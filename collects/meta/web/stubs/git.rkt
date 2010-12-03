@@ -1,4 +1,4 @@
-#lang at-exp s-exp "../common.rkt"
+#lang meta/web
 
 (define-context "stubs/git")
 
@@ -47,6 +47,7 @@
     # specification of visible repositories (managed by gitolite)
     our $projects_list = "plt-repos";
     our $projects_list_description_width = 80;
+    our $default_projects_order = "age";
     # hide repositories that are not listed in the above
     our $strict_export = 1;
     @||
@@ -95,7 +96,6 @@
 (define git-host        "git.racket-lang.org")
 (define at-racket       "@racket-lang.org")
 (define at-git-racket   "@git.racket-lang.org")
-(define at-lists-racket "@lists.racket-lang.org")
 (define (npre . text) (apply pre style: "margin-left: 0;" text))
 (define style
   @style/inline[type: 'text/css]{
@@ -151,6 +151,7 @@
   @ul*{
   @~ Ubuntu:
      @pre{sudo add-apt-repository ppa:git-core/ppa
+          sudo apt-get update
           sudo apt-get install git-core}
   @~ OSX using macports:
      @pre{sudo port selfupdate
@@ -210,8 +211,8 @@
   server, is via ssh.  (Access is controlled via a tool called “gitolite” —
   more on this below.)  The username and hostname of the server is
   "git@at-git-racket" — and you should be able to connect to this account using
-  the ssh identity key that corresponds to the public key that you gave me.  To
-  try it, run
+  the ssh identity key that corresponds to the public key that you use with the
+  git server.  To try it, run
   @pre{ssh git@at-git-racket}
   and the server (gitolite, actually) should reply with information about your
   current permissions.  The exact details of this is not important for now,
@@ -2449,8 +2450,8 @@
    @pre{git push my-fork :my-branch}
    Using an empty branch name for the local branch that you push is the way to
    delete remote branches.  (As with local branches, this might lead to losing
-   commits, so be careful.  If you make a mistake, let me know, since it is
-   likely easy to fix.)}
+   commits, so be careful.  As always, git has a few safety mechanisms in
+   place, so even if did this by mistake, it is very likely recoverable.)}
 @h3{Using a clone of your private repository, pushing changes to the public
     one:}
 @ol*{
@@ -2577,7 +2578,7 @@
      and you can see more in the @man{git-config} and @man{git-send-email} man
      pages.  The address to send the patches to is also configurable — you can
      use something like
-     @pre{to = plt-dev@at-lists-racket}
+     @pre{to = dev@at-racket}
      or
      @pre{to = someone@at-racket}
      depending on who you send your patches to — but this is better done as a
@@ -2601,7 +2602,7 @@
        accept it.  On the other hand, if you're working with someone specific,
        they might prefer attachments (for example, it's easier to save the
        attached file from gmail).}}
-@~ Once the commits have been pushed the the main repository, you would get
+@~ Once the commits have been pushed to the main repository, you would get
    them when you pull to update.  The commits will now be different objects
    than the ones you have — since the information changed (at least the
    committer information will be different, the log message might have been
@@ -2736,7 +2737,17 @@
   it shares history with yours, you can just pull that branch in, for example:
   @pre{git checkout -b someones-work
        git pull @i{someones-repository-url}}
-  or, if you expect to do this often (eg, you're going to suggest fixes for the
+  Note that the @cmd{pull} will merge the changes, creating a merge
+  commit if your @cmd{master} branch cannot be fast-forwarded.  To avoid
+  this, you can use @cmd{fetch} instead:
+  @pre{git checkout -b someones-work
+       git fetch @i{someones-repository-url}}
+  Either way, this fetches the remote repository's HEAD.  You can create
+  the branch in a single fetch command by specifying the remote branch
+  name, and the local branch to fetch into, for example:
+  @pre{git fetch @i{someones-repository-url} master:someone}
+@~
+  If you expect to do this often (eg, you're going to suggest fixes for the
   work and get new work in), then you can add a @cmd{someone} remote to be used
   more conveniently:
   @pre{git remote add someone @i{someones-repository-url}
@@ -2744,6 +2755,8 @@
        git checkout -b some-branch someone/some-branch}
   possibly using -t to make the branch track the remote one:
   @pre{git checkout -tb some-branch someone/some-branch}
+  Note that there is no need to create a branch before the @cmd{fetch}, since
+  it will be fetched to a @cmd{remotes/someone/master} branch.
 @~
   Once you pulled in the branch, you can inspect the changes, merge them,
   rebase them, etc.  The important point here is that you have a copy of the
@@ -2756,11 +2769,11 @@
   usual.
 @~
   Git has a tool that makes this mode of work a little more organized and
-  robust: @cmd{git request-pull}.  This simple command (surprisingly, it has no
-  flags) is intended to be used by the contributor.  It expects a commit that
-  marks the start of the new work (actually, the last one before it, eg,
-  @cmd{origin/master}), and the url of the repository.  For example:
-  @pre{git request-pull origin git://github.com/someone/somefork.git}
+  robust for the contributor: @cmd{git request-pull}.  This simple
+  command (surprisingly, it has no flags) expects a commit that marks the start
+  of the new work (actually, the last one before it, eg, @cmd{origin/master}),
+  and the url of the repository.  For example: @pre{git request-pull origin
+  git://github.com/someone/somefork.git}
 @~
   Of course, the contributor doesn't have to work directly in the available
   repository — in the case of github or with an over-the-web setup like the one
@@ -2781,6 +2794,55 @@
   (As a sidenote, you can use @cmd{.} as the url:
   @cmd{git request-pull origin .}, and get a condensed summary of your
   changes.)}
+
+@subsection{Pull-request workflow@br
+            — recipe for the sender side}
+@ol*{@~ Clone the plt repository and work with it as usual, commit your work
+     @~ Make your repository publicly available
+     @~ @npre{$ git request-pull origin @i{your-repository-url}}
+     @~ Send the resulting text to @cmd{dev@at-racket}
+     @~ You're done — thanks!}
+@p{Alternatively, you can fork the plt repository on github:
+   @cmd{http://github.com/plt/racket}, commit, then do a pull request.  Note:
+   it is better to send a note about your pull request to @cmd{dev@at-racket},
+   or you can do the pull request directly with git as listed above (using
+   github to have a public repository).}
+
+@subsection{Pull-request workflow@br
+            — recipe for the receiver side}
+@p{This recipe is for getting some remote work in as a one-time job.  If you
+   need to cooperate more closely with someone, you will want to add the remote
+   repository with @cmd{git remote} as shown above.}
+@ol*{
+@~ Get a plt clone, or use your own (it's safe to do the latter, no need for a
+   new clone unless you're paranoid):
+   @pre{git clone pltgit:plt
+        cd plt}
+@~ Get the foreign repository's master branch (or any other branch) into a
+   local branch:
+   @pre{git fetch @i{remote-repository-url} master:foo}
+   This pulls the @cmd{master} branch of the remote repository into a local
+   @cmd{foo} branch (you can use other names, of course).
+@~ Inspect the changes as usual
+   @pre{git log master..foo    # new commits
+        git diff master...foo  # changes
+        git log -p master..foo # both}
+   (See above for more details on these.)
+@~ If you're happy with the change and want to get it as-is, you can simply
+   @cmd{merge} the branch:
+   @pre{git merge foo}
+   But unless the remote work was done from the point your @cmd{master} points
+   at (i.e., there were no new commits), this will generate a merge commit that
+   might not be desired.  To avoid it, you can rebase the branch against your
+   @cmd{master} and then do the @cmd{merge} (which will now be a fast-forward)
+   merge:
+   @pre{git checkout foo
+        git rebase master
+        git checkout master
+        git merge foo}
+@~ You no longer need the @cmd{foo} branch, so delete it with:
+   @pre{git branch -d foo}
+@~ Push things back as usual}
 
 @section{Additional Resources}
 @dl*{
