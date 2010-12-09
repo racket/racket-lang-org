@@ -1,6 +1,6 @@
-#lang at-exp s-exp "shared.rkt"
+#lang meta/web
 
-(require "data.rkt" "installer-pages.rkt"
+(require "resources.rkt" "data.rkt" "installer-pages.rkt"
          (prefix-in pre: "../stubs/pre.rkt"))
 
 (provide render-download-page)
@@ -21,7 +21,8 @@
       @input[type: 'submit value: "Download" onclick: "do_jump();"]
       @|br hr|
       @div[align: "center"]{
-        @small{@license @nbsp @bull @nbsp @pre:installers}}
+        @small{@all-version-pages @nbsp @bull @nbsp
+               @license @nbsp @bull @nbsp @pre:installers}}
       @hr
       @div[id: "linux_explain"
            style: '("font-size: 75%; display: none; width: 28em;"
@@ -38,8 +39,36 @@
                                   (equal? package (installer-package i))))
              @li{@(installer->page i 'only-platform)})}}})
 
+(define all-version-pages
+  (let ()
+    (define all-versions
+      (remove-duplicates (map installer-version all-installers)))
+    (define all-packages
+      (remove-duplicates (map installer-package all-installers)))
+    (define (make-page ver pkg)
+      (define file  (format "~a-v~a.html" pkg ver))
+      (define title @list{@(package->name pkg) v@ver})
+      (define label @list{v@ver @small{(@(version->date ver))}})
+      (define the-page
+        @page[#:file file #:title title #:part-of 'download]{
+          @(render-download-page ver pkg)})
+      (the-page label))
+    @page[#:id 'all-versions #:title "All Versions" #:part-of 'download]{
+      @table[width: "90%" align: 'center cellspacing: 10 cellpadding: 10
+             rules: 'cols frame: 'box]{
+        @thead{
+          @tr[style: "border-bottom: 1px solid;"]{
+            @(map (lambda (p)
+                    @th[width: "50%" align: 'center]{@(package->name p)})
+                  all-packages)}}
+        @tbody{
+          @(map (lambda (v)
+                  (tr (map (lambda (p) (td align: 'center (make-page v p)))
+                           all-packages)))
+                all-versions)}}}))
+
 (define license
-  @page[#:title "Software License"]{
+  @page[#:title "Software License" #:part-of 'download]{
     @p{Racket is distributed under the
        @a[href: "http://www.gnu.org/copyleft/lesser.html"]{
          GNU Lesser General Public License (LGPL)}.
@@ -63,6 +92,8 @@
       location.href = selector[selector.selectedIndex].value;
     }
     // returns an ordering for the platform names, an array of regexps
+    // note that the entries are sorted in a good order, so return an order
+    // that only brings the locally desired entries to the top
     function getPlatformOrder() {
       var p = navigator.platform;
       var l = function(str) { return p.indexOf(str) != -1@";" }
@@ -75,18 +106,15 @@
           Linux32  = /Linux.*i386/,
           Unix     = /Unix/,
           Solaris  = /Solaris/;
-      var default_order = [Win, Mac, Linux, Unix];
-      // The default is the common case
-      if (p == null) return default_order;
-      else if (l("SunOS")) return [Solaris, Unix, Linux, Mac, Win];
-      else if (l("Win"))   return [Win, Mac, Linux, Unix];
-      else if (l("Mac"))
-      return [(l("Intel")?MacIntel:MacPPC), Mac, Unix, Linux, Win];
+      if (p == null) return [];
+      else if (l("SunOS")) return [Solaris, Unix];
+      else if (l("Win"))   return [Win];
+      else if (l("Mac"))   return [(l("Intel")?MacIntel:MacPPC), Mac, Unix];
       else if (l("Linux")) {
         // also show the linux explanation if it's a linux
         document.getElementById("linux_explain").style.display = "block";
-        return [(l("_64")?Linux64:Linux32), Linux, Unix, Mac, Win];
-      } else return default_order;
+        return [(l("_64")?Linux64:Linux32), Linux, Unix];
+      } else return [];
     }
     // show the linux explanation on change too (do it with a timeout so it
     // changes even when the arrow keys are used to move the selection -- since
@@ -105,28 +133,26 @@
     //
     var opts = selector.options;
     var len = opts.length;
-    var tmps = new Array(len); // temp array to sort the options
     // get the order and a make a sorting function
     var order = getPlatformOrder();
     function getOrder(str) {
-      for (var i=0@";" i<len@";" i++)
-        if (str.search(order[i]) >= 0) return i * 10;
+      for (var i=0@";" i<order.length@";" i++)
+        if (str.search(order[i]) >= 0) return i;
       return 999;
     }
     function isBetter(opt1,opt2) {
+      // sort first by the order, then by how they were placed originally
       var ord1 = getOrder(opt1[0]), ord2 = getOrder(opt2[0]);
-      // prefer non-source
-      if (opt1[0].search("source")>=0) ord1 += 1;
-      if (opt2[0].search("source")>=0) ord2 += 1;
            if (ord1 < ord2)       return -1;
       else if (ord1 > ord2)       return +1;
-      else if (opt1[0] < opt2[0]) return -1;
-      else if (opt1[0] > opt2[0]) return +1;
+      else if (opt1[2] < opt2[2]) return -1;
+      else if (opt1[2] > opt2[2]) return +1;
       else                        return  0;
     }
     // sort the options, need to use a temporary array
+    var tmps = new Array(len);
     for (var i=0@";" i<len@";" i++)
-      tmps[i]=[opts[i].text,opts[i].value];
+      tmps[i]=[opts[i].text,opts[i].value,i];
     tmps.sort(isBetter);
     for (var i=0@";" i<len@";" i++) {
       opts[i].text  = tmps[i][0];
