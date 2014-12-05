@@ -1,6 +1,6 @@
 #lang info
 
-(define collection "www-racket-lang-org")
+(define collection "racket-lang-org")
 
 (define deps '("base"
                "plt-web-lib"
