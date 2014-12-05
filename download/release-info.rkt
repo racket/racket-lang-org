@@ -10,7 +10,7 @@
                                           (exn-message exn))
                                #f)])
     (define p (collection-file-path (format "v~a.txt" vers)
-                                    "meta/announcements"))
+                                    "racket-lang-org/announcements"))
     (call-with-input-file p
       (lambda (i)
         (define s (read i))
