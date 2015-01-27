@@ -258,11 +258,15 @@
         #:link-title "RacketCon" #:title "RacketCon"
         #:extra-headers style-header]{
    @columns[12 #:center? #t #:row? #t]{
-     @h2{RacketCon: 20 September 2014}
+     @h2{RacketCon: 27 September 2015}
 
      @columns[6 #:center? #f #:row? #f]{
-       @p{@b{(fourth RacketCon)} was held in St. Louis on
-          the day after @a[href: "https://thestrangeloop.com/"]{Strange Loop}.}
+       @p{@b{(fifth RacketCon)} will be held in St. Louis, the day after
+             @a[href: "https://thestrangeloop.com/"]{Strange Loop}.}
+
+       @p{@nbsp}
+
+       @p{@b{(fourth RacketCon)} was held in St. Louis on September 20th 2014.}
 
        @p{@b{@a[href: "http://www.fogus.me/"]{Michael Fogus}} gave the keynote.}
 
