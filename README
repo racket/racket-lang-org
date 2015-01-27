@@ -24,7 +24,7 @@ To build:
 
 * You can choose `-w' (the default) for web mode, `-l' for local using
   "file://" references, or `-r` for' local mode using relative
-  refernces. Normally, you'll want to use `-l' for testing, and then
+  references. Normally, you'll want to use `-l' for testing, and then
   use `-w' for deployment.
 
 * Use `-o <dir>' to specify a directory where the built contents is
