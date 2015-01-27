@@ -55,8 +55,8 @@
                [current-command-line-arguments (vector "-w"
                                                        "-o" "generated"
                                                        "-f")])
-  (dynamic-require 'meta/new-web/all #f)
-  (dynamic-require '(submod meta/new-web/all main) #f))
+  (dynamic-require 'racket-lang-org/all #f)
+  (dynamic-require '(submod racket-lang-org/all main) #f))
 
 (define (upload dir site #:shallow? [shallow? #f])
   (step (format "Uploading ~a" site))

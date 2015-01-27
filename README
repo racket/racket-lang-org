@@ -45,4 +45,4 @@ To upload:
 
  * You'll need the "s3-sync" Racket package installed.
 
-* Run the "sync.rkt" script: racket -l meta/new-web/sync
+* Run the "sync.rkt" script: racket -l racket-lang-org/sync
