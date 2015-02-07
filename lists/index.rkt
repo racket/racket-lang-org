@@ -2,29 +2,29 @@
 
 (require "resources.rkt"
          "../identity.rkt"
-         ;; we may want to adopt this to use gumby / reactive design:
-         ;plt-web/style
-         
-         )
+         plt-web/style)
 
 (provide index)
 
 (register-identity lists-site)
 
-(struct ML (name gmane-name google-name description))
+(struct ML (name gmane-name google-name description mailman?))
 
 (define MLs
   (list (ML "users" "user" "racket-users"
             @text{A discussion list for all things related to Racket.
-                  Ask your questions here!})
+                  Ask your questions here!}
+            #t)
         (ML "announce" "announce" #f
             @text{A low-volume, moderated list for announcements, only.
                   @small{(These are posted on the @TT{users} list too, no need
-                         to subscribe to both.)}})
-        (ML "dev" "devel" #f
+                         to subscribe to both.)}}
+            #t)
+        (ML "dev" "devel" "racket-dev"
             @text{A mailing list for Racket development.
                   @small{(For people who want to see how the sausages are made
-                         — and help make them.)}})))
+                         — and help make them.)}}
+            #f)))
 
 (define index
   @page[#:site lists-site
@@ -37,10 +37,11 @@
         #:part-of 'lists #:width 'full
         (define (list-cells what) (map (λ (r) (r what)) list-renderers))
     ]{
-    @p{This is the Racket mailing list server.  We have several public mailing
+    @columns[12 #:center? #t #:row? #t]{
+      @p{This is the Racket mailing list server.  We have several public mailing
        lists, some are listed below with several mirrors for each one.  The
        complete list of public mailing lists is available on
-       @a[href: "listinfo"]{this page}.}
+       @a[href: "listinfo"]{this page}.}}
     @(define gap1 (tr (map (λ (_) @td{@div[style: "height: 1ex;"]{}}) MLs)))
     @(define gap2 (tr (map (λ (_) @td{}) MLs)))
     @(define (sec . text)
@@ -49,6 +50,7 @@
                               " padding: 0;")
                      colspan: (length MLs)]{@text}}
              @gap2})
+    @columns[12 #:center? #t #:row? #t]{
     @table[style: "width: 100%; margin: auto; text-align: center;"
            frame: 'box rules: 'cols cellpadding: 5]{
       @tr[style: "border-bottom: 1px solid; background-color: #ccccff;"]{
@@ -63,8 +65,10 @@
       @sec{Archive at mail-archive.com}
       @tr{@(list-cells 'mail-archive-cell)}
       @sec{Google group mirror}
-      @tr{@(list-cells 'google-cell)}}})
+      @tr{@(list-cells 'google-cell)}}}})
 
+;; given a mailing list structure, produce a renderer that can produce
+;; the required components on demand
 (define (list-renderer ml)
   (define name (ML-name ml))
   (define at-domain "@racket-lang.org")
@@ -84,17 +88,25 @@
     @a[href: (list "http://www.mail-archive.com/" email "/" suffix)]{@body})
   (define google-groups-url
     (let ([g (ML-google-name ml)])
-      (and g (list "http://groups.google.com/group/" g "/"))))
+      (and g (list "http://groups.google.com/forum/#!forum/" g "/"))))
+  (define google-groups-join-url
+    (and google-groups-url
+         (append google-groups-url (list "join"))))
   (define ((mk-form make) url #:method [method 'get] . body)
     (make @form[action: url method: method
                 style: "display: inline; clear: none;"]{
             @div{@body}}))
+  ;; this form URL is unused for google groups...
   (define (mk-subscribe mk)
-    @(mk-form mk)[(list (url-of index #t) name "/subscribe") #:method 'post]{
-      @input[type: 'text name: 'email size: 20 value: ""
-             placeholder: "Email to Subscribe"
-             title: @list{Enter your email to subscribe
-                          to the "@name" mailing list.}]})
+    (cond
+      [(ML-mailman? ml)
+       @(mk-form mk)[(list (url-of index #t) name "/subscribe") #:method 'post]{
+                       @input[type: 'text name: 'email size: 20 value: ""
+                                    placeholder: "Email to Subscribe"
+                                    title: @list{Enter your email to subscribe
+                                                 to the "@name" mailing list.}]}]
+      [else ;; it must be a google group
+       @td{@a[href: google-groups-join-url]{@google-groups-join-url}}]))
   (define form-cell (mk-form td))
   (λ (what)
     (case what

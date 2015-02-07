@@ -19,7 +19,8 @@ Sources:
 To build:
 =========
 
->>> looks the only thing that works right is running all.rkt in the main dir...
+* Run "./all.rkt" to build all pages.
+
 * Run any "*.rkt" to build a page and things that it references.
   (Use `-h' as usual.)
 
