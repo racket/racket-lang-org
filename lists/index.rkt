@@ -91,7 +91,7 @@
       (and g (list "http://groups.google.com/forum/#!forum/" g "/"))))
   (define google-groups-join-url
     (and google-groups-url
-         (append google-groups-url (list "join"))))
+         (append google-groups-url (list "join"))))7
   (define ((mk-form make) url #:method [method 'get] . body)
     (make @form[action: url method: method
                 style: "display: inline; clear: none;"]{
@@ -119,9 +119,18 @@
            @span[style: "font-size: small;"]{@at-domain}}}]
       [(description) @td{@description}]
       [(main-page-cell)
-       @td{@a[href: (list name "/")]{@big{@b{@TT{@name}}} page}
-           @bull
-           @a[href: (list name "/archive/")]{archive}}]
+       (cond
+         [(ML-mailman? ml) 
+          @td{@a[href: (list name "/")]{@big{@b{@TT{@name}}} page}
+               @bull
+               @a[href: (list name "/archive/")]{archive}}]
+         [else 
+          (unless google-groups-url
+            (error 'main-page-cell-renderer 
+                   "must have a google group URL for non-mailman list"))
+          @td{@a[href: google-groups-url]{@big{@b{@TT{@name}}} page}
+               @bull
+               @a[href: (list name "/archive/")]{old archive}}])]
       [(graph-cell)
        @td{@img[src: (list "http://gmane.org/plot-rate.php?group=" gmane)
                 style: "width: 80%;"]}]
