@@ -6,7 +6,8 @@
 (define docs "docs")
 
 (provide render-download-page)
-(define (render-download-page [release current-release] [package 'racket])
+(define (render-download-page [release current-release] [package 'racket]
+                              #:at-download [at-download list])
   (define version (release-version release))
   (define all-packages (sort (hash-map (for/hash ([i (in-list all-installers)]
                                                   #:when (equal? release (installer-release i)))
@@ -61,8 +62,8 @@
          (list
           @row{
             @links[@list{Release: @nbsp @(release-page release){Announcement}}
-                       @a[href: @list{@|docs|/release/}]{Notes}
-                       @a[href: @docs]{Documentation}]}
+                       @a[href: @at-download{@|docs|/release/}]{Notes}
+                       @a[href: @at-download{@docs}]{Documentation}]}
           @row{@links[@license{License}
                        all-version-pages
                        @pre:installers{Snapshot Builds}]}))}

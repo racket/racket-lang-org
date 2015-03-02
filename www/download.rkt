@@ -3,7 +3,8 @@
 (require "resources.rkt"
          (prefix-in download: "../download/index.rkt")
          "../download/download-pages.rkt"
-         racket/runtime-path)
+         racket/runtime-path
+         net/url)
 
 (provide download)
 (define download download:index)
@@ -18,7 +19,10 @@
        #:file "index.html"
        #:title "Download" #:window-title "Download Racket"
        #:part-of 'download #:width 'full]{
-    @(render-download-page)})
+    @(render-download-page #:at-download (lambda strs
+                                           (url->string
+                                            (combine-url/relative (string->url (url-of download:index))
+                                                                  (apply string-append (flatten strs))))))})
 
 #|
 (define-runtime-path img-dir "img")
