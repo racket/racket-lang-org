@@ -27,7 +27,7 @@
   (define ids
     (let loop ([e e])
       (cond
-        [(and (identifier? e) (syntax-original? e))
+        [(and (identifier? e) (syntax-original? e) (eq? 'prog (syntax-source e)))
          (define pos (sub1 (syntax-position e)))
          (define b (identifier-binding e))
          (define imp?
