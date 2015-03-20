@@ -14,7 +14,7 @@
   (list (ML "users" "user" "racket-users"
             @text{A discussion list for all things related to Racket.
                   Ask your questions here!}
-            #t)
+            #f)
         (ML "announce" "announce" #f
             @text{A low-volume, moderated list for announcements, only.
                   @small{(These are posted on the @TT{users} list too, no need
