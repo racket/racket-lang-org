@@ -22,7 +22,6 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊inline-list['sponsor]{
 ◊link["pollenpub.com"]{Matthew Butterick}
 ◊link["markshead.com"]{Mark Shead}
-◊link["http://www.brinckerhoff.org/clements/"]{John Clements}
 ◊link["robotic.de"]{DLR}}
 
 ◊h3{Previous RacketCons}
