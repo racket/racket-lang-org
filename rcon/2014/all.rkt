@@ -2,17 +2,14 @@
 
 (require plt-web/style
          racket/dict racket/match
-         "resources.rkt"
-         "utils.rkt"
-         "../identity.rkt"
-         (prefix-in 2011: "2011/all.rkt")
-         (prefix-in 2012: "2012/all.rkt")
-         (prefix-in 2013: "2013/all.rkt")
-         (prefix-in 2014: "2014/all.rkt"))
+         "../resources.rkt"
+         "../utils.rkt"
+         "../../identity.rkt"
+         (prefix-in 2011: "../2011/all.rkt")
+         (prefix-in 2012: "../2012/all.rkt")
+         (prefix-in 2013: "../2013/all.rkt"))
 
 (provide index)
-
-(register-identity con-site)
 
 (define group-rate-url
   "http://doubletree.hilton.com/en/dt/groups/personalized/S/STLUSDT-RAC-20140919/index.jhtml?WT.mc_id=POG")
@@ -256,17 +253,13 @@
 
 (define index
   @page[#:site con-site
-        #:link-title "RacketCon" #:title "RacketCon"
+        #:file "2014/index.html"
+        #:link-title "RacketCon 2014" #:title "RacketCon"
         #:extra-headers style-header]{
    @columns[12 #:center? #t #:row? #t]{
      @h2{RacketCon: 27 September 2015}
 
      @columns[6 #:center? #f #:row? #f]{
-       @p{@b{(fifth RacketCon)} will be held in St. Louis, the day after
-             @a[href: "https://thestrangeloop.com/"]{Strange Loop}.}
-
-       @p{@nbsp}
-
        @p{@b{(fourth RacketCon)} was held in St. Louis on September 20th 2014.}
 
        @p{@b{@a[href: "http://www.fogus.me/"]{Michael Fogus}} gave the keynote.}
@@ -351,7 +344,6 @@
       @p{@nbsp}
 
       @p{@b{Previous years:}}
-      @ul{@li{@2014:index}
-          @li{@2013:index}
+      @ul{@li{@2013:index}
           @li{@2012:index}
           @li{@2011:index}}}}})
