@@ -371,7 +371,7 @@ applications from @a[class: "introlink" href: (docs-path "web-server/")]{web ser
   @h2[style: "font-size: 144%; margin-bottom: 6pt;"]{News}
   @p[style: "font-size: 80%;"]{Racket @a[href: "http://blog.racket-lang.org/2014/11/racket-v611.html"]{version 6.1.1} is out!}
 
-  @p[style: "font-size: 80%;"]{RacketCon 2015 will be held in St.@|nbsp|Louis on September 27.}
+  @p[style: "font-size: 80%;"]{@rcon[2015]{RacketCon 2015} will be held in St.@|nbsp|Louis on September 27.}
                                        
   @p[style: "font-size: 80%;"]{@rcon[2014]{RacketCon 2014} videos are available.}}}
 
@@ -454,7 +454,7 @@ explains how to install
 @panetitle{News & Events}
 @p{@rcon[#f]{RacketCon} — The annual
   Racket meeting, coming up in September.  Previously
-  @rcon[2013], @rcon[2012], and @rcon[2011].}
+  @rcon[2014], @rcon[2013], @rcon[2012], and @rcon[2011].}
 
 @p{@a[href: "http://blog.racket-lang.org/"]{Blog}
   — Announcements, helpful hints, and thoughtful rants.}
