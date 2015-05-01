@@ -8,7 +8,8 @@
                "net-lib"
                "racket-index"
                "scribble-lib"
-               "syntax-color-lib"))
+               "syntax-color-lib"
+               "pollen")) ; for rcon
 
 (define pkg-desc "Sources for http://racket-lang.org")
 
