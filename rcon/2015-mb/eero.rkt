@@ -12,11 +12,12 @@
        [vsize 400]
        [spread 700])
   (plot-decorations? #f)
+  (line-samples 100)
   (define op (open-output-string))
   (plot-file  (map (λ(x) (parameterize ([line-color (inexact->exact (floor (* 128 (random))))]
                                         [line-width (random)])
                            (normalized-eero x))) (range (* -1 spread) spread 6))
-              op 'png
+              op 'svg
               #:x-min -1 #:x-max 1 #:y-min -1 #:y-max 1
               #:width hsize #:height vsize)
   (display-to-file (get-output-string op) "eero.svg" #:mode 'text #:exists 'replace)
