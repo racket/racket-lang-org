@@ -5,13 +5,16 @@
 ◊h2{◊xlink["venue"]{◊rc-2015-date}}
 ◊h2{◊xlink["venue"]{St. Louis}}
 ◊h2{◊xlink{Speakers}}
-◊;h2{◊xlink{Register}}
+◊h2{◊xlink{Register}}
 
 ◊image["eero.svg"]
 
 ◊h3{◊xtarget["venue"]{◊rc-2015-date in St. Louis (the day after ◊link["https://thestrangeloop.com"]{Strange Loop})}}
 
 RacketCon is a public meeting for everyone interested in Racket: developers, contributors, programmers, educators, and bystanders. It's an opportunity for all members of the community to come together to share plans, ideas, and enthusiasm. RacketCon will enable the entire Racket community to mingle: to update each other, to exchange ideas, to collaborate, and to help shape the future of Racket.
+
+◊h3{◊xtarget["register"]{Register}}
+◊link["https://eventbrite.com/event/16825218682/"]{Via Eventbrite.}
 
 ◊h3{◊xtarget["speakers"]{Keynote speaker}}
 ◊speaker["" ◊link["www.ccs.neu.edu/home/matthias"]{Matthias Felleisen}]{The Racket Manifesto}
