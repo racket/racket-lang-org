@@ -11,7 +11,8 @@
                "syntax-color-lib"
                "plot-gui-lib"
                "math-lib"
-               "pollen")) ; for rcon
+               "pollen" ; for rcon
+               "sugar"))
 
 (define pkg-desc "Sources for http://racket-lang.org")
 
