@@ -25,7 +25,8 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊inline-list['sponsor]{
 ◊link["pollenpub.com"]{Matthew Butterick}
 ◊link["blog.markshead.com"]{Mark Shead}
-◊link["robotic.de"]{DLR}}
+◊link["robotic.de"]{DLR}
+◊link["wearable.com"]{Wearable}}
 
 ◊h3{Previous RacketCons}
 
