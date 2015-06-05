@@ -9,7 +9,7 @@
 
 ◊image["eero.svg"]
 
-◊h3{◊xtarget["venue"]{◊rc-2015-date in St. Louis (the day after ◊link["https://thestrangeloop.com"]{Strange Loop})}}
+◊h3{◊xtarget["venue"]{◊rc-2015-date in St. Louis (the day after ◊link["http://thestrangeloop.com"]{Strange Loop})}}
 
 RacketCon is a public meeting for everyone interested in Racket: developers, contributors, programmers, educators, and bystanders. It's an opportunity for all members of the community to come together to share plans, ideas, and enthusiasm. RacketCon will enable the entire Racket community to mingle: to update each other, to exchange ideas, to collaborate, and to help shape the future of Racket.
 
