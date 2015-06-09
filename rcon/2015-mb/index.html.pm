@@ -19,6 +19,18 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊h3{◊xtarget["speakers"]{Keynote speaker}}
 ◊speaker["" ◊link["www.ccs.neu.edu/home/matthias"]{Matthias Felleisen}]{The Racket Manifesto}
 
+◊h3{◊xtarget["speakers"]{Confirmed speakers}}
+◊speaker["" ◊link["https://github.com/sabauma"]{Spenser Bauman}]{JIT Compilation for Racket}
+◊speaker["" ◊link["https://github.com/m4burns"]{Marc Burns}]{TBD}
+◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies}]{Rexcel: A Racket-based spreadsheet processing system}
+◊speaker["" ◊link["http://codepen.io/Universalist/"]{Jack Firth}]{Generic Syntax Expanders and Extensible Macros}
+◊speaker["" ◊link["https://github.com/florence"]{Spencer Florence}]{Code coverage outside of DrRacket}
+◊speaker["" ◊link["http://andmkent.com/"]{Andrew Kent}]{Practical Dependently Typed Racket}
+◊speaker["" ◊link["https://jeapostrophe.github.io"]{Jay McCarthy}]{TBD}
+◊speaker["" ◊link["http://www.math.grin.edu/~rebelsky/"]{Samuel Rebelsky}]{TBD}
+◊speaker["" ◊link["https://www.twistedplane.com/"]{Vishesh Yadav}]{TBD}
+And more to be announced!
+
 
 ◊h3{Sponsors}
 
