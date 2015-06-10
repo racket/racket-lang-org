@@ -26,7 +26,7 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊speaker["" ◊link["http://codepen.io/Universalist/"]{Jack Firth}]{Generic Syntax Expanders and Extensible Macros}
 ◊speaker["" ◊link["https://github.com/florence"]{Spencer Florence}]{Code coverage outside of DrRacket}
 ◊speaker["" ◊link["http://andmkent.com/"]{Andrew Kent}]{Practical Dependently Typed Racket}
-◊speaker["" ◊link["https://jeapostrophe.github.io"]{Jay McCarthy}]{TBD}
+◊speaker["" ◊link["https://jeapostrophe.github.io"]{Jay McCarthy}]{Bithoven and the NES Chamber Orchestra}
 ◊speaker["" ◊link["http://www.math.grin.edu/~rebelsky/"]{Samuel Rebelsky}]{TBD}
 ◊speaker["" ◊link["https://www.twistedplane.com/"]{Vishesh Yadav}]{TBD}
 And more to be announced!
