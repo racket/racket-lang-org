@@ -10,6 +10,7 @@
                "scribble-lib"
                "syntax-color-lib"
                "plot-gui-lib"
+               "plot-lib"
                "math-lib"
                "pollen" ; for rcon
                "sugar"))
