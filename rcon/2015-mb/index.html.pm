@@ -28,6 +28,7 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊speaker["" ◊link["https://github.com/florence"]{Spencer Florence}]{Code coverage outside of DrRacket}
 ◊speaker["" ◊link["http://www.ccs.neu.edu/home/types/"]{Ben Greenman}]{A #lang for All Seasons}
 ◊speaker["" ◊link["http://andmkent.com/"]{Andrew Kent}]{Practical Dependently Typed Racket}
+◊speaker["" ◊link["https://github.com/lexi-lambda"]{Alexis King}]{TBD}
 ◊speaker["" ◊link["https://jeapostrophe.github.io"]{Jay McCarthy}]{Bithoven and the NES Chamber Orchestra}
 ◊speaker["" ◊link["http://www.math.grin.edu/~rebelsky/"]{Samuel Rebelsky}]{TBD}
 ◊speaker["" ◊link["https://www.twistedplane.com/"]{Vishesh Yadav}]{TBD}
