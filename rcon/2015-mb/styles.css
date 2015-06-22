@@ -187,7 +187,7 @@ display: flex;
   border-right: 0;
 
   white-space: pre;
-  font-family: "Menlo" "Consolas" "Courier New" monospace;
+  font-family: "Menlo", "Consolas", "Courier New", monospace;
   font-size: 0.7rem;
   height: 20rem;
   overflow: auto;
