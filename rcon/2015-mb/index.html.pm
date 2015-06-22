@@ -22,7 +22,7 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 
 ◊h3{◊xtarget["speakers"]{Confirmed speakers}}
 ◊speaker["" ◊link["https://github.com/sabauma"]{Spenser Bauman}]{JIT Compilation for Racket}
-◊speaker["" ◊link["https://github.com/m4burns"]{Marc Burns}]{TBD}
+◊speaker["" ◊link["https://github.com/m4burns"]{Marc Burns}]{Rocking with Racket}
 ◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies}]{Rexcel: A Racket-based spreadsheet processing system}
 ◊speaker["" ◊link["http://codepen.io/Universalist/"]{Jack Firth}]{Generic Syntax Expanders and Extensible Macros}
 ◊speaker["" ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}]{Binding as Sets of Scopes}
