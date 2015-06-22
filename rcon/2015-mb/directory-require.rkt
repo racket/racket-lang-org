@@ -1,5 +1,5 @@
 #lang racket
-(require pollen/decode sugar/list sugar/string)
+(require pollen/decode sugar/list sugar/string txexpr)
 (provide (all-defined-out))
 
 (define (image src)
@@ -7,6 +7,9 @@
 
 (define (speaker time name title . desc)
   `(div ((class "speaker")) (h4 (span ((class "time")) ,time) " " ,name) ,title  ,@(if (not (empty? desc)) (cons '(br) desc) empty)))
+
+(define (keynote-speaker time name title . desc)
+  (attr-set (apply speaker time name title desc) 'class "keynote-speaker"))
 
 (define (xlink target . sources-in)
   (define sources (if (empty? sources-in) (list target) sources-in))

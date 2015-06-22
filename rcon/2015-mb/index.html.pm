@@ -17,7 +17,7 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊link["https://eventbrite.com/event/16825218682/"]{Via Eventbrite.}
 
 ◊h3{◊xtarget["speakers"]{Keynote speaker}}
-◊speaker["" ◊link["www.ccs.neu.edu/home/matthias"]{Matthias Felleisen}]{The Racket Manifesto}
+◊keynote-speaker["" ◊link["www.ccs.neu.edu/home/matthias"]{Matthias Felleisen}]{The Racket Manifesto}
 
 ◊h3{◊xtarget["speakers"]{Confirmed speakers}}
 ◊speaker["" ◊link["https://github.com/sabauma"]{Spenser Bauman}]{JIT Compilation for Racket}
@@ -25,7 +25,7 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies}]{Rexcel: A Racket-based spreadsheet processing system}
 ◊speaker["" ◊link["http://codepen.io/Universalist/"]{Jack Firth}]{Generic Syntax Expanders and Extensible Macros}
 ◊speaker["" ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}]{Binding as Sets of Scopes}
-◊speaker["" ◊link["https://github.com/florence"]{Spencer Florence}]{Code coverage outside of DrRacket}
+◊speaker["" ◊link["https://github.com/florence"]{Spencer Florence}]{Code Coverage Outside of DrRacket}
 ◊speaker["" ◊link["http://www.ccs.neu.edu/home/types/"]{Ben Greenman}]{A #lang for All Seasons}
 ◊speaker["" ◊link["http://andmkent.com/"]{Andrew Kent}]{Practical Dependently Typed Racket}
 ◊speaker["" ◊link["https://github.com/lexi-lambda"]{Alexis King}]{TBD}

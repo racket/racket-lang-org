@@ -153,13 +153,19 @@ h3 {
 
 h4 {
   display: inline;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 200;
   color: #778;
   margin-right: 0.5rem;
+  line-height: 1.4;
 }
 
-h3+div.speaker {
+.keynote-speaker h4 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+h3+div.speaker, h3+div.keynote-speaker {
   margin-top: -0.25rem;
 }
 
