@@ -1,4 +1,5 @@
 #lang pollen
+◊(require racket/file)
 
 ◊h1{(fifth RacketCon)}
 ◊(define rc-2015-date "27 Sept 2015")
@@ -7,7 +8,7 @@
 ◊h2{◊xlink{Speakers}}
 ◊h2{◊xlink{Register}}
 
-◊image["eero.svg"]
+◊div['class: "codebox"]{◊div['class: "opacity-control"]{◊(file->string "eero-demo.rkt")}}
 
 ◊h3{◊xtarget["venue"]{◊rc-2015-date in St. Louis (the day after ◊link["http://thestrangeloop.com"]{Strange Loop})}}
 

@@ -177,3 +177,37 @@ h3+div.speaker, h3+div.keynote-speaker {
 sponsor+sponsor:before, con+con:before {
   content: "\00A0\00A0·\00A0\00A0";
 }
+
+.codebox {
+display: flex;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #778;
+  border-left: 0;
+  border-right: 0;
+
+  white-space: pre;
+  font-family: "Menlo" "Consolas" "Courier New" monospace;
+  font-size: 0.7rem;
+  height: 20rem;
+  overflow: auto;
+  background-image: url("eero.svg");
+  background-size: cover;
+  background-repeat:no-repeat;
+  width: 38rem;
+  color: #778;
+}
+
+.opacity-control {
+  padding: 0.5rem;
+  opacity: 0;
+  background: white;
+}
+
+.opacity-control:hover {
+  opacity: 1;
+}
+
+.opacity-control, .opacity-control:hover {
+  transition: opacity 0.25s;
+}
