@@ -13,7 +13,8 @@
                "plot-lib"
                "math-lib"
                "pollen" ; for rcon
-               "sugar"))
+               "sugar"
+               "txexpr"))
 
 (define pkg-desc "Sources for http://racket-lang.org")
 
