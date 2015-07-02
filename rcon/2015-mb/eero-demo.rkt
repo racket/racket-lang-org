@@ -1,5 +1,7 @@
 #lang racket
 (require math plot file/gzip)
+;; variations on the Gateway Arch
+;; see https://en.wikipedia.org/wiki/Gateway_Arch#Mathematical_elements
 (let* ([fc 625.0925]
        [Qb 1262.6651]
        [Qt 125.1406]
@@ -8,9 +10,7 @@
        [C (acosh (/ Qb Qt))]
        [eero (λ(x) (* -1 A (sub1 (cosh (/ (* C x) L)))))]
        [normalized-eero (λ(w) (inverse (λ(x) (/ (eero (* w x)) w)) -1 1))]
-       [hsize 800]
-       [vsize 400]
-       [spread 700])
+       [hsize 800] [vsize 400] [spread 700])
   (plot-decorations? #f)
   (line-samples 100)
   (define op (open-output-string))
