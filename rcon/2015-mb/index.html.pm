@@ -22,7 +22,14 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 
 ◊h3{◊xtarget["speakers"]{Confirmed speakers}}
 ◊speaker["" ◊link["https://github.com/sabauma"]{Spenser Bauman}]{JIT Compilation for Racket}
-◊speaker["" ◊link["https://github.com/m4burns"]{Marc Burns}]{Rocking with Racket}
+
+◊folded{
+◊speaker["" "Marc Burns"]{Rocking with Racket}
+We made an in-browser music production and exploration platform. The backend was developed in Racket and C++; we just finished porting it to Typed Racket. I will talk about how using (typed) Racket has informed our design, some pitfalls we encountered, and what we're doing to make the backend both performant and reliable now that we have a few users.
+
+◊link["https://github.com/m4burns"]{Marc Burns} studied math and computer science at the University of Waterloo. He likes to tinker with functional languages and language design, sometimes managing to put his strange creations to work in industry. He works at an early-stage startup in Montreal, Canada creating music production software.
+}
+
 ◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies}]{Rexcel: A Racket-based spreadsheet processing system}
 
 ◊folded{
@@ -32,8 +39,13 @@ Racket's powerful syntax system allows things like pattern matching not only to 
 ◊link["http://codepen.io/Universalist/"]{Jack Firth} works at Mindjet in San Francisco as a developer of enterprise web applications and as a mentor to his colleagues on functional programming, particularly its applications to a Node / Angular stack. He has been a professional software engineer for a year and a half, but first began programming nine years ago. He attended college for mechanical engineering at a young age. His programming-related interests outside work include multi-language architectures, CI, testing, obscure languages, static verification, and type systems. He also used to be a hobbyist game developer, and still is once in a blue moon.
 }
 
+◊folded{
+◊speaker["" "Matthew Flatt"]{Binding as Sets of Scopes}
+Racket's macro expander evolved from a prototype circa 2000 that combined the `syntax-case` macro system with an idea for modules and phases. It has served Racket well, but the implementation is complex and difficult to explain in full, and it's starting to fray around the edges with the addition of submodules. The new macro expander starts over using a new way of representing and tracking bindings. The resulting model of macro expansion is simpler and more uniform than the current one based on renaming, but it's mostly compatible with the old expander.
 
-◊speaker["" ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}]{Binding as Sets of Scopes}
+◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt} is a professor at the University of Utah and one of the main developers of Racket. He works primarily on Racket's run-time system, compiler, macro system, build system, package system, documentation language, and graphics/GUI libraries.
+}
+
 
 ◊folded{
 ◊speaker["" "Spencer Florence"]{Code Coverage Outside of DrRacket}
