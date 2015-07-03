@@ -217,7 +217,7 @@ display: flex;
 
   white-space: pre;
   font-family: "Menlo", "Consolas", "Courier New", monospace;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   height: 20rem;
   overflow: auto;
   background-image: url("eero.svg");

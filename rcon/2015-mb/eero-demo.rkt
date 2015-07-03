@@ -13,7 +13,7 @@
 (define spread 700)
 (parameterize ([plot-decorations? #f]
                [line-samples 100])
-  (plot (for/list ([x (in-range (* -1 spread) spread 6)])
+  (plot (for/list ([x (in-range (- spread) spread 6)])
           (parameterize ([line-color (random 128)]
                          [line-width (random)])
             (normalized-eero x)))
