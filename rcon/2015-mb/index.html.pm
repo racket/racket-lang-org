@@ -111,8 +111,13 @@ spirit out of art through algorithmic assimilation. He is also a core
 Racket developer and associate professor at UMass Lowell.
 }
 ◊speaker["" ◊link["http://www.math.grin.edu/~rebelsky/"]{Samuel Rebelsky}]{TBD}
-◊speaker["" ◊link["https://www.twistedplane.com/"]{Vishesh Yadav}]{TBD}
-And more to be announced!
+
+◊folded{
+◊speaker["" "Vishesh Yadav"]{The Big Bang Universe on the World Wide Web}
+Each semester, thousands of students learn how to design programs using Racket's "universe" library, a no-boilerplate framework for easily writing interactive graphical programs. However, sharing their creations with family and friends is not as easy. I'll present my one-click solution, aided by the Whalesong Racket-to-JS compiler, that enables students to effortlessly go from IDE to sharable, interactive web-hosted program.
+
+◊link["https://www.twistedplane.com/"]{Vishesh Yadav} is a Masters student at Northeastern University, working on ideas to improve Whalesong. Before coming to Northeastern to study Programming Languages, he hacked on some open source projects such as KDE and the DragonFly BSD kernel.
+}
 
 
 ◊h3{Sponsors}
