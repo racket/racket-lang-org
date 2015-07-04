@@ -62,9 +62,7 @@ Racket's macro expander evolved from a prototype circa 2000 that combined the `s
 ◊speaker["" "Spencer Florence"]{Code Coverage Outside of DrRacket}
 Cover is a code coverage tool for Racket. It supports project level code coverage with various output formats. It supports the same configuration options as `raco test` making it easy to integrate into your project. This talk will cover the basics of using and configuring cover, as well as more advanced usage via the racket API.
 
-◊link["https://github.com/florence"]{I am a PhD student} at Northwestern University. I primarily use Racket to
-create medical programming languages, animate algorithms for wikipedia,
-and make insane twitter bots.
+◊link["https://github.com/florence"]{I am a PhD student} at Northwestern University. I primarily use Racket to create medical programming languages, animate algorithms for wikipedia, and make insane twitter bots.
  }
 
 ◊folded{
@@ -98,17 +96,9 @@ Typed Racket has enabled developers to enrich and optimize existing dynamically 
 357479307728375868180711548797277461020672 different compositions based on three-part harmony and basic chord progressions. The NES Chamber Orchestra is an engine for playing these (and other) compositions on the Ricoh RP2A03 (a.k.a. the NES sound chip) in one of approximately
 422234004059019268090786172918417043456000 different arrangements or "NEStrations".
 
-In randomized trials, we've found that audiences familiar with
-retro-style video game music can't tell Bithoven's compositions apart
-from "real" NES-era music. Yet, Bithoven contains almost no tuning for
-producing plausible retro-music and has fewer lines of code than the
-implementation of /bin/ls. In this talk, we'll discuss the beautiful
-Racket programming, elegant mathematics, and basic music theory that
-makes Bithoven work so well.
+In randomized trials, we've found that audiences familiar with retro-style video game music can't tell Bithoven's compositions apart from "real" NES-era music. Yet, Bithoven contains almost no tuning for producing plausible retro-music and has fewer lines of code than the implementation of /bin/ls. In this talk, we'll discuss the beautiful Racket programming, elegant mathematics, and basic music theory that makes Bithoven work so well.
 
-◊link["https://jeapostrophe.github.io"]{Jay McCarthy} has no artistic talent so he seeks to suck the human
-spirit out of art through algorithmic assimilation. He is also a core
-Racket developer and associate professor at UMass Lowell.
+◊link["https://jeapostrophe.github.io"]{Jay McCarthy} has no artistic talent so he seeks to suck the human spirit out of art through algorithmic assimilation. He is also a core Racket developer and associate professor at UMass Lowell.
 }
 ◊speaker["" ◊link["http://www.math.grin.edu/~rebelsky/"]{Samuel Rebelsky}]{TBD}
 
