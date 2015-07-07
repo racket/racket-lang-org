@@ -41,7 +41,7 @@ We made an in-browser music production and exploration platform. The backend was
 ◊link["https://github.com/m4burns"]{Marc Burns} studied math and computer science at the University of Waterloo. He likes to tinker with functional languages and language design, sometimes managing to put his strange creations to work in industry. He works at an early-stage startup in Montreal, Canada creating music production software.
 }
 
-◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies}]{Rexcel: A Racket-based spreadsheet processing system}
+◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies}]{Rexcel: A Racket-Based Spreadsheet Processing System}
 
 ◊folded{
 ◊speaker["" "Jack Firth"]{Generic Syntax Expanders and Extensible Macros}
