@@ -100,7 +100,13 @@ In randomized trials, we've found that audiences familiar with retro-style video
 
 ◊link["https://jeapostrophe.github.io"]{Jay McCarthy} has no artistic talent so he seeks to suck the human spirit out of art through algorithmic assimilation. He is also a core Racket developer and associate professor at UMass Lowell.
 }
-◊speaker["" ◊link["http://www.math.grin.edu/~rebelsky/"]{Samuel Rebelsky}]{TBD}
+
+◊folded{
+◊speaker["" "Samuel Rebelsky"]{Scripting GIMP with Racket}
+The GNU Image Manipulation Program, or GIMP, is an open-source alternative to Photoshop.  In the early days of GIMP, the designers added a scripting language, Script-Fu, based on Scheme.  Over the years, Script-Fu has been superseded by Python-Fu, although Script-Fu remains an option, albeit with a primitive IDE.  Over the past few years, my students and I have built a library that allows programmers to script GIMP using Racket and the DrRacket IDE.  In addition to providing the “glue” between GIMP and Racket, we also added a library of routines more amenable to novice programmers.  In this talk, we will discuss the design of both the “glue” and the broader library.  We will also discuss a related introductory course in CS that uses multiple models of image making as the motivating problem domain.
+
+◊link["http://www.math.grin.edu/~rebelsky/"]{Samuel A. Rebelsky} is Professor and Chair of Computer Science at Grinnell College, a small liberal arts college in the middle of Iowa. Although he teaches courses at every level of the curriculum, Sam is particularly passionate about teaching at the introductory level, where he has developed a workshop-style curriculum that combines image making and functional programming in Racket. Sam's research projects have included Web tools, software for functional image making, and a system for combining imperative and lazy functional languages.
+}
 
 ◊folded{
 ◊speaker["" "Vishesh Yadav"]{The Big Bang Universe on the World Wide Web}
