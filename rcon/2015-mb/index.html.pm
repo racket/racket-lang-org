@@ -41,7 +41,12 @@ We made an in-browser music production and exploration platform. The backend was
 ◊link["https://github.com/m4burns"]{Marc Burns} studied math and computer science at the University of Waterloo. He likes to tinker with functional languages and language design, sometimes managing to put his strange creations to work in industry. He works at an early-stage startup in Montreal, Canada creating music production software.
 }
 
-◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies}]{Rexcel: A Racket-Based Spreadsheet Processing System}
+◊folded{
+◊speaker["" "Byron Davies"]{Rexcel: A Racket-Based Spreadsheet Processing System}
+I developed Rexcel for analyzing standardized test data for schools. Although I did if for a specific application, the approach I took was very general, making it easy for people to perform complex spreadsheet processing in a language other than VBA.
+
+After his education at Caltech, MIT, Texas Instruments, Stanford (EE Ph.D), and Motorola, and after teaching medical informatics for five years at the Arizona School of Health Sciences, ◊link["https://twitter.com/daviesaz"]{Byron Davies} worked at several startups before settling into a dual career at StarShine Academy, a K-12 charter school and laboratory for learning, and Ontopilot, a company using mathematical logic and specialized hardware to develop software that debugs other software.  Exclusively a Lisper since 1973, he developed the first general-purpose “twist-down” data browser, one of the first web applications for manufacturing (published in CACM), and — in Racket — the proof-of-concept prototype for OntoPilot’s Systems Integrity Analysis System.  His current goal is to implement, in Racket, the tablet-based software that will win the Global Learning XPRIZE.
+}
 
 ◊folded{
 ◊speaker["" "Jack Firth"]{Generic Syntax Expanders and Extensible Macros}
