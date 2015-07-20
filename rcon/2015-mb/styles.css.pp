@@ -189,3 +189,11 @@ display: flex;
 .opacity-control, .opacity-control:hover {
   transition: opacity 0.25s;
 }
+
+span.title {
+  border-bottom: 1px solid ◊|anchor-color|;
+}
+
+span.title:hover {
+    border-bottom: 1px solid ◊|anchor-bright-color|;
+}

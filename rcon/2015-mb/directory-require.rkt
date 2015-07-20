@@ -8,7 +8,7 @@
   `(img ((src ,src))))
 
 (define (speaker time name title . desc)
-  `(div ((class "speaker")) (span ((class "speaker-name")(decode "exclude")) (span ((class "time")) ,time) " " ,name) ,title  ,@(if (not (empty? desc)) (cons '(br) desc) empty)))
+  `(div ((class "speaker")) (span ((class "speaker-name")(decode "exclude")) (span ((class "time")) ,time) " " ,name) (span ((class "title")) ,title)  ,@(if (not (empty? desc)) (cons '(br) desc) empty)))
 
 (define (keynote-speaker time name title . desc)
   (attr-set (apply speaker time name title desc) 'class "keynote-speaker"))

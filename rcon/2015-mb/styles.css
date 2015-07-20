@@ -240,3 +240,11 @@ display: flex;
 .opacity-control, .opacity-control:hover {
   transition: opacity 0.25s;
 }
+
+span.title {
+  border-bottom: 1px solid #606;
+}
+
+span.title:hover {
+    border-bottom: 1px solid #c0c;
+}
