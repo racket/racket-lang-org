@@ -90,7 +90,12 @@ Typed Racket has enabled developers to enrich and optimize existing dynamically 
 ◊link["http://andmkent.com/"]{Andrew} is a PhD student at Indiana University. He works with Sam Tobin-Hochstadt on exciting projects related to Typed Racket.
 }
 
-◊speaker["" ◊link["https://github.com/lexi-lambda"]{Alexis King}]{TBD}
+◊folded{
+◊speaker["" "Alexis King"]{Generic Collections: One Interface to Rule Them All}
+Racket encourages a functional style, but aside from immutable pairs, the collections library remains unsuitable for rich functional programming with a complement of functional data structures. Racket programmers may reach for linked lists when better structures would do to avoid the list-ref/vector-ref/stream-ref function zoo. This talk discusses the implementation of a generic collections system that encourages immutability by default, provides a more consistent and comprehensive interface across all data structures, and provides that interface in a way that can be leveraged by new, user-defined structures to feel as integrated with the language as Racket's built-ins.
+
+◊link["https://lexi-lambda.github.io/"]{Alexis King} works as a full-stack web developer at Philosophie in Los Angeles building rich web applications with Ruby on Rails and Angular. When not tinkering with different models to create expressive RESTful APIs, she is enthusiastic about finding ways to build programming interfaces that are expressive and easy to use. In Racket, that means figuring out how to build flexible DSLs and extensible language constructs that integrate well into the rest of the Racket ecosystem without sacrificing elegance or hygiene.
+}
 
 ◊folded{
 ◊speaker["" "Jay McCarthy"]{Bithoven and the NES Chamber Orchestra}
