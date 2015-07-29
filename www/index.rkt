@@ -247,19 +247,18 @@
        libraries: pulling out a foreign function is easy, and can even be done
        dynamically on the REPL.})
     ;; Is this effective without any highlights?
-    ;; TODO re-enable once datalog is fixed for the new expander
-    ;; (generic-example #:title "Datalog"; -----------------------------------------------
-    ;;  @code{#lang datalog
-    ;;        ancestor(A, B) :- parent(A, B).
-    ;;        ancestor(A, B) :-
-    ;;          parent(A, C), ancestor(C, B).
-    ;;        parent(john, douglas).
-    ;;        parent(bob, john).
-    ;;        ancestor(A, B)?}
-    ;;  @desc{Racket is useful for building other languages.  This example uses
-    ;;   the pre-packaged Racket implementation of Datalog, a logic programming
-    ;;   language.  If you use this from DrRacket, you'll see that it provides
-    ;;   proper highlighting, Check Syntax, and a Datalog-specific REPL.})
+    (generic-example #:title "Datalog"; -----------------------------------------------
+     @code{#lang datalog
+           ancestor(A, B) :- parent(A, B).
+           ancestor(A, B) :-
+             parent(A, C), ancestor(C, B).
+           parent(john, douglas).
+           parent(bob, john).
+           ancestor(A, B)?}
+     @desc{Racket is useful for building other languages.  This example uses
+      the pre-packaged Racket implementation of Datalog, a logic programming
+      language.  If you use this from DrRacket, you'll see that it provides
+      proper highlighting, Check Syntax, and a Datalog-specific REPL.})
     #; ; Not easy to present something like this.
     (generic-example #:title "Customizing your language"; -----------------------------------------------
      @code{#lang racket
