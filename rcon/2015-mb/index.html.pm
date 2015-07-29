@@ -29,7 +29,7 @@ The creation of a programming language calls for guiding principles that point i
 ◊link["www.ccs.neu.edu/home/matthias"]{Matthias Felleisen} is the Chief Philosopher and Shepherd (CPS) of PLT Design, Inc. As such he is responsible for thinking deep thoughts about Racket, pronouncing his insights in obscure emails to the mailing list, and herding cats while increasing their numbers. He bas been around since forever and considers this presentation his half-time show. 
 }
 
-◊h3{◊xtarget["speakers"]{Confirmed speakers}}
+◊h3{◊xtarget["speakers"]{Speakers}}
 ◊folded{
 ◊speaker["" "Spenser Bauman"]{Tracing Comes to Racket}
 While object-oriented languages have embraced use of advanced just-in-time compilers for fast execution, functional languages typically rely on ahead of time compilation/optmization.  Currently, there are no good JIT compilers for the Scheme family of languages, despite their successful application to other dynamic languages.  In this talk, I will present Pycket; an implementation of Racket in RPython which makes use of the meta-tracing JIT infrastructure developed for the PyPy project.  The goal of Pycket is to provide a fast Racket implementation which can eliminate the overhead of features which are difficult to optimize statically such as gradual typing, continuations, and contracts.
