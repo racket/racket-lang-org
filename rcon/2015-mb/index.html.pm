@@ -17,6 +17,9 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊h3{◊xtarget["register"]{Register}}
 ◊link["https://eventbrite.com/event/16825218682/"]{Via Eventbrite.}
 
+◊h3{◊xtarget["social"]{Social event}}
+We're planning a social gathering the evening before RacketCon (26 Sept). Stay tuned for more details!
+
 ◊h3{◊xtarget["speakers"]{Keynote speaker}}
 ◊folded{
 ◊keynote-speaker["" "Matthias Felleisen"]{The Racket Manifesto}
