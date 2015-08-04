@@ -8,3 +8,4 @@ compiled/
 .DS_Store
 *.bak
 TAGS
+rcon/2015-mb/pollen-cache/*
