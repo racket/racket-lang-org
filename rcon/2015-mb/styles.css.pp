@@ -76,6 +76,7 @@ div.payload {
 
 div.bio {
   font-size: 85%;
+  line-height: 1.45;
 }
 
 div.bio a{
@@ -207,4 +208,24 @@ span.title {
 
 span.title:hover {
     border-bottom: 1px solid ◊|anchor-bright-color|;
+}
+
+schedule {
+  display: flex;
+  flex-direction: column;
+}
+
+schedule > row {
+  display: flex;
+  flex-direction: row; 
+  padding-top: 0.2rem; 
+  padding-bottom: 0.2rem; 
+}
+
+schedule > row > at {
+  width: 25%;
+}
+
+schedule > row + row {
+  border-top: 1px solid #ccc;
 }

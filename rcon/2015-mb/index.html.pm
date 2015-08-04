@@ -20,6 +20,19 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 ◊h3{◊xtarget["social"]{Social event}}
 We're planning a social gathering the evening before RacketCon (26 Sept). Stay tuned for more details!
 
+◊h3{◊xtarget["schedule"]{Schedule}}
+
+◊schedule[
+◊row{◊at{9:00–9:30} ◊desc{Registration}}
+◊row{◊at{9:30} ◊desc{Welcome}}
+◊row{◊at{9:30–10:00} ◊desc{Keynote: Matthias Felleisen}}
+◊row{◊at{10:30–10:50} ◊desc{break}}
+◊row{◊at{10:50–11:50} ◊desc{Matthew Flatt: Carry on Racketing
+Daniel Prager: YouPatch
+David Vanderson: Another marvelous talk}}
+◊row{◊at{11:30–13:50} ◊desc{lunch}}
+]
+
 ◊h3{◊xtarget["speakers"]{Keynote speaker}}
 ◊folded{
 ◊keynote-speaker["" "Matthias Felleisen"]{The Racket Manifesto}
