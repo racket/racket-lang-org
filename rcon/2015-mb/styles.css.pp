@@ -56,7 +56,7 @@ p a:hover {
     border-bottom: 1px solid ◊|anchor-bright-color|;
 }
 
-p a {
+p a, div a {
   color: ◊|anchor-color|;
   border-bottom: 1px solid ◊|anchor-color|;
 }
@@ -69,6 +69,17 @@ div.payload {
   padding: 0.25rem 2rem 0rem 1.7rem;
   border-left: 0.2rem solid #ccc;
   margin-bottom: 1rem;
+  font-size: 85%;
+  width: 90%;
+}
+
+
+div.bio {
+  font-size: 85%;
+}
+
+div.bio a{
+  font-weight: bolder;
 }
 
 

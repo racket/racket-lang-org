@@ -108,7 +108,7 @@ p a:hover {
     border-bottom: 1px solid #c0c;
 }
 
-p a {
+p a, div a {
   color: #606;
   border-bottom: 1px solid #606;
 }
@@ -121,6 +121,17 @@ div.payload {
   padding: 0.25rem 2rem 0rem 1.7rem;
   border-left: 0.2rem solid #ccc;
   margin-bottom: 1rem;
+  font-size: 85%;
+  width: 90%;
+}
+
+
+div.bio {
+  font-size: 85%;
+}
+
+div.bio a{
+  font-weight: bolder;
 }
 
 

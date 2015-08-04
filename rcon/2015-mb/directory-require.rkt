@@ -73,3 +73,6 @@
 
 (define (folded-open title . xs)
   (apply folded title #:open #t xs))
+
+(define (bio . xs)
+  `(div ((class "bio")) ,@xs))
