@@ -2,7 +2,21 @@
 (require pollen/decode sugar/list sugar/string txexpr)
 (provide (all-defined-out))
 
+(define (main-menu-title . xs)
+  `(h1 ,@xs))
 
+(define (codebox . xs)
+  `(div ((class "codebox")) ,@xs))
+
+(define (opacity-control . xs)
+  `(div ((class "opacity-control")) ,@xs))
+
+(define (main-menu link-target . xs)
+  `(h2 ,(apply xlink link-target xs)))
+
+(define (insert-file path)
+  (local-require racket/file)
+  (file->string path))
 
 (define (image src)
   `(img ((src ,src))))
@@ -73,6 +87,3 @@
 
 (define (folded-open title . xs)
   (apply folded title #:open #t xs))
-
-(define (bio . xs)
-  `(div ((class "bio")) ,@xs))
