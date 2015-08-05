@@ -263,12 +263,16 @@ span.title:hover {
 
 schedule {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
+  -webkit-flex-direction: column;
 }
 
 schedule > row {
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
+  -webkit-flex-direction: row;
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
 }
