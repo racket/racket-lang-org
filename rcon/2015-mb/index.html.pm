@@ -27,15 +27,15 @@ We're planning a social gathering the evening before RacketCon (26 Sept). Stay t
 ◊row{◊at{9:30} ◊desc{Welcome}}
 ◊row{◊at{9:30–10:30} ◊desc{Keynote: Matthias Felleisen: The Racket Manifesto}}
 ◊row{◊at{10:30–11:00} ◊desc{Break}}
-◊row{◊at{11:00–12:00} ◊desc{Session: Infrastructure
-Matthew Flatt: Bindings as Sets of Scopes
-Spenser Bauman: Tracing Comes to Racket
-Andrew Kent: Practical Dependently Typed Racket}}
-◊row{◊at{12:00–14:00} ◊desc{Lunch at ◊link["http://www.landrysseafood.com/location-st-louis.asp"]{Landry's}}}
-◊row{◊at{14:00–15:00} ◊desc{Session: Poetry and Music
+◊row{◊at{11:00–12:00} ◊desc{Session: Poetry and Music
 Ben Greenman: A #lang for All Seasons
 Jay McCarthy: Bithoven and the NES Chamber Orchestra
 Marc Burns: Rocking with Racket}}
+◊row{◊at{12:00–14:00} ◊desc{Lunch at ◊link["http://www.landrysseafood.com/location-st-louis.asp"]{Landry's}}}
+◊row{◊at{14:00–15:00} ◊desc{Session: Infrastructure
+Andrew Kent: Practical Dependently Typed Racket
+Spenser Bauman: Tracing Comes to Racket
+Matthew Flatt: Bindings as Sets of Scopes}}
 ◊row{◊at{15:00–15:30} ◊desc{Break}}
 ◊row{◊at{15:30–16:30} ◊desc{Session: Scripting
 Byron Davies: Rexcel: A Racket-Based Spreadsheet Processing Systems
