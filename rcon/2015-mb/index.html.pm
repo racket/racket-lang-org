@@ -92,7 +92,7 @@ Racket's macro expander evolved from a prototype circa 2000 that combined the `s
 ◊speaker["" "Spencer Florence"]{Code Coverage Outside of DrRacket}
 Cover is a code coverage tool for Racket. It supports project level code coverage with various output formats. It supports the same configuration options as `raco test` making it easy to integrate into your project. This talk will cover the basics of using and configuring cover, as well as more advanced usage via the racket API.
 
-◊bio{◊link["https://github.com/florence"]{I am a PhD student} at Northwestern University. I primarily use Racket to create medical programming languages, animate algorithms for wikipedia, and make insane twitter bots.}}
+◊bio{◊link["https://github.com/florence"]{Spencer} is a PhD student at Northwestern University. He primarily uses Racket to create medical programming languages, animate algorithms for wikipedia, and make insane twitter bots.}}
 
 ◊folded{
 ◊speaker["" "Ben Greenman"]{A #lang for All Seasons}
