@@ -32,6 +32,7 @@ Ben Greenman: A #lang for All Seasons
 Jay McCarthy: Bithoven and the NES Chamber Orchestra
 Marc Burns: Rocking with Racket}}
 ◊row{◊at{12:00–14:00} ◊desc{Lunch at ◊link["http://www.landrysseafood.com/location-st-louis.asp"]{Landry's}}}
+◊row{◊at{14:00} ◊desc{Contributor Awards}}
 ◊row{◊at{14:00–15:00} ◊desc{Session: Infrastructure
 Andrew Kent: Practical Dependently Typed Racket
 Spenser Bauman: Tracing Comes to Racket
