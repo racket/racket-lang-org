@@ -1,0 +1,14 @@
+1439242233
+Racket v6.2.1
+
+Version 6.2.1 patches the recent v6.2 release in three small ways:
+
+* For the How to Design Programs teaching languages, DrRacket offers
+  an option to use the old style for printing the constants `true`,
+  `false`, and `empty` instead of `#true`, `#false`, and `'()`.
+
+* The teaching languages come with some additional functions to match
+  the August 2015 stable release of HtDP 2nd edition.
+
+* A repair to the compiler avoids an infinite loop at compile time for
+  certain expressions that should loop forever at run time.
