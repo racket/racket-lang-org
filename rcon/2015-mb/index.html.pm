@@ -16,6 +16,7 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 
 ◊h3{◊xtarget["register"]{Register}}
 ◊link["https://eventbrite.com/event/16825218682/"]{Via Eventbrite.}
+Use the "RAC" group code when reserving at the ◊link["http://doubletree3.hilton.com/en/hotels/missouri/st-louis-union-station-a-doubletree-by-hilton-hotel-STLUSDT/index.html"]{Union Station hotel}.
 
 ◊h3{◊xtarget["social"]{Social event}}
 We're planning a social gathering the evening before RacketCon (26 Sept). Stay tuned for more details!
