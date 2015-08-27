@@ -19,7 +19,8 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 Use the "RAC" group code when reserving at the ◊link["http://doubletree3.hilton.com/en/hotels/missouri/st-louis-union-station-a-doubletree-by-hilton-hotel-STLUSDT/index.html"]{Union Station hotel}.
 
 ◊h3{◊xtarget["social"]{Social event}}
-◊link["http://www.squareonebrewery.com/"]{Square One Brewery and Distillery}, 26 Sept, 7:00pm.
+◊link["http://www.squareonebrewery.com/"]{Square One Brewery and Distillery}, 26 Sept, 6:30pm.
+There will be shuttles running between the Union Station Hotel and the event.
 
 ◊h3{◊xtarget["schedule"]{Schedule}}
 
