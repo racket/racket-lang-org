@@ -90,7 +90,7 @@ body {
   margin-left:auto;
   margin-right:auto;
   width:100%;
-  max-width:1000px;
+  max-width:1050px;
   text-rendering: optimizeLegibility;
   font-feature-settings: 'kern' 1;
   font-feature-settings: 'liga' 1;

@@ -41,7 +41,7 @@ Spenser Bauman: Tracing Comes to Racket
 Matthew Flatt: Bindings as Sets of Scopes}}
 ◊row{◊at{15:00–15:30} ◊desc{Break}}
 ◊row{◊at{15:30–16:30} ◊desc{Session: Scripting
-Byron Davies: Rexcel: A Racket-Based Spreadsheet Processing Systems
+Byron Davies: Spreadsheets, Formal Methods, and Winning the XPRIZE
 Samuel Rebelsky: Scripting GIMP with Racket
 Vishesh Yadav: The Big Bang Universe on the World Wide Web}}
 ◊row{◊at{16:30–17:00} ◊desc{Break}}
@@ -73,8 +73,14 @@ We made an in-browser music production and exploration platform. The backend was
 ◊bio{◊link["https://github.com/m4burns"]{Marc Burns} studied math and computer science at the University of Waterloo. He likes to tinker with functional languages and language design, sometimes managing to put his strange creations to work in industry. He works at an early-stage startup in Montreal, Canada creating music production software.}}
 
 ◊folded{
-◊speaker["" "Byron Davies"]{Rexcel: A Racket-Based Spreadsheet Processing System}
+◊speaker["" "Byron Davies"]{Spreadsheets, Formal Methods, and Winning the XPRIZE}
 I developed Rexcel for analyzing standardized test data for schools. Although I did if for a specific application, the approach I took was very general, making it easy for people to perform complex spreadsheet processing in a language other than VBA.
+
+Using a Racket-based prototype to get our foot in the door, OntoPillot’s formal methods work is now in front of a Fortune 500 company to discuss possible collaboration. Using Racket’s compiler tools, including the syntax browser, we were able to create a credible prototype for a format methods tool development environment.
+
+Using Racket, StarShine Academy has made galloping progress toward the software needed to win the Global Learning XPRIZE. StarShine Academy has developed learning-to-read prototypes in Racket that our reading expert mentors said they had been awaiting for a decade or more.  We have also begun work on a math learning prototype based on a world class math learning method from Canada.
+
+I want to share the excitement of using the remarkable tools that the Racket community has developed, to create innovative applications that shake up the real world.
 
 ◊bio{After his education at Caltech, MIT, Texas Instruments, Stanford (EE Ph.D), and Motorola, and after teaching medical informatics for five years at the Arizona School of Health Sciences, ◊link["https://twitter.com/daviesaz"]{Byron Davies} worked at several startups before settling into a dual career at StarShine Academy, a K-12 charter school and laboratory for learning, and Ontopilot, a company using mathematical logic and specialized hardware to develop software that debugs other software.  Exclusively a Lisper since 1973, he developed the first general-purpose “twist-down” data browser, one of the first web applications for manufacturing (published in CACM), and — in Racket — the proof-of-concept prototype for OntoPilot’s Systems Integrity Analysis System.  His current goal is to implement, in Racket, the tablet-based software that will win the Global Learning XPRIZE.}}
 
