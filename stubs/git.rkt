@@ -31,7 +31,8 @@
 
 (define home-text
   (lazy @text{
-    @p{This is the Racket git server.}
+    @p{The Racket git repositories have moved to @a[href: "https://github.com/racket/"]{GitHub}.
+       The primary repository is @a[href: "https://github.com/racket/racket"]{racket/racket}.}
     @p{See the "brief", PLT-oriented @intro{introduction to git}.}}))
 (define home-file @plain[#:site git-site #:file "home-text.html" home-text])
 
