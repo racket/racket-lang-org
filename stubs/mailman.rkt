@@ -1,10 +1,11 @@
 #lang plt-web
+(require plt-web/style)
 
 (define mailman-site (site "stubs/mailman"
                            #:url "http://lists.racket-lang.org/"
                            #:always-abs-url? #t))
 
-(define (MM  . tag) @literal{<MM-@|tag|>})
+(define (MM  #:suffix [suffix ""] . tag) @literal{<MM-@|tag|>@suffix})
 (define (MM/ . tag) @literal{</MM-@|tag|>})
 (define (MMform name . body)
   (list @MM{@(and name (list name "-"))Form-Start} body @MM{Form-End}))
@@ -25,6 +26,9 @@
       font-size: 120%;
       font-weight: bold;
     }
+    @; Suppress subscription area based on the mailing-list name:
+    .users-subscribe { display: none; }
+    .dev-subscribe { display: none; }
     .subp {
       margin: 0.5ex 0 0.5ex 1em;
     }})
@@ -47,7 +51,8 @@
                      (length t) (length files)))
             (map encoder t))))
   (for/list ([f (in-list files)] [i (in-naturals)])
-    (plain #:site mailman-site #:file f #:newline #f (list-ref (force p) i))))
+    (plain #:site mailman-site #:file f #:newline #f
+           @columns[10 #:center? #t #:row? #t (list-ref (force p) i)])))
 
 (define generic-templates
   (split-template @page[#:site mailman-site
@@ -61,6 +66,7 @@
         #:title @list{Mailing lists: @MM{List-Name}} #:part-of 'community
         #:extra-headers style-header
         #:file (if archive? "listinfo+archive.html" "listinfo.html")]{
+   @columns[10 #:center? #t #:row? #t]{
     @; --------------------
     @comment{@||
       Based on the Mailman file "listinfo.html", revision: 5865
@@ -76,24 +82,26 @@
           @MMform['Lang]{@MM{displang-box} @MM{list-langs}}}}
     @subp{@MM{List-Info}}
     @subp{To post a message to the list, send email to
-      @a[href: @list{mailto:@MM{Posting-Addr}}]{@MM{Posting-Addr}}.
-      You can subscribe to the list or change your existing subscription
-      options in the sections below.}
-    @subp{To see the collection of prior postings to the list, visit the
-      @MM{Archive}@MM{List-Name} archives@MM/{Archive}.
-      @MM{Restricted-List-Message}}
-    @when[archive?]{
-      @; This is the mail-archive search box
-      @form[action: "http://www.mail-archive.com/search" method: 'get]{@subp{
-        @input[type: 'hidden name: 'l value: @MM{Posting-Addr}]
-        Archives are also available at
-        @a[href: @list{http://www.mail-archive.com/@MM{Posting-Addr}/}]{
-          mail-archive.com},
-        search it here:
-        @input[type: 'text name: 'q value: "" size: 16]}
-        @subp{(@a[href: "/"]{More information} on other ways to use this list
-          and other public Racket lists.)}}}
+      @a[href: @list{mailto:@MM{Posting-Addr}}]{@MM{Posting-Addr}}.}
+    @; Thanks to naive string munging in mailman, we can hide parts of the
+    @; page by constructing a style name out of the list name:
+    @div[class: @MM[#:suffix "-subscribe"]{List-Name}]{
+      @subp{To see the collection of prior postings to the list, visit the
+        @MM{Archive}@MM{List-Name} archives@MM/{Archive}.
+        @MM{Restricted-List-Message}}
+      @when[archive?]{
+        @; This is the mail-archive search box
+        @form[action: "http://www.mail-archive.com/search" method: 'get]{@subp{
+          @input[type: 'hidden name: 'l value: @MM{Posting-Addr}]
+          Archives are also available at
+          @a[href: @list{http://www.mail-archive.com/@MM{Posting-Addr}/}]{
+            mail-archive.com},
+          search it here:
+          @input[type: 'text name: 'q value: "" size: 16]}
+          @subp{(@a[href: "/"]{More information} on other ways to use this list
+            and other public Racket lists.)}}}}
     @; --------------------
+    @div[class: @MM[#:suffix "-subscribe"]{List-Name}]{
     @h2{@a[name: 'subscribers]{@MM{List-Name} subscribers}}
     @subp{@MMform['Options]{@MM{Editing-Options}}}
     @; not needed: @subp{@MMform['Roster]{@MM{Roster-Option}}}
@@ -140,10 +148,10 @@
           @MM{digest-question-end}
           @tr{@td[colspan: 3]{
                 @p[style: "text-align: center;"]{
-                  @MM{Subscribe-Button}}}}}}}
+                  @MM{Subscribe-Button}}}}}}}}
     @; --------------------
     @h2{@nbsp}
-    @MM{Mailman-Footer}})
+    @MM{Mailman-Footer}}})
 
 (define listinfos (map make-listinfo '(#t #f)))
 
@@ -151,6 +159,7 @@
   @page[#:site mailman-site
         #:title @list{@MM{List-Name} Subscription results} #:part-of 'community
         #:extra-headers style-header]{
+   @columns[10 #:center? #t #:row? #t]{
     @; --------------------
     @comment{@||
       Based on the Mailman file "subscribe.html", revision: 3550
@@ -159,7 +168,7 @@
     @; --------------------
     @h1{@MM{List-Name} Subscription results}
     @subp{@MM{Results}}
-    @MM{Mailman-Footer}})
+    @MM{Mailman-Footer}}})
 
 (define options
   @page[#:site mailman-site
@@ -167,6 +176,16 @@
                       for @MM{List-Name}}
         #:part-of 'community
         #:extra-headers style-header]{
+    @(define (tablesec . body)
+       (apply table cellspacing: 5 cellpadding: 3 width: "100%" align: 'center
+              body))
+    @(define (h2sub . body)
+       @h2[style: "margin-bottom: 0; font-size: 100%;"]{@body})
+    @(define (center . body)
+       @div[style: "text-align: center; margin-top: 1ex;"]{@body})
+    @(define (global-checkbox button-name)
+       @div[align: 'right]{@MM{global-@|button-name|-button}@i{Set globally}})
+   @columns[10 #:center? #t #:row? #t]{
     @; --------------------
     @comment{@||
       Based on the Mailman file "options.html" (no revision specified)
@@ -181,15 +200,6 @@
     @subp{@MM{Case-Preserved-User}
           @MM{Disabled-Notice}
           @div[style: "background-color: #ffaaaa;"]{@MM{Results}}}
-    @(define (tablesec . body)
-       (apply table cellspacing: 5 cellpadding: 3 width: "100%" align: 'center
-              body))
-    @(define (h2sub . body)
-       @h2[style: "margin-bottom: 0; font-size: 100%;"]{@body})
-    @(define (center . body)
-       @div[style: "text-align: center; margin-top: 1ex;"]{@body})
-    @(define (global-checkbox button-name)
-       @div[align: 'right]{@MM{global-@|button-name|-button}@i{Set globally}})
     @MMform[#f]{
       @tablesec{
         @tr{@td[colspan: 2]{
@@ -358,13 +368,14 @@
               @MM{dont-receive-duplicates-button}Yes @br
               @global-checkbox{nodupes}}}
         @tr{@td[colspan: 2 align: 'center]{@MM{options-Submit-button}}}}}
-    @MM{Mailman-Footer}})
+    @MM{Mailman-Footer}}})
 
 (define roster
   @page[#:site mailman-site
         #:title @list{@MM{List-Name} subscribers}
         #:part-of 'community
         #:extra-headers style-header]{
+   @columns[10 #:center? #t #:row? #t]{
     @; --------------------
     @comment{@||
       Based on the Mailman file "roster.html", revision 3394
@@ -387,7 +398,7 @@
       @tr[valign: 'top]{
         @td{@MM{Regular-Users}}
         @td{@MM{Digest-Users}}}}
-    @MM{Mailman-Footer}})
+    @MM{Mailman-Footer}}})
 
 ;; Files below go through "%(...)s" substitutions, so "%"s should be doubled to
 ;; avoid python errors -- hack this with regexps below.  A proper solution
@@ -417,6 +428,7 @@
           @list{@style-header
                 @script/inline{function sf(){document.f.adminpw.focus()@";"}}}
           #:extra-body-attrs `(onLoad: "sf();")]{
+   @columns[10 #:center? #t #:row? #t]{
     @; --------------------
     @comment{@||
       Based on the Mailman file "private.html" (no revision specified)
@@ -443,7 +455,7 @@
        @em{Log out} button.}
     @h2{Password reminder}
     @p{If you don't remember your password, enter your email address above and
-       click the @em{Remind} button and your password will be emailed to you.}})
+       click the @em{Remind} button and your password will be emailed to you.}}})
 
 (define admlogin
   @page%%[#:title @list{%(listname)s %(who)s Authentication}
@@ -452,6 +464,7 @@
           @list{@style-header
                 @script/inline{function sf(){document.f.adminpw.focus()@";"}}}
           #:extra-body-attrs `(onLoad: "sf();")]{
+   @columns[10 #:center? #t #:row? #t]{
     @; --------------------
     @comment{@||
       Based on the Mailman file "admlogin.html" (no revision specified)
@@ -473,13 +486,14 @@
        This cookie will expire automatically when you exit your browser, or you
        can explicitly expire the cookie by hitting the @em{Logout} link under
        @em{Other Administrative Activities} (which you'll see once you
-       successfully log in).}})
+       successfully log in).}}})
 
 ;; Archive templates
 
 (define emptyarchive
   @page%%[#:title @list{%(listname)s archives} #:part-of 'community
           #:extra-headers style-header]{
+   @columns[10 #:center? #t #:row? #t]{
     @; --------------------
     @comment{@||
       Based on the Mailman file "emptyarchive.html" (no revision specified)
@@ -489,7 +503,7 @@
     @h1{%(listname)s archives}
     @p{No messages have been posted to this list yet, so the archives are
        currently empty.  You can get @a[href: "%(listinfo)s"]{more information
-       about this list}.}})
+       about this list}.}}})
 
 (define archtocs
   (let ([title   @list{%(listname)s archives}]
@@ -518,10 +532,10 @@
         %(archive_listing_end)s})
     (define archtoc.html
       (@page%% #:title title #:part-of 'community #:extra-headers headers
-               (content #t)))
+               @columns[10 #:center? #t #:row? #t (content #t)]))
     (define archtocnombox.html
       (@page%% #:title title #:part-of 'community #:extra-headers headers
-               (content #f)))
+               @columns[10 #:center? #t #:row? #t (content #f)]))
     (list archtoc.html archtocnombox.html)))
 
 (define archlist-templates
@@ -602,6 +616,7 @@
                      %(prev_wsubj)s
                      %(next_wsubj)s
                      @li{@sorted-by}}})))
+   @columns[10 #:center? #t #:row? #t]{
     @; --------------------
     @; Based on the Mailman file "article.html" (no revision specified)
     @; Modified to fit the racket pages
@@ -624,7 +639,7 @@
     @hr
     @table{@tr{@td{Posted on the @;
                    @a[href: "%(listurl)s"]{%(listname)s mailing list}.}
-               @navcell}}})
+               @navcell}}}})
 
 ;; Previously mailman had a "site" directory which would override the default
 ;; "en" files.  I don't see this setup now, so a cheap hack is to create
