@@ -1,9 +1,12 @@
 #lang plt-web
 
-(require racket/runtime-path)
+(require racket/runtime-path
+         plt-web/style
+         (only-in "../www/resources.rkt" www-site))
 
 (define git-site
   (site "stubs/git"
+        #:share-from www-site
         #:url "http://git.racket-lang.org/"
         #:always-abs-url? #t
         #:robots (add-newlines (for/list ([d '(plt libs testing play)])
@@ -138,7 +141,9 @@
 
 @page[#:site git-site #:title "git intro" #:extra-headers style]{
 
-@sections[#:newpages? #t]
+@sections[#:wrap [columns 10 #:center? #t #:row? #t] #:newpages? #t]
+
+@columns[10 #:center? #t #:row? #t]{
 
 @div[class: 'the_text]{
 
@@ -2943,4 +2948,4 @@
    @~ This is a short visual document about git.  But it goes a little fast, so
       it would be useful after you're comfortable with the basics.}}
 
-}}))
+}}}))
