@@ -15,7 +15,7 @@
 RacketCon is a public meeting for everyone interested in Racket: developers, contributors, programmers, educators, and bystanders. It's an opportunity for all members of the community to come together to share plans, ideas, and enthusiasm. RacketCon will enable the entire Racket community to mingle: to update each other, to exchange ideas, to collaborate, and to help shape the future of Racket.
 
 ◊h3{◊xtarget["stream"]{Live Stream}}
-◊link["https://plus.google.com/u/0/events/crsu3iegmu73htksd9l6l8pfek8"]{Via Google Hangouts.}
+◊link["https://plus.google.com/u/0/events/c8336kfv1mqpto5u3h29g029g6k"]{Via Google Hangouts.}
 ◊link["https://t.co/6n2mEHIl9c"]{Morning sessions.}
 
 ◊h3{◊xtarget["register"]{Register}}
