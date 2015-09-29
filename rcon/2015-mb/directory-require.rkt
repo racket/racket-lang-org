@@ -21,6 +21,10 @@
   (define targets (if (empty? targets-in) (list id) targets-in))
   `(span ((id ,(string-downcase id))) ,@targets))
 
+(define (rlink target . sources-in)
+  (define sources (if (empty? sources-in) (list target) sources-in))
+  `(a ((href ,(string-downcase target))) ,@sources))
+
 
 (define (splice xs)
   (define tags-to-splice '(splice-me))

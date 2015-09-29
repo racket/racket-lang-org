@@ -67,7 +67,7 @@ The creation of a programming language calls for guiding principles that point i
 ◊h3{◊xtarget["speakers"]{Speakers}}
 ◊folded{
 ◊speaker["" "Spenser Bauman"]{Tracing Comes to Racket}
-◊link["bauman.pdf"]{Slides}
+◊rlink["2015/bauman.pdf"]{Slides}
 
 While object-oriented languages have embraced the use of advanced just-in-time compilers for fast execution, functional languages typically rely on ahead of time compilation/optmization.  Currently, there are no good JIT compilers for the Scheme family of languages, despite their successful application to other dynamic languages.  In this talk, I will present Pycket; an implementation of Racket in RPython which makes use of the meta-tracing JIT infrastructure developed for the PyPy project.  The goal of Pycket is to provide a fast Racket implementation which can eliminate the overhead of features which are difficult to optimize statically such as gradual typing, continuations, and contracts.
 
@@ -130,7 +130,7 @@ Typed Racket has enabled developers to enrich and optimize existing dynamically 
 
 ◊folded{
 ◊speaker["" "Alexis King"]{Generic Collections: One Interface to Rule Them All}
-◊link["king.pdf"]{Slides}
+◊rlink["2015/king.pdf"]{Slides}
 
 Racket encourages a functional style, but aside from immutable pairs, the collections library remains unsuitable for rich functional programming with a complement of functional data structures. Racket programmers may reach for linked lists when better structures would do to avoid the list-ref/vector-ref/stream-ref function zoo. This talk discusses the implementation of a generic collections system that encourages immutability by default, provides a more consistent and comprehensive interface across all data structures, and provides that interface in a way that can be leveraged by new, user-defined structures to feel as integrated with the language as Racket's built-ins.
 
@@ -157,7 +157,7 @@ The GNU Image Manipulation Program, or GIMP, is an open-source alternative to Ph
 
 ◊folded{
 ◊speaker["" "Vishesh Yadav"]{The Big Bang Universe on the World Wide Web}
-◊link["yadav.pdf"]{Slides}
+◊rlink["2015/yadav.pdf"]{Slides}
 
 Each semester, thousands of students learn how to design programs using Racket's "universe" library, a no-boilerplate framework for easily writing interactive graphical programs. However, sharing their creations with family and friends is not as easy. I'll present my one-click solution, aided by the Whalesong Racket-to-JS compiler, that enables students to effortlessly go from IDE to sharable, interactive web-hosted program.
 
