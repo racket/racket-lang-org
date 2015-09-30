@@ -60,6 +60,8 @@ Spencer Florence: Code Coverage Outside of DrRacket}}
 ◊folded{
 ◊keynote-speaker["" "Matthias Felleisen"]{The Racket Manifesto}
 
+◊rlink["2015/felleisen.pdf"]{Slides}
+
 The creation of a programming language calls for guiding principles that point its developers to goals. This talk will spell out the three basic principles behind the 20-year development of Racket. First, programming is about stating and solving problems, and this activity normally takes place in a context with its own language of discourse; good programmers ought to formulate this language as a programming language. Hence, Racket is a programming language for creating new programming languages. Second, by following this language-oriented approach to programming, systems become multi-lingual collections of interconnected components. Each language and component must be able to protect its specific invariants. In support, Racket offers protection mechanisms to implement a full language spectrum, from C-level bit manipulation to soundly typed extensions. Third, because Racket considers programming as problem solving in the correct language, Racket also turns extra-linguistic mechanisms into linguistic constructs, especially mechanisms for managing resources and projects. This talk will explain these principles and how Racket lives up to them, present the evaluation framework behind the design process, and conclude with a sketch of Racket's imperfections and opportunities for future improvements.
 
 ◊bio{◊link["www.ccs.neu.edu/home/matthias"]{Matthias Felleisen} is the Chief Philosopher and Shepherd (CPS) of PLT Design, Inc. As such he is responsible for thinking deep thoughts about Racket, pronouncing his insights in obscure emails to the mailing list, and herding cats while increasing their numbers. He has been around since forever and considers this presentation his half-time show.}}
@@ -112,6 +114,8 @@ Cover is a code coverage tool for Racket. It supports project level code coverag
 
 ◊folded{
 ◊speaker["" "Ben Greenman"]{A #lang for All Seasons}
+◊rlink["2015/greenman.pdf"]{Slides} ◊rlink["2015/greenman-writeup.pdf"]{Writeup}
+
 Racket's ability to create languages is extremely versatile and powerful. No matter the challenge or problem domain, Racket's language tools provide a foundation for directly expressing and solving issues. We demonstrate by taming the age-old challenge of crafting a well-formed sonnet.
 
 ◊bio{◊link["http://www.ccs.neu.edu/home/types/"]{Ben Greenman} is earning his PhD
@@ -124,6 +128,8 @@ writing in iambic pentameter.}}
  
 ◊folded{
 ◊speaker["" "Andrew Kent"]{Practical Dependently Typed Racket}
+◊rlink["2015/kent.pdf"]{Slides}
+
 Typed Racket has enabled developers to enrich and optimize existing dynamically Typed Racket programs with static types. We have extended this system with practical dependent types that can verify a wider range of patterns commonly found in Racket code. I will demonstrate how this extension can help users remove more bugs and optimize more operations in their programs with little (if any) additional effort.
 
 ◊bio{◊link["http://andmkent.com/"]{Andrew} is a PhD student at Indiana University. He works with Sam Tobin-Hochstadt on exciting projects related to Typed Racket.}}
