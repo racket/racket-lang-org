@@ -144,6 +144,8 @@ Racket encourages a functional style, but aside from immutable pairs, the collec
 
 ◊folded{
 ◊speaker["" "Jay McCarthy"]{Bithoven and the NES Chamber Orchestra}
+◊rlink["2015/mccarthy.pdf"]{Slides}
+
  Bithoven is a prolific composer of approximately
 107936338584579028906476999435802819420152571696145967835629469168
 256054600102650823583510099033608338153987460306459613902701999676
