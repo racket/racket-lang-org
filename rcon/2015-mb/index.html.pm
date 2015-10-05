@@ -101,6 +101,8 @@ Racket's powerful syntax system allows things like pattern matching not only to 
 
 ◊folded{
 ◊speaker["" "Matthew Flatt"]{Binding as Sets of Scopes}
+◊rlink["2015/flatt.pdf"]{Slides}
+
 Racket's macro expander evolved from a prototype circa 2000 that combined the `syntax-case` macro system with an idea for modules and phases. It has served Racket well, but the implementation is complex and difficult to explain in full, and it's starting to fray around the edges with the addition of submodules. The new macro expander starts over using a new way of representing and tracking bindings. The resulting model of macro expansion is simpler and more uniform than the current one based on renaming, but it's mostly compatible with the old expander.
 
 ◊bio{◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt} is a professor at the University of Utah and one of the main developers of Racket. He works primarily on Racket's run-time system, compiler, macro system, build system, package system, documentation language, and graphics/GUI libraries.}}
