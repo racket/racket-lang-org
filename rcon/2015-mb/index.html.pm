@@ -83,6 +83,8 @@ We made an in-browser music production and exploration platform. The backend was
 
 ◊folded{
 ◊speaker["" "Byron Davies"]{Spreadsheets, Formal Methods, and Winning the XPRIZE}
+◊rlink["2015/davies.pdf"]{Slides}
+
 I developed Rexcel for analyzing standardized test data for schools. Although I did if for a specific application, the approach I took was very general, making it easy for people to perform complex spreadsheet processing in a language other than VBA.
 
 Using a Racket-based prototype to get our foot in the door, OntoPillot’s formal methods work is now in front of a Fortune 500 company to discuss possible collaboration. Using Racket’s compiler tools, including the syntax browser, we were able to create a credible prototype for a format methods tool development environment.
