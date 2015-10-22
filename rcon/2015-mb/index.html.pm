@@ -77,6 +77,8 @@ While object-oriented languages have embraced the use of advanced just-in-time c
 
 ◊folded{
 ◊speaker["" "Marc Burns"]{Rocking with Racket}
+◊rlink["2015/burns.pdf"]{Slides}
+
 We made an in-browser music production and exploration platform. The backend was developed in Racket and C++; we just finished porting it to Typed Racket. I will talk about how using (typed) Racket has informed our design, some pitfalls we encountered, and what we're doing to make the backend both performant and reliable now that we have a few users.
 
 ◊bio{◊link["https://github.com/m4burns"]{Marc Burns} studied math and computer science at the University of Waterloo. He likes to tinker with functional languages and language design, sometimes managing to put his strange creations to work in industry. He works at an early-stage startup in Montreal, Canada creating music production software.}}
