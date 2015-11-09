@@ -15,7 +15,7 @@
 RacketCon is a public meeting for everyone interested in Racket: developers, contributors, programmers, educators, and bystanders. It's an opportunity for all members of the community to come together to share plans, ideas, and enthusiasm. RacketCon will enable the entire Racket community to mingle: to update each other, to exchange ideas, to collaborate, and to help shape the future of Racket.
 
 ◊h3{◊xtarget["stream"]{Videos}}
-Talk recording are available ◊link["https://www.youtube.com/playlist?list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{here}.
+Talk recordings are available ◊link["https://www.youtube.com/playlist?list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{here}.
 Links to individual talks with talk descriptions, below.
 
 Live stream archive:
