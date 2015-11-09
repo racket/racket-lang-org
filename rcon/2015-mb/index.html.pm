@@ -16,48 +16,11 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 
 ◊h3{◊xtarget["stream"]{Videos}}
 Talk recordings are available ◊link["https://www.youtube.com/playlist?list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{here}.
-Links to individual talks with talk descriptions, below.
+Links to individual talks below, with talk descriptions.
 
 Live stream archive:
 ◊link["https://www.youtube.com/watch?v=oxz_6ZiCNgk"]{Morning sessions.}
 ◊link["https://www.youtube.com/watch?v=PALBHyARNWo"]{Afternoon sessions.}
-
-◊h3{◊xtarget["register"]{Register}}
-◊link["https://eventbrite.com/event/16825218682/"]{Via Eventbrite.}
-Use the "RAC" group code when reserving at the ◊link["http://doubletree3.hilton.com/en/hotels/missouri/st-louis-union-station-a-doubletree-by-hilton-hotel-STLUSDT/index.html"]{Union Station hotel}.
-
-◊h3{◊xtarget["social"]{Social event}}
-◊link["http://www.squareonebrewery.com/"]{Square One Brewery and Distillery}, 26 Sept, 6:30pm.
-There will be shuttles running between the Union Station Hotel and the event.
-
-◊h3{◊xtarget["schedule"]{Schedule}}
-
-◊schedule[
-◊row{◊at{9:00–9:30} ◊desc{Registration}}
-◊row{◊at{9:30} ◊desc{Welcome}}
-◊row{◊at{9:30–10:30} ◊desc{Keynote: Matthias Felleisen: The Racket Manifesto}}
-◊row{◊at{10:30–11:00} ◊desc{Break}}
-◊row{◊at{11:00–12:00} ◊desc{Session: Poetry and Music
-Ben Greenman: A #lang for All Seasons
-Jay McCarthy: Bithoven and the NES Chamber Orchestra
-Marc Burns: Rocking with Racket}}
-◊row{◊at{12:00–14:00} ◊desc{Lunch at ◊link["http://www.landrysseafood.com/location-st-louis.asp"]{Landry's}}}
-◊row{◊at{14:00} ◊desc{Contributor Awards}}
-◊row{◊at{14:00–15:00} ◊desc{Session: Infrastructure
-Andrew Kent: Practical Dependently Typed Racket
-Spenser Bauman: Tracing Comes to Racket
-Matthew Flatt: Bindings as Sets of Scopes}}
-◊row{◊at{15:00–15:30} ◊desc{Break}}
-◊row{◊at{15:30–16:30} ◊desc{Session: Scripting
-Byron Davies: Spreadsheets, Formal Methods, and Winning the XPRIZE
-Samuel Rebelsky: Scripting GIMP with Racket
-Vishesh Yadav: The Big Bang Universe on the World Wide Web}}
-◊row{◊at{16:30–17:00} ◊desc{Break}}
-◊row{◊at{17:00–18:00} ◊desc{Session: Libraries and Tools
-Jack Firth: Generic Syntax Expanders and Extensible Macros
-Alexis King: Generic Collections: One Interface to Rule Them All
-Spencer Florence: Code Coverage Outside of DrRacket}}
-]
 
 ◊h3{◊xtarget["speakers"]{Keynote speaker}}
 ◊folded{
@@ -184,6 +147,42 @@ Each semester, thousands of students learn how to design programs using Racket's
 
 ◊bio{◊link["https://www.twistedplane.com/"]{Vishesh Yadav} is a Masters student at Northeastern University, working on ideas to improve Whalesong. Before coming to Northeastern to study Programming Languages, he hacked on some open source projects such as KDE and the DragonFly BSD kernel.}}
 
+◊h3{◊xtarget["register"]{Register}}
+◊link["https://eventbrite.com/event/16825218682/"]{Via Eventbrite.}
+Use the "RAC" group code when reserving at the ◊link["http://doubletree3.hilton.com/en/hotels/missouri/st-louis-union-station-a-doubletree-by-hilton-hotel-STLUSDT/index.html"]{Union Station hotel}.
+
+◊h3{◊xtarget["social"]{Social event}}
+◊link["http://www.squareonebrewery.com/"]{Square One Brewery and Distillery}, 26 Sept, 6:30pm.
+There will be shuttles running between the Union Station Hotel and the event.
+
+◊h3{◊xtarget["schedule"]{Schedule}}
+
+◊schedule[
+◊row{◊at{9:00–9:30} ◊desc{Registration}}
+◊row{◊at{9:30} ◊desc{Welcome}}
+◊row{◊at{9:30–10:30} ◊desc{Keynote: Matthias Felleisen: The Racket Manifesto}}
+◊row{◊at{10:30–11:00} ◊desc{Break}}
+◊row{◊at{11:00–12:00} ◊desc{Session: Poetry and Music
+Ben Greenman: A #lang for All Seasons
+Jay McCarthy: Bithoven and the NES Chamber Orchestra
+Marc Burns: Rocking with Racket}}
+◊row{◊at{12:00–14:00} ◊desc{Lunch at ◊link["http://www.landrysseafood.com/location-st-louis.asp"]{Landry's}}}
+◊row{◊at{14:00} ◊desc{Contributor Awards}}
+◊row{◊at{14:00–15:00} ◊desc{Session: Infrastructure
+Andrew Kent: Practical Dependently Typed Racket
+Spenser Bauman: Tracing Comes to Racket
+Matthew Flatt: Bindings as Sets of Scopes}}
+◊row{◊at{15:00–15:30} ◊desc{Break}}
+◊row{◊at{15:30–16:30} ◊desc{Session: Scripting
+Byron Davies: Spreadsheets, Formal Methods, and Winning the XPRIZE
+Samuel Rebelsky: Scripting GIMP with Racket
+Vishesh Yadav: The Big Bang Universe on the World Wide Web}}
+◊row{◊at{16:30–17:00} ◊desc{Break}}
+◊row{◊at{17:00–18:00} ◊desc{Session: Libraries and Tools
+Jack Firth: Generic Syntax Expanders and Extensible Macros
+Alexis King: Generic Collections: One Interface to Rule Them All
+Spencer Florence: Code Coverage Outside of DrRacket}}
+]
 
 ◊h3{Sponsors}
 
