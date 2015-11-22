@@ -46,10 +46,10 @@
    (place ; -------------------------------------------------------------------
     'calpoly "California Polytechnic State University"
     #:location "San Luis Obispo, CA"
-    #:url "http://users.csc.calpoly.edu/~clements/"
-    #:pubs "http://www.brinckerhoff.org/clements/papers/"
+    #:url "http://www.brinckerhoff.org/"
+    #:pubs "http://www.brinckerhoff.org/pubs/"
     (person 'clements "John Clements"
-            #:url "http://users.csc.calpoly.edu/~clements/"))
+            #:url "http://www.brinckerhoff.org/"))
    (place ; -------------------------------------------------------------------
     'wpi "Worcester Polytechnic Institute"
     #:location "Worcester, MA"
