@@ -1,0 +1,53 @@
+1448302601
+Racket v6.3
+
+- Racket's macro expander uses a new representation of binding called
+  "set of scopes". The new binding model provides a simpler
+  explanation of how macros preserve binding, especially across module
+  boundaries and in hygiene-bending expansions. The new expander is
+  mostly compatible with existing Racket macros, but there are some
+  incompatibilities. For the formally inclined, a research paper on
+  this macro system will appear at POPL next year:
+
+      http://www.cs.utah.edu/plt/scope-sets/
+
+- Racket's GUI library now uses Gtk+ 3 when available, instead of Gtk+
+  2. Set the `PLT_GTK2` environment variable to select Gtk+ 2.
+
+- Added a new Redex tutorial based on a week-long workshop in SLC.
+
+- Better syntax error checking for Redex patterns that do not use
+  holes correctly.
+
+- The blueboxes are more agressive about finding names to look up in
+  the docs, meaning they are useful much more often.
+
+- Submodules are now fully supported in Typed Racket. Previously, some
+  uses of submodules would produce internal errors, making it hard to
+  `module+ test` and `module+ main` effectively in Typed Racket. The
+  switch to the set-of-scopes expander fixed these problems, and
+  submodules are now happily at home in Typed Racket.
+
+- The `typed/racket/unsafe` library provides import and export forms
+  that circumvent contract generation. This improves performance for
+  typed-untyped interaction at the cost of safety and debuggability.
+
+- Typed Racket provides experimental support for units (from
+  `racket/unit`).
+
+- The experimental `define-new-subtype` form allows overlaying finer
+  distinctions between otherwise identical types, similar to Haskell's
+  `newtype`.
+
+- The `Promise` type constructor changes in a backwards-imcompatible
+  way to exclude promises created with `promise/name`.
+
+- The `unstable-*` packages are out of the main distribution. Most of
+  their contents have been either merged with established Racket
+  libraries or spun off as their own packages. This change is
+  backwards compatible for packages that properly list their
+  dependencies. Full details:
+  http://blog.racket-lang.org/2015/10/retiring-unstable.html
+
+- edu: `big-bang` supports a display-mode clause so that world
+  programs can take over the entire screen.
