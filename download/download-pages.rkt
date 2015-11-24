@@ -239,10 +239,15 @@
     // that only brings the locally desired entries to the top
     function getPlatformOrder() {
       var p = navigator.platform;
-      var l = function(str) { return p.indexOf(str) != -1@";" }
+      var p2 = navigator.appVersion;
+      var l = function(str) { return (p.indexOf(str) != -1) || (p2.indexOf(str) != -1) @";" }
       var Win      = /Windows/,
+          Win64    = /Windows.*64/,
+          Win32    = /Windows.*32/,
           Mac      = /Mac/,
           MacIntel = /Mac.*Intel/,
+          MacIntel64 = /Mac.*Intel.*64/,
+          MacIntel32 = /Mac.*Intel.*32/,
           MacPPC   = /Mac.*PPC/,
           Linux    = /Linux/,
           Linux64  = /Linux.*x86_64/,
@@ -251,13 +256,10 @@
           Solaris  = /Solaris/;
       if (p == null) return [];
       else if (l("SunOS")) return [Solaris, Unix];
-      @; Note about Windows 64: seems like the best guess could be done by
-      @; checking that the platform has "Win64" or navigator.userAgent has
-      @; either "Win64" or "WOW64".  But the 32 build might be better for many
-      @; people anyway, so keep things as is for now.  (With the `Win' filter
-      @; which will get the 32 version first and the 64 second.)
-      else if (l("Win"))   return [Win];
-      else if (l("Mac"))   return [(l("Intel")?MacIntel:MacPPC), Mac, Unix];
+      else if (l("Win64")) return [Win64, Win];
+      else if (l("WOW64")) return [Win64, Win];
+      else if (l("Win"))   return [Win32, Win];
+      else if (l("Mac"))   return [(l("Intel")?MacIntel64:MacPPC), (l("Intel")?MacIntel32:MacPPC), Mac, Unix];
       else if (l("Linux")) {
         // also show the linux explanation if it's a linux
         document.getElementById("linux_explain").style.display = "block";
