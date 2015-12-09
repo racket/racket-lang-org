@@ -77,7 +77,7 @@
       @div[id: "builtpkgs_explain"
            style: note-style]{
         @div{@b{About source distributions:}} The @b{Source + built packages}
-           distribution is recommend, instead of the selected @b{Source} distribution.
+           distribution is recommended, instead of the selected @b{Source} distribution.
            The @b{Source + built packages} distribution includes pre-built,
            platform-independent bytecode@";" it installs much faster than
            plain source, and it is also compatible with fast installs of
