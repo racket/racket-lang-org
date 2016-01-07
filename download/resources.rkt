@@ -5,5 +5,5 @@
 (provide download-site)
 
 (define download-site (site "download"
-                            #:url (rewrite-for-testing "http://download.racket-lang.org/")
+                            #:url (rewrite-for-testing "https://download.racket-lang.org/")
                             #:page-headers (identity-headers)))

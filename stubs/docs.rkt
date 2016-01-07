@@ -4,7 +4,7 @@
          "../testing.rkt")
 
 (define docs-site (site "stubs/docs" 
-                        #:url (rewrite-for-testing "http://docs.racket-lang.org/")
+                        #:url (rewrite-for-testing "https://docs.racket-lang.org/")
                         #:always-abs-url? #t
                         #:page-style? #f
                         #:meta? #t

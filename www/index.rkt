@@ -378,7 +378,7 @@ applications from @a[class: "introlink" href: (docs-path "web-server/")]{web ser
 @a[href: (docs-path "more/")]{build a web server from scratch}.  Racket comes with
 @a[href: (docs-path)]{batteries included} and a full-featured 
 @a[href: (docs-path "drracket/")]{programming environment}, 
-plus lots of @a[href: "http://pkgs.racket-lang.org"]{packages},
+plus lots of @a[href: "https://pkgs.racket-lang.org"]{packages},
 so @a[href: (docs-path "getting-started/")]{get started}!
 }}
 
@@ -410,7 +410,7 @@ and build a new one.}
 @growbox["Skills"]{Whether you're just
 @a[href: "http://htdp.org/"]{starting out}, want to know more about
 programming language @a[href: "http://www.plai.org/"]{applications} or
-@a[href: "http://redex.racket-lang.org/"]{models}, looking to
+@a[href: "https://redex.racket-lang.org/"]{models}, looking to
 @a[href: (docs-path "continue/")]{expand your
 horizons}, or ready to dive into @a[href: "learning.html"]{research},
 Racket can help you become a better programmer and system builder.}}
@@ -440,7 +440,7 @@ provides comprehensive coverage of all of Racket.}
     server} to build dynamic web applications.}
   @docelem["Package Management" "Racket" (docs-path "pkg/")]{
 explains how to install
-    @a[href: "http://pkgs.racket-lang.org"]{packages}, and how to
+    @a[href: "https://pkgs.racket-lang.org"]{packages}, and how to
     build and distribute your own.}}
 }
 
@@ -461,9 +461,9 @@ explains how to install
 
 @columns[4]{
 @panetitle{Discussion}
-@p{@a[href: "http://lists.racket-lang.org/"]{Mailing lists}
+@p{@a[href: "https://lists.racket-lang.org/"]{Mailing lists}
   — Discussion lists for using and developing Racket.}
-@p{@a[href: "http://racket-lang.org/irc-chat.html"]{IRC} —
+@p{@a[href: "https://racket-lang.org/irc-chat.html"]{IRC} —
 @irc-content}
 
 @p{@people   —
@@ -488,7 +488,7 @@ Useful pages
 @p{@pre:installers{Snapshot builds}   —
 The freshest versions of Racket.}
 
-@p{@a[href: "http://bugs.racket-lang.org"]{Bug reports}   —
+@p{@a[href: "https://bugs.racket-lang.org"]{Bug reports}   —
 File, query, and maybe fix existing reports.}}}
 
 @sectitle{Learning}
@@ -531,7 +531,7 @@ File, query, and maybe fix existing reports.}}}
     @li{For the working language engineer.}
 }}
 @book-image{
-  @a[href: "http://redex.racket-lang.org/"]{@img[src: (copyfile #:site www-site (build-path img-dir "redex-cover.jpg"))]}}
+  @a[href: "https://redex.racket-lang.org/"]{@img[src: (copyfile #:site www-site (build-path img-dir "redex-cover.jpg"))]}}
 }}
 
 @columns[12 #:row? #t #:center? #t]{@div[class: "thanks"]{@thanks}}

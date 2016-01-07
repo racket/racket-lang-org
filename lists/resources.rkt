@@ -5,5 +5,5 @@
 (provide lists-site)
 
 (define lists-site (site "lists"
-                         #:url (rewrite-for-testing "http://lists.racket-lang.org/")
+                         #:url (rewrite-for-testing "https://lists.racket-lang.org/")
                          #:page-headers (identity-headers)))

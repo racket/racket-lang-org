@@ -1,7 +1,7 @@
 #lang plt-web
 
 (define bugs-site (site "bugs"
-                        #:url "http://bugs.racket-lang.org/"))
+                        #:url "https://bugs.racket-lang.org/"))
 
 (define planet-bugs "http://planet.racket-lang.org/trac/newticket")
 

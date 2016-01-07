@@ -7,7 +7,7 @@
 (provide installers)
 
 (define pre-site (site "pre"
-                       #:url (rewrite-for-testing "http://pre.racket-lang.org/")
+                       #:url (rewrite-for-testing "https://pre.racket-lang.org/")
                        #:page-headers (identity-headers)
                        #:share-from www-site))
 

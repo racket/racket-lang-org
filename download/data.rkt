@@ -61,11 +61,11 @@
      "Matthew Flatt"
      "mflatt@cs.utah.edu"]
     ["USA, Massachusetts (Northeastern University)"
-     "http://mirror.racket-lang.org/installers/"
+     "https://mirror.racket-lang.org/installers/"
      "Eli Barzilay"
      "eli@barzilay.org"]
     ["USA, Utah (University of Utah)"
-     "http://www.cs.utah.edu/plt/installers/"
+     "https://www.cs.utah.edu/plt/installers/"
      "Matthew Flatt"
      "mflatt@cs.utah.edu"]
     ["USA, Illinois (Northwestern University)"
@@ -81,7 +81,7 @@
      "Marcus Crestani"
      "crestani@informatik.uni-tuebingen.de"]
     ["Belgium (Infogroep, Vrije Universiteit Brussel)"
-     "http://racket.infogroep.be/"
+     "https://racket.infogroep.be/"
      "Infogroep" ; fallback: Sam Vervaeck <svervaec@infogroep.be>
      "server@infogroep.be"]
     #;

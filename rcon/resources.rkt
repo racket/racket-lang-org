@@ -8,7 +8,7 @@
 
 (define con-site
   (site "con"
-        #:url (rewrite-for-testing "http://con.racket-lang.org/")
+        #:url (rewrite-for-testing "https://con.racket-lang.org/")
         #:page-headers (identity-headers)
         #:share-from www-site))
 

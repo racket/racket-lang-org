@@ -5,7 +5,7 @@
 (require (only-in "../download/resources.rkt" download-site))
 
 (define dirlist-site (site "stubs/dirlist" 
-                           #:url "http://download.racket-lang.org/"
+                           #:url "https://download.racket-lang.org/"
                            #:always-abs-url? #t
                            #:share-from download-site))
 

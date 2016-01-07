@@ -15,7 +15,7 @@
 ;; them to S3 manually.
 
 (define download-site (site "download"
-                            #:url "http://download.racket-lang.org/"
+                            #:url "https://download.racket-lang.org/"
                             #:always-abs-url? #t))
 
 (make-indexes download-site
