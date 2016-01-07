@@ -7,7 +7,7 @@
 (define git-site
   (site "stubs/git"
         #:share-from www-site
-        #:url "http://git.racket-lang.org/"
+        #:url "https://git.racket-lang.org/"
         #:always-abs-url? #t
         #:robots (add-newlines (for/list ([d '(plt libs testing play)])
                                  @list{Disallow: /@|d|/}))))
@@ -53,7 +53,7 @@
     @||
     our $favicon = "@(site-favicon-path git-site)";
     our $logo = "@gitweb-logo";
-    our $logo_url = "http://racket-lang.org/";
+    our $logo_url = "https://racket-lang.org/";
     our $logo_label = "Racket Homepage";
     @||
     # specification of visible repositories (managed by gitolite)
@@ -73,8 +73,8 @@
     our $home_link_str = "root";
     @||
     $feature{'pathinfo'}{'default'} = [1];
-    $my_uri = "http://git.racket-lang.org/";
-    $home_link = "http://git.racket-lang.org/";
+    $my_uri = "https://git.racket-lang.org/";
+    $home_link = "https://git.racket-lang.org/";
     # ? $feature{'javascript-actions'}{'default'} = [0];
     @||
     # some smaller features, usually overrideable by individual repos
