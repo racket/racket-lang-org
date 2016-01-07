@@ -1,9 +1,14 @@
 #lang plt-web
 
-(require "resources.rkt" "data.rkt" "installer-pages.rkt" "symlinks.rkt" plt-web/style
+(require "resources.rkt" "data.rkt" "installer-pages.rkt" "symlinks.rkt"
+         plt-web/style
+         version/utils
          (prefix-in pre: "../minis/pre.rkt"))
 
 (define docs "docs")
+
+(define releases "releases")
+(define first-version-with-releases-page "5.92")
 
 (provide render-download-page)
 (define (render-download-page [release current-release] [package 'racket]
@@ -25,6 +30,7 @@
                        " text-align: left;"
                        " line-height: 1.5em; "
                        " background-color: #edd"))
+  (define (at-mirror . strs) (list "https://mirror.racket-lang.org/" strs))
   (list
    @columns[10 #:center? #t #:row? #t #:center-text? #t]{
     @h3[style: "text-align: center"]{Version @version (@(release-date-string release))}
@@ -62,8 +68,11 @@
          (list
           @row{
             @links[@list{Release: @nbsp @(release-page release){Announcement}}
-                       @a[href: @at-download{@|docs|/release/}]{Notes}
-                       @a[href: @at-download{@docs}]{Documentation}]}
+                   @a[href: @at-download{@|docs|/release/}]{Notes}
+                   @list{@a[href: @at-download{@docs}]{Documentation}
+                         @(if (version<? @|version| first-version-with-releases-page)
+                              null
+                              @list{@br @nbsp @a[href: @at-mirror{@|releases|/@version}]{More Variants and Checksums}})}]}
           @row{@links[@license{License}
                        all-version-pages
                        @pre:installers{Snapshot Builds}]}))}
