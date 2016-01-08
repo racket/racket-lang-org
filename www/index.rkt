@@ -350,11 +350,11 @@ applications from @a[class: "introlink" href: (docs-path "web-server/")]{web ser
         style: "position: absolute; top: 0%; right: 0%;"]{@explain}
      @a[href: "#" class: "toggle narrow_only prev_toggle"
         gumby-trigger: ".unique_lines|.web_scraper"
-        style: "position: absolute; top: -40%; left: 35%"]{@prev}
+        style: "margin-left: 40px; position: absolute; top: -40%; left: 35%"]{@prev}
 
      @a[href: "#" class: "toggle narrow_only next_toggle"
         gumby-trigger: ".unique_lines|.web_scraper"
-        style: "position: absolute; top: -40%; right: 35%"]{@next}
+        style: "position: absolute; top: -40%; right: 25%"]{@next}
 
      @a[href: "#" class: "toggle wide_only prev_toggle"
         gumby-trigger: ".unique_lines|.web_scraper"
