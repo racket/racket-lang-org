@@ -369,7 +369,7 @@ applications from @a[class: "introlink" href: (docs-path "web-server/")]{web ser
 
 @columns[2 style: "text-color: black"]{
   @h2[style: "font-size: 144%; margin-bottom: 6pt;"]{News}
-  @p[style: "font-size: 80%;"]{Racket @a[href: "http://blog.racket-lang.org/2015/11/racket-v63.html"]{version 6.3} is out!}
+  @p[style: "font-size: 80%;"]{Racket @a[href: "https://blog.racket-lang.org/2015/11/racket-v63.html"]{version 6.3} is out!}
   @p[style: "font-size: 80%;"]{@rcon[2015]{(fifth RacketCon)} was held in St.@|nbsp|Louis on September 27. Videos are available.}}}
 
 
@@ -453,9 +453,9 @@ explains how to install
   Racket meeting, coming up in September.  Previously
   @rcon[2014], @rcon[2013], @rcon[2012], and @rcon[2011].}
 
-@p{@a[href: "http://blog.racket-lang.org/"]{Blog}
+@p{@a[href: "https://blog.racket-lang.org/"]{Blog}
   — Announcements, helpful hints, and thoughtful rants.}
-@p{@a[href: "http://twitter.com/#!/racketlang"]{Twitter}
+@p{@a[href: "https://twitter.com/racketlang"]{Twitter}
 — Short bits of Racket news.}
 }
 
@@ -510,13 +510,13 @@ File, query, and maybe fix existing reports.}}}
     @li{For those just starting out with Racket.}
 }}
 @book-image{
-  @a[href: "http://www.realmofracket.com"]{@img[src: (copyfile #:site www-site (build-path img-dir "racket_cover_web.png"))]}}
+  @a[href: "https://www.realmofracket.com"]{@img[src: (copyfile #:site www-site (build-path img-dir "racket_cover_web.png"))]}}
 }}
 
 @row{
 @row{
 @book-image{
-  @a[href: "http://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/"]{
+  @a[href: "https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/"]{
      @img[src: (copyfile #:site www-site (build-path img-dir "plai-cover.jpg"))]}}
 @columns[4]{@panetitle{PLAI}
 @p{Foundations of programming languages.}
@@ -658,7 +658,7 @@ File, query, and maybe fix existing reports.}}}
 ;;         (tr (td align: 'center body))))
 ;;     ;; someone posted a comment saying that adding "&fmt=18" to the url
 ;;     ;; shows a higher resolution video, but it looks exactly the same.
-;;     (define url "http://www.youtube.com/v/vgQO_kHl39g&hl=en")
+;;     (define url "https://www.youtube.com/v/vgQO_kHl39g&hl=en")
 ;;     @center{
 ;;       @object[type: "application/x-shockwave-flash" data: url
 ;;               width: (round (* 3/2 425)) height: (round (* 3/2 344))]{
