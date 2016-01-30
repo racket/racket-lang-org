@@ -1,8 +1,6 @@
 #lang racket
-(require pollen/decode sugar/list sugar/string txexpr)
+(require pollen/decode pollen/private/whitespace sugar/list sugar/string txexpr)
 (provide (all-defined-out))
-
-
 
 (define (image src)
   `(img ((src ,src))))
@@ -26,17 +24,10 @@
   `(a ((href ,(string-downcase target))) ,@sources))
 
 
-(define (splice xs)
-  (define tags-to-splice '(splice-me))
-  (apply append (for/list ([x (in-list xs)])
-                  (if (and (txexpr? x) (member (get-tag x) tags-to-splice))
-                      (get-elements x)
-                      (list x)))))
-
 (define exclusion-mark-attr '(decode "exclude"))
 (define (root . items)
   (decode `(decoded-root ,@items)
-          #:txexpr-elements-proc (compose1 detect-paragraphs splice)
+          #:txexpr-elements-proc detect-paragraphs
           #:string-proc (compose1 smart-quotes smart-dashes)
           #:exclude-tags '(style script pre)
           #:exclude-attrs (list exclusion-mark-attr)))
@@ -71,7 +62,7 @@
 (define (folded title #:open [open #f] . xs)
   (define openness (if open "block" "none"))
   (define div-name (symbol->string (gensym)))
-  `(splice-me
+  `(@
     ,(foldable-subhead `(a ((href ,(format "javascript:toggle_div('~a')" div-name))) ,title))
     (,payload-tag ((style ,(format "display:~a;" openness))(id ,div-name) (class ,payload-class)) ,@(detect-paragraphs xs #:force? #t))))
 

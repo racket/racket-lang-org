@@ -1,7 +1,7 @@
 #lang pollen
 ◊(require css-tools)
 
-◊(make-media-query 24 10.5 1000 40 .25)   
+◊(make-media-query 24 10.5 1050 40 .25)   
 
 ◊(define fgbg "#778")
 ◊(define fgbg-darker "#556")

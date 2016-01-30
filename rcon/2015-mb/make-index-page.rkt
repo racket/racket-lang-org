@@ -1,3 +1,4 @@
 #lang racket
 (require pollen/render)
-(render-batch "index.html")
+(render "index.html")
+(render "styles.css")
