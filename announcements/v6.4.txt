@@ -1,0 +1,46 @@
+1454946174
+Racket v6.4
+
+- We fixed a security vulnerability in the web server.  The existing
+  web server is vulnerable to a navigation attack if it is also
+  enabled to serve files statically; that is, any file readable by the
+  web server is accessible remotely.
+
+- DrRacket's scrolling is faster.
+
+- Incremental garbage-collection mode can eliminate long pauses in a
+  program. For example, incremental mode is useful for avoiding pauses
+  in games and animations.
+
+  Programs must specifically request incremental mode with
+  `(collect-garbage 'incremental)`, but libraries such as
+  `2htdp/universe` include the request as part of the library's
+  implementation.
+
+- The default package catalog is an HTTPS address instead of HTTP, and
+  package operations properly validate server certificates when using
+  HTTPS.
+
+- Documentation may define their own categories for the manual top-
+  level page by using strings, rather than only symbols that name
+  pre-defined categories.
+
+- The Racket cheat sheet is included in the main distribution.
+
+- DrRacket is available in Bulgarian, thanks to Alexander Shopov.
+
+- The contract Typed Racket generates for the `Any` type is more
+  permissive, allowing more typed/untyped programs to work without
+  contract errors.
+
+- Redex supports binding specifications; describe which variables bind
+  in which expressions and your metafunctions and reduction relations
+  automatically become scope-sensitive. Thanks to Paul Stansifer for
+  this improvement.
+
+- All `pict` functions accept `pict-convertible`s. This allows for
+  transparent interoperability between `pict` and  libraries like
+  `2htdp/image`.
+
+- The `raco profile` and `raco contract-profile` commands provide easy
+  access to profiling tools, without requiring program modifications.
