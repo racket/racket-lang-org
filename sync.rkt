@@ -7,13 +7,21 @@
 (require racket/cmdline)
 
 (define dry-run? #f)
+(define check-metadata? #f)
 (define save-temps? #f)
+(define jobs 1)
 
 (command-line
  #:once-each
  [("--dry-run") "Don't actually upload"
   (printf "Dry-run mode enabled\n")
   (set! dry-run? #t)]
+ [("--check-metadata") "Check metadata of otherwise unmodified files"
+  (set! check-metadata? #t)]
+ [("-j" "--jobs") n "Download/upload with <n> parallel jobs"
+  (set! jobs (string->number n))
+  (unless (exact-positive-integer? jobs)
+    (raise-user-error 's3-sync "bad number for --jobs: ~s" n))]
  [("--save-temps") "Preserve generated files"
   (printf "Saving generated files\n")
   (set! save-temps? #t)])
@@ -67,6 +75,8 @@
                #:shallow? shallow?
                #:upload? #t
                #:link-mode 'redirect
+               #:check-metadata? check-metadata?
+               #:jobs jobs
                #:log displayln))
 (upload "www" "racket-lang.org")
 (upload "www" "www.racket-lang.org")
