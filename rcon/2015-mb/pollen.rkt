@@ -1,5 +1,5 @@
 #lang racket
-(require pollen/decode pollen/private/whitespace sugar/list sugar/string txexpr)
+(require pollen/decode pollen/private/whitespace sugar/list sugar/unstable/string txexpr)
 (provide (all-defined-out))
 
 (define (image src)
