@@ -85,10 +85,10 @@
            [pfx (if (regexp-match? #rx"://" base) base (list "http://" base))])
       @a[href: (list pfx ".gmane.org" path gmane)]{@body}))
   (define (mail-archive-link suffix . body)
-    @a[href: (list "http://www.mail-archive.com/" email "/" suffix)]{@body})
+    @a[href: (list "https://www.mail-archive.com/" email "/" suffix)]{@body})
   (define google-groups-url
     (let ([g (ML-google-name ml)])
-      (and g (list "http://groups.google.com/forum/#!forum/" g "/"))))
+      (and g (list "https://groups.google.com/forum/#!forum/" g "/"))))
   (define google-groups-join-url
     (and google-groups-url
          (append google-groups-url (list "join"))))7
@@ -146,7 +146,7 @@
              Search: @input[type: 'text name: 'q value: "" size: 20].}}
          @td{@small{—none—}})]
       [(mail-archive-cell)
-       @form-cell["http://www.mail-archive.com/search"]{
+       @form-cell["https://www.mail-archive.com/search"]{
          @input[type: 'hidden name: 'l value: email]
          @mail-archive-link["info.html"]{Archive}
          @bull

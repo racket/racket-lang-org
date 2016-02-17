@@ -28,7 +28,7 @@
             @text{Your favorite search engine may well provide answers for many
                   of your questions, in particular, try to search through
                   Racket questions on
-                  @a[href: "http://stackoverflow.com/questions/tagged/racket"]{
+                  @a[href: "https://stackoverflow.com/questions/tagged/racket"]{
                     stackoverflow}.}]
    @parlist[@strong{The Mailing List}
             @text{The @tt|{users@racket-lang.org}| mailing list is a great

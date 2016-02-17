@@ -13,15 +13,15 @@
         Thanks to @a[href: "http://www.nsf.gov/"]{the NSF},
         @a[href: "http://www.darpa.mil/"]{DARPA},
         the
-        @a[href: "http://www.ed.gov/FIPSE/"]{
+        @a[href: "https://www.ed.gov/FIPSE/"]{
           Fund for the Improvement of Postsecondary Education (FIPSE)}
-        at the @a[href: "http://www.ed.gov/"]{US Department of Education},
-        the @a[href: '("http://www.exxonmobil.com/Corporate/"
+        at the @a[href: "https://www.ed.gov/"]{US Department of Education},
+        the @a[href: '("https://www.exxonmobil.com/Corporate/"
                        "community_foundation.aspx")]{Exxon Foundation},
         CORD, partners of the Academy of Information Technology,
-        @a[href: "http://microsoft.com"]{Microsoft},
-        @a[href: "http://mozilla.org"]{Mozilla},
-        and @a[href: "http://google.com"]{Google}
+        @a[href: "https://microsoft.com"]{Microsoft},
+        @a[href: "https://mozilla.org"]{Mozilla},
+        and @a[href: "https://google.com"]{Google}
         for their generous support over the years.})
 
 (provide community)
@@ -38,7 +38,7 @@
              @text{@rcon[] is our annual conference.}]
     @parlist[@strong{PLT Design Inc.}
       @text{@blog — announcements, helpful hints, and thoughtful rants.}
-      @text{@a[href: "http://twitter.com/#!/racketlang"]{Twitter}
+      @text{@a[href: "https://twitter.com/racketlang"]{Twitter}
             — random Racket bits.}
       @text{@people — the people behind Racket.}]
     @parlist[@strong{Wiki}
@@ -47,7 +47,7 @@
       @text{@-wiki{Videos} — Watch tutorials, interviews, and more.}]
     @parlist[@strong{Development}
       @text{@git (also available on
-            @a[href: "http://github.com/plt/racket/"]{GitHub}).}
+            @a[href: "https://github.com/racket/racket/"]{GitHub}).}
       @text{@pre:installers{Snapshot} — daily builds.}
       @text{@bug-reports — create and query existing reports.}]
     @parlist[@strong{Support}

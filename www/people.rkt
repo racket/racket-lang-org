@@ -17,10 +17,10 @@
    (place ; -------------------------------------------------------------------
     'utah "University of Utah"
     #:location "Salt Lake City, UT"
-    #:url "http://www.cs.utah.edu/plt/"
-    #:pubs "http://www.cs.utah.edu/plt/publications/"
+    #:url "https://www.cs.utah.edu/plt/"
+    #:pubs "https://www.cs.utah.edu/plt/publications/"
     (person 'mflatt "Matthew Flatt"
-            #:url "http://www.cs.utah.edu/~mflatt/"))
+            #:url "https://www.cs.utah.edu/~mflatt/"))
    (place ; -------------------------------------------------------------------
     'nwu "Northwestern University"
     #:location "Evanston, IL"
@@ -32,17 +32,17 @@
    (place ; -------------------------------------------------------------------
     'brown "Brown University"
     #:location "Providence, RI"
-    #:url "http://www.cs.brown.edu/research/plt/"
-    #:pubs "http://www.cs.brown.edu/~sk/Publications/Papers/"
+    #:url "https://www.cs.brown.edu/research/plt/"
+    #:pubs "https://www.cs.brown.edu/~sk/Publications/Papers/"
     (person 'shriram "Shriram Krishnamurthi"
-            #:url "http://www.cs.brown.edu/~sk/"))
+            #:url "https://www.cs.brown.edu/~sk/"))
    (place ; -------------------------------------------------------------------
-    'vassar "Vassar College"
-    #:location "Poughkeepsie, NY"
-    #:url "http://jeapostrophe.github.io/home/"
-    #:pubs "http://jeapostrophe.github.io/home/#%28part._pubs%29"
+    'uml "University of Massachussets, Lowell"
+    #:location "Lowell, MA"
+    #:url "https://jeapostrophe.github.io/home/"
+    #:pubs "https://jeapostrophe.github.io/home/#%28part._pubs%29"
     (person 'jay "Jay McCarthy"
-            #:url "http://jeapostrophe.github.io/home/"))
+            #:url "https://jeapostrophe.github.io/home/"))
    (place ; -------------------------------------------------------------------
     'calpoly "California Polytechnic State University"
     #:location "San Luis Obispo, CA"
@@ -53,9 +53,9 @@
    (place ; -------------------------------------------------------------------
     'wpi "Worcester Polytechnic Institute"
     #:location "Worcester, MA"
-    #:url "http://web.cs.wpi.edu/~kfisler/"
+    #:url "https://web.cs.wpi.edu/~kfisler/"
     (person 'kathi "Kathi Fisler"
-            #:url "http://web.cs.wpi.edu/~kfisler/"))
+            #:url "https://web.cs.wpi.edu/~kfisler/"))
    (place ; -------------------------------------------------------------------
     'indiana "Indiana University"
     #:location "Bloomington, IN"
@@ -100,7 +100,7 @@
             people (make-finder 'people people person-nick))))
 
 (provide people)
-(define acks-url "https://github.com/plt/racket/blob/master/racket/collects/acks/acks.rkt")
+(define acks-url "https://github.com/racket/racket/blob/master/racket/collects/acks/acks.rkt")
 (define people
   @page[#:site www-site
         #:window-title "Racket People: The PLT Group" #:part-of 'community

@@ -106,7 +106,7 @@
         scheme} to @tt{#lang racket} in the Racket distribution, although
         @tt{#lang scheme} will be supported for backward compatibility. The
         @url{http://plt-scheme.org} site will be replaced by
-        @url{http://racket-lang.org}.  The @tt{plt-scheme} mailing list becomes
+        @url{https://racket-lang.org}.  The @tt{plt-scheme} mailing list becomes
         the @tt{racket} mailing list (@tt|{users@racket-lang.org}|).
       @~
         The Racket site and documentation will note that Racket is a descendant
