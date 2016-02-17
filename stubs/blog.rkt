@@ -4,7 +4,7 @@
          racket/port)
 
 (define blog-site (site "stubs/blog"
-                        #:url "http://blog.racket-lang.org/"
+                        #:url "https://blog.racket-lang.org/"
                         #:always-abs-url? #t
                         #:page-style? #f
                         #:share-from www-site))
@@ -520,7 +520,7 @@ body#layout #header {
         gapi.load(&quot;gapi.iframes:gapi.iframes.style.bubble&quot;, function() {
           if (gapi.iframes &amp;&amp; gapi.iframes.getContext) {
             gapi.iframes.getContext().openChild({
-                url: &#39;https://www.blogger.com/navbar.g?targetBlogID\0752080885971644496896\46blogName\75The+Racket+Blog\46publishMode\75PUBLISH_MODE_HOSTED\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75http://blog.racket-lang.org/search\46blogLocale\75en\46v\0752\46homepageUrl\75http://blog.racket-lang.org/\46blogFollowUrl\75https://plus.google.com/103883747126741038443\46vt\0755151180936093146796&#39;,
+                url: &#39;https://www.blogger.com/navbar.g?targetBlogID\0752080885971644496896\46blogName\75The+Racket+Blog\46publishMode\75PUBLISH_MODE_HOSTED\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75https://blog.racket-lang.org/search\46blogLocale\75en\46v\0752\46homepageUrl\75https://blog.racket-lang.org/\46blogFollowUrl\75https://plus.google.com/103883747126741038443\46vt\0755151180936093146796&#39;,
                 where: document.getElementById(&quot;navbar-iframe-container&quot;),
                 id: &quot;navbar-iframe&quot;
             });
@@ -718,7 +718,7 @@ head.appendChild(script);
             <b:if cond="data:post.editUrl">
               <span expr:class="&quot;item-control &quot; + data:post.adminClass">
                 <a expr:href="data:post.editUrl" expr:title="data:top.editPostMsg">
-                  <img alt="" class="icon-action" height="18" src="http://img2.blogblog.com/img/icon18_edit_allbkg.gif" width="18"/>
+                  <img alt="" class="icon-action" height="18" src="https://img2.blogblog.com/img/icon18_edit_allbkg.gif" width="18"/>
                 </a>
               </span>
             </b:if>
