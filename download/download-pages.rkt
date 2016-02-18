@@ -72,7 +72,7 @@
                    @list{@a[href: @at-download{@docs}]{Documentation}
                          @(if (version<? @|version| first-version-with-releases-page)
                               null
-                              @list{@br @nbsp @a[href: @at-mirror{@|releases|/@version}]{More Variants and Checksums}})}]}
+                              @list{@br @nbsp @a[href: @list{/@|releases|/@version}]{More Variants and Checksums}})}]}
           @row{@links[@license{License}
                        all-version-pages
                        @pre:installers{Snapshot Builds}]}))}
