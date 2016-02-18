@@ -3,7 +3,7 @@
 (define collection "racket-lang-org")
 
 (define deps '("base"
-               "plt-web-lib"
+               ("plt-web-lib" #:version "1.1")
                "at-exp-lib"
                "net-lib"
                "racket-index"
@@ -15,7 +15,8 @@
                "pollen" ; for rcon
                "css-tools" ; for rcon
                "sugar"
-               "txexpr"))
+               "txexpr"
+               ("s3-sync" #:version "1.3")))
 
 (define pkg-desc "Sources for http://racket-lang.org")
 

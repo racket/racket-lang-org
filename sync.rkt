@@ -1,8 +1,5 @@
-#lang racket/load
-
-;; This script uses the "s3-sync" package, even though the enclosing
-;; package does not depend on it, and this module is written with
-;; `racket/load` to avoid the dependency.
+#lang racket
+(require s3-sync/web)
 
 (require racket/cmdline)
 
@@ -25,26 +22,6 @@
  [("--save-temps") "Preserve generated files"
   (printf "Saving generated files\n")
   (set! save-temps? #t)])
-
-;; Manually check package install and version:
-(define s3-sync-pkg "s3-sync")
-(define min-s3-sync-vers "1.3")
-(require pkg/lib
-         setup/getinfo
-         version/utils)
-(let ([dir (pkg-directory s3-sync-pkg)])
-  (unless dir
-    (error 'sync "please install the ~s package" s3-sync-pkg))
-  (let ([i (get-info/full dir)])
-    (unless (and i
-                 (let ([v (i 'version (lambda () #f))])
-                   (and v
-                        (version<=? min-s3-sync-vers v))))
-      (error 'sync
-             "please update the ~s package to get version ~a or later"
-             s3-sync-pkg min-s3-sync-vers))))
-
-(require s3-sync/web)
 
 (define (step . s)
   (displayln (make-string 72 #\=))
