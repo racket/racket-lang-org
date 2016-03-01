@@ -198,7 +198,7 @@
        contribute to Racket.  We encourage anyone to develop any kind of
        software, with any kind of license, using Racket.
     @~ We have chosen the LGPL as the license for Racket, which makes it
-       possible for for people to create software with Racket, and to allow us
+       possible for people to create software with Racket, and to allow us
        to build on existing libraries that use the LGPL, such as the Lightning
        assembler and the GMP math library.  The basic requirement of the LGPL
        is that you make your changes to Racket available, and that you let
