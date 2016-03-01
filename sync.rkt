@@ -1,7 +1,10 @@
 #lang racket
-(require s3-sync/web)
-
-(require racket/cmdline)
+(require racket/cmdline
+         s3-sync/web
+         s3-sync/routing-rule)
+;; For routing rules:
+(require "download/data.rkt"
+         version/utils)
 
 (define dry-run? #f)
 (define check-metadata? #f)
@@ -61,6 +64,23 @@
 (upload "con" "con.racket-lang.org")
 (upload "drracket" "www.drracket.org")
 (upload "download" "download.racket-lang.org" #:shallow? #t)
+
+;; ----------------------------------------
+
+(step "Additional Routing Rules")
+
+(define routing-rules
+  (for/list ([r (in-list all-releases)]
+             #:when (version<=? "5.92" (release-version r)))
+    (redirect-prefix-routing-rule #:old-prefix (format "releases/~a/installers" (release-version r))
+                                  #:new-prefix (format "installers/~a" (release-version r))
+                                  #:new-host "mirror.racket-lang.org")))
+
+(unless dry-run?
+  (add-routing-rules "download.racket-lang.org"
+                     routing-rules
+                     #:log-info displayln))
+
 
 ;; ----------------------------------------
 
