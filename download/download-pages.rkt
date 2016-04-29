@@ -25,6 +25,7 @@
                                 [(equal? (car a) package) #t]
                                 [(equal? (car b) package) #f]
                                 [else (string<? (cdr a) (cdr b))]))))
+  (define (literal-link url) @a[href: url url])
   (define note-style '("font-size: 85%; display: none;"
                        " margin-top: 1ex;"
                        " padding: 1ex 1ex 1ex 1ex;"
@@ -60,7 +61,11 @@
                              id: "download_link"
                              "Download")]
       @br
-      or @a[href: (resource "download/" #f) id: "mirror_link"]{mirror}}}
+      or @a[href: (resource "download/" #f) id: "mirror_link"]{mirror}
+      @span[id: "linux_ppa"]{
+        or
+        @a[href: "https://launchpad.net/~plt/+archive/ubuntu/racket"]{Ubuntu PPA}}
+     }}
   @columns[8 #:center? #t #:center-text? #t #:row? #t]{
       @(let* ([sep   @list{@nbsp @bull @nbsp}]
               [links (λ links @(div style: "margin: 1ex 4ex;" (add-between links sep)))]
@@ -276,6 +281,7 @@
       else if (l("Linux")) {
         // also show the linux explanation if it's a linux
         document.getElementById("linux_explain").style.display = "block";
+        document.getElementById("linux_ppa").style.display = "block";
         return [(l("_64")?Linux64:Linux32), Linux, Unix];
       } else return [];
     }
@@ -283,6 +289,7 @@
     // changes even when the arrow keys are used to move the selection -- since
     // then onchange is called only on blur)
     linux_expl_s = document.getElementById("linux_explain").style;
+    linux_ppa_s = document.getElementById("linux_ppa").style;
     source_expl_s = document.getElementById("source_explain").style;
     builtpkgs_expl_s = document.getElementById("builtpkgs_explain").style;
     selection_changed_timer = false;
@@ -316,6 +323,10 @@
     }
     function do_selection_changed() {
       linux_expl_s.display =
+        (selector[selector.selectedIndex].text.search(/Linux/) >= 0)
+        ? "block"
+        : "none";
+      linux_ppa_s.display =
         (selector[selector.selectedIndex].text.search(/Linux/) >= 0)
         ? "block"
         : "none";
