@@ -9,6 +9,7 @@
 
 (define releases "releases")
 (define first-version-with-releases-page "5.92")
+(define first-version-with-generic-linux "6.5")
 
 (provide render-download-page)
 (define (render-download-page [release current-release] [package 'racket]
@@ -30,7 +31,6 @@
                        " text-align: left;"
                        " line-height: 1.5em; "
                        " background-color: #edd"))
-  (define (at-mirror . strs) (list "https://mirror.racket-lang.org/" strs))
   (list
    @columns[10 #:center? #t #:row? #t #:center-text? #t]{
     @h3[style: "text-align: center"]{Version @version (@(release-date-string release))}
@@ -79,10 +79,14 @@
   @columns[6 #:center? #t #:center-text? #t #:row? #t]{
       @div[id: "linux_explain"
            style: note-style]{
-        @div{@b{About the Linux installers:}} If you don't see an option for
-        your particular platform, try other Linux installers, starting from
-        similar ones.  Very often, a build on one Linux variant will work on
-        others too.}
+        @div{@b{About the Linux installers:}}
+        @(if (version<? @|version| first-version-with-generic-linux)
+             @list{If you don't see an option for
+                   your particular platform, try other Linux installers, starting from
+                   similar ones.  Very often, a build on one Linux variant will work on
+                   others too.}
+             @list{The Linux build is generic enough that it should work on most
+                   distributions, including relatively old distributions.})}
       @div[id: "builtpkgs_explain"
            style: note-style]{
         @div{@b{About source distributions:}} The @b{Source + built packages}
