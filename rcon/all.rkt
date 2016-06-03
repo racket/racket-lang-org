@@ -15,28 +15,30 @@
 (register-identity con-site)
 
 (define-runtime-path 2015-mb "2015-mb/index.html")
+(define-runtime-path 2016-index "2016/index.html")
 
 (define index
   (page* #:site con-site
          #:link-title "RacketCon" #:title "RacketCon"
          #:extra-headers style-header
          #:id 'con
-         @copyfile[#:site con-site 2015-mb]))
+         @copyfile[#:site con-site 2016-index]))
 ;; TODO build the pollen file (and the SVGs) when the site is built, and remove
 ;;  the generated files from the repo
 
-(define-runtime-path eero "2015-mb/eero.svg")
-(define-runtime-path eero-z "2015-mb/eero.svgz")
-(define-runtime-path cubit "2015-mb/cubit.png")
-(define-runtime-path pattern "2015-mb/pattern.png")
-(define-runtime-path styles "2015-mb/styles.css")
-(void (copyfile #:site con-site eero))
-(void (copyfile #:site con-site eero-z))
-(void (copyfile #:site con-site cubit))
-(void (copyfile #:site con-site pattern))
-(void (copyfile #:site con-site styles))
+(define-runtime-path 2015-dir "2015-mb")
+
+(for ([f (in-list '("eero.svg" "eero.svgz" "cubit.png" "pattern.png" "styles.css"))])
+  (void (copyfile #:site con-site
+                  (build-path 2015-dir f) (string-append "2015/" f)))
+  (void (copyfile #:site con-site ; root of con-site, for current year
+                  (build-path 2015-dir f))))
+
+(void (copyfile #:site con-site
+                (build-path 2015-dir "index.html") "2015/index.html"))
 
 (define-runtime-path fonts "2015-mb/fonts/")
 (for ([f (in-directory fonts)])
   (define-values (base name _) (split-path f))
-  (copyfile #:site con-site f (string-append "fonts/" (path->string name))))
+  (copyfile #:site con-site f (string-append "fonts/" (path->string name)))
+  (copyfile #:site con-site f (string-append "2015/fonts/" (path->string name))))
