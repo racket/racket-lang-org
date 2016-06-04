@@ -6,7 +6,6 @@
 ◊h2{◊xlink["venue"]{◊rc-2016-date}}
 ◊h2{◊xlink["venue"]{St. Louis}}
 ◊h2{◊xlink{Speakers}}
-◊h2{◊xlink{Register}}
 
 ◊; ◊div['class: "codebox"]{◊div['class: "opacity-control"]{◊(file->string "eero-demo.rkt")}}
 
