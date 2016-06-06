@@ -6,6 +6,7 @@
 ◊h2{◊xlink["venue"]{◊rc-2016-date}}
 ◊h2{◊xlink["venue"]{St. Louis}}
 ◊h2{◊xlink{Speakers}}
+◊h2{◊xlink{Register}}
 
 ◊; ◊div['class: "codebox"]{◊div['class: "opacity-control"]{◊(file->string "eero-demo.rkt")}}
 
@@ -29,6 +30,9 @@ Rosette is a programming language for creating new programming tools. It extends
 ◊speaker["" "Linh Chi Nguyen" ""]{}
 ◊speaker["" "Rodrigo Setti" ""]{}
 ◊speaker["" "Bruce Steinberg" ""]{}
+
+◊h3{◊xtarget["register"]{Register}}
+◊link["https://www.eventbrite.com/e/racketcon-2016-tickets-24349152972"]{Via Eventbrite.}
 
 ◊h3{Sponsors}
 

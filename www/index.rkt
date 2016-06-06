@@ -369,6 +369,7 @@ applications from @a[class: "introlink" href: (docs-path "web-server/")]{web ser
 
 @columns[2 style: "text-color: black"]{
   @h2[style: "font-size: 144%; margin-bottom: 6pt;"]{News}
+  @p[style: "font-size: 80%;"]{@rcon[2016]{(sixth RacketCon)} will be in St.@|nbsp|Louis on September 18.}
   @p[style: "font-size: 80%;"]{Racket @a[href: "http://blog.racket-lang.org/2016/04/racket-v65.html"]{version 6.5} is out!}
   @p[style: "font-size: 80%;"]{@rcon[2015]{(fifth RacketCon)} was held in St.@|nbsp|Louis on September 27. Videos are available.}}}
 
