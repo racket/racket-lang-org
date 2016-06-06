@@ -71,3 +71,6 @@
 
 (define (bio . xs)
   `(div ((class "bio")) ,@xs))
+
+(define (gap [size 1.5])
+  `(div ((style ,(format "height: ~arem" size)))))
