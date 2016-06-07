@@ -40,6 +40,7 @@ Rosette is a programming language for creating new programming tools. It extends
 ◊link["airstash.com"]{AirStash}
 ◊link["pollenpub.com"]{Matthew Butterick}
 ◊link["robotic.de"]{DLR}
+◊link["brian.mastenbrook.net"]{Brian Mastenbrook}
 ◊link["blog.markshead.com"]{Mark Shead}}
 
 ◊h3{Previous RacketCons}
