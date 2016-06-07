@@ -23,6 +23,7 @@ Rosette is a programming language for creating new programming tools. It extends
 ◊bio{◊link["https://homes.cs.washington.edu/~emina/index.html"]{Emina Torlak}  is an assistant professor at the University of Washington. She works on computer-aided design, verification, and synthesis of software. Emina is the creator of Rosette, a new Racket-based language that makes it easy to build efficient tools for verifying and synthesizing all kinds of programs, from radiotherapy controllers to automated algebra tutors.}}
 
 ◊h3{◊xtarget["speakers"]{Confirmed Speakers}}
+◊speaker["" "Matthew Butterick" ""]{}
 ◊speaker["" "Byron Davies" ""]{}
 ◊speaker["" "Jack Firth" ""]{}
 ◊speaker["" "Alexis King" ""]{}
