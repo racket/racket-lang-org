@@ -1,33 +1,18 @@
 #lang pollen
 ◊(require css-tools)
 
-◊(make-media-query 24 10.5 1050 40 .25)   
+◊(define max-width 1100)
+◊(make-media-query 24 10.5 max-width 40 .25)   
 
 ◊(define fgbg "#778")
 ◊(define fgbg-darker "#556")
 
 @font-face{
-    font-family: 'source-serif';
+    font-family: 'cooper-hewitt';
     font-weight: 200;
     font-style: normal;
     font-stretch: normal;
-    src: url('fonts/ssp-extralight.woff') format('woff');
-}
-
-@font-face{
-    font-family: 'source-serif';
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    src: url('fonts/ssp-light.woff') format('woff');
-}
-
-@font-face{
-    font-family: 'source-serif';
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    src: url('fonts/ssp-regular.woff') format('woff');
+    src: url('fonts/CooperHewitt-Book.otf') format('woff');
 }
 
 
@@ -45,24 +30,24 @@
 }
 
 
-◊(define anchor-color "#606")
-◊(define anchor-bright-color "#c0c")
+◊(define anchor-color "#900")
+◊(define anchor-bright-color "rgb(135, 206, 250)")
 
-a:hover, a:hover span {
-  color: ◊|anchor-bright-color|;
-}
 
-p a:hover {
-    border-bottom: 1px solid ◊|anchor-bright-color|;
-}
-
-p a, div a {
+a, a:visited {
   color: ◊|anchor-color|;
-  border-bottom: 1px solid ◊|anchor-color|;
+  text-decoration: none;
+  border-bottom: 0.1rem solid ◊|anchor-color|;
 }
+
+a:hover {
+  color: ◊|anchor-bright-color|;
+  border-bottom-color: ◊|anchor-bright-color|;
+}
+
 
 p {
-  margin-bottom: 0.7rem;
+  margin-bottom: 1rem;
 }
 
 div.payload {
@@ -76,7 +61,6 @@ div.payload {
 
 div.bio {
   font-size: 85%;
-  line-height: 1.45;
 }
 
 div.bio a{
@@ -85,40 +69,36 @@ div.bio a{
 
 
 body {
-  font-family: source-serif;
-  font-weight: 300;
+  font-family: cooper-hewitt;
   margin-left:auto;
   margin-right:auto;
   width:100%;
-  max-width:1050px;
+  max-width:◊|max-width|px;
+  min-height: 2000px;
   text-rendering: optimizeLegibility;
   font-feature-settings: 'kern' 1;
   font-feature-settings: 'liga' 1;
-  background: ◊|fgbg| url('cubit.png') fixed;
-  line-height: 1.4;
+
+  background: #f6f6f6;
+  background: rgba(135, 206, 250, 0.2) url('stripe.png') fixed;
+  background-size: 12px; 
+  line-height: 1.6;
 }
 
 div#doc {
   background: white;
   padding: 2rem;
+  padding-left: 6rem;
   padding-top: 3rem;
-  border: 1px solid #ccc;
+  padding-bottom: 10rem;
+  border: 0px solid black;
   border-top: 0px;
-}
-
-img {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: 1px solid ◊|fgbg|;
-  border-left: 0;
-  border-right: 0;
 }
 
 h1 {
   display: inline;
   font-size: 2rem;
   font-weight: 200;
-  color: ◊|fgbg|;
   margin-right: 0.25rem;
   position: relative;
   left: -0.25rem; ◊; this impliedly creates space on the right side
@@ -126,16 +106,18 @@ h1 {
 
 h2 {
   display: inline;
-  color: ◊|fgbg|;
+}
+
+h2 + p {
+    margin-top: 1rem;
 }
 
 
 h3 {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
-  color: ◊|fgbg|;
   margin-left: 0;
   margin-top: 1rem;
   margin-bottom: 0.3rem;
@@ -144,19 +126,31 @@ h3 {
 .speaker-name {
   font-size: 1.6rem;
   font-weight: 200;
-  color: ◊|fgbg|;
   margin-right: 0.5rem;
   line-height: 1.4;
 }
 
-.keynote-speaker .speaker-name {
-  font-size: 2rem;
-  line-height: 1.2;
+span.title {
+  border-bottom: 1px solid ◊|anchor-color|;
 }
 
-h3+div.speaker, h3+div.keynote-speaker {
-  margin-top: -0.25rem;
+span.title:hover {
+    border-bottom: 1px solid ◊|anchor-bright-color|;
 }
+
+.keynote-speaker .speaker-name {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.keynote-speaker > span.title {
+  border: 0;
+  display: block;
+  font-size: 2rem;
+}
+
+
+
 
 .time {
   display: none;
@@ -167,26 +161,6 @@ sponsor+sponsor:before, con+con:before, h2+h2:before {
   content: "\00A0\00A0·\00A0\00A0";
 }
 
-.codebox {
-display: flex;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: 1px solid ◊|fgbg|;
-  border-left: 0;
-  border-right: 0;
-  line-height: 1.2;
-
-  white-space: pre;
-  font-family: "Menlo", "Consolas", "Courier New", monospace;
-  font-size: 0.75rem;
-  height: 20rem;
-  overflow: auto;
-  background-image: url("eero.svg");
-  background-size: cover;
-  background-repeat:no-repeat;
-  width: 38rem;
-  color: ◊|fgbg|;
-}
 
 .opacity-control {
   padding: 0.5rem;
@@ -202,13 +176,7 @@ display: flex;
   transition: opacity 0.25s;
 }
 
-span.title {
-  border-bottom: 1px solid ◊|anchor-color|;
-}
 
-span.title:hover {
-    border-bottom: 1px solid ◊|anchor-bright-color|;
-}
 
 schedule {
   display: flex;
@@ -232,4 +200,8 @@ schedule > row > at {
 
 schedule > row + row {
   border-top: 1px solid #ccc;
+}
+
+.two-col {
+  columns: 2;
 }
