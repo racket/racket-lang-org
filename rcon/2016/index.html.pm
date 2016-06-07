@@ -1,8 +1,8 @@
 #lang pollen
-◊(require racket/file)
+◊(require racket/file pollen/cache)
 
 ◊(define rc-2016-date "18 Sept 2016")
-◊h1{◊(img #:src "rcon.svg")}
+◊h1{◊(object #:id "rcon_svg" #:type "image/svg+xml" #:data "rcon.svg")}
 
 
 ◊h2{◊xlink["venue"]{◊rc-2016-date}}
@@ -15,7 +15,7 @@ RacketCon is a public meeting for everyone interested in Racket: developers, con
 
 ◊gap[1]
 
-◊h3{◊xtarget["speakers"]{◊(img #:src "keynote.svg")}}
+◊h3{◊xtarget["speakers"]{◊(object #:id "keynote_svg" #:type "image/svg+xml" #:data "keynote.svg")}}
 
 ◊gap[1]
 
@@ -29,7 +29,7 @@ Rosette is a programming language for creating new programming tools. It extends
 
 ◊gap[1.5]
 
-◊h3{◊xtarget["speakers"]{◊(img #:src "also.svg")}}
+◊h3{◊xtarget["speakers"]{◊(object #:id "also_svg" #:type "image/svg+xml" #:data "also.svg")}}
 
 ◊gap[0.5]
 

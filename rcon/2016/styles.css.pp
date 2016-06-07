@@ -12,7 +12,7 @@
     font-weight: 200;
     font-style: normal;
     font-stretch: normal;
-    src: url('fonts/CooperHewitt-Book.otf') format('woff');
+    src: url('fonts/CooperHewitt-Book.woff') format('woff');
 }
 
 
@@ -203,5 +203,5 @@ schedule > row + row {
 }
 
 .two-col {
-  columns: 2;
+  ◊(make-css-columns #:count 2);
 }
