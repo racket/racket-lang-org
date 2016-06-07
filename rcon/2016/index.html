@@ -17,8 +17,6 @@
 
 
     var recolorable_paths = [];
-    var blue = "rgb(52.941176%,80.784314%,98.039216%)";
-    var red = "rgb(86.27451%,7.843137%,23.529412%)";
 
     function random_int(range) {
         return Math.floor(Math.random() * (range + 1));
@@ -38,14 +36,10 @@
         add_to_recolorable_paths('rcon_svg');
         add_to_recolorable_paths('keynote_svg');
         add_to_recolorable_paths('also_svg');
-
-        for (var i = 0 ; i < recolorable_paths.length ; i++) {
-            recolorable_paths[i].setAttribute("stroke", (random_int(2) == 0) ? red : blue);
-        }
     }
 
     function flip_color(path) {
-        var next_color = (path.getAttribute("stroke") == red) ? blue : red;
+        var next_color = (path.getAttribute("stroke") == "rgb(86.27451%,7.843137%,23.529412%)") ? "rgb(52.941176%,80.784314%,98.039216%)" : "rgb(86.27451%,7.843137%,23.529412%)" ;
         path.setAttribute("stroke", next_color);
     }
 

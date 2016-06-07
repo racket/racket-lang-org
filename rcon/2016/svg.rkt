@@ -1,5 +1,5 @@
 #lang at-exp racket/base
-(require racket/file racket/string racket/list racket/match sugar/xml sugar/coerce txexpr)
+(require racket/file racket/string racket/list racket/match sugar/xml sugar/coerce txexpr "pollen.rkt")
 (provide make-doc-from-file)
 
 
@@ -20,6 +20,9 @@
   transition: stroke-width 0.3s ease;
   }})
 
+(define (pick-random-color)
+  (list-ref (list rcon-red rcon-blue ) (random 2)))
+
 (define (make-doc-from-file fn)
   (define-values (prolog body) (xml-string->xexprs (file->string fn)))
   
@@ -27,6 +30,6 @@
                                     [(and (txexpr? e) (eq? (get-tag e) 'path)
                                           (not-white e))
                                      (define id (gensym 'recolor))
-                                     (apply attr-set* e 'id id 'style "" (split-style-attrs e))]
+                                     (attr-set (apply attr-set* e 'id id 'style "" (split-style-attrs e)) 'stroke (pick-random-color))]
                                     [else e])) body)])
     (xexprs->xml-string prolog (append body (list `(style ,css-style-string))))))
