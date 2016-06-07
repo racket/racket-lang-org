@@ -2,6 +2,9 @@
 (require pollen/decode pollen/private/whitespace sugar/list sugar/unstable/string txexpr)
 (provide (all-defined-out))
 
+(define rcon-blue "rgb(52.941176%,80.784314%,98.039216%)")
+(define rcon-red "rgb(86.27451%,7.843137%,23.529412%)")
+
 (define (image src)
   `(img ((src ,src))))
 
