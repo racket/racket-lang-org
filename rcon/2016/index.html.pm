@@ -37,10 +37,10 @@ Rosette is a programming language for creating new programming tools. It extends
 ◊h3{Sponsors}
 
 ◊inline-list['sponsor]{
+◊link["airstash.com"]{AirStash}
 ◊link["pollenpub.com"]{Matthew Butterick}
-◊link["blog.markshead.com"]{Mark Shead}
 ◊link["robotic.de"]{DLR}
-◊link["wearable.com"]{Wearable}}
+◊link["blog.markshead.com"]{Mark Shead}}
 
 ◊h3{Previous RacketCons}
 
