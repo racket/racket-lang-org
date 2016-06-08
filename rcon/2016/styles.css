@@ -132,7 +132,7 @@ body {
 
   background: #f6f6f6;
   background: rgba(135, 206, 250, 0.2) url('stripe.png') fixed;
-  background-size: 12px;
+  background-size: 8px;
   line-height: 1.6;
 }
 

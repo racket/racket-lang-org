@@ -41,6 +41,14 @@
     function flip_color(path) {
         var next_color = (path.getAttribute("stroke") == "◊rcon-red") ? "◊rcon-blue" : "◊rcon-red" ;
         path.setAttribute("stroke", next_color);
+
+        if (path.getAttribute("stroke-width") == "8.25" && random_int(2) == 1) {
+            path.setAttribute("stroke-width", "32");
+        }
+
+        if (path.getAttribute("stroke-width") == "32" && random_int(2) == 1) {
+            path.setAttribute("stroke-width", "8.25");
+        }
     }
 
     function flip_color_of_random_paths() {
