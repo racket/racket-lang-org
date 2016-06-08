@@ -2,4 +2,4 @@
 (require "svg.rkt")
 (provide (all-defined-out))
 (define metas (make-hash))
-(define doc (make-doc-from-file "also-raw.svg"))
+(define doc (make-doc-from-file "speakers-raw.svg"))

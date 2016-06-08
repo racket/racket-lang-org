@@ -8,8 +8,9 @@
   (append-map (λ(substr) (match-define (list key val) (string-split substr ":"))
                 (list (->symbol key) val)) (string-split style-string ";")))
 
-(define (not-white e)
-  (not (regexp-match #rx"rgb\\(100%,100%,100%\\)" (attr-ref e 'style))))
+(define (not-white-or-black e)
+  (and (not (regexp-match #rx"rgb\\(100%,100%,100%\\)" (attr-ref e 'style)))
+       (not (regexp-match #rx"rgb\\(0%,0%,0%\\)" (attr-ref e 'style)))))
 
 (define css-style-string @string-append{
  path {
@@ -24,7 +25,7 @@
   
   (let ([body (map-elements (λ(e) (cond
                                     [(and (txexpr? e) (eq? (get-tag e) 'path)
-                                          (not-white e))
+                                          (not-white-or-black e))
                                      (define id (gensym 'recolor))
                                      (attr-set (apply attr-set* e 'id id 'style "" (split-style-attrs e)) 'stroke (pick-random-color))]
                                     [else e])) body)])
