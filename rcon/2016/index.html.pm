@@ -29,7 +29,7 @@ Rosette is a programming language for creating new programming tools. It extends
 
 ◊gap[1.5]
 
-◊h3{◊xtarget["speakers"]{◊(object #:id "also_svg" #:type "image/svg+xml" #:data "also.svg")}}
+◊h3{◊xtarget["speakers"]{◊(object #:id "speakers_svg" #:type "image/svg+xml" #:data "speakers.svg")}}
 
 ◊gap[0.5]
 

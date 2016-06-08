@@ -44,6 +44,7 @@
     (r (11 51 53 54 45 35 33 23 14 15))
     (s (11 14 25 35 31 41 52 55))
     (t (31 51 55 35) (53 13) (11 15))
+    (T (51 55) (53 13))
     (u (51 21 12 15 55))
     (v (55 35 13 11 51))
     (w (51 21 12 15 55) (53 13))
@@ -89,13 +90,13 @@
   (define layers (for/list ([i (in-range 0 (length attrs) 2)]) (list (list-ref attrs i) (list-ref attrs (add1 i)))))
   (for-each (λ(layer) (type str xoffset yoffset #:color (first layer) #:width (* (current-cell-size) (current-stroke-scale) (second layer)))) layers)) 
 
-(define (render text layers [stroke-scale 1])
+(define (render text layers [stroke-scale 1] [name (gensym)])
   (define lines (string-split text))
   (define horiz (* (current-cell-size) (apply max (map string-length lines)) char-edge-size))
   (define vert (* (current-cell-size) char-edge-size (length lines)))
   (define target (make-bitmap horiz vert))
   (parameterize ([current-dc (if (equal? 'svg (current-target))
-                                 (new svg-dc% [width horiz] [height vert] [output (format "/Users/MB/Desktop/~a.svg" (gensym))] [exists 'replace])
+                                 (new svg-dc% [width horiz] [height vert] [output (format "/Users/MB/Desktop/~a.svg" name)] [exists 'replace])
                                  (new bitmap-dc% [bitmap target]))]
                  [current-stroke-scale stroke-scale])
     (when (equal? 'svg (current-target))
@@ -122,8 +123,12 @@
 
 (module+ main
   (current-target 'gui)
-  #;(define text "(siXth rackEt con)")
-  (define text "eminatorlak")
+  (define texts '("siXTh rackET ZZcon" "kEynoTE" "sPEakErs"))
+  (define names '(rcon-raw keynote-raw speakers-raw))
+  
 
+  (define (do-it text name)
   (define color-choice (λ () (random-select '(LightSkyBlue Crimson))))
-  (render-svg text (list (list color-choice 5) (list (λ () 'White) 3) (list color-choice 1)) 0.33))
+  (render-svg text (list (list (λ () 'Black) 5) (list (λ () 'White) 3) (list color-choice 1)) 0.33 name))
+
+  (for-each do-it texts names))

@@ -35,7 +35,7 @@
     function gather_recolorable_paths() {
         add_to_recolorable_paths('rcon_svg');
         add_to_recolorable_paths('keynote_svg');
-        add_to_recolorable_paths('also_svg');
+        add_to_recolorable_paths('speakers_svg');
     }
 
     function flip_color(path) {
