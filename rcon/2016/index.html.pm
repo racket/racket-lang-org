@@ -35,6 +35,7 @@ Rosette is a programming language for creating new programming tools. It extends
 
 ◊div[#:class "two-col"]{
 ◊speaker["" "Matthew Butterick" ""]{}
+◊speaker["" "Stephen Chang" ""]{}
 ◊speaker["" "Byron Davies" ""]{}
 ◊speaker["" "Jack Firth" ""]{}
 ◊speaker["" "Alexis King" ""]{}
