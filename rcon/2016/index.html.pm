@@ -11,7 +11,7 @@
 ◊h2{◊xlink{Register}}
 
 
-RacketCon is a public meeting for everyone interested in Racket: developers, contributors, programmers, educators, and bystanders. It's an opportunity for all members of the community to come together to share plans, ideas, and enthusiasm. RacketCon will enable the entire Racket community to mingle: to update each other, to exchange ideas, to collaborate, and to help shape the future of Racket.
+(sixth RacketCon) is a public meeting for everyone interested in Racket: developers, contributors, programmers, educators, and bystanders. It's an opportunity for all members of the community to come together to share plans, ideas, and enthusiasm. RacketCon will enable the entire Racket community to mingle: to update each other, to exchange ideas, to collaborate, and to help shape the future of Racket.
 
 ◊gap[1]
 
@@ -40,7 +40,8 @@ Rosette is a programming language for creating new programming tools. It extends
 ◊speaker["" "Jay McCarthy" ""]{}
 ◊speaker["" "Linh Chi Nguyen" ""]{}
 ◊speaker["" "Rodrigo Setti" ""]{}
-◊speaker["" "Bruce Steinberg" ""]{}}
+◊speaker["" "Bruce Steinberg" ""]{}
+◊speaker["" "(and more to come)" ""]{}}
 
 ◊gap[1]
 
