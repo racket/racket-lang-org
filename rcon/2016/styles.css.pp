@@ -79,8 +79,7 @@ body {
   font-feature-settings: 'kern' 1;
   font-feature-settings: 'liga' 1;
 
-  background: #f6f6f6;
-  background: rgba(135, 206, 250, 0.2) url('stripe.png') fixed;
+  background: white url('stripe.svg') fixed;
   background-size: 8px; 
   line-height: 1.6;
 }
