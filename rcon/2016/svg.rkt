@@ -13,12 +13,8 @@
 
 (define css-style-string @string-append{
  path {
-  transition: stroke 2s linear;
- }
- path:hover {
-  stroke-width: 25;
-  transition: stroke-width 0.3s ease;
-  }})
+  transition: stroke 2s linear, stroke-width 2s linear;
+ }})
 
 (define (pick-random-color)
   (list-ref (list rcon-red rcon-blue ) (random 2)))
