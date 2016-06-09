@@ -34,15 +34,15 @@ Rosette is a programming language for creating new programming tools. It extends
 ◊gap[0.5]
 
 ◊div[#:class "two-col"]{
-◊speaker["" "Matthew Butterick" ""]{}
-◊speaker["" "Stephen Chang" ""]{}
-◊speaker["" "Byron Davies" ""]{}
-◊speaker["" "Jack Firth" ""]{}
-◊speaker["" "Alexis King" ""]{}
-◊speaker["" "Jay McCarthy" ""]{}
+◊speaker["" ◊link["pollenpub.com"]{Matthew Butterick} ""]{}
+◊speaker["" ◊link["http://www.ccs.neu.edu/home/stchang/"]{Stephen Chang} ""]{}
+◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies} ""]{}
+◊speaker["" ◊link["http://codepen.io/Universalist/"]{Jack Firth} ""]{}
+◊speaker["" ◊link["https://lexi-lambda.github.io/"]{Alexis King} ""]{}
+◊speaker["" ◊link["https://jeapostrophe.github.io"]{Jay McCarthy} ""]{}
 ◊speaker["" "Linh Chi Nguyen" ""]{}
-◊speaker["" "Rodrigo Setti" ""]{}
-◊speaker["" "Bruce Steinberg" ""]{}
+◊speaker["" ◊link["http://rodrigosetti.com/"]{Rodrigo Setti} ""]{}
+◊speaker["" ◊link["http://www.brucesteinbergld.com/"]{Bruce Steinberg} ""]{}
 ◊speaker["" "(and more to come)" ""]{}}
 
 ◊gap[1]
