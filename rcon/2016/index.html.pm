@@ -49,6 +49,7 @@ Rosette is a programming language for creating new programming tools. It extends
 
 ◊h3{◊xtarget["register"]{Register}}
 ◊link["https://www.eventbrite.com/e/racketcon-2016-tickets-24349152972"]{Via Eventbrite.}
+Use the "RKC" group code when reserving at the ◊link["http://doubletree3.hilton.com/en/hotels/missouri/st-louis-union-station-a-doubletree-by-hilton-hotel-STLUSDT/index.html"]{Union Station hotel}.
 
 ◊h3{◊xtarget["opportunity-grants"]{Opportunity Grants}}
 Recipients of Strange Loop ◊link["https://thestrangeloop.com/opportunity.html"]{opportunity grants} should apply for RacketCon opportunity grants. Contact ◊a['href: "mailto:stamourv@racket-lang.org"]{stamourv@racket-lang.org} before June 21st.
