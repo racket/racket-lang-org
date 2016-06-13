@@ -2,7 +2,9 @@
 
 (define collection "racket-lang-org")
 
-(define deps '("base"
+(define deps '("graph"
+               "gui-lib"
+               "base"
                ("plt-web-lib" #:version "1.1")
                "at-exp-lib"
                "net-lib"
