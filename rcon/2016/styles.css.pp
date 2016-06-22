@@ -38,11 +38,13 @@ a, a:visited {
   color: ◊|anchor-color|;
   text-decoration: none;
   border-bottom: 0.1rem solid ◊|anchor-color|;
+  transition: color 0.15s, border-bottom 0.15s;
 }
 
 a:hover {
   color: ◊|anchor-bright-color|;
   border-bottom-color: ◊|anchor-bright-color|;
+  transition: color 0.15s, border-bottom 0.15s;
 }
 
 
