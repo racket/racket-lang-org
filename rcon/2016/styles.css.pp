@@ -4,6 +4,9 @@
 ◊(define max-width 1100)
 ◊(make-media-query 24 10.5 max-width 40 .25)   
 
+◊(define mobile-overrides "@media all and (max-width:520px)")
+
+
 ◊(define fgbg "#778")
 ◊(define fgbg-darker "#556")
 
@@ -88,13 +91,14 @@ body {
 
 div#doc {
   background: white;
-  padding: 2rem;
   padding-left: 6rem;
+  padding-right: 2rem;
   padding-top: 3rem;
   padding-bottom: 10rem;
   border: 0px solid black;
   border-top: 0px;
 }
+
 
 h1 {
   display: inline;
@@ -148,6 +152,8 @@ span.title:hover {
   border: 0;
   display: block;
   font-size: 2rem;
+  margin-top: 0.5rem;
+  line-height: 1.2;
 }
 
 
@@ -206,3 +212,21 @@ schedule > row + row {
 .two-col {
   ◊(make-css-columns #:count 2);
 }
+
+
+◊|mobile-overrides| {
+    html{
+      font-size: 18px;
+    }
+
+    div#doc {
+      padding-top: 1.5rem;
+      padding-left: 1.5rem;
+      padding-right: 0.75rem;
+    }
+
+  .two-col {
+    ◊(make-css-columns #:count 1);
+  }
+}
+

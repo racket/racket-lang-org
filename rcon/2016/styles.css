@@ -58,6 +58,9 @@
 
 
 
+
+
+
 @font-face{
     font-family: 'cooper-hewitt';
     font-weight: 200;
@@ -139,13 +142,14 @@ body {
 
 div#doc {
   background: white;
-  padding: 2rem;
   padding-left: 6rem;
+  padding-right: 2rem;
   padding-top: 3rem;
   padding-bottom: 10rem;
   border: 0px solid black;
   border-top: 0px;
 }
+
 
 h1 {
   display: inline;
@@ -198,6 +202,8 @@ span.title:hover {
   border: 0;
   display: block;
   font-size: 2rem;
+  margin-top: 0.5rem;
+  line-height: 1.2;
 }
 
 
@@ -261,3 +267,26 @@ schedule > row + row {
 column-count: 2;
 ;
 }
+
+
+@media all and (max-width:520px) {
+    html{
+      font-size: 18px;
+    }
+
+    div#doc {
+      padding-top: 1.5rem;
+      padding-left: 1.5rem;
+      padding-right: 0.75rem;
+    }
+
+  .two-col {
+    -moz-column-count: 1;
+-webkit-column-count: 1;
+-o-column-count: 1;
+-ms-column-count: 1;
+column-count: 1;
+;
+  }
+}
+
