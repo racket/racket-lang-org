@@ -109,9 +109,6 @@ I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-ra
 ◊link["https://www.eventbrite.com/e/racketcon-2016-tickets-24349152972"]{Via Eventbrite.}
 Use the "RKC" group code when reserving rooms at the ◊link["http://doubletree3.hilton.com/en/hotels/missouri/st-louis-union-station-a-doubletree-by-hilton-hotel-STLUSDT/index.html"]{Union Station hotel}.
 
-◊h3{◊xtarget["opportunity-grants"]{Opportunity Grants}}
-Recipients of Strange Loop ◊link["https://thestrangeloop.com/opportunity.html"]{opportunity grants} should apply for RacketCon opportunity grants. Contact ◊a['href: "mailto:stamourv@racket-lang.org"]{stamourv@racket-lang.org} before June 21st.
-
 ◊h3{Sponsors}
 
 ◊inline-list['sponsor]{
