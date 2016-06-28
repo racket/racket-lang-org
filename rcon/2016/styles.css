@@ -83,6 +83,10 @@
   width: 100%;
 }
 
+tt {
+  font-family: "Source Code Pro", monospace;
+  font-size: 90%;
+}
 
 
 
@@ -91,7 +95,7 @@
 a, a:visited {
   color: #900;
   text-decoration: none;
-  border-bottom: 0.1rem solid #900;
+  border-bottom: 0.08rem solid #900;
   transition: color 0.15s, border-bottom 0.15s;
 }
 
@@ -106,17 +110,21 @@ p {
   margin-bottom: 1rem;
 }
 
+div.subhead {
+  margin-top: 0.5rem;
+}
+
 div.payload {
-  padding: 0.25rem 2rem 0rem 1.7rem;
-  border-left: 0.2rem solid #ccc;
+  padding-bottom: 1rem;
   margin-bottom: 1rem;
-  font-size: 85%;
-  width: 90%;
+  font-size: 90%;
+  width: 100%;
 }
 
 
+
 div.bio {
-  font-size: 85%;
+  font-size: 90%;
 }
 
 div.bio a{
@@ -186,11 +194,12 @@ h3 {
 }
 
 span.title {
-  border-bottom: 1px solid #900;
+  border-bottom: 0.08rem solid #900;
 }
 
-span.title:hover {
-    border-bottom: 1px solid rgb(135, 206, 250);
+a:hover span.title {
+    border-bottom-color: rgb(135, 206, 250);
+   transition: border-bottom-color 0.15s;
 }
 
 .keynote-speaker .speaker-name {
@@ -266,6 +275,10 @@ schedule > row + row {
 -ms-column-count: 2;
 column-count: 2;
 ;
+}
+
+.two-col .speaker {
+  margin-bottom: 0.5rem;
 }
 
 

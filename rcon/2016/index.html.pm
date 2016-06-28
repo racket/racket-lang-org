@@ -33,17 +33,68 @@ Rosette is a programming language for creating new programming tools. It extends
 
 ◊gap[0.5]
 
+◊folded{
+◊speaker["" "Matthew Butterick"]{The Making of "Beautiful Racket"}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+I've been devoting the year 2016 strictly to Racket projects. The most ambitious of these is a book about making domain-specific languages with Racket, called ◊link["http://beautifulracket.com"]{Beautiful Racket}. Why a book? Because making my own DSL with Racket — ◊link["http://pollenpub.com/"]{Pollen} — has improved my life tremendously. I want others to share the joy. To do that, however, I've had to forget what I already knew about making DSLs, and confront a few rough edges within Racket's ◊tt{#lang}-making apparatus. Of course, I'm a better person for it. Soon, you will be too: a summary of what I've discovered so far, and questions for further study. 
+
+◊bio{◊link["http://pollenpub.com/"]{Matthew Butterick}: I'm a writer and designer in Los Angeles. I made ◊link["http://practicaltypography.com/"]{Practical Typography}.}}
+
+
+◊folded{
+◊speaker["" "Byron Davies"]{Racket Does Dijkstra}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+In the same of Systems Integrity Assurance, ◊link["http://Ontopilot.com"]{Ontopilot.com} is prototyping new tools for automatically finding bugs in software, using Dijkstra Guarded Commands and weakest precondition (WP). One member of our team developed a new method for applying WP methods to software, and has used it successfully to find nearly intractable bugs in operating systems and other software. We’re automating the method and incorporating the new Micron Automata Process to make it possible to apply our approach to million-line programs. To prove the concept, we have implemented the method in Racket, using Syntax as the intermediate language before conversion to Dijkstra Guarded Commands, and using the Syntax Browser to examine and debug the multiple representations used to convert a programming language into mathematical logic.
+
+◊bio{◊link["https://twitter.com/daviesaz"]{Byron Davies} has been programming in Lisp for 42 years, at Caltech, MIT, Stanford, Texas Instruments, Motorola, and a host of start-ups. He took up Racket two years ago — and couldn’t be happier about his choice. With Racket he developed a formal methods prototype for Ontopilot.com, demonstrating a novel approach to using weakest precondition to rid programs of bugs. He now spends two hours a day in kindergarten, learning everything he needs to know.}}
+
+
+◊folded{
+◊speaker["" "Jack Firth"]{Language Integrated Nitpicking: Syntax Warnings in Racket}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+Many popular languages automatically warn developers of potential mistakes with static analysis: dangerous patterns, use of deprecated features, and inconsistent variable names are all caught by automated tools, making it easier for programmers to stay on the same page. This talk presents a Racket library for adding syntax warnings and suggesting refactors via the macro system. True to Racket's philosophy, library users can define their own warnings with equal power to built in suggestions. Next time you argue over style guide rules, resolve it with a new syntax warning so it never comes up again!
+
+◊bio{◊link["http://codepen.io/Universalist/"]{Jack Firth} is a software engineer at Google, working on backend systems in Google Cloud. In his spare time he enjoys thinking about making DSLs (and their authors) cooperate, solving his problems with Racket, microservice oriented distributed systems, and explaining monads in terms of burritos.
+}}
+
+
+◊folded{
+◊speaker["" "Alexis King"]{Languages in an Afternoon}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+Racket is not just a programming language; it is a programming language platform. Ideally, it could be more than a platform, but a greenhouse—a perfect tool for incubating new languages and growing mature ones (general purpose or domain specific). This talk presents a survey of Racket’s tools for building languages, the process it takes to add an entirely new, fully-integrated language to the ecosystem, and the places where that process could be streamlined to achieve the dream of designing, implementing, and applying an entirely new programming language in a single afternoon.
+
+◊bio{◊link["https://lexi-lambda.github.io/"]{Alexis King} works at CJ Affiliate writing primarily Haskell and JavaScript building web applications, APIs, and internal infrastructure. She is especially interested in the intersection of programming languages and usability and how smart tooling and domain specific languages can work together to make systems simpler and easier to reason about by treating programs like user interfaces.}}
+
+◊folded{
+◊speaker["" "Jay McCarthy"]{R-r-r-r-REMIX!}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+Parentheses getting you down? Not enough dots in your life? Can't tell a parenthesis from a brace or bracket? Standard library inconsistency getting you down? #lang remix is the droid you're looking for. It's Racket with delicious, buttery C-like syntax and a new standard library that remixes old forms to increase their Racketosity over 9,000!!!! Come for the dots, stay for the ◊tt{def+}.
+
+◊bio{◊link["https://jeapostrophe.github.io"]{Jay McCarthy} isn't joking when he says the only languages he likes are Racket, Coq, and C. After being desensitized from the flames after the new package system, making controversial programming choices is the only way he can feel anything anymore. Hence, ◊tt{#lang remix}. Also, he is a core Racket developer and associate professor at UMass Lowell.}}
+
+
+
+◊folded{
+◊speaker["" "Rodrigo Setti"]{Generative Art with Racket}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+Stamps is a language built on top of Racket, in which one can describe high-level generating rules for 2D shapes, and which takes care of interpreting those rules and rendering. It is easy to create beautiful art that resembles smooth biological forms, as well as recursive fractal-like works. In this talk I introduce my first non-trivial Racket project, and talk about my particular experience developing it.
+
+◊bio{◊link["http://rodrigosetti.com/"]{Rodrigo Setti} is a Brazilian software engineer, he works at Yahoo Search, and before that was working at Evernote (the note taking app). Most of his experience is around information retrieval systems - but his interests are broader, including programming games, creative coding and generative art. He discovered Racket after searching for the perfect Scheme, and has been happily hacking ever since.}}
+
+◊h3{Plus}
+
 ◊div[#:class "two-col"]{
-◊speaker["" ◊link["pollenpub.com"]{Matthew Butterick} ""]{}
 ◊speaker["" ◊link["http://www.ccs.neu.edu/home/stchang/"]{Stephen Chang} ""]{}
-◊speaker["" ◊link["https://twitter.com/daviesaz"]{Byron Davies} ""]{}
-◊speaker["" ◊link["http://codepen.io/Universalist/"]{Jack Firth} ""]{}
-◊speaker["" ◊link["https://lexi-lambda.github.io/"]{Alexis King} ""]{}
-◊speaker["" ◊link["https://jeapostrophe.github.io"]{Jay McCarthy} ""]{}
 ◊speaker["" "Linh Chi Nguyen" ""]{}
-◊speaker["" ◊link["http://rodrigosetti.com/"]{Rodrigo Setti} ""]{}
 ◊speaker["" ◊link["http://www.brucesteinbergld.com/"]{Bruce Steinberg} ""]{}
-◊speaker["" "(and more to come)" ""]{}}
+◊speaker["" "(more speakers to come)" ""]{}
+}
 
 ◊gap[1]
 

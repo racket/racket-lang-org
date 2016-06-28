@@ -32,6 +32,10 @@
   width: 100%;
 }
 
+tt {
+  font-family: "Source Code Pro", monospace;
+  font-size: 90%;
+}
 
 ◊(define anchor-color "#900")
 ◊(define anchor-bright-color "rgb(135, 206, 250)")
@@ -40,7 +44,7 @@
 a, a:visited {
   color: ◊|anchor-color|;
   text-decoration: none;
-  border-bottom: 0.1rem solid ◊|anchor-color|;
+  border-bottom: 0.08rem solid ◊|anchor-color|;
   transition: color 0.15s, border-bottom 0.15s;
 }
 
@@ -55,17 +59,21 @@ p {
   margin-bottom: 1rem;
 }
 
+div.subhead {
+  margin-top: 0.5rem;
+}
+
 div.payload {
-  padding: 0.25rem 2rem 0rem 1.7rem;
-  border-left: 0.2rem solid #ccc;
+  padding-bottom: 1rem;
   margin-bottom: 1rem;
-  font-size: 85%;
-  width: 90%;
+  font-size: 90%;
+  width: 100%;
 }
 
 
+
 div.bio {
-  font-size: 85%;
+  font-size: 90%;
 }
 
 div.bio a{
@@ -136,11 +144,12 @@ h3 {
 }
 
 span.title {
-  border-bottom: 1px solid ◊|anchor-color|;
+  border-bottom: 0.08rem solid ◊|anchor-color|;
 }
 
-span.title:hover {
-    border-bottom: 1px solid ◊|anchor-bright-color|;
+a:hover span.title {
+    border-bottom-color: ◊|anchor-bright-color|;    
+   transition: border-bottom-color 0.15s;
 }
 
 .keynote-speaker .speaker-name {
@@ -211,6 +220,10 @@ schedule > row + row {
 
 .two-col {
   ◊(make-css-columns #:count 2);
+}
+
+.two-col .speaker {
+  margin-bottom: 0.5rem;
 }
 
 

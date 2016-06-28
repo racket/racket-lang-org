@@ -8,7 +8,11 @@
 (define (image src)
   `(img ((src ,src))))
 
-(define (speaker time name title . desc)
+(define (speaker time name . xs)
+  (match-define (cons title desc)
+    (if (pair? xs)
+        xs
+        (list "")))
   `(div ((class "speaker")) (span ((class "speaker-name")(decode "exclude")) (span ((class "time")) ,time) " " ,name) (span ((class "title")) ,title)  ,@(if (not (empty? desc)) (cons '(br) desc) empty)))
 
 (define (keynote-speaker time name title . desc)
