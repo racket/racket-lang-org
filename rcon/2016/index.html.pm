@@ -87,12 +87,19 @@ Stamps is a language built on top of Racket, in which one can describe high-leve
 
 ◊bio{◊link["http://rodrigosetti.com/"]{Rodrigo Setti} is a Brazilian software engineer, he works at Yahoo Search, and before that was working at Evernote (the note taking app). Most of his experience is around information retrieval systems - but his interests are broader, including programming games, creative coding and generative art. He discovered Racket after searching for the perfect Scheme, and has been happily hacking ever since.}}
 
+◊folded{
+◊speaker["" "Bruce Steinberg"]{Functional Lighting}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-racket"]{an application for controlling Phillips Hue Bulbs in theatrical settings}. As a professional lighting designer specializing in new and experimental work, I often find myself in galleries and other untraditional settings. Rather than bringing in an entire rig (and unhelpfully transforming the space into a theatre), I've used ◊link["http://www2.meethue.com/en-us/"]{Phillip Hue Bulbs} instead. They allow wireless individual control of fixtures, even when they are all powered via a single track or outlet. Using functional logic to determine the most efficient json commands, ◊i{Simple Hue Control} offers a designer a familiar programming interface for creating beautiful shows.
+
+◊bio{◊link["www.BruceSteinbergLD.com"]{Bruce Steinberg}'s lighting designs have been seen in venues ranging from a Soho laundromat to Italian concert halls—and even an occasional theatre. New York: ◊i{The Maids' The Maids} (Kathryn Hamilton), ◊i{Les Mamelles de Tirésias} (Emma Griffin), ◊i{Art of Memory} (Tanya Calamoneri), ◊i{Feeder} (José Zayas), ◊i{Blue Before Morning} (Gia Forakis/NYIT Award). Regional: ◊i{Moby Dick—Rehearsed} (Jonathan Rosenberg), ◊i{Brief Interviews with Hideous Men} (Daniel Fish). International: ◊i{Sounds} (Paola Prestini). Installations: Mark di Suvero's ◊i{For Euler} (1997) and ◊i{Double Tetrahedron} (2004) at Salem Art Works; Keren Cytter's ◊i{Mysterious Serious} (2009) at X-Initiative. Architectural: ◊i{Happy Lucky No. 1 Gallery} (2015). He received his MFA from NYU TSOA, Department of Design for Stage & Film.}}
+
 ◊h3{Plus}
 
 ◊div[#:class "two-col"]{
 ◊speaker["" ◊link["http://www.ccs.neu.edu/home/stchang/"]{Stephen Chang} ""]{}
 ◊speaker["" "Linh Chi Nguyen" ""]{}
-◊speaker["" ◊link["http://www.brucesteinbergld.com/"]{Bruce Steinberg} ""]{}
 ◊speaker["" "(more speakers to come)" ""]{}
 }
 
