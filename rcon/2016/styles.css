@@ -65,8 +65,14 @@
     font-family: 'cooper-hewitt';
     font-weight: 200;
     font-style: normal;
-    font-stretch: normal;
     src: url('fonts/CooperHewitt-Book.woff') format('woff');
+}
+
+@font-face{
+    font-family: 'cooper-hewitt';
+    font-weight: 200;
+    font-style: italic;
+    src: url('fonts/CooperHewitt-BookItalic.woff') format('woff');
 }
 
 
@@ -146,6 +152,10 @@ body {
   background: white url('stripe.svg') fixed;
   background-size: 8px;
   line-height: 1.6;
+}
+
+em {
+  font-style: italic;
 }
 
 div#doc {

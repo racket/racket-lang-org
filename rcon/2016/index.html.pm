@@ -31,7 +31,7 @@ Rosette is a programming language for creating new programming tools. It extends
 
 ◊h3{◊xtarget["speakers"]{◊(object #:id "speakers_svg" #:type "image/svg+xml" #:data "speakers.svg")}}
 
-◊gap[0.5]
+◊gap[0]
 
 ◊folded{
 ◊speaker["" "Matthew Butterick"]{The Making of "Beautiful Racket"}
@@ -91,9 +91,9 @@ Stamps is a language built on top of Racket, in which one can describe high-leve
 ◊speaker["" "Bruce Steinberg"]{Functional Lighting}
 ◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
-I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-racket"]{an application for controlling Phillips Hue Bulbs in theatrical settings}. As a professional lighting designer specializing in new and experimental work, I often find myself in galleries and other untraditional settings. Rather than bringing in an entire rig (and unhelpfully transforming the space into a theatre), I've used ◊link["http://www2.meethue.com/en-us/"]{Phillip Hue Bulbs} instead. They allow wireless individual control of fixtures, even when they are all powered via a single track or outlet. Using functional logic to determine the most efficient json commands, ◊i{Simple Hue Control} offers a designer a familiar programming interface for creating beautiful shows.
+I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-racket"]{an application for controlling Phillips Hue Bulbs in theatrical settings}. As a professional lighting designer specializing in new and experimental work, I often find myself in galleries and other untraditional settings. Rather than bringing in an entire rig (and unhelpfully transforming the space into a theatre), I've used ◊link["http://www2.meethue.com/en-us/"]{Phillip Hue Bulbs} instead. They allow wireless individual control of fixtures, even when they are all powered via a single track or outlet. Using functional logic to determine the most efficient json commands, ◊em{Simple Hue Control} offers a designer a familiar programming interface for creating beautiful shows.
 
-◊bio{◊link["www.BruceSteinbergLD.com"]{Bruce Steinberg}'s lighting designs have been seen in venues ranging from a Soho laundromat to Italian concert halls—and even an occasional theatre. New York: ◊i{The Maids' The Maids} (Kathryn Hamilton), ◊i{Les Mamelles de Tirésias} (Emma Griffin), ◊i{Art of Memory} (Tanya Calamoneri), ◊i{Feeder} (José Zayas), ◊i{Blue Before Morning} (Gia Forakis/NYIT Award). Regional: ◊i{Moby Dick—Rehearsed} (Jonathan Rosenberg), ◊i{Brief Interviews with Hideous Men} (Daniel Fish). International: ◊i{Sounds} (Paola Prestini). Installations: Mark di Suvero's ◊i{For Euler} (1997) and ◊i{Double Tetrahedron} (2004) at Salem Art Works; Keren Cytter's ◊i{Mysterious Serious} (2009) at X-Initiative. Architectural: ◊i{Happy Lucky No. 1 Gallery} (2015). He received his MFA from NYU TSOA, Department of Design for Stage & Film.}}
+◊bio{◊link["www.BruceSteinbergLD.com"]{Bruce Steinberg}’s lighting designs have been seen in venues ranging from a Soho laundromat to Italian concert halls—and even an occasional theatre. New York: ◊em{The Maids' The Maids} (Kathryn Hamilton), ◊em{Les Mamelles de Tirésias} (Emma Griffin), ◊em{Art of Memory} (Tanya Calamoneri), ◊em{Feeder} (José Zayas), ◊em{Blue Before Morning} (Gia Forakis/NYIT Award). Regional: ◊em{Moby Dick—Rehearsed} (Jonathan Rosenberg), ◊em{Brief Interviews with Hideous Men} (Daniel Fish). International: ◊em{Sounds} (Paola Prestini). Installations: Mark di Suvero's ◊em{For Euler} (1997) and ◊em{Double Tetrahedron} (2004) at Salem Art Works; Keren Cytter's ◊em{Mysterious Serious} (2009) at X-Initiative. Architectural: ◊em{Happy Lucky No. 1 Gallery} (2015). He received his MFA from NYU TSOA, Department of Design for Stage & Film.}}
 
 ◊h3{Plus}
 
