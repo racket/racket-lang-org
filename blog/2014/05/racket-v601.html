@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v6.0.1</title>
+    <meta name="description" content="_posted by Ryan Culpepper_  Racket version 6.0.1 is now available from  http://racket-lang.org/   A new `racket/undefined` library exports `undefined` as the value currently produced by  (letrec ([x x]) x) This library anticipates a future where that expr...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2014/05/racket-v601.html">
+    <link rel="next" href="/2014/04/registration-for-fourth-racketcon.html">
+    <link rel="prev" href="/2014/07/scheme-workshop-2014.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>08 May 2014</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v6.0.1</h1>
+  </header>
+
+<p><em>posted by Ryan Culpepper</em></p>
+
+<p>Racket version 6.0.1 is now available from</p>
+
+<p><a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>A new <code>racket/undefined</code> library exports <code>undefined</code> as the value currently produced by</li></ul>
+
+<p>(letrec ([x x]) x) This library anticipates a future where that expression will raise an exception. The <code>racket/undefined</code> library will continue to offer the <code>undefined</code> value as a bridge between versions and as a last resort.</p>
+
+<ul>
+ <li>
+  <p>The drawing and GUI libraries provide improved support for high-resolution bitmaps and their use on Retina displays. For example, <code>read-bitmap</code> includes a <code>#:try-@2x?</code> option to trigger substitutions through the usual "@2x" naming convention.</p></li>
+ <li>
+  <p>Check Syntax cooperates with Typed Racket to show arrows and other Check Syntax highlighting even when there is a type error.</p></li>
+ <li>
+  <p>Functions provided via <code>contract-out</code> that have first-order contracts perform better.</p></li>
+ <li>
+  <p>The contract boundary between typed/untyped modules is much less expensive. Typed Racket now avoids generating contracts for places where contracts failures cannot happen.</p></li>
+ <li>
+  <p>Occurrence typing now works better with <code>when</code>/<code>unless</code>. Example:</p></li></ul>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="n">x</span> <span class="p">(</span><span class="nb">read</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">unless</span> <span class="p">(</span><span class="nb">number?</span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">error</span> <span class="o">&#39;</span><span class="ss">bad-input</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">add1</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<ul>
+ <li>
+  <p>Types in Typed Racket are now pretty-printed.</p></li>
+ <li>
+  <p>Function types can now be written in prefix style, which is now preferred and is used for printing. Infix function types are still accepted for backwards compatibility.</p></li>
+ <li>
+  <p>A new <code>-&gt;*</code> type constructor is used for writing types for functions with optional and keyword arguments. The notation is similar to the matching contract combinator.</p></li>
+ <li>
+  <p>Typed Racket forms do not have a <code>:</code> suffix by default now. For example, the <code>struct</code> form replaces <code>struct:</code>. The suffixed versions are all provided for backwards compatibility.</p></li>
+ <li>
+  <p>Typed Racket now has preliminary support for classes and objects. However, it is still experimental and the APIs are subject to change.</p></li>
+ <li>
+  <p>Type aliases in Typed Racket now support recursion and mutual recursion. For example, <code>(define-type (MyList X) (U Null (Pair X (MyList X))))</code> is now a valid type alias.</p></li>
+ <li>
+  <p>Plot correctly renders intersecting 3D graphs and non-grid-aligned 3D rectangles.</p></li>
+ <li>
+  <p>Elements in plots output in PDF/PS format have the same relative scale as in other formats. In particular, it is not necessary to adjust <code>plot-font-size</code> to make PDF plots look the same as PNG.</p></li></ul>
+<!-- more-->
+
+<hr />
+
+<p>Racket blog &hellip; Talk about Rackets !! I know some people running quite a rachet !</p>
+
+<p>Ask Annabel</p>
+
+<p>— <em>IOnlyDealInMiracles, 24 May 2014</em></p>
+
+<hr />
+
+<p>Dear Annabel,</p>
+
+<p>On a scale of 1 to 10, how rachet would you say you are?</p>
+
+<p>Ben</p>
+
+<p>— <em>Benjamin Greenman, 25 May 2014</em></p>
+
+<hr />
+
+<p>Please, provide PGP signatures for the installers and/or support download over SSL. I would not risk running an executable on my computer unless I can verify it&rsquo;s origin.</p>
+
+<p>— <em>verduphs, 2 June 2014</em></p>
+
+<hr />
+
+<p>Funny. I came here from the old plt site and initially misread the redirection alert: &ldquo;PLT is now a racket!&rdquo;</p>
+
+<p>— <em>Unknown, 19 June 2014</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2014/07/scheme-workshop-2014.html">Scheme Workshop 2014</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2014/04/registration-for-fourth-racketcon.html">Registration for (fourth RacketCon)</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

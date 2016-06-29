@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Don't say "abstract" (instead say "general")</title>
+    <meta name="description" content="_posted by John Clements_  The word &quot;abstract&quot; is common in computer science. An abstract thing is one where some part of the whole is unspecified. For instance, the expression &quot;3*x + 3&quot; is an abstraction of the expression &quot;3*4+3&quot;, because the &quot;x&quot; is unsp...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/09/dont-say-abstract-instead-say-general.html">
+    <link rel="next" href="/2007/09/completions-in-drscheme-finally.html">
+    <link rel="prev" href="/2007/11/getting-rid-of-set-car-and-set-cdr.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>14 Sep 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Don&rsquo;t say &ldquo;abstract&rdquo; (instead say &ldquo;general&rdquo;)</h1>
+  </header>
+
+<p><em>posted by John Clements</em></p>
+
+<p>The word &ldquo;abstract&rdquo; is common in computer science. An abstract thing is one where some part of the whole is unspecified. For instance, the expression &ldquo;3*x + 3&rdquo; is an abstraction of the expression &ldquo;3*4+3&rdquo;, because the &ldquo;x&rdquo; is unspecified. Likewise, a function is an abstraction over some set of values, supplied when the function is called.</p>
+
+<p>The word &ldquo;general&rdquo; is not at all common in computer science. In non-computer-science use, the word &ldquo;general&rdquo; is used to describe things that may be applied to more than one thing or situation. For instance, a &ldquo;more general solution&rdquo; is one that applies not just to the problem at hand, but instead to a larger set of problems.</p>
+
+<p>From a computer science perspective, things that are abstract are also general. Things that are general are also abstract. Substituting the word &ldquo;general&rdquo; for the word &ldquo;abstract&rdquo; would not be a terrible hurdle.</p>
+
+<p>From a non-computer-science perspective, however, &ldquo;general&rdquo; and &ldquo;abstract&rdquo; have very different implications. Something that is general is better: it is more useful, it applies more frequently. Something that is abstract, though, is worse: it is lacking detail, it is non-concrete.</p>
+
+<p>This is one difference&mdash;the major difference?&mdash;between computer science (and of course mathematics) and the real world: the abstract is no less concrete. We can abstract over expressions using functions, and we can even abstract over syntactic things, using hygienic macros. The result of such abstraction is a perfectly well-defined element in our universe of expressions.</p>
+
+<p>In computer science, then, the pejorative sense of the word &ldquo;abstract&rdquo; is misleading, and the use of the terms &ldquo;abstract&rdquo; and &ldquo;abstraction&rdquo; merely provides ammunition for those who wish that we could all still be writing assembly language.</p>
+
+<p>I suggest instead the use of the word &ldquo;general.&rdquo;</p>
+
+<p>John &ldquo;purveyor of barbarous neologisms&rdquo; Clements</p>
+<!-- more-->
+
+<hr />
+
+<p>Why would you want to adjust a valid and widespread usage just to integrate with usage elsewhere? If we followed this idea to its logical conclusion we would have no vocabulary at all.</p>
+
+<p>— <em>amoe, 15 September 2007</em></p>
+
+<hr />
+
+<p>Makes sense to me if you want to talk with the folks from elsewhere that you should learn their language. If you just want to stick with your own people, then you don&rsquo;t bother with things like that.</p>
+
+<p>— <em>Robby, 15 September 2007</em></p>
+
+<hr />
+
+<p>I&rsquo;m not sure that &ldquo;abstract&rdquo; and  &ldquo;general&rdquo; capture fungible notions.</p>
+
+<p>In computer science and mathematics, abstraction captures the essential core of something. I remember hearing David Foster Wallace, who&rsquo;d written a book about math, talking about how the number 5 is an abstraction over 5 sheep, 5 houses, and so on. But CS/math abstractions are very precise. I know exactly what you mean when you say &ldquo;five&rdquo;.</p>
+
+<p>To me, the word &ldquo;general&rdquo; as used in common parlance connotes some amount of fuzziness. &ldquo;Oh, that&rsquo;s the general idea.&rdquo; Not what you  want for computing &mdash; unless maybe  you&rsquo;re Lofti Zadeh.</p>
+
+<p>— <em>steck, 4 October 2007</em></p>
+
+<hr />
+
+<p>I know exactly what you mean when you say &ldquo;five&rdquo;.</p>
+
+<p>You do? 5 might be Frege&rsquo;s 5 (the set of all fivesomes), or von Neumann&rsquo;s 5 (the set {0, 1, 2, 3, 4}, where 4 is {0, 1, 2, 3}, where 3 is {0, 1, 2}, where 2 is {0, 1}, where 1 is {0}, where 0 is {}), or some other 5 altogether.</p>
+
+<p>— <em>John Cowan, 30 October 2007</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/11/getting-rid-of-set-car-and-set-cdr.html">Getting rid of <code>set-car!</code> and <code>set-cdr!</code></a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/09/completions-in-drscheme-finally.html">Completions in DrScheme (finally)</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

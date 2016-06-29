@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Getting rid of `set-car!` and `set-cdr!`</title>
+    <meta name="description" content="_posted by Matthew Flatt_  Functional is Beautiful:  Scheme is a “mostly functional” language. Although Schemers don’t hesitate to use `set!` when mutation solves a problem best, Scheme programmers prefer to think functionally. Purely functional programs ...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/11/getting-rid-of-set-car-and-set-cdr.html">
+    <link rel="next" href="/2007/09/dont-say-abstract-instead-say-general.html">
+    <link rel="prev" href="/2007/12/your-security-hole-is-my-fun-hack-or-computing-factorial-in-drscheme-with-a-click-powered-loop.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>12 Nov 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Getting rid of <code>set-car!</code> and <code>set-cdr!</code></h1>
+  </header>
+
+<p><em>posted by Matthew Flatt</em></p>
+
+<h2 id="functional-is-beautiful">Functional is Beautiful</h2>
+
+<p>Scheme is a “mostly functional” language. Although Schemers don’t hesitate to use <code>set!</code> when mutation solves a problem best, Scheme programmers prefer to think functionally. Purely functional programs are easier to test, they make better and more reliable APIs, and our environments, compilers, and run-time systems take advantage of functional style.</p>
+
+<p>A Schemer’s functional bias is especially strong when writing programs that process and produce lists. The <code>map</code> function, which does both, is a thing of beauty:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nb">map</span> <span class="n">f</span> <span class="n">l</span><span class="p">)</span>
+   <span class="p">(</span><span class="k">cond</span>
+     <span class="p">[(</span><span class="nb">null?</span> <span class="n">l</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">()]</span>
+     <span class="p">[</span><span class="k">else</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="nb">car</span> <span class="n">l</span><span class="p">))</span> <span class="p">(</span><span class="nb">map</span> <span class="n">f</span> <span class="p">(</span><span class="nb">cdr</span> <span class="n">l</span><span class="p">)))]))</span>
+</pre></div>
+
+</div>
+
+<p>The <code>map</code> function is most beautiful when the given <code>f</code> is functional. If <code>f</code> has side-effects, the the above implementation over-specifies <code>map</code>, which is traditionally allowed to process the list in any order that it wants (though PLT Scheme guarantees left-to-right order, as above). Arguably, when some other Schemer provides a non-functional <code>f</code>, then it’s their problem; they have to deal with the consequences (which may well be minor compared to some benefits of using mutation).</p>
+
+<p>The <code>map</code> function might also receive a non-list, but the <code>map</code> implementor can guard against such misuse of <code>map</code> by wrapping it with a check,</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">checked-map</span> <span class="n">f</span> <span class="n">l</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">list?</span> <span class="n">l</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">map</span> <span class="n">f</span> <span class="n">l</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">error</span> <span class="o">&#39;</span><span class="ss">map</span> <span class="s2">"not a list"</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>and then exporting <code>checked-map</code> instead of the raw <code>map</code>. This kind of checking gives nicer error messages, and it helps hide implementation details of <code>map</code>. We could further also imagine that the raw <code>map</code> is compiled without run-time checks on <code>car</code> and <code>cdr</code>.</p>
+
+<h2 id="the-problem-with-mutable-pairs">The Problem with Mutable Pairs</h2>
+
+<p>What if someone calls <code>checked-map</code> like this?:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="p">(</span><span class="k">define</span> <span class="n">l</span> <span class="p">(</span><span class="nb">list</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">checked-map</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                 <span class="p">(</span><span class="n">set-cdr!</span> <span class="p">(</span><span class="nb">cddr</span> <span class="n">l</span><span class="p">)</span> <span class="mi">5</span><span class="p">))</span>
+               <span class="n">l</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The <code>f</code> provided to <code>map</code> in this case is not purely functional. Moreover, it uses mutation in a particularly unfortunate way: the <code>list?</code> test in <code>checked-map</code> succeeds, because the argument is initially a list, and the mutation is ultimately discovered by a call to <code>cdr</code> &mdash; but only if checks haven&rsquo;t been disabled.</p>
+
+<p>If you’re a Schemer, then unless you’ve seen this before, or unless you thought a bit about the title of this section, then you probably didn&rsquo;t think of the above test case for <code>map</code>. A Schemer’s view of lists is so deeply functional that it&rsquo;s hard to make this particular leap.</p>
+
+<p>Furthermore, this example is not contrived. If you have either Chez Scheme version 6.1 or a pre&ndash;200 MzScheme sitting around, calling <code>map</code> as above leads to a seg fault or an invalid memory access:</p>
+
+<div class="brush: bash">
+ <div class="pygments">
+  <pre>  Chez Scheme Version 6.1
+  Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">1998</span> Cadence Research Systems
+
+  &gt; <span class="o">(</span>define l <span class="o">(</span>list <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> 5<span class="o">))</span>
+  &gt; <span class="o">(</span>map <span class="o">(</span>lambda <span class="o">(</span>x<span class="o">)</span> <span class="o">(</span><span class="nb">set</span>-cdr! <span class="o">(</span>cddr l<span class="o">)</span> 5<span class="o">))</span> l<span class="o">)</span>
+
+  Error: invalid memory reference.
+  Some debugging context may have been lost.
+</pre></div>
+
+</div>
+
+<p>The <code>map</code> example illustrates how mutable pairs can break a Schemer’s natural and ingrained model of programming. Of course, if optimizing and providing friendly error messages for <code>map</code> were the only issues with mutable pairs, then it wouldn’t matter; Scheme implementors are smart enough to (eventually) get this right. Unfortunately, the underlying problem is more pervasive.</p>
+
+<p>In the API for a typical Scheme library, lists can be used for many kinds of input and output. Flags for options might be provided in a list. A function might provide information about the current configuration (e.g., the current items in a GUI list box) in a list. Procedures or methods that deal gracefully with list mutation are few and far between. In most cases, the result of unexpected mutation is merely a bad error message; sometimes, however, unexpected mutation of a list can break the library’s internal invariants. In the worst case, the library whose internal invariants are broken plays some role in a system’s overall security.</p>
+
+<p>Mutable lists also interfere with the language’s extensibility. The PLT Scheme contract system, for example, offers a way to wrap an exported function with a contract that constrains its input and outputs, which are optionally (in principle) enforced by run-time checks. Higher-order contracts, such as “a list of functions that consume and produce numbers”, require wrappers on sub-pieces, and these wrappers can be installed only by copying the enclosing list. Copying a mutable list changes the semantics of a program, however, whereas contracts are supposed to enforce invariants without otherwise changing the program. Copying an immutable list creates no such problem.</p>
+
+<p>Finally, mutable lists make the language’s specification messy. The R6RS editors spent considerable energy trying to pin down the exception-raising guarantees of <code>map</code>; the possibility of mutable pairs made it difficult to provide much of a guarantee. The standard says that implementations should check that the lists provided to<code>map</code> are the same length, but it’s not worth much to require that check, since an argument’s length as a list can change via mutation to the list’s pairs.</p>
+
+<h2 id="switching-to-immutable-pairs">Switching to Immutable Pairs</h2>
+
+<p>The designers of PLT Scheme long ago recognized the problems of mutable pairs, and we introduced functions like <code>cons-immutable</code> and<code>list-immutable</code> to support programming with immutable lists. These additions solved some problems &mdash; but only in the cases where we were careful to use immutable lists. The R6RS editors also recognized the problems of mutable pairs, so that <code>set-car!</code> and <code>set-cdr!</code> were banished to their own library &mdash; but programmers are still free to use that library.</p>
+
+<p>While these are worthwhile steps for many reasons, they do not solve the underlying problem. Library implementors who deal in lists must still either set up elaborate guards against mutation, pretend that the problem doesn&rsquo;t matter, or require the use of a special immutable-list datatype that is incompatible with libraries whose authors set up elaborate guards or ignore the problem.</p>
+
+<p>Why all this hassle? If most Scheme code really does use and expect pairs in a functional way, can&rsquo;t we just switch to immutable pair? Most Scheme code will still work, untold security holes will have been closed, specifications will become instantly tighter, and language extensions like contracts will work better.</p>
+
+<p>Schemers have been reluctant to make this leap, because it has never been clear just how much code relies on mutable pairs. We don’t know how much the switch will cost in porting time and long-term incompatibility, and we don’t really know how much we will gain. We won&rsquo;t know until we try it.</p>
+
+<p>For PLT Scheme v4.0, we’re going to try it. In our main dialects of Scheme (such as the <code>mzscheme</code> language), <code>cons</code> will create immutable pairs, and <code>pair?</code> and <code>list?</code> will recognize only immutable pairs and lists. The <code>set-car!</code> and <code>set-cdr</code> procedures will not exist. A new set of procedure <code>mcons</code>, <code>mcar</code>, <code>mcdr</code>, <code>set-mcar!</code>, and <code>set-mcdr!</code> will support mutable pairs. (A related v4.0 change is that <code>define-struct</code> by default creates immutable structure types.)</p>
+
+<p>Of course, PLT Scheme v4.0 will support an R5RS language where <code>cons</code> is <code>mcons</code>, and so on, so many old programs can still run easily in the new version. The difference is that interoperability between R5RS libraries and PLT Scheme libraries will be less direct than before.</p>
+
+<h2 id="experience-so-far">Experience So Far</h2>
+
+<p>PLT Scheme v3.99.0.2 exists already in a branch of our SVN repository, and it will soon move to the SVN trunk. That is, we have already ported at least a half million lines of Scheme code to a dialect without <code>set-car!</code> and <code>set-cdr!</code>.</p>
+
+<p>The conversion took about eight hours. Obviously, relatively little code had to change. The following are the typical porting scenarios:</p>
+
+<ul>
+ <li>
+  <p>The <code>reverse!</code> and <code>append!</code> functions were frequently used for “linear updates” by performance-conscious implementors. As our underlying Scheme implementation has improved, however, the performance benefits of these functions has become less. All uses could be replaced with <code>reverse</code> and <code>append</code>.</p></li>
+ <li>
+  <p>The <code>set-cdr!</code> operation was often used to implement an internal queue. Such internal queues were easily changed to use <code>mcons</code>,<code>mcar</code>, <code>mcdr</code>, and <code>set-mcdr!</code>.</p></li>
+ <li>
+  <p>An association-list mapping was sometimes updated with <code>set-cdr!</code> when a mapping was present, otherwise the list was extended. Since the extension case was supported, it was easy to just update the list functionally. (The relevant lists were short; if the lists were long, the right change would be to use a hash table instead of a list.)</p></li>
+ <li>
+  <p>A pair was sometime used for an updatable mapping where a distinct structure type is better. The quick solution was to throw in a mutable box in place of the value.</p></li></ul>
+
+<p>The PLT Scheme code might be better positioned for the switch than arbitrary Scheme code. Most of it was written by a handful of people who understood the problems of mutable pairs, and who might therefore shy away from them. However, the PLT Scheme code base includes a lot of code that was not written specifically for PLT Scheme, including Slatex, Tex2page, and many SRFI reference implementations. With the exception of SRFI&ndash;9, which generalizes <code>set!</code> to work with pairs, the SRFI implementations were remarkably trouble free. (Thanks to Olin Shivers for making mutation optional in the “linear update” functions like <code>reverse!</code> from SRFIs 1 and 32.)</p>
+
+<p>In addition, we looked at a number of standard Scheme benchmarks, which can be found here:</p>
+
+<p><a href="http://svn.plt-scheme.org/plt/trunk/collects/tests/mzscheme/benchmarks/common/"> http://svn.plt-scheme.org/plt/trunk/collects/tests/mzscheme/benchmarks/common/</a></p>
+
+<p>Of the 28 benchmarks, eight of them mutate pairs. Four of those are trivially converted to functional programs, along the lines of the scenarios above. One, <code>destruct</code>, is designed specifically to test mutation performance, so it makes no sense to port. Another, <code>sort1</code>, is a sorting algorithm that inherently relies on mutation; a functional sort is obviously possible, but that would be a different benchmark. The <code>conform</code> benchmark uses mutable pairs for tables in a relatively non-local way; as a modern Scheme program, it would probably be written with structures, but it’s not trivial to port. The <code>peval</code> benchmark uses pairs to represent Scheme programs, and it partially evaluates the program by mutating it, so it is not trivial to port. To summarize, out of 28 old, traditional benchmark programs, only two represent interesting programs that are not easily adapted to immutable pairs. (They run in PLT Scheme’s R5RS language, of course.)</p>
+
+<p>Finally, we selected a useful third-party library that is not included with PLT Scheme. We checked the generic SSAX implementation (not the PLT Scheme version), and we found a couple of uses of <code>set-car!</code> and <code>set-cdr!</code>. Again, they fall into the above queue and association-list categories that are easily and locally converted.</p>
+
+<p>Meanwhile, as we start to use v3.99 to run scripts in our day-to-day work, immutable pairs have so far created no difficulty at all. So far, then, our optimism in trying immutable pairs seems to be justified; it just might work.</p>
+
+<h2 id="but-its-lisp-tradition">But It’s Lisp Tradition!</h2>
+
+<p>A typical response to news of the demise of mutable pairs is that it will create lot of trouble, because mutable pairs are Scheme tradition, and surely lots of useful old code exploits them in lots of places.</p>
+
+<p>We’re eager to hear whether anyone has such code. Our initial hypothesis is that practically all old code falls into one of two categories:</p>
+
+<ul>
+ <li>
+  <p>The code is easily ported to immutable pairs, along the same lines as above (i.e., local queues and small association lists).</p></li>
+ <li>
+  <p>The code so old and generic that it can be run as an R5RS program. It won’t call into the large PLT Scheme set of libraries that will expect immutable pairs, and it can easily be used as a library with wrappers that convert mutable pairs back and forth with immutable pairs.</p></li></ul>
+
+<p>Frankly, we’re not so eager to hear opinions based on guesswork about existing code and how it might get used. Download v3.99 from SVN or as a nightly build when it becomes available; let us know your guesses about how running your old code would go, but then let us know what actually happens.</p>
+
+<p>The immutable-pairs plan for v4.0 is not set in stone, but we won’t make the decision based on guesswork. More libraries (other than R5RS) to aid compatibility may be useful, but so far we don’t have a tangible need for them. In any case, we’ll revert to mutable pairs only if significant experience with the pre-release version demonstrates that it really won’t work.</p>
+<!-- more-->
+
+<hr />
+
+<p>A brave and commendable experiment!</p>
+
+<p>I think there are two distinct issues here: set-cdr! can mutate list structure (and creates problems for functions that assume that list structure is invariant) whereas set-car! mutates list contents but not structure (and prevents copying). I think the former is much more troublesome than the latter. Did you consider semi-mutable pairs, that is, pairs whose car is mutable but cdr is immutable? In the code you have converted, is set-cdr! more common than set-car!?</p>
+
+<p>— <em>Alan Watson, 12 November 2007</em></p>
+
+<hr />
+
+<p><code>set-car!</code> doesn&rsquo;t merely prevent copying (which is a big enough problem for the contract system); it can also break invariants, as in the example of reflecting a list-box&rsquo;s content.</p>
+
+<p>So, keeping <code>set-car!</code> leaves us with problems. Would keeping it solve any problems in practice? I did indeed see <code>set-cdr!</code> more than <code>set-car!</code>, and I can&rsquo;t think of an example that would have run if only we had kept <code>set-car!</code>. Thus, aside from tradition, I don&rsquo;t yet see any rationale for keeping <code>set-car!</code> &mdash; but I&rsquo;m eager to hear about other experience.</p>
+
+<p>— <em>Matthew Flatt, 12 November 2007</em></p>
+
+<hr />
+
+<p>The only situations where I find myself mutating pairs are, on first glance, generating lists front to back, which you discussed, using pairs to implement simple &lsquo;pairs of values&rsquo;, where structs/objects/vectors could be used instead, and for sorted insertion into lists, which is more fundamental, but I guess would be a good place to use mutable pairs.</p>
+
+<p>— <em>Marijn, 13 November 2007</em></p>
+
+<hr />
+
+<p>Perhaps all I am saying is that the arguments against set-car! are the standard arguments against mutation, whereas the arguments against set-cdr! are those plus the problems it creates for procedures like map. Thus, the justification for eliminating set-car! is similar to the justification for making records immutable (as you have done), whereas the justification for eliminating set-cdr! is this and more.</p>
+
+<p>— <em>Alan Watson, 13 November 2007</em></p>
+
+<hr />
+
+<p>Alan: I think that the arguments against set-cdr! are in fact the same arguments against any old mutation (ie, just like the anti-set-car! arguments). Even tho the core libraries of Scheme (things like map) suffer more due to set-cdr!, ordinary programs suffer equally in our experience (as Matthew has explained).</p>
+
+<p>Anyways, let me encourage you to put your theory to the test and find some non-trivial programs or libraries that back up your point!</p>
+
+<p>— <em>Robby, 13 November 2007</em></p>
+
+<hr />
+
+<p>My point is not that there are libraries or programs in which set-car! is a good idea. My point is an opinion, perhaps badly expressed, on why each creates problems and which is worse. Sorry for the noise.</p>
+
+<p>— <em>Alan Watson, 13 November 2007</em></p>
+
+<hr />
+
+<p>I tend to agree. I do use set-car! and set-cdr! time to time, but mostly from my laziness to use more appropriate data structures instead. Recently I also started to avoid the use of set-cdr! to create list from front to back, for it doesn&rsquo;t work well with call/cc.</p>
+
+<p>However, there&rsquo;s one more area that I see the mutable pairs are indispensable; circular lists. Though it has its own problems, it is sometimes very handy to express some kind of code concisely where I&rsquo;d use infinite lazy list in Haskell. It only needs mutation at construction time, and we can make it &ldquo;freeze&rdquo; so that it won&rsquo;t have the problem of &ldquo;the list changing during traversal&rdquo;.</p>
+
+<p>Do you have some plan to support circular structures specially (e.g. srfi&ndash;38 notation or srfi&ndash;1&rsquo;s circular-list procedure hides mutation &ldquo;under the hood&rdquo; so that the users only see immutable, already constructed structures)?</p>
+
+<p>— <em>Shiro Kawai, 13 November 2007</em></p>
+
+<hr />
+
+<p>Yes. Version 3.99.0.2 has <code>make-reader-graph</code> for creating cycles built from immutable pairs. We need a better name, but the current name reflects that <code>read</code> still supports the #n= and #n# graph notation. (We&rsquo;ve dropped support for cyclic syntax objects, though, so <code>read-syntax</code> no longer supports the graph notation).</p>
+
+<p>— <em>Matthew Flatt, 13 November 2007</em></p>
+
+<hr />
+
+<p>Well, I&rsquo;ve been online now for over 30 minutes, and AFAIK, I haven&rsquo;t been hacked. This is a banner day. Hi Matt; great article! Out of necessity, from a security standpoint, I have converted all my boxes to some flavor of *nix. As soon as I can download 3.99, I&rsquo;ll try to reproduce the flavor of the data from my flatten benchmark article. This time it will be different, simply because they&rsquo;ll be on a new OS. However, I have a bunch of varients of the flatten algorithm, using both muttable and immutable methods. As I recall from my earlier results, the biggest difference advantage to using mutation came about when a poor algorithm had been choosen to begin with, that required the reversal of the result list. These quite substantially improved their performance with the use of reverse! However, the more elegant functional solutions, under favorable conditions, actually out performed even the fastest mutable algorithms. Not typically, but definitely always in the race. The success of building functional solutions, which are also efficient is certainly achieved with other functional languages. I&rsquo;ll have to redesign my queue routine, as you mentioned, but it will be worth the effort. I&rsquo;m looking forward to getting a copy on my box as soon as possible.</p>
+
+<p>Take care.</p>
+
+<p>&mdash;kylr</p>
+
+<p>— <em>Kyle Smith, 18 November 2007</em></p>
+
+<hr />
+
+<p>Did not observe any problem beyond the typical usages noted in the article when I moved SSAX and SXML to R6RS libraries.</p>
+
+<p>Typical use is in implementing &ldquo;efficient&rdquo; queues. I expect an applicative queue such as found in Okasaki would work fine on modern hardware and scheme implementations.</p>
+
+<p>I doubt there is a systemic problem out there.</p>
+
+<p>— <em>GreyLensman, 18 November 2007</em></p>
+
+<hr />
+
+<p>How difficult would it be to replace set! with explicit boxes?</p>
+
+<p>— <em>Ethan Aubin, 21 November 2007</em></p>
+
+<hr />
+
+<p>Are you considering changing the behaviour of eq? or eqv? on (now immutable) pairs? Currently, two immutable pairs whose cars and cdrs are eq? can only be distinguished by eq? or eqv?. As such, should they really be considered to be distinct or is their apparent distinctiveness simply an artifact of the implementation that should be hidden from the programmer?</p>
+
+<p>— <em>Alan Watson, 26 November 2007</em></p>
+
+<hr />
+
+<p>Wow, did I make a mistake.</p>
+
+<p>Background. In PLT Redex, the stepper uses mutable lists to represent the currently visible portion of the reduction graph. When someone clicks the &ldquo;next&rdquo; button, it does a set-cdr! to add something to the end of that graph.</p>
+
+<p>The Mistake. When I converted the code to v4, I figured that I should preserve the mutation, so I went in and changed a few set-car!s to set-mcar!s and then changed about 15 or 20 uses of filter, for-each, ormap, list-ref, and friends to versions of those that worked on mutable pairs instead of immutable ones. This took about 2 hours.</p>
+
+<p>Not too bad, you might think. Two hours? Sometimes fixing one little bug can take longer than that, days even. Got away cheaply, you might think &hellip;</p>
+
+<p>What I Should Have Done. Today I decided that I wanted the code to work in both v4 and in earlier versions of PLT Scheme, since the code&rsquo;ll be on PLaneT, after all and not everyone is using v4 yet. Sigh. So now I need to go undo that work and copy the list instead of mutating its tail. So I did that.</p>
+
+<p>5 minutes. Done. Working code.</p>
+
+<p>10 more minutes: removing all of the now useless helper functions that dealt with the mutable-pair versions of filter, for-each, ormap, list-ref.</p>
+
+<p>Oh well. Lesson learned, I suppose.</p>
+
+<p>— <em>Robby, 27 November 2007</em></p>
+
+<hr />
+
+<p>On replacing set! with set-box!: in a sense, this is so easy that the compiler does it automatically. That is, mutable variables are already implemented via boxes. You always know statically whether a variable needs to be boxed and unboxed due to lexical scope plus rules on mutating module-defined identifiers. For essentially the same reason, <code>set!</code> doesn&rsquo;t really cause much trouble; programmers usually see <code>set!</code>s and know to treat the relevant variable with care &mdash; in contrast with <code>set-car!</code>s, which could be in a library that you don&rsquo;t see.</p>
+
+<p>— <em>Matthew Flatt, 27 November 2007</em></p>
+
+<hr />
+
+<p>We have so far not changed the interaction of <code>cons</code> with <code>eq?</code> or <code>eqv?</code>. Specifically, <code>cons</code>, <code>list</code>, etc. are guaranteed to create fresh cons cells, in the sense that <code>eq?</code> distinguishes them, even though the cons cells are immutable. I think we may want to remove this guarantee eventually, because it would make some constant-folding optimizations easier and enable hash-consing, but we&rsquo;ll take one step at a time.</p>
+
+<p>— <em>Matthew Flatt, 27 November 2007</em></p>
+
+<hr />
+
+<p>A little late, but &hellip;</p>
+
+<p>Once one acknowledges value of circular/recursive list data, it follows that there is likely value in the native runtime creation of such data as may be used for example to express arbitrarily recursively defined hierarchical information; which beyond the trivial, seems seems like a significant loss to the language to push such capability outside the baseline scope of the language by default.</p>
+
+<p>Yes, such capability may be defined and utilized as required although not as elegantly as if it were native; however it seems a shame to seriously consider alienating the previously native capability to dynamically formulate native list data from datum not known at program specification/compile time (i.e. the ability to formulate and manipulate such list datum from information extracted during run-time, as data bases typically are, can not be performed natively without set-car! set-cdr!, nor specified purely functionally); as the loss of such a potentially powerful and useful capability seems like a poor trade in exchange for the questionable value of default immutable lists, especially as the mutability of function argument can most typically be easily determined within a function, and optimizations applied accordingly, and in the few cases where it can&rsquo;t, so what, presume it may be mutated. (If the concern is limited to map, then simply specify that map&rsquo;s arguments are presumed to not be mutated until terminated, or generally forbidden).</p>
+
+<p>— <em>pschlie, 15 December 2007</em></p>
+
+<hr />
+
+<p>The entire purpose of this experiment was to avoid caveats like &ldquo;seems&rdquo;, &ldquo;likely&rdquo; and &ldquo;potentially&rdquo;. If you have real examples to show, that would be interesting. So far we have far better abstract arguments against mutation than for it, and no concrete experience suggesting it should be brought back.</p>
+
+<p>Also, I should remind you that mcons (and friends) exist, as do mutable structs. These are as &ldquo;native&rdquo; as it gets.</p>
+
+<p>— <em>Robby, 15 December 2007</em></p>
+
+<hr />
+
+<p>Somewhat more concrete:</p>
+
+<ul>
+ <li>presume the run-time creation, storage and/or retrieval of arbitrarily recursive list structured data is useful (or please prove otherwise).</li></ul>
+
+<p> (Personally see no value in presenting any particular program utilizing such capabilities, as the potential usefulness of such data structures representing state transition graphs, or more generally arbitrarily self recursive data representations are self evident; just as I see no value in any example given of how list mutation may yield indeterminate behavior in the absents of the specification of evaluation order; as overall the less flexible and deterministic a language is, the less useful it tends to be. Thereby I view dropping native mutable lists in an effort to improve determinism, in effect an attempt to improve a deficiency by removing utility; as opposed to improving its utility, by removing a deficiency.)</p>
+
+<p>Implying:</p>
+
+<ul>
+ <li>
+  <p>a facility to create/manipulate such data at run-time is required.</p></li>
+ <li>
+  <p>mcons (and friends) are only rudimentarily facilitates, which exclusively operate on a now severely crippled data type because mutable lists have been alienated from the language (incompatible with car and friends) and thereby incompatible with the majority of all native list functions and thereby now require an entirely redundant and largely absent collection of functions to specified to operate on and utilize them (inclusive of their inability to be evaluated as code):</p></li>
+ <li>
+  <p>a facility to store and retrieve such data at run-time is required.</p></li>
+ <li>
+  <p>as there is no current reader support to denote mutable lists:</p>
+  <ul>
+   <li>
+    <p>(mcons &lsquo;a &rsquo;{b}) -&gt; {a . (b)} ; not {a b} as likely  (cons &lsquo;a &rsquo;(b)) -&gt; (a b) ; expected by analogy</p></li>
+   <li>
+    <p>(define x (mcons &rsquo;+ (mcons 1 (mcons 2 null)))) ; i.e. {+ 1 2}  (with-output-to-file &ldquo;f&rdquo; (lambda () (print x)) &rsquo;text &rsquo;replace)  (with-input-from-file &ldquo;f&rdquo; (lambda () (read)))  =&gt; (+ 1 2) ; wrong</p></li>
+   <li>
+    <p>(define x (mcons 1 null)) (set-mcdr! x x) ; i.e. #0={1 . #0}  (with-output-to-file &ldquo;f&rdquo; (lambda () (print x)) &rsquo;text &rsquo;replace)  (with-input-from-file &ldquo;f&rdquo; (lambda () (read)))  =&gt; #0=(1 . #0#) ; wrong</p></li></ul>
+  <p> [not to mention (define x &rsquo;#0=(1 . #0#)) isn&rsquo;t accepted anymore]</p></li></ul>
+
+<p>So overall, scheme absent mutable lists removes an entire class of capabilities which which was never proven to be useless, in fact arguably known to be otherwise, nor given analogous facilities of comparable utility.</p>
+
+<p>Yes, such facilities may be structured from non-native structured data types and a corresponding new set of support functions; just as in most languages; however scheme was previously unique in that such a capability was inherent. (while were at it, maybe list data types and functions should be removed entirely, as after all, they&rsquo;re not strictly necessary as evidenced by most all other languages).</p>
+
+<p>In hind sight, justifying mutable list removal because large classes of programs do not require them, or that the language&rsquo;s specification may be easier in their absents, or because the contract facility implementation isn&rsquo;t capable determining if list data is in fact potentially mutated; hardly seems reasonable. IMHO</p>
+
+<p>— <em>pschlie, 16 December 2007</em></p>
+
+<hr />
+
+<p>Paul, this is not what I meant by concrete. No one said (or attempted to prove) that mutable cons cells were useless. Indeed, we still support them, but we just do not use them by default anymore.</p>
+
+<p>The comment &ldquo;justifying mutable list removal because large classes of programs do not require them&rdquo; misses half of the problem with mutable lists. The first half of the problem, in fact. Matthew&rsquo;s post clearly explains why mutable lists cause problems in concrete ways and, if you permit me to say so, makes a far more convincing abstract case against mutable pairs than your abstract arguments for them.</p>
+
+<p>But, in any case, these abstract arguments (either way) ultimately need to be backed up with real programs. Let me encourage you once again to provide some to back up your arguments. We have found none in a large body of code. Have you investigated a body of code and found some?</p>
+
+<p>— <em>Robby, 16 December 2007</em></p>
+
+<hr />
+
+<p>The problems you describe with mutability remind me of type-theory where each kind of thing is separated into its own type. Then you can always use the types in conjunction with each other if you need the functionality of both.</p>
+
+<p>For example, if you had the types <code>list</code> and <code>mutable</code> you could distinguish between an immutable list of immutable elements, an immutable list of mutable elements, a mutable list of immutable elements, and so on, and put this in your &ldquo;contract system&rdquo; (whatever that is).</p>
+
+<p>This not only documents the usage of things like mutability, but also allows the compiler (in theory) to check such constraints on inputs and outputs.</p>
+
+<p>When a function like <code>map</code> expects an immutable list, it will simply use the <code>list</code> type without restricting the mutation of elements. But in places where that could be harmful, a different type can be used. The conventional Scheme way of allowing everything to be mutable prevents this separation of distinct properties of values.</p>
+
+<p>I&rsquo;m not too familiar with how Scheme implements things, but the general way this is done is to box things that are mutable.</p>
+
+<p>— <em>Jon T, 28 December 2007</em></p>
+
+<hr />
+
+<p>In another five years or so you&rsquo;ll be where ML was twenty years ago! Better late than never, I suppose, but, really, what is the point?</p>
+
+<p>— <em>Existential Type, 25 January 2008</em></p>
+
+<hr />
+
+<p>&ldquo;Existential Type&rdquo;: your comment begs the exact same reply with macros, except that five years is probably optimistic, and twenty years is an underestimate. Or type reflection that maybe some day will get ML some of the advantages of Scheme.</p>
+
+<p>(But this is, of course, a pointless flame, just like your comment. FWIW, the main issue is legacy code, and switching to Scheme with immutable lists is slightly easier than switching to ML. At least for us Scheme freaks.)</p>
+
+<p>— <em>Eli Barzilay, 25 January 2008</em></p>
+
+<hr />
+
+<p>The conversion of my code took less than a day (about 10000 lines, a guess, for I never counted the nr of lines) There are two types of instances in which I used set-cdr!: for assoclists and imperative queues. Assoclists now have become immutable lists of mutable pairs with a hybrid-assq procedure added. The imperative queues remain mutable lists, the cdr of the last pair being the only one being updated. My code did not contain anything like append! or reverse!. I found no trouble in swithing to v3.99.0.9. I say yes to the better conditions for optimization. Jos Koot</p>
+
+<p>— <em>jos koot, 26 January 2008</em></p>
+
+<hr />
+
+<p>Eli, you seem forget that all Scheme fits into tiny corner of ML, namely a single recursive datatype.</p>
+
+<p>— <em>Existential Type, 26 January 2008</em></p>
+
+<hr />
+
+<p>Eli, I agree with you about the pointlessness of an ML-vs-Scheme flame war. Can you be more explicit about what you mean by &ldquo;type reflection&rdquo;? That sounds interesting, but I have no idea what you&rsquo;re talking about.</p>
+
+<p>— <em>Michael, 26 January 2008</em></p>
+
+<hr />
+
+<p>Existential Type: From this side of the fence I can say that Scheme covers all of ML, with all types that were and will be written. But this is a second pointless flame, and still irrelevant to the context. I could just as well point at the many limitations of ML types (eg, what&rsquo;s the real type of map? sqrt? printf? collatz? GetFunction(&ldquo;foo&rdquo;,"bar.dll")?). But that&rsquo;s not going to do any good, so I&rsquo;ll stop replying. Feel free to continue on the PLT list, or email me.</p>
+
+<p>Michael: I&rsquo;m talking about several efforts that attempt to get the benefits of a dynamic language into a static language like ML. There was some work done on reflecting types (or reifying types) which makes it possible to sort of package a value together with a type object (in the run-time sense; it becomes a value). IIRC, there was also something related to universal types that goes in the same direction.</p>
+
+<p>Personally, I found that MLers who blindly bash Scheme for it&rsquo;s lack of types are just as bad as Schemers who blindly bash all static typing. IMO (and in the opinion of many other good people I&rsquo;ve talked to) there are very good advantages on both sides &mdash; and the real challenge is to get dynamic languages like Scheme to benefit from the advantages of statically typed languages like ML, and vice versa. Some people choose to work on just that (from either side), some people don&rsquo;t but appreciate those who do, and some people will inevitably continue to spit out useless comments even in a completely unrelated context, like the above anonymous poster.</p>
+
+<p>— <em>Eli Barzilay, 26 January 2008</em></p>
+
+<hr />
+
+<p>Don&rsquo;t you just love it when language maintainers drop a feature because someone, somewhere, might misuse it?</p>
+
+<p>What&rsquo;s next? Dropping the number zero, because it can cause a divide-by-zero error?</p>
+
+<p>I&rsquo;m de-installing PLT today and switching to an implementation which doesn&rsquo;t think I&rsquo;m an idiot.</p>
+
+<p>— <em>T., 24 June 2008</em></p>
+
+<hr />
+
+<p>T: In fact, <em>most</em> modern languages dropped the number zero as a pointer. Most languages also restrict you from using a ton of other features, so which implementation are you going to install: C? assembler? maybe you&rsquo;ll get a soldering iron?</p>
+
+<p>— <em>Eli Barzilay, 24 June 2008</em></p>
+
+<hr />
+
+<p>T: You do realize, don&rsquo;t you, that set-car! and set-cdr! are still available in PLT Scheme 4.0, only as a library instead of as a built-in feature? Given that, I don&rsquo;t see what you are so upset about. You&rsquo;re free to use set-car! and set-cdr! as much as you want.</p>
+
+<p>— <em>Michael Vanier, 24 June 2008</em></p>
+
+<hr />
+
+<p>I know this is an old, and probably dead thread, but I did want to respond to one post.</p>
+
+<p>&mdash;-Quote&mdash;- Robby said&hellip; &hellip;  But, in any case, these abstract arguments (either way) ultimately need to be backed up with real programs. Let me encourage you once again to provide some to back up your arguments. We have found none in a large body of code. Have you investigated a body of code and found some?  December 16, 2007 6:56 PM  &mdash;-End Quote&mdash;-</p>
+
+<p>Over 25 years ago, I used set-cdr! in a PC Scheme implementation of N-Queens for an AI class. Besides using set-cdr!, calls to move a queen were properly tail recursive. I noticed the PLT Scheme benchmark didn&rsquo;t use tail recursion for moves, so I modified my code to match the benchmark. The following times compare the improvements for just using set-cdr! and for using set-cdr! combined with tail recursion:</p>
+
+<p>PLT Scheme Benchmark: &gt; (begin (collect-garbage) (time (nqueens 15))) cpu time: 158899 real time: 158982 gc time: 16920 2279184 (execution time = cpu time - gc time = 142.0s)</p>
+
+<p>set-cdr! version: &gt; (begin (collect-garbage) (time (N-Queens 15))) cpu time: 138616 real time: 138787 gc time: 3286 2279184 (execution time = cpu time - gc time = 135.3s)</p>
+
+<p>set-cdr! plus properly tail recursive moves: &gt; (begin (collect-garbage) (time (N-Queens 15))) cpu time: 119845 real time: 120061 gc time: 3284 2279184 (execution time = cpu time - gc time = 116.5s)</p>
+
+<p>As you can see, using set-cdr! improved overall cpu time by about the same amount as using properly tail recursive moves. The major performance improvement for set-cdr! came from reduced garbage collection. N-Queens is just one example of back-tracking used to traverse a search space. Any time the search space can be pruned before the back-tracking call is made, and restored on return from the call, set-cdr! should yield improved performance. It&rsquo;s also very localized, as shown by the following code snippet:</p>
+
+<p>(else ..(set-mcdr! prior-column (mcdr column)) ..(begin0 &hellip;.(place&amp;move safe-columns &hellip;&hellip;&hellip;..(mcdr safe-columns) safe-columns &hellip;&hellip;&hellip;..(cons (mcar column) solution) count) &hellip;.(set-mcdr! prior-column column))))))</p>
+
+<p>In the above example, prior-column and column traverse the list, while safe-columns always points to it&rsquo;s beginning. The list is never copied, just manipulated with set-mcdr! as the search space is traversed. Also, the list goes from 0 to N to simplify handling prior-column.</p>
+
+<p>Gene Snider</p>
+
+<p>— <em>Gene Snider, 27 January 2010</em></p>
+
+<hr />
+
+<p>Way to go PLT Scheme 4.x. You&rsquo;ve just made it impossible for me to use your Scheme to work through the exercises in The Scheme Programming Language (4th edition) &mdash; see for example Exercise 2.9.3 on page 55.</p>
+
+<p>As if learning a language like Scheme isn&rsquo;t hard enough for us poor suckers trying to break out of the imperative/object world. Do you really have to add yet more beautiful impediments?</p>
+
+<p>— <em>Mike Taylor, 14 April 2010</em></p>
+
+<hr />
+
+<p>Mike, mcons, mcar, mcdr, set-mcar!, and set-mcdr! are provided by scheme already. Just add (require scheme/mpair) to your definitions to get more mutable pair functionality. You will need to use slightly different function names, e.g. mlist, mlength, etc. The /scheme/mpair module is well documented.</p>
+
+<p>When I first wrote N-Queens, returning the solutions was a requirement. So naturally I built the solutions with cons for later return. After my earlier post, I realized that two additional lines of code would eliminate all cons operations. Now, it doesn&rsquo;t garbage collect until N = 17:</p>
+
+<blockquote>
+ <p>(begin (collect-garbage) (time (N-Queens 17))) cpu time: 6670485 real time: 6702624 gc time: 618 95815104 618ms time in gc while taking 1 hour and 51 minutes to determine 95,815,104 solutions isn&rsquo;t bad.</p></blockquote>
+
+<p>The key is: (else ..(set-mcdr! prior-column (mcdr column)) ..(set-mcdr! column solution) ..(begin0 &hellip;.(next-queen safe-columns column new-count) &hellip;.(set-mcdr! column (mcdr prior-column)) &hellip;.(set-mcdr! prior-column column)))</p>
+
+<p>Gene</p>
+
+<p>— <em>Gene Snider, 13 May 2010</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/12/your-security-hole-is-my-fun-hack-or-computing-factorial-in-drscheme-with-a-click-powered-loop.html">Your security hole is my fun hack, or: computing factorial in DrScheme with a click-powered loop.</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/09/dont-say-abstract-instead-say-general.html">Don&rsquo;t say &ldquo;abstract&rdquo; (instead say &ldquo;general&rdquo;)</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

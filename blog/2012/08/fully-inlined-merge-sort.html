@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Fully Inlined Merge Sort</title>
+    <meta name="description" content="_posted by Neil Toronto_  While writing the code for the triangular distribution in the upcoming math library, I found that I needed a function that sorts exactly three numbers. This kind of code is annoying to write and to get right. But it comes up rare...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2012/08/fully-inlined-merge-sort.html">
+    <link rel="next" href="/2012/08/racket-v53.html">
+    <link rel="prev" href="/2012/08/dynamic-programming-versus-memoization.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>24 Aug 2012</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Fully Inlined Merge Sort</h1>
+  </header>
+
+<p><em>posted by Neil Toronto</em></p>
+
+<p>While writing the code for the <a href="http://en.wikipedia.org/wiki/Triangular_distribution">triangular distribution</a> in the upcoming math library, I found that I needed a function that sorts exactly three numbers. This kind of code is annoying to write and to get right. But it comes up rarely enough, and it seems simple enough, that I’ve never felt like making a library function for it.</p>
+
+<p>But what if I wrote a macro that generated code to sort n numbers very quickly, where n is known at expansion time, but the numbers themselves aren’t? I think I could justify putting that in a library.</p>
+
+<p>Here’s code that correctly sorts three numbers a, b and c:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">values</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">values</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">values</span> <span class="n">b</span> <span class="n">c</span> <span class="n">a</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">values</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">values</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">values</span> <span class="n">c</span> <span class="n">b</span> <span class="n">a</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<p>It’s an if tree. Notice that there are 6 leaf expressions, for the 3! = 6 possible permutations. Also, it never compares more than it has to. It’s optimal.The optimality came from my reasoning about transitivity. For example, only two comparisons are needed before returning (values a b c). I knew that both (&lt; a b) and (&lt; b c), so (&lt; a b c) must be true by transitivity.</p>
+
+<p>It would be nice if the macro generated optimal code by explicitly reasoning about transitivity, or as an emergent property of the sorting algorithm it uses.</p>
+
+<p>We’ll write a macro that does the latter, by generating a fully inlined merge sort.</p>
+
+<p>[Edit: The final inline sort macro is <a href="https://gist.github.com/3456604">here</a>.]</p>
+
+<h2 id="runtime-merge-sort">Runtime Merge Sort</h2>
+
+<p>Start with a simple, runtime merge sort:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">merge</span> <span class="n">as</span> <span class="n">bs</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">match*</span> <span class="p">(</span><span class="n">as</span> <span class="n">bs</span><span class="p">)</span>
+    <span class="p">[((</span><span class="nb">list</span><span class="p">)</span> <span class="n">bs</span><span class="p">)</span>  <span class="n">bs</span><span class="p">]</span>
+    <span class="p">[(</span><span class="n">as</span> <span class="p">(</span><span class="nb">list</span><span class="p">))</span>  <span class="n">as</span><span class="p">]</span>
+    <span class="p">[((</span><span class="nb">list</span> <span class="n">a</span> <span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="p">(</span><span class="nb">list</span> <span class="n">b</span> <span class="n">bs</span> <span class="k">...</span><span class="p">))</span>
+     <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="p">(</span><span class="n">merge</span> <span class="n">as</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="n">bs</span><span class="p">)))</span>
+         <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="p">(</span><span class="n">merge</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="n">as</span><span class="p">)</span> <span class="n">bs</span><span class="p">)))]))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">merge-sort</span> <span class="n">vs</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">match</span> <span class="n">vs</span>
+    <span class="p">[(</span><span class="nb">list</span><span class="p">)</span>  <span class="n">vs</span><span class="p">]</span>
+    <span class="p">[(</span><span class="nb">list</span> <span class="n">a</span><span class="p">)</span>  <span class="n">vs</span><span class="p">]</span>
+    <span class="p">[</span><span class="k">_</span>  <span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="n">lvs</span> <span class="n">rvs</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">split-at</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">quotient</span> <span class="p">(</span><span class="nb">length</span> <span class="n">vs</span><span class="p">)</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="p">(</span><span class="n">merge</span> <span class="p">(</span><span class="n">merge-sort</span> <span class="n">lvs</span><span class="p">)</span> <span class="p">(</span><span class="n">merge-sort</span> <span class="n">rvs</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+
+<p>Example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="n">merge-sort</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">5</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">10</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>To make a macro out of merge sort, we need to change two things. The most obvious is that it has to return syntax for an if instead of evaluating it. That’s easy for a novice macrologist: change the functions to operate on syntax, stick a syntax-quasiquote in front of the if, and unquote the bits inside that get evaluated at expansion time.</p>
+
+<p>But if we did only that, we’d end up with expanded code like this:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="p">(</span><span class="k">if</span> <span class="k">...</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="p">(</span><span class="k">if</span> <span class="k">...</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>It would be slow because cons allocates. We want the code to be fast.So the other change is to move the conses inside the ifs, and evaluate them at expansion time. We can then construct a values expression out of the resulting list.</p>
+
+<h2 id="accumulator-passing-style-wont-work">Accumulator-Passing Style Won’t Work</h2>
+
+<p> Novice functional programmers should know that accumulator-passing style (APS) moves conses inward. For example, this “add 1 to each element” function:</p>
+
+<p> <code>racket
+ (define (list-add1 vs)
+  (match vs
+    [(list)  (list)]
+    [(list v vs ...)
+     (cons (add1 v) (list-add1 vs))]))</code></p>
+
+<p>becomes this after conversion to APS:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">list-add1/acc</span> <span class="n">vs</span> <span class="p">[</span><span class="n">acc</span> <span class="p">(</span><span class="nb">list</span><span class="p">)])</span>
+  <span class="p">(</span><span class="k">match</span> <span class="n">vs</span>
+    <span class="p">[(</span><span class="nb">list</span><span class="p">)</span>  <span class="p">(</span><span class="nb">reverse</span> <span class="n">acc</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">list</span> <span class="n">v</span> <span class="n">vs</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="n">list-add1/acc</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">add1</span> <span class="n">v</span><span class="p">)</span> <span class="n">acc</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+
+<p>Now cons is where we want it: inside the recursive call, instead of in tail position. The problem is that APS doesn’t work on tree-shaped recursion.</p>
+
+<h2 id="continuation-passing-style-does-work">Continuation-Passing Style Does Work</h2>
+
+<p>In continuation-passing style (CPS), we pass a continuation k—i.e. “what happens next”— instead of an accumulator. The functions call k instead of returning values. For example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">list-add1/k</span> <span class="n">vs</span> <span class="p">[</span><span class="n">k</span> <span class="nb">identity</span><span class="p">])</span>
+  <span class="p">(</span><span class="k">match</span> <span class="n">vs</span>
+    <span class="p">[(</span><span class="nb">list</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">list</span><span class="p">))]</span>
+    <span class="p">[(</span><span class="nb">list</span> <span class="n">v</span> <span class="n">vs</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="n">list-add1/k</span> <span class="n">vs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">add1</span> <span class="n">v</span><span class="p">)</span> <span class="n">vs</span><span class="p">))))]))</span>
+</pre></div>
+
+</div>
+
+<p>If we want, we can pass something besides identity as the base-case continuation:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="n">list-add1/k</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply</span> <span class="nb">values</span> <span class="n">vs</span><span class="p">)))</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+</pre></div>
+
+</div>
+
+<p>CPS turns every call into a tail call, so it moves conses inward even with tree-shaped recursion. As a demonstration, here’s a CPSed merge sort:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">merge/k</span> <span class="n">as</span> <span class="n">bs</span> <span class="n">k</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">match*</span> <span class="p">(</span><span class="n">as</span> <span class="n">bs</span><span class="p">)</span>
+    <span class="p">[((</span><span class="nb">list</span><span class="p">)</span> <span class="n">bs</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="n">bs</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="n">as</span> <span class="p">(</span><span class="nb">list</span><span class="p">))</span>  <span class="p">(</span><span class="n">k</span> <span class="n">as</span><span class="p">)]</span>
+    <span class="p">[((</span><span class="nb">list</span> <span class="n">a</span> <span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="p">(</span><span class="nb">list</span> <span class="n">b</span> <span class="n">bs</span> <span class="k">...</span><span class="p">))</span>
+     <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+         <span class="p">(</span><span class="n">merge/k</span> <span class="n">as</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="n">bs</span><span class="p">)</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="n">vs</span><span class="p">))))</span>
+         <span class="p">(</span><span class="n">merge/k</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="n">as</span><span class="p">)</span> <span class="n">bs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="n">vs</span><span class="p">)))))]))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">merge-sort/k</span> <span class="n">vs</span> <span class="n">k</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">match</span> <span class="n">vs</span>
+    <span class="p">[(</span><span class="nb">list</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="n">vs</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">list</span> <span class="n">a</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="n">vs</span><span class="p">)]</span>
+    <span class="p">[</span><span class="k">_</span>  <span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="n">lvs</span> <span class="n">rvs</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">split-at</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">quotient</span> <span class="p">(</span><span class="nb">length</span> <span class="n">vs</span><span class="p">)</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="p">(</span><span class="n">merge-sort/k</span>
+         <span class="n">lvs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">lvs</span><span class="p">)</span>
+               <span class="p">(</span><span class="n">merge-sort/k</span>
+                <span class="n">rvs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">rvs</span><span class="p">)</span>
+                      <span class="p">(</span><span class="n">merge/k</span> <span class="n">lvs</span> <span class="n">rvs</span> <span class="n">k</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p>You can read the last expression in merge-sort/k as, “Sort lvs. Then, with the sorted lvs, sort rvs. Then, with the sorted rvs, merge lvs and rvs.” Example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="n">merge-sort/k</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">5</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply</span> <span class="nb">values</span> <span class="n">vs</span><span class="p">)))</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">5</span>
+</pre></div>
+
+</div>
+
+<h2 id="the-inline-sort-macro">The Inline Sort Macro</h2>
+
+<p>When we macro-ize the CPSed merge sort, we’ll turn the continuations into expansion-time functions. So not only will macro-ized CPS move conses inward, it’ll apply them all at expansion time!</p>
+
+<p>We’ll do it in three parts: the user-facing macro, the inline merge function, and the inline sort function.</p>
+
+<h2 id="the-user-facing-macro">The User-Facing Macro</h2>
+
+<p>Let’s put a nice face on inline sorting:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">inline-sort</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">lst</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">with-syntax</span> <span class="p">([(</span><span class="n">vs</span> <span class="k">...</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nb">generate-temporaries</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">lst</span> <span class="k">...</span><span class="p">))])</span>
+       <span class="o">#`</span><span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">vs</span> <span class="n">lst</span><span class="p">]</span> <span class="k">...</span><span class="p">)</span>
+           <span class="o">#,</span><span class="p">(</span><span class="n">inline-sort/k</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">vs</span> <span class="k">...</span><span class="p">)</span>
+                            <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="o">#`</span><span class="p">(</span><span class="nb">values</span> <span class="o">#,@</span><span class="n">vs</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p>This macro does two things. First, it names the values to be sorted, so they don’t get re-evaluated every time they’re compared. Second, it calls inline-sort/k with a base-case continuation that converts syntax lists to values expressions.Note that the call #,(inline-sort/k &hellip;) happens at expansion time, and that the continuation (λ (vs) &hellip;) it passes is an expansion-time value.</p>
+
+<h2 id="the-inline-merge-function">The Inline Merge Function</h2>
+
+<p>Changing merge/k to operate on syntax at expansion time is as straightforward as possible:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-for-syntax</span> <span class="p">(</span><span class="n">inline-merge/k</span> <span class="n">as</span> <span class="n">bs</span> <span class="n">k</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="p">(</span><span class="nb">list</span> <span class="n">as</span> <span class="n">bs</span><span class="p">)</span> <span class="p">()</span>
+    <span class="p">[(()</span> <span class="n">bs</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="o">#&#39;</span><span class="n">bs</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="n">as</span> <span class="p">())</span>  <span class="p">(</span><span class="n">k</span> <span class="o">#&#39;</span><span class="n">as</span><span class="p">)]</span>
+    <span class="p">[((</span><span class="n">a</span> <span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="p">(</span><span class="n">b</span> <span class="n">bs</span> <span class="k">...</span><span class="p">))</span>
+     <span class="o">#`</span><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+           <span class="o">#,</span><span class="p">(</span><span class="n">inline-merge/k</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">b</span> <span class="n">bs</span> <span class="k">...</span><span class="p">)</span>
+                             <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="o">#&#39;</span><span class="n">a</span> <span class="n">vs</span><span class="p">))))</span>
+           <span class="o">#,</span><span class="p">(</span><span class="n">inline-merge/k</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">a</span> <span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">bs</span> <span class="k">...</span><span class="p">)</span>
+                             <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="o">#&#39;</span><span class="n">b</span> <span class="n">vs</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p>The only substantial changes are the quasiquotes and unquotes, and using syntax-case to destructure syntax lists instead of using match to destructure lists. Again, note that the recursive calls #,(inline-merge/k &hellip;) in each if branch happen at expansion time, and that their continuations are expansion-time values.We can see what kind of code merge/k returns by applying it at expansion time:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">begin-for-syntax</span>
+    <span class="p">(</span><span class="nb">print</span>
+     <span class="p">(</span><span class="nb">syntax-&gt;datum</span>
+      <span class="p">(</span><span class="n">inline-merge/k</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">b</span> <span class="n">c</span><span class="p">)</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="n">vs</span><span class="p">)))))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="ss">if</span> <span class="p">(</span><span class="ss">&lt;</span> <span class="ss">a</span> <span class="ss">b</span><span class="p">)</span> <span class="p">(</span><span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span><span class="p">)</span> <span class="p">(</span><span class="ss">if</span> <span class="p">(</span><span class="ss">&lt;</span> <span class="ss">a</span> <span class="ss">c</span><span class="p">)</span> <span class="p">(</span><span class="ss">b</span> <span class="ss">a</span> <span class="ss">c</span><span class="p">)</span> <span class="p">(</span><span class="ss">b</span> <span class="ss">c</span> <span class="ss">a</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>The syntax list #&rsquo;(b c) is assumed already sorted, meaning (&lt; b c) at runtime. Therefore, if (&lt; a b) at runtime, by transitivity, (&lt; a b c) at runtime, so the merge generates #&rsquo;(a b c). In other words, inline-merge/k’s assumption that its arguments are sorted is equivalent to reasoning about transitivity.</p>
+
+<h2 id="the-inline-sort-function">The Inline Sort Function</h2>
+
+<p>Lastly, the divide-and-conquer part:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">for-syntax</span> <span class="n">racket/list</span><span class="p">))</span>  <span class="c1">; for list functions</span>
+
+<span class="p">(</span><span class="k">define-for-syntax</span> <span class="p">(</span><span class="n">inline-sort/k</span> <span class="n">vs</span> <span class="n">k</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">vs</span> <span class="p">()</span>
+    <span class="p">[()</span>  <span class="p">(</span><span class="n">k</span> <span class="n">vs</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="n">a</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="n">vs</span><span class="p">)]</span>
+    <span class="p">[</span><span class="k">_</span>  <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">vs</span>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">list?</span> <span class="n">vs</span><span class="p">)</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">vs</span><span class="p">))])</span>
+          <span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="n">lvs</span> <span class="n">rvs</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">split-at</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">quotient</span> <span class="p">(</span><span class="nb">length</span> <span class="n">vs</span><span class="p">)</span> <span class="mi">2</span><span class="p">)))</span>
+          <span class="p">(</span><span class="n">inline-sort/k</span>
+           <span class="n">lvs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">lvs</span><span class="p">)</span>
+                 <span class="p">(</span><span class="n">inline-sort/k</span>
+                  <span class="n">rvs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">rvs</span><span class="p">)</span>
+                        <span class="p">(</span><span class="n">inline-merge/k</span> <span class="n">lvs</span> <span class="n">rvs</span> <span class="n">k</span><span class="p">))))))]))</span>
+</pre></div>
+
+</div>
+
+<p>This is changed similarly to merge/k. The only new change is using syntax-&gt;list to convert syntax to lists so we can use the functions length and split-at. Example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="n">inline-sort</span> <span class="mi">5</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">5</span>
+</pre></div>
+
+</div>
+
+<p>Of course, the result of evaluating an inline-sort doesn’t tell the whole story. Let’s fire up the macro stepper and see what (inline-sort 5 2 3) expands to. Copying from the macro stepper window and renaming temp variables, we get</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">a</span> <span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="n">b</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="n">c</span> <span class="mi">3</span><span class="p">])</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">values</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span>
+          <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">values</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">values</span> <span class="n">b</span> <span class="n">c</span> <span class="n">a</span><span class="p">)))</span>
+      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">values</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="p">)</span>
+          <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">values</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">values</span> <span class="n">c</span> <span class="n">b</span> <span class="n">a</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>It’s an if tree. Notice that there are 6 leaf expressions, for the 3! = 6 possible permutations. Also, it never compares more than it has to. It’s optimal.</p>
+
+<h2 id="inline-sort-properties">Inline Sort Properties</h2>
+
+<p>Inherited from the merge sort, the inline sort has the following properties (assuming a length-n list):</p>
+
+<ul>
+ <li>
+  <p>Time optimality: The depth of the if tree is O(n log(n)).</p></li>
+ <li>
+  <p>Size optimality: The number of leaves is exactly n!. The term “size optimality” is misleading, because that’s still a lot of code. I’ve seriously considered requiring any user of this macro to state how many permutations there are for the number of values they’re sorting. They’d have to prove to the macro that they know how much code they’re asking it to generate.Inline sort is wicked fast, as we should expect:</p></li></ul>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">define</span> <span class="n">vs</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">5</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">match-define</span> <span class="p">(</span><span class="nb">list</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="p">)</span> <span class="n">vs</span><span class="p">)</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="k">_</span>  <span class="p">(</span><span class="nb">in-range</span> <span class="mi">5</span><span class="p">)])</span>
+    <span class="p">(</span><span class="k">time</span> <span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="k">_</span>  <span class="p">(</span><span class="nb">in-range</span> <span class="mi">1000000</span><span class="p">)])</span>
+            <span class="p">(</span><span class="k">match-let</span> <span class="p">([(</span><span class="nb">list</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="p">)</span>  <span class="p">(</span><span class="nb">sort</span> <span class="n">vs</span> <span class="nb">&lt;</span><span class="p">)])</span>
+              <span class="p">(</span><span class="nb">void</span><span class="p">)))))</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">550</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">540</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">30</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">510</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">518</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">520</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">517</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">20</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">520</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">517</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">510</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">516</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">10</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="k">_</span>  <span class="p">(</span><span class="nb">in-range</span> <span class="mi">5</span><span class="p">)])</span>
+    <span class="p">(</span><span class="k">time</span> <span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="k">_</span>  <span class="p">(</span><span class="nb">in-range</span> <span class="mi">1000000</span><span class="p">)])</span>
+            <span class="p">(</span><span class="k">let-values</span> <span class="p">([(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="p">)</span>  <span class="p">(</span><span class="n">inline-sort</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="p">)])</span>
+              <span class="p">(</span><span class="nb">void</span><span class="p">)))))</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">20</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">28</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">30</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">27</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">30</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">27</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">30</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">27</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">20</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">27</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+</pre></div>
+
+</div>
+
+<p>So about 20 times faster than sort on a length&ndash;4 list.I use it in Typed Racket, on floating-point numbers. Typed Racket’s optimizer replaces <code>&lt;</code> with <code>unsafe-fl&lt;</code>. This tells the compiler that the elements are floats, so it can keep them stack-allocated, which reduces allocations further. In all, for my particular use of inline-sort, it’s over 50 times faster than sort.And using it is a heckuvalot easier than writing an if tree and reasoning about transitivity every time I need to sort a handful of floats.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p> Writing macros in expansion-time CPS to fully inline a recursive function works out beautifully. I suspect that it will work on any recursive, polymorphic function whose well-foundedness follows only from the structure of the input data.Also, it can generate a metric truckload of code.Interesting note: I originally wrote inline-sort using only syntax-rules, passing the names of higher-order macros to other macros as continuations. Sorting a five-element list took almost 19000 expansion steps, which is ridiculously inefficient even for a 120-leaf if tree.</p>
+<!-- more-->
+
+<hr />
+
+<p>Looks like a functional pearl to me!</p>
+
+<p>— <em>Matt, 24 August 2012</em></p>
+
+<hr />
+
+<p>As i remember, sorting networks macro from <code>Let over Lambda</code> book, solves the same problem differently.</p>
+
+<p>— <em>kmmbvnr, 24 August 2012</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/08/dynamic-programming-versus-memoization.html">Dynamic Programming versus Memoization</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2012/08/racket-v53.html">Racket v5.3</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

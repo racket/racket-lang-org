@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>PLT Modules and Separate Compilation</title>
+    <meta name="description" content="_posted by Richard Cobbe_  For my summer job this year, I'm programming in Common Lisp; this is the first time I've used the language for anything more than toy examples. The experience has given me new appreciation for the PLT module system and how it en...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/08/plt-modules-and-separate-compilation.html">
+    <link rel="next" href="/2007/08/macros-and-hygiene-resumed.html">
+    <link rel="prev" href="/2007/08/plt-scheme-v371.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>07 Aug 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>PLT Modules and Separate Compilation</h1>
+  </header>
+
+<p><em>posted by Richard Cobbe</em></p>
+
+<p>For my summer job this year, I&rsquo;m programming in Common Lisp; this is the first time I&rsquo;ve used the language for anything more than toy examples. The experience has given me new appreciation for the PLT module system and how it enables separate compilation.</p>
+
+<p>Lisp has a package system, of course, but it&rsquo;s not the same thing. It&rsquo;s primarily a tool to make sure that the symbols in one part of the program don&rsquo;t collide with the symbols in another part (unless you ask them to). Packages aren&rsquo;t about abstraction: while you can specify which symbols are exported from the package and which aren&rsquo;t, that&rsquo;s just a suggestion that&rsquo;s not enforced by the language.</p>
+
+<p>(You&rsquo;ll notice, by the way, that I used the word &ldquo;symbol&rdquo; and not &ldquo;identifier,&rdquo; which is the more common term in the study of programming languages, in the previous paragraph. That&rsquo;s deliberate: the Lisp package system works on symbols, not identifiers, so it also affects quoted, literal symbols. In my experience, this is sometimes helpful, sometimes a real pain, and usually completely unexpected. But that&rsquo;s a topic for another post.)</p>
+
+<p>Also, there&rsquo;s no real relationship between Lisp packages and files. One package can be spread across multiple files, and one file can contain code in several different packages.</p>
+
+<p>All this means that separate compilation in Lisp is a real problem. There is a system, ASDF, that attempts to address this need. (For more details, consult <a href="http://www.cliki.net/asdf">the closest thing to a homepage</a> that I could find for ASDF.) I&rsquo;m no expert on ASDF, but essentially the programmer specifies the dependencies between source files, in a set of files that exist parallel to the Lisp source. (ASDF does support grouping source files into larger chunks and specifying dependencies between those chunks, but as far as I can tell that&rsquo;s largely a convenience thing.)</p>
+
+<p>The key thing for separate compilation, of course, is the dependencies. With ASDF, the programmer specifies those manually, and then ASDF basically does a topological sort such that if file a depends on file b, then ASDF ensures that a is compiled and loaded before b is compiled, and again before B is loaded. (This should start sounding a little familiar to folks who&rsquo;ve worked in the area where PLT&rsquo;s modules and macros intersect.)</p>
+
+<p>So far, so good. Unfortunately, there are a couple of problems with this setup. First, the dependencies between files are specified outside the language. This means that, if you happen to forget one, the results are not well-defined. If ASDF happens to choose an order that&rsquo;s consistent with the dependency you left out, everything will just work, and you won&rsquo;t have any indication that there&rsquo;s a problem. If, however, it doesn&rsquo;t, then you&rsquo;ll get random &ldquo;undefined function&rdquo; and &ldquo;undefined symbol&rdquo; errors&mdash;if you&rsquo;re lucky (at least in SBCL, the implementation of Common Lisp that I use at my job). In PLT, by contrast, inter-module dependencies are part of the language, so the compiler will always give you an undefined-identifier error when it tries to compile a module in which you&rsquo;ve forgotten a require form. Big win, in my opinion (although we could argue about whether this should be an error or a warning, and whether the compiler should report lots of errors or just one before giving up completely).</p>
+
+<p>Second, because ASDF lives outside the compiler, it can&rsquo;t be very smart about how macros affect separate compilation. I don&rsquo;t fully understand this, perhaps because the folks who&rsquo;ve been mentoring me at my job haven&rsquo;t thought it worth the time to explain it to me fully. But it appears that, if you change a macro that&rsquo;s used in other files, or change a function that&rsquo;s called by a macro at expansion time, you have to do the effect of a make clean in a distressingly large number of cases. This is a real problem when you&rsquo;ve got a large source base (~200K LOC, I think) and you&rsquo;re trying to speed up builds, as we are, and it&rsquo;s especially problematic if you&rsquo;re trying to run unrelated parts of the build in parallel.</p>
+
+<p>I&rsquo;ve certainly griped about the complexity of the interaction between PLT&rsquo;s modules and macros in the past. But after this summer, I have to say it&rsquo;s awfully nice to have a module system that Just Works for separate compilation. Nicely done, Matthew.</p>
+
+<p>(I&rsquo;ve pointed the folks at work at Matthew&rsquo;s <a href="http://www.cs.utah.edu/plt/publications/macromod.pdf">ICFP 02 paper</a>, but as that technique requires a lot of support from the compiler, and we don&rsquo;t have the resources to add the necessary support to SBCL ourselves, I don&rsquo;t know that it&rsquo;ll be more than a &ldquo;wouldn&rsquo;t it be nice if we could do that?&rdquo;)</p>
+
+<p>(Answer to rhetorical question in preceding paragraph: Yes. Yes it would.)</p>
+<!-- more-->
+
+<hr />
+
+<p>What exactly do you mean by random errors? If you get a &ldquo;undefined function FOO&rdquo; error that&rsquo;s a pretty clear indication that whatever file defines FOO should be defined as a dependency.</p>
+
+<p>Also, if you wish to speed up compilation by determining precise dependencies between files in your system asdf-dependency-grovel might be a useful little tool.</p>
+
+<p>— <em>Luís, 7 August 2007</em></p>
+
+<hr />
+
+<p>I agree about the issue of macros &mdash; ASDF does not allow you to say &ldquo;this system exports a macro, and if the macro has changed, all downstream systems should be recompiled.&rdquo; This is left as an exercise to the reader, and I have certainly been caused severe pain by that.</p>
+
+<p>WRT &ldquo;compiler support,&rdquo; I don&rsquo;t really agree with you. This is Common Lisp, after all, and I like the fact that ASDF works on SBCL and Allegro Common Lisp, etc.</p>
+
+<p>— <em>Robert, 16 August 2007</em></p>
+
+<hr />
+
+<p>Hellow. Could you please advice something like PLT but for SBCL. Sorry for the oftopic.</p>
+
+<p>— <em>Dmitrenko Evgenij, 23 December 2009</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/08/plt-scheme-v371.html">PLT Scheme v371</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/08/macros-and-hygiene-resumed.html">macros and hygiene, resumed</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

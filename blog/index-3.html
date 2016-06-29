@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 3)</title>
+    <meta name="description" content="Racket Blog (page 3)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-3.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>26 Feb 2014</p></col-1>
+
+<col-2>
+  <h1><a href='/2014/02/racket-v60.html'>Racket v6.0</a></h1>
+  <div class="truncate">
+<p><em>posted by Ryan Culpepper</em></p>
+
+<p>Racket version 6.0 is now available from</p>
+
+<p><a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<p>Racket 6.0 has a new package system, including a catalog of hundreds of already-available packages. Please visit</p>
+
+<p><a href="http://pkgs.racket-lang.org/">http://pkgs.racket-lang.org/</a></p>
+
+<p>for an overview of the packages.</p>
+
+<p>Racket versions 5.3.4 through 5.3.6 included &ldquo;beta&rdquo; versions of the package system. Racket version 6.0 incorporates many improvements suggested by preliminary experiences in those versions:</p>
+
+<ul>
+ <li>
+  <p>A package is treated as a single collection by default, so it is even easier to use a GitHub repository as a package. Get started quickly:<a href="http://docs.racket-lang.org/pkg/getting-started.html"> http://docs.racket-lang.org/pkg/getting-started.html</a></p></li>
+ <li>
+  <p>DrRacket includes a new package manager GUI, available via the File|Package Manager &hellip; menu item. The GUI is also available as a stand-alone program via the &ldquo;gui-pkg-manager&rdquo; package.</p></li>
+ <li>
+  <p>The main Racket distribution has been separated into about 200 packages. The Racket installer combines the core system with bundled versions of these packages.</p></li></ul>
+
+<p>Alternatively, you may now install a Minimal Racket distribution — which is about 1/10 the size of the main distribution — and add only those packages that you need.</p>
+
+<ul>
+ <li>Package installation supports pre-built packages that include compiled byte code and rendered documentation, meaning packages can be installed quickly when built versions are available. All packages in the main distribution are available in pre-built form.</li></ul>
+
+<p>The recent 5.92 and 5.93 releases served as release candidates for 6.0, and 6.0 includes a few additional repairs related to the package system.</p>
+
+<p>Further improvements to the package system are in the works, notably including package documentation on the package-catalog web site.</p>
+
+<p>COMPATIBILITY NOTE: PLaneT, the previous Racket package system, will remain in place for the foreseeable future, but we expect all package work to shift to the new system.</p>
+
+<p>Beyond the package system, this release brings a number of other changes:</p>
+
+<ul>
+ <li>
+  <p>Racket&rsquo;s HTML documentation has a new and improved look, thanks to Matthew Butterick.</p></li>
+ <li>
+  <p>The documentation includes a style guide, <a href="http://docs.racket-lang.org/style/">&ldquo;How to Program Racket&rdquo;</a>.</p></li>
+ <li>
+  <p>Racket&rsquo;s JIT compiler supports the ARM architecture.</p></li>
+ <li>
+  <p>Racket supports the Mac&rsquo;s Retina display mode.</p></li>
+ <li>
+  <p>The performance of the Typed Racket compiler improved by 50% on some typed programs; e.g., see <a href="http://bit.ly/1d0Ye4z">http://bit.ly/1d0Ye4z</a></p></li>
+ <li>
+  <p>The profiler provides a new mode that uses the errortrace library to produce fine-grained profiles.</p></li>
+ <li>
+  <p>A new contract profiler reports how much time programs spend checking contracts, and which contracts are most expensive.</p></li>
+ <li>
+  <p>The math/flonum library exports fast 105-bit precision operations.</p></li>
+ <li>
+  <p>Check Syntax handles generated identifiers, especially those introduced by struct (e.g. field selectors) and Redex (e.g., e_1, e_2)</p></li>
+ <li>
+  <p>2htdp/batch-io includes functions for dealing with html/xml in files and web sites as X-expressions plus conveniences for web-based graph traversals.</p></li>
+ <li>
+  <p>The `gen:set&rsquo; generic interface extends set operations to work on user-defined types that implement set methods, as well as on other set-like built-in types, such as lists.</p></li>
+ <li>
+  <p>Picts support conversion to SVG format.</p></li>
+ <li>
+  <p>Under unix, Racket provides desktop entries (.desktop files) for its graphical executables.</p></li></ul></div>
+  <a class="more" href='/2014/02/racket-v60.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>17 Dec 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/12/typed-racket-and-classes.html'>Typed Racket and Classes</a></h1>
+  <div class="truncate">
+<p><em>posted by Asumu Takikawa</em></p>
+
+<p>Recently we had our inaugural <a href="https://dekvek.com/racket-salon/">Racket Salon</a> meetup here in Boston, graciously organized by Dan King. At the meetup I gave a short demo about the upcoming support for classes and object-oriented programming in Typed Racket. In this blog post, I’ll go over the concepts I presented in my demo.</p>
+
+<p>Background</p>
+
+<hr />
+
+<p>As many readers already know, <a href="http://www.cs.utah.edu/plt/snapshots/current/doc/ts-guide/index.html">Typed Racket</a> is a gradually-typed sister language to Racket. That means it’s a <a href="http://en.wikipedia.org/wiki/Static_typing#Static_type-checking">statically-typed</a> language that accommodates the idioms of Racket. Programs written in Racket should seamlessly port to Typed Racket with the addition of type annotations here and there. You can even keep some parts of the program dynamically-typed and Typed Racket will make sure those parts won’t break the type invariants via <a href="http://www.cs.utah.edu/plt/snapshots/current/doc/guide/contracts.html">contracts</a>.</p>
+
+<p>Of course, supporting all Racket idioms is quite a lot of work, especially since it’s a constantly evolving language. One of the big pieces missing from Typed Racket right now is support for <a href="http://www.cs.utah.edu/plt/snapshots/current/doc/guide/classes.html">classes and objects</a>. Since the GUI library heavily uses the class system, it’s important to support the object-oriented subset of Racket.</p>
+
+<p>Supporting classes isn’t trivial though. There are a bunch of issues, but the main ones are: (1) the class system is built as a complex macro and so reconstructing the information needed to type-check is tricky, and (2) we need to make sure that interoperation between Racket and Typed Racket using classes/objects can be done safely.</p>
+
+<p>I won’t go over the technical details about the implementation in this blog post, but contact me if you’re interested. In the rest of the blog post, I’ll show some examples to demonstrate what programming in Typed Racket with classes looks like. Just so you know, these examples won’t work in the current version of Typed Racket but will be supported in a future release.</p>
+
+<p>Side note: If you like to live dangerously, you can track the experimental branch with support for classes <a href="https://github.com/takikawa/racket/tree/tr-classes">here</a>.</p>
+
+<h2 id="fishes-and-types">Fishes and types</h2>
+
+<p>To start out, let’s look at an untyped example from the Racket Guide on classes and objects. The following snippet defines a fish% class. The class has several features: an initialization argument named size, a private field named current-size, three methods get-size, grow, and eat.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="n">fish%</span>
+  <span class="p">(</span><span class="k">class</span> <span class="nb">object%</span>
+    <span class="p">(</span><span class="k">init</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">current-size</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">super-new</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">get-size</span><span class="p">)</span>
+      <span class="n">current-size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">grow</span> <span class="n">amt</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">set!</span> <span class="n">current-size</span> <span class="p">(</span><span class="nb">+</span> <span class="n">amt</span> <span class="n">current-size</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">eat</span> <span class="n">other-fish</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">grow</span> <span class="p">(</span><span class="k">send</span> <span class="n">other-fish</span> <span class="n">get-size</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>The notation should seem mostly familiar if you’ve programmed in Java or other object-oriented languages. The % suffix is a convention for identifiers that are bound to class values. The object% value is the superclass of fish% and is the root class of all class hierarchies. The initialization argument size is used when constructing an instance of a class:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">new</span> <span class="n">fish%</span> <span class="p">[</span><span class="n">size</span> <span class="mi">3</span><span class="p">])</span>
+<span class="p">(</span><span class="n">object:fish%</span> <span class="k">...</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Note that in Racket, classes are just values that can be passed around like anything else. For example, you can even do silly things like define nested inheriting classes:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">new</span> <span class="p">(</span><span class="k">class</span> <span class="p">(</span><span class="k">class</span> <span class="nb">object%</span> <span class="p">(</span><span class="k">super-new</span><span class="p">)</span> <span class="p">(</span><span class="nb">displayln</span> <span class="s2">"superclass"</span><span class="p">))</span>
+         <span class="p">(</span><span class="k">super-new</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">displayln</span> <span class="s2">"subclass"</span><span class="p">)))</span>
+<span class="n">superclass</span>
+<span class="n">subclass</span>
+<span class="p">(</span><span class="n">object:eval:4:0</span> <span class="k">...</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>In practice, this feature is quite useful since it lets you define <a href="http://www.cs.utah.edu/plt/snapshots/current/doc/guide/classes.html#%28part._.Mixins%29">mixins</a> easily. That’s a topic for another blog post.</p>
+
+<p>Side note: In other words, Racket has first-class classes. This is a term you might see used in the programming language literature.</p>
+
+<p>Adding types to the fish program is easy. First, we can introduce a type definition for the fish class.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">define-type</span> <span class="n">Fish%</span>
+  <span class="p">(</span><span class="n">Class</span> <span class="p">(</span><span class="k">init</span> <span class="p">[</span><span class="n">size</span> <span class="n">Real</span><span class="p">])</span>
+         <span class="p">[</span><span class="n">get-size</span> <span class="p">(</span><span class="k">-&gt;</span> <span class="n">Real</span><span class="p">)]</span>
+         <span class="p">[</span><span class="n">grow</span> <span class="p">(</span><span class="n">Real</span> <span class="k">-&gt;</span> <span class="n">Void</span><span class="p">)]</span>
+         <span class="p">[</span><span class="n">draw</span> <span class="p">(</span><span class="k">-&gt;</span> <span class="n">Pict</span><span class="p">)]</span>
+         <span class="p">[</span><span class="n">eat</span> <span class="p">((</span><span class="n">Instance</span> <span class="n">Fish%</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Void</span><span class="p">)]))</span>
+</pre></div>
+
+</div>
+
+<p>This type definition says that Fish% is a class type with the given initialization argument and methods types. Note that the type of the fish class Fish% is not the same as the type of its instances (Instance Fish%). This is an important distinction to make, since both the fish class value and fish object values may appear in the same program.</p>
+
+<p>Side note: If you’re familiar with Typed Racket, you may be surprised that the recursive reference to Fish% in the type definition works. Future versions of Typed Racket will support implicit recursive type definitions.</p>
+
+<p>With the type definition in hand, we can just annotate the class value with the type:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">:</span> <span class="n">fish%</span> <span class="n">:</span> <span class="n">Fish%</span><span class="p">)</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">fish%</span>
+  <span class="p">(</span><span class="k">class</span> <span class="nb">object%</span>
+    <span class="p">(</span><span class="k">init</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">:</span> <span class="n">current-size</span> <span class="n">Real</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">current-size</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">super-new</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">get-size</span><span class="p">)</span>
+      <span class="n">current-size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">grow</span> <span class="n">amt</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">set!</span> <span class="n">current-size</span> <span class="p">(</span><span class="nb">+</span> <span class="n">amt</span> <span class="n">current-size</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">eat</span> <span class="n">other-fish</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">grow</span> <span class="p">(</span><span class="k">send</span> <span class="n">other-fish</span> <span class="n">get-size</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>We do need an extra type annotation on the private field because its type isn’t included in the type definition above. This fish definition is a bit boring, so let’s spice it up a bit by making fishes drawable:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">define-type</span> <span class="n">Fish%</span>
+  <span class="p">(</span><span class="n">Class</span> <span class="p">(</span><span class="k">init</span> <span class="p">[</span><span class="n">size</span> <span class="n">Real</span><span class="p">])</span>
+         <span class="p">(</span><span class="n">get-size</span> <span class="p">(</span><span class="k">-&gt;</span> <span class="n">Real</span><span class="p">))</span>
+         <span class="p">[</span><span class="n">grow</span> <span class="p">(</span><span class="n">Real</span> <span class="k">-&gt;</span> <span class="n">Void</span><span class="p">)]</span>
+         <span class="c1">; a type for the new method</span>
+         <span class="p">[</span><span class="n">draw</span> <span class="p">(</span><span class="k">-&gt;</span> <span class="n">Pict</span><span class="p">)]</span>
+         <span class="p">[</span><span class="n">eat</span> <span class="p">((</span><span class="n">Instance</span> <span class="n">Fish%</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Void</span><span class="p">)]))</span>
+<span class="p">(</span><span class="n">:</span> <span class="n">fish%</span> <span class="n">:</span> <span class="n">Fish%</span><span class="p">)</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">fish%</span>
+  <span class="p">(</span><span class="k">class</span> <span class="nb">object%</span>
+    <span class="p">(</span><span class="k">init</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">:</span> <span class="n">current-size</span> <span class="n">Real</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">current-size</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">super-new</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">get-size</span><span class="p">)</span>
+      <span class="n">current-size</span><span class="p">)</span>
+    <span class="c1">; new draw method</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">draw</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">standard-fish</span> <span class="p">(</span><span class="nb">*</span> <span class="n">current-size</span> <span class="mi">10</span><span class="p">)</span>
+                     <span class="p">(</span><span class="nb">*</span> <span class="n">current-size</span> <span class="mi">5</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">grow</span> <span class="n">amt</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">set!</span> <span class="n">current-size</span> <span class="p">(</span><span class="nb">+</span> <span class="n">amt</span> <span class="n">current-size</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">define/public</span> <span class="p">(</span><span class="n">eat</span> <span class="n">other-fish</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">grow</span> <span class="p">(</span><span class="k">send</span> <span class="n">other-fish</span> <span class="n">get-size</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>The new draw method that’s been added to the fish relies on some functions from the pict library. Since that’s not currently included in Typed Racket’s standard libraries, we need to give its exports some types:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="c1">; this would go at the top of the file before fish%</span>
+<span class="p">(</span><span class="n">require/typed</span> <span class="n">pict</span>
+               <span class="p">[</span><span class="kd">#:opaque</span> <span class="n">Pict</span> <span class="n">pict?</span><span class="p">]</span>
+               <span class="p">[</span><span class="n">standard-fish</span> <span class="p">(</span><span class="n">Real</span> <span class="n">Real</span> <span class="p">[</span><span class="kd">#:color</span> <span class="n">String</span><span class="p">]</span> <span class="k">-&gt;</span> <span class="n">Pict</span><span class="p">)])</span>
+</pre></div>
+
+</div>
+
+<p>The <code>#:opaque</code> import form in Typed Racket lets you create a new type that corresponds to some predicate, in this case pict?. It’s useful for bringing in datatypes from dynamically-typed Racket libraries. With that new type, we can give a type for the standard-fish function.</p>
+
+<p>In the end, you can interact with some fish and draw them:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">define</span> <span class="n">dory</span> <span class="p">(</span><span class="k">new</span> <span class="n">fish%</span> <span class="p">[</span><span class="n">size</span> <span class="mi">5</span><span class="p">]))</span>
+<span class="nb">&gt;</span> <span class="n">dory</span>
+<span class="nb">-</span> <span class="n">:</span> <span class="p">(</span><span class="n">Instance</span> <span class="n">Fish%</span><span class="p">)</span>
+<span class="p">(</span><span class="n">object:fish%</span> <span class="k">...</span><span class="p">)</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">send</span> <span class="n">dory</span> <span class="n">draw</span><span class="p">)</span>
+<span class="nb">-</span> <span class="n">:</span> <span class="n">Pict</span>
+<span class="n">image</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">send</span> <span class="n">dory</span> <span class="n">eat</span> <span class="n">dory</span><span class="p">)</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">send</span> <span class="n">dory</span> <span class="n">draw</span><span class="p">)</span>
+<span class="nb">-</span> <span class="n">:</span> <span class="n">Pict</span>
+<span class="n">image</span>
+</pre></div>
+
+</div>
+
+<p>Conclusion:  At Racket Salon, I talked about a few other things including mixins and converting a slightly larger program that uses the GUI library. They didn’t translate well to a blog setting so I didn’t include them here. Racket Salon was a fun event, so I encourage anyone in the Boston area to attend!</p>
+
+<p>Typed Racket’s support for classes will land in a future version of Racket, possibly the release after v6.0.</p></div>
+  <a class="more" href='/2013/12/typed-racket-and-classes.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>10 Aug 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/08/racket-v536.html'>Racket v5.3.6</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.3.6 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> Racket v5.3.6 is a bug-fix release. It eliminates errors from v5.3.5 that people have found over the summer.</p></div>
+  <a class="more" href='/2013/08/racket-v536.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>31 Jul 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/07/racketcon-2013-signup.html'>RacketCon 2013 Signup</a></h1>
+  <div class="truncate">
+<p><em>posted by Asumu Takikawa</em></p>
+
+<p>RacketCon sign up is now open! <a href="http://bit.ly/racketconsignup2013">http://bit.ly/racketconsignup2013</a></p>
+
+<p>RacketCon will be held at Northeastern University in Boston on September 29. The details of the event can be found on the website: <a href="http://con.racket-lang.org/">http://con.racket-lang.org</a></p>
+
+<p>We also have a page on Lanyrd for the event: <a href="http://lanyrd.com/2013/racketcon/">http://lanyrd.com/2013/racketcon/</a></p>
+
+<p>More information about the schedule will be posted in the upcoming weeks.</p></div>
+  <a class="more" href='/2013/07/racketcon-2013-signup.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>18 Jun 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/06/racket-v535.html'>Racket v5.3.5</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.3.5 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> This is a special-purpose release to match the arrival of “Realm of Racket” in bookstores. Racket v5.3.5 adds a single <code>realm</code> collection to the v5.3.4 release. The new collection contains the source code that readers of Realm may wish to use for experiments.</p></div>
+  <a class="more" href='/2013/06/racket-v535.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 May 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/05/marketplace-a-language-for-network-aware-programming.html'>Marketplace: A language for network-aware programming</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>We are happy to announce the release of Marketplace, a new programming language for building functional network programs. Marketplace combines two fundamental ideas in a new way: nested virtual machines and publish/subscribe messaging. Nesting allows programs to isolate processes and to delimit conversations. While publish/subscribe generalizes point-to-point and broadcast messaging, it smoothly turns the appearance and disappearance of participants and resources into presence and absence messages. Such messages make it particularly easy to start and stop services and to manage resources based on demand.</p>
+
+<p>Here is a simple TCP echo server written in Marketplace: </p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">marketplace</span>
+
+<span class="p">(</span><span class="n">endpoint</span> <span class="kd">#:subscriber</span> <span class="p">(</span><span class="n">tcp-channel</span> <span class="n">?</span> <span class="p">(</span><span class="n">tcp-listener</span> <span class="mi">5999</span><span class="p">)</span> <span class="n">?</span><span class="p">)</span>
+          <span class="kd">#:conversation</span> <span class="p">(</span><span class="n">tcp-channel</span> <span class="n">from</span> <span class="n">to</span> <span class="k">_</span><span class="p">)</span>
+          <span class="kd">#:on-presence</span> <span class="p">(</span><span class="n">spawn</span> <span class="kd">#:child</span> <span class="p">(</span><span class="n">echoer</span> <span class="n">from</span> <span class="n">to</span><span class="p">)))</span>
+
+<span class="c1">;; echoer: TcpAddress TcpAddress -&gt; Transition</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">echoer</span> <span class="n">from</span> <span class="n">to</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">transition</span> <span class="n">stateless</span>
+    <span class="p">(</span><span class="n">endpoint</span> <span class="kd">#:subscriber</span> <span class="p">(</span><span class="n">tcp-channel</span> <span class="n">from</span> <span class="n">to</span> <span class="n">?</span><span class="p">)</span>
+              <span class="kd">#:on-absence</span> <span class="p">(</span><span class="n">quit</span><span class="p">)</span>
+              <span class="p">[(</span><span class="n">tcp-channel</span> <span class="k">_</span> <span class="k">_</span> <span class="n">data</span><span class="p">)</span>
+               <span class="p">(</span><span class="n">send-message</span> <span class="p">(</span><span class="n">tcp-channel</span> <span class="n">to</span> <span class="n">from</span> <span class="n">data</span><span class="p">))])))</span>
+</pre></div>
+
+</div>
+
+<p>The initial endpoint subscribes to TCP messages on port 5999. When a conversational partner appears, the endpoint spawns a new process that runs an echoer process. The latter is stateless and subscribes to TCP messages. When it gets messages with payload data, it sends them back out with the opposite addressing; when the TCP conversation disappears, it quits.</p>
+
+<p>Thus far, we have built several real systems using Marketplace: a DNS server, a DNS proxy, and an SSH server.</p>
+
+<p>The DNS proxy has handled DNS traffic for ourselves and other members of our lab for the last several months.</p>
+
+<p>You can read an overview along with detailed documentation for Marketplace at <a href="http://tonyg.github.io/marketplace/">http://tonyg.github.io/marketplace/</a>.</p>
+
+<p>To get the sources for Marketplace as well as the applications point your browser to <a href="https://github.com/tonyg/marketplace">https://github.com/tonyg/marketplace</a>.</p>
+
+<p>Enjoy!</p>
+
+<p>Tony Garnock-Jones</p>
+
+<p>Sam Tobin-Hochstadt</p>
+
+<p>Matthias Felleisen</p></div>
+  <a class="more" href='/2013/05/marketplace-a-language-for-network-aware-programming.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>08 May 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/05/racket-v534.html'>Racket v5.3.4</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.3.4 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>Extflonums (80-bit floating-point numbers) are supported on some x86/x86_64 platforms — including Windows, and including platforms where Racket is compiled to use SSE instructions for flonum arithmetic. Thanks to Michael Filonenko.</p></li>
+ <li>
+  <p>OS X: DrRacket and all of the other apps are now signed with an official key.</p></li>
+ <li>
+  <p>Tally Maze: a new game based an enumeration of 2d mazes.</p></li>
+ <li>
+  <p>The Optimization Coach, a DrRacket plugin, has been moved from the Racket distribution to the Racket package repository. Install it with: <code>raco pkg install optimization-coach</code>.</p></li>
+ <li>
+  <p>Redex: <code>define-union-language</code> now merges productions when languages define the same nonterminals. Thanks to William Bowman.</p></li>
+ <li>
+  <p>The <code>srfi/19</code> library is now compatible with the date structure type exported by <code>racket/base</code>.</p></li></ul></div>
+  <a class="more" href='/2013/05/racket-v534.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>08 May 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/05/racketcon-2013.html'>RacketCon 2013</a></h1>
+  <div class="truncate">
+<p><em>posted by Asumu Takikawa</em></p>
+
+<p>We are pleased to announce that (thirdRacketCon) will take place on September 29, 2013 at Northeastern University in Boston. This year, we plan to bring in several speakers from industry, as well as host talks from Racket developers and users.</p>
+
+<p>Lunch will be provided.</p>
+
+<p>On the Saturday (28th) before RacketCon, we plan to hold a hackathon to work on various Racket projects.</p>
+
+<p>Registration will open during the summer, and we will post a detailed schedule of events around the same time. The conference website is at</p>
+
+<p><a href="http://con.racket-lang.org/">http://con.racket-lang.org/</a></p></div>
+  <a class="more" href='/2013/05/racketcon-2013.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>25 Mar 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/03/200.html'>200!</a></h1>
+  <div class="truncate">
+<p><em>posted by Asumu Takikawa</em></p>
+
+<p>About a month ago, inspired by a mailing list post by Tim Brown, Racketeers started to write more solutions to <a href="http://rosettacode.org/wiki/Rosetta_Code">Rosetta Code</a> tasks for Racket. Just today, we&rsquo;ve reached 200 entries in the <a href="http://rosettacode.org/wiki/Category:Racket">Racket category</a>!</p>
+
+<p>This is a nice milestone, but we still have a ways to go. At 200 entries, Racket comes in at around 54th in the <a href="http://rosettacode.org/wiki/RC_POP.OUT">popularity</a> rankings. So if you&rsquo;re looking to practice your Racketeering skills, don&rsquo;t hesitate to work on some of the <a href="http://rosettacode.org/wiki/Reports:Tasks_not_implemented_in_Racket">remaining tasks</a>.</p>
+
+<p>To give you a taste of the kinds of solutions we have so far, here are some examples.</p>
+
+<p>Mandelbrot:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">iterations</span> <span class="n">a</span> <span class="n">z</span> <span class="n">i</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">z′</span> <span class="p">(</span><span class="nb">+</span> <span class="p">(</span><span class="nb">*</span> <span class="n">z</span> <span class="n">z</span><span class="p">)</span> <span class="n">a</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="k">or</span> <span class="p">(</span><span class="nb">=</span> <span class="n">i</span> <span class="mi">255</span><span class="p">)</span> <span class="p">(</span><span class="nb">&gt;</span> <span class="p">(</span><span class="nb">magnitude</span> <span class="n">z′</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span>
+      <span class="n">i</span>
+      <span class="p">(</span><span class="n">iterations</span> <span class="n">a</span> <span class="n">z′</span> <span class="p">(</span><span class="nb">add1</span> <span class="n">i</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">iter-&gt;color</span> <span class="n">i</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">=</span> <span class="n">i</span> <span class="mi">255</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">make-object</span> <span class="n">color%</span> <span class="s2">"black"</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">make-object</span> <span class="n">color%</span> 
+        <span class="p">(</span><span class="nb">*</span> <span class="mi">5</span> <span class="p">(</span><span class="nb">modulo</span> <span class="n">i</span> <span class="mi">15</span><span class="p">))</span> <span class="p">(</span><span class="nb">*</span> <span class="mi">32</span> <span class="p">(</span><span class="nb">modulo</span> <span class="n">i</span> <span class="mi">7</span><span class="p">))</span> 
+          <span class="p">(</span><span class="nb">*</span> <span class="mi">8</span> <span class="p">(</span><span class="nb">modulo</span> <span class="n">i</span> <span class="mi">31</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">mandelbrot</span> <span class="n">width</span> <span class="n">height</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">target</span> <span class="p">(</span><span class="n">make-screen-bitmap</span> <span class="n">width</span> <span class="n">height</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">dc</span> <span class="p">(</span><span class="k">new</span> <span class="n">bitmap-dc%</span> <span class="p">[</span><span class="n">bitmap</span> <span class="n">target</span><span class="p">]))</span>
+  <span class="p">(</span><span class="k">for*</span> <span class="p">([</span><span class="n">x</span> <span class="n">width</span><span class="p">]</span> <span class="p">[</span><span class="n">y</span> <span class="n">height</span><span class="p">])</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">real-x</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">*</span> <span class="mf">3.0</span> <span class="p">(</span><span class="nb">/</span> <span class="n">x</span> <span class="n">width</span><span class="p">))</span> <span class="mf">2.25</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">real-y</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">*</span> <span class="mf">2.5</span> <span class="p">(</span><span class="nb">/</span> <span class="n">y</span> <span class="n">height</span><span class="p">))</span> <span class="mf">1.25</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">send</span> <span class="n">dc</span> <span class="n">set-pen</span> 
+      <span class="p">(</span><span class="n">iter-&gt;color</span> 
+        <span class="p">(</span><span class="n">iterations</span> 
+          <span class="p">(</span><span class="nb">make-rectangular</span> <span class="n">real-x</span> <span class="n">real-y</span><span class="p">)</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">))</span> <span class="mi">1</span> <span class="o">&#39;</span><span class="ss">solid</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">send</span> <span class="n">dc</span> <span class="n">draw-point</span> <span class="n">x</span> <span class="n">y</span><span class="p">))</span>
+  <span class="n">target</span><span class="p">)</span>
+
+<span class="nb">&gt;</span> <span class="p">(</span><span class="n">mandelbrot300200</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Yin and Yang:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">yin-yang</span> <span class="n">d</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">base</span>
+    <span class="p">(</span><span class="n">hc-append</span> <span class="p">(</span><span class="n">inset/clip</span> <span class="p">(</span><span class="n">circle</span> <span class="n">d</span><span class="p">)</span> <span class="mi">0</span> <span class="mi">0</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">2</span><span class="p">))</span> <span class="mi">0</span><span class="p">)</span>
+               <span class="p">(</span><span class="n">inset/clip</span> <span class="p">(</span><span class="n">disk</span> <span class="n">d</span><span class="p">)</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">2</span><span class="p">))</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">with-top</span>
+    <span class="p">(</span><span class="n">ct-superimpose</span>
+     <span class="n">base</span>
+     <span class="p">(</span><span class="n">cc-superimpose</span> <span class="p">(</span><span class="n">colorize</span> <span class="p">(</span><span class="n">disk</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">2</span><span class="p">))</span> <span class="s2">"white"</span><span class="p">)</span>
+                     <span class="p">(</span><span class="n">disk</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">8</span><span class="p">)))))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">with-bottom</span>
+    <span class="p">(</span><span class="n">cb-superimpose</span>
+     <span class="n">with-top</span>
+     <span class="p">(</span><span class="n">cc-superimpose</span> <span class="p">(</span><span class="n">disk</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">2</span><span class="p">))</span>
+                     <span class="p">(</span><span class="n">colorize</span> <span class="p">(</span><span class="n">disk</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">8</span><span class="p">))</span> <span class="s2">"white"</span><span class="p">))))</span>
+  <span class="p">(</span><span class="n">cc-superimpose</span> <span class="n">with-bottom</span> <span class="p">(</span><span class="n">circle</span> <span class="n">d</span><span class="p">)))</span>
+
+
+<span class="nb">&gt;</span> <span class="p">(</span><span class="n">yin-yang</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Animate a pendulum:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket</span>
+
+<span class="p">(</span><span class="k">require</span> <span class="n">2htdp/image</span>
+         <span class="n">2htdp/universe</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">pendulum</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">accel</span> <span class="n">θ</span><span class="p">)</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">sin</span> <span class="n">θ</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">θ</span> <span class="p">(</span><span class="nb">/</span> <span class="nb">pi</span> <span class="mf">2.5</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">θ′</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">θ′′</span> <span class="p">(</span><span class="n">accel</span> <span class="p">(</span><span class="nb">/</span> <span class="nb">pi</span> <span class="mf">2.5</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">x</span> <span class="n">θ</span><span class="p">)</span> <span class="p">(</span><span class="nb">+</span> <span class="mi">200</span> <span class="p">(</span><span class="nb">*</span> <span class="mi">150</span> <span class="p">(</span><span class="nb">sin</span> <span class="n">θ</span><span class="p">))))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">y</span> <span class="n">θ</span><span class="p">)</span> <span class="p">(</span><span class="nb">*</span> <span class="mi">150</span> <span class="p">(</span><span class="nb">cos</span> <span class="n">θ</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">p-image</span> 
+      <span class="p">(</span><span class="n">underlay/xy</span> 
+        <span class="p">(</span><span class="n">add-line</span> 
+          <span class="p">(</span><span class="n">empty-scene</span> <span class="mi">400</span> <span class="mi">200</span><span class="p">)</span> <span class="mi">200</span> <span class="mi">0</span> <span class="p">(</span><span class="n">x</span> <span class="n">θ</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="n">θ</span><span class="p">)</span> <span class="s2">"black"</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="n">x</span> <span class="n">θ</span><span class="p">)</span> <span class="mi">5</span><span class="p">)</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="n">y</span> <span class="n">θ</span><span class="p">)</span> <span class="mi">5</span><span class="p">)</span> 
+              <span class="p">(</span><span class="n">circle</span> <span class="mi">5</span> <span class="s2">"solid"</span> <span class="s2">"blue"</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">set!</span> <span class="n">θ</span> <span class="p">(</span><span class="nb">+</span> <span class="n">θ</span> <span class="p">(</span><span class="nb">*</span> <span class="n">θ′</span> <span class="mf">0.04</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">set!</span> <span class="n">θ′</span> <span class="p">(</span><span class="nb">+</span> <span class="n">θ′</span> <span class="p">(</span><span class="nb">*</span> <span class="p">(</span><span class="n">accel</span> <span class="n">θ</span><span class="p">)</span> <span class="mf">0.04</span><span class="p">)))</span>
+    <span class="n">p-image</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">animate</span> <span class="p">(</span><span class="n">pendulum</span><span class="p">))</span>
+
+
+<span class="n">Jensen</span><span class="o">&#39;</span><span class="ss">s</span> <span class="n">Device:</span>
+
+<span class="o">```</span><span class="ss">racket</span>
+<span class="kn">#lang </span><span class="nn">algol60</span>
+<span class="k">begin</span>
+   <span class="n">integer</span> <span class="n">i</span><span class="c1">;</span>
+   <span class="n">real</span> <span class="n">procedure</span> <span class="n">sum</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">lo</span><span class="o">,</span> <span class="n">hi</span><span class="o">,</span> <span class="n">term</span><span class="p">)</span><span class="c1">;</span>
+      <span class="n">value</span> <span class="n">lo</span><span class="o">,</span> <span class="n">hi</span><span class="c1">;</span>
+      <span class="n">integer</span> <span class="n">i</span><span class="o">,</span> <span class="n">lo</span><span class="o">,</span> <span class="n">hi</span><span class="c1">;</span>
+      <span class="n">real</span> <span class="n">term</span><span class="c1">;</span>
+      <span class="n">comment</span> <span class="n">term</span> <span class="n">is</span> <span class="n">passed</span> <span class="n">by-name</span><span class="o">,</span> <span class="k">and</span> <span class="n">so</span> <span class="n">is</span> <span class="n">i</span><span class="c1">;</span>
+   <span class="k">begin</span>
+      <span class="n">real</span> <span class="n">temp</span><span class="c1">;</span>
+      <span class="n">temp</span> <span class="n">:=</span> <span class="mi">0</span><span class="c1">;</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="n">:=</span> <span class="n">lo</span> <span class="n">step</span> <span class="mi">1</span> <span class="n">until</span> <span class="n">hi</span> <span class="k">do</span>
+         <span class="n">temp</span> <span class="n">:=</span> <span class="n">temp</span> <span class="nb">+</span> <span class="n">term</span><span class="c1">;</span>
+      <span class="n">sum</span> <span class="n">:=</span> <span class="n">temp</span>
+   <span class="n">end</span><span class="c1">;</span>
+   <span class="n">comment</span> <span class="n">note</span> <span class="n">the</span> <span class="n">correspondence</span> <span class="n">between</span> 
+   <span class="n">the</span> <span class="n">mathematical</span> <span class="n">notation</span> <span class="k">and</span> <span class="n">the</span> <span class="n">call</span> <span class="n">to</span> <span class="n">sum</span><span class="c1">;</span>
+   <span class="n">printnln</span> <span class="p">(</span><span class="n">sum</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="n">1/i</span><span class="p">))</span>
+<span class="n">end</span>
+</pre></div>
+
+</div>
+
+<p>Thanks to all of the people who have contributed solutions so far!</p></div>
+  <a class="more" href='/2013/03/200.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>15 Feb 2013</p></col-1>
+
+<col-2>
+  <h1><a href='/2013/02/racket-v533.html'>Racket v5.3.3</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.3.3 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<p>This is a bug-fix release to address a flaw in DrRacket v5.3.2 concerning interactions between the contour window and the syntax coloring.</p></div>
+  <a class="more" href='/2013/02/racket-v533.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-2.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li class="active"><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-4.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

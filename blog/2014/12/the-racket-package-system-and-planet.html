@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>The Racket package system and PLaneT</title>
+    <meta name="description" content="_posted by Jay McCarthy_  We have recently moved the majority of Racket's code base into packages and repositories separate from the main core repository. This has given the Racket package system another cycle of attention. Whenever this happens, there ar...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html">
+    <link rel="next" href="/2014/11/800.html">
+    <link rel="prev" href="/2015/04/scheme-workshop-2015.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>10 Dec 2014</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>The Racket package system and PLaneT</h1>
+  </header>
+
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>We have recently moved the majority of Racket&rsquo;s code base into packages and repositories separate from the main core repository. This has given the Racket package system another cycle of attention. Whenever this happens, there are often questions and confusion about how to solve various distribution problems with the package system. A natural point of comparison is the older PLaneT system provided by Racket that appears to solve similar problems. In this blog post, I attempt to explain the purpose of the package system and its relation to PLaneT.</p>
+
+<p>The package system and PLaneT do not solve the same problem and don&rsquo;t exist for the same reason.</p>
+
+<p>PLaneT is:</p>
+
+<ul>
+ <li>
+  <p>A file distribution mechanism for source code.</p>
+  <p>Via <code>.plt</code> files that are installed into a particular place on your machine and then <code>raco setup</code>&rsquo;d.</p></li>
+ <li>
+  <p>A mechanism for automatically downloading and installing source code just before it is needed by programs.</p>
+  <p>Via the <code>(planet ...)</code> require form.</p></li>
+ <li>
+  <p>A centralized database of libraries</p>
+  <p>Via the PLaneT website and its server &amp; protocol which were undocumented and proprietary for the majority of PLaneT&rsquo;s life</p></li>
+ <li>
+  <p>A prescriptive model of how programs and libraries should be composed.</p>
+  <p>Specifically the system of major/minor versions, tagging packages by author name, and embedding the names of packages in source code.</p></li></ul>
+
+<p>In contrast, the package system is:</p>
+
+<ul>
+ <li>A file distribution mechanism for source code, byte code, and documentation. Via the <code>raco pkg</code> command.</li></ul>
+
+<p>In this way, the package system is almost identical to an operating system package system like Debian&rsquo;s dpkg and apt systems. The problem is very finely tailored and becomes more flexible as a result (notice that we can now distribute byte code and documentation.) This design aspires to follow the admonition of <a href="http://people.csail.mit.edu/jaffer/r3rs_2.html#SEC2">holy writ</a>: &ldquo;Programming languages should be designed not by piling feature on top of feature, but by removing the weaknesses and restrictions that make additional features appear necessary.&rdquo;</p>
+
+<p>Furthermore, it was intended to solve practical problems throughout the Racket ecosystem. In particular, one of the common complaints people had and have about PLaneT is the very long install times because of long builds. The package system allows this problem to be solved by distributing pre-built code.</p>
+
+<p>Since the package system specifically does not address jobs 2, 3, or 4 of PLaneT, we have to ask, &ldquo;Do they need to be solved?&rdquo; and if so, &ldquo;How can we solve them on top of the package system, i.e. as a library in honor of the design principle?&rdquo;.</p>
+
+<p>In particular, 2 and 3 are very painful for people wanting to just use the file distribution mechanism of PLaneT. 2 causes unpredictability, because you don&rsquo;t know if running a program will start a long invocation of &ldquo;raco setup&rdquo;, require Internet access, and start running un-vetted code. 3 requires you to share your code if you want to use the file distribution mechanism and is a single point of failure for doing installation.</p>
+
+<p>By not mandating how to address 2 and 3 in the package system, we offer flexibility. Here is where the solutions to these jobs are now:</p>
+
+<ol>
+ <li>
+  <p>There is currently no way to get automatic installs of packages. However, both DrRacket and xrepl offer advice about which packages you might want to install to compile and run the program. It would be natural to extend this advice to be automatic and patches are welcome. Given the experiences of operating systems which merely make suggestions (<code>nethack: command not found, provided by nethack-console</code>), I personally feel like we are at the sweet spot.</p></li>
+ <li>
+  <p>The file distribution mechanism&rsquo;s flexible package sources combine with a very simple protocol for package catalogs (Take a URL, add<code>/pkg/</code>, add a string, get a <code>read</code>-able hash table) to look up packages you don&rsquo;t yet have. As a service, we run a few catalogs (one for each release, plus <a href="http://pkgs.racket-lang.org">pkgs.r-l.o</a>). But we expect that users with special needs (such as sensitive installations that need exactly certain tested and trusted versions, especially with proprietary software) will build their own catalogs on private Web sites.</p></li></ol>
+
+<p>Clearly, however, job 4 is where PLaneT and the package system differ the most.</p>
+
+<p>With the package system, we follow the precedent of operating systems. An OS package&rsquo;s job is to get files into the right spot. An OS package contains a binary and instructions to install it as <code>/usr/bin/zsh</code>. It is not typical in OSes to be able to install multiple packages (such as different &ldquo;versions&rdquo; of the &ldquo;same&rdquo; package) that both provide <code>/usr/bin/zsh</code>. When you&rsquo;re at a Unix prompt, you don&rsquo;t have to write <code>zsh-5.0.5/usr/bin/zsh</code>. It&rsquo;s possible that many consider this is a big problem with OSes and indeed we do observe that it is fairly common to provide packages that provide binaries and libraries with embedded names such as how on my machine I have <code>python2.6</code>, <code>python2.7</code>, and <code>python3.2</code> all in my <code>$PATH</code>. It is important to realize, however, that the <code>deb</code> format and the <code>apt</code> tool didn&rsquo;t need to change to support this change or future changes in perspective in how to compose code.</p>
+
+<p>I hope this analogy helps understand the Racket package system. In the package system, a package doesn&rsquo;t install &ldquo;binaries&rdquo;, &ldquo;man pages&rdquo;, and &ldquo;init scripts&rdquo;, but installs similar things, such as &ldquo;module paths&rdquo;, &ldquo;documentation manuals&rdquo;, and "<code>raco</code> commands". Each of these has a notion of conflict: can&rsquo;t have two <code>zsh</code>s or two <code>racket/list</code>s; can&rsquo;t have two <code>zsh.1</code> pages or two docs named <code>doc</code>; can&rsquo;t have two modules trying to provide <code>raco neo-tokyo-is-about-to-explode</code>. If you find a random <code>.deb</code> on the Internet, can you predict what binaries it will contain from its name? No. The same goes for Racket packages. However, if you are egregiously weird, then people probably won&rsquo;t want to install your packages, just like for random <code>deb</code>s.</p>
+
+<p>However, clearly rules are helpful. In the world of operating systems, you know that basically all packages distributed by Debian can be installed at the same time, except for &ldquo;virtual packages&rdquo; that do stuff like selecting whether <code>postfix</code> or <code>sendmail</code> should be responsible for the <code>sendmail</code> command. These rules are not enforced through technology, though. Instead, the Debian maintainers have a social process that enforces them, with information being provided by technology (such as regression systems that identify unintended conflicts.) The catalog server that the Racket team provides helps facilitate a similar process with the concentric rings (all ring &lt;=1 packages can be installed at once and ring 1&lt; packages can do anything.)</p>
+
+<p>Non-conflicting sets of packages is the simplest rule to define and enforce. Other rules about backwards compatibility are much more complicated to define and enforce. I do not believe there is much precedent in the world of OSes, although we can see a little bit of what they do through things like <code>libgtk</code>, <code>libgtk2</code>, and <code>libgtk3</code>, where generally code written for one <code>libgtk2</code> package is compatible with all <code>libgtk2</code> packages made in the future, but <code>libgtk3</code> is effectively a totally different package and introduces totally separate binaries like <code>gtk3-config</code>.</p>
+
+<p>The most that the Racket team attempts to do here is to say, &ldquo;Here are the rules we will follow and we think you should follow them too.&rdquo; Specifically, that we will maintain backwards compatibility or make a new package. We can&rsquo;t and won&rsquo;t enforce this, nor do we always live up to it with our own work (but we feel really bad about it when we do.)</p>
+
+<p>Although my main goal of this section has been to explain my solution to (4), a great thing about the package system is that it is not binding at all. You can decide to follow the same rules as PLaneT. It is easy to do so:</p>
+
+<ul>
+ <li>
+  <p>Always name your packages <code>$AUTHOR-$PACKAGE-$MAJOR</code></p></li>
+ <li>
+  <p>Always provide modules from only the collection, <code>$AUTHOR-$PACKAGE-$MAJOR</code></p></li>
+ <li>
+  <p>Maintain backwards compatibility within releases of <code>$AUTHOR-$PACKAGE-$MAJOR</code></p></li>
+ <li>
+  <p>Update the <code>'version</code> metadata in the package <code>info.rkt</code> to reflect the <code>$MINOR</code> version.</p></li></ul>
+
+<p>And, boom!, you&rsquo;ve recreated the rules of PLaneT to a T except for two things: (a) you&rsquo;ll still need to put a dependency on <code>$AUTHOR-$PACKAGE-$MAJOR</code> on the outside of code in a package <code>info.rkt</code> file rather than just inside files and (b) you can&rsquo;t use <code>$AUTHOR-$PACKAGE</code> to refer to &ldquo;whatever the current <code>$MAJOR</code>&rdquo; is.</p>
+
+<p>The first compromise of adding something to the <code>info.rkt</code> is fairly modest, as it requires O(1) line modifications.</p>
+
+<p>The second compromise is more severe, although actually you could just maintain such a package and deal with the breakage that occurs when you try to upgrade. Such breakage, however, was present in PLaneT too, as when a package was installed based on <code>$AUTHOR-$PACKAGE</code> only the local machine would cache the version used, so if you took the requiring module to another machine, it would download a new version and, potentially, have a backwards incompatibility problem. Using the package system in the most naive way (i.e. installing the <code>$AUTHOR-$PACKAGE</code> at some point and programming to that) would work exactly the same as PLaneT, except that the package system was designed to be able to port installations from one machine to another with <code>raco pkg migrate</code>.</p>
+
+<p>I hope this blog post has helped explain the package system and shown that it does not prevent you from doing anything that PLaneT let you do, it only allows you to do more.</p>
+<!-- more-->
+
+<hr />
+
+<p>I think node.js&rsquo;s package manager gets versioning right. NPM uses semver to manage dependency versions, and it works well. The node-semver package demonstrates how this versioning works. A semver string is then included a module&rsquo;s dependencies list, which can specify all sorts of things, including &ldquo;use the latest version of the library,&rdquo; &ldquo;use the latest version given a particular major.minor string,&rdquo; and &ldquo;use this precise major.minor.patch&rdquo; version.</p>
+
+<p>NPM handles the rest, downloading the correct version of the dependencies. The reason this is tricky is that this requires every module to have its own set of dependencies, since different modules can request different versions of packages. I&rsquo;m not sure exactly how Node handles loading multiple versions of the same dependency with regards to performance and interaction, though it might be worth looking into.</p>
+
+<p>In contrast, the Racket package manager provides very little versioning support, and packages have to be installed in an entire user or installation scope, rather than having module-specific dependency versioning. Is this bad? I don&rsquo;t know. But it&rsquo;s different, and I think NPM&rsquo;s model is worth considering.</p>
+
+<p>— <em>Alexis King, 9 January 2015</em></p>
+
+<hr />
+
+<p>NPM uses local packages. Essentially, every dependancy you install is local to your package, and no other packages can access them. Your dependancies, in turn have a tree of packages that you can&rsquo;t access. In other words, every single package gets a separate copy of its dependancies. This might seem terrible, but the node community is deeply rooted in UNIX, so most packages expose only a few functions doing one thing well, and so the overhead of having many copies is very low.</p>
+
+<p>— <em>g145, 4 September 2015</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2015/04/scheme-workshop-2015.html">Scheme Workshop 2015</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2014/11/800.html">800!</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

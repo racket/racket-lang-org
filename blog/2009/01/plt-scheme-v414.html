@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>PLT Scheme v4.1.4</title>
+    <meta name="description" content="_posted by Eli Barzilay_  PLT Scheme version 4.1.4 is now available from  http://plt-scheme.org/      New libraries include `scheme/package' (for nestable static modules) and`ffi/objc' (support for Objective-C).     New teaching support includes a &quot;univer...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/01/plt-scheme-v414.html">
+    <link rel="next" href="/2008/11/simple-gnuplotting.html">
+    <link rel="prev" href="/2009/01/cfp-scheme-workshop-2009.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>21 Jan 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>PLT Scheme v4.1.4</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.1.4 is now available from  <a href="http://plt-scheme.org/">http://plt-scheme.org/</a></p>
+
+<ul>
+ <li>
+  <p>New libraries include <code>scheme/package' (for nestable static modules) and</code>ffi/objc&rsquo; (support for Objective-C).</p></li>
+ <li>
+  <p>New teaching support includes a &ldquo;universe.ss&rdquo; teachpack for connecting &ldquo;worlds&rdquo; over a network.</p></li>
+ <li>
+  <p>Redex now supports automatic test-case generation. Specify a predicate that should hold of your reduction system, and Redex will attempt to falsify it. See &lsquo;redex-check&rsquo; in the manual for more details.</p></li>
+ <li>
+  <p>Improvements to the run-time system include better and more reliable memory-limit tracking, function contracts that preserve tail recursion in many cases, native debugging backtraces on x86_64, and performance improvements.</p></li>
+ <li>
+  <p>Improved libraries include enhancements to <code>scheme/sandbox', better handling of zero-sized matches by</code>regexp-split&rsquo; and friends, an <code>equal&gt;' interface for specifying equality on class instances (and more general support for attaching properties to interfaces), equality (via</code>equal&gt;&rsquo;) for image objects, and refinements to `scheme/foreign&rsquo; to support atomic operations and function-pointer conversions.</p></li></ul>
+
+<p>[Note that mirror sites can take a while to catch up with the new downloads.]</p>
+
+<p>Feedback Welcome.</p>
+<!-- more-->
+
+<hr />
+
+<p>Hello,</p>
+
+<p>Let me notify you that the current version of MzScheme does not start on my old win98 machine.</p>
+
+<p>I&rsquo;ve been using 4.1.1. for some time and it&rsquo;s been working all fine. To my dismay, however, when I tried to run the newly installed one, it just caused crash and I had to reboot the PC. The same thing happned with mzc.exe, too.</p>
+
+<p>I can&rsquo;t figure out where the problem is, but I hope it will be solved anyway. (Or will the support of win95 family be discontinued?)</p>
+
+<p>— <em>Madoka, 21 January 2009</em></p>
+
+<hr />
+
+<p>Win95 family should be discontinued. End of story.</p>
+
+<p>— <em>Bob, 23 January 2009</em></p>
+
+<hr />
+
+<p>Greetings Fellows.</p>
+
+<p>Im getting this error on XP/OSX in about DrScheme -&gt; our software license</p>
+
+<p>procedure send-main-page: expects 0 arguments plus optional arguments with keywords #:fragment, #:notify, #:query, and #:sub, given 1: &ldquo;license/index.html&rdquo;</p>
+
+<p> === context === /Applications/PLTScheme/collects/scheme/private/more-scheme.ss:155:2: call-with-break-parameterization /Applications/PLTScheme/collects/scheme/private/more-scheme.ss:271:2: call-with-exception-handler</p>
+
+<p>Best Regards</p>
+
+<p>— <em>Jesus Boadas, 26 January 2009</em></p>
+
+<hr />
+
+<p>The &ldquo;software license&rdquo; problem is fixed for the next version. As for the Windows98 problem, we still didn&rsquo;t find what the problem is&hellip;</p>
+
+<p>— <em>Eli Barzilay, 27 January 2009</em></p>
+
+<hr />
+
+<p>Madoka: thanks for letting us know. We have restored pre-XP compatibility for the next version. If you&rsquo;d like to try the 4.1.4.2 snapshot, see http://pre.plt-scheme.org/installers/</p>
+
+<p>— <em>Matthew Flatt, 27 January 2009</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/01/cfp-scheme-workshop-2009.html">CfP: Scheme Workshop 2009!</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2008/11/simple-gnuplotting.html">Simple GnuPLoTting</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

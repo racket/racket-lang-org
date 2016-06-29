@@ -1,0 +1,1512 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<rss version="2.0">
+ <channel>
+  <title>Racket Blog: Racket Blog</title>
+  <description>Racket Blog: Racket Blog</description>
+  <link>http://blog.racket-lang.org/index.html</link>
+  <lastBuildDate>Thu, 28 Apr 2016 18:04:00 UT</lastBuildDate>
+  <pubDate>Thu, 28 Apr 2016 18:04:00 UT</pubDate>
+  <ttl>1800</ttl>
+  <item>
+   <title>Racket v6.5</title>
+   <link>http://blog.racket-lang.org/2016/04/racket-v65.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2016-04-racket-v65-html</guid>
+   <pubDate>Thu, 28 Apr 2016 18:04:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket version 6.5 is now available from &lt;a href="http://racket-lang.org/"&gt;http://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Typed Racket and the &lt;code&gt;racket/contract&lt;/code&gt; library generate code with lower overhead, speeding up typed/untyped interaction in a number of gradual typing programs we studied.&lt;/p&gt;
+
+&lt;p&gt;Macros written using &lt;code&gt;syntax-parse&lt;/code&gt; automatically emit more accurate error messages.&lt;/p&gt;
+
+&lt;p&gt;The contract profiler captures costs from more contract combinators, including all those in the main distribution.&lt;/p&gt;
+
+&lt;p&gt;Hash table and set iteration, via both existing and new non-generic sequences, performs better, up to twice as fast on microbenchmarks.&lt;/p&gt;
+
+&lt;p&gt;The Racket optimizer detects many more optimization opportunities, including when variables always hold numbers.&lt;/p&gt;
+
+&lt;p&gt;The db library supports single-result CALL statements in MySQL.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;net/dns&lt;/code&gt; library supports SRV records.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;racket/unix-socket&lt;/code&gt; library supports listen and accept operations.&lt;/p&gt;
+
+&lt;p&gt;The following people contributed to this release:&lt;/p&gt;
+
+&lt;p&gt;Adrien Tateno, Alex Knauth, Alexander Shopov, Alexis King, Andrew Kent, Asumu Takikawa, Ben Greenman, Chen Xiao, Chris Jester-Young, Daniel Feltey, Eric Dobson, Georges Dupéron, Gustavo Massaccesi, Ian Harris, Jay McCarthy, Jens Axel Søgaard, John Clements, Leandro Facchinetti, Lehi Toskin, Leif Andersen, Łukasz Dąbek, Marc Kaufmann, Matthew Flatt, Matthias Felleisen, Michael McConville, Mike Sperber, Paul Stansifer, Philippe Meunier, Robby Findler, Rodrigo Setti, Ryan Culpepper, Sam Caldwell, Sam Tobin-Hochstadt, Sorawee Porncharoenwase, Spencer Florence, Stephen Chang, Tony Garnock-Jones, Vincent St-Amour, WarGrey Gyoudmon Ju, and William J. Bowman.&lt;/p&gt;
+
+&lt;p&gt;Feedback Welcome&lt;/p&gt;
+&lt;!-- more--&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket Web Server Security Vulnerability</title>
+   <link>http://blog.racket-lang.org/2016/02/racket-web-server-security-vulnerability.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2016-02-racket-web-server-security-vulnerability-html</guid>
+   <pubDate>Mon, 08 Feb 2016 22:05:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Sam Tobin-Hochstadt&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We recently discovered a serious security vulnerability in the Racket web server, which can lead to unintended disclosure of files on the machine running the web server. This vulnerability is fixed in &lt;a href="../../2016/02/racket-v64.html"&gt;Racket version 6.4&lt;/a&gt;, just released, and we encourage people to upgrade to that version.&lt;/p&gt;
+
+&lt;p&gt;The vulnerability affects web servers that serve static files using the &lt;code&gt;#:extra-files-paths&lt;/code&gt; option, including the default value of this option. If you do not use the Racket web serve to serve static files, or you do so via a mechanism that does not use the &lt;code&gt;make-url-&amp;gt;path&lt;/code&gt; function, then you are likely not vulnerable. Affected web serves will allow specially-crafted URLs to access files outside of the specified paths, potentially exposing any file that the web server process is able to read.&lt;/p&gt;
+
+&lt;p&gt;If you cannot immediately upgrade to version 6.4, we have provided a package catalog with updated versions of the &amp;ldquo;web-server-lib&amp;rdquo; package for versions of Racket back to 6.0. That catalog is located at&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://download.racket-lang.org/patches/web-server-1/"&gt;http://download.racket-lang.org/patches/web-server&amp;ndash;1/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To use it to upgrade your Racket installation, add it as a catalog using &lt;code&gt;raco pkg config&lt;/code&gt;. To make this process easier, you can download the Racket script available &lt;a href="https://gist.github.com/samth/c81e1e2fabc744759970"&gt;here&lt;/a&gt;. Then run:&lt;/p&gt;
+
+&lt;div class="brush: bash"&gt;
+ &lt;div class="pygments"&gt;
+  &lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;racket add-catalog.rkt
+&lt;span class="nv"&gt;$ &lt;/span&gt;raco pkg update -i web-server-lib
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;If you need advice on updating Racket installations older than version 6.0, please let us know and we will provide them.&lt;/p&gt;
+
+&lt;p&gt;To test that your Racket installation is fixed, you can run &lt;a href="https://gist.github.com/samth/740cc39eb6c0d9bd7bc3"&gt;the program here&lt;/a&gt;. It will print whether your installation is out of date.&lt;/p&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket v6.4</title>
+   <link>http://blog.racket-lang.org/2016/02/racket-v64.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2016-02-racket-v64-html</guid>
+   <pubDate>Mon, 08 Feb 2016 19:04:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket version 6.4 is now available from &lt;a href="http://racket-lang.org/"&gt;http://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;We fixed a security vulnerability in the web server. The existing web server is vulnerable to a navigation attack if it is also enabled to serve files statically; that is, any file readable by the web server is accessible remotely. For more information, see &lt;a href="../../2016/02/racket-web-server-security-vulnerability.html"&gt;this post&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;DrRacket&amp;rsquo;s scrolling is faster.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Incremental garbage-collection mode can eliminate long pauses in a program. For example, incremental mode is useful for avoiding pauses in games and animations.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;Programs must specifically request incremental mode with &lt;code&gt;(collect-garbage 'incremental)&lt;/code&gt;, but libraries such as &lt;code&gt;2htdp/universe&lt;/code&gt; include the request as part of the library&amp;rsquo;s implementation.&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;The default package catalog is an HTTPS address instead of HTTP, and package operations properly validate server certificates when using HTTPS.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Documentation may define their own categories for the manual top-level page by using strings, rather than only symbols that name pre-defined categories.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The Racket cheat sheet is included in the main distribution.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;DrRacket is available in Bulgarian, thanks to Alexander Shopov.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The contract Typed Racket generates for the &lt;code&gt;Any&lt;/code&gt; type is more permissive, allowing more typed/untyped programs to work without contract errors.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Redex supports binding specifications; describe which variables bind in which expressions and your metafunctions and reduction relations automatically become scope-sensitive. Thanks to Paul Stansifer for this improvement.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;All &lt;code&gt;pict&lt;/code&gt; functions accept &lt;code&gt;pict-convertible&lt;/code&gt;s. This allows for transparent interoperability between &lt;code&gt;pict&lt;/code&gt; and libraries like &lt;code&gt;2htdp/image&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The &lt;code&gt;raco profile&lt;/code&gt; and &lt;code&gt;raco contract-profile&lt;/code&gt; commands provide easy access to profiling tools, without requiring program modifications.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;Feedback Welcome&lt;/p&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Great work! and thank you.&lt;/p&gt;
+
+&lt;p&gt;I was wondering why isn&amp;rsquo;t incremental garbage collection the default option?&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Harikrishnan, 8 February 2016&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Incremental mode has shorter GC pauses, but it tends to use more memory and use more time overall. Those trade-offs are usually worthwhile for interactive programs, but not for batch programs.&lt;/p&gt;
+
+&lt;p&gt;Given the trade-offs, non-incremental mode is a more transparent default. It&amp;rsquo;s easy to tell when an interactive program suffers from pauses and needs to turn on incremental mode. It would be more difficult to notice that a batch program runs too slowly because incremental mode hasn&amp;rsquo;t been disabled.&lt;/p&gt;
+
+&lt;p&gt;(Incremental mode uses more memory because it moves objects to the old generation sooner, and because the old generation is not compacted. Incremental mode uses more time because extra steps are needed to pause and resume traversal of the old generation – and also because it uses more memory.)&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Matthew Flatt, 9 February 2016&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket v6.3</title>
+   <link>http://blog.racket-lang.org/2015/11/racket-v63.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2015-11-racket-v63-html</guid>
+   <pubDate>Tue, 24 Nov 2015 07:30:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket version 6.3 is now available from &lt;a href="http://racket-lang.org/"&gt;http://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Racket&amp;rsquo;s macro expander uses a new representation of binding called &amp;ldquo;set of scopes&amp;rdquo;. The new binding model provides a simpler explanation of how macros preserve binding, especially across module boundaries and in hygiene-bending expansions. The new expander is mostly compatible with existing Racket macros, but there are some incompatibilities. For the formally inclined, a research paper on this macro system will appear at POPL next year: &lt;a href="http://www.cs.utah.edu/plt/scope-sets/"&gt;http://www.cs.utah.edu/plt/scope-sets/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Racket&amp;rsquo;s GUI library now uses Gtk+ 3 when available, instead of Gtk+ 2. Set the &lt;code&gt;PLT_GTK2&lt;/code&gt; environment variable to select Gtk+ 2.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Added a new Redex tutorial based on a week-long workshop in SLC.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Better syntax error checking for Redex patterns that do not use holes correctly.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The blueboxes are more agressive about finding names to look up in the docs, meaning they are useful much more often.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Submodules are now fully supported in Typed Racket. Previously, some uses of submodules would produce internal errors, making it hard to &lt;code&gt;module+ test&lt;/code&gt; and &lt;code&gt;module+ main&lt;/code&gt; effectively in Typed Racket. The switch to the set-of-scopes expander fixed these problems, and submodules are now happily at home in Typed Racket.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The &lt;code&gt;typed/racket/unsafe&lt;/code&gt; library provides import and export forms that circumvent contract generation. This improves performance for typed-untyped interaction at the cost of safety and debuggability.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket provides experimental support for units (from &lt;code&gt;racket/unit&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The experimental &lt;code&gt;define-new-subtype&lt;/code&gt; form allows overlaying finer distinctions between otherwise identical types, similar to Haskell&amp;rsquo;s &lt;code&gt;new type&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The &lt;code&gt;Promise&lt;/code&gt; type constructor changes in a backwards-incompatible way to exclude promises created with &lt;code&gt;promise/name&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The &lt;code&gt;unstable-*&lt;/code&gt; packages are out of the main distribution. Most of their contents have been either merged with established Racket libraries or spun off as their own packages. This change is backwards compatible for packages that properly list their dependencies. &lt;a href="../../2015/10/retiring-unstable.html"&gt;Full details&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;edu: &lt;code&gt;big-bang&lt;/code&gt; supports a display-mode clause so that world programs can take over the entire screen.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;Feedback welcome&lt;/p&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;How to run the installer silently when we would like to distribute this to teachers with SCCM 2012.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Ari Toivola, 25 November 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I believe you broke the 2htdp/planetcute libraries with this release.&lt;/p&gt;
+
+&lt;p&gt;At least, I get an error just like this page now shows: http://docs.racket-lang.org/teachpack/2htdpPlanet_Cute_Images.html&lt;/p&gt;
+
+&lt;p&gt;(require 2htdp/planetcute)&lt;/p&gt;
+
+&lt;p&gt;in the REPL:&lt;/p&gt;
+
+&lt;blockquote&gt;
+ &lt;p&gt;character-cat-girl g1: unbound identifier;  also, no #%top syntax transformer is bound in: g1&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;— &lt;em&gt;lalamine, 5 December 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Ari: To run the Windows installer silently, supply the /S command-line argument&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Matthew Flatt, 9 December 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;lalamine: Thanks for the report! I cam able to replicate the problem with planetcute in v6.3. It looks like the problem happens only in interactive modes like the REPL and docs, and not when used within a module.&lt;/p&gt;
+
+&lt;p&gt;The problem seems to be fixed in our development snapshots. Unfortunately, I don&amp;rsquo;t know how it got broken or fixed, so we&amp;rsquo;ll have to investigate more to ensure that the bug stays fixed.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Matthew Flatt, 9 December 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I see this bug; glad it&amp;rsquo;s getting fixed. My daughter has made an awesome maze runner game with the planetcute images, so she was distressed about the broken compile. :)&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Peter, 10 December 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;It will force the use of dedicated AMD graphics of a 15-inch MacBook Pro but the previous version does not require it, it is consuming more battery than before.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;霏芃宋, 5 January 2016&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Regarding AMD graphics: The only change in graphics visible from that changelog is about the underlying graphical library Gtk. Can you check if setting PLT_GTK2=y before starting DrRacket makes a difference?&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Paolo Giarrusso, 21 January 2016&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Do you have a portable distribution for Windows anywhere? I used to use zipped binary snapshots for this purpose but they don&amp;rsquo;t seem to be available any longer, only *.exe versions.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Kevin Havener, 2 February 2016&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Retiring `unstable`</title>
+   <link>http://blog.racket-lang.org/2015/10/retiring-unstable.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2015-10-retiring-unstable-html</guid>
+   <pubDate>Sat, 31 Oct 2015 00:34:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Vincent St-Amour&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Some of you may be familiar with the &lt;code&gt;unstable&lt;/code&gt; collection, whose purpose was to serve as a staging ground for new APIs that hadn&amp;rsquo;t yet found a more permanent home. With the advent of the package system, packages can serve that same purpose, which removes the need for a dedicated &lt;code&gt;unstable&lt;/code&gt; collection provided by the main distribution.&lt;/p&gt;
+
+&lt;p&gt;For this reason we are moving &lt;code&gt;unstable-*&lt;/code&gt; packages out of the main distribution.&lt;/p&gt;
+
+&lt;p&gt;For backwards compatibility, the packages remain available from the package catalog. Packages that properly list their dependencies (as they should! it&amp;rsquo;s an error not to!) are unaffected by this change. Packages that are missing dependencies may need to be adjusted to include the appropriate &lt;code&gt;unstable&lt;/code&gt; dependencies.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;unstable&lt;/code&gt; packages contained many useful functions and APIs, and we merged many of them into established Racket libraries. Others were spun off as their own packages. The remaining APIs, which we judged too narrow or too immature, we left in &lt;code&gt;unstable&lt;/code&gt; packages, where they are still available in their original form. In all cases, the original &lt;code&gt;unstable&lt;/code&gt; libraries continue to export the same bindings they always did, to ensure backwards compatibility.&lt;/p&gt;
+
+&lt;p&gt;For completeness, here is a list of the fate of each unstable library that used to be part of the main distribution.&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;&lt;code&gt;unstable/2d&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;2d&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/arrow&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/automata&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;automata&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/bytes&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/class-iop&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;class-iop&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/contract&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;non-empty-string?&lt;/code&gt; to &lt;code&gt;racket/string&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;port-number?&lt;/code&gt; and &lt;code&gt;tcp-listen-port?&lt;/code&gt; to &lt;code&gt;racket/tcp&lt;/code&gt;, the latter renamed to &lt;code&gt;listen-port-number?&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;if/c&lt;/code&gt;, &lt;code&gt;failure-result/c&lt;/code&gt;, &lt;code&gt;predicate/c&lt;/code&gt; and &lt;code&gt;rename-contract&lt;/code&gt; to &lt;code&gt;racket/contract&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;treeof&lt;/code&gt; to &lt;code&gt;plot/utils&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;sequence/c&lt;/code&gt; to &lt;code&gt;racket/sequence&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;path-piece?&lt;/code&gt;, &lt;code&gt;maybe/c&lt;/code&gt;, &lt;code&gt;truth/c&lt;/code&gt; in &lt;code&gt;unstable-contract-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/custom-write&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;make-constructor-style-printer&lt;/code&gt; to &lt;code&gt;racket/struct&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;prop:auto-custom-write&lt;/code&gt; in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/debug&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-debug-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/define&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/error&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/find&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/flonum&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Superseded by &lt;code&gt;math/flonum&lt;/code&gt;. Left in &lt;code&gt;unstable-flonum-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/function&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Merged with &lt;code&gt;racket/function&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/future&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Merged with &lt;code&gt;racket/future&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/gui/notify&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to &lt;code&gt;framework/notify&lt;/code&gt;, with naming changes.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/gui/pict&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;color/c&lt;/code&gt;, &lt;code&gt;light&lt;/code&gt;, &lt;code&gt;dark&lt;/code&gt;, &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;orange&lt;/code&gt;, &lt;code&gt;yellow&lt;/code&gt;, &lt;code&gt;green&lt;/code&gt;, &lt;code&gt;blue&lt;/code&gt;, &lt;code&gt;purple&lt;/code&gt;, &lt;code&gt;black&lt;/code&gt;, &lt;code&gt;brown&lt;/code&gt;, &lt;code&gt;gray&lt;/code&gt;, &lt;code&gt;white&lt;/code&gt;, &lt;code&gt;cyan&lt;/code&gt;, and &lt;code&gt;magenta&lt;/code&gt; to &lt;code&gt;pict/color&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;show&lt;/code&gt;, &lt;code&gt;hide&lt;/code&gt;, &lt;code&gt;pict-if&lt;/code&gt;, &lt;code&gt;pict-cond&lt;/code&gt;, and &lt;code&gt;pict-case&lt;/code&gt; to &lt;code&gt;pict/conditional&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Merged &lt;code&gt;scale-to&lt;/code&gt; with &lt;code&gt;pict&lt;/code&gt;&amp;rsquo;s &lt;code&gt;scale-to-fit&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Merged &lt;code&gt;ellipse/border&lt;/code&gt;, &lt;code&gt;circle/border&lt;/code&gt;, &lt;code&gt;rectangle/border&lt;/code&gt;, &lt;code&gt;rounded-rectangle/border&lt;/code&gt; with &lt;code&gt;pict&lt;/code&gt;&amp;rsquo;s &lt;code&gt;ellipse&lt;/code&gt;, &lt;code&gt;circle&lt;/code&gt;, &lt;code&gt;rectangle&lt;/code&gt;, and &lt;code&gt;rounded-rectangle&lt;/code&gt;, respectively.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Merged &lt;code&gt;pin-label-line&lt;/code&gt;, &lt;code&gt;pin-arrow-label-line&lt;/code&gt;, and &lt;code&gt;pin-arrows-label-line&lt;/code&gt; with &lt;code&gt;pict&lt;/code&gt;&amp;rsquo;s &lt;code&gt;pin-line&lt;/code&gt;, &lt;code&gt;pin-arrow-line&lt;/code&gt;, and &lt;code&gt;pin-arrows-line&lt;/code&gt;, respectively.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;blur&lt;/code&gt;, &lt;code&gt;shadow&lt;/code&gt;, and &lt;code&gt;shadow-frame&lt;/code&gt; to &lt;code&gt;pict/shadow&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;unstable/gui/pict/align&lt;/code&gt; to &lt;code&gt;ppict/align&lt;/code&gt;, in the &lt;code&gt;ppict&lt;/code&gt; package.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;color&lt;/code&gt;, &lt;code&gt;pict-match&lt;/code&gt;, &lt;code&gt;pict-combine&lt;/code&gt;, &lt;code&gt;with-pict-combine&lt;/code&gt;, &lt;code&gt;fill&lt;/code&gt;, &lt;code&gt;strike&lt;/code&gt;, &lt;code&gt;shade&lt;/code&gt;, &lt;code&gt;blur-bitmap!&lt;/code&gt;, &lt;code&gt;arch&lt;/code&gt;, &lt;code&gt;draw-pict-centered&lt;/code&gt;, &lt;code&gt;backdrop&lt;/code&gt;, &lt;code&gt;cross-out&lt;/code&gt;, and &lt;code&gt;make-plt-title-background&lt;/code&gt; in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/gui/ppict&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;ppict&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/gui/prefs&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to &lt;code&gt;framework/preferences&lt;/code&gt;, with naming changes.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/gui/redex&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-redex&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/gui/scribble&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/gui/slideshow&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;with-size&lt;/code&gt;, &lt;code&gt;with-scale&lt;/code&gt;, &lt;code&gt;big&lt;/code&gt;, &lt;code&gt;small&lt;/code&gt;, &lt;code&gt;with-font&lt;/code&gt;, &lt;code&gt;with-style&lt;/code&gt;, &lt;code&gt;bold&lt;/code&gt;, &lt;code&gt;italic&lt;/code&gt;, &lt;code&gt;subscript&lt;/code&gt;, &lt;code&gt;superscript&lt;/code&gt;, &lt;code&gt;caps&lt;/code&gt;, and &lt;code&gt;blank-line&lt;/code&gt; to &lt;code&gt;slideshow/text&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;slide/staged&lt;/code&gt;, &lt;code&gt;staged&lt;/code&gt;, &lt;code&gt;stage&lt;/code&gt;, &lt;code&gt;stage-name&lt;/code&gt;, &lt;code&gt;at&lt;/code&gt;, &lt;code&gt;before&lt;/code&gt;, &lt;code&gt;after&lt;/code&gt;, &lt;code&gt;before/at&lt;/code&gt;, &lt;code&gt;after/at&lt;/code&gt; to the &lt;code&gt;staged-slide&lt;/code&gt; package.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;column&lt;/code&gt;, &lt;code&gt;columns&lt;/code&gt;, &lt;code&gt;column-size&lt;/code&gt;, &lt;code&gt;two-columns&lt;/code&gt;, &lt;code&gt;mini-slide&lt;/code&gt;, &lt;code&gt;tabular&lt;/code&gt;, &lt;code&gt;reveal&lt;/code&gt;, &lt;code&gt;revealing-slide&lt;/code&gt;, and &lt;code&gt;items-slide&lt;/code&gt; in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/gui/snip&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/hash&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Merged with &lt;code&gt;racket/hash&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/latent-contract&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-latent-contract-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/lazy-require&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;lazy-require&lt;/code&gt; has been in &lt;code&gt;racket/lazy-require&lt;/code&gt; for some time.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;begin-on-demand&lt;/code&gt; in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/list&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;check-duplicates&lt;/code&gt;, &lt;code&gt;remf&lt;/code&gt;, &lt;code&gt;remf*&lt;/code&gt;, &lt;code&gt;group-by&lt;/code&gt;, &lt;code&gt;cartesian-product&lt;/code&gt;, &lt;code&gt;list-update&lt;/code&gt;, and &lt;code&gt;list-set&lt;/code&gt; to &lt;code&gt;racket/list&lt;/code&gt;. * Moved &lt;code&gt;list-prefix?&lt;/code&gt;, &lt;code&gt;take-common-prefix&lt;/code&gt;, &lt;code&gt;drop-common-prefix&lt;/code&gt;, and &lt;code&gt;split-common-prefix&lt;/code&gt; to &lt;code&gt;racket/list&lt;/code&gt;, with slight API changes to harmonize with Racket&amp;rsquo;s list API.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;filter-multiple&lt;/code&gt;, &lt;code&gt;extend&lt;/code&gt;, &lt;code&gt;map/values&lt;/code&gt;, and &lt;code&gt;map2&lt;/code&gt; in &lt;code&gt;unstable-list-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/logging&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;with-intercepted-logging&lt;/code&gt; and &lt;code&gt;with-logging-to-port&lt;/code&gt; to &lt;code&gt;racket/logging&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;start-recording&lt;/code&gt; and &lt;code&gt;stop-recording&lt;/code&gt; in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/macro-testing&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to &lt;code&gt;syntax/macro-testing&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/markparam&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;markparam&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/open-place&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved &lt;code&gt;open-place&lt;/code&gt; to &lt;code&gt;racket/place&lt;/code&gt;, and renamed it &lt;code&gt;place/context&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/options&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;option-contract&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/parameter-group&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;parameter-group&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/pretty&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Merged &lt;code&gt;pretty-format/write&lt;/code&gt;, &lt;code&gt;pretty-format/display&lt;/code&gt;, and &lt;code&gt;pretty-format/print&lt;/code&gt; with &lt;code&gt;racket/pretty&lt;/code&gt;&amp;rsquo;s &lt;code&gt;pretty-format&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;break-lines&lt;/code&gt; in &lt;code&gt;unstable-pretty-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/recontract&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Merged with &lt;code&gt;racket/contract&lt;/code&gt; some time ago.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/sandbox&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Merged with &lt;code&gt;scribble/eval&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/sequence&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;in-syntax&lt;/code&gt; and &lt;code&gt;in-slice&lt;/code&gt; to &lt;code&gt;racket/sequence&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;in-pairs&lt;/code&gt;, &lt;code&gt;in-sequence-forever&lt;/code&gt;, and &lt;code&gt;sequence-lift&lt;/code&gt; in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/socket&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;unix-socket&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/string&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/struct&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;struct-&amp;gt;list&lt;/code&gt; to &lt;code&gt;racket/struct&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;make&lt;/code&gt; in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/syntax&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;make-variable-like-transformer&lt;/code&gt; to &lt;code&gt;syntax/transformer&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Moved &lt;code&gt;syntax-source-directory&lt;/code&gt; and &lt;code&gt;syntax-source-file-name&lt;/code&gt; to &lt;code&gt;syntax/location&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+   &lt;li&gt;
+    &lt;p&gt;Left &lt;code&gt;explode-module-path-index&lt;/code&gt;, &lt;code&gt;phase-of-enclosing-module&lt;/code&gt;, &lt;code&gt;format-unique-id&lt;/code&gt;, &lt;code&gt;syntax-length&lt;/code&gt;, and &lt;code&gt;syntax-within?&lt;/code&gt; in &lt;code&gt;unstable/syntax&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/temp-c&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to the &lt;code&gt;temp-c&lt;/code&gt; package.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/time&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Left in &lt;code&gt;unstable-lib&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+ &lt;li&gt;&lt;code&gt;unstable/wrapc&lt;/code&gt;
+  &lt;ul&gt;
+   &lt;li&gt;Moved to &lt;code&gt;syntax/contract&lt;/code&gt;.&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Hi, it&amp;rsquo;s my first day with Racket. Attempting to install the pict3d library is failing in a way that mentions not finding unstable/custom-write.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m guessing this probably relates to the reorganization mentioned above.&lt;/p&gt;
+
+&lt;p&gt;Any tips? Thanks!&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Corporate Sheep, 27 November 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket Package Server Security Vulnerabilities</title>
+   <link>http://blog.racket-lang.org/2015/09/racket-package-server-security-vulnerabilities.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2015-09-racket-package-server-security-vulnerabilities-html</guid>
+   <pubDate>Tue, 22 Sep 2015 07:10:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Sam Tobin-Hochstadt&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Recently, we discovered several security vulnerabilities with how both the Racket package catalog server and the Racket package client work. The vulnerabilities have now all been fixed, and we do not know of any exploitation of them. However, we encourage you to take the following steps:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Change your password on the &lt;a href="http://pkgs.racket-lang.org"&gt;http://pkgs.racket-lang.org&lt;/a&gt; site.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Check any packages you have uploaded to the site, to ensure that no unexpected changes have been made to them.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Do not use the released versions of the raco pkg catalog-archive command, or the &lt;code&gt;file/untar&lt;/code&gt; and &lt;code&gt;file/unzip&lt;/code&gt; libraries, on untrusted inputs. If you use these tools or libraries, use a snapshot build available from &lt;a href="http://pre.racket-lang.org/"&gt;http://pre.racket-lang.org/&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="the-errors-and-how-they-were-fixed"&gt;The errors, and how they were fixed&lt;/h2&gt;
+
+&lt;p&gt;A total of 5 errors related to package handling were reported to us by Tony Garnock-Jones and Asumu Takikawa. Two were XSS vulnerabilities relating to handling user input in the package administration dialog. One was an error where unsanitized email addresses with path name components in them could allow a malicious user to impersonate someone else, whom they shared an email suffix with (such addresses are illegal on most mail servers, like Outlook and GMail, but not illegal in SMTP itself.) Two were errors in handling MANIFEST files and tar/zip archives, which allowed decompression to write to arbitrary locations on the file system. These last errors affected not only the server, which decompresses packages to analyze them, but also clients using the commands described above.&lt;/p&gt;
+
+&lt;p&gt;The relevant server-side code was fixed to appropriately sanitize user input. The package handling libraries now reject any attempts to navigate up the filesystem hierarchy, meaning that these attacks are no longer possible.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, due to the nature of these attacks, we cannot be sure that they were not exploited, but we have no evidence that they were. Therefore, we encourage anyone with an account to change their password, and to treat the password as compromised. Please also check your existing packages to make sure they are as you left them.&lt;/p&gt;
+
+&lt;p&gt;Furthermore, using the &lt;code&gt;file/untar&lt;/code&gt; and &lt;code&gt;file/unzip&lt;/code&gt; libraries, the raco pkg catalog-archive command, and the internal functions that manipulate packages is not safe on untrusted inputs in released versions of Racket. Since raco pkg install executes code, it is already unsafe to use on untrusted packages, but simply extracting malicious packages is also unsafe.&lt;/p&gt;
+
+&lt;p&gt;We have not released a new version of Racket, but encourage anyone who needs to perform these commands to use a snapshot build. The next version of Racket will be released on-schedule in October. If, however, you would benefit from a patched version of Racket 6.2.1, please let us know.&lt;/p&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Modules, Packages and Collections</title>
+   <link>http://blog.racket-lang.org/2015/08/modules-packages-and-collections.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2015-08-modules-packages-and-collections-html</guid>
+   <pubDate>Tue, 11 Aug 2015 21:33:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Vincent St-Amour&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket, the Racket docs and Racketeers use a number of terms to refer to various units of Racket code. Of those, module, package and collection refer to related but distinct concepts. Their exact relations and distinctions can be confusing for new users. This is an attempt at explaining those concepts, what they are for, and how they relate to each other.&lt;/p&gt;
+
+&lt;p&gt;To begin with the smallest of the three, a file that begins with #lang and the name of a language is a module. There are also other ways to construct modules, but let&amp;rsquo;s not worry about those.&lt;/p&gt;
+
+&lt;p&gt;A module is the basic unit of functionality for Racket code.&lt;/p&gt;
+
+&lt;p&gt;Once your Racket programs get larger, though, you&amp;rsquo;ll want to split them over multiple modules. This allows you to organize your source better, enables separate compilation, and makes it possible for you to mix and match modules written in different Racket languages (&lt;a href="http://docs.racket-lang.org/guide/index.html"&gt;Racket&lt;/a&gt;, &lt;a href="http://docs.racket-lang.org/ts-guide/index.html"&gt;Typed Racket&lt;/a&gt;, &lt;a href="http://docs.racket-lang.org/datalog/index.html"&gt;Datalog&lt;/a&gt;, &lt;a href="http://docs.racket-lang.org/scribble/index.html"&gt;Scribble&lt;/a&gt;, etc.).&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s where packages and collections come in. They help you organize your modules.&lt;/p&gt;
+
+&lt;p&gt;A package is an group of modules that you can install together, and that usually provide one piece of functionality. To pick a random example, take the &lt;a href="http://pkg-build.racket-lang.org/doc/pict3d/index.html"&gt;pict3d&lt;/a&gt; package from &lt;a href="http://pkgs.racket-lang.org/"&gt;pkgs.racket-lang.org&lt;/a&gt;. That package is a collection of modules which together implement a functional 3D engine. You can install it using raco pkg install pict3d, or via the graphical package manager in DrRacket.&lt;/p&gt;
+
+&lt;p&gt;So, to sum up, packages are units of code distribution.&lt;/p&gt;
+
+&lt;p&gt;A collection is a group of modules whose functionality is related to the same topic, for example data structures (the data collection), or wrapper libraries for use with Typed Racket (the typed collection). Modules are referred to and required using collection paths. For example, when you require racket/class, you&amp;rsquo;re requiring the class module from the racket collection.&lt;/p&gt;
+
+&lt;p&gt;Modules within a collection do not necessarily come from the same package, and may not be developed together. For example, some data structures in the data collection are provided as part of the core of Racket, such as the integer sets in &lt;a href="http://docs.racket-lang.org/data/integer-set.html"&gt;&lt;code&gt;data/integer-set&lt;/code&gt;&lt;/a&gt;. Other data structures are provided by additional packages which you may need to install separately, such as the hash-array-mapped tries in &lt;code&gt;data/hamt&lt;/code&gt;, which are provided by the &lt;a href="http://pkg-build.racket-lang.org/doc/hamt/index.html"&gt;&lt;code&gt;hamt&lt;/code&gt;&lt;/a&gt; package. Having both of those in the data collection signals that they both provide data structures. If you develop your own data structures, putting them in the data collection is probably the right thing to do.&lt;/p&gt;
+
+&lt;p&gt;Many packages, however, provide functionality that does not fall under existing categories, and provide their own, new collection. For example, the &lt;code&gt;pict3d&lt;/code&gt; package we discussed above puts its modules in the &lt;code&gt;pict3d&lt;/code&gt; collection. For that reason, the distinction between package and collection is sometimes a bit blurred.&lt;/p&gt;
+
+&lt;p&gt;So, to sum up, collections are units of code classification.&lt;/p&gt;
+
+&lt;p&gt;The term library does not have a technical meaning in Racket. We usually use it to refer to a package, or to a set of packages that are developed together. For example, the &lt;a href="http://docs.racket-lang.org/rackunit/index.html"&gt;Rackunit&lt;/a&gt; library is split across multiple packages: &lt;code&gt;rackunit&lt;/code&gt;, &lt;code&gt;rackunit-lib&lt;/code&gt;, &lt;code&gt;rackunit-gui&lt;/code&gt;, &lt;code&gt;rackunit-plugin-lib&lt;/code&gt;, &lt;code&gt;rackunit-doc&lt;/code&gt; and &lt;code&gt;rackunit-test&lt;/code&gt;. This allows packages to only depend on part of Rackunit. For example, a package for a string-processing library probably should not depend on the &lt;a href="http://docs.racket-lang.org/gui/index.html"&gt;Racket GUI library&lt;/a&gt; (to be deployed on headless servers, for example), and so should depend on the &lt;code&gt;rackunit-lib&lt;/code&gt; package for its testing, instead of on the full &lt;code&gt;rackunit&lt;/code&gt; package, which brings in GUI support via the &lt;code&gt;rackunit-gui&lt;/code&gt; package, and would introduce a dependency to Racket&amp;rsquo;s GUI library.&lt;/p&gt;
+
+&lt;p&gt;Hopefully, this clarifies the Racket code organization terminology a bit.&lt;/p&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Why was there no mention of &amp;ldquo;units&amp;rdquo; http://docs.racket-lang.org/reference/mzlib_unit.html ?&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Franklin Chen, 11 August 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Units are also a modularity mechanism, but at a more local level. That is, they&amp;rsquo;re used to organize code at and below the module-level, rather than above the module level, as collections and packages do.&lt;/p&gt;
+
+&lt;p&gt;Units, in modern Racket, are also a &amp;ldquo;niche&amp;rdquo; feature, that&amp;rsquo;s useful in very specific situations. In contrast, most Racket programmers writing programs that don&amp;rsquo;t fit in a single file will end up working with packages and collections, whether they realize it or not.&lt;/p&gt;
+
+&lt;p&gt;But to say a few words about them, units are first-class module-like values. Unlike Racket modules, they allow recursive linking, which allows for circular dependencies. They also allow dynamic linking, which makes it possible to &amp;ldquo;swap in&amp;rdquo; different implementations of the same signature. Dynamic linking also makes units useful for implementing plug-in systems, like the one in DrRacket, which can dynamically link in new plug-ins.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Vincent St-Amour, 13 August 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Thanks Vincent for an illuminating post. Regarding units, is it useful to think of modules as units with automatically generated signatures bounded together with the code?&lt;/p&gt;
+
+&lt;p&gt;Modules cannot be recursively linked because they are values that are evaluated at compile/run time, while units can be because they can be represented by signature values that can be linked to arbitrary units satisfying the signatures. Is that a reasonable phrasing of the difference between modules and units?&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m curious, what are the disadvantages of organizing code using only units versus using modules?&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Alexander McLin, 14 August 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Alexander,&lt;/p&gt;
+
+&lt;p&gt;The main thing modules and units have in common is that they are code containers that import and export names. Beyond that, the two systems are different enough that I don&amp;rsquo;t think trying to understand one in terms of the other is helpful. Modules are static, while units are dynamic. Units are values, whereas modules are not. Modules interact nicely with macros, but units don&amp;rsquo;t.&lt;/p&gt;
+
+&lt;p&gt;Some of the disadvantages of using units instead of modules are: * units do not support importing / exporting macros * linking errors happen at run-time instead of compile-time * units are syntactically more heavyweight * the dynamic nature of units prevents some optimizations That said, units are the right tool for some use cases, but modules are what you want most of the time.&lt;/p&gt;
+
+&lt;p&gt;Because units predate modules in Racket&amp;rsquo;s history, there&amp;rsquo;s a fair amount of code out there (including in the main distribution) that uses units in places where we&amp;rsquo;d use modules today, e.g., parts of the net collection. That code is doing roughly what you&amp;rsquo;re describing, so you may be interested in looking at the result. :)&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Vincent St-Amour, 16 August 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Thank you Vincent!&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Alexander McLin, 17 August 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket v6.2.1</title>
+   <link>http://blog.racket-lang.org/2015/08/racket-v621.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2015-08-racket-v621-html</guid>
+   <pubDate>Tue, 11 Aug 2015 00:48:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket v6.2.1 is now available from &lt;a href="http://racket-lang.org/"&gt;http://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Version 6.2.1 patches the recent v6.2 release in three small ways:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;For the How to Design Programs teaching languages, DrRacket offers an option to use the old style for printing the constants &lt;code&gt;true&lt;/code&gt;, &lt;code&gt;false&lt;/code&gt;, and &lt;code&gt;empty&lt;/code&gt; instead of &lt;code&gt;#true&lt;/code&gt;, &lt;code&gt;#false&lt;/code&gt;, and &lt;code&gt;'()&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The teaching languages come with some additional functions to match the August 2015 &lt;a href="http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html"&gt;stable release of HtDP 2nd edition&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;A repair to the compiler avoids an infinite loop at compile time for certain expressions that should loop forever at run time.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;Feedback Welcome&lt;/p&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;did anyone notice that the download page is broken?&lt;/p&gt;
+
+&lt;p&gt;when i click download on the home page, it gives a 403 forbidden error with message:&lt;/p&gt;
+
+&lt;p&gt;Request forbidden by administrative rules.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Ke Kevin, 7 September 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Are you still seeing that error? I can&amp;rsquo;t reproduce it on my end.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Vincent St-Amour, 7 September 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;it&amp;rsquo;s ok now.&lt;/p&gt;
+
+&lt;p&gt;cheers&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Ke Kevin, 10 September 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket v6.2</title>
+   <link>http://blog.racket-lang.org/2015/06/racket-v62.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2015-06-racket-v62-html</guid>
+   <pubDate>Sat, 20 Jun 2015 06:14:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket version 6.2 is now available from &lt;a href="http://racket-lang.org/"&gt;http://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;With this release we are taking a major step forward to get our user community even more involved than in the past. Over the past six months, we have re-organized the Racket code base into a small core code repo and many other package repos, all found on GitHub. If you have time and if you wish to get involved, please take a look at the GitHub repos and find your favorite places to learn, fix, and enhance our world.&lt;/p&gt;
+
+&lt;p&gt;The core repo is at &lt;a href="https://github.com/plt/racket"&gt;https://github.com/plt/racket&lt;/a&gt;, and the package repos are listed at &lt;a href="https://github.com/racket/"&gt;https://github.com/racket/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/plt/racket"&gt;core repo&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;The package manager supports a direct references to Git repositories via &amp;ldquo;git://[&amp;hellip;]&amp;rdquo;, &amp;ldquo;http://[&amp;hellip;].git&amp;rdquo;, and &amp;ldquo;https://[&amp;hellip;].git&amp;rdquo; URLs. (Previously, only references to GitHub were supported.)&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;A &lt;code&gt;--clone&lt;/code&gt; option for &lt;code&gt;raco pkg install&lt;/code&gt; or &lt;code&gt;raco pkg update&lt;/code&gt; facilitates Git-based package development. If a package X has a Git repository source, installing and updating the package pulls from the repository in a read-only mode. Using &lt;code&gt;raco pkg update --clone X&lt;/code&gt; switches the local installation to a repository checkout that is suitable for modifying the package implementation, issuing pull requests, pushing changes, and so on.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;Using &lt;code&gt;raco pkg update --lookup X&lt;/code&gt; switches the package back to the default installation mode.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/racket/drracket"&gt;drracket&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Its on-line check syntax works with graphical content.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Increased availability of DrRacket&amp;rsquo;s blueboxes, including method and constructor information.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The &amp;ldquo;Open Require Path&amp;rdquo; menu item supports ".." in relative pathnames.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/racket/data"&gt;data&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;Added &lt;code&gt;data/enumerate&lt;/code&gt;, a library that supports efficient enumeration of data structures&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/racket/redex"&gt;redex&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Its &lt;code&gt;redex-check&lt;/code&gt; facility uses data (in addition to random) enumeration to try to find counter-examples.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Its &lt;code&gt;generate-term&lt;/code&gt; function accepts additional arguments to return the &amp;ldquo;i&amp;rdquo;-th member of a pattern using &lt;code&gt;data/enumerate&lt;/code&gt; (meaning it efficiently supports very large values of &amp;ldquo;i&amp;rdquo;).&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The examples collection includes Launchbury&amp;rsquo;s 1993 big-step lazy semantics.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/racket/htdp"&gt;htdp&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;code&gt;2htdp/image&lt;/code&gt;&amp;rsquo;s polygon may be built out of bezier curves instead of just straight lines (see the docs for &lt;code&gt;pulled-point&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;code&gt;2htdp/abstraction&lt;/code&gt; is a teachpack for instructors and students who wish to use &lt;code&gt;for/*&lt;/code&gt; loops, &lt;code&gt;match&lt;/code&gt;, &lt;code&gt;define-type&lt;/code&gt; and &lt;code&gt;type-cases&lt;/code&gt; in ISL and ISL+.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;code&gt;2htdp/universe&lt;/code&gt; programs can be exported using DrRacket&amp;rsquo;s executable creation mechanism and they behave properly when run independently.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/racket/typed-racket"&gt;typed-racket&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket in DrRacket displays tooltips that show the types of expressions. Tooltips are also displayed for type errors.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket loads generated contracts only when needed. This reduces memory use and startup time for Typed Racket programs.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket has improved support for prefab structures, future semaphores, and async channels.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket understands when two different variables refer to the same thing, and updates types accordingly. This particularly improves the type checking of macros such as &lt;code&gt;match&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;Feedback Welcome&lt;/p&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>King of the Hill on Rosetta Code</title>
+   <link>http://blog.racket-lang.org/2015/05/king-of-the-hill-on-rosetta-code.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2015-05-king-of-the-hill-on-rosetta-code-html</guid>
+   <pubDate>Sun, 03 May 2015 15:30:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Tim Brown&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket is &lt;em&gt;&amp;ldquo;King of the Hill&amp;rdquo;&lt;/em&gt; on Rosetta Code: &lt;strong&gt;This announcement is a follow up to &amp;ldquo;800!&amp;rdquo;.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;In it I said we&amp;rsquo;d &lt;em&gt;"[S]ee you at 1000!"&lt;/em&gt;; but you&amp;rsquo;ll understand why we stopped at this milestone.&lt;/p&gt;
+
+&lt;p&gt;Please read that article if you need an introduction to Rosetta Code, and the efforts being made to implement Racket tasks there, and more detail on how you can help. It is more instructive and less braggart than this post.&lt;/p&gt;
+
+&lt;p&gt;On Rosetta Code (RC), early in the morning on April 29th, Racket drew level with Tcl in the number of tasks that had been implemented for it. Shortly after that we could announce that:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Racket has the Most Tasks Implemented in Any Language on Rosetta Code!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Before I go into too much detail, it must be said that this is another amazing achievement. I, and I&amp;rsquo;m sure the rest of the Racket community, want to thank and congratulate everyone who has contributed to this effort.&lt;/p&gt;
+
+&lt;h2 id="how-did-this-happen"&gt;How Did This Happen?&lt;/h2&gt;
+
+&lt;p&gt; On the front page of RC&amp;rsquo;s site, it states its goal as:&lt;/p&gt;
+
+&lt;blockquote&gt;
+ &lt;p&gt;&amp;hellip; to present solutions to the same task in as many different languages as possible, to demonstrate how languages are similar and different, and to aid a person with a grounding in one approach to a problem in learning another.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt; As well as achieving these comparative goals, implementing tasks also provides a useful library of tools, applications and examples for Racket users themselves. Therefore, doing so is a laudable activity in its own right. The persistent effort and progress have been made by Racketeers on RC, both before and since the &amp;ldquo;800!&amp;rdquo; tasks post has been (mostly) performed in that spirit. And that should be plenty enough incentive for &lt;em&gt;you&lt;/em&gt; to do so, too.&lt;/p&gt;
+
+&lt;p&gt; But I admit, there is a competitive element that creeps in (affecting some more than others). After having passed the 800 task mark after spending so much time in second place to get past the current leader, Tcl to stay &lt;a href="Python,"&gt;ahead of Python&lt;/a&gt; these, too, provide plenty of motivation to implement tasks. And if winning isn&amp;rsquo;t important, why, then, do we keep score?&lt;/p&gt;
+
+&lt;p&gt; And in &lt;em&gt;that&lt;/em&gt; spirit, early in the morning on April 29th, I was busily [cherry-picking] [2] tasks on Rosetta Code to help close the gap with Tcl; when I thought I would take a quick check on Tcl&amp;rsquo;s and Racket&amp;rsquo;s [task counts][3]. From what I could see, both had a task count of 845! Racket had drawn level with, Tcl as the &lt;em&gt;Joint Most Popular Programming Language&lt;/em&gt; on RC.&lt;/p&gt;
+
+&lt;p&gt; I got the independent verification of this from the #racket [IRC Channel][4]. It was true! But Racket was &lt;em&gt;only joint first.&lt;/em&gt; This point was not lost on the denizens of IRC (&lt;code&gt;zedoary&lt;/code&gt; being one); who posted two more tasks in very quick succession, bringing Racket up to 847 &amp;mdash; two clear of the previous leader!&lt;/p&gt;
+
+&lt;p&gt; How does this Help Racket?  &amp;mdash;&lt;/p&gt;
+
+&lt;p&gt; &lt;strong&gt;Plenty of Examples&lt;/strong&gt;  Look back at the intentions of Rosetta Code itself. It is expected that users of other languages can come and compare what they know with what Racket provides. Strictly speaking, of course, in a lot of cases they won&amp;rsquo;t be able to compare since the other language won&amp;rsquo;t be represented whereas Racket will.&lt;/p&gt;
+
+&lt;p&gt; There is also, now, a large collection of Racket examples, which Racketeers themselves can use to improve their understanding of Racket. Strangely, this is not actually one of the stated objectives of RC; it is a welcome side-effect of the work.&lt;/p&gt;
+
+&lt;p&gt; &lt;strong&gt;A Tool for Advocacy&lt;/strong&gt;  Advocates of Racket can use this position on Rosetta Code to show that Racket is as, if not more, capable than any language. Especially for general purpose computing.&lt;/p&gt;
+
+&lt;p&gt; &amp;ldquo;Racket is Number One on Rosetta Code&amp;rdquo; isn&amp;rsquo;t a bad place to start with, I guess.&lt;/p&gt;
+
+&lt;p&gt; Additionally, I would like to point out that whatever any of the other languages (or tasks) seem to throw at it, there is something in Racket that allows it to take it in its stride. Sometimes the implementations have had high [line counts][5]; but they rarely, if ever, seem contrived.&lt;/p&gt;
+
+&lt;p&gt; If you need to provide reasons for tasks not being implemented in Racket, here are a few you can use:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;em&gt;Nobody has implemented them &amp;ldquo;yet&amp;rdquo;:&lt;/em&gt; let it be known that we&amp;rsquo;ve done the best part of 850 tasks, and there are only so many hours in the day.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;em&gt;Someone has written an FFI for Tcl to an obscure library:&lt;/em&gt; The task for Tcl has then simply been to load the FFI. The task for Racket is either to a) implement the library, which is much more effort than Tcl put in or b) to produce FFI bindings itself, which after the first time doesn&amp;rsquo;t bring much to the party. The same holds true for tasks written &lt;em&gt;for&lt;/em&gt; languages which are basically DSLs, showing off how they work in domain for which they are specific.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;em&gt;The task is written and documented entirely in Russian:&lt;/em&gt; This makes translating it an &amp;ldquo;exercise.&amp;rdquo;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="is-it-time-to-rest-on-our-laurels"&gt;Is it Time to Rest on our Laurels?&lt;/h2&gt;
+
+&lt;p&gt; That was a rhetorical question.&lt;/p&gt;
+
+&lt;p&gt;Please ignore it.&lt;/p&gt;
+
+&lt;p&gt;There are many reasons to continue to work on Rosetta Code.&lt;/p&gt;
+
+&lt;h2 id="we-havent-finished"&gt;We Haven&amp;rsquo;t Finished&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Implement Some Outstanding Tasks!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are 922 tasks on Rosetta Code. 849 are implemented in Racket (more have been added as we speak)! Even excluding the impossible and Russian tasks, that&amp;rsquo;s still many more tasks to implement.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Improve Existing Tasks!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Some tasks are old, and lack style. Some may even be re-branded Scheme tasks. Anyone can edit these tasks. Add style to them. Tasks can then not only be an example of how to use the syntax and features of Racket, but also exemplars of well-written code.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Propose New Tasks!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are things that Racket and other Lisps do well that haven&amp;rsquo;t been illustrated on RC. How about the fancier macro facilities that Racket provides?&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m sure you can think of something. Might you suggest something involving &lt;em&gt;anaphoric macros&lt;/em&gt;?&lt;/p&gt;
+
+&lt;p&gt;Oh, and if you &lt;em&gt;do&lt;/em&gt; suggest something, maybe you can implement it, too!&lt;/p&gt;
+
+&lt;h2 id="they-havent-finished"&gt;They Haven&amp;rsquo;t Finished&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;New Tasks are Being Invented!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tasks are being added to Rosetta Code constantly. Keep an eye out, some of these are really quite interesting.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tasks are Being Implemented!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt; Tcl and Python (and maybe others in the future) will want what we have earned here, and they are going to continue to propose and implement tasks. &lt;em&gt;&amp;ldquo;King of the Hill&amp;rdquo;&lt;/em&gt; is a precarious place. The more clear blue water between us and them Just do it! Buy glucose sports drinks&lt;/p&gt;
+
+&lt;p&gt; Maybe I &lt;em&gt;am&lt;/em&gt; getting too competitive.&lt;/p&gt;
+
+&lt;p&gt; Finally  &amp;mdash;&lt;/p&gt;
+
+&lt;p&gt; Once again, many thanks to the people who have contributed to Racket on Rosetta Code. Including those who have answered questions on the mailing list or IRC. Your help has been invaluable even if the questions made you wonder &amp;ldquo;why on earth does he or she want to do &lt;em&gt;that?&lt;/em&gt;&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt; Finally, but certainly not least: Thanks to the folk at Rosetta Code. They&amp;rsquo;ve provided a site and experience which have been instructive, educational and fun; and without whom none of this would have been possible.&lt;/p&gt;
+
+&lt;p&gt;is also doing magnificently well, to be sure. It even had the audacity to draw level with Racket according to the FUPPLR a couple of times.&lt;/p&gt;
+
+&lt;p&gt;[2] A good way to start on Rosetta Code is to find tasks that are &lt;em&gt;easy&lt;/em&gt; to implement. In order to find &lt;em&gt;easy&lt;/em&gt; tasks you will need to browse the unimplemented tasks (and maybe some implemented ones, too) and decide what you could either implement and/or translate without breaking too much of a sweat. In the process you will also develop a sense of what tasks are out there ready to be implemented. A good example of an &lt;em&gt;easy&lt;/em&gt; task would have been &lt;a href="http://www.rosettacode.org/wiki/Pentagram"&gt;Pentagram&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;[3] There is a &lt;a href="http://timb.net/popular-languages.html"&gt;Frequently Updated Popular Programming Languages Report&lt;/a&gt;, which I refer to but recently it has been miscounting tasks, and needs a bit of a look at.&lt;/p&gt;
+
+&lt;p&gt;[4] The &lt;code&gt;#racket&lt;/code&gt; IRC channel is a fantastic community if you need support with your Racket issues&lt;/p&gt;
+
+&lt;p&gt;[5] Remember that Rosetta Code is not a &lt;em&gt;Golf&lt;/em&gt; site. If it were, J&amp;rsquo;s weird 20-character-strings-that-do-anything (if only you could remember what they do 30 seconds after you&amp;rsquo;ve written them) would win hands down. Keep to the &lt;a href="http://www.ccs.neu.edu/home/matthias/Style/style/"&gt;Style Guide&lt;/a&gt; as best you can. And since RC is a wiki, if you&amp;rsquo;re not perfect, others can improve the style of your code.&lt;/p&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Where is the list of unsolved task? I would think this would be in one place.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;L.A., 6 May 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;The list of unsolved tasks is here: http://rosettacode.org/wiki/Reports:Tasks_not_implemented_in_Racket&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Jens Axel Søgaard, 6 May 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Scheme Workshop 2015</title>
+   <link>http://blog.racket-lang.org/2015/04/scheme-workshop-2015.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2015-04-scheme-workshop-2015-html</guid>
+   <pubDate>Mon, 20 Apr 2015 20:44:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Call For Papers:&lt;/p&gt;
+
+&lt;p&gt;Scheme and Functional Programming Workshop 2015&lt;/p&gt;
+
+&lt;p&gt;Vancouver, British Columbia, Canada&lt;/p&gt;
+
+&lt;p&gt;(Co-located with ICFP 2015)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://andykeep.com/SchemeWorkshop2015/"&gt;http://andykeep.com/SchemeWorkshop2015/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Submissions related to Scheme, Racket, Clojure, and functional programming are welcome and encouraged. Topics of interest include but are not limited to:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Program-development environments, debugging, testing&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Implementation (interpreters, compilers, tools, benchmarks, etc.)&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Syntax, macros, hygiene&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Distributed computing, concurrency, parallelism&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Interoperability with other languages, FFIs&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Continuations, modules, object systems, types&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Theory, formal semantics, correctness&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;History, evolution and standardization of Scheme&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Applications, experience and industrial uses of Scheme&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Education&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Scheme pearls (elegant, instructive uses of Scheme)&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;We also welcome submissions related to dynamic or multiparadigmatic languages and programming techniques.&lt;/p&gt;
+
+&lt;p&gt;Important Dates:&lt;/p&gt;
+
+&lt;p&gt;May 22nd, 2015 - Paper deadline&lt;/p&gt;
+
+&lt;p&gt;June 26th, 2015 - Author notification&lt;/p&gt;
+
+&lt;p&gt;July 19th, 2015 - Camera-ready deadline&lt;/p&gt;
+
+&lt;p&gt;September 4th, 2015 - Workshop&lt;/p&gt;
+
+&lt;p&gt;Submissions must be in ACM proceedings format, no smaller than 9-point type (10-point type preferred). Microsoft Word and LaTeX templates for this format are available at: &lt;a href="http://www.acm.org/sigs/sigplan/authorInformation.htm"&gt;http://www.acm.org/sigs/sigplan/authorInformation.htm&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Submissions should be in PDF and printable on US Letter.&lt;/p&gt;
+
+&lt;p&gt;To encourage authors to submit their best work, this year we are encouraging shorter papers (around 6 pages, excluding references). This is to allow authors to submit longer, revised versions of their papers to archival conferences or journals. Longer papers (10&amp;mdash;12 pages) are also acceptable, if the extra space is needed. There is no maximum length limit on submissions, but good submissions will likely be in the range of 6 to 12 pages.&lt;/p&gt;
+
+&lt;p&gt;More information available at: &lt;a href="http://andykeep.com/SchemeWorkshop2015/"&gt;http://andykeep.com/SchemeWorkshop2015/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Organizers:&lt;/p&gt;
+
+&lt;p&gt;Andy Keep, Cisco Systems Inc. (General Chair)&lt;/p&gt;
+
+&lt;p&gt;Ryan Culpepper, Northeastern University (Program Chair)&lt;/p&gt;
+
+&lt;p&gt;(Apologies for duplications from cross-posting.)&lt;/p&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>The Racket package system and PLaneT</title>
+   <link>http://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-12-the-racket-package-system-and-planet-html</guid>
+   <pubDate>Wed, 10 Dec 2014 20:58:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Jay McCarthy&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We have recently moved the majority of Racket&amp;rsquo;s code base into packages and repositories separate from the main core repository. This has given the Racket package system another cycle of attention. Whenever this happens, there are often questions and confusion about how to solve various distribution problems with the package system. A natural point of comparison is the older PLaneT system provided by Racket that appears to solve similar problems. In this blog post, I attempt to explain the purpose of the package system and its relation to PLaneT.&lt;/p&gt;
+
+&lt;p&gt;The package system and PLaneT do not solve the same problem and don&amp;rsquo;t exist for the same reason.&lt;/p&gt;
+
+&lt;p&gt;PLaneT is:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;A file distribution mechanism for source code.&lt;/p&gt;
+  &lt;p&gt;Via &lt;code&gt;.plt&lt;/code&gt; files that are installed into a particular place on your machine and then &lt;code&gt;raco setup&lt;/code&gt;&amp;rsquo;d.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;A mechanism for automatically downloading and installing source code just before it is needed by programs.&lt;/p&gt;
+  &lt;p&gt;Via the &lt;code&gt;(planet ...)&lt;/code&gt; require form.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;A centralized database of libraries&lt;/p&gt;
+  &lt;p&gt;Via the PLaneT website and its server &amp;amp; protocol which were undocumented and proprietary for the majority of PLaneT&amp;rsquo;s life&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;A prescriptive model of how programs and libraries should be composed.&lt;/p&gt;
+  &lt;p&gt;Specifically the system of major/minor versions, tagging packages by author name, and embedding the names of packages in source code.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;In contrast, the package system is:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;A file distribution mechanism for source code, byte code, and documentation. Via the &lt;code&gt;raco pkg&lt;/code&gt; command.&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;In this way, the package system is almost identical to an operating system package system like Debian&amp;rsquo;s dpkg and apt systems. The problem is very finely tailored and becomes more flexible as a result (notice that we can now distribute byte code and documentation.) This design aspires to follow the admonition of &lt;a href="http://people.csail.mit.edu/jaffer/r3rs_2.html#SEC2"&gt;holy writ&lt;/a&gt;: &amp;ldquo;Programming languages should be designed not by piling feature on top of feature, but by removing the weaknesses and restrictions that make additional features appear necessary.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Furthermore, it was intended to solve practical problems throughout the Racket ecosystem. In particular, one of the common complaints people had and have about PLaneT is the very long install times because of long builds. The package system allows this problem to be solved by distributing pre-built code.&lt;/p&gt;
+
+&lt;p&gt;Since the package system specifically does not address jobs 2, 3, or 4 of PLaneT, we have to ask, &amp;ldquo;Do they need to be solved?&amp;rdquo; and if so, &amp;ldquo;How can we solve them on top of the package system, i.e. as a library in honor of the design principle?&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;In particular, 2 and 3 are very painful for people wanting to just use the file distribution mechanism of PLaneT. 2 causes unpredictability, because you don&amp;rsquo;t know if running a program will start a long invocation of &amp;ldquo;raco setup&amp;rdquo;, require Internet access, and start running un-vetted code. 3 requires you to share your code if you want to use the file distribution mechanism and is a single point of failure for doing installation.&lt;/p&gt;
+
+&lt;p&gt;By not mandating how to address 2 and 3 in the package system, we offer flexibility. Here is where the solutions to these jobs are now:&lt;/p&gt;
+
+&lt;ol&gt;
+ &lt;li&gt;
+  &lt;p&gt;There is currently no way to get automatic installs of packages. However, both DrRacket and xrepl offer advice about which packages you might want to install to compile and run the program. It would be natural to extend this advice to be automatic and patches are welcome. Given the experiences of operating systems which merely make suggestions (&lt;code&gt;nethack: command not found, provided by nethack-console&lt;/code&gt;), I personally feel like we are at the sweet spot.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The file distribution mechanism&amp;rsquo;s flexible package sources combine with a very simple protocol for package catalogs (Take a URL, add&lt;code&gt;/pkg/&lt;/code&gt;, add a string, get a &lt;code&gt;read&lt;/code&gt;-able hash table) to look up packages you don&amp;rsquo;t yet have. As a service, we run a few catalogs (one for each release, plus &lt;a href="http://pkgs.racket-lang.org"&gt;pkgs.r-l.o&lt;/a&gt;). But we expect that users with special needs (such as sensitive installations that need exactly certain tested and trusted versions, especially with proprietary software) will build their own catalogs on private Web sites.&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;
+
+&lt;p&gt;Clearly, however, job 4 is where PLaneT and the package system differ the most.&lt;/p&gt;
+
+&lt;p&gt;With the package system, we follow the precedent of operating systems. An OS package&amp;rsquo;s job is to get files into the right spot. An OS package contains a binary and instructions to install it as &lt;code&gt;/usr/bin/zsh&lt;/code&gt;. It is not typical in OSes to be able to install multiple packages (such as different &amp;ldquo;versions&amp;rdquo; of the &amp;ldquo;same&amp;rdquo; package) that both provide &lt;code&gt;/usr/bin/zsh&lt;/code&gt;. When you&amp;rsquo;re at a Unix prompt, you don&amp;rsquo;t have to write &lt;code&gt;zsh-5.0.5/usr/bin/zsh&lt;/code&gt;. It&amp;rsquo;s possible that many consider this is a big problem with OSes and indeed we do observe that it is fairly common to provide packages that provide binaries and libraries with embedded names such as how on my machine I have &lt;code&gt;python2.6&lt;/code&gt;, &lt;code&gt;python2.7&lt;/code&gt;, and &lt;code&gt;python3.2&lt;/code&gt; all in my &lt;code&gt;$PATH&lt;/code&gt;. It is important to realize, however, that the &lt;code&gt;deb&lt;/code&gt; format and the &lt;code&gt;apt&lt;/code&gt; tool didn&amp;rsquo;t need to change to support this change or future changes in perspective in how to compose code.&lt;/p&gt;
+
+&lt;p&gt;I hope this analogy helps understand the Racket package system. In the package system, a package doesn&amp;rsquo;t install &amp;ldquo;binaries&amp;rdquo;, &amp;ldquo;man pages&amp;rdquo;, and &amp;ldquo;init scripts&amp;rdquo;, but installs similar things, such as &amp;ldquo;module paths&amp;rdquo;, &amp;ldquo;documentation manuals&amp;rdquo;, and "&lt;code&gt;raco&lt;/code&gt; commands". Each of these has a notion of conflict: can&amp;rsquo;t have two &lt;code&gt;zsh&lt;/code&gt;s or two &lt;code&gt;racket/list&lt;/code&gt;s; can&amp;rsquo;t have two &lt;code&gt;zsh.1&lt;/code&gt; pages or two docs named &lt;code&gt;doc&lt;/code&gt;; can&amp;rsquo;t have two modules trying to provide &lt;code&gt;raco neo-tokyo-is-about-to-explode&lt;/code&gt;. If you find a random &lt;code&gt;.deb&lt;/code&gt; on the Internet, can you predict what binaries it will contain from its name? No. The same goes for Racket packages. However, if you are egregiously weird, then people probably won&amp;rsquo;t want to install your packages, just like for random &lt;code&gt;deb&lt;/code&gt;s.&lt;/p&gt;
+
+&lt;p&gt;However, clearly rules are helpful. In the world of operating systems, you know that basically all packages distributed by Debian can be installed at the same time, except for &amp;ldquo;virtual packages&amp;rdquo; that do stuff like selecting whether &lt;code&gt;postfix&lt;/code&gt; or &lt;code&gt;sendmail&lt;/code&gt; should be responsible for the &lt;code&gt;sendmail&lt;/code&gt; command. These rules are not enforced through technology, though. Instead, the Debian maintainers have a social process that enforces them, with information being provided by technology (such as regression systems that identify unintended conflicts.) The catalog server that the Racket team provides helps facilitate a similar process with the concentric rings (all ring &amp;lt;=1 packages can be installed at once and ring 1&amp;lt; packages can do anything.)&lt;/p&gt;
+
+&lt;p&gt;Non-conflicting sets of packages is the simplest rule to define and enforce. Other rules about backwards compatibility are much more complicated to define and enforce. I do not believe there is much precedent in the world of OSes, although we can see a little bit of what they do through things like &lt;code&gt;libgtk&lt;/code&gt;, &lt;code&gt;libgtk2&lt;/code&gt;, and &lt;code&gt;libgtk3&lt;/code&gt;, where generally code written for one &lt;code&gt;libgtk2&lt;/code&gt; package is compatible with all &lt;code&gt;libgtk2&lt;/code&gt; packages made in the future, but &lt;code&gt;libgtk3&lt;/code&gt; is effectively a totally different package and introduces totally separate binaries like &lt;code&gt;gtk3-config&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The most that the Racket team attempts to do here is to say, &amp;ldquo;Here are the rules we will follow and we think you should follow them too.&amp;rdquo; Specifically, that we will maintain backwards compatibility or make a new package. We can&amp;rsquo;t and won&amp;rsquo;t enforce this, nor do we always live up to it with our own work (but we feel really bad about it when we do.)&lt;/p&gt;
+
+&lt;p&gt;Although my main goal of this section has been to explain my solution to (4), a great thing about the package system is that it is not binding at all. You can decide to follow the same rules as PLaneT. It is easy to do so:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Always name your packages &lt;code&gt;$AUTHOR-$PACKAGE-$MAJOR&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Always provide modules from only the collection, &lt;code&gt;$AUTHOR-$PACKAGE-$MAJOR&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Maintain backwards compatibility within releases of &lt;code&gt;$AUTHOR-$PACKAGE-$MAJOR&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Update the &lt;code&gt;'version&lt;/code&gt; metadata in the package &lt;code&gt;info.rkt&lt;/code&gt; to reflect the &lt;code&gt;$MINOR&lt;/code&gt; version.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;And, boom!, you&amp;rsquo;ve recreated the rules of PLaneT to a T except for two things: (a) you&amp;rsquo;ll still need to put a dependency on &lt;code&gt;$AUTHOR-$PACKAGE-$MAJOR&lt;/code&gt; on the outside of code in a package &lt;code&gt;info.rkt&lt;/code&gt; file rather than just inside files and (b) you can&amp;rsquo;t use &lt;code&gt;$AUTHOR-$PACKAGE&lt;/code&gt; to refer to &amp;ldquo;whatever the current &lt;code&gt;$MAJOR&lt;/code&gt;&amp;rdquo; is.&lt;/p&gt;
+
+&lt;p&gt;The first compromise of adding something to the &lt;code&gt;info.rkt&lt;/code&gt; is fairly modest, as it requires O(1) line modifications.&lt;/p&gt;
+
+&lt;p&gt;The second compromise is more severe, although actually you could just maintain such a package and deal with the breakage that occurs when you try to upgrade. Such breakage, however, was present in PLaneT too, as when a package was installed based on &lt;code&gt;$AUTHOR-$PACKAGE&lt;/code&gt; only the local machine would cache the version used, so if you took the requiring module to another machine, it would download a new version and, potentially, have a backwards incompatibility problem. Using the package system in the most naive way (i.e. installing the &lt;code&gt;$AUTHOR-$PACKAGE&lt;/code&gt; at some point and programming to that) would work exactly the same as PLaneT, except that the package system was designed to be able to port installations from one machine to another with &lt;code&gt;raco pkg migrate&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I hope this blog post has helped explain the package system and shown that it does not prevent you from doing anything that PLaneT let you do, it only allows you to do more.&lt;/p&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I think node.js&amp;rsquo;s package manager gets versioning right. NPM uses semver to manage dependency versions, and it works well. The node-semver package demonstrates how this versioning works. A semver string is then included a module&amp;rsquo;s dependencies list, which can specify all sorts of things, including &amp;ldquo;use the latest version of the library,&amp;rdquo; &amp;ldquo;use the latest version given a particular major.minor string,&amp;rdquo; and &amp;ldquo;use this precise major.minor.patch&amp;rdquo; version.&lt;/p&gt;
+
+&lt;p&gt;NPM handles the rest, downloading the correct version of the dependencies. The reason this is tricky is that this requires every module to have its own set of dependencies, since different modules can request different versions of packages. I&amp;rsquo;m not sure exactly how Node handles loading multiple versions of the same dependency with regards to performance and interaction, though it might be worth looking into.&lt;/p&gt;
+
+&lt;p&gt;In contrast, the Racket package manager provides very little versioning support, and packages have to be installed in an entire user or installation scope, rather than having module-specific dependency versioning. Is this bad? I don&amp;rsquo;t know. But it&amp;rsquo;s different, and I think NPM&amp;rsquo;s model is worth considering.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Alexis King, 9 January 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;NPM uses local packages. Essentially, every dependancy you install is local to your package, and no other packages can access them. Your dependancies, in turn have a tree of packages that you can&amp;rsquo;t access. In other words, every single package gets a separate copy of its dependancies. This might seem terrible, but the node community is deeply rooted in UNIX, so most packages expose only a few functions doing one thing well, and so the overhead of having many copies is very low.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;g145, 4 September 2015&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>800!</title>
+   <link>http://blog.racket-lang.org/2014/11/800.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-11-800-html</guid>
+   <pubDate>Sun, 23 Nov 2014 18:40:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Tim Brown&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt; 800 (Racket Tasks On Rosetta Code)&lt;/p&gt;
+
+&lt;p&gt; Since (and even before) Asumu Takikawa&amp;rsquo;s post &amp;ldquo;200!&amp;rdquo; at the beginning of March 2013, folk have been beavering away, implementing tasks on &lt;a href="http://rosettacode.org"&gt;Rosetta Code&lt;/a&gt;. And on November 15th 2014:&lt;/p&gt;
+
+&lt;p&gt; &lt;strong&gt;800 tasks have now been Implemented1 in Racket on the Rosetta Code website!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt; Before I go any further it must be said that, without a doubt… this is awesome! This achievement represents a lot of work, and a lot of code. And everyone who has participated should be thanked and congratulated for getting this far.&lt;/p&gt;
+
+&lt;p&gt; So thank you. And &lt;em&gt;well done!&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt; What is Rosetta Code?: Rosetta Code (RC) describes itself as:&lt;/p&gt;
+
+&lt;blockquote&gt;
+ &lt;p&gt;&amp;hellip; a &lt;a href="http://en.wikipedia.org/wiki/Chrestomathy"&gt;programming chrestomathy&lt;/a&gt; site. The idea is to present solutions to the same task in as many different languages as possible, to demonstrate how languages are similar and different, and to aid a person with a grounding in one approach to a problem in learning another. Rosetta Code currently has 758 tasks, 134 draft tasks, and is aware of 560 languages, though we do not (and cannot) have solutions to every task in every language."2&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt; Of these tasks, 800 have been implemented in Racket… some tasks, like &lt;a href="http://rosettacode.org/wiki/Hello_world/Text"&gt;Hello World/Text&lt;/a&gt;, have been implemented in hundreds of languages. Some, however, like &lt;a href="rosettacode.org/wiki/Time-based_One-time_Password_Algorithm"&gt;Time-based One-time Password Algorithm&lt;/a&gt;, have only been implemented in 3 (including Racket).&lt;/p&gt;
+
+&lt;p&gt; If you haven&amp;rsquo;t already, I suggest you take a quick look about the site to get a feel of what that means in practice.&lt;/p&gt;
+
+&lt;p&gt; &lt;strong&gt;WARNING:&lt;/strong&gt; Rosetta Code is a wiki. Like any wiki it will steal your time from you as you browse tasks, algorithms, languages and the occasional link to Wikipedia. Don&amp;rsquo;t say I didn&amp;rsquo;t warn you.&lt;/p&gt;
+
+&lt;p&gt; What Can You Do With Rosetta Code?  &amp;mdash;&lt;/p&gt;
+
+&lt;p&gt; &lt;strong&gt;Learn From It&lt;/strong&gt;  Rosetta Code is a valuable resource with plenty of material to absorb and ideas to be had from. If you&amp;rsquo;re new to Racket, there are tasks like &lt;a href="http://rosettacode.org/wiki/Loops/For"&gt;Loops/For&lt;/a&gt; which will get you on your way with fundamental programming tasks.&lt;/p&gt;
+
+&lt;p&gt; If you want something juicier there are other tasks (like &lt;a href="http://rosettacode.org/wiki/Nonogram_solver"&gt;Nonogram solver&lt;/a&gt; which runs to over 400 lines of Racket) for you to pick over.&lt;/p&gt;
+
+&lt;p&gt; And there&amp;rsquo;s everything in between.&lt;/p&gt;
+
+&lt;p&gt; &lt;strong&gt;Write Code!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Each task gives you a chance to think, &amp;ldquo;Is this how I would do this?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Even if I don&amp;rsquo;t submit something, I find it&amp;rsquo;s fun to write some code around the task. In fact, I don&amp;rsquo;t even have to type code into a REPL, the thought exercise is often fun enough!&lt;/p&gt;
+
+&lt;p&gt;Some tasks, like (&amp;ldquo;Chess Player&amp;rdquo;), are shall we say, very challenging. But don&amp;rsquo;t let even that put you off thinking of, tinkering around or coding a solution to them.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If there isn&amp;rsquo;t a Racket implementation for a task you like the looks of, have a go.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt; Someone might have a better idea of how to do it in Racket later. But if there isn&amp;rsquo;t an implementation now &amp;mdash; change that now!&lt;/p&gt;
+
+&lt;p&gt; Remember that others will be reading your code to understand Racket all the better. So please try to adhere to the &lt;a href="http://docs.racket-lang.org/style/index.html"&gt;Racket Style Guide&lt;/a&gt; as best you can3. Again, don&amp;rsquo;t worry about getting that perfect. Like anything, learning Racket style takes practice, and nobody expects perfection. And the experienced contributors/documentors are always at hand to &lt;a href="http://permalink.gmane.org/gmane.comp.lang.racket.user/18248"&gt;help correct style&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt; &lt;em&gt;Hints:&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;I always have a &lt;a href="https://en.wikipedia.org/wiki/Help:Cheatsheet"&gt;Wikimedia Cheatsheet&lt;/a&gt; to hand. I can never remember its markdown syntax (which unfortunately doesn&amp;rsquo;t really support &lt;code&gt;&amp;lt;code/&amp;gt;&lt;/code&gt;, either)&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Pick whatever task you want… but it would be good to clear all the &amp;ldquo;Complete Tasks&amp;rdquo; (as opposed to &amp;ldquo;Draft Tasks&amp;rdquo;) if you have a choice.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Don&amp;rsquo;t add code until it&amp;rsquo;s running and producing the output you expect. This isn&amp;rsquo;t Project Euler, you don&amp;rsquo;t have to guess the answer in most cases &amp;mdash; it&amp;rsquo;s likely someone has some sample output to compare to.4&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;If you can&amp;rsquo;t get your head around the algorithm in the task description then try to translate another language into Racket. You&amp;rsquo;ll learn Racket, you&amp;rsquo;ll learn the other language, and in working it through for yourself you&amp;rsquo;ll also see how the algorithm takes shape and works.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;My workflow for posting a new solution is this: Once I have something to submit, I add a &amp;ldquo;Stub&amp;rdquo; Racket implementation. I edit the whole Task page (because that is all that is available to edit at that point), find whatever is after Racket alphabetically, and insert boilerplate code. I check this template code as a &amp;ldquo;minor edit&amp;rdquo; described as &amp;ldquo;Racket stub added &amp;mdash; implementation later&amp;rdquo;. This then allows is for me to be able to edit the Racket section in isolation and keeps the rest of the task (everyone else&amp;rsquo;s hard work) safe from any, er, silliness. &lt;code&gt;{{header|Racket}}
+&amp;lt;lang racket&amp;gt;
+&amp;lt;/lang racket&amp;gt;
+{{out}}
+&amp;lt;pre&amp;gt;
+&amp;lt;/pre&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;I have started to make it my habit (especially when showcasing one or two functions) to use &lt;code&gt;#lang racket/base&lt;/code&gt; and &lt;code&gt;require&lt;/code&gt;ing the salient individual functions.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;It is often not appropriate to fully document the functionality of Racket functions in the RC task implementation. You can, however, point to the canonical documentation on the Racket website. So I also include a link to &lt;code&gt;http://docs.racket-lang.org/reference/...&lt;/code&gt; when I need to.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The RC administrators have switched off image uploading (or I, at least, cannot find out how). Even though Racket can produce images as results, think hard about whether you want the hassle of trying to present images to the reader. If you find out a method that works for you &lt;em&gt;please tell me&lt;/em&gt;, I&amp;rsquo;d love to know. I suppose you could also extend all of the above to coding in another language &amp;mdash; if you really have to.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;h2 id="improve-whats-already-there"&gt;Improve What&amp;rsquo;s Already There&lt;/h2&gt;
+
+&lt;p&gt; Rosetta Code is a wiki.&lt;/p&gt;
+
+&lt;p&gt;It is open to anyone to edit.&lt;/p&gt;
+
+&lt;p&gt; Don&amp;rsquo;t be afraid to. If you see something that could be implemented, styled or documented better &amp;mdash; work to improve it.&lt;/p&gt;
+
+&lt;p&gt; Once you have your improved entry together, show it to the author of the original post. Besides being courteous, he or she might have an opinion on what else you might do. Often, there is something bugging them, and you are scratching an itch of theirs!&lt;/p&gt;
+
+&lt;p&gt; I have never had anyone react badly to a change request. Everyone appreciates that you have made an effort to produce your change (and that you&amp;rsquo;re not just standing in the aisles complaining that it doesn&amp;rsquo;t look right).&lt;/p&gt;
+
+&lt;p&gt; Teach Through It  &amp;mdash;&lt;/p&gt;
+
+&lt;p&gt;If there is an aspect of Racket, algorithm or other &amp;ldquo;CS task&amp;rdquo; (in the broadest sense) that you want to share: see to it that it is adequately illustrated on Rosetta Code. If it is not, then create a task to demonstrate it. Not only will you show how something is done properly (i.e. in Racket), but you will also be inviting others to implement the task in their own favourite languages.&lt;/p&gt;
+
+&lt;h2 id="the-competition"&gt;The Competition&lt;/h2&gt;
+
+&lt;p&gt; Back at &lt;em&gt;200&lt;/em&gt;, Racket was the 54th most popular language. But for some time now, it has been sitting at #2 in the popularity1 ranking for quite some time now. For a while, it has been placed a long way behind TCL, and being hotly pursued by Python (never more than 10 tasks behind).&lt;/p&gt;
+
+&lt;p&gt; One of &lt;em&gt;my&lt;/em&gt; motivators is that having seen Racket get to #2 &amp;mdash; I don&amp;rsquo;t want to see it any lower in the rankings. I&amp;rsquo;m sure there&amp;rsquo;s something in the Python lot that wants to overtake us! This healthy competition has kept both of the communities pushing ahead with implementing the tasks.&lt;/p&gt;
+
+&lt;p&gt; The &lt;a href="https://github.com/plt/racket/wiki/Intro-Projects"&gt;&lt;em&gt;Intro Projects&lt;/em&gt;&lt;/a&gt; page of the racket wiki has &amp;ldquo;Implement a Rosetta code task&amp;rdquo; as a &amp;ldquo;Small Project&amp;rdquo;. I think of it as slightly more of a &amp;ldquo;Recreational&amp;rdquo; project (this at least justifies to myself the element of competition that has crept in.)&lt;/p&gt;
+
+&lt;p&gt; The Rallying Call  &amp;mdash;&lt;/p&gt;
+
+&lt;p&gt; or &lt;strong&gt;&amp;ldquo;What Specifically Would Help Racket on Rosetta Code?&amp;rdquo;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt; RC is a good way to present Racket as a most general programming language. So as a tool for Racket advocacy, as well as for the purposes of RC, we need to:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;strong&gt;Implement more tasks in Racket to keep a high profile:&lt;/strong&gt; 800 tasks, #2 in the popularity stakes. This keeps Racket visible; and proves it capable of (almost) anything. I would &lt;em&gt;so&lt;/em&gt; love to give TCL a run for its money &amp;mdash; so there&amp;rsquo;s 41 tasks to go before we can even think of taking a breather!&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;We have implemented 800 tasks in Racket. The quote above says there are 892 (758+134) tasks in total. That means that there are 92 more tasks to get to grips with.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;strong&gt;Suggest new tasks:&lt;/strong&gt; Especially tasks that will demonstrate the latest shiny feature of the latest shiny versions of Racket!&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt; Personally I can&amp;rsquo;t believe that there are less than 900 things that you would want to do with a programming language. If you think of a task, add it. Even impossible tasks provoke thought and imagination &amp;mdash; and interesting solutions!&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;strong&gt;Improve those tasks that have been implemented in Racket:&lt;/strong&gt; We want to maintain a body of good, useful code, to allow us to teach and demonstrate Racket. There are a number of reasons why existent tasks need revisiting:&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Racket technology has moved on (and moves on) apace. What was unavailable and experimental even 18 months ago is now available and reliable. This new technology needs to be demonstrated.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Code that is even older is very &amp;ldquo;schemey&amp;rdquo; (I have in some cases simply copied the Scheme implementation and stuck a &lt;code&gt;#lang racket&lt;/code&gt; tag on the front). Although compatible, Racket has moved quite a way on from Scheme.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Some implementors (not a million miles from where I&amp;rsquo;m standing, for example), were not as &lt;em&gt;au fait&lt;/em&gt; with the language and/or style guide as they might be now. It&amp;rsquo;s a housekeeping job, I know, but giving the examples as consistent a style as possible will help satisfy this aspiration from the Racket Style Guide:&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt; &amp;ldquo;Doing so will help us … and our users, who use the open source code … as an implicit guide to Racket programming.&amp;rdquo;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;&lt;strong&gt;Document tasks:&lt;/strong&gt; see my hint about documentation and links above for what I now think is good practice. If some code seems utterly heiroglyphic, see if it can be made clearer. Remember this is Racket, not APL.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;General tidying up never goes amiss.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;RC is run by someone outside the Racket community. At the bottom of the &amp;ldquo;Small Projects&amp;rdquo; section of the Racket wiki is a suggestion to collect the RC examples into something &amp;ldquo;owned&amp;rdquo; by the Racket community. I&amp;rsquo;ve been thinking about this… if anyone has suggestions, let me know. There are limits to what we can put on RC (defined by the purpose of RC itself). It would be good to remove those limits by implementing something along RC&amp;rsquo;s lines oursleves.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Very specifically… anyone with a joystick, drivers and some spare time - please could you do &amp;ldquo;Joystick Position&amp;rdquo;. The possession of a joystick puts you in a position of &lt;em&gt;great power&lt;/em&gt; with respect to that task. Exercise your responsibility. And Finally…: Well done everyone again! Keep up the good work. And see you at 1000!&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;You can track Racket (and everyone else&amp;rsquo;s) progress on the &lt;a href="http://timb.net/popular-languages.html"&gt;Popular Programming Languages&lt;/a&gt; report, which is updated hourly or so.&lt;a href="#g76184-footnote-1-return"&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Rosetta Code&amp;rsquo;s Front Page&lt;a href="#g76184-footnote-2-return"&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The style guide is actually the chapter called &amp;ldquo;How to Program Racket&amp;rdquo; in the main Racket documentation. One of the RC &amp;ldquo;style&amp;rdquo; rules is that code should be 80 characters wide. Personally, I ignore that in favour of Racket&amp;rsquo;s more generous 102. Sometimes someone on RC objects. Sometimes I then care enough to put the required newlines in.&lt;a href="#g76184-footnote-3-return"&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Even if there are example results don&amp;rsquo;t necessarily trust them. e.g. in &lt;a href="http://rosettacode.org/wiki/The_ISAAC_Cipher"&gt;The ISAAC Cipher&lt;/a&gt;, the cypher engine isn&amp;rsquo;t reset between test runs in the Pascal implementation. That error is propagated through all other implementations. Mine (Racket) conforms to show that I&amp;rsquo;m doing the same thing as everyone else; but I also do what I think to be a more correct test later.&lt;a href="#g76184-footnote-4-return"&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Hold on a mo… this is meant to be a pedagogical exercise, not a competition&lt;a href="#g76184-footnote-5-return"&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;That&amp;rsquo;s good! But, it&amp;rsquo;s also interesting what real projects use Racket. Is this information available?&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Роман Николаевич, 24 November 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Hi Роман. You can look at the videos from the third and fourth RacketCons which have several talks from industrial users of Racket: https://www.youtube.com/user/racketlang/playlists&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Racket Lang, 24 November 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Congrats guys.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Paddy3118, 16 December 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket v6.1.1</title>
+   <link>http://blog.racket-lang.org/2014/11/racket-v611.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-11-racket-v611-html</guid>
+   <pubDate>Tue, 04 Nov 2014 18:43:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket version 6.1.1 is now available from &lt;a href="http://racket-lang.org/"&gt;http://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;The Mac OS X Yosemite compatibility problems are fixed. We bundled a patched Pango text-drawing library with Racket.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The Windows [32-bit] releases fixes the window-update crashes. We bundled a patched Cairo drawing library with Racket.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket closes two safety holes in the exception system. The revised type system restricts &lt;code&gt;raise&lt;/code&gt; to send only instances of the &lt;code&gt;exn&lt;/code&gt; structure type and flat data to handlers. It also checks exception handlers properly. Note: Previously well-typed programs may fail to typecheck.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket&amp;rsquo;s typed regions support casts and predicates.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;2htdp/image&amp;rsquo;s notion of equality ignores an image&amp;rsquo;s baseline.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The package manager supports a binary library installation mode, which allows users to install packages without source or documentation. Use the &lt;code&gt;--binary-lib&lt;/code&gt; option with &lt;code&gt;raco pkg install&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The new drracket-tool-lib package factors out parts of DrRacket&amp;rsquo;s IDE so that they can be reused with other editors, such as Emacs.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The compiler&amp;rsquo;s use-before-defined analysis has been repaired for certain forms of nested &lt;code&gt;letrec&lt;/code&gt;, some &lt;code&gt;let&lt;/code&gt; forms, and some uses of &lt;code&gt;set!&lt;/code&gt; or &lt;code&gt;with-continuation-mark&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The compiler performs additional bytecode optimizations. Thanks to Gustavo Massaccesi.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The CML library comes with a new &lt;code&gt;replace-evt&lt;/code&gt; event constructor. Thanks to Jan Dvořák.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Redex&amp;rsquo;s benchmark suite comes with a description of the benchmark programs.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Redex&amp;rsquo;s metafunctions can be typeset using the &amp;ldquo;large left brace&amp;rdquo; notation for conditionals.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The contract library comes with an improved &lt;code&gt;contract-stronger?&lt;/code&gt;. Its error messages note that the contract itself might be wrong.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The GUI library is DPI-aware on Windows.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The openssl library supports Server Name Indication for servers. Thanks to Jay Kominek.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The syntax/parse library allows the definition of new pattern forms via pattern expanders, similar to match expanders. Thanks to Alex Knauth.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;OpenGL on Linux no longer depends on libgtkgl, and core profiles are supported (see &lt;code&gt;set-legacy?&lt;/code&gt;).&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The teaching languages&amp;rsquo; unit test framework supports &lt;code&gt;check-satisfied&lt;/code&gt;, a construct for checking whether a result satisfies a predicate, e.g.:&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;&lt;code&gt;(check-satisfied (sort l) sorted?)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Feedback Welcome&lt;/p&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>PLT Redex Summer School, Call for Participation</title>
+   <link>http://blog.racket-lang.org/2014/10/plt-redex-summer-school-call-for-participation.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-10-plt-redex-summer-school-call-for-participation-html</guid>
+   <pubDate>Tue, 07 Oct 2014 18:30:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Robby Findler&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;LOCATION: University of Utah, Salt Lake City&lt;/p&gt;
+
+&lt;p&gt;DATES: July 27 - July 31, 2015&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://www.cs.utah.edu/~mflatt/plt-redex/"&gt;http://www.cs.utah.edu/~mflatt/plt-redex/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;PLT Redex is a lightweight, embedded DSL for modeling programming languages, their reduction semantics, and their type systems. It comes with an IDE and a toolbox for exploring, testing, debugging, and type-setting language models. The PLT research group has successfully used Redex to model and analyze a wide spectrum of published models.&lt;/p&gt;
+
+&lt;p&gt;The summer school will introduce students to the underlying theory of reduction semantics, programming in the Redex language, and using its tool suite effectively. The course is intended for PhD students and researchers in programming languages. Enrollment is limited to 25 attendees.&lt;/p&gt;
+
+&lt;p&gt;While the workshop itself is free, attendees must pay for travel, room, and board. We expect room and board to be around $500, assuming an arrival in the evening of Sunday July 26 and leaving Friday July 31 or August 1. Partial financial support for PhD students is available.&lt;/p&gt;
+
+&lt;p&gt;To register, send email to Matthew Flatt (mflatt@cs.utah.edu). If you are a PhD student and requesting financial support, CC your advisor and ask for a one-line confirmation email.&lt;/p&gt;
+
+&lt;p&gt;Literature&lt;/p&gt;
+
+&lt;p&gt; Matthias Felleisen, Robert Bruce Findler, Matthew Flatt. &lt;em&gt;Semantics Engineering with PLT Redex&lt;/em&gt;. MIT Press, 2012.&lt;/p&gt;
+
+&lt;p&gt; Casey Klein, John Clements, Christos Dimoulas, Carl Eastlund, Matthias Felleisen, Matthew Flatt, Jay McCarthy, Jon Rafkind, Sam Tobin-Hochstadt, Robert Bruce Findler. &lt;em&gt;Run Your Research: On the Effectiveness of Lightweight Mechanization&lt;/em&gt;. POPL 2012.&lt;/p&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket v6.1</title>
+   <link>http://blog.racket-lang.org/2014/08/racket-v61.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-08-racket-v61-html</guid>
+   <pubDate>Sat, 02 Aug 2014 21:31:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;PLT Design Inc. announces the release of Racket version 6.1 at&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://racket-lang.org/"&gt;http://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The major innovation concerns local recursive variable definitions. Instead of initializing variables with an &lt;code&gt;undefined&lt;/code&gt; value, Racket raises an exception when such a variable is used before its definition. (Thanks to Claire Alvis for adapting Dybvig&amp;rsquo;s &amp;ldquo;Fixing Letrec&amp;rdquo; work.)&lt;/p&gt;
+
+&lt;p&gt;Since programs are rarely intended to produce &lt;code&gt;#&amp;lt;undefined&amp;gt;&lt;/code&gt;, raising an exception provides early and improved feedback. Module-level variables have always triggered such an exception when used too early, and this change finally gives local bindings — including class fields — the same meaning.&lt;/p&gt;
+
+&lt;p&gt;This change is backwards-incompatible with prior releases of Racket. Aside from exposing a few bugs, the change will mainly affect programs that include&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;(define undefined (letrec ([x x]) x))&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;to obtain the &lt;code&gt;#&amp;lt;undefined&amp;gt;&lt;/code&gt; value. In its stead, Racket provides the same value via the &lt;code&gt;racket/undefined&lt;/code&gt; library (which was introduced in the previous release). Programmers are encouraged to use it in place of the pattern above to obtain the &amp;ldquo;undefined&amp;rdquo; value.&lt;/p&gt;
+
+&lt;p&gt;The release also includes the following small changes:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Plumbers generalize the flush-on-exit capability of primitive output ports to enable arbitrary flushing actions and to give programmers control over the timing of flushes (i.e., a composable &lt;code&gt;atexit&lt;/code&gt;). New functions include &lt;code&gt;current-plumber&lt;/code&gt;, &lt;code&gt;plumber-add-flush!&lt;/code&gt;, and &lt;code&gt;plumber-flush-all&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Contracts: the contract system&amp;rsquo;s random testing facility has been strengthened so that it can easily find simple mistakes in contracted data structure implementations (e.g. an accidental reverse of a conditional in a heap invariant check).&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Redex: the semantics of mis-match patterns (variables followed by &lt;code&gt;_!_&lt;/code&gt;) inside ellipses has changed in a backwards-incompatible way. This change simplifies the patterns&amp;rsquo; semantics and increases the usefulness of these patterns.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Teaching languages: &lt;code&gt;check-random&lt;/code&gt; is an addition to the preferred unit testing framework in the teaching languages. It enables the testing of students&amp;rsquo; functions that use random-number generation. (Thanks to David Van Horn (UMaryland) for proposing this idea.)&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Upgraded and normalized versions of graphics libraries and dependencies (Pango, Cairo, GLib, etc.) that are bundled with Racket on Windows and Mac OS X. For example, FreeType support is consistently enabled.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket: its standard library includes contracted exports from the Racket standard library, such as the formatting combinators of &lt;code&gt;racket/format&lt;/code&gt;. It also supports Racket&amp;rsquo;s asynchronous channels; see the &lt;code&gt;typed/racket/async-channel&lt;/code&gt; library.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;SSL: The &lt;code&gt;openssl&lt;/code&gt; library supports forward secrecy via DHE and ECDHE cipher suites (thanks to Edward Lee) and Server Name Indication (thanks to Jay Kominek).&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The &lt;code&gt;mzlib/class100&lt;/code&gt; library has been removed. Use &lt;code&gt;racket/class&lt;/code&gt; instead.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I an running the new beta version of Mac OSX Yosemite and DrRacket will not run! please help!!!&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;John Sheriff, 9 September 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Is there a way to order http://docs.racket-lang.org/guide/ as a printed manual or download as a PDF to print my own for reference?&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;The Drifter, 10 September 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;+John Sherriff: It looks like a bug related to Yosemite was fixed on August 27th, after the release of 6.1.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the (closed) bug report.&lt;/p&gt;
+
+&lt;p&gt;http://bugs.racket-lang.org/query/?cmd=view%20audit-trail&amp;amp;database=default&amp;amp;pr=14672&lt;/p&gt;
+
+&lt;p&gt;If you want to run a newer version, you might be interested in the nightly-build package, available at&lt;/p&gt;
+
+&lt;p&gt;http://www.cs.utah.edu/plt/snapshots/&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;John Clements, 10 September 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I can&amp;rsquo;t run it on Mac OS X Yosemite&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Ege Şenkul, 18 October 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Scheme Workshop 2014</title>
+   <link>http://blog.racket-lang.org/2014/07/scheme-workshop-2014.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-07-scheme-workshop-2014-html</guid>
+   <pubDate>Sun, 27 Jul 2014 01:34:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by John Clements&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;DEADLINE: 5 September 2014, (23:59 UTC&amp;ndash;12)&lt;/p&gt;
+
+&lt;p&gt;WEBSITE: &lt;a href="http://homes.soic.indiana.edu/jhemann/scheme-14/"&gt;http://homes.soic.indiana.edu/jhemann/scheme&amp;ndash;14/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;LOCATION: Washington, DC (co-located with Clojure/conj)&lt;/p&gt;
+
+&lt;p&gt;DATE: 19 November 2014&lt;/p&gt;
+
+&lt;p&gt;The 2014 Scheme and Functional Programming Workshop is calling for submissions. Submissions related to Scheme and functional programming are welcome and encouraged. Topics of interest include but are not limited to:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Program-development environments, debugging, testing&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Implementation (interpreters, compilers, tools, benchmarks, etc)&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Syntax, macros, and hygiene&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Distributed computing, concurrency, parallelism&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Interoperability with other languages, FFIs&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Continuations, modules, object systems, types&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Theory, formal semantics, correctness&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;History, evolution and standardization of Scheme&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Applications, experience and industrial uses of Scheme&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Education&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Scheme pearls (elegant, instructive uses of Scheme)&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;We also welcome papers related to dynamic or multiparadigmatic languages and programming techniques.&lt;/p&gt;
+
+&lt;p&gt;Full papers are due 5 September 2014.&lt;/p&gt;
+
+&lt;p&gt;Authors will be notified by 10 October 2014.&lt;/p&gt;
+
+&lt;p&gt;Camera-ready versions are due 24 Oct 2014.&lt;/p&gt;
+
+&lt;p&gt;All deadlines are (23:59 UTC&amp;ndash;12), &amp;ldquo;Anywhere on Earth&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;For more information, please see: &lt;a href="http://homes.soic.indiana.edu/jhemann/scheme-14/"&gt;http://homes.soic.indiana.edu/jhemann/scheme&amp;ndash;14/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;See you there!&lt;/p&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Racket v6.0.1</title>
+   <link>http://blog.racket-lang.org/2014/05/racket-v601.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-05-racket-v601-html</guid>
+   <pubDate>Thu, 08 May 2014 23:46:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Ryan Culpepper&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket version 6.0.1 is now available from&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://racket-lang.org/"&gt;http://racket-lang.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;A new &lt;code&gt;racket/undefined&lt;/code&gt; library exports &lt;code&gt;undefined&lt;/code&gt; as the value currently produced by&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;(letrec ([x x]) x) This library anticipates a future where that expression will raise an exception. The &lt;code&gt;racket/undefined&lt;/code&gt; library will continue to offer the &lt;code&gt;undefined&lt;/code&gt; value as a bridge between versions and as a last resort.&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;The drawing and GUI libraries provide improved support for high-resolution bitmaps and their use on Retina displays. For example, &lt;code&gt;read-bitmap&lt;/code&gt; includes a &lt;code&gt;#:try-@2x?&lt;/code&gt; option to trigger substitutions through the usual "@2x" naming convention.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Check Syntax cooperates with Typed Racket to show arrows and other Check Syntax highlighting even when there is a type error.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Functions provided via &lt;code&gt;contract-out&lt;/code&gt; that have first-order contracts perform better.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The contract boundary between typed/untyped modules is much less expensive. Typed Racket now avoids generating contracts for places where contracts failures cannot happen.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Occurrence typing now works better with &lt;code&gt;when&lt;/code&gt;/&lt;code&gt;unless&lt;/code&gt;. Example:&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;div class="brush: racket"&gt;
+ &lt;div class="pygments"&gt;
+  &lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;read&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;number?&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;error&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;bad-input&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;add1&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Types in Typed Racket are now pretty-printed.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Function types can now be written in prefix style, which is now preferred and is used for printing. Infix function types are still accepted for backwards compatibility.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;A new &lt;code&gt;-&amp;gt;*&lt;/code&gt; type constructor is used for writing types for functions with optional and keyword arguments. The notation is similar to the matching contract combinator.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket forms do not have a &lt;code&gt;:&lt;/code&gt; suffix by default now. For example, the &lt;code&gt;struct&lt;/code&gt; form replaces &lt;code&gt;struct:&lt;/code&gt;. The suffixed versions are all provided for backwards compatibility.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Typed Racket now has preliminary support for classes and objects. However, it is still experimental and the APIs are subject to change.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Type aliases in Typed Racket now support recursion and mutual recursion. For example, &lt;code&gt;(define-type (MyList X) (U Null (Pair X (MyList X))))&lt;/code&gt; is now a valid type alias.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Plot correctly renders intersecting 3D graphs and non-grid-aligned 3D rectangles.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Elements in plots output in PDF/PS format have the same relative scale as in other formats. In particular, it is not necessary to adjust &lt;code&gt;plot-font-size&lt;/code&gt; to make PDF plots look the same as PNG.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;!-- more--&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Racket blog &amp;hellip; Talk about Rackets !! I know some people running quite a rachet !&lt;/p&gt;
+
+&lt;p&gt;Ask Annabel&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;IOnlyDealInMiracles, 24 May 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Dear Annabel,&lt;/p&gt;
+
+&lt;p&gt;On a scale of 1 to 10, how rachet would you say you are?&lt;/p&gt;
+
+&lt;p&gt;Ben&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Benjamin Greenman, 25 May 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Please, provide PGP signatures for the installers and/or support download over SSL. I would not risk running an executable on my computer unless I can verify it&amp;rsquo;s origin.&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;verduphs, 2 June 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Funny. I came here from the old plt site and initially misread the redirection alert: &amp;ldquo;PLT is now a racket!&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;— &lt;em&gt;Unknown, 19 June 2014&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>Registration for (fourth RacketCon)</title>
+   <link>http://blog.racket-lang.org/2014/04/registration-for-fourth-racketcon.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-04-registration-for-fourth-racketcon-html</guid>
+   <pubDate>Thu, 24 Apr 2014 21:50:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Asumu Takikawa&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Registration for (fourth RacketCon) is now open. Tickets are 30$.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://www.eventbrite.com/e/racketcon-2014-tickets-11408046775"&gt;https://www.eventbrite.com/e/racketcon&amp;ndash;2014-tickets&amp;ndash;11408046775&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;(fourth RacketCon) will be held on September 20th, and will be co-located with &lt;a href="https://thestrangeloop.com/"&gt;Strange Loop&lt;/a&gt; in St. Louis.&lt;/p&gt;
+
+&lt;p&gt;RacketCon is a yearly event where members of the Racket community get together, featuring talks and demos about the things you do with Racket.&lt;/p&gt;
+
+&lt;p&gt;To get you excited, here&amp;rsquo;s a sneak peek at the roster of speakers so far:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;Michael Fogus (keynote)&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Matthew Butterick&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Matthew Flatt&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Jay McCarthy&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Daniel Prager&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;Neil Toronto&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;We still have room for more speakers. If you&amp;rsquo;ve built something cool with Racket, we want to hear about it!&lt;/p&gt;
+
+&lt;p&gt;Hope to see you there!&lt;/p&gt;
+
+&lt;p&gt;Vincent, for the Racket team&lt;/p&gt;&lt;/html&gt;</description></item>
+  <item>
+   <title>The new Racket home page</title>
+   <link>http://blog.racket-lang.org/2014/03/the-new-racket-home-page.html?utm_source=all&amp;utm_medium=RSS</link>
+   <guid>urn:http-blog-racket-lang-org:-2014-03-the-new-racket-home-page-html</guid>
+   <pubDate>Wed, 12 Mar 2014 17:09:00 UT</pubDate>
+   <description>&lt;html&gt;
+&lt;p&gt;&lt;em&gt;posted by Asumu Takikawa&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Racket now has a new look for its web presence. You can see it at&lt;a href="http://racket-lang.org/"&gt; http://racket-lang.org&lt;/a&gt; (modulo DNS propagation).&lt;/p&gt;
+
+&lt;p&gt;The new pages improve on the old in several ways:&lt;/p&gt;
+
+&lt;ul&gt;
+ &lt;li&gt;
+  &lt;p&gt;More information is now on the front page.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The site works much better small devices, such as phones.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;It&amp;rsquo;s easier to find important parts of the site, like the package directory.&lt;/p&gt;&lt;/li&gt;
+ &lt;li&gt;
+  &lt;p&gt;The download process is more streamlined &amp;mdash; now it&amp;rsquo;s only 2 clicks.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;
+
+&lt;p&gt;We also wanted to have a new look, and a description that talks about why Racket is exciting.&lt;/p&gt;
+
+&lt;p&gt;Finally, we&amp;rsquo;ve taken this opportunity to shift our web hosting entirely to Amazon S3, for which Greg Hendershott&amp;rsquo;s &lt;a href="https://github.com/greghendershott/aws"&gt;aws&lt;/a&gt; package has been very helpful.&lt;/p&gt;
+
+&lt;p&gt;While the new pages have been under development for quite a while, we&amp;rsquo;re still happy to take bug reports, suggestions and (especially) patches: all of the site can be found here:&lt;/p&gt;
+
+&lt;p&gt; &lt;a href="https://github.com/plt/racket/tree/master/pkgs/plt-services/meta/new-web"&gt;https://github.com/plt/racket/tree/master/pkgs/plt-services/meta/new-web&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;with the framework for building the site here:&lt;/p&gt;
+
+&lt;p&gt; &lt;a href="https://github.com/plt/racket/tree/master/pkgs/plt-web-pkgs"&gt;https://github.com/plt/racket/tree/master/pkgs/plt-web-pkgs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The site is built using Eli&amp;rsquo;s &lt;a href="http://www.cs.utah.edu/plt/snapshots/current/doc/scribble-pp/html.html"&gt;scribble/html&lt;/a&gt; library, which is very nice to use.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;d especially like to thank Eli and Matthew for their help with this &amp;mdash; going from my hacked-up HTML prototype to the smooth-building and well-organized code we have now has taken lots of work.&lt;/p&gt;
+
+&lt;p&gt;Sam&lt;/p&gt;&lt;/html&gt;</description></item></channel></rss>

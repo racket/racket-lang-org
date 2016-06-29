@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Dirty Looking Hygiene</title>
+    <meta name="description" content="_posted by Eli Barzilay_  With the recent release of Arc, there has been some discussion over hygienic macros. Yes, hygienic macros are usually very convenient, but they can become messy in some 'corner' cases. People who learn about macros in Scheme usua...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2008/02/dirty-looking-hygiene.html">
+    <link rel="next" href="/2008/01/a-privacy-flaw-thwarted.html">
+    <link rel="prev" href="/2008/06/plt-scheme-version-40-is-coming-soon.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>23 Feb 2008</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Dirty Looking Hygiene</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>With the recent release of <a href="http://arclanguage.com/">Arc</a>, there has been some discussion over hygienic macros. Yes, hygienic macros are usually very convenient, but they can become messy in some &lsquo;corner&rsquo; cases. People who learn about macros in Scheme usually start with <code>syntax-rules</code>, and being the limited tool that it is, they often get the impression that for advanced uses (like a macro that captures an identifier) you need to use <code>syntax-case</code> which is this &ldquo;really obscure thing&rdquo;.</p>
+
+<p>For example, say that we want to implement an <code>if</code> form that is similar to Arc&rsquo;s <code>if</code>. This is pretty easy using <code>syntax-rules</code>:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="n">if*</span>
+    <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+      <span class="p">[(</span><span class="n">if*</span><span class="p">)</span> <span class="p">(</span><span class="nb">void</span><span class="p">)]</span>
+      <span class="p">[(</span><span class="n">if*</span> <span class="n">X</span><span class="p">)</span> <span class="n">X</span><span class="p">]</span>
+      <span class="p">[(</span><span class="n">if*</span> <span class="n">C</span> <span class="n">X</span> <span class="n">more</span> <span class="k">...</span><span class="p">)</span> <span class="p">(</span><span class="k">if</span> <span class="n">C</span> <span class="n">X</span> <span class="p">(</span><span class="n">if*</span> <span class="n">more</span> <span class="k">...</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+
+<p>But more important than being easy to write: it is also easy to read. In fact, the nice thing about <code>syntax-rules</code> is that you write more or less the specification of your transformation. Compare this to the specification of Arc&rsquo;s <code>if</code>, which appears in a comment before the definition of <code>ac-if</code> in "<code>ac.scm</code>":</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="c1">; (if) -&gt; nil</span>
+  <span class="c1">; (if x) -&gt; x</span>
+  <span class="c1">; (if t a ...) -&gt; a</span>
+  <span class="c1">; (if nil a b) -&gt; b</span>
+  <span class="c1">; (if nil a b c) -&gt; (if b c)</span>
+</pre></div>
+
+</div>
+
+<p>(Except that the comment mixes up the syntactic specification and the semantic evaluation.)</p>
+
+<p>As a side note, now that we have this definition, it is easy to construct a new language that is just like MzScheme, except for its <code>if</code> that behaves like the above:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">module</span> <span class="n">arc-like</span> <span class="n">mzscheme</span>
+    <span class="p">(</span><span class="k">define-syntax</span> <span class="n">if*</span> <span class="n">..._the</span> <span class="n">above</span> <span class="n">definition_...</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">provide</span> <span class="p">(</span><span class="n">all-from-except</span> <span class="n">mzscheme</span> <span class="k">if</span><span class="p">)</span>
+             <span class="p">(</span><span class="k">rename</span> <span class="n">if*</span> <span class="k">if</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>You can now write code that uses <code>"arc-like.scm"</code> as its language, using the new <code>if</code>. There is no problem in accommodating two languages with two different <code>if</code>&rsquo;s: the new form is compiled to the old one, and there is no confusion in which version you use in any module.</p>
+
+<p>Back to the macro issue: as I said above, you run into problems if you want to capture names, right? For example, if you want to implement Arc&rsquo;s <code>aif</code>. The usual <code>syntax-case</code> solution is to construct an identifier that has the lexical context of the input syntax. It&rsquo;s easy to abstract over all this &mdash; I posted a <a href="http://www.arclanguage.org/item?id=841">message</a> on the Arc forum showing how to define a <a href="http://tmp.barzilay.org/defmac.ss">defmac</a> macro that has the simplicity of <code>syntax-rules</code> with the added convenience of specifying keywords and captured names. This works for <em>some</em> cases, but there are still some <a href="http://download.plt-scheme.org/doc/372/html/mzscheme/mzscheme-Z-H-12.html#node_sec_12.2.1.1">subtle corner cases</a>.</p>
+
+<p>But there&rsquo;s a better solution in PLT Scheme, one that follows Paul Graham&rsquo;s intuition when he <a href="http://www.arclanguage.org/item?id=2526">says</a>: &ldquo;captured symbols are kind of freaky.&rdquo; The basic idea is a change of perspective: instead of (unhygienically) binding individual occurrences of <code>it</code> whenever <code>aif</code> is used, you define <code>it</code> once as a thing in its own right &mdash; a special context-dependent piece of syntax. Outside of an <code>aif</code> form, <code>it</code> has no meaning: we simply make it throw a syntax error. Uses of <code>aif</code> provide a meaning for <code>it</code> by locally changing its meaning (its expansion) to something useful: the binding that holds the result of evaluating the condition expression. (&ldquo;Locally&rdquo; means within a piece of syntax, so the new meaning is valid in a lexical-scope.)</p>
+
+<p>In PLT Scheme, the &ldquo;special context-dependent piece of syntax&rdquo; are <em>syntax parameters</em>, and you change them locally with <code>syntax-parameterize</code>.</p>
+
+<p>To continue the above example, here&rsquo;s how we make our <code>if*</code> anaphoric:</p>
+
+<ul>
+ <li>
+  <p>require the <code>(lib "stxparam.ss" "mzlib")</code> library,</p></li>
+ <li>
+  <p>define <code>it</code> as a syntax using <code>define-syntax-parameter</code>, and have it raise an error by default,</p></li>
+ <li>
+  <p>bind a temporary variable to the result of evaluating the condition,</p></li>
+ <li>
+  <p>wrap the positive branch with <code>syntax-parameterize</code>, using <code>make-rename-transformer</code>, which is a convenient way to make a macro that behaves like the new variable.</p></li></ul>
+
+<p>The implementation looks like this:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"stxparam.ss"</span> <span class="s2">"mzlib"</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">define-syntax-parameter</span> <span class="n">it</span>
+    <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">stx</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">raise-syntax-error</span> <span class="no">#f</span> <span class="s2">"can only be used inside `if&#39;"</span> <span class="n">stx</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">define-syntax</span> <span class="n">if*</span>
+    <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+      <span class="p">[(</span><span class="n">if*</span><span class="p">)</span> <span class="p">(</span><span class="nb">void</span><span class="p">)]</span>
+      <span class="p">[(</span><span class="n">if*</span> <span class="n">X</span><span class="p">)</span> <span class="n">X</span><span class="p">]</span>
+      <span class="p">[(</span><span class="n">if*</span> <span class="n">C</span> <span class="n">X</span> <span class="n">more</span> <span class="k">...</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">b</span> <span class="n">C</span><span class="p">])</span>
+         <span class="p">(</span><span class="k">if</span> <span class="n">b</span>
+           <span class="p">(</span><span class="n">syntax-parameterize</span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb">make-rename-transformer</span> <span class="o">#&#39;</span><span class="n">b</span><span class="p">)])</span> <span class="n">X</span><span class="p">)</span>
+           <span class="p">(</span><span class="n">if*</span> <span class="n">more</span> <span class="k">...</span><span class="p">)))]))</span>
+</pre></div>
+
+</div>
+
+<p>The resulting macro does not break hygiene. For example, <code>(let ([it 3]) (if #t it))</code> evaluates to <code>3</code>, because it shadows the global <code>it</code> that <code>if</code> changes. This is a change from a real unhygienic macro &mdash; but that&rsquo;s the whole point: we (the macro author) do not interfere with scopes in the user code.</p>
+
+<p>Note that <code>(if 1 (if 2 it))</code> still evaluates to <code>2</code>, because the outer <code>if</code> does not really bind <code>it</code> &mdash; it is not captured, just changed locally &mdash; so the inner <code>if</code> changes it again. Also, <code>(if #f it it)</code> raises the usual context error, since our macro changes <code>it</code> only in the positive branch.</p>
+<!-- more-->
+
+<hr />
+
+<p>The specification atop the macro reminds me of the quip that &ldquo;any sufficiently well-commented lisp program contains an ML program in its comments&rdquo; (:</p>
+
+<p>— <em>Martin DeMello, 28 April 2008</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2008/06/plt-scheme-version-40-is-coming-soon.html">PLT Scheme version 4.0 is Coming Soon</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2008/01/a-privacy-flaw-thwarted.html">A Privacy Flaw, Thwarted</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

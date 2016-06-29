@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v5.3.2</title>
+    <meta name="description" content="_posted by Eli Barzilay_  Racket version 5.3.2 is now available from http://racket-lang.org/ Core Libraries::      The new `math` library provides functions and data structures for working with numbers and collections of numbers. Functions include non-ele...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2013/01/racket-v532.html">
+    <link rel="next" href="/2012/12/simple-test-coverage-a-macro-with-line-numbers-and-lifting.html">
+    <link rel="prev" href="/2013/02/racket-v533.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>31 Jan 2013</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v5.3.2</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.3.2 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> Core Libraries::</p>
+
+<ul>
+ <li>
+  <p>The new <code>math</code> library provides functions and data structures for working with numbers and collections of numbers. Functions include non-elementary (such as gamma, zeta, Lambert&rsquo;s W), number-theoretic (factorization, modular arithmetic), linear algebra (arithmetic, decompositions), and statistical (expected values, order statistics, binning). Data structures include arbitrary-precision bigfloats, probability distributions, and multidimensional arrays.</p></li>
+ <li>
+  <p>The new <code>file/untar</code>, <code>file/untgz</code>, and <code>file/unzip</code> libraries support unpacking widely used archive formats.</p></li>
+ <li>
+  <p>The new <code>lazy-require</code> form allows programs to delay the loading and instantiation of helper modules until they are needed.</p></li>
+ <li>
+  <p>The new <code>data/bit-vector</code> library provides an implementation of bit vectors (a mutable sequence of booleans) supporting popcount.</p></li>
+ <li>
+  <p>The <code>racket/generic</code> library allows the specification of default method implementations for core datatypes.</p></li>
+ <li>
+  <p>The <code>openssl</code> library can verify hostnames and use the operating system&rsquo;s certificate store to verify certificates.</p></li></ul>
+
+<p>Package System::</p>
+
+<ul>
+ <li>
+  <p>A new package system is in beta release. This system will become Planet&rsquo;s successor. It differs significantly from the latter. For details, please read the documentation at <a href="http://docs.racket-lang.org/planet2/">http://docs.racket-lang.org/planet2/</a> and list your packages on the new index at <a href="https://pkg.racket-lang.org/">https://pkg.racket-lang.org/</a>.</p></li>
+ <li>
+  <p>The <code>raco test</code> command supports testing by collection and package, in addition to by directory and file, with the <code>-c</code> and <code>-p</code> options.</p></li></ul>
+
+<p>Teaching Libraries::</p>
+
+<ul>
+ <li>batch-io: the read and write functions work on Unix-style standard input and output.</li></ul>
+
+<p>DrRacket::</p>
+
+<ul>
+ <li>
+  <p>DrRacket&rsquo;s GUI is more responsive.</p></li>
+ <li>
+  <p>The automatic parenthesis insertion mode is improved.</p></li></ul>
+
+<p>Scribble::</p>
+
+<ul>
+ <li>
+  <p>Scribble renders Markdown format files via the <code>--markdown</code> command-line flag. Example use case: Generate documentation hosted on GitHub or BitBucket.</p></li>
+ <li>
+  <p>Documentation cross-reference information is stored in an SQLite3 database, which means that SQLite3 is required for building Racket documentation on Unix/Linux machines (but SQLite3 is included in Racket distributions for Windows and Mac OS X).</p></li></ul>
+
+<p> Using a database for cross-reference information significantly reduces the initial footprint of DrRacket, since DrRacket no longer needs to load all cross-reference information.</p>
+
+<p>Typed Racket::</p>
+
+<ul>
+ <li>
+  <p>Typed Racket programs can require <code>plot/typed</code> to draw plots. List- and vector-accepting functions accept general sequences.</p></li>
+ <li>
+  <p>Typed Racket supports Racket&rsquo;s delimited continuation and continuation mark operators.</p></li></ul>
+
+<p>Redex::</p>
+
+<ul>
+ <li>Added more support for <code>define-judgment-form</code>, including random generation for well-formed judgments and visualization of judgments.</li></ul>
+
+<p>Deprecation::  The following have been removed in this release:</p>
+
+<ul>
+ <li>the <code>planet</code> command-line tool; use <code>raco planet</code> instead.</li></ul>
+
+<p>The following has been deprecated and will be removed in the August 2013 release:</p>
+
+<ul>
+ <li>the <code>mzlib/class100</code> library; use <code>racket/class</code> instead.</li></ul>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2013/02/racket-v533.html">Racket v5.3.3</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2012/12/simple-test-coverage-a-macro-with-line-numbers-and-lifting.html">Simple Test Coverage: A Macro with Line Numbers and Lifting</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v5.3</title>
+    <meta name="description" content="_posted by Eli Barzilay_  Racket version 5.3 is now available from  http://racket-lang.org/ Release Highlights::      Submodules are nested module declarations that can be loaded and run independently from the enclosing module. See also the overview of su...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2012/08/racket-v53.html">
+    <link rel="next" href="/2012/06/submodules.html">
+    <link rel="prev" href="/2012/08/fully-inlined-merge-sort.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>07 Aug 2012</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v5.3</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.3 is now available from</p>
+
+<p><a href="http://racket-lang.org/">http://racket-lang.org/</a> Release Highlights::</p>
+
+<ul>
+ <li>
+  <p>Submodules are nested module declarations that can be loaded and run independently from the enclosing module. See also the <a href="../../2012/06/submodules.html">overview of submodules</a>.</p></li>
+ <li>
+  <p>The futures visualizer is a graphical profiling tool for parallel programs using futures. The tool shows a detailed execution timeline depicting the migration of futures between threads, and gives detailed information about each runtime synchronization that occurred during program execution. In addition, <code>would-be-future</code> is a special type of future that always executes sequentially and records all potential barricades a regular future would encounter.</p></li>
+ <li>
+  <p>Optimization Coach (formerly Performance Report) reports information about Racket&rsquo;s inlining optimizations. Optimization Coach can be launched in any language through the View menu.</p></li>
+ <li>
+  <p>The new <code>images/flomap</code> library defines floating-point bitmaps and fast image processing operations on them. It is written in Typed Racket, so Typed Racket code may use it without the cost of contract checks.</p></li>
+ <li>
+  <p>The new <code>json</code> library supports parsing and generating JSON. (Originally based on Dave Herman&rsquo;s planet library.)</p></li>
+ <li>
+  <p><code>racket/string</code> is extended with a set of simplified string manipulation functions that are more convenient than using regexps. <code>regexp-match*</code> and friends can now be used with new keyword arguments to return specific matched regexp group/s and gaps between matches.</p></li>
+ <li>
+  <p>The new <code>racket/generic</code> library allows generic function definitions, which dispatch to methods added to a structure type via the new <code>#:methods</code> keyword.</p></li>
+ <li>
+  <p>The <code>class</code> form supports declaring a method abstract. An abstract method prevents a class from being instantiated unless it is overridden.</p></li>
+ <li>
+  <p>The contract library comes with support for interfaces, generics, prompts, continuation-marks, and structs.</p></li>
+ <li>
+  <p>Most error messages use a new multi-line format that is more consistent with contract errors and accommodates more information.</p></li>
+ <li>
+  <p>Typed Racket supports function definitions with keyword arguments; the startup time of Typed Racket programs has been sharply reduced.</p></li>
+ <li>
+  <p>The new <code>ffi/com</code> library replaces MysterX; a compatibility <code>mysterx</code> library remains, but without ActiveX support. The new <code>ffi/unsafe/com</code> library offers a more primitive and direct way to use COM classes and methods.</p></li>
+ <li>
+  <p>There is now a very complete completion code for zsh. It is not included in the distribution though; get it at http://goo.gl/DU8JK (This script and the bash completions will be included in the standard installers in future versions.)</p></li></ul>
+
+<p>Deprecation:  Effective this release:</p>
+
+<ul>
+ <li>
+  <p>The <code>tex2page</code> and <code>combinator-parser</code> libraries have been moved from the Racket distribution to PLaneT:</p>
+  <p> (require (planet plt/tex2page))  (require (planet plt/combinator-parser))</p></li>
+ <li>The following has been deprecated and will be removed in the January 2013 release:</li></ul>
+
+<p> the <code>planet</code> command-line tool; use <code>raco planet</code> instead.</p>
+
+<ul>
+ <li>The following has been deprecated and will be removed in the August 2013 release:</li></ul>
+
+<p> the <code>mzlib/class100</code> library; use <code>racket/class</code> instead.</p>
+<!-- more-->
+
+<hr />
+
+<p>Awesome guys. Thanks for the hard work on this!</p>
+
+<p>— <em>Robert, 7 August 2012</em></p>
+
+<hr />
+
+<p>The futures visualizer sounds very interesting!</p>
+
+<p>— <em>nek, 8 August 2012</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/08/fully-inlined-merge-sort.html">Fully Inlined Merge Sort</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2012/06/submodules.html">Submodules</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

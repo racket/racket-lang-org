@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Futures: Fine Grained Parallelism in PLT</title>
+    <meta name="description" content="_posted by Robby Findler_  We're pleased to announce the initial release of parallel futures, a construct for fine-grained parallelism in PLT. Roughly speaking, a programmer passes a thunk to 'future' and it gets run in parallel. That &quot;roughly&quot; holds a fe...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/12/futures-fine-grained-parallelism-in-plt.html">
+    <link rel="next" href="/2009/12/plt-scheme-v423.html">
+    <link rel="prev" href="/2010/01/scheme-videos-lectures-and-talks.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>07 Dec 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Futures: Fine Grained Parallelism in PLT</h1>
+  </header>
+
+<p><em>posted by Robby Findler</em></p>
+
+<p>We&rsquo;re pleased to announce the initial release of parallel futures, a construct for fine-grained parallelism in PLT. Roughly speaking, a programmer passes a thunk to &lsquo;future&rsquo; and it gets run in parallel. That &ldquo;roughly&rdquo; holds a few gotchas, partly because we&rsquo;re just getting started and partly due to the technique we&rsquo;re using. See the documentation for more details:</p>
+
+<p><a href="http://pre.plt-scheme.org/docs/html/futures/">http://pre.plt-scheme.org/docs/html/futures/</a></p>
+
+<p>If you&rsquo;ve got a multicore machine where you can&rsquo;t keep the cores busy or your office/machine room is a bit cold, try this program:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">scheme</span>
+<span class="p">(</span><span class="k">require</span> <span class="n">scheme/future</span><span class="p">)</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">loop</span><span class="p">)</span> <span class="p">(</span><span class="n">loop</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">for-each</span>
+ <span class="nb">touch</span>
+ <span class="p">(</span><span class="k">for/list</span> <span class="p">([</span><span class="n">i</span> <span class="p">(</span><span class="nb">in-range</span> <span class="mi">0</span> <span class="p">(</span><span class="nb">processor-count</span><span class="p">))])</span>
+  <span class="p">(</span><span class="nb">future</span> <span class="n">loop</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>Note that you have to build mzscheme with futures; it isn&rsquo;t enabled by default, but see the docs above for how to do that. Beyond the above, we&rsquo;ve also gotten a few parallel kernels going and are seeing good scalability up to 8 cores (the biggest machine we have around for the time being).</p>
+<!-- more-->
+
+<hr />
+
+<p>Why is the touch explicit?</p>
+
+<p>Why don&rsquo;t you use future-strict primitives to force future values?</p>
+
+<p>— <em>matthias, 7 December 2009</em></p>
+
+<hr />
+
+<p>One could build another layer on top of this one to do things like that (and perhaps we should not have taken over the names &lsquo;future&rsquo; and &lsquo;touch&rsquo; and let a library like that have them).</p>
+
+<p>touch is explicit so that the runtime system primitives that depend on a particular context are well-defined (eg, exception handlers and continuation marks).</p>
+
+<p>— <em>Robby, 7 December 2009</em></p>
+
+<hr />
+
+<p>Will never versions have it enabled by default for the OSX package?</p>
+
+<p>— <em>Robert, 7 December 2009</em></p>
+
+<hr />
+
+<p>Eventually, yes. But it is easy to build under mac os x. Just make sure you have the developer tool installed and then it is only a few simple commands in a Terminal window.</p>
+
+<p>— <em>Robby, 7 December 2009</em></p>
+
+<hr />
+
+<p>Does that &ldquo;mess up&rdquo; anything with the packaged installation?</p>
+
+<p>— <em>Robert, 7 December 2009</em></p>
+
+<hr />
+
+<p>No. You can have as many versions as you want, completely separate. (Double clicking in the finder will always choose one of the open drschemes; I haven&rsquo;t figured out what the OS does when none of them are open.)</p>
+
+<p>— <em>Robby, 7 December 2009</em></p>
+
+<hr />
+
+<p>It seems to me that delay/thread in scheme/promise has an analogous existing interface to a later forced-touched promise-future. Outside the very important and appreciated implementation difference of having multiple CPUs, where does the analogy fall short enough to require a different set of functions?</p>
+
+<p>— <em>griffinish, 20 December 2009</em></p>
+
+<hr />
+
+<p>Well, parallelism is an important difference, of course (enough that warrants its own, separate api so programmers know what they are getting), but another difference is that with promises the computation won&rsquo;t get &ldquo;frozen&rdquo; in the way that futures can get frozen.</p>
+
+<p>— <em>Robby, 20 December 2009</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2010/01/scheme-videos-lectures-and-talks.html">Scheme Videos (Lectures and Talks)</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/12/plt-scheme-v423.html">PLT Scheme v4.2.3</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

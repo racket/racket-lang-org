@@ -1,0 +1,17 @@
+<article class="index">
+ @(local-require gregor)
+ 
+<row>
+
+<col-1>  
+  <p class='date-and-tags'>@(~t (iso8601->date date-8601) "dd MMM YYYY")</p></col-1>
+
+<col-2>
+  <h1><a href='@|uri-path|'>@|title|</a></h1>
+  <div class="truncate">@|content-only|</div>
+  <a class="more" href='@|uri-path|'>more →</a>
+<col-2>
+
+</row>
+  
+</article>

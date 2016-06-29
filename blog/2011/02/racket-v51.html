@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v5.1</title>
+    <meta name="description" content="_posted by Eli Barzilay_  Racket version 5.1 is now available from http://racket-lang.org/The most significant change in version 5.1 is a rewrite of the GUI library. Unix/X users will see the biggest difference with this change, because DrRacket and all R...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2011/02/racket-v51.html">
+    <link rel="next" href="/2010/12/rebuilding-rackets-graphics-layer.html">
+    <link rel="prev" href="/2011/03/languages-as-libraries-pldi-2011.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>14 Feb 2011</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v5.1</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a>The most significant change in version 5.1 is a <a href="../../2010/12/racket-version-5.html">rewrite of the GUI library</a>. Unix/X users will see the biggest difference with this change, because DrRacket and all Racket GUI programs now take on the desktop theme for menus, buttons, and other GUI widgets.</p>
+
+<p>In the long run, Racket GUI programs on all platforms will improve as a result of the library rewrite. In the short run, beware that this first release of a new library will inevitably include a new set of bugs.</p>
+
+<p>Version 5.1 changes in more detail:</p>
+
+<ul>
+ <li>
+  <p>The <code>racket/draw</code> library&mdash;which implements the drawing half the GUI toolkit&mdash;can be used independent of the <code>racket/gui/base</code> library and without a graphics display (e.g., without an X11 connection).The new library has one small incompatibility with the old GUI toolbox: &rsquo;xor drawing is no longer supported. The new library has many additional features: rotation and general affine transformations, PDF and SVG drawing contexts, gradients, and alpha-channel bitmaps.</p></li>
+ <li>
+  <p>The GRacket executable is no longer strictly necessary for running GUI programs, because the <code>racket/gui/base</code> library can be used from Racket. To the degree that a platform distinguishes GUI and console applications, however, the GRacket executable still offers some additional GUI-specific functionality (e.g., single-instance support).The new <code>racket/gui/base</code> library includes small incompatibilities with the old GUI toolbox: the <code>send-event</code>, <code>current-ps-afm-file-paths</code>, and <code>current-ps-cmap-file-paths</code> functions have been removed. The <code>racket/gui/base</code> library re-exports <code>racket/draw</code>, so it includes the same drawing functionality as before (except for &rsquo;xor drawing).</p></li>
+ <li>
+  <p>The new <code>racket/snip</code> library can be used independently of <code>racket/gui/base</code> to work with graphical editor content (e.g., images in student programs). Like <code>racket/draw</code>, the <code>racket/snip</code> library is re-exported by <code>racket/gui/base</code>.</p></li>
+ <li>
+  <p>The Web Server includes a backwards incompatible change that prevents X-expressions and lists of bytes from being directly returned from servlets. This change will increase performance for those types of responses and allow easier experimentation with response types. Please see "<code>collects/web-server/compat/0/README</code>" in the installation to learn about porting your servlets forward. Don&rsquo;t worry. It&rsquo;s easy.</p></li>
+ <li>
+  <p>The new <code>raco demodularize</code> tool collapses a module&rsquo;s dependencies into a single module comprising the whole program. This transformation currently provides no performance improvement, but is the basis for cross-module optimization and dead-code elimination tools to come. The transformation is currently useful for static analysis of whole Racket programs.</p></li>
+ <li>
+  <p>The picturing-programs teachpack, formerly installed via PLaneT, is now bundled with the standard distribution. Use the teachpack with <code>(require picturing-programs)</code> instead of <code>(require installed-teachpacks/picturing-programs)</code>. The old PLaneT-based installation procedure still works, but it now merely installs a stub that invokes the bundled version.</p></li>
+ <li>
+  <p>Slideshow picts, <code>racket/draw</code> bitmaps, and images created with <code>2htdp/image</code> can now be used directly in Scribble documents. More generally, the new <code>file/convertible</code> protocol enables any value that is convertible to a PNG and/or PDF stream to be used as an image in a Scribble document.</p></li>
+ <li>
+  <p>The Same game sports a new look and an improved scoring system. (The current known high score is 12,429; can you beat that?)</p></li></ul>
+<!-- more-->
+
+<hr />
+
+<p>Wow, that was a bunch of work. I&rsquo;ve been lurking, trying the nightly build about every week. Congratulations on the successful rewrite and thank you for the effort.</p>
+
+<p>— <em>griffinish, 19 February 2011</em></p>
+
+<hr />
+
+<p>Thanks a lot for Racket! It&rsquo;s really great.</p>
+
+<p>And could you help me? Does vim syntax file for Racket exist and how can I find one if yes?</p>
+
+<p>— <em>ul, 22 February 2011</em></p>
+
+<hr />
+
+<p>I&rsquo;m using the Lion GM and can&rsquo;t seem to launch any of the binaries included in the download. They invariably crash on launch.</p>
+
+<p>— <em>Alex Lew, 10 July 2011</em></p>
+
+<hr />
+
+<p>Try a newer version &mdash; IIRC, there were some relevant fixes since then.</p>
+
+<p>— <em>Eli Barzilay, 17 July 2011</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2011/03/languages-as-libraries-pldi-2011.html">Languages as Libraries, PLDI 2011</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2010/12/rebuilding-rackets-graphics-layer.html">Rebuilding Racket’s Graphics Layer</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>
