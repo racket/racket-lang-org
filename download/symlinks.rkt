@@ -11,9 +11,6 @@
 ;; Map old layout to new layout (where "new" = "v5.92 and later"):
 (define (version-symlink src-v dest-v)
   (symlink #:site download-site
-           (format "../releases/~a/installers" dest-v)
-           (format "installers/~a" src-v))
-  (symlink #:site download-site
            (format "../../releases/~a/doc" dest-v)
            (format "docs/~a/html" src-v))
   (symlink #:site download-site

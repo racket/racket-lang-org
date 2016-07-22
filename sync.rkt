@@ -79,7 +79,8 @@
 (unless dry-run?
   (add-routing-rules "download.racket-lang.org"
                      routing-rules
-                     #:log-info displayln))
+                     #:log-info displayln
+                     #:preserve-existing? #f))
 
 
 ;; ----------------------------------------
