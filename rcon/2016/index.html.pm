@@ -87,6 +87,14 @@ Parentheses getting you down? Not enough dots in your life? Can't tell a parenth
 ◊bio{◊link["https://jeapostrophe.github.io"]{Jay McCarthy} isn't joking when he says the only languages he likes are Racket, Coq, and C. After being desensitized from the flames after the new package system, making controversial programming choices is the only way he can feel anything anymore. Hence, ◊tt{#lang remix}. Also, he is a core Racket developer and associate professor at UMass Lowell.}}
 
 
+◊folded{
+◊speaker["" "Scott Moore"]{Contracts for Security}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+The Principle of Least Privilege says that software shouldn't be executed with more authority than it needs to get its job done. Shill is a shell scripting language designed to make it easy to follow the Principle of Least Privilege—every Shill script comes with a contract (built with Racket's contract library) that describes exactly what it can do. By combining careful language design with system-level sandboxing, Shill's security guarantees let users run third-party scripts with confidence. This talk gives an overview of Shill and describes how Racket streamlined its design and implementation.
+
+◊bio{◊link["http://www.thinkmoore.net/"]{Scott Moore} is a research fellow at Harvard University, where he studies how to use programming language design help programmers write safe, correct, and understandable software.}}
+
 
 ◊folded{
 ◊speaker["" "Rodrigo Setti"]{Generative Art with Racket}
