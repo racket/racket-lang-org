@@ -97,6 +97,15 @@ The Principle of Least Privilege says that software shouldn't be executed with m
 
 
 ◊folded{
+◊speaker["" "Linh Chi Nguyen"]{Population game simulation in Racket}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+As part of our research in social science, we simulate a population of agents playing an abstract game and let them evolve to see what kind of strategies survive and emerge in the long run. As an example, we describe the simulation of the repeated Prisoner's Dilemma game. It has been quite a journey in Racket. We love the vibe and would like to share the insights we have accumulated about Racket programming. We also show how the technical result could be interpreted or translated into cultural meaning. After all, the bridge between economics (especially game theory) and programming is getting crowded with practitioners and intellectual musings from both fields. We look forward to a fun and interesting discussion at RacketCon.
+
+◊bio{Currently a PhD student in Trento Italy. Formally my research interest is evolutionary game theory, bargaining game and agent based model simulation. I had the luck to talk at Max Planck Institute (2015) and Maastricht University (GAMES Congress 2016). My informal hobbies includes programming and karate. Depression and anxiety make me ponder the philosophical questions of existence, life and universe quite a bit. However, as not being a professional in the field, I consider that day dreaming and materials for a fun little chitchat at sunset.}}
+
+
+◊folded{
 ◊speaker["" "Rodrigo Setti"]{Generative Art with Racket}
 ◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
@@ -111,13 +120,6 @@ Stamps is a language built on top of Racket, in which one can describe high-leve
 I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-racket"]{an application for controlling Phillips Hue Bulbs in theatrical settings}. As a professional lighting designer specializing in new and experimental work, I often find myself in galleries and other untraditional settings. Rather than bringing in an entire rig (and unhelpfully transforming the space into a theatre), I've used ◊link["http://www2.meethue.com/en-us/"]{Phillip Hue Bulbs} instead. They allow wireless individual control of fixtures, even when they are all powered via a single track or outlet. Using functional logic to determine the most efficient json commands, ◊em{Simple Hue Control} offers a designer a familiar programming interface for creating beautiful shows.
 
 ◊bio{◊link["www.BruceSteinbergLD.com"]{Bruce Steinberg}’s lighting designs have been seen in venues ranging from a Soho laundromat to Italian concert halls—and even an occasional theatre. New York: ◊em{The Maids' The Maids} (Kathryn Hamilton), ◊em{Les Mamelles de Tirésias} (Emma Griffin), ◊em{Art of Memory} (Tanya Calamoneri), ◊em{Feeder} (José Zayas), ◊em{Blue Before Morning} (Gia Forakis/NYIT Award). Regional: ◊em{Moby Dick—Rehearsed} (Jonathan Rosenberg), ◊em{Brief Interviews with Hideous Men} (Daniel Fish). International: ◊em{Sounds} (Paola Prestini). Installations: Mark di Suvero's ◊em{For Euler} (1997) and ◊em{Double Tetrahedron} (2004) at Salem Art Works; Keren Cytter's ◊em{Mysterious Serious} (2009) at X-Initiative. Architectural: ◊em{Happy Lucky No. 1 Gallery} (2015). He received his MFA from NYU TSOA, Department of Design for Stage & Film.}}
-
-◊h3{Plus}
-
-◊div[#:class "two-col"]{
-◊speaker["" "Linh Chi Nguyen" ""]{}
-◊speaker["" "(more speakers to come)" ""]{}
-}
 
 ◊gap[1]
 
