@@ -121,6 +121,17 @@ I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-ra
 
 ◊bio{◊link["www.BruceSteinbergLD.com"]{Bruce Steinberg}’s lighting designs have been seen in venues ranging from a Soho laundromat to Italian concert halls—and even an occasional theatre. New York: ◊em{The Maids' The Maids} (Kathryn Hamilton), ◊em{Les Mamelles de Tirésias} (Emma Griffin), ◊em{Art of Memory} (Tanya Calamoneri), ◊em{Feeder} (José Zayas), ◊em{Blue Before Morning} (Gia Forakis/NYIT Award). Regional: ◊em{Moby Dick—Rehearsed} (Jonathan Rosenberg), ◊em{Brief Interviews with Hideous Men} (Daniel Fish). International: ◊em{Sounds} (Paola Prestini). Installations: Mark di Suvero's ◊em{For Euler} (1997) and ◊em{Double Tetrahedron} (2004) at Salem Art Works; Keren Cytter's ◊em{Mysterious Serious} (2009) at X-Initiative. Architectural: ◊em{Happy Lucky No. 1 Gallery} (2015). He received his MFA from NYU TSOA, Department of Design for Stage & Film.}}
 
+◊folded{
+◊speaker["" "Andy Wingo"]{Spelunking through JPEG with Racket}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+JPEG is a funny thing.  Photos are our lives and our memories, our first steps and our friends, and yet how much do we know about how they work?  This talk explores the JPEG format in a graphical way, using a Racket library to dissect, reconstruct, encode, and decode JPEG files.
+
+This library was first written for Guile but then ported to Racket as an exercise.  Along the way in the talk we can mention things that we really enjoy about Racket and other points of interest.
+
+◊bio{◊link["http://wingolog.org/"]{Andy Wingo} co-maintains the Guile implementation of Scheme and has admired Racket-the-language and Racket-the-community for a long time. Though he's read a lot of Racket and writes a lot of Scheme, this port of the JPEG library is his first foray into Racketland.  Here goes nothing!}}
+
+
 ◊gap[1]
 
 ◊h3{◊xtarget["register"]{Register}}
