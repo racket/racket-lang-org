@@ -79,6 +79,16 @@ Racket is not just a programming language; it is a programming language platform
 ◊bio{◊link["https://lexi-lambda.github.io/"]{Alexis King} works at CJ Affiliate writing primarily Haskell and JavaScript building web applications, APIs, and internal infrastructure. She is especially interested in the intersection of programming languages and usability and how smart tooling and domain specific languages can work together to make systems simpler and easier to reason about by treating programs like user interfaces.}}
 
 ◊folded{
+◊speaker["" "Geoffrey S. Knauth"]{Racket is my Mjolnir}
+◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+
+Weather services around the world rely on binary and compressed data formats that were formalized in the days when Fortran was dominant and bandwidth was extremely expensive. The formats were revolutionary in the 1980s, but now, though compact and commonplace, they are not as easy to work with as more modern general purpose formats used in other disciplines. In order to see what’s in these files, decoders have been written with APIs in Fortran, C and Python, but those decoders, now in beta, require programs that use them to expect input files to be of a specific subtype. Even the Python interface, which offers some amount of interactive and scripting potential, expects a person to have some knowledge of the structure and contents in advance.
+
+Racket offers the additional capability of using customizable domain specific language to truly explore these files interactively, discovering properties, querying them, transforming data into a variety of formats, and sharing those data with other programs in real time, e.g., for visualization and for use in functional streaming data pipelines.
+
+◊bio{◊link["http://knauth.org/gsk/"]{Geoffrey S. Knauth}.}}
+
+◊folded{
 ◊speaker["" "Jay McCarthy"]{R-r-r-r-REMIX!}
 ◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
