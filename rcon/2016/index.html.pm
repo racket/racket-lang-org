@@ -86,7 +86,7 @@ Weather services around the world rely on binary and compressed data formats tha
 
 Racket offers the additional capability of using customizable domain specific language to truly explore these files interactively, discovering properties, querying them, transforming data into a variety of formats, and sharing those data with other programs in real time, e.g., for visualization and for use in functional streaming data pipelines.
 
-◊bio{◊link["http://knauth.org/gsk/"]{Geoffrey S. Knauth}.}}
+◊bio{◊link["http://knauth.org/gsk/"]{Geoffrey Knauth} is a Senior Software Developer at AccuWeather.  Previously he taught computer science at Lycoming College, developed systems to project demand and schedule logistics for all of DoD's fuel consumers, and consulted to Fortune 100 companies with NeXT computers.  He started programming in 1975 on a PDP-8, has been a GNU contributor for 31 years, and an FSF board member for 20 years.  He was a US rowing team coxswain, and is an active Civil Air Patrol mission pilot.  A more important fact is his son Alex loves Racket and is a better programmer than Dad.}}
 
 ◊folded{
 ◊speaker["" "Jay McCarthy"]{R-r-r-r-REMIX!}
