@@ -257,7 +257,7 @@
         #:link-title "RacketCon 2014" #:title "RacketCon"
         #:extra-headers style-header]{
    @columns[12 #:center? #t #:row? #t]{
-     @h2{RacketCon: 27 September 2015}
+     @h2{RacketCon: 20 September 2014}
 
      @columns[6 #:center? #f #:row? #f]{
        @p{@b{(fourth RacketCon)} was held in St. Louis on September 20th 2014.}
