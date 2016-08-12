@@ -26,7 +26,7 @@ Live stream archive:
 ◊folded{
 ◊keynote-speaker["" "Matthias Felleisen"]{The Racket Manifesto}
 
-◊rlink["2015/felleisen.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=JnczIyPXGfc&index=1&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
+◊rlink["felleisen.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=JnczIyPXGfc&index=1&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
 
 The creation of a programming language calls for guiding principles that point its developers to goals. This talk will spell out the three basic principles behind the 20-year development of Racket. First, programming is about stating and solving problems, and this activity normally takes place in a context with its own language of discourse; good programmers ought to formulate this language as a programming language. Hence, Racket is a programming language for creating new programming languages. Second, by following this language-oriented approach to programming, systems become multi-lingual collections of interconnected components. Each language and component must be able to protect its specific invariants. In support, Racket offers protection mechanisms to implement a full language spectrum, from C-level bit manipulation to soundly typed extensions. Third, because Racket considers programming as problem solving in the correct language, Racket also turns extra-linguistic mechanisms into linguistic constructs, especially mechanisms for managing resources and projects. This talk will explain these principles and how Racket lives up to them, present the evaluation framework behind the design process, and conclude with a sketch of Racket's imperfections and opportunities for future improvements.
 
@@ -35,7 +35,7 @@ The creation of a programming language calls for guiding principles that point i
 ◊h3{◊xtarget["speakers"]{Speakers}}
 ◊folded{
 ◊speaker["" "Spenser Bauman"]{Tracing Comes to Racket}
-◊rlink["2015/bauman.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=GOfIY8NHAqg&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=6"]{Video}
+◊rlink["bauman.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=GOfIY8NHAqg&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=6"]{Video}
 
 While object-oriented languages have embraced the use of advanced just-in-time compilers for fast execution, functional languages typically rely on ahead of time compilation/optmization.  Currently, there are no good JIT compilers for the Scheme family of languages, despite their successful application to other dynamic languages.  In this talk, I will present Pycket; an implementation of Racket in RPython which makes use of the meta-tracing JIT infrastructure developed for the PyPy project.  The goal of Pycket is to provide a fast Racket implementation which can eliminate the overhead of features which are difficult to optimize statically such as gradual typing, continuations, and contracts.
 
@@ -43,7 +43,7 @@ While object-oriented languages have embraced the use of advanced just-in-time c
 
 ◊folded{
 ◊speaker["" "Marc Burns"]{Rocking with Racket}
-◊rlink["2015/burns.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=QoYJfA7cq2I&index=3&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
+◊rlink["burns.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=QoYJfA7cq2I&index=3&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
 
 We made an in-browser music production and exploration platform. The backend was developed in Racket and C++; we just finished porting it to Typed Racket. I will talk about how using (typed) Racket has informed our design, some pitfalls we encountered, and what we're doing to make the backend both performant and reliable now that we have a few users.
 
@@ -51,7 +51,7 @@ We made an in-browser music production and exploration platform. The backend was
 
 ◊folded{
 ◊speaker["" "Byron Davies"]{Spreadsheets, Formal Methods, and Winning the XPRIZE}
-◊rlink["2015/davies.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=TCCZWzgKgdE&index=8&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
+◊rlink["davies.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=TCCZWzgKgdE&index=8&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
 
 I developed Rexcel for analyzing standardized test data for schools. Although I did if for a specific application, the approach I took was very general, making it easy for people to perform complex spreadsheet processing in a language other than VBA.
 
@@ -72,7 +72,7 @@ Racket's powerful syntax system allows things like pattern matching not only to 
 
 ◊folded{
 ◊speaker["" "Matthew Flatt"]{Binding as Sets of Scopes}
-◊rlink["2015/flatt.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=ABWLveMNdzg&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=7"]{Video}
+◊rlink["flatt.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=ABWLveMNdzg&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=7"]{Video}
 
 Racket's macro expander evolved from a prototype circa 2000 that combined the `syntax-case` macro system with an idea for modules and phases. It has served Racket well, but the implementation is complex and difficult to explain in full, and it's starting to fray around the edges with the addition of submodules. The new macro expander starts over using a new way of representing and tracking bindings. The resulting model of macro expansion is simpler and more uniform than the current one based on renaming, but it's mostly compatible with the old expander.
 
@@ -88,7 +88,7 @@ Cover is a code coverage tool for Racket. It supports project level code coverag
 
 ◊folded{
 ◊speaker["" "Ben Greenman"]{A #lang for All Seasons}
-◊rlink["2015/greenman.pdf"]{Slides} ◊rlink["2015/greenman-writeup.pdf"]{Writeup} ◊link["https://www.youtube.com/watch?v=p3duA-dmv7k&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=13"]{Video}
+◊rlink["greenman.pdf"]{Slides} ◊rlink["greenman-writeup.pdf"]{Writeup} ◊link["https://www.youtube.com/watch?v=p3duA-dmv7k&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=13"]{Video}
 
 Racket's ability to create languages is extremely versatile and powerful. No matter the challenge or problem domain, Racket's language tools provide a foundation for directly expressing and solving issues. We demonstrate by taming the age-old challenge of crafting a well-formed sonnet.
 
@@ -102,7 +102,7 @@ writing in iambic pentameter.}}
  
 ◊folded{
 ◊speaker["" "Andrew Kent"]{Practical Dependently Typed Racket}
-◊rlink["2015/kent.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=ejFJIAsvdEg&index=5&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
+◊rlink["kent.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=ejFJIAsvdEg&index=5&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
 
 Typed Racket has enabled developers to enrich and optimize existing dynamically Typed Racket programs with static types. We have extended this system with practical dependent types that can verify a wider range of patterns commonly found in Racket code. I will demonstrate how this extension can help users remove more bugs and optimize more operations in their programs with little (if any) additional effort.
 
@@ -110,7 +110,7 @@ Typed Racket has enabled developers to enrich and optimize existing dynamically 
 
 ◊folded{
 ◊speaker["" "Alexis King"]{Generic Collections: One Interface to Rule Them All}
-◊rlink["2015/king.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=JUD_JwG0alg&index=12&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
+◊rlink["king.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=JUD_JwG0alg&index=12&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
 
 Racket encourages a functional style, but aside from immutable pairs, the collections library remains unsuitable for rich functional programming with a complement of functional data structures. Racket programmers may reach for linked lists when better structures would do to avoid the list-ref/vector-ref/stream-ref function zoo. This talk discusses the implementation of a generic collections system that encourages immutability by default, provides a more consistent and comprehensive interface across all data structures, and provides that interface in a way that can be leveraged by new, user-defined structures to feel as integrated with the language as Racket's built-ins.
 
@@ -118,7 +118,7 @@ Racket encourages a functional style, but aside from immutable pairs, the collec
 
 ◊folded{
 ◊speaker["" "Jay McCarthy"]{Bithoven and the NES Chamber Orchestra}
-◊rlink["2015/mccarthy.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["mccarthy.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
  Bithoven is a prolific composer of approximately
 107936338584579028906476999435802819420152571696145967835629469168
@@ -133,7 +133,7 @@ In randomized trials, we've found that audiences familiar with retro-style video
 
 ◊folded{
 ◊speaker["" "Samuel Rebelsky"]{Scripting GIMP with Racket}
-◊rlink["2015/rebelsky.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=pufAyybrPtk&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=9"]{Video}
+◊rlink["rebelsky.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=pufAyybrPtk&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=9"]{Video}
 
 The GNU Image Manipulation Program, or GIMP, is an open-source alternative to Photoshop.  In the early days of GIMP, the designers added a scripting language, Script-Fu, based on Scheme.  Over the years, Script-Fu has been superseded by Python-Fu, although Script-Fu remains an option, albeit with a primitive IDE.  Over the past few years, my students and I have built a library that allows programmers to script GIMP using Racket and the DrRacket IDE.  In addition to providing the “glue” between GIMP and Racket, we also added a library of routines more amenable to novice programmers.  In this talk, we will discuss the design of both the “glue” and the broader library.  We will also discuss a related introductory course in CS that uses multiple models of image making as the motivating problem domain.
 
@@ -141,7 +141,7 @@ The GNU Image Manipulation Program, or GIMP, is an open-source alternative to Ph
 
 ◊folded{
 ◊speaker["" "Vishesh Yadav"]{The Big Bang Universe on the World Wide Web}
-◊rlink["2015/yadav.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=tkBBsO1yLnw&index=10&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
+◊rlink["yadav.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=tkBBsO1yLnw&index=10&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8"]{Video}
 
 Each semester, thousands of students learn how to design programs using Racket's "universe" library, a no-boilerplate framework for easily writing interactive graphical programs. However, sharing their creations with family and friends is not as easy. I'll present my one-click solution, aided by the Whalesong Racket-to-JS compiler, that enables students to effortlessly go from IDE to sharable, interactive web-hosted program.
 
