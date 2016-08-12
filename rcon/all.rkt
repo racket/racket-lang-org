@@ -14,7 +14,7 @@
 
 (register-identity con-site)
 
-(define-runtime-path 2015-mb "2015-mb/index.html")
+(define-runtime-path 2015-index "2015/index.html")
 (define-runtime-path 2016-index "2016/index.html")
 
 (define index
@@ -27,12 +27,12 @@
 ;;  the generated files from the repo
 
 ;; copy over 2015 site
-(define-runtime-path 2015-dir "2015-mb")
+(define-runtime-path 2015-dir "2015")
 (for ([f (in-list '("eero.svg" "eero.svgz" "cubit.png" "pattern.png"
                     "styles.css" "index.html"))])
   (void (copyfile #:site con-site
                   (build-path 2015-dir f) (string-append "2015/" f))))
-(define-runtime-path 2015-fonts "2015-mb/fonts/")
+(define-runtime-path 2015-fonts "2015/fonts/")
 (for ([f (in-directory 2015-fonts)])
   (define-values (base name _) (split-path f))
   (copyfile #:site con-site f (string-append "2015/fonts/" (path->string name))))
