@@ -9,6 +9,7 @@
 ◊h2{◊xlink["register"]{St. Louis: Union Station hotel}}
 ◊h2{◊xlink{Speakers}}
 ◊h2{◊xlink{Register}}
+◊h2{◊xlink{Schedule}}
 
 
 (sixth RacketCon) is a public meeting for everyone interested in Racket: developers, contributors, programmers, educators, and bystanders. It's an opportunity for all members of the community to come together to share plans, ideas, and enthusiasm. RacketCon will enable the entire Racket community to mingle: to update each other, to exchange ideas, to collaborate, and to help shape the future of Racket.
@@ -150,6 +151,34 @@ Use the "RKC" group code when reserving rooms at the ◊link["http://doubletree3
 
 ◊h3{◊xtarget["social-event"]{Social Event}}
 ◊link["http://www.morganstreetbrewery.com/"]{Morgan Street Brewery}, 17 Sept, 6pm.
+
+◊h3{◊xtarget["schedule"]{Schedule}}
+
+◊schedule[
+◊row{◊at{9:00–9:30} ◊desc{Registration}}
+◊row{◊at{9:30} ◊desc{Welcome}}
+◊row{◊at{9:30–10:30} ◊desc{Keynote: Emina Torlak: Synthesis and Verification for All}}
+◊row{◊at{10:30–11:00} ◊desc{Break}}
+◊row{◊at{11:00–12:00} ◊desc{
+Alexis King: Languages in an Afternoon
+Rodrigo Setti: Generative Art with Racket
+Geoffrey Knauth: Racket is my Mjolnir}}
+◊row{◊at{12:00–14:00} ◊desc{Lunch at ◊link["http://www.hardrock.com/cafes/st-louis/"]{Hard Rock Cafe}}}
+◊row{◊at{14:00–15:00} ◊desc{
+Bruce Steinberg: Functional Lighting
+Scott Moore: Contracts for Security
+Stephen Chang and Alex Knauth: Type Systems as Macros}}
+◊row{◊at{15:00–15:15} ◊desc{Break}}
+◊row{◊at{15:15–16:15} ◊desc{
+Matthew Butterick: The Making of "Beautiful Racket"
+Linh Chi Nguyen: Population game simulation in Racket
+Andy Wingo: Spelunking through JPEG with Racket}}
+◊row{◊at{16:15–16:30} ◊desc{Break}}
+◊row{◊at{16:30–17:30} ◊desc{
+Jay McCarthy: R-r-r-r-REMIX!
+Byron Davies: Racket Does Dijkstra
+Jack Firth: Language Integrated Nitpicking}}
+]
 
 ◊h3{Sponsors}
 
