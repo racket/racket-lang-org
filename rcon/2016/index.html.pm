@@ -178,6 +178,8 @@ Andy Wingo: Spelunking through JPEG with Racket}}
 Jay McCarthy: R-r-r-r-REMIX!
 Byron Davies: Racket Does Dijkstra
 Jack Firth: Language Integrated Nitpicking}}
+◊row{◊at{17:30–17:45} ◊desc{Break}}
+◊row{◊at{17:45–} ◊desc{Town Hall Meeting / General Q&A}}
 ]
 
 ◊h3{Sponsors}
