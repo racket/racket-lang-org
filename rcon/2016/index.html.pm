@@ -164,6 +164,7 @@ Alexis King: Languages in an Afternoon
 Rodrigo Setti: Generative Art with Racket
 Geoffrey Knauth: Racket is my Mjolnir}}
 ◊row{◊at{12:00–14:00} ◊desc{Lunch at ◊link["http://www.hardrock.com/cafes/st-louis/"]{Hard Rock Cafe}}}
+◊row{◊at{14:00} ◊desc{Contributor Awards}}
 ◊row{◊at{14:00–15:00} ◊desc{
 Bruce Steinberg: Functional Lighting
 Scott Moore: Contracts for Security
