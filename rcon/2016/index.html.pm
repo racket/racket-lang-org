@@ -152,6 +152,10 @@ Use the "RKC" group code when reserving rooms at the ◊link["http://doubletree3
 ◊h3{◊xtarget["social-event"]{Social Event}}
 ◊link["http://www.morganstreetbrewery.com/"]{Morgan Street Brewery}, 17 Sept, 6pm.
 
+◊h3{◊xtarget["videos"]{Videos}}
+Talks will be live-streamed and recorded for posterity. Details to come!
+
+
 ◊h3{◊xtarget["schedule"]{Schedule}}
 
 ◊schedule[
