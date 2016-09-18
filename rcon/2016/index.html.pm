@@ -54,7 +54,7 @@ The Racket Manifesto says that "Racket is a programming language for creating ne
 
 ◊folded{
 ◊speaker["" "Byron Davies"]{Racket Does Dijkstra}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/davies.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 In the name of Systems Integrity Assurance, ◊link["http://Ontopilot.com"]{Ontopilot.com} is prototyping new tools for automatically finding bugs in software, using Dijkstra Guarded Commands and weakest precondition (WP). One member of our team developed a new method for applying WP methods to software, and has used it successfully to find nearly intractable bugs in operating systems and other software. We’re automating the method and incorporating the new Micron Automata Process to make it possible to apply our approach to million-line programs. To prove the concept, we have implemented the method in Racket, using Syntax as the intermediate language before conversion to Dijkstra Guarded Commands, and using the Syntax Browser to examine and debug the multiple representations used to convert a programming language into mathematical logic.
 
