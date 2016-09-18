@@ -63,7 +63,7 @@ In the name of Systems Integrity Assurance, ◊link["http://Ontopilot.com"]{Onto
 
 ◊folded{
 ◊speaker["" "Jack Firth"]{Language Integrated Nitpicking: Syntax Warnings in Racket}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/firth.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 Many popular languages automatically warn developers of potential mistakes with static analysis: dangerous patterns, use of deprecated features, and inconsistent variable names are all caught by automated tools, making it easier for programmers to stay on the same page. This talk presents a Racket library for adding syntax warnings and suggesting refactors via the macro system. True to Racket's philosophy, library users can define their own warnings with equal power to built in suggestions. Next time you argue over style guide rules, resolve it with a new syntax warning so it never comes up again!
 
