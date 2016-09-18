@@ -91,7 +91,7 @@ Racket offers the additional capability of using customizable domain specific la
 
 ◊folded{
 ◊speaker["" "Jay McCarthy"]{R-r-r-r-REMIX!}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 Parentheses getting you down? Not enough dots in your life? Can't tell a parenthesis from a brace or bracket? Standard library inconsistency getting you down? #lang remix is the droid you're looking for. It's Racket with delicious, buttery C-like syntax and a new standard library that remixes old forms to increase their Racketosity over 9,000!!!! Come for the dots, stay for the ◊tt{def+}.
 
