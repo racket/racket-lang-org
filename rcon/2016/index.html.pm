@@ -109,7 +109,7 @@ The Principle of Least Privilege says that software shouldn't be executed with m
 
 ◊folded{
 ◊speaker["" "Linh Chi Nguyen"]{Population game simulation in Racket}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/nguyen.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 As part of our research in social science, we simulate a population of agents playing an abstract game and let them evolve to see what kind of strategies survive and emerge in the long run. As an example, we describe the simulation of the repeated Prisoner's Dilemma game. It has been quite a journey in Racket. We love the vibe and would like to share the insights we have accumulated about Racket programming. We also show how the technical result could be interpreted or translated into cultural meaning. After all, the bridge between economics (especially game theory) and programming is getting crowded with practitioners and intellectual musings from both fields. We look forward to a fun and interesting discussion at RacketCon.
 
