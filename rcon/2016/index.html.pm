@@ -45,7 +45,7 @@ I've been devoting the year 2016 strictly to Racket projects. The most ambitious
 
 ◊folded{
 ◊speaker["" "Stephen Chang and Alex Knauth"]{Type Systems as Macros}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/chang-knauth1.pdf"]{Slides (Part 1)} ◊rlink["2016/chang-knauth2.pdf"]{Slides (Part 2)} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 The Racket Manifesto says that "Racket is a programming language for creating new programming languages". Yet, nearly all languages created with Racket are untyped, ignoring the significant typed portion of the PL spectrum. Typed Racket demonstrates that creating typed languages in Racket is possible ... with monumental effort. This talk attempts to give hope to the common Racket programmer who wishes to create typed languages with Racket, yet does not possess multiple PhDs. Specifically, I'll demonstrate a technique for embedding type checking directly into macro definitions, in a manner that is compatible with the language-creation patterns that Racket programmers are already familiar with, thus leading to typed languages with little effort.
 
@@ -100,7 +100,7 @@ Parentheses getting you down? Not enough dots in your life? Can't tell a parenth
 
 ◊folded{
 ◊speaker["" "Scott Moore"]{Contracts for Security}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/moore.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 The Principle of Least Privilege says that software shouldn't be executed with more authority than it needs to get its job done. Shill is a shell scripting language designed to make it easy to follow the Principle of Least Privilege—every Shill script comes with a contract (built with Racket's contract library) that describes exactly what it can do. By combining careful language design with system-level sandboxing, Shill's security guarantees let users run third-party scripts with confidence. This talk gives an overview of Shill and describes how Racket streamlined its design and implementation.
 
