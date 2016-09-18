@@ -73,7 +73,7 @@ Many popular languages automatically warn developers of potential mistakes with 
 
 ◊folded{
 ◊speaker["" "Alexis King"]{Languages in an Afternoon}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/king.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 Racket is not just a programming language; it is a programming language platform. Ideally, it could be more than a platform, but a greenhouse—a perfect tool for incubating new languages and growing mature ones (general purpose or domain specific). This talk presents a survey of Racket’s tools for building languages, the process it takes to add an entirely new, fully-integrated language to the ecosystem, and the places where that process could be streamlined to achieve the dream of designing, implementing, and applying an entirely new programming language in a single afternoon.
 
@@ -81,7 +81,7 @@ Racket is not just a programming language; it is a programming language platform
 
 ◊folded{
 ◊speaker["" "Geoffrey S. Knauth"]{Racket is my Mjolnir}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/knauth.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 Weather services around the world rely on binary and compressed data formats that were formalized in the days when Fortran was dominant and bandwidth was extremely expensive. The formats were revolutionary in the 1980s, but now, though compact and commonplace, they are not as easy to work with as more modern general purpose formats used in other disciplines. In order to see what’s in these files, decoders have been written with APIs in Fortran, C and Python, but those decoders, now in beta, require programs that use them to expect input files to be of a specific subtype. Even the Python interface, which offers some amount of interactive and scripting potential, expects a person to have some knowledge of the structure and contents in advance.
 
@@ -118,7 +118,7 @@ As part of our research in social science, we simulate a population of agents pl
 
 ◊folded{
 ◊speaker["" "Rodrigo Setti"]{Generative Art with Racket}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/setti.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 Stamps is a language built on top of Racket, in which one can describe high-level generating rules for 2D shapes, and which takes care of interpreting those rules and rendering. It is easy to create beautiful art that resembles smooth biological forms, as well as recursive fractal-like works. In this talk I introduce my first non-trivial Racket project, and talk about my particular experience developing it.
 
