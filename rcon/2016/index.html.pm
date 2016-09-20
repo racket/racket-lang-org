@@ -126,7 +126,7 @@ Stamps is a language built on top of Racket, in which one can describe high-leve
 
 ◊folded{
 ◊speaker["" "Bruce Steinberg"]{Functional Lighting}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/steinberg.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-racket"]{an application for controlling Phillips Hue Bulbs in theatrical settings}. As a professional lighting designer specializing in new and experimental work, I often find myself in galleries and other untraditional settings. Rather than bringing in an entire rig (and unhelpfully transforming the space into a theatre), I've used ◊link["http://www2.meethue.com/en-us/"]{Phillip Hue Bulbs} instead. They allow wireless individual control of fixtures, even when they are all powered via a single track or outlet. Using functional logic to determine the most efficient json commands, ◊em{Simple Hue Control} offers a designer a familiar programming interface for creating beautiful shows.
 
