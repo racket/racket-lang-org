@@ -135,7 +135,7 @@ I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-ra
 
 ◊folded{
 ◊speaker["" "Andy Wingo"]{Spelunking through JPEG with Racket}
-◊;rlink["2015/mccarthy.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
+◊rlink["2016/wingo.pdf"]{Slides} ◊;link["https://www.youtube.com/watch?v=BDg79CPbdXQ&list=PLXr4KViVC0qJAsNuDeQzhFDjMK1gEdls8&index=2"]{Video}
 
 JPEG is a funny thing.  Photos are our lives and our memories, our first steps and our friends, and yet how much do we know about how they work?  This talk explores the JPEG format in a graphical way, using a Racket library to dissect, reconstruct, encode, and decode JPEG files.
 
