@@ -1,0 +1,43 @@
+1477520983
+Racket version 6.7 is now available from
+
+    http://racket-lang.org/
+
+- Racket supports building graphical applications on Android through the
+  racket-android project: https://github.com/jeapostrophe/racket-android
+
+- The Racket REPL comes with line-editing, command and result history,
+  and various meta-commands out of the box, via the `racket/interactive`
+  module. See the `racket/interactive` and `xrepl` documentation for
+  details.
+
+- The package system supports authentication when installing packages
+  from git, using the `raco pkg config git-checkout-credentials`
+  configuration option.
+
+- HTTP libraries, as well as "raco pkg", support proxying via HTTP
+  CONNECT.
+
+- Typed Racket provides typed versions of `racket/os` and
+  `racket/db/sqlite`.
+
+- The `PLT_COMPILED_FILE_CHECK` environment variable provides more
+  fine-grained control over when ".zo" files are consulted.
+
+- The documentation search supports searching for "#lang"s and
+  "#reader"s via the "L:" and "R:" search prefixes.
+
+- The `file/glob` module implements globbing for path-strings.
+
+- Optimizations in the bytecode compiler improve performance for
+  structure, list, string, and byte-string operations.
+
+The following people contributed to this release:
+Alex Knauth, Alex Harsanyi, Alexis King, Andrew Kent, Asumu Takikawa,
+Ben Greenman, Brian Lachance, Chongkai Zhu, Daniel Feltey, Georges
+Dupéron, Gustavo Massaccesi, Jay McCarthy, John Clements, Jonathan
+Schuster, Leif Andersen, Marc Burns, Matthew Butterick, Matthew Flatt,
+Matthias Felleisen, Mike Sperber, Robby Findler, Rohin Shah, Ryan
+Culpepper, Sam Tobin-Hochstadt, Spencer Florence, Stephen Chang, Stephen
+De Gabrielle, Tim Brown, Tony Garnock-Jones, Vincent St-Amour, WarGrey
+Gyoudmon Ju, and William J. Bowman.
