@@ -58,7 +58,7 @@
       @tr[valign: 'top style: "text-align: left;"]{@(list-cells 'description)}
       @tr{@(list-cells 'main-page-cell)}
       @tr{@(list-cells 'graph-cell)}
-      @sec{Subscription: enter your email here to subscribe to a mailing list}
+      @sec{Subscribe to a mailing list}
       @tr{@(list-cells 'subscribe-cell)}
       @sec{Gmane Mirror}
       @tr{@(list-cells 'gmane-cell)}
@@ -91,7 +91,9 @@
       (and g (list "https://groups.google.com/forum/#!forum/" g "/"))))
   (define google-groups-join-url
     (and google-groups-url
-         (append google-groups-url (list "join"))))7
+         (append google-groups-url (list "join"))))
+  (define google-groups-join-text
+    (string-append "Join the "name" mailing list"))
   (define ((mk-form make) url #:method [method 'get] . body)
     (make @form[action: url method: method
                 style: "display: inline; clear: none;"]{
@@ -106,7 +108,7 @@
                                     title: @list{Enter your email to subscribe
                                                  to the "@name" mailing list.}]}]
       [else ;; it must be a google group
-       @td{@a[href: google-groups-join-url]{@google-groups-join-url}}]))
+       @td{@a[href: google-groups-join-url]{@google-groups-join-text}}]))
   (define form-cell (mk-form td))
   (λ (what)
     (case what
