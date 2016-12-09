@@ -57,7 +57,6 @@
         @(list-cells 'header-cell)}
       @tr[valign: 'top style: "text-align: left;"]{@(list-cells 'description)}
       @tr{@(list-cells 'main-page-cell)}
-      @tr{@(list-cells 'graph-cell)}
       @sec{Subscribe to a mailing list}
       @tr{@(list-cells 'subscribe-cell)}
       @sec{Gmane Mirror}
@@ -133,9 +132,6 @@
           @td{@a[href: google-groups-url]{@big{@b{@TT{@name}}} page}
                @bull
                @a[href: (list name "/archive/")]{old archive}}])]
-      [(graph-cell)
-       @td{@img[src: (list "http://gmane.org/plot-rate.php?group=" gmane)
-                style: "width: 80%;"]}]
       [(subscribe-cell) (mk-subscribe td)]
       [(google-cell)
        (if google-groups-url
