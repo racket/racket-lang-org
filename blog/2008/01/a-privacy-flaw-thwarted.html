@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>A Privacy Flaw, Thwarted</title>
+    <meta name="description" content="_posted by Shriram Krishnamurthi_  My student Brendan Hickey recently identified the following security hole.  A university (let's call it Orange University) wants to let its graduating students vote on their graduation speaker. They used to do it by pape...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2008/01/a-privacy-flaw-thwarted.html">
+    <link rel="next" href="/2007/12/the-design-of-extended-exercises.html">
+    <link rel="prev" href="/2008/02/dirty-looking-hygiene.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>14 Jan 2008</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>A Privacy Flaw, Thwarted</h1>
+  </header>
+
+<p><em>posted by Shriram Krishnamurthi</em></p>
+
+<p>My student Brendan Hickey recently identified the following security hole.</p>
+
+<p>A university (let&rsquo;s call it Orange University) wants to let its graduating students vote on their graduation speaker. They used to do it by paper; catching up with the times, they now do it on the Web.</p>
+
+<p>They used to have a box into which you could type the name of your nominee. But that is surely problematic: people misspell names, you have to argue about how to count ambiguous votes, someone will vote for their pet bonobo, etc. Better (perhaps) to give them the names of all the students and let them choose. [Alert: if Orange U adopts a simple naming scheme for email addresses, a student can immediately screen-scrape a pretty plum list to sell a spammer. Brendan and I noticed this in a femtosecond; I don&rsquo;t know why this didn&rsquo;t occur to the university.]</p>
+
+<p>Anyway, now you have a Web page where people are going to choose, and the software that processes the responses must distinguish between these choices. You have to associate a key with each student. You&rsquo;ve already got a key for each candidate: their student ID number. So you use that as your key. Now anyone viewing the page source can immediately see which student ID number goes with which student name. So much for confidentiality.</p>
+
+<p>Whoops.</p>
+
+<p>I&rsquo;d like to point out that Pete Hopkins&rsquo;s <code>send/suspend/dispatch</code>, and the improved version of it by Jay McCarthy, identify and solve just this code structuring problem in a way that the privacy leak can never occur. For the most up-to-date presentation of it, read section 3.2 and section 4 of <a href="http://www.cs.brown.edu/~sk/Publications/Papers/Published/khmgpf-impl-use-plt-web-server-journal/">our paper</a>.</p>
+
+<p>Maybe Orange U should be using Scheme.</p>
+<!-- more-->
+
+<hr />
+
+<p>Salting and hashing the student ids before publishing them would protect identity as well, without depending on program-flow strategies, no?</p>
+
+<p>— <em>fawcett, 22 January 2008</em></p>
+
+<hr />
+
+<p>Salting and hashing ids was a thought I had too. But I think the paper&rsquo;s Continue web server has control flow constructs and error recovery capabilities built-in that would have to be added to other web-based approaches.</p>
+
+<p>— <em>Geoff Knauth, 22 February 2008</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2008/02/dirty-looking-hygiene.html">Dirty Looking Hygiene</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/12/the-design-of-extended-exercises.html">The Design of Extended Exercises</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Soft State in the PLT Web Server</title>
+    <meta name="description" content="_posted by Jay McCarthy_  Many Web applications and network protocols have values in the continuation that are necessary to complete the computation, but that may be recomputed if they are not available. This is &quot;soft state&quot;.  For example, a Web applicati...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/05/soft-state-in-the-plt-web-server.html">
+    <link rel="next" href="/2009/05/scheme-workshop-deadline-not-extended.html">
+    <link rel="prev" href="/2009/05/the-two-state-solution-native-and-serializable-continuations-in-the-plt-web-server.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>18 May 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Soft State in the PLT Web Server</h1>
+  </header>
+
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>Many Web applications and network protocols have values in the continuation that are necessary to complete the computation, but that may be recomputed if they are not available. This is &ldquo;soft state&rdquo;.</p>
+
+<p>For example, a Web application may cache a user&rsquo;s preferences from a database and deliver it to a Web browser as a hidden value; when the value is returned to the application in subsequent steps, it is used to customize the display. However, if the preferences were not available (or were corrupted in some way), the application could retrieve them from the database.</p>
+
+<p>When using the PLT Web Server&rsquo;s native continuations, this roughly corresponds to the use of a <em>weak box</em>: a box that the GC is allowed to erase the contents of. When using the PLT Web Server&rsquo;s serializable continuations it roughly corresponds to a weak box and a <em>weak hash table</em> (that holds its keys weakly) to give the box a serializable value as an identifier.</p>
+
+<p>This programming pattern is a bit difficult to get right. So, a library that implements it is now provided with PLT Scheme: <a href="http://faculty.cs.byu.edu/~jay/plt-doc/web-server/stateless.html#(part._.Soft_.State)"><code>web-server/lang/soft</code></a>.</p>
+
+<p>Here&rsquo;s a trivial example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">web-server</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._provide))" style="color: inherit">provide</a></span> <span class="n">interface-version</span> <span class="n">start</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">interface-version</span> <span class="o">'</span><span class="ss">stateless</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">softie</span>
+  <span class="p">(</span><span class="n">soft-state</span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"Doing a long computation...~n"</span><span class="p">)</span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/threads.html#(def._((quote._~23~25kernel)._sleep))" style="color: inherit">sleep</a></span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">soft-state-ref</span> <span class="n">softie</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"Done~n"</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">start</span>
+   <span class="p">(</span><span class="n">send/suspend</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">k-url</span><span class="p">)</span>
+      <span class="o">`</span><span class="p">(</span><span class="ss">html</span> <span class="p">(</span><span class="ss">body</span> <span class="p">(</span><span class="ss">a</span> <span class="p">([</span><span class="ss">href</span> <span class="o">,</span><span class="n">k-url</span><span class="p">])</span> <span class="s2">"Done"</span><span class="p">)))))))</span>
+</pre></div>
+
+</div>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/05/the-two-state-solution-native-and-serializable-continuations-in-the-plt-web-server.html">The Two State Solution: Native and Serializable Continuations in the PLT Web Server</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/05/scheme-workshop-deadline-not-extended.html">Scheme Workshop: deadline NOT extended!</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

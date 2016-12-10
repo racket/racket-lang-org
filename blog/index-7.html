@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 7)</title>
+    <meta name="description" content="Racket Blog (page 7)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-7.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>19 Mar 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/03/languages-as-libraries-pldi-2011.html'>Languages as Libraries, PLDI 2011</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>We&rsquo;ve just finished up the <a href="http://bit.ly/langlib">final version</a> of our <a href="http://pldi11.cs.utah.edu/">PLDI 2011</a> paper on language extension in Racket. The paper describes how the module system and the syntax system work together to support new languages with new static semantics, such as Typed Racket. Here&rsquo;s the abstract:</p>
+
+<blockquote>
+ <p>Programming language design benefits from constructs for extending the syntax and semantics of a host language. While C&rsquo;s string-based macros empower programmers to introduce notational shorthands, the parser-level macros of Lisp encourage experimentation with domain-specific languages. The Scheme programming language improves on Lisp with macros that respect lexical scope.</p></blockquote>
+
+<blockquote>
+ <p>The design of Racket—a descendant of Scheme—goes even further with the introduction of a full-fledged interface to the static semantics of the language. A Racket extension programmer can thus add constructs that are indistinguishable from “native” notation, large and complex embedded domain-specific languages, and even optimizing transformations for the compiler backend. This power to experiment with language design has been used to create a series of sub-languages for programming with first-class classes and modules, numerous languages for implementing the Racket system, and the creation of a complete and fully integrated typed sister language to Racket&rsquo;s untyped base language.</p></blockquote>
+
+<blockquote>
+ <p>This paper explains Racket&rsquo;s language extension API via an implementation of a small typed sister language. The new language provides a rich type system that accommodates the idioms of untyped Racket. Furthermore, modules in this typed language can safely exchange values with untyped modules. Last but not least, the implementation includes a type-based optimizer that achieves promising speedups. Although these extensions are complex, their Racket implementation is just a library, like any other library, requiring no changes to the Racket implementation.</p></blockquote>
+
+<p>To learn how to implement your own new language in Racket, start with <a href="http://docs.racket-lang.org/guide/languages.html">this documentation</a>.</p></div>
+  <a class="more" href='/2011/03/languages-as-libraries-pldi-2011.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>14 Feb 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/02/racket-v51.html'>Racket v5.1</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a>The most significant change in version 5.1 is a <a href="../../2010/12/racket-version-5.html">rewrite of the GUI library</a>. Unix/X users will see the biggest difference with this change, because DrRacket and all Racket GUI programs now take on the desktop theme for menus, buttons, and other GUI widgets.</p>
+
+<p>In the long run, Racket GUI programs on all platforms will improve as a result of the library rewrite. In the short run, beware that this first release of a new library will inevitably include a new set of bugs.</p>
+
+<p>Version 5.1 changes in more detail:</p>
+
+<ul>
+ <li>
+  <p>The <code>racket/draw</code> library&mdash;which implements the drawing half the GUI toolkit&mdash;can be used independent of the <code>racket/gui/base</code> library and without a graphics display (e.g., without an X11 connection).The new library has one small incompatibility with the old GUI toolbox: &rsquo;xor drawing is no longer supported. The new library has many additional features: rotation and general affine transformations, PDF and SVG drawing contexts, gradients, and alpha-channel bitmaps.</p></li>
+ <li>
+  <p>The GRacket executable is no longer strictly necessary for running GUI programs, because the <code>racket/gui/base</code> library can be used from Racket. To the degree that a platform distinguishes GUI and console applications, however, the GRacket executable still offers some additional GUI-specific functionality (e.g., single-instance support).The new <code>racket/gui/base</code> library includes small incompatibilities with the old GUI toolbox: the <code>send-event</code>, <code>current-ps-afm-file-paths</code>, and <code>current-ps-cmap-file-paths</code> functions have been removed. The <code>racket/gui/base</code> library re-exports <code>racket/draw</code>, so it includes the same drawing functionality as before (except for &rsquo;xor drawing).</p></li>
+ <li>
+  <p>The new <code>racket/snip</code> library can be used independently of <code>racket/gui/base</code> to work with graphical editor content (e.g., images in student programs). Like <code>racket/draw</code>, the <code>racket/snip</code> library is re-exported by <code>racket/gui/base</code>.</p></li>
+ <li>
+  <p>The Web Server includes a backwards incompatible change that prevents X-expressions and lists of bytes from being directly returned from servlets. This change will increase performance for those types of responses and allow easier experimentation with response types. Please see "<code>collects/web-server/compat/0/README</code>" in the installation to learn about porting your servlets forward. Don&rsquo;t worry. It&rsquo;s easy.</p></li>
+ <li>
+  <p>The new <code>raco demodularize</code> tool collapses a module&rsquo;s dependencies into a single module comprising the whole program. This transformation currently provides no performance improvement, but is the basis for cross-module optimization and dead-code elimination tools to come. The transformation is currently useful for static analysis of whole Racket programs.</p></li>
+ <li>
+  <p>The picturing-programs teachpack, formerly installed via PLaneT, is now bundled with the standard distribution. Use the teachpack with <code>(require picturing-programs)</code> instead of <code>(require installed-teachpacks/picturing-programs)</code>. The old PLaneT-based installation procedure still works, but it now merely installs a stub that invokes the bundled version.</p></li>
+ <li>
+  <p>Slideshow picts, <code>racket/draw</code> bitmaps, and images created with <code>2htdp/image</code> can now be used directly in Scribble documents. More generally, the new <code>file/convertible</code> protocol enables any value that is convertible to a PNG and/or PDF stream to be used as an image in a Scribble document.</p></li>
+ <li>
+  <p>The Same game sports a new look and an improved scoring system. (The current known high score is 12,429; can you beat that?)</p></li></ul></div>
+  <a class="more" href='/2011/02/racket-v51.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>08 Dec 2010</p></col-1>
+
+<col-2>
+  <h1><a href='/2010/12/rebuilding-rackets-graphics-layer.html'>Rebuilding Racket’s Graphics Layer</a></h1>
+  <div class="truncate">
+<p><em>posted by Matthew Flatt</em></p>
+
+<p>Racket version 5.1, which is scheduled for release in early February, will look a little different on the outside. Unix/X users will see the biggest difference: DrRacket and all Racket GUI programs will take on the desktop theme for menus, buttons, and other GUI widgets. Text handling is also better than before on Unix/X, especially when printing. Windows and Mac OS X users will see smaller changes, such as better printing, better handling of mouse-wheel events, and support for 64-bit Windows and Mac OS X.</p>
+
+<p>On the inside, version 5.1 is the biggest single change in Racket (or PLT Scheme) history. We’ve reimplemented the GUI layer, which meant throwing out about 200,000 lines of C++ code that built on Xt, Win32, and Carbon. We’ve replaced that C++ code with about 30,000 lines of Racket code that builds on Gtk, Win32, Cocoa, Cairo, and Pango. This change modernizes Racket&rsquo;s graphics support while significantly reducing the cost of maintaining the GUI and drawing libraries.</p>
+
+<p>In the space between the GUI implementation and the surface, there are many API improvements:</p>
+
+<ul>
+ <li>
+  <p>You can run GUI programs with just <code>racket</code>, instead of having to use <code>gracket</code>. Depending on how much your platform distinguishes between GUI and console applications, there may still be an advantage to using <code>gracket</code> (i.e., to tell the OS that you mean to start a GUI application or that you want a single instance of the application), but the difference is minor.</p></li>
+ <li>
+  <p>Most of the drawing library has moved to <code>racket/draw</code>, which you can use without the rest of the GUI library – and, in the case of Unix platforms, without an X-server connection. After detangling the graphics and GUIs libraries, the graphics library is now integrated in more places, such as adding pict support for Scribble documents.</p></li>
+ <li>
+  <p>The drawing library includes some new capabilities, such as rotation, affine transformations, and bitmaps with alpha channels.</p></li></ul>
+
+<p>Replacing hundreds of thousands of lines of C++ code with tens of thousands of lines of Racket code sounds like a no-brainer. The old library was implemented in C++ because we started in 1995 by gluing together a Scheme interpreter with a portable GUI library. Then the GUI code stayed in C++, because the interpreter wasn’t fast enough and the foreign interface was too clumsy. Racket is now plenty fast and its foreign interface has improved a lot since then.</p>
+
+<p>Still, the reimplementation took about 18 months. Smoothly integrating cross-platform GUI support with a programming language can be more difficult than it sounds, and mating new libraries with a legacy API creates additional challenges. Finally, many Racket tools depend Racket’s “eventspaces,” which are multiple process-like entities in the same virtual machine, each with its own GUI event loop. Implementing eventspaces on top of modern GUI toolkits turns out to be tricky, because the toolkits insist on a single event-loop per process and they cannot tolerate event-loop actions during certain callbacks. Fortunately, delimited continuations can help work around those limitations.</p>
+
+<p>Cairo and Pango are the two big enablers of the Racket graphics rewrite. The old Racket graphics library depended on many toolkits (X11, Win32, QuickDraw, Quartz, PostScript, and more), and it had poor font handling. Again, the problem was that we chose the previous technology in 1995. Cairo and Pango have since solved the portable-graphics problem, and we were able to trade in 80,000 lines of C++ glue for about 8,000 lines of Racket glue. The code could be much less if we didn’t have to match most of the old drawing API, but we&rsquo;re still very happy with the result.</p>
+
+<p>On the GUI side, the remaining 22,000 lines of Racket code replace similar C++ code that binds to three different toolkits. The set of underlying toolkits has changed, and a few eventspace tricks are new, but the approach is essentially the same as before. The code is nevertheless much more compact, because (no surprise) Racket is better than C++. Interestingly, the amount of toolkit-specific code is right around 6,500 lines for each toolkit, even though the way that a C programmer uses the different toolkits seems very different: Objective-C classes (Cocoa) versus signal callbacks with explicit wiring (Gtk) versus a single callback function for message handling (Win32). Maybe they&rsquo;re the same because we built a Racket mini-language for each toolkit that makes them all about equally convenient.</p>
+
+<p>The rewrite is not perfectly compatible with old code, and no doubt we have many bugs to find before the release. The process is well on track, though, and the new library implementations give a us a solid foundation to keep making Racket better.</p>
+
+<p>To try out the current development version, visit</p>
+
+<p><a href="http://pre.racket-lang.org/installers">http://pre.racket-lang.org/installers</a></p></div>
+  <a class="more" href='/2010/12/rebuilding-rackets-graphics-layer.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>07 Nov 2010</p></col-1>
+
+<col-2>
+  <h1><a href='/2010/11/racket-v502.html'>Racket v5.0.2</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.0.2 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>Typed Racket&rsquo;s optimizer is now turned on by default; error messages have been simplified and clarified.</p></li>
+ <li>
+  <p>Contracts: contracts on mutable containers allow functions or other higher order values, and contracts are checked when updating or dereferencing the containers. The new contracts are slower than the old ones, so the old check-once functionality is still available.A new dependent function contract combinator, <code>-&gt;i</code>, properly assigns blame for contracts that violate themselves and the generated wrappers are more efficient than <code>-&gt;d</code>. (Although it does more checking so your contracts may be faster or slower).See the docs for <code>box/c</code>, <code>hash/c</code>, <code>vector/c</code>, <code>vectorof</code> and <code>-&gt;i</code> for more details.</p></li>
+ <li>
+  <p>The <code>when</code>, <code>unless</code>, <code>cond</code>, <code>case</code>, and <code>match</code> forms (in <code>racket/base</code> and derived languages) now allow immediate internal definitions.</p></li>
+ <li>
+  <p>Web server: the formlets library provides more HTML form elements; <code>make-xexpr-response</code> supports a preamble for DTD declarations; <code>serve/servlet</code> supports stateless servlets.</p></li>
+ <li>
+  <p>New WebSocket implementation, see <code>net/websocket</code> for details.</p></li>
+ <li>
+  <p>The new <code>data</code> collection contains implementations of several data structures, including growable vectors and order-based dictionaries.</p></li>
+ <li>
+  <p><code>racket/match</code> is now significantly faster.</p></li>
+ <li>
+  <p>The Racket documentations are built in parallel by default.</p></li>
+ <li>
+  <p>The stepper is now compatible with programs using the Universe teachpack.</p></li>
+ <li>
+  <p><code>2htdp/image</code>: pinholes are now supported in the library (if you don&rsquo;t use pinhole primitives you will not see them); a number of new triangle functions added; supports conversion of images to color lists and back. Also, cropping has been improved for scenes; see the documentation section on the nitty-gritty of pixels for details.</p></li>
+ <li>
+  <p>Signatures have been moved to ASL, BSL, BSL+, ISL, and ISL+ (HtDP teaching languages) no longer support checked signatures.</p></li>
+ <li>
+  <p>Student languages: one-armed <code>check-error</code> in all levels; ASL is extended with hash operations, and <code>define-datatype</code>.</p></li>
+ <li>
+  <p>DMdA languages: Checking for parametric signatures is now eager. This catches errors earlier, but retains the asymptotic complexity properties; signatures for record types now have generators; <code>list-of</code> and <code>any</code> signatures are now provided.</p></li></ul></div>
+  <a class="more" href='/2010/11/racket-v502.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Oct 2010</p></col-1>
+
+<col-2>
+  <h1><a href='/2010/10/the-two-state-solution-native-and-serializable-continuations-accord.html'>The Two-State Solution: Native and Serializable Continuations Accord</a></h1>
+  <div class="truncate">
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>The Racket Web Server allows an expressive way of writing Web applications using first-class continuations to capture the control-flow of the server while it is waiting for the client to respond. For example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">web-server/insta</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">get-number</span> <span class="n">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._string-~3enumber))" style="color: inherit">string-&gt;number</a></span>
+   <span class="p">(</span><span class="n">extract-binding/single</span>
+    <span class="o">'</span><span class="ss">num</span>
+    <span class="p">(</span><span class="n">request-bindings</span>
+     <span class="p">(</span><span class="n">send/suspend</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">k-url</span><span class="p">)</span>
+        <span class="o">`</span><span class="p">(</span><span class="ss">html</span> 
+          <span class="p">(</span><span class="ss">body</span>
+           <span class="p">(</span><span class="ss">form</span> <span class="p">([</span><span class="ss">action</span> <span class="o">,</span><span class="n">k-url</span><span class="p">])</span>
+                 <span class="o">,</span><span class="n">p</span> <span class="ss">nbsp</span> <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">name</span> <span class="s2">"num"</span><span class="p">]))</span>
+                 <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">type</span> <span class="s2">"submit"</span><span class="p">])))))))))))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">how-many</span>
+    <span class="p">(</span><span class="n">get-number</span> <span class="s2">"How many numbers to add?"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._number-~3estring))" style="color: inherit">number-&gt;string</a></span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._foldr))" style="color: inherit">foldr</a></span> 
+    <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">0</span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span> 
+     <span class="n">how-many</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+       <span class="p">(</span><span class="n">get-number</span> 
+        <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"Provide number: ~a"</span> 
+                <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">i</span><span class="p">))))))))</span>
+</pre></div>
+
+</div>
+
+<p>This application creates a re-usable <code>get-number</code> interaction abstraction and uses it in a number of different contexts. In particular, it uses it in the higher-order context of <code>build-list</code>. This application also reuses useful third-party library functions like <code>foldr</code>, etc.</p>
+
+<p>Such an application would be complicated to write in a traditional Web programming environment because the continuation of each <code>get-number</code> invocation is considerably more complex than is typical. Yet, the first-class continuations in Racket ensure that this continuation is captured exactly, correctly, every time.</p>
+
+<p>Unfortunately, the native first-class continuations of Racket are not serializable, so they impose a per-session resource expenditure on the server. This can be alleviated through <a href="http://docs.racket-lang.org/web-server/servlet.html#(part._managers)">expiration policies</a>, but such policies are inherently unsound because continuations URLs are global roots.</p>
+
+<p>In the past, PLT has <a href="http://cs.brown.edu/~sk/Publications/Papers/Published/mfgkf-web-restructuring-cps-journal/">provided tools</a> that automatically restructure this kind of program into one that uses serializable continuations through an acronym soup of source transformations: CPS, lambda-lifting, defunctionalization, SPS, and so on. These tools effectively create automatically what most Web programmers write manually, except the tools don&rsquo;t mistakes. But the tools also don&rsquo;t take into consideration what functions actually contribute to the interaction context and transform library functions like <code>foldr</code> (which is unnecessary in the continuation) the same as functions like <code>build-list</code> (which <em>are</em> necessary.)</p>
+
+<p>Our <a href="http://faculty.cs.byu.edu/~jay/static/icfp065-mccarthy.pdf">past work</a> (based on <a href="http://cs.brown.edu/~sk/Publications/Papers/Published/pcmkf-cont-from-gen-stack-insp/">another PLT paper</a>) alleviates this problem by only requiring functions like <code>build-list</code> to be transformed. From the perspective of a programmer, &ldquo;transformed&rdquo; is tantamount to &ldquo;rewritten&rdquo; because the source code for a third-party library may not be readily available. Programmers would have to program <code>add-many-numbers.com</code> as:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">web-server</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="n">web-server/servlet-env</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">get-number</span> <span class="n">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._string-~3enumber))" style="color: inherit">string-&gt;number</a></span>
+   <span class="p">(</span><span class="n">extract-binding/single</span>
+    <span class="o">'</span><span class="ss">num</span>
+    <span class="p">(</span><span class="n">request-bindings</span>
+     <span class="p">(</span><span class="n">send/suspend</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">k-url</span><span class="p">)</span>
+        <span class="o">`</span><span class="p">(</span><span class="ss">html</span> 
+          <span class="p">(</span><span class="ss">body</span>
+           <span class="p">(</span><span class="ss">form</span> <span class="p">([</span><span class="ss">action</span> <span class="o">,</span><span class="n">k-url</span><span class="p">])</span>
+                 <span class="o">,</span><span class="n">p</span> <span class="ss">nbsp</span> <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">name</span> <span class="s2">"num"</span><span class="p">]))</span>
+                 <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">type</span> <span class="s2">"submit"</span><span class="p">])))))))))))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span> <span class="n">n</span> <span class="n">f</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/for.html#(form._((lib._racket/private/base..rkt)._for/list))" style="color: inherit">for/list</a></span> <span class="p">([</span><span class="n">i</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/sequences.html#(def._((lib._racket/private/base..rkt)._in-range))" style="color: inherit">in-range</a></span> <span class="n">n</span><span class="p">)])</span>
+    <span class="p">(</span><span class="n">f</span> <span class="n">i</span><span class="p">)))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">how-many</span>
+    <span class="p">(</span><span class="n">get-number</span> <span class="s2">"How many numbers to add?"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._number-~3estring))" style="color: inherit">number-&gt;string</a></span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._foldr))" style="color: inherit">foldr</a></span> 
+    <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">0</span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span>
+     <span class="n">how-many</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+       <span class="p">(</span><span class="n">get-number</span> 
+        <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"Provide number: ~a"</span>
+                <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">i</span><span class="p">))))))))</span>
+<span class="c1">; This requires a pre-release version</span>
+<span class="c1">; to run in an un-named DrRacket buffer</span>
+<span class="p">(</span><span class="n">serve/servlet</span> <span class="n">start</span> <span class="kd">#:stateless?</span> <span class="no">#t</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>where <code>build-list</code> has been re-implemented, but functions like <code>foldr</code> have not. This application, despite its striking similarity to the first, requires absolutely no per-session server state, so it is considerably more scalable.</p>
+
+<p>Do we need to re-implement <code>build-list</code>? What if the third-party, higher-order function (<code>build-list</code>) that we use with a higher-order argument that causes Web interaction (<code>get-number</code>) is too complicated to re-implement?</p>
+
+<p>Naturally this blog post would not exist if we didn&rsquo;t solve this problem.</p>
+
+<p>Our new approach, dubbed The Two-State Solution, allows the programmer to transparently use a very small amount of per-session server state to store <em>just</em> the part of the continuation inside functions like <code>build-list</code> while serializing everything else to the client.</p>
+
+<p>The key is to use <a href="http://docs.racket-lang.org/reference/eval-model.html#(part._prompt-model)">delimited, composable continuations</a> to isolate the appropriate part of the continuation. The programmer designates this piece of the continuation through the <code>serial-&gt;native</code> and <code>native-&gt;serial</code> annotations. The programmer can write the application as:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">web-server</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="n">web-server/servlet-env</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">get-number</span> <span class="n">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._string-~3enumber))" style="color: inherit">string-&gt;number</a></span>
+   <span class="p">(</span><span class="n">extract-binding/single</span>
+    <span class="o">'</span><span class="ss">num</span>
+    <span class="p">(</span><span class="n">request-bindings</span>
+     <span class="p">(</span><span class="n">send/suspend</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">k-url</span><span class="p">)</span>
+        <span class="o">`</span><span class="p">(</span><span class="ss">html</span> 
+          <span class="p">(</span><span class="ss">body</span>
+           <span class="p">(</span><span class="ss">form</span> <span class="p">([</span><span class="ss">action</span> <span class="o">,</span><span class="n">k-url</span><span class="p">])</span>
+                 <span class="o">,</span><span class="n">p</span> <span class="ss">nbsp</span> <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">name</span> <span class="s2">"num"</span><span class="p">]))</span>
+                 <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">type</span> <span class="s2">"submit"</span><span class="p">])))))))))))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">how-many</span>
+    <span class="p">(</span><span class="n">get-number</span> <span class="s2">"How many numbers to add?"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._number-~3estring))" style="color: inherit">number-&gt;string</a></span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._foldr))" style="color: inherit">foldr</a></span> 
+    <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">0</span>
+    <span class="p">(</span><span class="n">serial-&gt;native</span>
+     <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span>
+      <span class="n">how-many</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">native-&gt;serial</span>
+         <span class="p">(</span><span class="n">get-number</span> 
+          <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"Provide number: ~a"</span>
+                  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">i</span><span class="p">))))))))))</span>
+<span class="c1">; This requires a pre-release version</span>
+<span class="c1">; to run in an un-named DrRacket buffer</span>
+<span class="p">(</span><span class="n">serve/servlet</span> <span class="n">start</span> <span class="kd">#:stateless?</span> <span class="no">#t</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The important distinction here is that both the <code>build-list</code> and the <code>get-number</code> abstractions do not need to change. We simply mark the context as being a &ldquo;serial&rdquo; or &ldquo;native&rdquo; context through the annotation forms. This re-written version will be more scalable than a purely native version, but represents an easier to achieve step in the evolution of a program, because third-party, higher-order functions can be used as is.</p>
+
+<p>This work will be presented at <a href="http://splashcon.org/index.php?option=com_content&amp;amp;view=article&amp;amp;id=122&amp;amp;Itemid=91">OOPSLA 2010</a>. It is also described in a paper with same name this blog post:<a href="http://faculty.cs.byu.edu/~jay/static/oopsla026-mccarthy.pdf">The Two-State Solution: Native and Serializable Continuations Accord</a>.</p></div>
+  <a class="more" href='/2010/10/the-two-state-solution-native-and-serializable-continuations-accord.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>15 Sep 2010</p></col-1>
+
+<col-2>
+  <h1><a href='/2010/09/extending-typed-racket-part-1.html'>Extending Typed Racket, Part 1</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>The Typed Racket team is pleased to announce a number of new additions to our system. We&rsquo;ll be writing a few blog posts about them, all of which you can read here.</p>
+
+<p>This post begins with the core of the Typed Racket type system. The fundamental idea at the heart of Typed Racket is called occurrence typing. This is the technique that allows us to typecheck existing Racket programs without requiring rewrites. Here&rsquo;s a simple example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((quote._~23~25kernel)._if))" style="color: inherit">if</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._number~3f))" style="color: inherit">number?</a></span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">x</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The typechecker can figure out from the use of <code>number?</code> that the second occurrence of <code>x</code> is always going to be a number. This simple form of occurrence typing is enough to take Typed Racket a long way. But because we want to be able to handle all the sophisticated reasoning that programmers are already using to write their Racket programs, we have been working on extending the system further.</p>
+
+<p>The new design of our system is described in a paper, <a href="http://www.ccs.neu.edu/scheme/pubs/#icfp10-thf">Logical Types for Untyped Languages</a>, in the upcoming International Conference on Functional Programming. The introduction provides an overview that&rsquo;s acessible to any Racket programmer, but here&rsquo;s the key example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._cond))" style="color: inherit">cond</a></span>
+  <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._and))" style="color: inherit">and</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._number~3f))" style="color: inherit">number?</a></span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/strings.html#(def._((quote._~23~25kernel)._string~3f))" style="color: inherit">string?</a></span> <span class="n">y</span><span class="p">))</span> <span class="n">—</span> <span class="mi">1</span> <span class="n">—</span><span class="p">]</span>
+  <span class="p">[(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._number~3f))" style="color: inherit">number?</a></span> <span class="n">x</span><span class="p">)</span>                   <span class="n">—</span> <span class="mi">2</span> <span class="n">—</span><span class="p">]</span>
+  <span class="p">[</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._else))" style="color: inherit">else</a></span>                          <span class="n">—</span> <span class="mi">3</span> <span class="n">—</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+<p>In expression 1, we know that <code>x</code> is a number and <code>y</code> is a string. In 2, we know that <code>x</code> is a number and <code>y</code> is not a string, by the logical properties of <code>and</code> and <code>cond</code>. This form of logical reasoning is enabled by the new foundation of the system, and makes the entire system significantly more expressive.</p>
+
+<p>All of these improvements are available in the current version of Racket.</p></div>
+  <a class="more" href='/2010/09/extending-typed-racket-part-1.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Aug 2010</p></col-1>
+
+<col-2>
+  <h1><a href='/2010/08/racket-v501.html'>Racket v5.0.1</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.0.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>Datalog is a lightweight deductive database system with Racket integration. It is now available in the <code>datalog</code> collection and with <code>#lang datalog</code>.</p></li>
+ <li>
+  <p>Racklog provides Prolog-style logic programming in Racket, adapted from Dorai Sitaram&rsquo;s Schelog package. It is available in the <code>racklog</code> collection and now as <code>#lang racklog</code>.</p></li>
+ <li>
+  <p>By default <code>make install</code> and <code>raco setup</code> compile collections in parallel on all available processors. (Use <code>raco setup -j 1</code> to disable, if necessary.)</p></li>
+ <li>
+  <p>Changes (as part of 5.0) in the <code>racket</code> language compared to the <code>scheme</code> language: constructor-style printing, a <code>struct</code> alternative to <code>define-struct</code> that fits more naturally with <code>match</code> and constructor-style printing, bytecode-dependency management via SHA&ndash;1 hashes instead of just timestamps (where the <code>openssl/sha1</code> library provides the SHA&ndash;1 hash function), a reorganization of <code>scheme/foreign</code> into <code>ffi/unsafe</code> and associated libraries, and new printing functions <code>eprintf</code> and <code>displayln</code>. Also, a generator from <code>racket/generator</code> is required to have the form <code>(generator () body ...)</code>, which supports a planned extension to let a generator accept arguments.</p></li>
+ <li>
+  <p>Changes to the <code>racket</code> language (since 5.0): internal-definition positions allow mixing expressions with definitions, full continuations can escape past a continuation barrier, custodians can attempt to terminate subprocesses and subprocess groups (see <code>current-subprocess-custodian-mode</code>, <code>subprocess-group-enabled</code>), the JIT supports additional unboxing flonum operations and unsafe variants, <code>ffi/unsafe</code> provides an asychronous-call mechanism to deal with foreign threads, a new "." modifier for format string directives (e.g., "~.s" and "~.a") limits the respective output to <code>(error-print-width)</code> characters.</p></li>
+ <li>
+  <p>The core type system of Typed Racket has been substantially revised. In particular, Typed Racket can now follow significantly more sophisticated reasoning about the relationships between predicates. Additionally, Typed Racket now allows variable arity types in more places, allowing programmers to specify variable-arity lists.</p></li>
+ <li>
+  <p>We are working on an optimizing version of Typed Racket that takes advantage of type information for certain classes of programs. This project is a work in progress. For those interested, see the documentation for <code>#:optimized</code>.</p></li>
+ <li>
+  <p>The <code>web-server/formlets</code> library adds a <code>formlet*</code> form that allows dynamic formlet construction, as opposed to <code>formlet</code> which requires syntactic Xexprs and static formlets. Several new library formlets are added.</p></li>
+ <li>
+  <p>The <code>syntax/parse</code> library has new support for matching literals at different phases using the <code>#:phase</code> argument for literals and literal sets.</p></li>
+ <li>
+  <p>RackUnit now includes a GUI test runner as <code>rackunit/gui</code>.</p></li>
+ <li>
+  <p>The <code>2htdp/image</code> library now includes <code>flip-vertical</code> and <code>flip-horizontal</code> operations that mirror images (vertically and horizontally).</p></li></ul></div>
+  <a class="more" href='/2010/08/racket-v501.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>07 Jun 2010</p></col-1>
+
+<col-2>
+  <h1><a href='/2010/06/racket.html'>Racket</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT is happy to announce the release of Racket, available from  <a href="http://racket-lang.org/"><code>http://racket-lang.org/</code></a></p>
+
+<p>With Racket, you can script command shells and web servers; you can quickly prototype animations and complex GUIs; regexps and threads are here to serve you. To organize your systems, you can mix and match classes, modules or components. Best of all, you start without writing down types. If you later wish to turn your script into a program, equip your Racket modules with explicit type declarations as you wish. And Racket doesn&rsquo;t just come as a typed variant; you can also write your modules in a purely functional and lazy dialect.</p>
+
+<p>Racket comes in so many flavors because Racket is much more than a standard scripting language or a plain programming language. Racket supports language extensibility to an unequaled degree. A Racket programmer knows that making up a new language is as easy as writing a new library.</p>
+
+<p>To help you start quickly, Racket includes batteries in all shapes and sizes, most importantly, extensive documentation and all kinds of libraries.</p>
+
+<p>Racket occupies a unique position between research and practice. It inherits many major ideas from language research, among them type safety (when the type system says that x is a number, then at runtime it always is a number) and memory safety (when some memory is reclaimed by the garbage collector it is impossible to still have a reference to it). At the same time, user demand governs rigid adherence to purely theoretical principles.</p>
+
+<p>Racket, formerly PLT Scheme, is a product of over 15 years of development. Although Racket starts with a mature software base and an established user community, its new name reflects our view that this is just the beginning of Racket&rsquo;s evolution.</p></div>
+  <a class="more" href='/2010/06/racket.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>02 Apr 2010</p></col-1>
+
+<col-2>
+  <h1><a href='/2010/04/plt-scheme-v425.html'>PLT Scheme v4.2.5</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.2.5 is now available from <a href="http://plt-scheme.org/"><code>http://plt-scheme.org/</code></a></p>
+
+<ul>
+ <li>PLT now supports multi-core parallelism via futures. Futures create tasks that run in parallel, as long as the tasks stay in the &ldquo;fast path&rdquo; of the runtime system. For more information, see <a href="http://docs.plt-scheme.org/guide/performance.html?q=future#%28part._effective-futures%29">the guide</a>.</li>
+ <li>Our unit testing framework, schemeunit, is now included in the distribution. A graphical test runner is available via <code>schemeunit/gui</code>.</li>
+ <li>The support languages for the &ldquo;Programming Languages: Application and Interpretation&rdquo; textbook by Shriram Krishnamurthi are now part of PLT Scheme. In addition the PLAI GC language comes with a random mutator generator (to help test collectors) and an improved heap visualizer.</li>
+ <li>New Russian and Ukranian translations, thanks to Sergey Semerikov.</li>
+ <li>A number of improvements to Redex&rsquo;s typesetting facilities.</li>
+ <li>Typed Scheme users can now automatically generate predicates from types with <code>define-predicate</code>. Typed code can be inserted in untyped modules by requiring <code>with-type</code> from <code>typed/scheme</code>.</li>
+ <li>The <code>scheme/class</code> library now provides contract combinators for classes (<code>class/c</code>) and objects (<code>object/c</code>). See the Reference and Guide for details. Also, a backwards-compatible <code>object-contract</code> version of <code>object/c</code> has replaced the old <code>object-contract</code> combinator.</li>
+ <li>Writing new kinds of contracts is now easier with keyword-based constructors (<code>make-contract</code> and <code>make-flat-contract</code>), a simpler set of structure properties (<code>prop:contract</code> and <code>prop:flat-contract</code>), and the introduction of blame objects for tracking contract metadata.</li>
+ <li>The Scheme-implemented bytecode reader fails less often. This is used by &ldquo;mzc &mdash;decompile&rdquo;. The Scheme-implemented bytecode writer uses the compact bytecode format and fails less often. This may be used in the future for Scheme-implement bytecode processors.</li>
+ <li>The language dialog now suggests using "#lang" more strongly as the default language. DrScheme no longer uses the term `Module language&rsquo;.</li></ul></div>
+  <a class="more" href='/2010/04/plt-scheme-v425.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>08 Mar 2010</p></col-1>
+
+<col-2>
+  <h1><a href='/2010/03/talk-at-flourish.html'>Talk at Flourish</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>The image in this post shows a tree where the interior nodes represent directories and the leaf nodes represent files in the PLT source code. The leaves are colored based on the programming language used. (To avoid clutter, if there is more than one file in a given directory written in a particular language, that language only gets a single dot.)</p>
+
+<p>Some highlights: the blues are Scheme-like languages, the reds are langauges we use to write documentation (see <a href="http://docs.plt-scheme.org/scribble/">Scribble</a> for more about them), the greens are teaching languages, orange is the language we use to bootstrap new languages, and yellow is a language for metadata about nearby files.</p>
+
+<p>Curious about how we managed to write and use so many different languages? I&rsquo;ll be giving a talk at <a href="http://www.flourishconf.com/flourish2010/">Flourish 2010</a> next week (3/19 @11am, UIC in Chicago) explaining how. Come to learn more!</p></div>
+  <a class="more" href='/2010/03/talk-at-flourish.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-6.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li><a href="/index-6.html">6</a></li>
+  <li class="active"><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-8.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>control, resumed</title>
+    <meta name="description" content="_posted by matthias_  Since at least some people helped me re-re-invent prompt after my last post, I thought I would remind people that PLT Scheme is the _only_ production system in the world that provides delimited and (truly) composable continuations di...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/07/control-resumed.html">
+    <link rel="next" href="/2007/07/callcc-and-self-modifying-code.html">
+    <link rel="prev" href="/2007/08/relationally-parametric-polymorphic-contracts.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>30 Jul 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>control, resumed</h1>
+  </header>
+
+<p><em>posted by matthias</em></p>
+
+<p>Since at least some people helped me re-re-invent prompt after my last post, I thought I would remind people that PLT Scheme is the <em>only</em> production system in the world that provides delimited and (truly) composable continuations directly (and w/o loss of TCO properties). So here is the same fragment again:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._lib))" style="color: inherit">lib</a></span> <span class="s2">"control.ss"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">generate-one-element-at-a-time</span> <span class="n">a-list</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">control-state</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._for-each))" style="color: inherit">for-each</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">an-element-from-a-list</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">control</span> <span class="n">resume-here</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/set_.html#(form._((quote._~23~25kernel)._set!))" style="color: inherit">set!</a></span> <span class="n">control-state</span> <span class="n">resume-here</span><span class="p">)</span>
+    <span class="n">an-element-from-a-list</span><span class="p">))</span>
+              <span class="n">a-list</span><span class="p">)</span>
+    <span class="o">'</span><span class="ss">you-fell-off-the-end-off-the-list</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">generator</span><span class="p">)</span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/reference/cont.html#(form._((lib._racket/control..rkt)._prompt))" style="color: inherit">prompt</a></span> <span class="p">(</span><span class="n">control-state</span><span class="p">)))</span>
+  <span class="n">generator</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Take a look, compare and contrast with the previous post. Time permitting, I will continue to show you another control poem soon. P.S. See <a href="http://www.ccs.neu.edu/scheme/pubs/#icfp07-fyf">Adding Delimited and Composable Control to a Production Programming Environment</a> for details.</p>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/08/relationally-parametric-polymorphic-contracts.html">Relationally-Parametric Polymorphic Contracts</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/07/callcc-and-self-modifying-code.html"><code>call/cc</code> and self-modifying code</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

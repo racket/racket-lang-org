@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>R6RS is "perfect"</title>
+    <meta name="description" content="_posted by matthias_  When I read the &quot;side by side&quot; and &quot;head to head&quot; descriptions of the alternatives facing the Scheme community (see Comp.Lang.Scheme and the R6RS mailing list), I am wondering which one is which and which one is better.      Is it re...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/06/r6rs-is-perfect.html">
+    <link rel="next" href="/2007/05/plt-scheme-version-370.html">
+    <link rel="prev" href="/2007/06/small-is-beautiful-large-is-useful-and-scheme-is-both.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>09 Jun 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>R6RS is &ldquo;perfect&rdquo;</h1>
+  </header>
+
+<p><em>posted by matthias</em></p>
+
+<p>When I read the &ldquo;side by side&rdquo; and &ldquo;head to head&rdquo; descriptions of the alternatives facing the Scheme community (see Comp.Lang.Scheme and the R6RS mailing list), I am wondering which one is which and which one is better.</p>
+
+<ul>
+ <li>
+  <p>Is it really good that Scheme (the spec) doesn&rsquo;t support a module system?</p></li>
+ <li>
+  <p>Is it really good that almost all major implementations support their own version of a module system?</p></li>
+ <li>
+  <p>Is it really good that programmers can&rsquo;t even leave the module structure intact when porting code?</p></li></ul>
+
+<p>Imagine your own similar questions and add them here. We have lived in a side-by-side universe for a long time, and there are quite a few programmers who have suffered from this not-really-the-same-language problem. Besides the module system, there are other not-quite-the-same-but-related features that implementations have and programmers wish to use. The R6RS process has pushed several major implementors/implementations to agree on a design for module systems and other constructs. Their report declares that they are ready to put a large amount of work in to get from r5rs to r6rs. I believe that this step would help the community in several arenas, listed in increasing order of relevance:</p>
+
+<ul>
+ <li>
+  <p>the academic publishing business</p></li>
+ <li>
+  <p>the fund raising business</p></li>
+ <li>
+  <p>adapting each others innovations</p></li>
+ <li>
+  <p>supporting programmers who learn on one and switch to another implementation</p></li>
+ <li>
+  <p>supporting commercial programmers who need reassurance that there is more than one implementation and implementor [ever attended Commercial Uses of Functional Programming?]</p></li></ul>
+
+<p>Is the document perfect? Is every construct exactly the &lsquo;right thing&rsquo;? Of course not! Guy and Gerry revised their first Scheme report because they didn&rsquo;t get it &lsquo;right&rsquo;. R3RS and R4RS and R5RS revised flaws in R(n&ndash;1)RS because the authors/editors didn&rsquo;t get it &lsquo;right&rsquo;. It is extremely difficult, and usually impossible, to get the design of a complex artifacts (such as a programming language) &lsquo;right&rsquo; the first time. In these cases, it&rsquo;s all about the feedback loop and revising your design based on observations. (Remember the &lsquo;science&rsquo; part in the name of our discipline?) Indeed, &lsquo;right&rsquo; doesn&rsquo;t exist; what exists is &lsquo;most pragmatic and internally beautiful,&rsquo; and nothing else.  Our choice is quite simple: move forward as a community with some amount of convergence (r6rs) or split into dozens of mutually incompatible sub-communities (status quo, including SRFIs). <em>Also posted as <a href="http://lists.r6rs.org/pipermail/r6rs-discuss/2007-June/002538.html"> &ldquo;R6RS is perfect&rdquo;</a> at the R6RS discussion list.</em></p>
+<!-- more-->
+
+<hr />
+
+<p>The biggest argument against R6RS seems to be bloat. They say Scheme betrays its root, because it gets big and complex, instead of &ldquo;smallest possible, while usable.&rdquo;</p>
+
+<p>Is it really debated enough, wether all this stuff belongs into Scheme? Probably. Then why don&rsquo;t people just point to the mailing list thread (or whatever)?</p>
+
+<p>— <em>beza1e1, 9 June 2007</em></p>
+
+<hr />
+
+<p>I&rsquo;m just curious - why cannot the module system and the rest of the stuff that R6RS tries to do be implemented as SRFIs first, and only after they&rsquo;re used for some time they could be frozen into the new spec ?</p>
+
+<p>— <em>taw, 9 June 2007</em></p>
+
+<hr />
+
+<p>Easy questions.</p>
+
+<p>Yes, one can produce an OS with Turing Machines. (At least I am pretty sure one can.) I still wouldn&rsquo;t want to do it. In this spirit, Scheme isn&rsquo;t the best medium for creating large applications and frameworks.</p>
+
+<p>The implementors (on the editoral board) <em>have</em> implemented variations of the proposed features and they like what they see. PLT users have experienced a good number of them, and they like what they see. Now it&rsquo;s time to commit.</p>
+
+<p>And I am pretty sure that for those who wish to stay behind, some soul among the implementor crowd (is there a language with more implementations than Scheme?) will maintain an old R4RS or R5RS compatible Scheme.</p>
+
+<p>— <em>matthias, 9 June 2007</em></p>
+
+<hr />
+
+<p>As far as I can tell, there&rsquo;s a vocal part of the Scheme community that is entirely unwilling to compromise anything for anyone. This is a bit foreign to me, having come to Scheme from Common Lisp. Whether they constitute a plurality or not is another matter, but consider just how many different forms of define-record syntax are out there.</p>
+
+<p>I as a programmer not an implementer would love to see any RnRS with some provision for modules, almost no matter what the syntax or semantics might be. I might have my own personal favorite, but the network benefit of (almost) everybody using the same damn thing is important. The SRFI libraries are immensely useful here, but because module systems are such a sore point there is no useful way, even leveraging SRFIs, to write one library that engages the native module system for any two different Scheme implementations.</p>
+
+<p>Pass the damn thing already. I&rsquo;ll write using Swahili identifiers if need be.</p>
+
+<p>— <em>Graham, 10 June 2007</em></p>
+
+<hr />
+
+<p>(Sorry about my non-native English and bad collocations.)</p>
+
+<p>Well, I think the biggest problem with the concept of modules coupled with the core is when we make this question to ourselves: &ldquo;what is really important to put on core? Is it module? Is it another thing else?&rdquo;</p>
+
+<p>Anyway, I think one great point of R6RS is about define Unicode as standard&hellip; Am I too wrong??</p>
+
+<p>— <em>SpamKids, 30 August 2009</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/06/small-is-beautiful-large-is-useful-and-scheme-is-both.html">Small is Beautiful, Large is Useful, and Scheme is Both</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/05/plt-scheme-version-370.html">PLT Scheme version 370</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

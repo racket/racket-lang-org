@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>PLT Scheme v4.1.5</title>
+    <meta name="description" content="_posted by Eli Barzilay_  PLT Scheme version 4.1.5 is now available from  http://plt-scheme.org/   Web Server:       new URL-based dispatching library `web-server/dispatch`, customizable continuation serialization policies for the stateless web language `...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/03/plt-scheme-v415.html">
+    <link rel="next" href="/2009/03/maintaining-self-references-in-planet-packages.html">
+    <link rel="prev" href="/2009/03/the-drscheme-repl-isnt-the-one-in-emacs.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>22 Mar 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>PLT Scheme v4.1.5</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.1.5 is now available from  <a href="http://plt-scheme.org/">http://plt-scheme.org/</a></p>
+
+<ul>
+ <li>Web Server:
+  <ul>
+   <li>new URL-based dispatching library <code>web-server/dispatch</code>,</li>
+   <li>customizable continuation serialization policies for the stateless web language <code>web-server/stuffers</code>,</li>
+   <li>abstraction of serve/servlet to build simpler dispatchers <code>web-server/servlet-env</code>,</li>
+   <li>HTTP Digest authentication support <code>web-server/http/digest-auth</code>,</li>
+   <li>built-in cookie support in <code>web-server/http/cookie</code> and <code>web-server/http/cookie-parse</code>,</li>
+   <li>highlighting and pretty-printing of errors in Xexpr constructions,</li>
+   <li>load control dispatcher for limit concurrent sessions <code>web-server/dispatchers/limit</code>.</li></ul></li>
+ <li>Scribble:
+  <ul>
+   <li>Literate programming is now available using the new <code>scribble/lp</code> language.</li>
+   <li>A new <code>at-exp</code> language makes it convenient to use the scribble reader&rsquo;s @-expressions for general code.</li>
+   <li>The <code>scribble/text</code> preprocessor language has been extended to deal with indentation and other formatting issues.</li>
+   <li>The &ldquo;scribble&rdquo; command-line tool accepts a <code>--pdf</code> flag to render PDFs (via pdflatex).</li></ul></li>
+ <li>
+  <p>DrScheme now provides feedback when PLaneT downloads and installs new packages.</p></li>
+ <li>Units &amp; Contracts:
+  <ul>
+   <li>Elements of unit signatures can now be associated with contracts via the <code>contracted</code> signature form.</li>
+   <li>A contract combinator for units, <code>unit/c</code>, has been added.</li>
+   <li>The new <code>with-contract</code> form provides a nestable submodule contract boundary, protecting a group of definitions from the surrounding code with contracts.</li>
+   <li>The <code>define/contract</code> form has been reworked and new define forms have been added: <code>define-struct/contract</code> and <code>define-unit/contract</code>.</li></ul></li>
+ <li>
+  <p>Language levels and teachpacks from the DeinProgramm project for the German textbook &ldquo;Die Macht der Abstraktion&rdquo; by Herbert Klaeren and Michael Sperber have been added.</p></li>
+ <li>Misc:
+  <ul>
+   <li>Typed Scheme now comes with several more pre-wrapped libraries, found in the <code>typed</code> collection.</li>
+   <li>The <code>xml</code> and <code>html</code> collections are now contracted.</li>
+   <li>Binding parsing in net/cgi now interacts with <code>net/uri-codec</code>&rsquo;s configuration parameters.</li>
+   <li>DrScheme captures logging output.</li>
+   <li>Check syntax: it is now possible to tack arrows crossing the currently selected text.</li>
+   <li>New <code>bitwise-bit-field</code> function.</li></ul></li>
+ <li>The usual pile of bugfixes. (Notable: <code>scheme/package</code> works, <code>deflate</code> compression fixed, DrScheme language dialog issue resolved, <code>match</code> fixes, Windows networking, and much more.)</li></ul>
+
+<p>[Note that mirror sites can take a while to catch up with the new downloads.]</p>
+
+<p>Feedback Welcome.</p>
+<!-- more-->
+
+<hr />
+
+<p>nice. I&rsquo;m new to scheme and using plt scheme to build a web prototype&hellip;</p>
+
+<p>After years of C++, I must say I love the language and environment.</p>
+
+<p>I really appreciate the work you guys put into this - will be nice to have the url aliasing of this release.</p>
+
+<p>— <em>gord, 22 March 2009</em></p>
+
+<hr />
+
+<p>We&rsquo;re glad you like it! I&rsquo;d be very interested to know any of the problems you do have with the Web framework, because I might be able to make it even better.</p>
+
+<p>— <em>Jay McCarthy, 22 March 2009</em></p>
+
+<hr />
+
+<p>Pretty cool stuff dude!</p>
+
+<p>RT www.Privacy-Center.net</p>
+
+<p>— <em>Harold Fowler, 22 March 2009</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/03/the-drscheme-repl-isnt-the-one-in-emacs.html">the DrScheme repl isn&rsquo;t the one in Emacs</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/03/maintaining-self-references-in-planet-packages.html">Maintaining self-references in Planet packages</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

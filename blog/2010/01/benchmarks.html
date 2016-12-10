@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Benchmarks</title>
+    <meta name="description" content="_posted by Matthew Flatt_  First, the usual disclaimer:  That said, I've run the latest version of PLT Scheme on two sets of benchmarks:      Benchmarks in the PLT sources – vs. Bigloo, Chicken, Gambit, Guile, Ikarus, Larceny, MIT Scheme, and Scheme48; sa...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2010/01/benchmarks.html">
+    <link rel="next" href="/2010/01/plt-scheme-v424.html">
+    <link rel="prev" href="/2010/02/dags-vs-trees.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Jan 2010</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Benchmarks</h1>
+  </header>
+
+<p><em>posted by Matthew Flatt</em></p>
+
+<p>First, the usual disclaimer:</p>
+
+<p>That said, I&rsquo;ve run the latest version of PLT Scheme on two sets of benchmarks:</p>
+
+<ul>
+ <li>
+  <p><a href="http://www.cs.utah.edu/%7Emflatt/benchmarks-20100126/log3/Benchmarks.html">Benchmarks in the PLT sources</a> – vs. Bigloo, Chicken, Gambit, Guile, Ikarus, Larceny, MIT Scheme, and Scheme48; safe operations and generic arithmetic only</p></li>
+ <li>
+  <p><a href="http://www.cs.utah.edu/%7Emflatt/benchmarks-20100126/log1/Gambit_20benchmarks.html">Benchmarks in the Gambit sources</a> – vs. Bigloo and Gambit; generic vs. fixnum-/flonum-specific arithmetic, safe vs. unsafe operationsThe second set is why I started running benchmarks. Fixnum-/flonum-specific arithmetic and unsafe operations are new in PLT Scheme 4.2.4. The benchmark results suggest that the new operations in PLT Scheme offer roughly the same performance benefits as in Bigloo and Gambit. There&rsquo;s room for improvement, but it&rsquo;s a good first cut.</p></li></ul>
+
+<p>For the other results: PLT Scheme is rarely the fastest implementation on a given benchmark. For most purposes, though, it&rsquo;s in the same ballpark – except for programs that spend all their time capturing and invoking continuations.</p>
+
+<p>It&rsquo;s fun to run benchmarks occasionally. Now, back to working on language design, libraries, documentation, usability&hellip;</p>
+<!-- more-->
+
+<hr />
+
+<p>Could it be possible to add Guile 1.9.7 to that list?</p>
+
+<p>— <em>dales@vxitech.com, 29 January 2010</em></p>
+
+<hr />
+
+<p>Although I don&rsquo;t want to stay in the benchmark-running business, Guile 1.9.7 does seem to be much faster than 1.8.7. So, I&rsquo;ve replaced 1.8.7 with 1.9.7 in the benchmark results.</p>
+
+<p>— <em>Matthew Flatt, 29 January 2010</em></p>
+
+<hr />
+
+<p>Thanks for adding Guile 1.9.7. I wonder though, did you include the runtime for the first Guile run? Guile will compile files the first time they&rsquo;re run, and then used the cached object file later.</p>
+
+<p>I ask because my old slow laptop is getting better times than the ones you list. Perhaps you inadvertantly included that first compilation time.</p>
+
+<p>In any case, congrats on those great PLT results! :)</p>
+
+<p>Happy hacking,</p>
+
+<p>Andy</p>
+
+<p>— <em>Andy Wingo, 30 January 2010</em></p>
+
+<hr />
+
+<p>I don&rsquo;t think that compilation time is included, since run time is measured within the program using <code>(times)'. Also, clearing out the cache before running doesn't seem to give different results than running a second time.
+
+— *Matthew Flatt, 30 January 2010*
+
+* * *
+
+Good point regarding the use of</code>time&rsquo;. Ah well, a Lisp is never finished, is it. Thanks for the response, and happy hacking :)</p>
+
+<p>— <em>Andy Wingo, 30 January 2010</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2010/02/dags-vs-trees.html">DAGs vs Trees</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2010/01/plt-scheme-v424.html">PLT Scheme v4.2.4</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

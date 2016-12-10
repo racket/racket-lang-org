@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Your security hole is my fun hack, or: computing factorial in DrScheme with a click-powered loop.</title>
+    <meta name="description" content="_posted by Robby Findler_  One of the many changes in v4.0 is to close a security hole in DrScheme. Specifically, DrScheme v371 lets the program in the definitions window get a hold of the editor containing said program and manipulate it programmatically....">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/12/your-security-hole-is-my-fun-hack-or-computing-factorial-in-drscheme-with-a-click-powered-loop.html">
+    <link rel="next" href="/2007/11/getting-rid-of-set-car-and-set-cdr.html">
+    <link rel="prev" href="/2007/12/plt-scheme-v372.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>19 Dec 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Your security hole is my fun hack, or: computing factorial in DrScheme with a click-powered loop.</h1>
+  </header>
+
+<p><em>posted by Robby Findler</em></p>
+
+<p>One of the many changes in v4.0 is to close a security hole in DrScheme. Specifically, DrScheme v371 lets the program in the definitions window get a hold of the editor containing said program and manipulate it programmatically. There are lots of bad things one might do with this fact, like circumventing DrScheme&rsquo;s protections and cause it to crash, or even spontaneously exit.</p>
+
+<p>But, we can do something even more fun. Put the following program into a DrScheme window (in v371) and set the language to the mzscheme/textual language. Change &ldquo;input&rdquo; to whatever number you wish to compute the factorial of and then hit the Run button until your program transforms itself into the final result.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">input</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._lib))" style="color: inherit">lib</a></span> <span class="s2">"mred.ss"</span> <span class="s2">"mred"</span><span class="p">)</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._lib))" style="color: inherit">lib</a></span> <span class="s2">"class.ss"</span><span class="p">))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let*))" style="color: inherit">let*</a></span> <span class="p">([</span><span class="n">ed</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let-syntax))" style="color: inherit">let-syntax</a></span> <span class="p">([</span><span class="n">m</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">stx</span><span class="p">)</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._with-syntax))" style="color: inherit">with-syntax</a></span> <span class="p">([</span><span class="n">x</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-source))" style="color: inherit">syntax-source</a></span> <span class="n">stx</span><span class="p">)])</span> <span class="o">#'</span><span class="n">x</span><span class="p">))])</span>
+             <span class="p">(</span><span class="n">m</span><span class="p">))]</span>
+       <span class="p">[</span><span class="n">mth</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/regexp.html#(def._((quote._~23~25kernel)._regexp-match))" style="color: inherit">regexp-match</a></span> 
+             <span class="sr">#rx"^; ([0-9]+) ([0-9]+)"</span> 
+             <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">get-text</span> <span class="mi">0</span> 
+                   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">paragraph-end-position</span> <span class="mi">0</span><span class="p">)))]</span>
+       <span class="p">[</span><span class="n">lckd</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">is-locked?</span><span class="p">)])</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">begin-edit-sequence</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">lock</span> <span class="no">#f</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((quote._~23~25kernel)._if))" style="color: inherit">if</a></span> <span class="n">mth</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">n</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._string-~3enumber))" style="color: inherit">string-&gt;number</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list-ref))" style="color: inherit">list-ref</a></span> <span class="n">mth</span> <span class="mi">1</span><span class="p">))]</span>
+            <span class="p">[</span><span class="n">acc</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._string-~3enumber))" style="color: inherit">string-&gt;number</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list-ref))" style="color: inherit">list-ref</a></span> <span class="n">mth</span> <span class="mi">2</span><span class="p">))])</span>
+        <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">delete</span> <span class="mi">0</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">paragraph-end-position</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((quote._~23~25kernel)._if))" style="color: inherit">if</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3d))" style="color: inherit">=</a></span> <span class="n">n</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/begin.html#(form._((quote._~23~25kernel)._begin))" style="color: inherit">begin</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">delete</span> <span class="mi">0</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">paragraph-end-position</span> <span class="mi">0</span><span class="p">))</span>
+                   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">insert</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"~a</span><span class="se">\n</span><span class="s2">#|"</span> <span class="n">acc</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+                   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">insert</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">|#"</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">last-position</span><span class="p">)))</span>
+            <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/begin.html#(form._((quote._~23~25kernel)._begin))" style="color: inherit">begin</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">delete</span> <span class="mi">0</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">paragraph-end-position</span> <span class="mi">0</span><span class="p">))</span>
+                   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">insert</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"; <a href="http://docs.racket-lang.org/reference/strings.html#(def._((lib._racket/format..rkt)._~7ea))" style="color: inherit">~a</a> ~a"</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._-))" style="color: inherit">-</a></span> <span class="n">n</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._*))" style="color: inherit">*</a></span> <span class="n">n</span> <span class="n">acc</span><span class="p">))</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">))))</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">insert</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"; <a href="http://docs.racket-lang.org/reference/strings.html#(def._((lib._racket/format..rkt)._~7ea))" style="color: inherit">~a</a> 1</span><span class="se">\n</span><span class="s2">"</span> <span class="n">input</span><span class="p">)</span> <span class="mi">0</span><span class="p">))</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">lock</span> <span class="n">lckd</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">ed</span> <span class="n">end-edit-sequence</span><span class="p">))</span>
+</pre></div>
+
+</div>
+<!-- more-->
+
+<hr />
+
+<p>Some folks would call that a feature!</p>
+
+<p>— <em>Griff, 20 December 2007</em></p>
+
+<hr />
+
+<p>Oh, indeed! Virus authors consider C&rsquo;s lack of array bounds checking a feature, no doubt. :)</p>
+
+<p>— <em>Robby, 20 December 2007</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/12/plt-scheme-v372.html">PLT Scheme v372</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/11/getting-rid-of-set-car-and-set-cdr.html">Getting rid of <code>set-car!</code> and <code>set-cdr!</code></a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

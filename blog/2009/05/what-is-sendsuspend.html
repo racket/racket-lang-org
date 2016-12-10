@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>What is `send/suspend`?</title>
+    <meta name="description" content="_posted by Jay McCarthy_  I often ponder what `send/suspend` really is. It is a lot like `call/cc`, but has the curious property that the continuation escapes in a single way and is only called in a particular context. I often wonder if there is something...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/05/what-is-sendsuspend.html">
+    <link rel="next" href="/2009/03/the-drscheme-repl-isnt-the-one-in-emacs.html">
+    <link rel="prev" href="/2009/05/scheme-workshop-deadline-not-extended.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>06 May 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>What is <code>send/suspend</code>?</h1>
+  </header>
+
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>I often ponder what <a href="http://docs.plt-scheme.org/web-server/servlet.html#(def._((lib._web-server/servlet/web..ss)._send/suspend))"><code>send/suspend</code></a> really is. It is a lot like <code>call/cc</code>, but has the curious property that the continuation escapes in a single way and is only called in a particular context. I often wonder if there is something weaker than <code>call/cc</code> that implements <code>send/suspend</code>.</p>
+
+<p>Today I wrote a little dispatcher that uses threads to implement <code>send/suspend</code>. In this implementation, _send_ing truly _suspend_s the computation.</p>
+
+<p>Here&rsquo;s the code: <a href="http://www.copypastecode.com/codes/view/5003">http://www.copypastecode.com/codes/view/5003</a></p>
+
+<p>The trick is to have channels for communicating responses and requests. When you run this example, you should be able to add two numbers. But, in contrast to the normal <code>send/suspend</code>, all the URLs are one-shots, because once the computation is resumed, it moves forward&hellip; it is never saved.</p>
+
+<p>This implementation technique also precludes clever implementations of <code>send/suspend/dispatch</code>, like:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">send/suspend/dispatch</span> <span class="n">mk-page</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/cont.html#(form._((lib._racket/private/more-scheme..rkt)._let/cc))" style="color: inherit">let/cc</a></span> <span class="n">k0</span>
+    <span class="p">(</span><span class="n">send/back</span>
+     <span class="p">(</span><span class="n">mk-page</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/cont.html#(form._((lib._racket/private/letstx-scheme..rkt)._let/ec))" style="color: inherit">let/ec</a></span> <span class="n">k1</span> 
+          <span class="p">(</span><span class="n">k0</span> <span class="p">(</span><span class="n">handler</span> <span class="p">(</span><span class="n">send/suspend</span> <span class="n">k1</span><span class="p">)))))))))</span>
+</pre></div>
+
+</div>
+<!-- more-->
+
+<hr />
+
+<p>As Shriram pointed out in email, he and I conjectured that there was an intimate relationship between s/s and call/cc in 2002. When I then gave my Oxford lecture, some German attendees (from Mike&rsquo;s or Peter&rsquo;s group, I believe) implemented call/cc via s/s. Question is what this really means.</p>
+
+<p>— <em>matthias, 6 May 2009</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/05/scheme-workshop-deadline-not-extended.html">Scheme Workshop: deadline NOT extended!</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/03/the-drscheme-repl-isnt-the-one-in-emacs.html">the DrScheme repl isn&rsquo;t the one in Emacs</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

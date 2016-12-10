@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>macros and hygiene, resumed</title>
+    <meta name="description" content="_posted by matthias_  The Friday entry demonstrates how to break hygiene for a macro that defines a generator. Ryan Culpepper, the local macrologist, reminded me that expanding into this macro goes wrong in the syntax-case world:      (define-syntax defin...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/08/macros-and-hygiene-resumed.html">
+    <link rel="next" href="/2007/08/control-and-macros.html">
+    <link rel="prev" href="/2007/08/plt-modules-and-separate-compilation.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>06 Aug 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>macros and hygiene, resumed</h1>
+  </header>
+
+<p><em>posted by matthias</em></p>
+
+<p>The Friday entry demonstrates how to break hygiene for a macro that defines a generator. Ryan Culpepper, the local macrologist, reminded me that expanding into this macro goes wrong in the syntax-case world:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="n">define-that-expands-into-define/y</span> 
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-rules))" style="color: inherit">syntax-rules</a></span> <span class="p">()</span>
+    <span class="p">((</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> 
+     <span class="p">(</span><span class="n">define/y</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))))</span>
+
+<span class="p">(</span><span class="n">define-that-expands-into-define/y</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="o">'</span><span class="ss">finished</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Run this in Pretty Big [DrScheme] and you get a strange note concerning MrEd&rsquo;s yield or run it in MzScheme [Textual] and you get an error message about &lsquo;yield&rsquo; being unbound.</p>
+
+<p>What gives? The &lsquo;stx&rsquo; of <code>datum-&gt;syntax-object</code> is the syntactic context of the new macro but it doesn&rsquo;t bind yield; it just uses it. So the definition of <code>yield</code> in <code>define/y</code> must be a different one according to the hygiene standards. Ergo yield is free at the top-level [MzScheme] or bound to the yield import from MrEd [Pretty Big].</p>
+
+<p>How can we try to fix this? The explanation suggests we use a different macro definition for <code>define/y</code>, one that uses a context that is guaranteed from the body of an instance of <code>define/y</code>:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._lib))" style="color: inherit">lib</a></span> <span class="s2">"control.ss"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">define/y</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> <span class="n">body0</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._with-syntax))" style="color: inherit">with-syntax</a></span> 
+         <span class="p">((</span><span class="n">yield-name</span> 
+           <span class="p">(</span><span class="n">datum-&gt;syntax-object</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="n">body0</span><span class="p">)</span> <span class="o">'</span><span class="ss">yield</span><span class="p">)))</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span>
+        <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+          <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">yield-name</span> <span class="n">x</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">control</span> <span class="n">resume-here</span>
+             <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/set_.html#(form._((quote._~23~25kernel)._set!))" style="color: inherit">set!</a></span> <span class="n">name</span> 
+                   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">()</span>
+                     <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/reference/cont.html#(form._((lib._racket/control..rkt)._prompt))" style="color: inherit">prompt</a></span> <span class="p">(</span><span class="n">resume-here</span> <span class="o">'</span><span class="ss">dummy</span><span class="p">))))</span>
+             <span class="n">x</span><span class="p">))</span>
+          <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/reference/cont.html#(form._((lib._racket/control..rkt)._prompt))" style="color: inherit">prompt</a></span> <span class="n">body0</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))))]))</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="n">define-that-expands-into-define/y</span> 
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-rules))" style="color: inherit">syntax-rules</a></span> <span class="p">()</span>
+    <span class="p">((</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> 
+     <span class="p">(</span><span class="n">define/y</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))))</span>
+
+<span class="c1">;; --- try it out ---</span>
+
+<span class="p">(</span><span class="n">define-that-expands-into-define/y</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="o">'</span><span class="ss">finished</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="p">(</span><span class="n">bar</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Run it. You will find that it works as expected.</p>
+
+<p>Tomorrow, time permitting, I will tell you what&rsquo;s wrong with it and how you can fix it.</p>
+<!-- more-->
+
+<hr />
+
+<p>Isn&rsquo;t it still a problem that we cannot use yield in macros?</p>
+
+<p>As a silly example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="n">yield2</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-rules))" style="color: inherit">syntax-rules</a></span> <span class="p">(</span><span class="n">yield</span><span class="p">)</span>
+    <span class="p">((</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">yield</span> <span class="n">x</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="n">define/y</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">yield2</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="o">'</span><span class="ss">finished</span><span class="p">)</span><span class="err">)</span>
+</pre></div>
+
+</div>
+
+<p>We&rsquo;ll get a yield unbound error when calling step.</p>
+
+<p>— <em>Léa, 22 August 2007</em></p>
+
+<hr />
+
+<p>This comment has been removed by the author.</p>
+
+<p>— <em>Léa, 22 August 2007</em></p>
+
+<hr />
+
+<p>Ah, OK, this has to do with the lexical scope of yield.</p>
+
+<p>If I define</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">define/y</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="n">yield2</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-rules))" style="color: inherit">syntax-rules</a></span> <span class="p">()</span>
+    <span class="p">((</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">yield</span> <span class="n">x</span><span class="p">))))</span>
+  <span class="p">(</span><span class="n">yield2</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="o">'</span><span class="ss">finished</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>instead, it works.</p>
+
+<p>— <em>Léa, 22 August 2007</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/08/plt-modules-and-separate-compilation.html">PLT Modules and Separate Compilation</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/08/control-and-macros.html">control and macros</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

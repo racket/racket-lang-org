@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Typed Racket and Classes</title>
+    <meta name="description" content="_posted by Asumu Takikawa_  Recently we had our inaugural Racket Salon meetup here in Boston, graciously organized by Dan King. At the meetup I gave a short demo about the upcoming support for classes and object-oriented programming in Typed Racket. In th...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2013/12/typed-racket-and-classes.html">
+    <link rel="next" href="/2013/08/racket-v536.html">
+    <link rel="prev" href="/2014/02/racket-v60.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>17 Dec 2013</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Typed Racket and Classes</h1>
+  </header>
+
+<p><em>posted by Asumu Takikawa</em></p>
+
+<p>Recently we had our inaugural <a href="https://dekvek.com/racket-salon/">Racket Salon</a> meetup here in Boston, graciously organized by Dan King. At the meetup I gave a short demo about the upcoming support for classes and object-oriented programming in Typed Racket. In this blog post, I’ll go over the concepts I presented in my demo.</p>
+
+<p>Background</p>
+
+<hr />
+
+<p>As many readers already know, <a href="http://www.cs.utah.edu/plt/snapshots/current/doc/ts-guide/index.html">Typed Racket</a> is a gradually-typed sister language to Racket. That means it’s a <a href="http://en.wikipedia.org/wiki/Static_typing#Static_type-checking">statically-typed</a> language that accommodates the idioms of Racket. Programs written in Racket should seamlessly port to Typed Racket with the addition of type annotations here and there. You can even keep some parts of the program dynamically-typed and Typed Racket will make sure those parts won’t break the type invariants via <a href="http://www.cs.utah.edu/plt/snapshots/current/doc/guide/contracts.html">contracts</a>.</p>
+
+<p>Of course, supporting all Racket idioms is quite a lot of work, especially since it’s a constantly evolving language. One of the big pieces missing from Typed Racket right now is support for <a href="http://www.cs.utah.edu/plt/snapshots/current/doc/guide/classes.html">classes and objects</a>. Since the GUI library heavily uses the class system, it’s important to support the object-oriented subset of Racket.</p>
+
+<p>Supporting classes isn’t trivial though. There are a bunch of issues, but the main ones are: (1) the class system is built as a complex macro and so reconstructing the information needed to type-check is tricky, and (2) we need to make sure that interoperation between Racket and Typed Racket using classes/objects can be done safely.</p>
+
+<p>I won’t go over the technical details about the implementation in this blog post, but contact me if you’re interested. In the rest of the blog post, I’ll show some examples to demonstrate what programming in Typed Racket with classes looks like. Just so you know, these examples won’t work in the current version of Typed Racket but will be supported in a future release.</p>
+
+<p>Side note: If you like to live dangerously, you can track the experimental branch with support for classes <a href="https://github.com/takikawa/racket/tree/tr-classes">here</a>.</p>
+
+<h2 id="fishes-and-types">Fishes and types</h2>
+
+<p>To start out, let’s look at an untyped example from the Racket Guide on classes and objects. The following snippet defines a fish% class. The class has several features: an initialization argument named size, a private field named current-size, three methods get-size, grow, and eat.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">fish%</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._class))" style="color: inherit">class</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/createclass.html#(def._((lib._racket/private/class-internal..rkt)._object~25))" style="color: inherit">object%</a></span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._init))" style="color: inherit">init</a></span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">current-size</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/objcreation.html#(form._((lib._racket/private/class-internal..rkt)._super-new))" style="color: inherit">super-new</a></span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">get-size</span><span class="p">)</span>
+      <span class="n">current-size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">grow</span> <span class="n">amt</span><span class="p">)</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/set_.html#(form._((quote._~23~25kernel)._set!))" style="color: inherit">set!</a></span> <span class="n">current-size</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="n">amt</span> <span class="n">current-size</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">eat</span> <span class="n">other-fish</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">grow</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">other-fish</span> <span class="n">get-size</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>The notation should seem mostly familiar if you’ve programmed in Java or other object-oriented languages. The % suffix is a convention for identifiers that are bound to class values. The object% value is the superclass of fish% and is the root class of all class hierarchies. The initialization argument size is used when constructing an instance of a class:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/objcreation.html#(form._((lib._racket/private/class-internal..rkt)._new))" style="color: inherit">new</a></span> <span class="n">fish%</span> <span class="p">[</span><span class="n">size</span> <span class="mi">3</span><span class="p">])</span>
+<span class="p">(</span><span class="n">object:fish%</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Note that in Racket, classes are just values that can be passed around like anything else. For example, you can even do silly things like define nested inheriting classes:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/objcreation.html#(form._((lib._racket/private/class-internal..rkt)._new))" style="color: inherit">new</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._class))" style="color: inherit">class</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._class))" style="color: inherit">class</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/createclass.html#(def._((lib._racket/private/class-internal..rkt)._object~25))" style="color: inherit">object%</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/objcreation.html#(form._((lib._racket/private/class-internal..rkt)._super-new))" style="color: inherit">super-new</a></span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((lib._racket/private/misc..rkt)._displayln))" style="color: inherit">displayln</a></span> <span class="s2">"superclass"</span><span class="p">))</span>
+         <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/objcreation.html#(form._((lib._racket/private/class-internal..rkt)._super-new))" style="color: inherit">super-new</a></span><span class="p">)</span>
+         <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((lib._racket/private/misc..rkt)._displayln))" style="color: inherit">displayln</a></span> <span class="s2">"subclass"</span><span class="p">)))</span>
+<span class="n">superclass</span>
+<span class="n">subclass</span>
+<span class="p">(</span><span class="n">object:eval:4:0</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>In practice, this feature is quite useful since it lets you define <a href="http://www.cs.utah.edu/plt/snapshots/current/doc/guide/classes.html#%28part._.Mixins%29">mixins</a> easily. That’s a topic for another blog post.</p>
+
+<p>Side note: In other words, Racket has first-class classes. This is a term you might see used in the programming language literature.</p>
+
+<p>Adding types to the fish program is easy. First, we can introduce a type definition for the fish class.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed/racket/base..rkt)._define-type))" style="color: inherit">define-type</a></span> <span class="n">Fish%</span>
+  <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/Typed_Classes.html#(form._((lib._typed-racket/base-env/base-types-extra..rkt)._.Class))" style="color: inherit">Class</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._init))" style="color: inherit">init</a></span> <span class="p">[</span><span class="n">size</span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span><span class="p">])</span>
+         <span class="p">[</span><span class="n">get-size</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span><span class="p">)]</span>
+         <span class="p">[</span><span class="n">grow</span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Void))" style="color: inherit">Void</a></span><span class="p">)]</span>
+         <span class="p">[</span><span class="n">draw</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">Pict</span><span class="p">)]</span>
+         <span class="p">[</span><span class="n">eat</span> <span class="p">((</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/Typed_Classes.html#(form._((lib._typed-racket/base-env/base-types-extra..rkt)._.Instance))" style="color: inherit">Instance</a></span> <span class="n">Fish%</span><span class="p">)</span> <span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Void))" style="color: inherit">Void</a></span><span class="p">)]))</span>
+</pre></div>
+
+</div>
+
+<p>This type definition says that Fish% is a class type with the given initialization argument and methods types. Note that the type of the fish class Fish% is not the same as the type of its instances (Instance Fish%). This is an important distinction to make, since both the fish class value and fish object values may appear in the same program.</p>
+
+<p>Side note: If you’re familiar with Typed Racket, you may be surprised that the recursive reference to Fish% in the type definition works. Future versions of Typed Racket will support implicit recursive type definitions.</p>
+
+<p>With the type definition in hand, we can just annotate the class value with the type:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="n">fish%</span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="n">Fish%</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">fish%</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._class))" style="color: inherit">class</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/createclass.html#(def._((lib._racket/private/class-internal..rkt)._object~25))" style="color: inherit">object%</a></span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._init))" style="color: inherit">init</a></span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="n">current-size</span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">current-size</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/objcreation.html#(form._((lib._racket/private/class-internal..rkt)._super-new))" style="color: inherit">super-new</a></span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">get-size</span><span class="p">)</span>
+      <span class="n">current-size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">grow</span> <span class="n">amt</span><span class="p">)</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/set_.html#(form._((quote._~23~25kernel)._set!))" style="color: inherit">set!</a></span> <span class="n">current-size</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="n">amt</span> <span class="n">current-size</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">eat</span> <span class="n">other-fish</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">grow</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">other-fish</span> <span class="n">get-size</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>We do need an extra type annotation on the private field because its type isn’t included in the type definition above. This fish definition is a bit boring, so let’s spice it up a bit by making fishes drawable:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed/racket/base..rkt)._define-type))" style="color: inherit">define-type</a></span> <span class="n">Fish%</span>
+  <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/Typed_Classes.html#(form._((lib._typed-racket/base-env/base-types-extra..rkt)._.Class))" style="color: inherit">Class</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._init))" style="color: inherit">init</a></span> <span class="p">[</span><span class="n">size</span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span><span class="p">])</span>
+         <span class="p">(</span><span class="n">get-size</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span><span class="p">))</span>
+         <span class="p">[</span><span class="n">grow</span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Void))" style="color: inherit">Void</a></span><span class="p">)]</span>
+         <span class="c1">; a type for the new method</span>
+         <span class="p">[</span><span class="n">draw</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">Pict</span><span class="p">)]</span>
+         <span class="p">[</span><span class="n">eat</span> <span class="p">((</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/Typed_Classes.html#(form._((lib._typed-racket/base-env/base-types-extra..rkt)._.Instance))" style="color: inherit">Instance</a></span> <span class="n">Fish%</span><span class="p">)</span> <span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Void))" style="color: inherit">Void</a></span><span class="p">)]))</span>
+<span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="n">fish%</span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="n">Fish%</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">fish%</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._class))" style="color: inherit">class</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/createclass.html#(def._((lib._racket/private/class-internal..rkt)._object~25))" style="color: inherit">object%</a></span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._init))" style="color: inherit">init</a></span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="n">current-size</span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">current-size</span> <span class="n">size</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/objcreation.html#(form._((lib._racket/private/class-internal..rkt)._super-new))" style="color: inherit">super-new</a></span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">get-size</span><span class="p">)</span>
+      <span class="n">current-size</span><span class="p">)</span>
+    <span class="c1">; new draw method</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">draw</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">standard-fish</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._*))" style="color: inherit">*</a></span> <span class="n">current-size</span> <span class="mi">10</span><span class="p">)</span>
+                     <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._*))" style="color: inherit">*</a></span> <span class="n">current-size</span> <span class="mi">5</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">grow</span> <span class="n">amt</span><span class="p">)</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/set_.html#(form._((quote._~23~25kernel)._set!))" style="color: inherit">set!</a></span> <span class="n">current-size</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="n">amt</span> <span class="n">current-size</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._define/public))" style="color: inherit">define/public</a></span> <span class="p">(</span><span class="n">eat</span> <span class="n">other-fish</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">grow</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">other-fish</span> <span class="n">get-size</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>The new draw method that’s been added to the fish relies on some functions from the pict library. Since that’s not currently included in Typed Racket’s standard libraries, we need to give its exports some types:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="c1">; this would go at the top of the file before fish%</span>
+<span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._require/typed))" style="color: inherit">require/typed</a></span> <span class="n">pict</span>
+               <span class="p">[</span><span class="kd">#:opaque</span> <span class="n">Pict</span> <span class="n">pict?</span><span class="p">]</span>
+               <span class="p">[</span><span class="n">standard-fish</span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.Real))" style="color: inherit">Real</a></span> <span class="p">[</span><span class="kd">#:color</span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/type-ref.html#(form._((lib._typed-racket/base-env/base-types..rkt)._.String))" style="color: inherit">String</a></span><span class="p">]</span> <span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">Pict</span><span class="p">)])</span>
+</pre></div>
+
+</div>
+
+<p>The <code>#:opaque</code> import form in Typed Racket lets you create a new type that corresponds to some predicate, in this case pict?. It’s useful for bringing in datatypes from dynamically-typed Racket libraries. With that new type, we can give a type for the standard-fish function.</p>
+
+<p>In the end, you can interact with some fish and draw them:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">dory</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/objcreation.html#(form._((lib._racket/private/class-internal..rkt)._new))" style="color: inherit">new</a></span> <span class="n">fish%</span> <span class="p">[</span><span class="n">size</span> <span class="mi">5</span><span class="p">]))</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="n">dory</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._-))" style="color: inherit">-</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/ts-reference/Typed_Classes.html#(form._((lib._typed-racket/base-env/base-types-extra..rkt)._.Instance))" style="color: inherit">Instance</a></span> <span class="n">Fish%</span><span class="p">)</span>
+<span class="p">(</span><span class="n">object:fish%</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">dory</span> <span class="n">draw</span><span class="p">)</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._-))" style="color: inherit">-</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="n">Pict</span>
+<span class="n">image</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">dory</span> <span class="n">eat</span> <span class="n">dory</span><span class="p">)</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="n">dory</span> <span class="n">draw</span><span class="p">)</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._-))" style="color: inherit">-</a></span> <span class="n"><a href="http://docs.racket-lang.org/ts-reference/special-forms.html#(form._((lib._typed-racket/base-env/prims..rkt)._~3a))" style="color: inherit">:</a></span> <span class="n">Pict</span>
+<span class="n">image</span>
+</pre></div>
+
+</div>
+
+<p>Conclusion:  At Racket Salon, I talked about a few other things including mixins and converting a slightly larger program that uses the GUI library. They didn’t translate well to a blog setting so I didn’t include them here. Racket Salon was a fun event, so I encourage anyone in the Boston area to attend!</p>
+
+<p>Typed Racket’s support for classes will land in a future version of Racket, possibly the release after v6.0.</p>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2014/02/racket-v60.html">Racket v6.0</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2013/08/racket-v536.html">Racket v5.3.6</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

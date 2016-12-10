@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Generics</title>
+    <meta name="description" content="_posted by Asumu Takikawa_  Recently at RacketCon, I gave a talk about the new Generics library that ships with Racket 5.3. In this blog post, I’ll offer a slightly expanded commentary about the new library. For the ten-minute video explanation, see the Y...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2012/11/generics.html">
+    <link rel="next" href="/2012/10/the-3n1-problem.html">
+    <link rel="prev" href="/2012/11/racket-v531.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>01 Nov 2012</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Generics</h1>
+  </header>
+
+<p><em>posted by Asumu Takikawa</em></p>
+
+<p>Recently at <a href="http://con.racket-lang.org/">RacketCon</a>, I gave a talk about the new Generics library that ships with Racket 5.3. In this blog post, I’ll offer a slightly expanded commentary about the new library. For the ten-minute video explanation, see the <a href="http://www.youtube.com/watch?v=MYtm9YG4tMM">Youtube</a> video. The accompanying slides are available <a href="http://www.ccs.neu.edu/home/asumu/slides/racketcon-2012-generics.pdf">here</a>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Probably the first question that comes to your mind is: what are generics and what do we mean by generic programming? Let me illustrate with some example code:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">vector-ref#</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">3</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list-ref))" style="color: inherit">list-ref</a></span><span class="o">'</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">3</span>
+</pre></div>
+
+</div>
+
+<p>Both of the lines above operate on sequence-like datatypes, but for each of the datatypes we use different functions: <code>vector-ref</code> and <code>list-ref</code>. This is also the case with other datatypes like dictionary-like datatypes: <code>hash-ref</code>, <code>assoc</code>, etc. Or all the different kinds of equality: <code>string=?</code>, <code>boolean=?</code>, and <code>=</code>. These specialized operations may seem redundant. Ideally, we’d have generic functions that don’t care about the specific datatypes that we operate over.</p>
+
+<p>Thankfully, Racket does provide these. For dictionaries, we have functions like <code>dict-ref</code> and <code>dict-set</code> that operate over any kind of dictionary-like type. For sequences, <code>sequence-ref</code>, <code>sequence-append</code>, and so on. These generic interfaces are all built-in to the standard library. You might wonder, however, if you can define your own generic functions.</p>
+
+<p>As of version 5.3, you just need to (require racket/generic) to get all the tools you need to define your own generic interface. In the rest of the article I’ll show you how to define your own generic interface and how to use it. If you’ve seen Rust’s <a href="http://pcwalton.github.com/blog/2012/08/08/a-gentle-introduction-to-traits-in-rust">traits</a> or Clojure’s <a href="http://clojure.org/protocols">protocols</a>, our design will feel familiar.</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>The running example will be the implementation of a simple queue interface. Our queue will contain five operations: <code>queue-enqueue</code>, <code>queue-dequeue</code>, <code>queue-head</code>, <code>queue-empty?</code>, and <code>queue-length</code>.</p>
+
+<p>The first thing to do is to require the library:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">requireracket/generic</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Then we use define-generics to define a generic interface:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/reference/struct-generics.html#(form._((lib._racket/generic..rkt)._define-generics))" style="color: inherit">define-generics</a></span> <span class="n">queue</span>
+    <span class="p">[</span><span class="n">queue-enqueue</span> <span class="n">queue</span> <span class="n">elem</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">queue-dequeue</span> <span class="n">queue</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">queue-head</span> <span class="n">queue</span><span class="p">]</span>
+    <span class="p">[</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-empty~3f))" style="color: inherit">queue-empty?</a></span> <span class="n">queue</span><span class="p">]</span>
+    <span class="p">[</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-length))" style="color: inherit">queue-length</a></span> <span class="n">queue</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+<p>The method headers above define the methods that concrete implementations of the generic interface need to provide. Each header needs to contain at least one argument that matches the name of the interface; this argument will be used for dispatch. The form defines several identifiers: queue?, gen:queue, queue/c, and each of the generic functions. The first is a predicate that checks whether a given value implements the interface. The identifier prefixed with gen: is a binding that’s used to supply methods for the interface. The queue/c specifies a contract combinator for the interface, which I’ll describe later in the article.</p>
+
+<p>We now have the generic functions, but they’re not very useful without concrete implementations. To implement a generic interface, you first need to define a structure type. We’ll define a simple functional queue(Okasaki 1998, p.42) that uses two lists:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define-struct.html#(form._((lib._racket/private/base..rkt)._struct))" style="color: inherit">struct</a></span> <span class="n">simple-queue</span> <span class="p">(</span><span class="n">front</span> <span class="n">back</span><span class="p">)</span>
+    <span class="kd">#:methods</span> <span class="n">gen:queue</span>
+    <span class="p">[</span><span class="c1">; helper function to balance lists</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">check-front</span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a></span> <span class="n">queue</span>
+         <span class="p">[(</span><span class="n">simple-queue</span> <span class="o">'</span><span class="p">()</span> <span class="n">back</span><span class="p">)</span>
+          <span class="p">(</span><span class="n">simple-queue</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._reverse))" style="color: inherit">reverse</a></span> <span class="n">back</span><span class="p">)</span> <span class="o">'</span><span class="p">())]</span>
+         <span class="p">[</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">queue</span><span class="p">]))</span>
+     <span class="c1">; enqueue an element</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">queue-enqueue</span> <span class="n">queue</span> <span class="n">elem</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a></span> <span class="n">queue</span>
+         <span class="p">[(</span><span class="n">simple-queue</span> <span class="n">front</span> <span class="n">back</span><span class="p">)</span>
+          <span class="p">(</span><span class="n">check-front</span> <span class="p">(</span><span class="n">simple-queue</span> <span class="n">front</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="n">elem</span> <span class="n">back</span><span class="p">)))]))</span>
+     <span class="c1">; dequeue an element</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">queue-dequeue</span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a></span> <span class="n">queue</span>
+         <span class="p">[(</span><span class="n">simple-queue</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="n">back</span><span class="p">)</span>
+          <span class="p">(</span><span class="n">check-front</span> <span class="p">(</span><span class="n">simple-queue</span> <span class="n">xs</span> <span class="n">back</span><span class="p">))]))</span>
+     <span class="c1">; get the head of the queue</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">queue-head</span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a></span> <span class="n">queue</span>
+         <span class="p">[(</span><span class="n">simple-queue</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="n">x</span> <span class="n">xs</span><span class="p">)</span> <span class="n">back</span><span class="p">)</span> <span class="n">x</span><span class="p">]))</span>
+     <span class="c1">; check if the queue is empty</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-empty~3f))" style="color: inherit">queue-empty?</a></span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/list..rkt)._empty~3f))" style="color: inherit">empty?</a></span> <span class="p">(</span><span class="n">simple-queue-front</span> <span class="n">queue</span><span class="p">)))</span>
+     <span class="c1">; get the queue&#39;s length</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-length))" style="color: inherit">queue-length</a></span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._length))" style="color: inherit">length</a></span> <span class="p">(</span><span class="n">simple-queue-front</span> <span class="n">queue</span><span class="p">))</span>
+          <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._length))" style="color: inherit">length</a></span> <span class="p">(</span><span class="n">simple-queue-back</span> <span class="n">queue</span><span class="p">))))])</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">empty-queue</span>
+    <span class="p">(</span><span class="n">simple-queue</span> <span class="o">'</span><span class="p">()</span> <span class="o">'</span><span class="p">()))</span>
+</pre></div>
+
+</div>
+
+<p>Using the #:methods keyword and the gen:queue binding, we can specify the methods that a simple-queue implements. Note that a #:methods block may also contain helper functions (like check-front) and definitions that are used to define the methods. Each method has the same method header as the corresponding headers in the interface definition.</p>
+
+<p>We can check that our new queue actually works with the generic functions:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">queue-head</span><span class="p">(</span><span class="n">queue-enqueueempty-queue5</span><span class="p">))</span>
+<span class="mi">5</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">queue-empty?empty-queue</span><span class="p">)</span>
+<span class="no">#t</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-length))" style="color: inherit">queue-length</a></span><span class="p">(</span><span class="n">queue-enqueue</span><span class="p">(</span><span class="n">queue-enqueueempty-queue7</span><span class="p">)</span><span class="mi">5</span><span class="p">))</span>
+<span class="mi">2</span>
+</pre></div>
+
+</div>
+
+<p>It works! For any structure type, we can define methods in the same way. For example, we can define an efficient persistent queue(Okasaki 1998, p.64) that implements the same methods. This time, the implementation will use lazy evaluation with streams:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define-struct.html#(form._((lib._racket/private/base..rkt)._struct))" style="color: inherit">struct</a></span> <span class="n">persistent-queue</span> <span class="p">(</span><span class="n">front-len</span> <span class="n">front</span> <span class="n">back-len</span> <span class="n">back</span><span class="p">)</span>
+    <span class="kd">#:methods</span> <span class="n">gen:queue</span>
+    <span class="p">[</span><span class="c1">; helper function to balance lists</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">check</span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a></span> <span class="n">queue</span>
+         <span class="p">[(</span><span class="n">persistent-queue</span> <span class="n">front-len</span> <span class="n">front</span> <span class="n">back-len</span> <span class="n">back</span><span class="p">)</span>
+          <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((quote._~23~25kernel)._if))" style="color: inherit">if</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3c~3d))" style="color: inherit">&lt;=</a></span> <span class="n">back-len</span> <span class="n">front-len</span><span class="p">)</span>
+              <span class="n">queue</span>
+              <span class="p">(</span><span class="n">persistent-queue</span>
+               <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="n">front-len</span> <span class="n">back-len</span><span class="p">)</span>
+               <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/streams.html#(def._((lib._racket/stream..rkt)._stream-append))" style="color: inherit">stream-append</a></span> <span class="n">front</span> <span class="p">(</span><span class="n">stream-reverse</span> <span class="n">back</span><span class="p">))</span>
+               <span class="mi">0</span> <span class="n">stream-null</span><span class="p">))]))</span>
+     <span class="c1">; enqueue an element</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">queue-enqueue</span> <span class="n">queue</span> <span class="n">elem</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a></span> <span class="n">queue</span>
+         <span class="p">[(</span><span class="n">persistent-queue</span> <span class="n">front-len</span> <span class="n">front</span> <span class="n">back-len</span> <span class="n">back</span><span class="p">)</span>
+          <span class="p">(</span><span class="n">check</span> <span class="p">(</span><span class="n">persistent-queue</span>
+                  <span class="n">front-len</span> <span class="n">front</span>
+                  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">1</span> <span class="n">back-len</span><span class="p">)</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/streams.html#(form._((lib._racket/stream..rkt)._stream-cons))" style="color: inherit">stream-cons</a></span> <span class="n">elem</span> <span class="n">back</span><span class="p">)))]))</span>
+     <span class="c1">; dequeue an element</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">queue-dequeue</span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a></span> <span class="n">queue</span>
+         <span class="p">[(</span><span class="n">persistent-queue</span> <span class="n">front-len</span> <span class="n">front</span> <span class="n">back-len</span> <span class="n">back</span><span class="p">)</span>
+          <span class="p">(</span><span class="n">check</span> <span class="p">(</span><span class="n">persistent-queue</span>
+                  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._-))" style="color: inherit">-</a></span> <span class="n">front-len</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/streams.html#(def._((lib._racket/stream..rkt)._stream-rest))" style="color: inherit">stream-rest</a></span> <span class="n">front</span><span class="p">)</span>
+                  <span class="n">back-len</span> <span class="n">back</span><span class="p">))]))</span>
+     <span class="c1">; get the head of the queue</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">queue-head</span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a></span> <span class="n">queue</span>
+         <span class="p">[(</span><span class="n">persistent-queue</span> <span class="n">front-len</span> <span class="n">front</span> <span class="n">back-len</span> <span class="n">back</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/streams.html#(def._((lib._racket/stream..rkt)._stream-first))" style="color: inherit">stream-first</a></span> <span class="n">front</span><span class="p">)]))</span>
+     <span class="c1">; check if the queue is empty</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-empty~3f))" style="color: inherit">queue-empty?</a></span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3d))" style="color: inherit">=</a></span> <span class="mi">0</span> <span class="p">(</span><span class="n">persistent-queue-front-len</span> <span class="n">queue</span><span class="p">)))</span>
+     <span class="c1">; get the queue&#39;s length</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-length))" style="color: inherit">queue-length</a></span> <span class="n">queue</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="p">(</span><span class="n">persistent-queue-front-len</span> <span class="n">queue</span><span class="p">)</span>
+          <span class="p">(</span><span class="n">persistent-queue-back-len</span> <span class="n">queue</span><span class="p">)))])</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">empty-persistent-queue</span>
+    <span class="p">(</span><span class="n">persistent-queue</span> <span class="mi">0</span> <span class="n">stream-null</span> <span class="mi">0</span> <span class="n">stream-null</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Our operations from before work as expected:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">queue-head</span><span class="p">(</span><span class="n">queue-enqueueempty-persistent-queue5</span><span class="p">))</span>
+<span class="mi">5</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">queue-empty?empty-persistent-queue</span><span class="p">)</span>
+<span class="no">#t</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-length))" style="color: inherit">queue-length</a></span><span class="p">(</span><span class="n">queue-enqueue</span><span class="p">(</span><span class="n">queue-enqueueempty-persistent-queue7</span><span class="p">)</span><span class="mi">5</span><span class="p">))</span>
+<span class="mi">2</span>
+</pre></div>
+
+</div>
+
+<h2 id="contracts">Contracts</h2>
+
+<p>Earlier, I mentioned that the generic interface also comes with a contract form that’s automatically defined. You can use these to attach dynamic checks to your implementations.</p>
+
+<p>For example, we can write a contract that restricts our queues to only accept integers as data elements:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">int-queue/c</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/contract-utilities.html#(form._((lib._racket/contract/private/base..rkt)._recursive-contract))" style="color: inherit">recursive-contract</a></span>
+     <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue/c))" style="color: inherit">queue/c</a></span> <span class="p">[</span><span class="n">queue-enqueue</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._integer~3f))" style="color: inherit">integer?</a></span> <span class="n">int-queue/c</span><span class="p">)]</span>
+              <span class="p">[</span><span class="n">queue-dequeue</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="n">int-queue/c</span><span class="p">)]</span>
+              <span class="p">[</span><span class="n">queue-head</span>    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._integer~3f))" style="color: inherit">integer?</a></span><span class="p">)]</span>
+              <span class="p">[</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-empty~3f))" style="color: inherit">queue-empty?</a></span>  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/booleans.html#(def._((quote._~23~25kernel)._boolean~3f))" style="color: inherit">boolean?</a></span><span class="p">)]</span>
+              <span class="p">[</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-length))" style="color: inherit">queue-length</a></span>  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._integer~3f))" style="color: inherit">integer?</a></span><span class="p">)])))</span>
+</pre></div>
+
+</div>
+
+<p>For the queue interface, the automatically defined queue/c combinator allows us to specify contracts on each of the methods in the interface. We also use a recursive contract here just so that we can reference the int-queue/c contract within itself.</p>
+
+<p>We can apply the contract to a particular queue:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/attaching-contracts-to-values.html#(form._((lib._racket/contract/region..rkt)._define/contract))" style="color: inherit">define/contract</a></span> <span class="n">checked-queue</span>
+    <span class="n">int-queue/c</span>
+    <span class="n">empty-queue</span><span class="p">)</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">queue-enqueue</span> <span class="n">checked-queue</span> <span class="mi">42</span><span class="p">)</span>
+<span class="n">#&lt;simple-queue&gt;</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">queue-enqueue</span> <span class="n">checked-queue</span> <span class="s2">"not an integer"</span><span class="p">)</span>
+<span class="n">checked-queue:</span> <span class="k"><a href="http://docs.racket-lang.org/reference/attaching-contracts-to-values.html#(form._((lib._racket/contract/private/base..rkt)._contract))" style="color: inherit">contract</a></span> <span class="n">violation</span>
+ <span class="n">expected:</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._integer~3f))" style="color: inherit">integer?</a></span>
+ <span class="n">given:</span> <span class="s2">"not an integer"</span>
+ <span class="n">in:</span> <span class="n">the</span> <span class="n">2nd</span> <span class="n">argument</span> <span class="n">of</span>
+     <span class="n">the</span> <span class="n">queue-enqueue</span> <span class="n">method</span> <span class="n">of</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/contract-utilities.html#(form._((lib._racket/contract/private/base..rkt)._recursive-contract))" style="color: inherit">recursive-contract</a></span>
+       <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue/c))" style="color: inherit">queue/c</a></span>
+        <span class="p">(</span><span class="n">queue-enqueue</span>
+         <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._integer~3f))" style="color: inherit">integer?</a></span> <span class="n">int-queue/c</span><span class="p">))</span>
+        <span class="p">(</span><span class="n">queue-dequeue</span>
+         <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="n">int-queue/c</span><span class="p">))</span>
+        <span class="p">(</span><span class="n">queue-head</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._integer~3f))" style="color: inherit">integer?</a></span><span class="p">))</span>
+        <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-empty~3f))" style="color: inherit">queue-empty?</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/booleans.html#(def._((quote._~23~25kernel)._boolean~3f))" style="color: inherit">boolean?</a></span><span class="p">))</span>
+        <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-length))" style="color: inherit">queue-length</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">int-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._integer~3f))" style="color: inherit">integer?</a></span><span class="p">))))</span>
+ <span class="k"><a href="http://docs.racket-lang.org/reference/attaching-contracts-to-values.html#(form._((lib._racket/contract/private/base..rkt)._contract))" style="color: inherit">contract</a></span> <span class="n">from:</span> <span class="p">(</span><span class="n">definition</span> <span class="n">checked-queue</span><span class="p">)</span>
+ <span class="n">blaming:</span> <span class="n">top-level</span>
+ <span class="n">at:</span> <span class="n">eval:15.0</span>
+</pre></div>
+
+</div>
+
+<p>The second use of <code>queue-enqueue</code> causes a contract error as expected, since we can’t add a string to an integer queue. You can also provide a constructor for your integer queue that’s contracted to produce int-queue/cs. Any queues created with that constructor will be checked for integers.</p>
+
+<p>Also, you might have noticed that the queues we wrote above don’t protect against dequeueing or taking the head of empty queues. To prevent this, we can write contracts that ensure these operations raise contract errors on empty queues. Since we want to enforce this for all queues instead of just some of them, we apply contracts to the generic functions:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">non-empty-queue/c</span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/data-structure-contracts.html#(def._((lib._racket/contract/private/misc..rkt)._flat-named-contract))" style="color: inherit">flat-named-contract</a></span>
+     <span class="o">'</span><span class="ss">non-empty-queue</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._and))" style="color: inherit">and</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue~3f))" style="color: inherit">queue?</a></span> <span class="n">q</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/booleans.html#(def._((quote._~23~25kernel)._not))" style="color: inherit">not</a></span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue-empty~3f))" style="color: inherit">queue-empty?</a></span> <span class="n">q</span><span class="p">))))))</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/attaching-contracts-to-values.html#(form._((lib._racket/contract/region..rkt)._define/contract))" style="color: inherit">define/contract</a></span> <span class="p">(</span><span class="n">checked-dequeue</span> <span class="n">queue</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">non-empty-queue/c</span> <span class="n"><a href="http://docs.racket-lang.org/data/Imperative_Queues.html#(def._((lib._data/queue..rkt)._queue~3f))" style="color: inherit">queue?</a></span><span class="p">)</span>
+    <span class="p">(</span><span class="n">queue-dequeue</span> <span class="n">queue</span><span class="p">))</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/attaching-contracts-to-values.html#(form._((lib._racket/contract/region..rkt)._define/contract))" style="color: inherit">define/contract</a></span> <span class="p">(</span><span class="n">checked-head</span> <span class="n">queue</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">non-empty-queue/c</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/data-structure-contracts.html#(def._((lib._racket/contract/private/misc..rkt)._any/c))" style="color: inherit">any/c</a></span><span class="p">)</span>
+    <span class="p">(</span><span class="n">queue-head</span> <span class="n">queue</span><span class="p">))</span>
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">checked-head</span> <span class="n">empty-persistent-queue</span><span class="p">)</span>
+<span class="n">checked-head:</span> <span class="k"><a href="http://docs.racket-lang.org/reference/attaching-contracts-to-values.html#(form._((lib._racket/contract/private/base..rkt)._contract))" style="color: inherit">contract</a></span> <span class="n">violation</span>
+ <span class="n">expected:</span> <span class="n">non-empty-queue</span>
+ <span class="n">given:</span> <span class="n">#&lt;persistent-queue&gt;</span>
+ <span class="n">in:</span> <span class="n">the</span> <span class="n">1st</span> <span class="n">argument</span> <span class="n">of</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/function-contracts.html#(form._((lib._racket/contract/base..rkt)._-~3e))" style="color: inherit">-&gt;</a></span> <span class="n">non-empty-queue</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/data-structure-contracts.html#(def._((lib._racket/contract/private/misc..rkt)._any/c))" style="color: inherit">any/c</a></span><span class="p">)</span>
+ <span class="k"><a href="http://docs.racket-lang.org/reference/attaching-contracts-to-values.html#(form._((lib._racket/contract/private/base..rkt)._contract))" style="color: inherit">contract</a></span> <span class="n">from:</span> <span class="p">(</span><span class="n">function</span> <span class="n">checked-head</span><span class="p">)</span>
+ <span class="n">blaming:</span> <span class="n">top-level</span>
+ <span class="n">at:</span> <span class="n">eval:20.0</span>
+</pre></div>
+
+</div>
+
+<p>The <code>checked-head</code> function raises a contract error as expected instead of an exception from a stream function. In a real implementation, you would just export the original generic functions with contracts attached using contract-out instead of defining checked versions like we did here.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Racket 5.3 has made the process of defining and using generic interfaces much easier. The new library is still under active development and we plan to experiment with additional features and performance improvements. The full code from this article can be found in the following gist: <a href="https://gist.github.com/3995200">https://gist.github.com/3995200</a></p>
+
+<p>Bibliography:  Chris Okasaki. Purely Functional Data Structures. Cambridge University Press, 1998.</p>
+<!-- more-->
+
+<hr />
+
+<p>Interesting stuff. These days I find data + interfaces all I really need to in terms of &ldquo;object orientation&rdquo;.</p>
+
+<p>Given all this, is it possible to define new sequence methods in a similar way?</p>
+
+<p>— <em>Unknown, 15 January 2014</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/11/racket-v531.html">Racket v5.3.1</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2012/10/the-3n1-problem.html">The 3n+1 problem</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

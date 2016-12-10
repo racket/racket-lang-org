@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v5.3.1</title>
+    <meta name="description" content="_posted by Eli Barzilay_  Racket version 5.3.1 is now available from http://racket-lang.org/ Racket::      The `case` form dispatches on characters, fixnums, symbols, and keywords in logarithmic time. (Thanks to Jon Zeppieri.)     The new `racket/format` ...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2012/11/racket-v531.html">
+    <link rel="next" href="/2012/11/generics.html">
+    <link rel="prev" href="/2012/11/drracket-now-more-responsive.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>07 Nov 2012</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v5.3.1</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.3.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> Racket::</p>
+
+<ul>
+ <li>
+  <p>The <code>case</code> form dispatches on characters, fixnums, symbols, and keywords in logarithmic time. (Thanks to Jon Zeppieri.)</p></li>
+ <li>
+  <p>The new <code>racket/format</code> library provides new and improved string-formatting functions.</p></li>
+ <li>
+  <p>Logging tools include improved filtering support based on the name of a logger. A new <code>define-logger</code> form simplifies the use of named loggers. Forms such as <code>log-debug</code> now support string formatting.</p></li>
+ <li>
+  <p>The <code>for</code> forms now support <code>#:break</code> and <code>#:final</code> clauses.</p></li>
+ <li>
+  <p>The new <code>PLTCOMPILEDROOTS</code> environment variable configures the search path for compiled bytecode.</p></li></ul>
+
+<p>DrRacket::</p>
+
+<ul>
+ <li>
+  <p>Check Syntax now summarizes the documentation (i.e., the blue boxes) for the identifier at the insertion point in the top-right corner of the definitions window.</p></li>
+ <li>
+  <p>Check Syntax now runs continuously for programs that declare their language within the source. This mode has been available for several of the past releases, but now enabled by default.</p></li>
+ <li>
+  <p>DrRacket can spell-check string constants (enable this in the Edit menu).</p></li></ul>
+
+<p>Typed Racket::</p>
+
+<ul>
+ <li>
+  <p>Typed Racket interprets the <code>Any</code> type as a different contract. This may signal dynamic errors in some existing mixed typed/untyped programs. The normal fix is to replace a use of <code>Any</code> with a more specific types.</p></li>
+ <li>
+  <p>NaN is included in all of Typed Racket&rsquo;s floating-point types, which makes precise floating-point types easier to use.</p></li>
+ <li>
+  <p>Typed Racket supports a <code>cast</code> operation with support for higher-order types.</p></li>
+ <li>
+  <p>Typed Racket provides the <code>:query-type/args</code> and <code>:query-type/result</code> utilities to explore types at the REPL.</p></li></ul>
+
+<p>Miscellaneous::</p>
+
+<ul>
+ <li>
+  <p>The <code>compatibility</code> collection provides features from Racket relatives, such as <code>defmacro</code> and mutable lists. These features are provided to ease porting code to Racket. Avoid them in modern Racket code.</p></li>
+ <li>
+  <p>Screenshots of the widgets provided by the Racket GUI library are included in the documentation. (Thanks to Diogo F. S. Ramos.)</p></li>
+ <li>
+  <p>FrTime was ported to racket <code>#lang</code>. (Thanks to Patrick Mahoney.)</p></li></ul>
+
+<p>Deprecation::  The following has been deprecated and will be removed in the January 2013 release:</p>
+
+<ul>
+ <li>the <code>planet</code> command-line tool; use <code>raco planet</code> instead.</li></ul>
+
+<p>The following has been deprecated and will be removed in the August 2013 release:</p>
+
+<ul>
+ <li>the <code>mzlib/class100</code> library; use <code>racket/class</code> instead.</li></ul>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/11/drracket-now-more-responsive.html">DrRacket, now more responsive</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2012/11/generics.html">Generics</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

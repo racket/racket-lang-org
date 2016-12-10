@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v6.4</title>
+    <meta name="description" content="_posted by Ryan Culpepper_  Racket version 6.4 is now available from http://racket-lang.org/      We fixed a security vulnerability in the web server. The existing web server is vulnerable to a navigation attack if it is also enabled to serve files static...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2016/02/racket-v64.html">
+    <link rel="next" href="/2015/11/racket-v63.html">
+    <link rel="prev" href="/2016/02/racket-web-server-security-vulnerability.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>08 Feb 2016</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v6.4</h1>
+  </header>
+
+<p><em>posted by Ryan Culpepper</em></p>
+
+<p>Racket version 6.4 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>We fixed a security vulnerability in the web server. The existing web server is vulnerable to a navigation attack if it is also enabled to serve files statically; that is, any file readable by the web server is accessible remotely. For more information, see <a href="../../2016/02/racket-web-server-security-vulnerability.html">this post</a>.</p></li>
+ <li>
+  <p>DrRacket&rsquo;s scrolling is faster.</p></li>
+ <li>
+  <p>Incremental garbage-collection mode can eliminate long pauses in a program. For example, incremental mode is useful for avoiding pauses in games and animations.</p></li></ul>
+
+<p>Programs must specifically request incremental mode with <code>(collect-garbage 'incremental)</code>, but libraries such as <code>2htdp/universe</code> include the request as part of the library&rsquo;s implementation.</p>
+
+<ul>
+ <li>
+  <p>The default package catalog is an HTTPS address instead of HTTP, and package operations properly validate server certificates when using HTTPS.</p></li>
+ <li>
+  <p>Documentation may define their own categories for the manual top-level page by using strings, rather than only symbols that name pre-defined categories.</p></li>
+ <li>
+  <p>The Racket cheat sheet is included in the main distribution.</p></li>
+ <li>
+  <p>DrRacket is available in Bulgarian, thanks to Alexander Shopov.</p></li>
+ <li>
+  <p>The contract Typed Racket generates for the <code>Any</code> type is more permissive, allowing more typed/untyped programs to work without contract errors.</p></li>
+ <li>
+  <p>Redex supports binding specifications; describe which variables bind in which expressions and your metafunctions and reduction relations automatically become scope-sensitive. Thanks to Paul Stansifer for this improvement.</p></li>
+ <li>
+  <p>All <code>pict</code> functions accept <code>pict-convertible</code>s. This allows for transparent interoperability between <code>pict</code> and libraries like <code>2htdp/image</code>.</p></li>
+ <li>
+  <p>The <code>raco profile</code> and <code>raco contract-profile</code> commands provide easy access to profiling tools, without requiring program modifications.</p></li></ul>
+
+<p>Feedback Welcome</p>
+<!-- more-->
+
+<hr />
+
+<p>Great work! and thank you.</p>
+
+<p>I was wondering why isn&rsquo;t incremental garbage collection the default option?</p>
+
+<p>— <em>Harikrishnan, 8 February 2016</em></p>
+
+<hr />
+
+<p>Incremental mode has shorter GC pauses, but it tends to use more memory and use more time overall. Those trade-offs are usually worthwhile for interactive programs, but not for batch programs.</p>
+
+<p>Given the trade-offs, non-incremental mode is a more transparent default. It&rsquo;s easy to tell when an interactive program suffers from pauses and needs to turn on incremental mode. It would be more difficult to notice that a batch program runs too slowly because incremental mode hasn&rsquo;t been disabled.</p>
+
+<p>(Incremental mode uses more memory because it moves objects to the old generation sooner, and because the old generation is not compacted. Incremental mode uses more time because extra steps are needed to pause and resume traversal of the old generation – and also because it uses more memory.)</p>
+
+<p>— <em>Matthew Flatt, 9 February 2016</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2016/02/racket-web-server-security-vulnerability.html">Racket Web Server Security Vulnerability</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2015/11/racket-v63.html">Racket v6.3</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>800!</title>
+    <meta name="description" content="_posted by Tim Brown_   800 (Racket Tasks On Rosetta Code)   Since (and even before) Asumu Takikawa's post &quot;200!&quot; at the beginning of March 2013, folk have been beavering away, implementing tasks on Rosetta Code. And on November 15th 2014:   **800 tasks h...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2014/11/800.html">
+    <link rel="next" href="/2014/11/racket-v611.html">
+    <link rel="prev" href="/2014/12/the-racket-package-system-and-planet.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>23 Nov 2014</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>800!</h1>
+  </header>
+
+<p><em>posted by Tim Brown</em></p>
+
+<p> 800 (Racket Tasks On Rosetta Code)</p>
+
+<p> Since (and even before) Asumu Takikawa&rsquo;s post &ldquo;200!&rdquo; at the beginning of March 2013, folk have been beavering away, implementing tasks on <a href="http://rosettacode.org">Rosetta Code</a>. And on November 15th 2014:</p>
+
+<p> <strong>800 tasks have now been Implemented1 in Racket on the Rosetta Code website!</strong></p>
+
+<p> Before I go any further it must be said that, without a doubt… this is awesome! This achievement represents a lot of work, and a lot of code. And everyone who has participated should be thanked and congratulated for getting this far.</p>
+
+<p> So thank you. And <em>well done!</em></p>
+
+<p> What is Rosetta Code?: Rosetta Code (RC) describes itself as:</p>
+
+<blockquote>
+ <p>&hellip; a <a href="http://en.wikipedia.org/wiki/Chrestomathy">programming chrestomathy</a> site. The idea is to present solutions to the same task in as many different languages as possible, to demonstrate how languages are similar and different, and to aid a person with a grounding in one approach to a problem in learning another. Rosetta Code currently has 758 tasks, 134 draft tasks, and is aware of 560 languages, though we do not (and cannot) have solutions to every task in every language."2</p></blockquote>
+
+<p> Of these tasks, 800 have been implemented in Racket… some tasks, like <a href="http://rosettacode.org/wiki/Hello_world/Text">Hello World/Text</a>, have been implemented in hundreds of languages. Some, however, like <a href="rosettacode.org/wiki/Time-based_One-time_Password_Algorithm">Time-based One-time Password Algorithm</a>, have only been implemented in 3 (including Racket).</p>
+
+<p> If you haven&rsquo;t already, I suggest you take a quick look about the site to get a feel of what that means in practice.</p>
+
+<p> <strong>WARNING:</strong> Rosetta Code is a wiki. Like any wiki it will steal your time from you as you browse tasks, algorithms, languages and the occasional link to Wikipedia. Don&rsquo;t say I didn&rsquo;t warn you.</p>
+
+<p> What Can You Do With Rosetta Code?  &mdash;</p>
+
+<p> <strong>Learn From It</strong>  Rosetta Code is a valuable resource with plenty of material to absorb and ideas to be had from. If you&rsquo;re new to Racket, there are tasks like <a href="http://rosettacode.org/wiki/Loops/For">Loops/For</a> which will get you on your way with fundamental programming tasks.</p>
+
+<p> If you want something juicier there are other tasks (like <a href="http://rosettacode.org/wiki/Nonogram_solver">Nonogram solver</a> which runs to over 400 lines of Racket) for you to pick over.</p>
+
+<p> And there&rsquo;s everything in between.</p>
+
+<p> <strong>Write Code!</strong></p>
+
+<p>Each task gives you a chance to think, &ldquo;Is this how I would do this?&rdquo;</p>
+
+<p>Even if I don&rsquo;t submit something, I find it&rsquo;s fun to write some code around the task. In fact, I don&rsquo;t even have to type code into a REPL, the thought exercise is often fun enough!</p>
+
+<p>Some tasks, like (&ldquo;Chess Player&rdquo;), are shall we say, very challenging. But don&rsquo;t let even that put you off thinking of, tinkering around or coding a solution to them.</p>
+
+<p><strong>If there isn&rsquo;t a Racket implementation for a task you like the looks of, have a go.</strong></p>
+
+<p> Someone might have a better idea of how to do it in Racket later. But if there isn&rsquo;t an implementation now &mdash; change that now!</p>
+
+<p> Remember that others will be reading your code to understand Racket all the better. So please try to adhere to the <a href="http://docs.racket-lang.org/style/index.html">Racket Style Guide</a> as best you can3. Again, don&rsquo;t worry about getting that perfect. Like anything, learning Racket style takes practice, and nobody expects perfection. And the experienced contributors/documentors are always at hand to <a href="http://permalink.gmane.org/gmane.comp.lang.racket.user/18248">help correct style</a>.</p>
+
+<p> <em>Hints:</em></p>
+
+<ul>
+ <li>
+  <p>I always have a <a href="https://en.wikipedia.org/wiki/Help:Cheatsheet">Wikimedia Cheatsheet</a> to hand. I can never remember its markdown syntax (which unfortunately doesn&rsquo;t really support <code>&lt;code/&gt;</code>, either)</p></li>
+ <li>
+  <p>Pick whatever task you want… but it would be good to clear all the &ldquo;Complete Tasks&rdquo; (as opposed to &ldquo;Draft Tasks&rdquo;) if you have a choice.</p></li>
+ <li>
+  <p>Don&rsquo;t add code until it&rsquo;s running and producing the output you expect. This isn&rsquo;t Project Euler, you don&rsquo;t have to guess the answer in most cases &mdash; it&rsquo;s likely someone has some sample output to compare to.4</p></li>
+ <li>
+  <p>If you can&rsquo;t get your head around the algorithm in the task description then try to translate another language into Racket. You&rsquo;ll learn Racket, you&rsquo;ll learn the other language, and in working it through for yourself you&rsquo;ll also see how the algorithm takes shape and works.</p></li>
+ <li>
+  <p>My workflow for posting a new solution is this: Once I have something to submit, I add a &ldquo;Stub&rdquo; Racket implementation. I edit the whole Task page (because that is all that is available to edit at that point), find whatever is after Racket alphabetically, and insert boilerplate code. I check this template code as a &ldquo;minor edit&rdquo; described as &ldquo;Racket stub added &mdash; implementation later&rdquo;. This then allows is for me to be able to edit the Racket section in isolation and keeps the rest of the task (everyone else&rsquo;s hard work) safe from any, er, silliness. <code>{{header|Racket}}
+&lt;lang racket&gt;
+&lt;/lang racket&gt;
+{{out}}
+&lt;pre&gt;
+&lt;/pre&gt;</code></p></li>
+ <li>
+  <p>I have started to make it my habit (especially when showcasing one or two functions) to use <code>#lang racket/base</code> and <code>require</code>ing the salient individual functions.</p></li>
+ <li>
+  <p>It is often not appropriate to fully document the functionality of Racket functions in the RC task implementation. You can, however, point to the canonical documentation on the Racket website. So I also include a link to <code>http://docs.racket-lang.org/reference/...</code> when I need to.</p></li>
+ <li>
+  <p>The RC administrators have switched off image uploading (or I, at least, cannot find out how). Even though Racket can produce images as results, think hard about whether you want the hassle of trying to present images to the reader. If you find out a method that works for you <em>please tell me</em>, I&rsquo;d love to know. I suppose you could also extend all of the above to coding in another language &mdash; if you really have to.</p></li></ul>
+
+<h2 id="improve-whats-already-there">Improve What&rsquo;s Already There</h2>
+
+<p> Rosetta Code is a wiki.</p>
+
+<p>It is open to anyone to edit.</p>
+
+<p> Don&rsquo;t be afraid to. If you see something that could be implemented, styled or documented better &mdash; work to improve it.</p>
+
+<p> Once you have your improved entry together, show it to the author of the original post. Besides being courteous, he or she might have an opinion on what else you might do. Often, there is something bugging them, and you are scratching an itch of theirs!</p>
+
+<p> I have never had anyone react badly to a change request. Everyone appreciates that you have made an effort to produce your change (and that you&rsquo;re not just standing in the aisles complaining that it doesn&rsquo;t look right).</p>
+
+<p> Teach Through It  &mdash;</p>
+
+<p>If there is an aspect of Racket, algorithm or other &ldquo;CS task&rdquo; (in the broadest sense) that you want to share: see to it that it is adequately illustrated on Rosetta Code. If it is not, then create a task to demonstrate it. Not only will you show how something is done properly (i.e. in Racket), but you will also be inviting others to implement the task in their own favourite languages.</p>
+
+<h2 id="the-competition">The Competition</h2>
+
+<p> Back at <em>200</em>, Racket was the 54th most popular language. But for some time now, it has been sitting at #2 in the popularity1 ranking for quite some time now. For a while, it has been placed a long way behind TCL, and being hotly pursued by Python (never more than 10 tasks behind).</p>
+
+<p> One of <em>my</em> motivators is that having seen Racket get to #2 &mdash; I don&rsquo;t want to see it any lower in the rankings. I&rsquo;m sure there&rsquo;s something in the Python lot that wants to overtake us! This healthy competition has kept both of the communities pushing ahead with implementing the tasks.</p>
+
+<p> The <a href="https://github.com/plt/racket/wiki/Intro-Projects"><em>Intro Projects</em></a> page of the racket wiki has &ldquo;Implement a Rosetta code task&rdquo; as a &ldquo;Small Project&rdquo;. I think of it as slightly more of a &ldquo;Recreational&rdquo; project (this at least justifies to myself the element of competition that has crept in.)</p>
+
+<p> The Rallying Call  &mdash;</p>
+
+<p> or <strong>&ldquo;What Specifically Would Help Racket on Rosetta Code?&rdquo;</strong></p>
+
+<p> RC is a good way to present Racket as a most general programming language. So as a tool for Racket advocacy, as well as for the purposes of RC, we need to:</p>
+
+<ul>
+ <li>
+  <p><strong>Implement more tasks in Racket to keep a high profile:</strong> 800 tasks, #2 in the popularity stakes. This keeps Racket visible; and proves it capable of (almost) anything. I would <em>so</em> love to give TCL a run for its money &mdash; so there&rsquo;s 41 tasks to go before we can even think of taking a breather!</p></li>
+ <li>
+  <p>We have implemented 800 tasks in Racket. The quote above says there are 892 (758+134) tasks in total. That means that there are 92 more tasks to get to grips with.</p></li>
+ <li>
+  <p><strong>Suggest new tasks:</strong> Especially tasks that will demonstrate the latest shiny feature of the latest shiny versions of Racket!</p></li></ul>
+
+<p> Personally I can&rsquo;t believe that there are less than 900 things that you would want to do with a programming language. If you think of a task, add it. Even impossible tasks provoke thought and imagination &mdash; and interesting solutions!</p>
+
+<ul>
+ <li>
+  <p><strong>Improve those tasks that have been implemented in Racket:</strong> We want to maintain a body of good, useful code, to allow us to teach and demonstrate Racket. There are a number of reasons why existent tasks need revisiting:</p></li>
+ <li>
+  <p>Racket technology has moved on (and moves on) apace. What was unavailable and experimental even 18 months ago is now available and reliable. This new technology needs to be demonstrated.</p></li>
+ <li>
+  <p>Code that is even older is very &ldquo;schemey&rdquo; (I have in some cases simply copied the Scheme implementation and stuck a <code>#lang racket</code> tag on the front). Although compatible, Racket has moved quite a way on from Scheme.</p></li>
+ <li>
+  <p>Some implementors (not a million miles from where I&rsquo;m standing, for example), were not as <em>au fait</em> with the language and/or style guide as they might be now. It&rsquo;s a housekeeping job, I know, but giving the examples as consistent a style as possible will help satisfy this aspiration from the Racket Style Guide:</p></li></ul>
+
+<p> &ldquo;Doing so will help us … and our users, who use the open source code … as an implicit guide to Racket programming.&rdquo;</p>
+
+<ul>
+ <li>
+  <p><strong>Document tasks:</strong> see my hint about documentation and links above for what I now think is good practice. If some code seems utterly heiroglyphic, see if it can be made clearer. Remember this is Racket, not APL.</p></li>
+ <li>
+  <p>General tidying up never goes amiss.</p></li>
+ <li>
+  <p>RC is run by someone outside the Racket community. At the bottom of the &ldquo;Small Projects&rdquo; section of the Racket wiki is a suggestion to collect the RC examples into something &ldquo;owned&rdquo; by the Racket community. I&rsquo;ve been thinking about this… if anyone has suggestions, let me know. There are limits to what we can put on RC (defined by the purpose of RC itself). It would be good to remove those limits by implementing something along RC&rsquo;s lines oursleves.</p></li>
+ <li>
+  <p>Very specifically… anyone with a joystick, drivers and some spare time - please could you do &ldquo;Joystick Position&rdquo;. The possession of a joystick puts you in a position of <em>great power</em> with respect to that task. Exercise your responsibility. And Finally…: Well done everyone again! Keep up the good work. And see you at 1000!</p></li>
+ <li>
+  <p>You can track Racket (and everyone else&rsquo;s) progress on the <a href="http://timb.net/popular-languages.html">Popular Programming Languages</a> report, which is updated hourly or so.<a href="#g76184-footnote-1-return">↩</a></p></li>
+ <li>
+  <p>Rosetta Code&rsquo;s Front Page<a href="#g76184-footnote-2-return">↩</a></p></li>
+ <li>
+  <p>The style guide is actually the chapter called &ldquo;How to Program Racket&rdquo; in the main Racket documentation. One of the RC &ldquo;style&rdquo; rules is that code should be 80 characters wide. Personally, I ignore that in favour of Racket&rsquo;s more generous 102. Sometimes someone on RC objects. Sometimes I then care enough to put the required newlines in.<a href="#g76184-footnote-3-return">↩</a></p></li>
+ <li>
+  <p>Even if there are example results don&rsquo;t necessarily trust them. e.g. in <a href="http://rosettacode.org/wiki/The_ISAAC_Cipher">The ISAAC Cipher</a>, the cypher engine isn&rsquo;t reset between test runs in the Pascal implementation. That error is propagated through all other implementations. Mine (Racket) conforms to show that I&rsquo;m doing the same thing as everyone else; but I also do what I think to be a more correct test later.<a href="#g76184-footnote-4-return">↩</a></p></li>
+ <li>
+  <p>Hold on a mo… this is meant to be a pedagogical exercise, not a competition<a href="#g76184-footnote-5-return">↩</a></p></li></ul>
+<!-- more-->
+
+<hr />
+
+<p>That&rsquo;s good! But, it&rsquo;s also interesting what real projects use Racket. Is this information available?</p>
+
+<p>— <em>Роман Николаевич, 24 November 2014</em></p>
+
+<hr />
+
+<p>Hi Роман. You can look at the videos from the third and fourth RacketCons which have several talks from industrial users of Racket: https://www.youtube.com/user/racketlang/playlists</p>
+
+<p>— <em>Racket Lang, 24 November 2014</em></p>
+
+<hr />
+
+<p>Congrats guys.</p>
+
+<p>— <em>Paddy3118, 16 December 2014</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2014/12/the-racket-package-system-and-planet.html">The Racket package system and PLaneT</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2014/11/racket-v611.html">Racket v6.1.1</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

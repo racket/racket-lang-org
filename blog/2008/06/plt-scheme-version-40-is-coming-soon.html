@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>PLT Scheme version 4.0 is Coming Soon</title>
+    <meta name="description" content="_posted by Matthew Flatt_  PLT Scheme is now 13 years old. The initial version was little more than glue code between a few open-source libraries, which seemed to offer the quickest solution to our modest goals. Modest success leads to bigger goals, howev...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2008/06/plt-scheme-version-40-is-coming-soon.html">
+    <link rel="next" href="/2008/02/dirty-looking-hygiene.html">
+    <link rel="prev" href="/2008/06/the-tour-in-video.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Jun 2008</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>PLT Scheme version 4.0 is Coming Soon</h1>
+  </header>
+
+<p><em>posted by Matthew Flatt</em></p>
+
+<p>PLT Scheme is now 13 years old. The initial version was little more than glue code between a few open-source libraries, which seemed to offer the quickest solution to our modest goals. Modest success leads to bigger goals, however, and then continued success leads to ever more ambitious goals. Before you know it, a mass of users, co-developers, libraries, and documentation rely on design decisions that were made for a much smaller project years before.</p>
+
+<p>Naturally, many of those early design decisions turn out to be a poor fit for the project&rsquo;s eventual role. Starting from scratch isn&rsquo;t usually practical, so you gradually adjust the infrastructure to meet new needs. That was precisely the story for the version 300 series of releases for PLT Scheme. The biggest gap between our original and current goals was in run-time performance, so we replaced bytecode interpretation with a just-in-time native-code compiler, and we replaced a memory manager based on &ldquo;conservative&rdquo; estimates of pointer usage with one that uses precise information.</p>
+
+<p>Performance improves a bit more with version 4.0, but mostly we&rsquo;ve moved on to a bigger mismatch between the original and current goals: the way that PLT Scheme presents itself to users. PLT Scheme was originally conceived as R5RS Scheme with some extensions to make it practical, and with useful tools (notably an IDE) and libraries (notably a GUI library) built on that core. Our documentation and web pages reflected that architecture - which now seems completely upside-down.</p>
+
+<p>Version 4.0 is a fresh start in the way that we present PLT Scheme. It&rsquo;s a new language. PLT Scheme is a dialect of Scheme, certainly, but it&rsquo;s not merely a superset of R5RS, R6RS, or other standards, and those standards are not really the best place to start understanding PLT Scheme. At the same time, the unique extensibility features of the PLT Scheme language and tools allow them to support other languages easily, including R5RS (though a new <code>plt-r5rs</code> executable), R6RS, and more.</p>
+
+<p>Improvements to the PLT Scheme language include better syntax for modules, better support for optional and keyword function arguments, more expressive syntax for structure types, streamlined hash-table operations, new syntax for list comprehensions and iterations, a more complete and consistent set of list and string operations, and reduced dependence on mutable pairs. To current users of PLT Scheme, these changes will seem like the big ones behind version 4.0, but they&rsquo;re small compared to the overall re-organization and the accompanying documentation effort.</p>
+
+<p>We wrote hundreds of pages of new documentation, including much more tutorial and overview information. We ported hundreds of pages of existing documents to new a system that produces cleaner, better organized, more consistent output. We will replace the old tangle of web pages (that try to explain a confusing federation of tools) with a simple page about &ldquo;PLT Scheme.&rdquo; We have even streamlined the command-line flags for the main virtual machine.</p>
+
+<p>The development of PLT Scheme version 4.0 took about one year of hard work. In retrospect, that doesn&rsquo;t sound too bad, considering the scale of the existing code base, the number of things that we improved, and the total size of the documentation (about 2000 pages in PDF form). Still, you can imagine how happy we are to arrive at a stable release, and we hope that the improvements in PLT Scheme version 4.0 work as well for everyone else as they do for us.</p>
+
+<p>For a preview, see <a href="http://pre.plt-scheme.org/">http://pre.plt-scheme.org/</a>. The final version 4.0 release is just days away.</p>
+<!-- more-->
+
+<hr />
+
+<p>Outstanding, I can hardly wait!</p>
+
+<p>JT http://www.FireMe.To/Udi</p>
+
+<p>— <em>Brad, 4 June 2008</em></p>
+
+<hr />
+
+<p>I want it <em>now</em>!</p>
+
+<p>— <em>Daniel, 4 June 2008</em></p>
+
+<hr />
+
+<p>daniel: the best I can do for now is point you to the pre-releases builds online. But it should be soon!</p>
+
+<p>http://pre.plt-scheme.org/installers/</p>
+
+<p>— <em>Robby, 4 June 2008</em></p>
+
+<hr />
+
+<p>Very exciting! The new documentation especially helped me get started with PLT Scheme.</p>
+
+<p>Thank you!</p>
+
+<p>— <em>David Vanderson, 4 June 2008</em></p>
+
+<hr />
+
+<p>Congrats, all! The re-emergence of Scheme in programming courses is in large part thanks to your efforts. Thank you!</p>
+
+<p>— <em>Duane Johnson, 4 June 2008</em></p>
+
+<hr />
+
+<p>Thanks,</p>
+
+<p>I was waiting for something fresh, I&rsquo;ve found it.</p>
+
+<p>— <em>kib, 4 June 2008</em></p>
+
+<hr />
+
+<p>I already find DrScheme good enough for my needs. All that I wish to see is a good tutorial (like the one the Python guys have put together).</p>
+
+<p>The lack of a good &ldquo;official&rdquo; tutorial, coupled with the difficulty one encounters reading online versions of printed books (SICP), is keeping me from using Scheme as a primary development language (I&rsquo;m a hobbyist programmer, and barely have enough resources to buy books etc.)</p>
+
+<p>— <em>General Maximus, 8 June 2008</em></p>
+
+<hr />
+
+<p>General Maximus: have you had a change to look at the v4.0 tutorials yet? They&rsquo;re at the link in the post (and soon will be on the main website).</p>
+
+<p>— <em>Robby, 8 June 2008</em></p>
+
+<hr />
+
+<p>You mean this one, right? : http://pre.plt-scheme.org/docs/html/guide/index.html</p>
+
+<p>I didn&rsquo;t look at it before. Looks pretty nice. Since I don&rsquo;t know much about Scheme, can you tell me how it is as an introductory tutorial?</p>
+
+<p>— <em>General Maximus, 8 June 2008</em></p>
+
+<hr />
+
+<p>That one is the one that covers the most ground and definitely should be useful, but if you&rsquo;re new to Scheme I would start with the two much shorter tutorials (below) and move to that one as you need more specific information for some particular task.</p>
+
+<p>http://pre.plt-scheme.org/docs/html/quick/</p>
+
+<p>http://pre.plt-scheme.org/docs/html/more/</p>
+
+<p>— <em>Robby, 8 June 2008</em></p>
+
+<hr />
+
+<p>I only see the 3.99.0.26 pre-release up on http://pre.plt-scheme.org/installers/.</p>
+
+<p>Are the 4.0 pre-releases up somewhere?</p>
+
+<p>— <em>databus, 8 June 2008</em></p>
+
+<hr />
+
+<p>3.99.x is the pre-release for 4.0.</p>
+
+<p>— <em>Robby, 8 June 2008</em></p>
+
+<hr />
+
+<p>Great, thanks Robby.</p>
+
+<p>— <em>databus, 8 June 2008</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2008/06/the-tour-in-video.html">The Tour in Video</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2008/02/dirty-looking-hygiene.html">Dirty Looking Hygiene</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

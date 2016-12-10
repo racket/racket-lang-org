@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 6)</title>
+    <meta name="description" content="Racket Blog (page 6)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-6.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>09 Nov 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/11/racket-v52.html'>Racket v5.2</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.2 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> Release Highlights::</p>
+
+<ul>
+ <li>
+  <p>DrRacket comes with an experimental, on-line check syntax tool, although this new tool is disabled default. See below for more information.</p></li>
+ <li>
+  <p>The new <code>db</code> library offers a high-level, functional interface to popular relational database systems, including PostgreSQL, MySQL, and SQLite, as well as other systems via ODBC.</p></li>
+ <li>
+  <p>A new XREPL collection provides convenient commands for a plain racket REPL. It is particularly convenient for people who prefer console-based work and alternative editors. See also the new chapter on command-line tools and other editors at the end of the Racket Guide.</p></li>
+ <li>
+  <p>The <code>plot</code> collection has been reimplemented in Racket. It now offers PDF output, log axes, histograms, and more. Some code that uses <code>plot</code> will still work, and some will need light porting. The <code>plot/compat</code> module offers expedient backward compatibility.</p></li>
+ <li>
+  <p>DrRacket uses more conventional key bindings: <code>C-t</code> creates a new tab, <code>C-w</code> closes the current one, and <code>C-r</code> runs the definitions. On Mac OS X, the Command key is used. See “Defining Custom Shortcuts” in the DrRacket manual for an example that uses the old key bindings.</p></li>
+ <li>
+  <p>The new <code>raco link</code> command registers a directory as a collection, which allows the collection directory to reside outside the “<code>collects</code>” tree and without changing the PLTCOLLECTS environment variable.</p></li>
+ <li>
+  <p>Typed Racket:</p></li>
+ <li>
+  <p>Typed Racket provides static performance debugging support to show which code gets optimized and point out code that does not. Use the “Performance Report” button in DrRacket.</p></li>
+ <li>
+  <p>More intuitive types in printouts in the REPL and in error messages. Use <code>:query-result-type</code> to explore types, or <code>:print-type</code> for a full printout.</p></li>
+ <li>
+  <p>Typed Racket now supports defining function with optional arguments using the same syntax as Racket.</p></li>
+ <li>
+  <p>Redex now supports specifying (and testing and automatically typesetting) judgment forms including type systems and SOS-style operational semantics.</p></li>
+ <li>
+  <p>Fixed several GUI problems, including problems on Ubuntu 11.10 (GTK+ 3) and 64-bit Mac OS X.</p></li>
+ <li>
+  <p>Internal-definition expansion has changed to use <code>let*</code> semantics for sequences that contain no back references. This change removes a performance penalty for using internal definitions instead of <code>let</code> in common cases, and it only changes the meaning of programs that capture continuations in internal definitions. Internal definitions are now considered preferable in style to <code>let</code>.</p></li>
+ <li>
+  <p>Support for <code>begin-for-syntax</code> has been generalized; modules may now define and export both value bindings and syntax bindings (macros) at phase 1 and higher. Due to a bug, phase 1 syntax (or higher) is not available in DrRacket&rsquo;s <code>#lang</code>-based REPL. A simple workaround is to disable debugging in DrRacket (see “no debugging” radio button in detailed language dialog).</p></li></ul>
+
+<p>Additional Items::</p>
+
+<ul>
+ <li>
+  <p>The <code>racket/gui</code> library (and Slideshow) provides more support for multiple-screen displays.</p></li>
+ <li>
+  <p>DrRacket remembers whether an opened file used LF or CRLF line endings, and will continue using the same. When creating a new file, a preference determines how it is saved.</p></li>
+ <li>
+  <p><code>net/url</code> can now follow HTTP redirections.</p></li>
+ <li>
+  <p>The LNCS and JFP class files are no longer distributed with Racket. Instead, they are downloaded on demand.</p></li>
+ <li>
+  <p>The Algol language implementation is now available as a plain language using <code>#lang algol60</code>.</p></li>
+ <li>
+  <p>The Racket-to-C compiler (as accessed via <code>raco ctool</code> or <code>mzc</code>) has been removed; Racket&rsquo;s JIT has long provided better performance, and the FFI provides better access to C libraries.</p></li>
+ <li>
+  <p>Contracts can be applied to exports with the new <code>contract-out</code> form within <code>provide</code>, instead of a separate <code>provide/contract</code> form. (The new <code>contract-out</code> form is implemented as a new kind of “provide pre-transformer”.)</p></li>
+ <li>
+  <p>The <code>date*</code> structure type is an extension of <code>date</code> with <code>nanosecond</code> and <code>time-zone-name</code> fields.</p></li>
+ <li>
+  <p>New looping constructs: <code>for/sum</code> and <code>for/product</code>.</p></li>
+ <li>
+  <p>Direct calls to keyword-accepting functions are now optimized to eliminate the overhead of keywords. In addition, the compiler detects and logs warnings for keyword-argument mismatches.</p></li>
+ <li>
+  <p>The libfit interface is available from <code>plot/deprecated/fit</code>, and will be removed in the near future.</p></li>
+ <li>
+  <p>The Unix installer has been re-done, and it is now more robust.</p></li>
+ <li>
+  <p>The built-in reader and printer support for Honu is removed. (This functionality is re-implemented in Racket.)</p></li></ul>
+
+<p>On-line Check Syntax::  DrRacket now provides an on-line version of the syntax check tool, which means that syntax checking runs automatically while you continue to edit a program. With this tool enabled, its annotations (e.g., binding arrows) and actions (e.g., the renaming refactoring and direct documentation links) are almost always available. We have noticed that on-line syntax checking renders DrRacket unstable on occasion, perhaps because it relies on relatively new support for parallelism. Occurrences of the problem are rare, but they are not rare enough, which is why we have disabled the tool by default. At the same time, current users of the tool find it so valuable that we felt it should be included in the release. We expect to track down the remaining problems and enable the tool by default in near-future release. To enable on-line syntax checking (for <code>#lang</code>-based programs only), click on the red dot in the bottom right of DrRacket&rsquo;s window. To turn it off, click there again.</p></div>
+  <a class="more" href='/2011/11/racket-v52.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>18 Oct 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/10/on-eval-in-dynamic-languages-generally-and-in-racket-specifically.html'>On <code>eval</code> in dynamic languages generally and in Racket specifically</a></h1>
+  <div class="truncate">
+<p><em>posted by Matthew Flatt</em></p>
+
+<p>The <code>eval</code> function is at the heart of a dynamic language, and it strikes many newcomers as an amazingly powerful tool. At the same time, experienced programmers avoid <code>eval</code>, because unnecessary use creates trouble. It&rsquo;s not easy to explain why <code>eval</code> should be avoided or when it"s appropriate to use <code>eval</code>, but I&rsquo;ll take another stab at it here.</p>
+
+<h2 id="what-is-eval">What is <code>eval</code>?</h2>
+
+<p>Consider the following &ldquo;program&rdquo; in English prose:</p>
+
+<blockquote>
+ <p>Assume that your favorite color is red. Now imagine a balloon that is  your favorite color. Paint a canvas the same color as the balloon.</p></blockquote>
+
+<p>As English goes, that&rsquo;s a fairly clear program with a fairly well-defined result. When I follow those instructions, at least, I will always produce a red canvas (assuming that I have a canvas and some red paint, but a potential lack of art supplies is not the point here).</p>
+
+<p>I would come up with a red canvas even if I read the instructions when surrounded by people who speak only Chinese, obviously, since I&rsquo;m the one reading the instructions. Furthermore, it would be straightforward to translate the program to Chinese, and then a person who reads Chinese would produce a red canvas.</p>
+
+<p>A translator might even take the liberty of simplifying the program to just</p>
+
+<blockquote>
+ <p>Paint a canvas red.</p></blockquote>
+
+<p>The translation loses some of the poetry of the original, but the result is the same.</p>
+
+<p>In Racket terms, the paragraph corresponds to a module. It can be compiled (i.e., translated) and optimized (i.e., simplified). A program can be made up of multiple modules that are written in different languages, but since each module can be reliably translated, they can all be compiled into some common language to run the program.</p>
+
+<p>Here&rsquo;s a different program:</p>
+
+<blockquote>
+ <p>Tell the person next to you &ldquo;Assume that your favorite color is red.&rdquo; Tell the person &ldquo;Now, imagine a balloon that is your favorite color.&rdquo; Tell the person &ldquo;Paint canvas the same color as the balloon.&rdquo;</p></blockquote>
+
+<p>Getting a red canvas back may be a little trickier in this case. If the person next to me speaks only Chinese, then my program may fail with a message-not-understood error.</p>
+
+<p>If I want to translate the program to Chinese, then it&rsquo;s not clear whether the parts in quotes should be translated. Maybe I mean for a person who can read Chinese but only sound out English to run the program when surrounded by English speakers, or maybe I mean for a Chinese person to run the program when surrounded by Chinese people. Either way, I have to be a lot more specific to a translator. For more complex programs, the instructions to the translator can become complex and fragile.</p>
+
+<p>Finally, a translator probably won&rsquo;t feel comfortable simplifying the program to</p>
+
+<blockquote>
+ <p>Tell the person next to you &ldquo;Paint a canvas red.&rdquo;</p></blockquote>
+
+<p>because there could be all sorts of environmental conditions that make the result different&mdash;such as people who are willing to paint but unwilling to accept assumptions about their favorite colors.</p>
+
+<p>The paragraph with &ldquo;tell the person&hellip;&rdquo; is a program that uses <code>eval</code>. It can&rsquo;t be compiled and optimized as well as the earlier paragraph, and the language context in which it is run may change the result. The quotes around sentences correspond to the quote in front of an expression passed to <code>eval</code> in Racket; there&rsquo;s no particular reason that the language for <code>eval</code> will match the language of the program that has the quoted text. The issues become even more complex if you try to implement different parts of the program in different languages.</p>
+
+<p>If the analogy to multiple spoken languages seems strange&mdash;maybe your language is Javascript, period&mdash;the problem of translation to another language is really a proxy for program understanding. There&rsquo;s a direct connection to performance and optimization (i.e., translation to efficient machine code), but using <code>eval</code> also makes a program more difficult to understand for the same reasons that it makes the program more difficult to translate. For example, a reader of your program may not be able to tell whether &ldquo;assume your favorite color is red&rdquo; is just a rhetorical device to get to a red canvas or whether some new instructions will arrive that will ask for your favorite color.</p>
+
+<h2 id="when-is-eval-good">When is <code>eval</code> Good?</h2>
+
+<p>The program with &ldquo;tell the person next to you&rdquo; above uses <code>eval</code> in a bad way. The task could just as well be performed by the person reading the instructions, instead of getting another nearby person involved.</p>
+
+<p>Some other uses <code>eval</code> are both good and necessary. For example, consider the following program:</p>
+
+<blockquote>
+ <p>Ask the construction manager for instructions. Walk to the building  site and convey those instructions to the construction crew.</p></blockquote>
+
+<p>This program uses <code>eval</code> when it conveys instructions to the construction crew, but no quoted forms appear in the program. The absence of quoted code is one sign that <code>eval</code> may be appropriate. Note that the program could work no matter what language the manager and crew speak, although there is an implicit (and sometimes non-trivial) assumption that the manager and crew speak the same language.</p>
+
+<p>Here&rsquo;s another example:</p>
+
+<blockquote>
+ <p>Go outside, and tell each member of the construction crew &ldquo;take a  lunch break, now.&rdquo;</p></blockquote>
+
+<p>There&rsquo;s a quoted program in this case, but it&rsquo;s crucial to ask other people to run the quoted program, instead of just taking the lunch break yourself. That is, <code>eval</code> is really necessary. The implementor of this program takes on the burden of making sure that the instructions are in a suitable language, however, and may need to parameterize the quoted program by an explicit action to translate it to a language understood by the construction crew.</p>
+
+<p>Here&rsquo;s one more reasonable example:</p>
+
+<blockquote>
+ <p>Ask the construction manager for instructions. Follow them.</p></blockquote>
+
+<p>In this case, it&rsquo;s the construction manager&rsquo;s problem to give you instructions in a language that you understand.</p>
+
+<p>Here&rsquo;s a questionable example:</p>
+
+<blockquote>
+ <p>Decide how long to work before lunch, say N hours, and write a note  to yourself to work N hours. Add to the note by telling yourself to  take a lunch break afterward.</p></blockquote>
+
+<p>If you could really write that program without quotes, then it&rsquo;s probably ok. The example is misleading, though, because languages don&rsquo;t usually support</p>
+
+<blockquote>
+ <p>write a note to yourself to work N hours</p></blockquote>
+
+<p>You&rsquo;d have to write instead</p>
+
+<blockquote>
+ <p>write a note to yourself that says &ldquo;work&rdquo; followed by the number N  and then &ldquo;hours&rdquo;</p></blockquote>
+
+<p>and the quote marks are where the problem comes in. If you translate the program to Chinese, then you have to be careful to somehow translate &ldquo;work&rdquo; and &ldquo;hours&rdquo; to Chinese, too.</p>
+
+<p>The point here is not that programs without quoted text are clearly good or that programs with quoted text are clearly bad. The real point is that a programmer has to be especially careful about passing around instructions and using quoted instructions. Using <code>eval</code> means accepting the burden of using instructions will make sense by the time they are delivered. That burdened is best avoided, which is why experienced programmers avoid <code>eval</code>, but some of the examples illustrate cases where the burden is not avoidable or where the actions enabled by <code>eval</code> make the burden worthwhile.</p>
+
+<h2 id="using-eval-in-racket">Using <code>eval</code> in Racket</h2>
+
+<p>In the context of Racket, the multiple-language analogy is relatively accurate, because Racket is about having many programming languages work together and allowing programmers to define ever better languages and language constructs. In Racket, it&rsquo;s especially likely that a library written in one language is used in a context where another language is the default.</p>
+
+<p>Newcomers to Racket sometimes stumble over the fact that</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre> <span class="kn">#lang </span><span class="nn">racket</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">my-x</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/eval.html#(def._((quote._~23~25kernel)._eval))" style="color: inherit">eval</a></span> <span class="o">'</span><span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="ss">my-x</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>or even</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre> <span class="kn">#lang </span><span class="nn">racket</span>
+ <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/eval.html#(def._((quote._~23~25kernel)._eval))" style="color: inherit">eval</a></span> <span class="o">'</span><span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>does not work at all, and yet if the program</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre> <span class="kn">#lang </span><span class="nn">racket</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">my-x</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>is loaded into a read-eval-print loop&mdash;for example, by clicking the &ldquo;Run&rdquo; button in DrRacket and then typing into the lower interactions panel&mdash;then</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/eval.html#(def._((quote._~23~25kernel)._eval))" style="color: inherit">eval</a></span> <span class="o">'</span><span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="ss">my-x</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>works as expected.</p>
+
+<p>DrRacket&rsquo;s interactions window has to use <code>eval</code> in the sense that it reads an expression to evaluate and then passes it on to the interpreter for an answer. More generally, to make various pieces of the environment fit together, DrRacket sets <code>eval</code> globally to use the module&rsquo;s language while evaluating expressions in the interactions window. In Racket terminology, DrRacket sets the <code>current-namespace</code> parameter to the module&rsquo;s namespace when it initializes the interactions window. In contrast, while the module body is being evaluated, <code>eval</code> treats expressions as being in the language that is empty by default, which is why <code>eval</code> during the module evaluation produces a different result from <code>eval</code> during the interactions windows.</p>
+
+<p>You may wonder why DrRacket doesn&rsquo;t initialize the namespace of <code>eval</code> to be the module&rsquo;s namespace from the start, so that in-module uses of <code>eval</code> and the interactions window behave the same. In a program that is implemented by multiple modules, which module&rsquo;s language should be used? In particular, if the language it&rsquo;s always the main module&rsquo;s language, then a module may behave differently on its own than as part of a larger program. In the process of developing Racket and DrRacket, we&rsquo;ve seen many such problems, and so Racket now arranges for the default language to be empty (which is different from any useful language) to help programmers remember that there&rsquo;s a language issue to consider whenever <code>eval</code> is used.</p>
+
+<p>The Racket Guide&rsquo;s chapter 15 covers in more depth the issues and namespace tools of Racket for harnessing the power of <code>eval</code>:</p>
+
+<p> <a href="http://docs.racket-lang.org/guide/reflection.html">http://docs.racket-lang.org/guide/reflection.html</a></p>
+
+<p>Think of <code>eval</code> as a power tool. For some tasks, there&rsquo;s no real substitute, and so we want <code>eval</code> around. At the same time, <code>eval</code> should be used with care. In dynamic languages generally, that means a reluctant and targeted use <code>eval</code>. In Racket specifically, it means knowing the namespace toolbox and being as explicit as possible about the intended context for dynamic evaluation.</p></div>
+  <a class="more" href='/2011/10/on-eval-in-dynamic-languages-generally-and-in-racket-specifically.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>16 Aug 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/08/racket-v513.html'>Racket v5.1.3</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1.3 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a>This is a bugfix release, resolving the DrRacket issue with the contour view. In addition, two tex files with problematic licensing were removed.</p></div>
+  <a class="more" href='/2011/08/racket-v513.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Aug 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/08/racket-v512.html'>Racket v5.1.2</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1.2 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>The download page includes 64-bit installers for Mac OS X, Windows, and two Debian flavors. Racket now supports OS X Lion.</p></li>
+ <li>
+  <p>Racket now includes a new <code>racket/place</code> library to support parallelism, complementing <code>racket/future</code>. Racket&rsquo;s parallel build process is now based on places instead of multiple OS processes.Places support share-nothing parallelism and message-passing communication. Compared to futures, places are heavyweight, but they have a simpler performance model.</p></li>
+ <li>
+  <p>The syntax-certificate system has been replaced by a syntax-taint system. Both certificates and taints were designed to protect otherwise inaccessible bindings from abuse when they appear in macro expansions. Taints are simpler and lighter, and the switch closes known holes in the certificate system. Macros that are not implemented with <code>syntax-rules</code> or <code>define-syntax-rule</code>, however, must explicitly use <code>syntax-protect</code> to protect their expansions from abuse.</p></li>
+ <li>
+  <p>The <code>net/url</code> library supports HTTPS connections, but beware that by default all sites are accepted (equivalent to ignoring a browser&rsquo;s warnings about untrusted certificates).</p></li>
+ <li>
+  <p>Error messages in the student languages use a simplified vocabulary and consistent phrasings. If you maintain curriculum material or teachpacks then please consider updating. See the “Error Message Composition Guidelines” section in the documentation for details.</p></li>
+ <li>
+  <p>Typed Racket: almost all core Racket data structures and operations are now accessible in Typed Racket (most of this work is due to prolific contributor Eric Dobson). The performance of the typechecker has been significantly improved.</p></li>
+ <li>
+  <p>The <code>scriblib/bibtex</code> library supports BibTeX-formatted citation databases in Scribble documents. BibTeX can be tricky to parse, so please report failed entries as bug reports.</p></li>
+ <li>
+  <p>The <code>for</code> forms now support an <code>#:unless</code> clause, and a nonnegative integer can be used as a sequence. The new <code>compose1</code> function creates single-valued composition functions. The <code>racket/function</code> library now provides <code>identity</code>, <code>thunk</code>, and <code>thunk*</code>.</p></li>
+ <li>
+  <p>The license has been clarified: we now use LGPLv2.1 uniformly. (The license file used to specify LGPLv2, contrary to the download pages.)</p></li></ul></div>
+  <a class="more" href='/2011/08/racket-v512.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Jul 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/07/racketcon-recap.html'>RacketCon Recap</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>We held <a href="http://con.racket-lang.org/">RacketCon</a> here at <a href="http://www.ccis.neu.edu/2011/">Northeastern</a> over the past weekend, and it was a great time! Matthew Flatt consulted his magic 8-ball about the future of Racket (it involves Hawaiian shirts); Matthias Felleisen announced the upcoming Realm of Racket book; Robby Findler demoed DrRacket with online syntax checking; Ryan Culpepper taught us how to make Rackety libraries; Prabhakar Ragde explained how the University of Waterloo teaches Racket and Program by Design to 1500 students a year (and how to embed math into Scribble documents).</p>
+
+<p>Danny Yoo has already <a href="http://blog.hashcollision.org/?p=162">blogged</a> about his talk about his <a href="http://hashcollision.org/whalesong/">Whalesong</a> Racket-&gt;JavaScript compiler. Hopefully other people will write more about some of the individual talks; I&rsquo;ll update this post to link to any that I see.</p>
+
+<p>As promised, the talks were videotaped by Jeff Dlouhy of the <a href="http://acm.ccs.neu.edu/">NUACM</a>; the videos are in post-production and should be up within a few weeks. We&rsquo;ll announce their availability on this blog. Slides from the individual talks will be up on the <a href="http://con.racket-lang.org/2011/">RacketCon webpage</a> soon.</p></div>
+  <a class="more" href='/2011/07/racketcon-recap.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Jun 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/06/come-to-racketcon.html'>Come to RacketCon!</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>Calling All Racketeers!</p>
+
+<p>Join us at RacketCon, 23 &amp; 24 July 2011. <a href="http://con.racket-lang.org/">http://con.racket-lang.org/</a></p>
+
+<p>The schedule for RacketCon is now available, and includes presentations by key members of the Racket team, including Matthew Flatt on the future of Racket and Matthias Felleisen on the Program By Design curriculum, as well as tutorials on building web applications and accessing low-level libraries.</p>
+
+<p>The meeting will take place at Northeastern University in Boston, MA. It will be an opportunity for developers, researchers, and educators using Racket, DrRacket, Program By Design, and related technologies to come together to share plans, ideas, and enthusiasm. To make it accessible, we will not charge any registration fees; we&rsquo;ll also serve you breakfast and lunch.</p>
+
+<p>We&rsquo;re excited about RacketCon, and hope you&rsquo;ll join us there. To register for RacketCon, please send an email with your name and affiliation to <a href="mailto:racketcon@racket-lang.org">racketcon@racket-lang.org</a>.</p>
+
+<p>Additional information, including registration, transportation and hotel information, can be found on the web page: <a href="http://con.racket-lang.org">http://con.racket-lang.org</a></p></div>
+  <a class="more" href='/2011/06/come-to-racketcon.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>26 May 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/05/multi-file-code-coverage-viewing-tool.html'>Multi-file code coverage viewing tool</a></h1>
+  <div class="truncate">
+<p><em>posted by John Clements</em></p>
+
+<p>I&rsquo;m very pleased to announce the availability of a multi-file code coverage viewer, written by Jonathan Walsh.</p>
+
+<p>Torn between separating your test cases into another file and actually seeing the coverage? Well, go ahead and pull them apart, because the multi-file coverage tool displays coverage information for the files required by the present one, including both percentage covered (on a line-by-line basis) and optionally a list of uncovered lines (no more inching through your code, looking for the red highlighting.</p>
+
+<p><a href="http://3.bp.blogspot.com/-d4j23yei4rc/Td6l0wv3UCI/AAAAAAAAAF8/ptD2u9KwevE/s1600/coverage-button.png"></a> Back End:</p>
+
+<p>One reason I expect this tool to be long-term robust is that it makes absolutely no changes to the back-end; that is, it just uses the existing code coverage framework. The only thing going on here is that the tool provides a way to store, load, and display this information. This means that the tool displays coverage for un-compiled files only. We thought about fiddling with this, but finally decided that the existing behavior was probably about as useful as anything else we&rsquo;d come up with, and a lot more robust.</p>
+
+<p>URL for docs:</p>
+
+<p><a href="http://planet.racket-lang.org/package-source/jowalsh/code-coverage.plt/1/3/planet-docs/code-coverage/index.html">http://planet.racket-lang.org/package-source/jowalsh/code-coverage.plt/1/3/planet-docs/code-coverage/index.html</a></p>
+
+<p>As you might expect, it&rsquo;s a one-line install:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">jowalsh/code-coverage</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Please let us know about bugs you discover!</p></div>
+  <a class="more" href='/2011/05/multi-file-code-coverage-viewing-tool.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>26 May 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/05/racket-on-floss-weekly.html'>Racket on FLOSS Weekly</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>Our own <a href="http://www.cs.utah.edu/~mflatt/">Matthew Flatt</a> was interviewed about Racket <a href="http://twit.tv/floss167">on FLOSS Weekly</a>. Also available on <a href="http://www.youtube.com/watch?v=vJGV7HaTdbg">YouTube</a>.</p></div>
+  <a class="more" href='/2011/05/racket-on-floss-weekly.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>30 Apr 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/04/racket-v511.html'>Racket v5.1.1</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>The new <code>racket/stream</code> library provides <code>stream-first</code>, <code>stream-rest</code>, a lazy <code>stream-cons</code>, and so on. Streams are a subtype of sequences, so they work in <code>for</code> forms. Some sequence generators, such as <code>in-range</code>, now produce streams. A <code>racket/sequence</code> library replaces the old <code>racket/stream</code> library.</p></li>
+ <li>
+  <p>The new <code>racket/syntax</code> library contains facilities useful for writing macros. The new <code>syntax/srcloc</code> and <code>syntax/location</code> libraries provide support for manipulating source locations.</p></li>
+ <li>
+  <p>The <code>racket/gui</code> library now supports multi-column list boxes and scrolling panels.</p></li>
+ <li>
+  <p>The new <code>ffi/file</code> library is useful for writing foreign library bindings that cooperate with Racket&rsquo;s security guard mechanism.</p></li>
+ <li>
+  <p>Generators from the <code>racket/generator</code> library can now have formal arguments that are used when the generator is fired up.</p></li>
+ <li>
+  <p>Single-precision floating-point support is now enabled by default. Single-precision floats print differently from their default double-precision counterparts, new primitives convert between the two precisions, and new reader syntax supports single-precision literals.</p></li>
+ <li>
+  <p>JIT improvements include a small change to aid x86 branch prediction on function-call returns, which can speed up some programs significantly.</p></li>
+ <li>
+  <p>Typed Racket:</p></li>
+ <li>
+  <p>The numeric tower has been entirely overhauled. TR programs can now use more precise types than before, and check more numeric properties, such as sign or range properties.</p></li>
+ <li>
+  <p>Fixnum optimizations have been improved and should apply more broadly.</p></li>
+ <li>
+  <p>The performance of the typechecker has been improved. In particular, dispatch on large union types should typecheck much faster than before.</p></li>
+ <li>
+  <p>The Stepper can now step through Lazy Racket programs.</p></li>
+ <li>
+  <p>The <code>racket/future</code> library includes <code>fsemaphore</code> values, the <code>future</code> primitive no longer freezes futures (so a future can spawn new futures), and <code>future</code> log messages are more informative.</p></li>
+ <li>
+  <p>PLaneT development links are now version-specific.</p></li>
+ <li>
+  <p>The <code>2htdp/image</code> library now includes <code>overlay/align</code>, <code>underlay/align</code>, <code>overlay/align/offset</code> and <code>underlay/align/offset</code>.</p></li>
+ <li>
+  <p>The network protocol for universes in <code>2htdp/universe</code> has changed, so that v5.1.1 is incompatible with earlier versions.</p></li>
+ <li>
+  <p>The &ldquo;DrScheme&rdquo; application (which simply ran DrRacket in the last few releases) has been removed. The &ldquo;MrEd&rdquo; GUI executables for Windows and Mac OS X have also been removed, although the &ldquo;mred&rdquo; console executable remains for Unix and Mac OS X to support old scripts.</p></li></ul></div>
+  <a class="more" href='/2011/04/racket-v511.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>04 Apr 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/04/writing-syntax-case-macros.html'>Writing <code>syntax-case</code> Macros</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Disclaimer: This is not really a tutorial on macros, it&rsquo;s more of a quick introduction to using Racket&rsquo;s <code>syntax-case</code>-based macros for people who are familiar with symbolic macros and miss their “simplicity”. It&rsquo;s also not comprehensive or thorough or complete, it&rsquo;s just intended to provide a rough quick overview of how to write macros. It was originally posted on comp.lang.scheme in a thread called “Idiot&rsquo;s guide to Scheme macros”, but I avoided that title here, since it&rsquo;s not a general purpose guide. (Also, it&rsquo;s yet another attempt to dispel the irrational “macrophobia” some people have when it gets to hygienic macros, leading them back to using <code>defmacro</code> with all its problems.)</p>
+
+<p>The main idea with Racket&rsquo;s macro system (and with other <code>syntax-case</code> systems) is that macros are syntax-to-syntax functions, just like the case of <code>defmacro</code>, except that instead of raw S-expressions you&rsquo;re dealing with syntax objects. This becomes very noticeable when identifiers are handled: instead of dealing with plain symbols, you&rsquo;re dealing with these syntax values (called “identifiers” in this case) that are essentially a symbol and <em>some opaque information</em> that represents the lexical scope for its source. In several <code>syntax-case</code> systems this is the only difference from <code>defmacro</code> macros, but in the Racket case this applies to everything — identifiers, numbers, other immediate constants, and even function applications, etc — they are all the same S-expression values that you&rsquo;re used to, except wrapped with additional information. Another thing that is unique to Racket is the extra information: in addition to the opaque lexical context, there is also source information and arbitrary properties (there are also certificates, but that&rsquo;s ignorable for this text).</p>
+
+<p>With this in mind, explaining the rest is not too difficult:</p>
+
+<ul>
+ <li>
+  <p><code>(syntax-source stx)</code>, <code>(syntax-position stx)</code>, <code>(syntax-line stx)</code>, <code>(syntax-column stx)</code> — retrieve parts of the source location information.</p></li>
+ <li>
+  <p><code>(syntax-e stx)</code> — takes a syntax value and returns the value it “wraps”. For example, if <code>stx</code> is an identifier you&rsquo;d get a symbol, and if it&rsquo;s a number you&rsquo;d get the number. If it&rsquo;s a simple parenthesized form, you&rsquo;d get a list of syntax values for the subforms. Note that the list can be improper, with the last element being a syntax object that contains a proper list. (But the list will actually be improper if the original syntax was a dotted list.)</p></li>
+ <li>
+  <p><code>(syntax-&gt;datum stx)</code> — takes a syntax value and returns the plain S-expression that it holds. This is done by recursive uses of <code>syntax-e</code>. (It would be a simple definition that does what you&rsquo;d think it should do.)</p></li>
+ <li>
+  <p><code>(syntax-&gt;list stx)</code> — sometimes you want to pull out the list of syntax values from a given parenthesized syntax, but <code>syntax-e</code> does too little (can still return an improper list) and <code>syntax-&gt;datum</code> does too much (gives you back raw S-expressions). <code>syntax-&gt;list</code> is a utility function that uses <code>syntax-e</code> as many times as needed to get back a proper list of syntax values. If that&rsquo;s not possible (if the input syntax was not a proper list), it returns <code>#f</code>, so it serves as a predicate too.</p></li>
+ <li>
+  <p><code>(syntax-property stx prop)</code> — returns the given property value from stx, if any, and <code>#f</code> if none. For example, try</p></li></ul>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxprops.html#(def._((quote._~23~25kernel)._syntax-property))" style="color: inherit">syntax-property</a></span> <span class="o">#'</span><span class="p">[</span><span class="n">foo</span><span class="p">]</span> <span class="o">'</span><span class="ss">paren-shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>(The <code>#'</code> is similar to a quote, but for syntax values — I&rsquo;ll get to that later on.)</p>
+
+<ul>
+ <li>
+  <p>Note that there is <em>no</em> accessor for the opaque lexical scope, and as you&rsquo;ll see next, you don&rsquo;t need one.</p></li>
+ <li>
+  <p>To create a piece of syntax you use <code>datum-&gt;syntax</code>, and you give it an S-expression which will be the “contents” of the resulting syntax object. (The input can contain syntax values, which are left as is.) But when you do that you need to give it the other bits — including the lexical context thing, which you have no access to. The way that&rsquo;s done is:</p></li></ul>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">context-stx</span> <span class="n">input-sexpr</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+
+<p>This returns a syntax value that wraps the <code>input-sexpr</code> value, using the lexical scope from <code>context-stx</code>. A common way to “break hygiene” and create a binding that is visible to the macro user&rsquo;s code is:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">stx</span> <span class="o">'</span><span class="ss">foo</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>where <code>stx</code> is some syntax value that you get from the user input to the macro. It returns a <code>foo</code> identifier that has the same lexical context information as <code>stx</code>, so it&rsquo;s as if it came from there.</p>
+
+<p>Note that there is actually another optional argument that specifies the source (either using another syntax object, or as an explicit list), and another for copying the properties from — so an alternative to the above would be:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">stx</span> <span class="o">'</span><span class="ss">foo</span> <span class="n">stx</span> <span class="n">stx</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>which also makes the source information and the properties be the same as those of <code>stx</code> (for example, this can matter in case of syntax errors).</p>
+
+<ul>
+ <li>
+  <p>There is also <code>(quote-syntax blah)</code> which creates a quoted syntax, with its lexical source from the place it appears.</p></li>
+ <li>
+  <p>Finally, <code>define-syntax</code> does the magic of tying a name with a transformer function.</p></li></ul>
+
+<p>And that&rsquo;s almost everything that you need in order to write hygienic (and non-hygienic) macros. Very inconveniently.</p>
+
+<p>For example, here&rsquo;s a simple <code>while</code> macro (use this in a file that starts with <code>#lang racket</code>):</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">subs</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">stx</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span>
+   <span class="n">stx</span>
+   <span class="o">`</span><span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="ss">loop</span> <span class="p">()</span>
+      <span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="o">,</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="n">subs</span><span class="p">)</span>
+        <span class="o">,@</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cddr))" style="color: inherit">cddr</a></span> <span class="n">subs</span><span class="p">)</span>
+        <span class="p">(</span><span class="ss">loop</span><span class="p">)))</span>
+   <span class="n">stx</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>which breaks like this:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">x</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="mi">5</span><span class="p">])</span>
+  <span class="p">(</span><span class="n">while</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3c))" style="color: inherit">&lt;</a></span> <span class="n">x</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"x <a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3d))" style="color: inherit">=</a> <a href="http://docs.racket-lang.org/reference/strings.html#(def._((lib._racket/format..rkt)._~7es))" style="color: inherit">~s</a></span><span class="se">\n</span><span class="s2">"</span> <span class="n">x</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/set_.html#(form._((quote._~23~25kernel)._set!))" style="color: inherit">set!</a></span> <span class="n">x</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">x</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<p>The problem is that all of those quoted names are getting the context of the user input, which is not the right thing (it&rsquo;s close to a <code>defmacro</code>). To fix this, you need to <code>quote-syntax</code> all of these identifiers, so they&rsquo;ll have the macro source instead of the input source:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">subs</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">stx</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span>
+   <span class="n">stx</span>
+   <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/Syntax_Quoting__quote-syntax.html#(form._((quote._~23~25kernel)._quote-syntax))" style="color: inherit">quote-syntax</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span><span class="p">)</span> <span class="o">,</span><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/Syntax_Quoting__quote-syntax.html#(form._((quote._~23~25kernel)._quote-syntax))" style="color: inherit">quote-syntax</a></span> <span class="n">loop</span><span class="p">)</span> <span class="p">()</span>
+     <span class="p">(</span><span class="o">,</span><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/Syntax_Quoting__quote-syntax.html#(form._((quote._~23~25kernel)._quote-syntax))" style="color: inherit">quote-syntax</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span><span class="p">)</span> <span class="o">,</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="n">subs</span><span class="p">)</span>
+      <span class="o">,@</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cddr))" style="color: inherit">cddr</a></span> <span class="n">subs</span><span class="p">)</span>
+      <span class="p">(</span><span class="o">,</span><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/Syntax_Quoting__quote-syntax.html#(form._((quote._~23~25kernel)._quote-syntax))" style="color: inherit">quote-syntax</a></span> <span class="n">loop</span><span class="p">))))</span>
+   <span class="n">stx</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>But that&rsquo;s clearly insane&hellip; More than being tedious, it&rsquo;s still incorrect since all of those function application parens will have the user&rsquo;s lexical context (Racket has a special implicit <code>#%app</code> macro that gets used in all function applications, and in this case the context of this application will make it unhygienic). Instead of doing this, a better approach would be to create the resulting syntax with the lexical context of the macro source by changing just that argument:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">subs</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">stx</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span>
+   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/Syntax_Quoting__quote-syntax.html#(form._((quote._~23~25kernel)._quote-syntax))" style="color: inherit">quote-syntax</a></span> <span class="n">here</span><span class="p">)</span>
+   <span class="o">`</span><span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="ss">loop</span> <span class="p">()</span>
+      <span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="o">,</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="n">subs</span><span class="p">)</span>
+        <span class="o">,@</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cddr))" style="color: inherit">cddr</a></span> <span class="n">subs</span><span class="p">)</span>
+        <span class="p">(</span><span class="ss">loop</span><span class="p">)))</span>
+   <span class="n">stx</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>And that&rsquo;s simple again, and works fine now.</p>
+
+<p>The problem is that it&rsquo;s tedious wrt to deconstructing the input (which happens to be trivial in this case), and wrt slapping together an output value — and that&rsquo;s where <code>syntax-case</code> comes in. It addresses the both by using pattern matching, where identifiers in patterns are bound as “syntax patterns”. A new form is added — <code>syntax</code> — which is similar to a <code>quote</code>, except that (a) it actually quotes things similarly to <code>quote-syntax</code>, with the lexical context of the <code>syntax</code> form; and (b) pattern variables are substituted with what they matched. With this, the above macro becomes much easier:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">test</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="n">loop</span> <span class="p">()</span>
+               <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="n">test</span>
+                 <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+                 <span class="p">(</span><span class="n">loop</span><span class="p">))))]))</span>
+</pre></div>
+
+</div>
+
+<p>The first line specifies that you want to match the <code>stx</code> input syntax, and that you have no “keywords” (in the same sense as in <code>syntax-rules</code>). The second line is the pattern that is matched against this input — with two pattern variables that match the second subexpression and the sequence of expressions from the third and on. (The first subexpression is matched against <code>_</code> which is a wild-card that matches anything without binding a pattern variable — the head part is often not needed, since it&rsquo;s just the macro name.) The last line is the output, specified using <code>syntax</code>, which means that it&rsquo;s very similar to the previous version where everything is given the lexical context of the macro and the two pattern variables are replaced with the two matches (so <code>body</code> gets spliced into the resulting syntax).</p>
+
+<p>Now, say that you want an unhygienic user-visible piece of syntax. For example, bind the always entertaining <code>it</code> thing to the test result. This:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">test</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="n">loop</span> <span class="p">()</span>
+               <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+                 <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="n">it</span>
+                   <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+                   <span class="p">(</span><span class="n">loop</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p>won&rsquo;t work because <code>it</code> has the macro source — it&rsquo;s hygienic and therefore not visible. Instead, you need to use <code>datum-&gt;syntax</code> with the user syntax:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">test</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">stx</span> <span class="o">'</span><span class="ss">it</span><span class="p">)])</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="n">loop</span> <span class="p">()</span>
+                 <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+                   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="n">it</span>
+                     <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+                     <span class="p">(</span><span class="n">loop</span><span class="p">))))))]))</span>
+</pre></div>
+
+</div>
+
+<p>But this doesn&rsquo;t really work since <code>it</code> needs to be bound as a pattern variable rather than a plain binding. <code>syntax-case</code> can be used here again: <code>(syntax-case &lt;name&gt; () [foo &lt;body&gt;])</code> will match <code>foo</code> against the <code>&lt;name&gt;</code> syntax, and if it&rsquo;s a name then it will be bound as a pattern variable in the <code>&lt;body&gt;</code>.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">test</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">stx</span> <span class="o">'</span><span class="ss">it</span><span class="p">)</span> <span class="p">()</span>
+       <span class="p">[</span><span class="n">it</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="n">loop</span> <span class="p">()</span>
+                     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+                       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="n">it</span>
+                         <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+                         <span class="p">(</span><span class="n">loop</span><span class="p">)))))])]))</span>
+</pre></div>
+
+</div>
+
+<p>Note that since <code>it</code> is a pattern variable, it doesn&rsquo;t need to be unquoted — <code>syntax</code> will do that.</p>
+
+<p>Finally, there are some more conveniences. First, <code>with-syntax</code> is a macro that binds pattern variables (by a similar translation to <code>syntax-case</code>):</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">test</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._with-syntax))" style="color: inherit">with-syntax</a></span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">stx</span> <span class="o">'</span><span class="ss">it</span><span class="p">)])</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="n">loop</span> <span class="p">()</span>
+                 <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+                   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="n">it</span>
+                     <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+                     <span class="p">(</span><span class="n">loop</span><span class="p">))))))]))</span>
+</pre></div>
+
+</div>
+
+<p>and there&rsquo;s the <code>#'</code> reader macro for <code>syntax</code>:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">test</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._with-syntax))" style="color: inherit">with-syntax</a></span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">stx</span> <span class="o">'</span><span class="ss">it</span><span class="p">)])</span>
+       <span class="o">#'</span><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="n">loop</span> <span class="p">()</span>
+           <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+             <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="n">it</span>
+               <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+               <span class="p">(</span><span class="n">loop</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p> and there are also <code>#`</code> and <code>#,</code> and <code>#,@</code> which are implemented by translating them to uses of <code>with-syntax</code>.</p>
+
+<p> Note that the last example uses the lexical context of the whole form for the new identifier, but that&rsquo;s not only the option. You could use any other part of the macro input — for example, you could use the macro keyword:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-case))" style="color: inherit">syntax-case</a></span> <span class="n">stx</span> <span class="p">()</span>
+  <span class="p">[(</span><span class="n">hd</span> <span class="n">test</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> <span class="c1">; need the head now</span>
+   <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._with-syntax))" style="color: inherit">with-syntax</a></span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="o">#'</span><span class="n">hd</span> <span class="o">'</span><span class="ss">it</span><span class="p">)])</span>
+     <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span> <span class="n">same</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)]))</span>
+</pre></div>
+
+</div>
+
+<p> or the test expression (use <code>#'test</code>). Each of these choices has subtle differences that are especially important when you&rsquo;re composing macros (for example, using a second macro that <em>expands</em> to a <code>while</code>, where the test expression comes from that macro rather than the user code). Demonstrating these things is a popular way to pass the time in some circles, but I&rsquo;ll avoid it here. In fact, a great way to avoid this whole thing altogether is not create unhygienic bindings in the first place. It sounds like doing so excludes cases where you <em>really</em> want to have a new binding visible in user code, but Racket provides “syntax parameters” that can be used more conveniently (and less confusingly) — see <a href="../../2008/02/dirty-looking-hygiene.html">an earlier post</a> for a description of that. As a side note, these options are a good hint that a hygienic macro system is more expressive than a symbolic <code>defmacro</code> system, where no such choices exist. Creating such macros using <code>defmacro</code> can appear easier simply because of this lack of choice — in the same way that CPP-style string-based macros are “simpler” than <code>defmacro</code> since they&rsquo;re less expressive (just appending lexical tokens, no structural information).</p>
+
+<p> There are other important aspects of the Racket macro system that are not covered here. The most obvious of them is worth mentioning here: Racket separates the “runtime phase” from the “syntax phase”. For example, if you want to try these examples with “<code>#lang racket/base</code>”, you&rsquo;ll need to add <code>(require (for-syntax racket/base))</code> since the <code>racket/base</code> language doesn&rsquo;t have a full language in its syntax phase.</p>
+
+<p> Roughly speaking, this makes sure that source code is deterministically compilable by having each level live in its own world, limiting macros to deal only with the input syntax only and not runtime values. (For example, a CLOS implementation in this system cannot check the value of an identifier bound to a class to determine how some macro should expand.) This results in reliable compilations that do not depend on how things were loaded, or whatever happened on the REPL.</p>
+
+<p> The important bottom line here is that you get to write macros with the full language available — and phase separation means that Racket is explicitly designed to make running code at the macro level and using it by the compiler as robust as possible, so you don&rsquo;t have to worry about using any complex system as part of your macro. You just need to keep in mind that the macro world is completely separate from the runtime, and the direct benefit of not worrying about weird interactions with compilation and file loading orders.</p></div>
+  <a class="more" href='/2011/04/writing-syntax-case-macros.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-5.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li class="active"><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-7.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>
