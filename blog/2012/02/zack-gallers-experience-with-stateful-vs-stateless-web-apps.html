@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Zack Galler's Experience with Stateful vs Stateless Web Apps</title>
+    <meta name="description" content="_posted by Jay McCarthy_  Communication using HTTP between client and server is a simple problem of halted computation. A client computes a request, transmits and halts, waiting for a server response. On receipt, the server computes a response, transmits ...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2012/02/zack-gallers-experience-with-stateful-vs-stateless-web-apps.html">
+    <link rel="next" href="/2011/11/racket-v52.html">
+    <link rel="prev" href="/2012/02/racket-v521.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>01 Feb 2012</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Zack Galler&rsquo;s Experience with Stateful vs Stateless Web Apps</h1>
+  </header>
+
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>Communication using HTTP between client and server is a simple problem of halted computation. A client computes a request, transmits and halts, waiting for a server response. On receipt, the server computes a response, transmits and halts, waiting for the next client request. This much is well known. Racket&rsquo;s magnificent <em>stateful</em> Web server does three things on the server side:</p>
+
+<ul>
+ <li>
+  <p>it reifies a Racket continuation, capturing where the server computation has halted.</p></li>
+ <li>
+  <p>it externalizes the continuation, creating a URL-representation that uniquely maps to the Racket continuation</p></li>
+ <li>
+  <p>it disseminates the externalized continuation to interested clients, typically via HTTP response, but alternately via SMTP or any other protocol. Then, it waits. Later, when presented with an externalized continuation, a quick inverse mapping occurs, the underlying Racket continuation is invoked, and the server processes the new client request. Rinse and repeat. The problem with this approach is twofold</p></li>
+ <li>
+  <p>the reified Racket continuations live in server memory. And there&rsquo;s no safe way to garbage collect, as the continuations could be invoked at any time. There are strategies to reclaim memory, but <em>some</em> load level will noticeably decrease the performance of your application. And its not possible to figure out what that load level is prior to finishing your application. This is a problem.</p></li>
+ <li>
+  <p>Again, the reified Racket continuations live in server memory and cannot be moved. So there&rsquo;s no way to scale an application to more than one server. It&rsquo;s a necessarily one machine system. This makes problem #1 worse. Racket&rsquo;s yet more magnificent <em>stateless</em> Web server does exactly the same three things:</p></li>
+ <li>
+  <p>to reify, it rewrites the entire call stack into a format known as <a href="https://en.wikipedia.org/wiki/Administrative_normal_form">A-Normal Form</a> (ANF).</p></li>
+ <li>
+  <p>to externalize, the ANF&rsquo;d stack is encoded for transmission over HTTP.</p></li>
+ <li>
+  <p>and then it&rsquo;s sent over to the client (dissemination). Later, when presented with encoded stack, the stateless server performs an inverse transform to reconstruct the call stack, at which point the server keeps going. So we&rsquo;ve lost the invocation step and substituted a reconstruction. But in exchange, we&rsquo;ve eliminated continuations from server memory, and solved both enumerated problems above. Neat trick.</p></li></ul>
+
+<p>I provide a few lessons learned for the archives for the next person to attempt porting <code>#lang racket</code> to <code>#lang web-server</code> code. First, the predicate <code>serializable?</code> from <code>racket/serialize</code> is invaluable. The <code>#lang web-server</code> code will not transform if there are non-serializable constructs in the dynamic extent of the invocation of <code>send/suspend</code>, such as a local binding or argument. Second, invocations of native continuations reified with <code>call/cc</code> frequently throw errors related to continuation prompts, such as “attempt to cross a continuation barrier” or “no corresponding prompt tag in continuation”. In all cases, I was able to remedy the situation by enclosing the invocation in <code>call-with-continuation-prompt</code>. This may be an error in the system, but it is unclear at this time. Third, the transformation does not allow parameters or <code>dynamic-wind</code>, because the internal data-structures representing them are not serializable, but continuation-marks can be used to reimplement the piece of the functionality you need.</p>
+
+<p>Finally, thank you to the Racket team. I think the stateless Web language is important technology and must have required an enormous amount of work to implement. Anecdotally, application speed seems at or better than the stateful code. To learn more about the stateless Web application infrastructure, <a href="http://docs.racket-lang.org/web-server/stateless.html">consult the manual</a> or post to the <a href="http://lists.racket-lang.org/">mailing list</a>. (This post was written by Zack Galler with minor edits before posting by Jay McCarthy.)</p>
+<!-- more-->
+
+<hr />
+
+<p>Please help me:</p>
+
+<p>My stateless servlet allways throw exception:</p>
+
+<div class="brush: bash">
+ <div class="pygments">
+  <pre>D:<span class="se">\t</span>mpracket<span class="se">\R</span>acket<span class="se">\c</span>ollects<span class="se">\w</span>eb-server<span class="se">\d</span>ispatchers<span class="se">\d</span>ispatch-servlets.rkt:85:20: Servlet <span class="o">(</span>@ /c.rkt<span class="p">;</span><span class="o">((</span>%22c%22%20.%20%220<span class="o">((</span>3<span class="o">)</span>%202%20<span class="o">(((</span>lib%20%5C%22web-server%2Flang%2Fabort-resume.rkt%5C%22<span class="o">)</span>%20.%20%5C%22lifted.6%5C%22<span class="o">)</span>%20<span class="o">((</span>lib%20%5C%22web-server%2Flang%2Fweb-cells.rkt%5C%22<span class="o">)</span>%20.%20deserialize-info:frame-v0<span class="o">))</span>%200%20<span class="o">()</span>%20<span class="o">()</span>%20<span class="o">(</span>0%20<span class="o">(</span>1%20<span class="o">(</span>h%20-%20<span class="o">()))</span>%20<span class="o">()))</span>%22<span class="o">)))</span> exception:
+<span class="nb">set</span>-servlet-handler!: contract violation, expected: can-be-response?, given: <span class="c">#</span>
+  contract from: 
+    /web-server/private/servlet.rkt
+  blaming: 
+    /web-server/servlet/setup.rkt
+  contract: 
+    <span class="o">(</span>-&gt;
+     servlet?
+     <span class="o">(</span>-&gt; request? can-be-response?<span class="o">)</span>
+     void?<span class="o">)</span>
+  at: /web-server/private/servlet.rkt:8.15
+</pre></div>
+
+</div>
+
+<p>The stateless servlet:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="n">web-server/http/xexpr</span>
+         <span class="n">web-server/managers/lru</span>
+         <span class="n">web-server/lang/web</span>
+         <span class="n">web-server/lang/stuff-url</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">render-home</span> <span class="n">u</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">response/xexpr</span>
+     <span class="o">`</span><span class="p">(</span><span class="ss">body</span> <span class="s2">"Hello World: Stateless"</span>
+            <span class="p">(</span><span class="ss">a</span> <span class="p">([</span><span class="ss">href</span> <span class="o">,</span><span class="n">u</span><span class="p">])</span> <span class="s2">" clickMe"</span><span class="p">))))</span>
+  <span class="p">(</span><span class="n">send/suspend</span> <span class="n">render-home</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="n">response/xexpr</span>
+   <span class="o">`</span><span class="p">(</span><span class="ss">body</span> <span class="s2">"OK, You clickedMe!"</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="n">interface-version</span> <span class="o">&#39;</span><span class="ss">stateless</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="n">stuffer</span> <span class="p">(</span><span class="n">make-default-stuffer</span> <span class="p">(</span><span class="nb">build-path</span> <span class="s2">"f:</span><span class="se">\\</span><span class="s2">lisp</span><span class="se">\\</span><span class="s2">scheme</span><span class="se">\\</span><span class="s2">racket</span><span class="se">\\</span><span class="s2">program</span><span class="se">\\</span><span class="s2">urls.urls"</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">provide</span> <span class="n">interface-version</span>
+         <span class="n">stuffer</span>
+         <span class="n">start</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>My main dispatcher is :</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket</span>
+
+<span class="p">(</span><span class="k">require</span> <span class="n">web-server/web-server</span>
+         <span class="n">web-server/servlet-dispatch</span>
+         <span class="n">web-server/servlet/setup</span>
+         <span class="p">(</span><span class="k">prefix-in</span> <span class="n">files:</span> <span class="n">web-server/dispatchers/filesystem-map</span><span class="p">)</span>
+         <span class="p">(</span><span class="k">prefix-in</span> <span class="n">servlets:</span> <span class="n">web-server/dispatchers/dispatch-servlets</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="n">p-&gt;s</span> <span class="p">(</span><span class="n">make-default-path-&gt;servlet</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">u-&gt;p</span> <span class="p">(</span><span class="n">files:make-url-&gt;path</span> <span class="s2">"f:</span><span class="se">\\</span><span class="s2">lisp</span><span class="se">\\</span><span class="s2">scheme</span><span class="se">\\</span><span class="s2">racket</span><span class="se">\\</span><span class="s2">program</span><span class="se">\\</span><span class="s2">"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="k">_</span> <span class="n">u-&gt;s</span><span class="p">)</span> <span class="p">(</span><span class="n">servlets:make-cached-url-&gt;servlet</span> <span class="n">u-&gt;p</span> <span class="n">p-&gt;s</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">dis</span> <span class="p">(</span><span class="n">servlets:make</span> <span class="n">u-&gt;s</span><span class="p">))</span>
+
+<span class="c1">;; (serve</span>
+<span class="c1">;;  #:dispatch dis</span>
+<span class="c1">;;  #:port 9979</span>
+<span class="c1">;;  )</span>
+
+
+<span class="p">(</span><span class="n">serve/launch/wait</span>
+ <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">sem</span><span class="p">)</span>
+   <span class="n">dis</span><span class="p">)</span>
+ <span class="kd">#:port</span> <span class="mi">9968</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>— <em>cnnzp, 9 March 2012</em></p>
+
+<hr />
+
+<p>@cnnzp, I copied exactly what you wrote in the comment (except I added #lang web-server) to the servlet and everything worked fine. If you&rsquo;d like to work through it more, I suggest you email the mailing list, as it is a better place to get support.</p>
+
+<p>Jay</p>
+
+<p>— <em>Jay McCarthy, 12 March 2012</em></p>
+
+<hr />
+
+<p>Interesting and useful&hellip; my initial wondering though is how easy would it be to forge an interesting continuation? I can think of ways to guard against that as needed.</p>
+
+<p>— <em>patrickdlogan, 7 August 2012</em></p>
+
+<hr />
+
+<p>@patrickdlogan, It is pretty easy to change the free variables, but basically impossible to change the control flow. There&rsquo;s a trivial option in the Web server to enable signing (so that you can detect forgery) or encryption (so that you can disable their ability to read the free vars)</p>
+
+<p>— <em>Jay McCarthy, 8 August 2012</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/02/racket-v521.html">Racket v5.2.1</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2011/11/racket-v52.html">Racket v5.2</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

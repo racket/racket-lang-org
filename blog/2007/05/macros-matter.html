@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Macros Matter</title>
+    <meta name="description" content="_posted by matthias_  Thank you Jens for setting up this Blog.  PLT Scheme is a 12-year old project now and it is definitely time to open it up to the world. The language and the project has contributed numerous ideas and products to the world. This cover...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/05/macros-matter.html">
+
+    <link rel="prev" href="/2007/05/xml-transformation-in-scheme.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 May 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Macros Matter</h1>
+  </header>
+
+<p><em>posted by matthias</em></p>
+
+<p>Thank you Jens for setting up this Blog.</p>
+
+<p>PLT Scheme is a 12-year old project now and it is definitely time to open it up to the world. The language and the project has contributed numerous ideas and products to the world. This covers programming languages (units, mixins, an implementation of cml-style concurrency, etc); programming tools (drscheme, check-syntax, transparent repls, module browsers, etc), programming pedagogy (htdp, htdc); program engineering (we resurrected the &ldquo;expression&rdquo; problem, web programming and continuations); and some more.</p>
+
+<p>Time and again, people have asked me what I consider the one &lsquo;feature&rsquo; that distinguishes us from the rest of the hordes of programming languages. I always respond with a single word:</p>
+
+<p><strong>Macros.</strong></p>
+
+<p>We have pushed macros hard, and we have accomplished a lot with them. I conjecture that without macros, we would never have achieved the level of productivity that this group displays.</p>
+
+<p>Of course, everyone else in academia works on types. ML&rsquo;s module type system of the third kind and Haskell&rsquo;s system-complete type system are serious challenges to anyone. It is probably true that you shouldn&rsquo;t consider yourself a programmer if you can&rsquo;t read and write some of those type-laden programs, and I seriously believe that they are the next generation of influential languages.</p>
+
+<p>For the generation-after-the-next then, I see &ldquo;macros&rdquo; as one of the big topics (next to concurrency). A real programmer will have to know how Lisp and Scheme-style macros can reduce labor by orders of magnitude, how macros provide the tools for creating the &ldquo;ultimate abstraction&rdquo; in the form of domain-specific and embedded languages (Hudak&rsquo;s words). And there is no better place to start with than PLT Scheme&rsquo;s macro system.</p>
+
+<p>So I would like to dedicate this blog to all things macros and everything else that matters in (and to) PLT Scheme.</p>
+<!-- more-->
+
+<hr />
+
+<p>The Scala programming language claims that its combination of language features allows for the easy addition of new control structures and domain-specific syntax, without the need for macro-based metaprogramming.</p>
+
+<p>Although I have only a surface knowledge of Scala, the introductory Scala documentation provides some examples to back up this claim, and I&rsquo;m inclined to believe that Scala&rsquo;s facilities would suffice for most of the purposes that macros are commonly used for. Scala&rsquo;s &ldquo;actors&rdquo; library (essentially an implementation of Erlang-style concurrency with corresponding syntactic extensions) is a good example of a task I would expect to require macros, and yet they do just fine without.</p>
+
+<p>It would be really interesting to to know what a macro expert thinks about Scala&rsquo;s approach. Is Scala essentially providing macros in disguise, or does it have a real lack of expressive power relative to Scheme&rsquo;s macros?</p>
+
+<p>— <em>puzzler, 4 May 2007</em></p>
+
+<hr />
+
+<p>My impression is that Scala has &ldquo;macro power&rdquo; in the same spirit as Java has &ldquo;closure power.&rdquo;</p>
+
+<p>Rumor has it that Java 7 will have real closures.</p>
+
+<p>Someone show me that I am wrong.</p>
+
+<p>— <em>matthias, 4 May 2007</em></p>
+
+<hr />
+
+<p>I am pleased to see a PLT Scheme blog, and look forward to reading it.</p>
+
+<p>As you know, Matthias, I teach supplementary lectures on macros and continuations to post-HtDP students. Continuations &ldquo;fit&rdquo; &mdash; there are challenges, but they&rsquo;re of the sort that students are used to from other parts of Scheme. Macros are a different matter. Perhaps it&rsquo;s because I don&rsquo;t understand them that well myself, but it seems to me that there is a considerable jump in complexity. They&rsquo;re not as natural, and there are no good expository materials. I would like to see the transition into macrology be a little smoother. Is this possible? &mdash;PR</p>
+
+<p>— <em>plragde@uwaterloo.ca, 4 May 2007</em></p>
+
+<hr />
+
+<p>Well, I can&rsquo;t speak for other students of scheme, but I found procedural macros easier to grok than the syntax-rules language. Though I program more in Common Lisp now, the first macro system I learned to use in a non-trivial way was the explicit renaming system in scheme 48</p>
+
+<p>— <em>akopa, 4 May 2007</em></p>
+
+<hr />
+
+<p>If you have read the docs, you know that  PLT Scheme does have procedural macros. Better still, it has those and implements macros as proper abstractions.</p>
+
+<p>This idea of <em>macros as proper abstractions</em> is why I have strong doubts that Scala has any real &ldquo;macro power&rdquo; and that systems such as in CL or S48 will ever be close.</p>
+
+<p>Because we support macros-as-abstractions, implementing classes, mixins, and traits as macros is not only feasible, it&rsquo;s a joy. Indeed, implementing an entire language, such as Arc is doable and is no just a toy (as it would be if implemented in a primitive macro system).</p>
+
+<p>— <em>matthias, 5 May 2007</em></p>
+
+<hr />
+
+<p>I have not used the syntactic abstractions in PLT. I wasn&rsquo;t even disparaging Scheme macros in my previous comment.</p>
+
+<p>However, the introductory materials to Scheme macros always concentrate on syntax-rules. In addition, there is an implicit assumption that the pattern matching language is the &ldquo;easy&rdquo; way to think about source transformation.</p>
+
+<p>This is does not seem to be the case, or at least it isn&rsquo;t sufficient for many Scheme students.</p>
+
+<p>In my case, the mechanics of explicitly constructing the syntax tree helped me enormously.</p>
+
+<p>As far as providing a proper abstraction goes, in Common Lisp the burden is on the macro writer. Philosophically, Scheme advocates will always find defmacro wanting, but I am able to construct a macro writing framework for my own macros that provide good abstraction and meaningful error reporting for the macro writer and the consumer. I acknowledge that it can be a lot of work.</p>
+
+<p>— <em>akopa, 6 May 2007</em></p>
+
+<hr />
+
+<p>Hi Akopa,</p>
+
+<p>There are more than one type of macros in the Scheme world. To a Scheme a &ldquo;procedural macro system&rdquo; isn&rsquo;t associated with Common Lisp&rsquo;s defmacro.</p>
+
+<p>For simple transformations, syntax-rules is easy to use. However, if you need to write macros that doesn&rsquo;t fit into a simple rewriting rule, then you&rsquo;ll need something more powerful like syntax-case macros.</p>
+
+<p>For a very nice explanation of syntax-case seen from the Common Lisp perspective see:</p>
+
+<p>http://groups.google.com/group/comp.lang.lisp/msg/7893ba79443a82f8?hl=en&amp;</p>
+
+<p>— <em>Jens Axel Søgaard, 6 May 2007</em></p>
+
+<hr />
+
+<p>Here is the url broken into 3 lines</p>
+
+<p>http://groups.google.com/ group/comp.lang.lisp/ msg/7893ba79443a82f8?hl=en&amp;</p>
+
+<p>— <em>Jens Axel Søgaard, 6 May 2007</em></p>
+
+<hr />
+
+<p>&ldquo;As far as providing a proper abstraction goes, in Common Lisp the burden is on the macro write.&rdquo;</p>
+
+<p>If that&rsquo;s the case for <em>any</em> linguistic construct, the language simply doesn&rsquo;t support abstraction (for this aspect). Period. Just think: in the spirit of this statement, assembly language supports first-class closures.</p>
+
+<p>— <em>matthias, 7 May 2007</em></p>
+
+<hr />
+
+<p>"&lsquo;As far as providing a proper abstraction goes, in Common Lisp the burden is on the macro write.&rsquo;</p>
+
+<p>If that&rsquo;s the case for <em>any</em> linguistic construct, the language simply doesn&rsquo;t support abstraction (for this aspect). Period. Just think: in the spirit of this statement, assembly language supports first-class closures."</p>
+
+<p>Yeah, but macro-writing macros allow you to create the abstraction. Don&rsquo;t get me wrong, it&rsquo;s nice the Scheme supports this out of the box.</p>
+
+<p>Of course assembly language supports first-class closures; it&rsquo;s just a macro expansion away :).</p>
+
+<p>— <em>akopa, 7 May 2007</em></p>
+
+<hr />
+
+<p>Scala has limited non-macro-based facilities for syntactic extension. This along with its liberal method naming syntax and the ability to use anything as infix lets you build things like embedded linear algebra operators (A*B where A and B are matrix operators could be matrix multiplication, etc.).</p>
+
+<p>Scala is a hell of a lot faster than PLT Scheme, and it plays perfectly with the vast Java ecosystem, while Scheme does not. They are good at different things and there is no need for Schemers to feel they need to put down a fine language like Scala. If you&rsquo;re going to play the language debate game, focus your energy on languages that actually do suck.</p>
+
+<p>— <em>warren, 9 May 2007</em></p>
+
+<hr />
+
+<p>warren wrote: &gt; Scala has limited non-macro-based facilities for &gt; syntactic extension. [&hellip;]</p>
+
+<p>Right &mdash; it has no macros.</p>
+
+<blockquote>
+ <p>Scala is a hell of a lot faster than PLT Scheme,</p></blockquote>
+
+<p>I find this questionable. I tried a quick fib test, and with an input of 38 (which should be large enough to compensate for Scala&rsquo;s horrendous initial overhead). With 5 runs for each, MzScheme was 2.7 times faster in user time, and 3.2 times faster in total time. But we&rsquo;re not playing language debate games, right?</p>
+
+<blockquote>
+ <p>and it plays perfectly with the vast Java ecosystem, while Scheme does not.</p></blockquote>
+
+<p>MzScheme does not play with Java code easily, because it&rsquo;s implemented in C. Schemes that are implemented in Java do. OTOH, MzScheme plays perfectly with the vast(er) C ecosystem. But we&rsquo;re not playing language debate games, right?</p>
+
+<blockquote>
+ <p>They are good at different things and there is no need for Schemers to feel they need to put down a fine language like Scala.</p></blockquote>
+
+<p>I looked again at all comments &mdash; and the only sense in which Scala was &ldquo;put down&rdquo; is by saying that it has no macros. Reading the Scala documentation re its extensibility feature all I see is an ability to specify thunk arguments, and automatic thunking of expressions that are used for these arguments. Saying that this is anywhere close to having macros is like saying that my old Pontiac Grand Prix 93 has the same functionality of a Ferrari.</p>
+
+<p>The original question was: &ldquo;Is Scala essentially providing macros in disguise, or does it have a real lack of expressive power relative to Scheme&rsquo;s macros?&rdquo;. The answer to this question is a simple and definite &ldquo;no, it does not have the expressive power of macros&rdquo; &mdash; and that&rsquo;s for any macro system I know about (including non-sexpr macro systems, like CamlP4 or CPP). It&rsquo;s as simple as that. Language debate games or not.</p>
+
+<blockquote>
+ <p>If you&rsquo;re going to play the language debate game, focus your energy on languages that actually do suck.</p></blockquote>
+
+<p>Look in the above comments again, bearing in mind my answer above. Saying that Scala has no macros is a plain fact, not a subjective arguments. It is therefore your own comment that started a debate game. The current comment contributes to that, sorry.</p>
+
+<p>— <em>Eli Barzilay, 9 May 2007</em></p>
+
+<hr />
+
+<p>eli, is CamlP4 is missing anything besides the obvious thing (ie, hygiene)?</p>
+
+<p>— <em>Neel Krishnaswami, 9 May 2007</em></p>
+
+<hr />
+
+<p>Well, hygiene is a big deal. The advantage that CamlP4 gives you over CPP is that it uses proper structures, which is also what you get with defmacro, so it&rsquo;s a good step in that direction.</p>
+
+<p>One techincal point here is that when working with it, I found that the types got in my way. The AST type is quite big, and evey piece of code must have many trivial cases. One solution to that was obvious: create an s-expr-like type, and translate the AST to that.</p>
+
+<p>Getting hygiene is also related to being integrated into the languaue, which is another thing you don&rsquo;t get with CamlP4. Transformations live completely outside of your code, so, for example, it is not possible to have libraries that provide new syntax transformers.</p>
+
+<p>This, combined with the heavy AST type mean that you need to do a <em>lot</em> of work for every transformation, which makes it more difficult to use. I don&rsquo;t see people going through all that just to implement a small debugging macro, or something simple like `when&rsquo; or a while loop.</p>
+
+<p>BTW, one thing I did when I worked with CamlP4 is to create a defmacro-like facility. It was limited in many ways: different AST nodes means that my macros would only work with AST subsets that make sense both as expressions and as patterns; the scope was in-file only; we needed to add facilities for including code etc etc. Still, it was much better than CPP (which was used for debug code), and even fixed a couple of bugs.</p>
+
+<p>— <em>Eli Barzilay, 9 May 2007</em></p>
+
+<hr />
+
+<p>Thanks for your comment. The way I usually use P4 is to define a small grammar for my extension, with a custom AST type for that. Then, I write a function to compile my custom AST into the Ocaml expression syntax. This matches how I write things on the whiteboard pretty well, and personally I found it more convenient than syntax-rules (which has a bizarre evaluation order).</p>
+
+<p>I do get really annoyed every time I have to define a gensym function &mdash; I should not have to do this in 2007! &mdash; and I take your point about the need for better language integration, because I have often wanted to write type-directed transformations. (For example, if you want to extend pattern matching and still check coverage, you need to know all the type and module definitions in the current scope.) You can&rsquo;t do this with P4.</p>
+
+<p>— <em>Neel Krishnaswami, 10 May 2007</em></p>
+
+<hr />
+
+<p>Let me preface my comment by saying that I think PLT Scheme is a wonderful language, and my thanks to the PLT folks for making it happen. With that said, I wanted to respond to these comments by Matthias:</p>
+
+<p>&ldquo;Because we support macros-as-abstractions, implementing classes, mixins, and traits as macros is not only feasible, it&rsquo;s a joy. Indeed, implementing an entire language, such as Arc is doable and is no just a toy (as it would be if implemented in a primitive macro system).&rdquo;</p>
+
+<p>I heard from a reliable source that the current Arc implementation doesn&rsquo;t use scheme macros at all. So it perhaps is a bad example to use in this case.</p>
+
+<p>— <em>Repl, 10 June 2007</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/05/xml-transformation-in-scheme.html">XML Transformation in Scheme</a></h2>
+
+
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

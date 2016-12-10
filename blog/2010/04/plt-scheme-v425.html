@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>PLT Scheme v4.2.5</title>
+    <meta name="description" content="_posted by Eli Barzilay_  PLT Scheme version 4.2.5 is now available from `http://plt-scheme.org/`   PLT now supports multi-core parallelism via futures. Futures create tasks that run in parallel, as long as the tasks stay in the &quot;fast path&quot; of the runtime...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2010/04/plt-scheme-v425.html">
+    <link rel="next" href="/2010/03/talk-at-flourish.html">
+    <link rel="prev" href="/2010/06/racket.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>02 Apr 2010</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>PLT Scheme v4.2.5</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.2.5 is now available from <a href="http://plt-scheme.org/"><code>http://plt-scheme.org/</code></a></p>
+
+<ul>
+ <li>PLT now supports multi-core parallelism via futures. Futures create tasks that run in parallel, as long as the tasks stay in the &ldquo;fast path&rdquo; of the runtime system. For more information, see <a href="http://docs.plt-scheme.org/guide/performance.html?q=future#%28part._effective-futures%29">the guide</a>.</li>
+ <li>Our unit testing framework, schemeunit, is now included in the distribution. A graphical test runner is available via <code>schemeunit/gui</code>.</li>
+ <li>The support languages for the &ldquo;Programming Languages: Application and Interpretation&rdquo; textbook by Shriram Krishnamurthi are now part of PLT Scheme. In addition the PLAI GC language comes with a random mutator generator (to help test collectors) and an improved heap visualizer.</li>
+ <li>New Russian and Ukranian translations, thanks to Sergey Semerikov.</li>
+ <li>A number of improvements to Redex&rsquo;s typesetting facilities.</li>
+ <li>Typed Scheme users can now automatically generate predicates from types with <code>define-predicate</code>. Typed code can be inserted in untyped modules by requiring <code>with-type</code> from <code>typed/scheme</code>.</li>
+ <li>The <code>scheme/class</code> library now provides contract combinators for classes (<code>class/c</code>) and objects (<code>object/c</code>). See the Reference and Guide for details. Also, a backwards-compatible <code>object-contract</code> version of <code>object/c</code> has replaced the old <code>object-contract</code> combinator.</li>
+ <li>Writing new kinds of contracts is now easier with keyword-based constructors (<code>make-contract</code> and <code>make-flat-contract</code>), a simpler set of structure properties (<code>prop:contract</code> and <code>prop:flat-contract</code>), and the introduction of blame objects for tracking contract metadata.</li>
+ <li>The Scheme-implemented bytecode reader fails less often. This is used by &ldquo;mzc &mdash;decompile&rdquo;. The Scheme-implemented bytecode writer uses the compact bytecode format and fails less often. This may be used in the future for Scheme-implement bytecode processors.</li>
+ <li>The language dialog now suggests using "#lang" more strongly as the default language. DrScheme no longer uses the term `Module language&rsquo;.</li></ul>
+<!-- more-->
+
+<hr />
+
+<p>Just wondering&hellip;does the future hold a 64-bit version for OSX?</p>
+
+<p>— <em>Robert, 2 April 2010</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2010/06/racket.html">Racket</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2010/03/talk-at-flourish.html">Talk at Flourish</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

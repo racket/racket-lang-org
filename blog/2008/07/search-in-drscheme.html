@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Search in DrScheme</title>
+    <meta name="description" content="_posted by Robby Findler_  I've just overhauled search in DrScheme. Instead of popping up a dialog box and asking you for a search string, you get a new editor along the bottom of the DrScheme window where you can type a search string and DrScheme respond...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2008/07/search-in-drscheme.html">
+    <link rel="next" href="/2008/07/plt-scheme-v402.html">
+    <link rel="prev" href="/2008/08/plt-scheme-v41.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Jul 2008</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Search in DrScheme</h1>
+  </header>
+
+<p><em>posted by Robby Findler</em></p>
+
+<p>I&rsquo;ve just overhauled search in DrScheme. Instead of popping up a dialog box and asking you for a search string, you get a new editor along the bottom of the DrScheme window where you can type a search string and DrScheme responds by circling (in purple) all of the occurrences of the search string in the file, both in the main window and in the contour window.</p>
+
+<p>From there, you can use the new menu shortcuts to navigate forwards and backwards through the hits, optionally replacing occurrences of the search string with the replace strings (see the Edit menu).</p>
+
+<p>With the default settings, typing a search string does not move around in the main window. Specifically (unlike Emacs, Safari, or Firefox), you don&rsquo;t move immediately to the first occurrence of the search string. You have to hit return or one of the search keys (in the Edit menu) for that to happen. But you can enable this in the General pane of the Editing tab in the preferences dialog. Click on &ldquo;Search using anchors&rdquo;. Now, when you search for a string, DrScheme will whizz you right to it and when you edit the search string, DrScheme will shift the insertion point based on the search string. In order for you to keep track of where edits will go, you&rsquo;ll see a funny looking little red dongle in your text. That&rsquo;s where the insertion point was when you started your search, and that&rsquo;s where DrScheme starts all of these implicit searches from.</p>
+
+<p>Try it out and let us know what you think! In particular, is the anchor-based search or the non-anchor-based search more intuitive for you?</p>
+<!-- more-->
+
+<hr />
+
+<p>It is better that it is intuitive or obvious to people how the anchoring works, then where it is anchored.</p>
+
+<p>Sure we&rsquo;ve all been trained by our favorite web browsers, but we&rsquo;re also fast learners ;).</p>
+
+<p>That said, I&rsquo;m quite used to the anchor being the start of the file.</p>
+
+<p>— <em>grant rettke, 30 July 2008</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2008/08/plt-scheme-v41.html">PLT Scheme v4.1</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2008/07/plt-scheme-v402.html">PLT Scheme v4.0.2</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

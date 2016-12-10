@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>PLT Scheme v4.2.2</title>
+    <meta name="description" content="_posted by Eli Barzilay_  PLT Scheme version 4.2.2 is now available from `http://plt-scheme.org/`      DrScheme now, by default, compiles all of the files that are loaded when it runs a program and saves the compiled files in the filesystem. This should l...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/10/plt-scheme-v422.html">
+    <link rel="next" href="/2009/09/set-vs-set-box-and-unbox.html">
+    <link rel="prev" href="/2009/12/plt-scheme-v423.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>04 Oct 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>PLT Scheme v4.2.2</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.2.2 is now available from <a href="http://plt-scheme.org/"><code>http://plt-scheme.org/</code></a></p>
+
+<ul>
+ <li>
+  <p>DrScheme now, by default, compiles all of the files that are loaded when it runs a program and saves the compiled files in the filesystem. This should lead to faster load times (not faster runtimes) since it avoids re-compiling files whose dependencies have not changed.</p></li>
+ <li>
+  <p>New Scribble libraries and documentation make it easier to get started with Scribble, especially for uses other than PLT documentation. DrScheme now has better indentation and syntax coloring support for Scribble languages (and generally all @-exp based languages).</p></li>
+ <li>
+  <p>The new <code>syntax/keyword</code> library provides support for macros with keyword options. A new quick start guide has been added to the documentation for the <code>syntax/parse</code> library.</p></li>
+ <li>
+  <p>Added support for abstract contracts via the #:exists keywords. This is an experiment to add support for data hiding to the contract system.</p></li>
+ <li>
+  <p>Added <code>in-producer</code>: a sequence expression makes it easy to iterate over producer functions (e.g., <code>read</code>). A new <code>scheme/generator</code> library creates generators that can use a (parameterized) yield function.</p></li>
+ <li>
+  <p>HtDP langs: several primitives now consume 0 and 1 arguments in ISL (and up), including <code>append</code>, <code>+</code> and <code>*</code>. In addition, <code>make-list</code> was added to the primitives.</p></li>
+ <li>
+  <p>The API to Universe has a number of new constructs. All Universe programs should run unchanged. The most important change is the addition of <code>animate</code> as an alternative name for <code>run-simulation</code>. In addition, adding the clause <code>(state true)</code> to a world description now pretty-prints the state of the world into a separate canvas.</p></li>
+ <li>
+  <p>A number of changes were made to the DeinProgramm / DMdA language levels: The <code>check-property</code> and <code>contract</code> forms were added, <code>define-record-procedures-parametric</code> has changed. See the documentation for details.</p></li>
+ <li>
+  <p>The test engine in the HtDP languages no longer warns programmers when the Definitions window has no tests.</p></li>
+ <li>
+  <p>ProfessorJ (and related code) is no longer included in the PLT distributions. It may re-appear in the future as a PLaneT package.</p></li></ul>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/12/plt-scheme-v423.html">PLT Scheme v4.2.3</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/09/set-vs-set-box-and-unbox.html"><code>set!</code> vs. <code>set-box!</code> and <code>unbox</code></a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

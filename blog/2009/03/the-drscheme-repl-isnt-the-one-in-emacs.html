@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>the DrScheme repl isn't the one in Emacs</title>
+    <meta name="description" content="_posted by matthias_  Dear old Lisper,  You have found drscheme and it is almost like your old Lisp machine. It is easy to program in it, it has things that nobody else has, and we all love parentheses. But after some initial enthusiasm you are wondering ...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/03/the-drscheme-repl-isnt-the-one-in-emacs.html">
+    <link rel="next" href="/2009/03/plt-scheme-v415.html">
+    <link rel="prev" href="/2009/05/what-is-sendsuspend.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Mar 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>the DrScheme repl isn&rsquo;t the one in Emacs</h1>
+  </header>
+
+<p><em>posted by matthias</em></p>
+
+<p>Dear old Lisper,</p>
+
+<p>You have found drscheme and it is almost like your old Lisp machine. It is easy to program in it, it has things that nobody else has, and we all love parentheses. But after some initial enthusiasm you are wondering why in the world, we decided not to provide commands for sending individual definitions and expressions from the Definitions window to the Interactions window, aka, REPL.</p>
+
+<p>It wasn&rsquo;t an accident. It was by design after some difficult experiences. I am personally a product of the Emacs world that you are describing below, and my advisor Dan Friedman was called the &ldquo;Lispman&rdquo; on his door sign at Indiana.</p>
+
+<p>When I first discovered the idea of sending individual expressions and definitions from a buffer to a repl, it was a near-religious revelation to me. I wanted everyone to know this trick and use it. When I started teaching the freshman course at Rice, I told our chairman so and he asked &ldquo;why&rdquo;. I was shocked, awed, and I failed to explain to him how it mattered. He was a mathematician and I wrote it off. They don&rsquo;t know.</p>
+
+<p>Then I started watching my sophomores and juniors at Rice in lab. Now that was a true disappointment. Few if any used this trick and when they did, they more often tripped up and got the repl into a state where they didn&rsquo;t know what was going on.</p>
+
+<p>In the mid 90s, I wrote some more Little books with Dan, and boy, time and again, I watched him stumble across the state of the repl. I even watched him re-start the repl and load the whole buffer more often than not.</p>
+
+<p>Why? In the presence of macros and higher-order functions and other beasts, it is difficult for masters of the universe with 30 years of experience to keep track of things. What do you think students with 10 or 20 days worth of experience will do? Is it really such a deep principle of computing to create the objects incrementally in the repl as opposed to thinking systematically through the design of a program?</p>
+
+<p>I decided not and asked Robby to make DrScheme&rsquo;s repl transparent. That is, it re-starts the repl and re-loads the buffer every time. I consider this behavior a suitable compromise: have a repl but don&rsquo;t confuse yourself with send-defs and send-exprs. This is especially true in an age when sending an entire buffer takes as much time as sending an individual expression or definition. Soon we&rsquo;ll get &ldquo;compilation behind your back&rdquo; so that only the current buffer is re-interpreted. It&rsquo;ll start things even faster.</p>
+
+<p>Even though I had used the incremental mode for more than a decade when I switched from Emacs to DrScheme in 1998, I have hardly ever looked back. I miss a few other things but the incremental repl is one of those rituals old Lispers acquired and never questioned &hellip; but it isn&rsquo;t fundamental and critical to anything. (Note there is no qualifying clauses, no when no if no but. I really mean this last sentence the way I spelled it.)</p>
+<!-- more-->
+
+<hr />
+
+<p>This comment has been removed by the author.</p>
+
+<p>— <em>Kyle Cronin, 29 March 2009</em></p>
+
+<hr />
+
+<p>Why not provide the ability to do both? Reloading an expression and reloading the entire buffer are two different things that, while their functionality somewhat overlaps, provide two distinct ways of interacting with Lisp/Scheme expressions. You can have your big &ldquo;Run&rdquo; button for students new to Scheme, but also perhaps provide a keyboard shortcut that would send a definition or expression to the current REPL. One advantage to this is that often times when I&rsquo;m testing my code I&rsquo;ll create temporary variables with dummy data in the REPL, and being able to reload a definition without recreating the test data would be quite a timesaver. In other words, both mechanisms have their uses, and there&rsquo;s no reason why both can&rsquo;t be included. (this is a revision of my first reply, mainly due to some grammar issues)</p>
+
+<p>— <em>Kyle Cronin, 29 March 2009</em></p>
+
+<hr />
+
+<p>I can understand the motivation behind the design. But this way of working does not work well with my way of developing a program incrementally.</p>
+
+<p>Let&rsquo;s say you are developing the procedure string-prefix? which answers if a string is a prefix of another. You have a file utils.scm with the definition of string-prefix?</p>
+
+<p>Now you want to test it. Start the REPL and try your definition with a couple of examples. Iterate the process until you have a correct function.</p>
+
+<p>The bad thing here is that all the tests you have developed are only in the REPL and are not saved in the file utils.scm. So if you continue working on your program later and need to verify the definition of string-prefix? you must re-type and re-engineer a test suite for it.</p>
+
+<p>The way I do it, is to have the test suite in comments around the definition and send those tests with send exp and watch for the results.</p>
+
+<p>— <em>Pierre, 29 March 2009</em></p>
+
+<hr />
+
+<p>I, too, do not see why it can&rsquo;t be an option. One of the frustrations I have with the REPL in DrScheme is related to the error-flagging whenever I define something in the REPL.</p>
+
+<p>Yes, dang it, I <em>KNOW</em> it&rsquo;s inconsistent with the definitions window.</p>
+
+<p>Could it possibly be an option?</p>
+
+<p>— <em>Yakov, 29 March 2009</em></p>
+
+<hr />
+
+<p>I am guessing that most people avoid this by doing the exploratory part of the programming inside of the REPL and when they are happy with new functions they do a:</p>
+
+<p>M:S:right-arrow C:c C:F6 C:v</p>
+
+<p>— <em>grant rettke, 29 March 2009</em></p>
+
+<hr />
+
+<p>Another useful feature gone because somebody thinks they know better what is good for other people than those people themselves.</p>
+
+<p>— <em>Pascal Costanza, 29 March 2009</em></p>
+
+<hr />
+
+<p>Just like <code>goto</code>.</p>
+
+<p>— <em>Eli Barzilay, 29 March 2009</em></p>
+
+<hr />
+
+<p>Pascal: Someone will probably write a DrScheme plugin to add this feature.</p>
+
+<p>— <em>grant rettke, 29 March 2009</em></p>
+
+<hr />
+
+<p>&ldquo;Another feature gone &hellip;&rdquo; &mdash; I didn&rsquo;t know that features go away via someone&rsquo;s effort; I thought they came <em>in</em> via someone&rsquo;s effort. I must have been doing it wrong all along!</p>
+
+<p>— <em>Robby, 29 March 2009</em></p>
+
+<hr />
+
+<p>See this quote from Steele and Sussman.</p>
+
+<p>— <em>Pascal Costanza, 29 March 2009</em></p>
+
+<hr />
+
+<p>Pascal, Just to be clear: yes, I know about using <code>lambda</code> as a <code>goto</code>. In a sane language like Scheme, <code>goto</code> is gone &mdash; but only on the superficial level of what you see when you browse through the report or the manual. An incremental REPL is gone from PLT Scheme in a similarly superficial way: DrScheme does not support it &mdash; but it&rsquo;s still part of the language, and you can still fire up MzScheme and talk to it like any other REPL. More than that, as said in previous comments: it wouldn&rsquo;t be too hard to implement a send-last-sexpr functionality in DrScheme. Why was it done so far? For the exact same reason that nobody implemented a <code>prog</code> macro in PLT: nobody really needed it.</p>
+
+<p>— <em>Eli Barzilay, 29 March 2009</em></p>
+
+<hr />
+
+<p>Eli, the article above argues that it is a feature designed into DrScheme. It is one reason I never got warm with DrScheme, it does not support the style of interaction I like. I&rsquo;m old. Bearded. Lisp hacker. I&rsquo;m probably not the &lsquo;target&rsquo; for it. Yeah, how I liked MacScheme - that was fun.</p>
+
+<p>— <em>Rainer, 30 March 2009</em></p>
+
+<hr />
+
+<p>That was interesting. I am new to Scheme (PLT Scheme) and I have only played with DrScheme so I didn&rsquo;t know there was any other &ldquo;way&rdquo; to do it.</p>
+
+<p>Now, I have read the responses from the &ldquo;incrementalists&rdquo; and I see the point they are making. Couldn&rsquo;t what they want be just another &ldquo;mode&rdquo; for DrScheme? You change the option to &ldquo;Incremental REPL&rdquo; or something and you get the way of working they like.</p>
+
+<p>— <em>Robert, 30 March 2009</em></p>
+
+<hr />
+
+<p>Rainer: yes, it is a feature designed into DrScheme. But as mentioned above several times now, it doesn&rsquo;t contradict having the incremental kind of REPL too: all that is needed for that is a simple send-to-repl key, and that&rsquo;s really not too hard to do. See also Robby&rsquo;s reply: it took effort to implement the resetting functionality &mdash; an effort that was made due to the design decision. So DrScheme has an additional feature &mdash; and implementing a send-to-repl key just happens to be a something that is not going to use that feature (making it even easier to implement). Back for the reason why it wasn&rsquo;t implemented so far: it&rsquo;s because once people got used to it, they liked it. Once they liked it, they saw no need to implement support for the old mode of work. It&rsquo;s actually quite similar to why we use S-expression syntax: once people got used to that, they didn&rsquo;t see any reason to go back and implement M-expressions as originally planned.</p>
+
+<p>— <em>Eli Barzilay, 30 March 2009</em></p>
+
+<hr />
+
+<p>I do the vast majority of my programming as a scientist (in Matlab, unfortunately). However, I recently did some consulting work where the language I used was not important and so chose to use PLTScheme. Like my scientific work, though, this consulting involved a lot of large data sets which one wanted to load, and then interactively transform - generally speaking such &ldquo;exploratory data analysis&rdquo; is not a process for which large scale program design is very useful. What is useful is to be able to load large data sets (or perform long simulations or calculations) once, storing them in variables in a running interpreter, and then interactively plot and/or analyze the results - a process which often involves sending partial expressions to a running process to be evaluated. Had I been able to do this in DrScheme I might have used the environment. The absence of this feature was definitely irksome enough that I decided to use Emacs and Quack for my development instead.</p>
+
+<p>I don&rsquo;t know how many other programmers out there are use their programming languages as extensions of their ability to visualize and analyze data rather than as systems to design applications, but I would suspect it is a fair number. For them, it may be worth the confusion to allow incremental compilation/evaluation.</p>
+
+<p>— <em>J.V. Toups, 30 March 2009</em></p>
+
+<hr />
+
+<p>No matter &mdash; old Lispers can just post  to them newfangled Wikis to see the  effect of small changes in state on  the big picture.</p>
+
+<p>&mdash; Paul</p>
+
+<p>— <em>steck, 31 March 2009</em></p>
+
+<hr />
+
+<p>J.V., the data analysis problem is precisely the kind of process where a specialized environment is possibly superior to the old incremental Emacs mode. Just like writing shell scripts is neat once you have figured out how to use the Language dialog to preset command line arguments.</p>
+
+<p>— <em>matthias, 31 March 2009</em></p>
+
+<hr />
+
+<p>Why so much fuss about it? Like Grant pointed out, I generally develop and refine functions in the REPL and when I&rsquo;m satisfied with it, I write it to the definitions buffer. You may also copy from the definitions, copy on the REPL and further refine it, despite the &ldquo;out of sync&rdquo; alert.</p>
+
+<p>— <em>namekuseijin, 2 April 2009</em></p>
+
+<hr />
+
+<p>namekuseijin,</p>
+
+<p>Sure, you can also program with one arm tied behind your back. It&rsquo;s just not very helpful.</p>
+
+<p>The fact that you&rsquo;re programming in this style proves that you would benefit from a less restrictive environment. It also proves that the argument that &ldquo;nobody implemented it, because nobody needed it&rdquo; is not really valid. We have actually already seen a few people mentioning here that they would &ldquo;need&rdquo; it. But unfortunately, many programmers just use whatever they are given and don&rsquo;t question their tools too much, and instead use workarounds, like you seem to do in this case.</p>
+
+<p>You see this also a lot in the Java world. So, indeed, nothing much is really fundamental and critical to anything&hellip;</p>
+
+<p>— <em>Pascal Costanza, 2 April 2009</em></p>
+
+<hr />
+
+<p>&ldquo;A less restrictive environment&rdquo; is bogus: the environment lacks a keypress that makes copy-from-definitions-paste-to-repl easier, but it is <em>not</em> restricted. Confusing that with &ldquo;a restriction&rdquo; is what makes you draw other bogus conclusions, so I&rsquo;ll stop here.</p>
+
+<p>— <em>Eli Barzilay, 2 April 2009</em></p>
+
+<hr />
+
+<p>Pascal, like I said I usually just work out the functions at the excellent command line &mdash; complete with full command history, completion and parenthetical editing &mdash; and then paste to the definitions once I&rsquo;m done.</p>
+
+<p>If I ever have to redefine it, I may just either access the command history (even from previous closed sessions) or, from your usual emacs position when doing the same (in the tail of a definition), do: Alt+Shift+&lt;- (to select the definition) Ctrl+C (to copy) Ctrl+D (do go to interactions) Ctrl+V+Enter (to rerun the definition)</p>
+
+<p>Hardly Earth-shattering, specially in the face of the powerful command-line editing. But yeah, the above procedure could be turned into a single step with something as keybinding customization. Section 3.3.7 of the DrScheme environment manual spill out the details.</p>
+
+<p>I&rsquo;ve grown on Emacs, but got fed up of all the baroqueness and hand dextery. I&rsquo;m no virtuoso pianist.</p>
+
+<p>— <em>namekuseijin, 3 April 2009</em></p>
+
+<hr />
+
+<p>namekuseijin,</p>
+
+<p>Sure, it&rsquo;s possible to find workarounds to get what you want. And there may indeed be very good reasons to stick to these workarounds, because you deem other things more important than this.</p>
+
+<p>But note that your suggested workaround makes things even harder to follow than what Matthias describes in his blog posting. Not only do you now have to track which definitions actually resemble closest the current state of the image, you also have to track them down in a long list of definitions that is ordered by history rather than by some program logic.</p>
+
+<p>By the way, emacs is a straw man here. I don&rsquo;t like emacs that much either. But there are much better alternatives, like the IDEs for Macintosh Common Lisp, LispWorks, Allegro Common Lisp, and Corman Lisp, to name just a few current ones.</p>
+
+<p>For example, in LispWorks I can choose to define the current selected form in the buffer - or even undefine it! - by clicking the respective entries in the contextual menu that I get, as usual, by right-clicking. I can also select several forms in a row and define or undefine them in one go, which makes it already a lot easier to have some confidence in a consistent state of the system. And by using a system definition facility, it is also quite straightforward to do a complete reload of everything, but without invalidating all the data on which I want to test my definitions.</p>
+
+<p>But that&rsquo;s Common Lisp, and that&rsquo;s worse than Scheme in every respect, right? So much for religion&hellip;</p>
+
+<p>— <em>Pascal Costanza, 4 April 2009</em></p>
+
+<hr />
+
+<p>Pascal: your comments go down a line where each is more bogus than the previous. You now claim that namekuseijin&rsquo;s method is harder because definitions don&rsquo;t follow some mythical &ldquo;program logic&rdquo;. With any conventional REPL (including the one in DrScheme and in MzScheme) there is no &ldquo;program logic&rdquo; that dictates the ordering of definitions entered on the REPL &mdash; there is just the history of whatever you happen to have typed in. The core of Matthias&rsquo;s post is exactly about that: this history leads to hidden dependencies (and therefore bugs) that are not evident in your code.</p>
+
+<p>Yes, there are some Lisps that will allow you to dump the current runtime image &mdash; and yes, you can use that as a kind of a formalization of the history as &ldquo;the code&rdquo; &mdash; but trying to write real software (one that requires maintenance) this way is crazy. The problems involved in doing this kind of development are hard, and &mdash; AFAIK &mdash; no Lisp is actually trying to solve them <em>properly</em>. Ad-hoc &ldquo;solutions&rdquo; involve tools similar to what you mention: undefining a name, retroactively defining a name, etc. CLOS is a good example in the retroactive-change attempt: defining an already existing class has some complex semantics that try to update previously defined instances, and that tends to work only with very simple classes. In the more common cases you end up facing a need for <code>update-instance-for-redefined-class</code> &mdash; which means that you now need to actually write code around the problem inherent in REPLs. Worse, if the redefinition is due to change in your source, this code is a one-time throwaway tool that will never be used outside of your currently outdated REPL.</p>
+
+<p>IME, I found myself reaching a similar conclusion to Matthias: in theory, I can maintain the REPL, and I can invest some effort in doing so by writing update methods. In practice, it&rsquo;s just easier to restart the REPL and be done with it. It&rsquo;s nice to have a REPL, and it&rsquo;s easy to get carried away with it to the point where I write code for the sake of not killing it &mdash; and at that point a relevant question is whether the REPL is helping me or whether I&rsquo;m helping the REPL.</p>
+
+<p>The bottom line is that the Lisp world is infested with loading-order problems, and there are a good number of packages (and correspondingly a good amount of human effort) that try to solve these issues. And this is not some theoretical &ldquo;we had a problem and now it&rsquo;s solved&rdquo; &mdash; I see people who are running into these problems today, and I see people who are working on these problems today.</p>
+
+<p>— <em>Eli Barzilay, 4 April 2009</em></p>
+
+<hr />
+
+<p>Eli,</p>
+
+<p>If you send definitions from the buffer to the image, or send commands to undefine them, then you can preserve the arrangement of the program text according to some program logic. This has nothing to do with the REPL. (Corman Lisp seems very interesting here because it actually does not make the distinction between a buffer and a REPL anymore, but gives you only buffers from which you can interact with the image.)</p>
+
+<p>It&rsquo;s good that you have reached some conclusions and stick to a certain programming style. But why do you (or Matthias) make attempts to impose your own views on others?</p>
+
+<p>— <em>Pascal Costanza, 4 April 2009</em></p>
+
+<hr />
+
+<p>Never thought blogs could be as amusing as usenet. :)</p>
+
+<p>In any case, I&rsquo;ll get onto Corman Lisp when I&rsquo;m fed up with DrScheme&rsquo;s interaction style. should take a while&hellip;</p>
+
+<p>— <em>namekuseijin, 4 April 2009</em></p>
+
+<hr />
+
+<p>Pascal,</p>
+
+<p> No one is imposing their will on others.</p>
+
+<p>Indeed, others have explaining how one might build the kind of interactions you propose into DrScheme, if you were so inclined. As I said in a rather obtuse way earlier (for which I apologize), it takes work to do such things. If someone deems it important, they can certainly do it. I&rsquo;d be more than happy to help if said person gets stuck in trying.</p>
+
+<p>— <em>Robby, 4 April 2009</em></p>
+
+<hr />
+
+<p>Pascal,</p>
+
+<p>Re &ldquo;If you send definitions from the buffer to the image, or send commands to undefine them&rdquo; &mdash; that would be equivalent to writing your program with <code>eval</code>. While this is available in a number of languages including outside of the Lisp world, I have yet to see anyone writing &ldquo;Real&rdquo; code that way, for exactly the same reason I mentioned earlier: maintaining such code would be a nightmare. (And this is even if your environment provides your with more powerful eval-like primitives like querying the current bindings, or removing a binding &mdash; all existing in MzScheme (and in DrScheme, of course) too, BTW.)</p>
+
+<p>And re &ldquo;make attempts to impose your own views on others&rdquo; &mdash; where did I do that?? MzScheme <em>does</em> have these feature, DrScheme only <em>adds</em> a feature on top of MzScheme. Like I said about 2000 times now, the only thing that is actually missing from DrScheme would be a convenient &ldquo;send the current expression to the REPL&rdquo; key &mdash; which is very likely to be very easy to add. I also said that nobody did this because nobody has seen any burning need to do so. I can tell you even more: I <em>do</em> use the REPL to debug code every once in a while. Why didn&rsquo;t I bother adding that feature? Well, I said that too: I know where Emacs is when I need it, and Emacs is already doing what Emacs is doing very well &mdash; I have absolutely no desire to compete with it.</p>
+
+<p>— <em>Eli Barzilay, 4 April 2009</em></p>
+
+<hr />
+
+<p>Having read through the comments, while I can understand the reasoning behind not having a &ldquo;send the current expression to the REPL&rdquo; key, it seems that there are two distinct schools of thought here, with no middle ground.</p>
+
+<p>The best way to support both schools would probably be to have two distinct modes, one for each of both. I, for one, could definitely use both, each for different purposes.</p>
+
+<p>One reason that I still keep MIT/GNU Scheme around is that I like its feature to use C-x C-e to return the current expression to the REPL. It is actually convenient when working through such a book as SICP, because then I can keep a running log of the current session history without resetting the session every time I change a definition. It is also one reason that I haven&rsquo;t used DrScheme for SICP yet.</p>
+
+<p>On the other hand, I can see Matthias&rsquo;s point in re-starting the REPL and re-loading the definitions buffer for users who have difficulty in keeping track of the state of the REPL.</p>
+
+<p>Considering that effort was spent in making DrScheme&rsquo;s REPL transparent, and that it wasn&rsquo;t transparent before, why not retain the current mode in as a &ldquo;non-interactive mode,&rdquo; and simply create an alternative &ldquo;interactive mode&rdquo; based on code from the code base of an earlier version of DrScheme before that change was made.</p>
+
+<p>This should not take too much effort, and should be acceptable by both camps. It would resolve this conflict, and add a useful alternative, making DrScheme acceptable to both schools of interaction.</p>
+
+<p>— <em>Benjamin L. Russell, 8 April 2009</em></p>
+
+<hr />
+
+<p>Ok, so here is a try to create a keybinding to push a sexp to the interaction windows (I&rsquo;m not sure I will personally use this though):</p>
+
+<p>In &ldquo;keys.ss&rdquo; that defines my DrScheme keybindings, I bind &ldquo;c:e&rdquo; with a function that takes an editor and an event. Then I use: (send (send editor get-keymap) call-function &ldquo;select-backward-sexp&rdquo; editor event #f) and calls alike with &ldquo;shift-focus&rdquo;, &ldquo;copy-clipboard&rdquo;, &hellip;</p>
+
+<p>The problem is once &ldquo;shift-focus&rdquo; has been called, the focused editor has changed, but I don&rsquo;t know what it is, so I can&rsquo;t call &ldquo;paste-clipboard&rdquo; on the new editor (the interaction window in fact, which I&rsquo;m not sure is really an editor). So how do I get the editor under focus? Or how do I get the interactions editor?</p>
+
+<p>— <em>Laurent, 22 January 2010</em></p>
+
+<hr />
+
+<p>I&rsquo;ve added a note to the keybindings documentation that comes with the code to implement a few of the standard &lsquo;send things to the repl&rsquo; keybindings.</p>
+
+<p>— <em>Robby, 24 September 2011</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/05/what-is-sendsuspend.html">What is <code>send/suspend</code>?</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/03/plt-scheme-v415.html">PLT Scheme v4.1.5</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

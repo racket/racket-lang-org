@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v5.2.1</title>
+    <meta name="description" content="_posted by Eli Barzilay_  Racket version 5.2.1 is now available from http://racket-lang.org/ Release Highlights::      Performance improvements include the use of `epoll()`/`kqueue()` instead of `select()` for the Racket thread scheduler, cross-module inl...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2012/02/racket-v521.html">
+    <link rel="next" href="/2012/02/zack-gallers-experience-with-stateful-vs-stateless-web-apps.html">
+    <link rel="prev" href="/2012/03/fixed-racket-v521-installers.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>02 Feb 2012</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v5.2.1</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.2.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> Release Highlights::</p>
+
+<ul>
+ <li>
+  <p>Performance improvements include the use of <code>epoll()</code>/<code>kqueue()</code> instead of <code>select()</code> for the Racket thread scheduler, cross-module inlining of small functions, and the use of SSE instead of x87 for JIT-compiled floating-point operations on platforms where SSE is always available (including x86_64 platforms). A related change is the interning of literal numbers, strings, byte strings, characters, and regexps that appear in code and syntax objects.</p></li>
+ <li>
+  <p>DrRacket uses a set of composable ray-traced icons available from the new <code>images</code> library collection.</p></li>
+ <li>
+  <p>Typed Racket&rsquo;s <code>typecheck-fail</code> form allows macro creators to customize the error messages that Typed Racket produces. This is especially useful when creating pattern matching macros.</p></li>
+ <li>
+  <p>The performance of Redex&rsquo;s matcher has been substantially improved; depending on the model you should see improvements between 2x and 50x in the time it takes to reduce terms.</p></li>
+ <li>
+  <p>Plots look nicer and are more correct at very small and very large scales. New features include customizable dual axis ticks and transforms (e.g., log axes, date and currency ticks, axis interval collapse and stretch), stacked histograms, and 3D vector fields. The legacy <code>fit</code> function and libfit have been removed.</p></li>
+ <li>
+  <p>The <code>2htdp/universe</code> library&rsquo;s <code>big-bang</code> form supports an experimental game pad key handler.</p></li>
+ <li>
+  <p>The <code>db</code> library now supports nested transactions and PostgreSQL arrays. Bugs involving MySQL authentication and memory corruption in the SQLite bindings have been fixed.</p></li>
+ <li>
+  <p>The Macro Stepper tool in DrRacket no longer executes a program after expanding it.</p></li>
+ <li>
+  <p>In the DMdA teaching languages, infinite recursive signatures (&ldquo;streams&rdquo;, for example) with no intervening <code>mixed</code> are now supported, and the signatures of record definitions without fields now have generators for use with <code>property</code>.</p></li>
+ <li>
+  <p>MysterX&rsquo;s ActiveX support is deprecated and will be removed in the next release. MysterX&rsquo;s core COM functionality will become deprecated in the next release, but COM functionality will be supported for the foreseeable future as a compatibility layer over a forthcoming <code>ffi/com</code> library.</p></li></ul>
+<!-- more-->
+
+<hr />
+
+<p>What is your opinion of Clojure?</p>
+
+<p>— <em>Owen, 2 February 2012</em></p>
+
+<hr />
+
+<p>I just compiled and installed the new racket release on my linux laptop! Racket&rsquo;s great! The performance seems to be much better than in previous versions and DrRacket IDE has improved much! Thanks!</p>
+
+<p>— <em>Axel S., 7 February 2012</em></p>
+
+<hr />
+
+<p>On Windows 7 with both the 32-bit and 64-bit installers, DrRacket can&rsquo;t run due to this error:</p>
+
+<p>read-bitmap: expects type  as 1st argument, given: &rsquo;#(# 270 270); other arguments were: &rsquo;unknown/alpha #f #t</p>
+
+<p>(The problem shows up for the new 5.2.1, but not on with 5.2 version.)</p>
+
+<p>— <em>Dan, 26 March 2012</em></p>
+
+<hr />
+
+<p>This is a bug that we are currently working on. Full message can be found here.</p>
+
+<p>— <em>Eli Barzilay, 26 March 2012</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/03/fixed-racket-v521-installers.html">Fixed Racket v5.2.1 Installers</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2012/02/zack-gallers-experience-with-stateful-vs-stateless-web-apps.html">Zack Galler&rsquo;s Experience with Stateful vs Stateless Web Apps</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

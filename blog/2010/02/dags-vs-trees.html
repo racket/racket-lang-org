@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>DAGs vs Trees</title>
+    <meta name="description" content="_posted by Robby Findler_  As I wondering whether or not there is a better layout algorithm for the module browser window, I looked into tree maps. Of course, the modules in a program form a DAG, not a tree, so I wondered just how big the tree would get i...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2010/02/dags-vs-trees.html">
+    <link rel="next" href="/2010/01/benchmarks.html">
+    <link rel="prev" href="/2010/03/talk-at-flourish.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>28 Feb 2010</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>DAGs vs Trees</h1>
+  </header>
+
+<p><em>posted by Robby Findler</em></p>
+
+<p>As I wondering whether or not there is a better layout algorithm for the module browser window, I looked into <a href="http://www.cs.umd.edu/hcil/treemap-history/">tree maps</a>. Of course, the modules in a program form a DAG, not a tree, so I wondered just how big the tree would get if all of the shared structure in the DAG were replicated. Hey, I figured, if a tree map can handle showing me my entire filesystem, maybe that could work.</p>
+
+<p>&hellip; yeah, no. Turns out to be hopeless. In the spirit of a geeky take off on a jelly bean counting contest, lets see if you can guess just how big these things get. Consider the module graph from the program <code>#lang scheme</code> (ie, the graph that just contains an empty program). This program loads 170 modules with 917 connections between modules (counting the main file that just contains the <code>#lang scheme</code>).</p>
+
+<p>So, the question: how many nodes are there in the unsharified tree? First one to come within 1 billion of the right answer gets all of the fame and glory that this blog brings to bear (har har). I&rsquo;ll post the answer in the comments in a few days (and no fair cheating, those of you that know enough to be able to get your hands on the DAG).</p>
+<!-- more-->
+
+<hr />
+
+<p>Okay, I&rsquo;ll give it a go on the scale you indicate: &hellip; 282 billion? (9^12)</p>
+
+<p>— <em>Kohath, 1 March 2010</em></p>
+
+<hr />
+
+<p>Sadly, not close. Lets make this easier. If you&rsquo;re within a trillion of the correct answer, you win.</p>
+
+<p>— <em>Robby, 2 March 2010</em></p>
+
+<hr />
+
+<p>There are 102,295,446,100,979 nodes. Which is a lot. If we somehow used only a single pixel per node (at the standard 72dpi) that would require a monitor that was more that 2 miles square to display the entire thing.</p>
+
+<p>— <em>Robby, 3 March 2010</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2010/03/talk-at-flourish.html">Talk at Flourish</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2010/01/benchmarks.html">Benchmarks</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

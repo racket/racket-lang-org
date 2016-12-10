@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v6.1.1</title>
+    <meta name="description" content="_posted by Ryan Culpepper_  Racket version 6.1.1 is now available from http://racket-lang.org/      The Mac OS X Yosemite compatibility problems are fixed. We bundled a patched Pango text-drawing library with Racket.     The Windows [32-bit] releases fixe...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2014/11/racket-v611.html">
+    <link rel="next" href="/2014/10/plt-redex-summer-school-call-for-participation.html">
+    <link rel="prev" href="/2014/11/800.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>04 Nov 2014</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v6.1.1</h1>
+  </header>
+
+<p><em>posted by Ryan Culpepper</em></p>
+
+<p>Racket version 6.1.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>The Mac OS X Yosemite compatibility problems are fixed. We bundled a patched Pango text-drawing library with Racket.</p></li>
+ <li>
+  <p>The Windows [32-bit] releases fixes the window-update crashes. We bundled a patched Cairo drawing library with Racket.</p></li>
+ <li>
+  <p>Typed Racket closes two safety holes in the exception system. The revised type system restricts <code>raise</code> to send only instances of the <code>exn</code> structure type and flat data to handlers. It also checks exception handlers properly. Note: Previously well-typed programs may fail to typecheck.</p></li>
+ <li>
+  <p>Typed Racket&rsquo;s typed regions support casts and predicates.</p></li>
+ <li>
+  <p>2htdp/image&rsquo;s notion of equality ignores an image&rsquo;s baseline.</p></li>
+ <li>
+  <p>The package manager supports a binary library installation mode, which allows users to install packages without source or documentation. Use the <code>--binary-lib</code> option with <code>raco pkg install</code>.</p></li>
+ <li>
+  <p>The new drracket-tool-lib package factors out parts of DrRacket&rsquo;s IDE so that they can be reused with other editors, such as Emacs.</p></li>
+ <li>
+  <p>The compiler&rsquo;s use-before-defined analysis has been repaired for certain forms of nested <code>letrec</code>, some <code>let</code> forms, and some uses of <code>set!</code> or <code>with-continuation-mark</code>.</p></li>
+ <li>
+  <p>The compiler performs additional bytecode optimizations. Thanks to Gustavo Massaccesi.</p></li>
+ <li>
+  <p>The CML library comes with a new <code>replace-evt</code> event constructor. Thanks to Jan Dvořák.</p></li>
+ <li>
+  <p>Redex&rsquo;s benchmark suite comes with a description of the benchmark programs.</p></li>
+ <li>
+  <p>Redex&rsquo;s metafunctions can be typeset using the &ldquo;large left brace&rdquo; notation for conditionals.</p></li>
+ <li>
+  <p>The contract library comes with an improved <code>contract-stronger?</code>. Its error messages note that the contract itself might be wrong.</p></li>
+ <li>
+  <p>The GUI library is DPI-aware on Windows.</p></li>
+ <li>
+  <p>The openssl library supports Server Name Indication for servers. Thanks to Jay Kominek.</p></li>
+ <li>
+  <p>The syntax/parse library allows the definition of new pattern forms via pattern expanders, similar to match expanders. Thanks to Alex Knauth.</p></li>
+ <li>
+  <p>OpenGL on Linux no longer depends on libgtkgl, and core profiles are supported (see <code>set-legacy?</code>).</p></li>
+ <li>
+  <p>The teaching languages&rsquo; unit test framework supports <code>check-satisfied</code>, a construct for checking whether a result satisfies a predicate, e.g.:</p></li></ul>
+
+<p><code>(check-satisfied (sort l) sorted?)</code></p>
+
+<p>Feedback Welcome</p>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2014/11/800.html">800!</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2014/10/plt-redex-summer-school-call-for-participation.html">PLT Redex Summer School, Call for Participation</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

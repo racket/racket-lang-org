@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 11)</title>
+    <meta name="description" content="Racket Blog (page 11)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-11.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>04 Jul 2008</p></col-1>
+
+<col-2>
+  <h1><a href='/2008/07/plt-scheme-v402.html'>PLT Scheme v4.0.2</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.0.2 is now available from</p>
+
+<p> <a href="http://plt-scheme.org/">http://plt-scheme.org/</a> This release fixes a bug that caused PLaneT packages to install abnormally slow in 4.0.1.</p>
+
+<p>[ For those that use the nightly builds, subversion, or 4.0.1tsrj2008, you already have this fix (and even more fixes). You do not need to upgrade. The version in svn is now 4.0.2.3 to minimize confusion. ]</p>
+
+<p>Feedback Welcome.</p></div>
+  <a class="more" href='/2008/07/plt-scheme-v402.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>22 Jun 2008</p></col-1>
+
+<col-2>
+  <h1><a href='/2008/06/plt-scheme-v401.html'>PLT Scheme v4.0.1</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.0.1 is now available from</p>
+
+<p> <code>[http://plt-scheme.org/](http://plt-scheme.org/)</code></p>
+
+<p>This release fixes a number of bugs. Most noteworthy, the &ldquo;Internal Error&rdquo; message when requiring a PLaneT package has been fixed and user-defined teachpacks now work properly.</p>
+
+<p>Feedback Welcome.</p></div>
+  <a class="more" href='/2008/06/plt-scheme-v401.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>12 Jun 2008</p></col-1>
+
+<col-2>
+  <h1><a href='/2008/06/plt-scheme-v40.html'>PLT Scheme v4.0</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.0 is now available from <code>[http://plt-scheme.org/](http://plt-scheme.org/)</code> This major new release offers many improvements over version 372, and we encourage everyone to upgrade.</p>
+
+<ul>
+ <li>
+  <p>The PLT Scheme language now provides better syntax for modules, better support for optional and keyword arguments to functions, a more complete syntax for structure types, new syntax for list comprehensions and iterations, a more complete and consistent set of list operations, a more complete set of string operations, and streamlined hash-table operations.</p></li>
+ <li>
+  <p>The documentation has been re-organized and re-written. New tutorials and overviews offer a clearer introduction to Scheme and PLT Scheme.</p></li>
+ <li>
+  <p>New documentation tools help programmers create and install documentation for libraries and Planet packages. All installed documentation can be read though the user&rsquo;s web browser, and even searching within the browser works on local files. The language for writing documentation is an extension of Scheme, and document sources are linked to implementations through the module system. The module connection allows, for example, reliable automatic hyperlinking of identifiers mentioned in documentation to their specifications in other documentation.</p></li>
+ <li>
+  <p>R6RS programs are supported in two ways: though the <code>plt-r6rs</code> executable and through the <code>#!r6rs</code> prefix. The latter allows an R6RS library or program to serve as a PLT Scheme module.</p></li>
+ <li>
+  <p>Legacy R5RS support is improved, partly through a separate <code>plt-r5rs</code> executable.</p></li>
+ <li>
+  <p>Pairs are immutable within the PLT Scheme language; mutable pairs (which are the same as R6RS and R5RS pairs) are provided as a separate datatype. For more information, see &ldquo;Getting rid of <code>set-car!</code> and <code>set-cdr!</code>&rdquo;</p></li>
+ <li>
+  <p>ProfessorJ uses a new and improved parser, it evaluates programs faster, and it includes a Java-specific indenter.</p></li>
+ <li>
+  <p>Testing frameworks for the HtDP and HtDC (ProfessorJ) teaching languages have been unified. Both support systematic unit testing in a comprehensive fashion. When programs lack tests, students are asked to add test cases. When all tests succeed, a simple message says so; otherwise, a pop-up window (dockable) displays URLs to the failed test cases and explains why the cases failed.</p></li>
+ <li>
+  <p>Typed Scheme, a statically typed dialect of Scheme, is now included with PLT Scheme. While Typed Scheme is still in its early stages of development, it supports modular programming with types and full interaction with existing untyped code. Safe interactions between typed and untyped modules are enforced via contracts. Typed Scheme also features a novel type system designed to accommodate Scheme programming idioms. For more information, see the <a href="http://www.ccs.neu.edu/~samth/typed-scheme/">Typed Scheme</a> page.</p></li></ul>
+
+<p>Feedback Welcome.</p></div>
+  <a class="more" href='/2008/06/plt-scheme-v40.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>06 Jun 2008</p></col-1>
+
+<col-2>
+  <h1><a href='/2008/06/the-tour-in-video.html'>The Tour in Video</a></h1>
+  <div class="truncate">
+<p><em>posted by Shriram Krishnamurthi</em></p>
+
+<p>Putting behind its stodgy textual past, the DrScheme tour is now <a href="http://www.youtube.com/watch?v=vgQO_kHl39g">in video</a>! It&rsquo;s rather preliminary, and can use lots of improvement, but now we&rsquo;re really taking it to the kids.</p></div>
+  <a class="more" href='/2008/06/the-tour-in-video.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Jun 2008</p></col-1>
+
+<col-2>
+  <h1><a href='/2008/06/plt-scheme-version-40-is-coming-soon.html'>PLT Scheme version 4.0 is Coming Soon</a></h1>
+  <div class="truncate">
+<p><em>posted by Matthew Flatt</em></p>
+
+<p>PLT Scheme is now 13 years old. The initial version was little more than glue code between a few open-source libraries, which seemed to offer the quickest solution to our modest goals. Modest success leads to bigger goals, however, and then continued success leads to ever more ambitious goals. Before you know it, a mass of users, co-developers, libraries, and documentation rely on design decisions that were made for a much smaller project years before.</p>
+
+<p>Naturally, many of those early design decisions turn out to be a poor fit for the project&rsquo;s eventual role. Starting from scratch isn&rsquo;t usually practical, so you gradually adjust the infrastructure to meet new needs. That was precisely the story for the version 300 series of releases for PLT Scheme. The biggest gap between our original and current goals was in run-time performance, so we replaced bytecode interpretation with a just-in-time native-code compiler, and we replaced a memory manager based on &ldquo;conservative&rdquo; estimates of pointer usage with one that uses precise information.</p>
+
+<p>Performance improves a bit more with version 4.0, but mostly we&rsquo;ve moved on to a bigger mismatch between the original and current goals: the way that PLT Scheme presents itself to users. PLT Scheme was originally conceived as R5RS Scheme with some extensions to make it practical, and with useful tools (notably an IDE) and libraries (notably a GUI library) built on that core. Our documentation and web pages reflected that architecture - which now seems completely upside-down.</p>
+
+<p>Version 4.0 is a fresh start in the way that we present PLT Scheme. It&rsquo;s a new language. PLT Scheme is a dialect of Scheme, certainly, but it&rsquo;s not merely a superset of R5RS, R6RS, or other standards, and those standards are not really the best place to start understanding PLT Scheme. At the same time, the unique extensibility features of the PLT Scheme language and tools allow them to support other languages easily, including R5RS (though a new <code>plt-r5rs</code> executable), R6RS, and more.</p>
+
+<p>Improvements to the PLT Scheme language include better syntax for modules, better support for optional and keyword function arguments, more expressive syntax for structure types, streamlined hash-table operations, new syntax for list comprehensions and iterations, a more complete and consistent set of list and string operations, and reduced dependence on mutable pairs. To current users of PLT Scheme, these changes will seem like the big ones behind version 4.0, but they&rsquo;re small compared to the overall re-organization and the accompanying documentation effort.</p>
+
+<p>We wrote hundreds of pages of new documentation, including much more tutorial and overview information. We ported hundreds of pages of existing documents to new a system that produces cleaner, better organized, more consistent output. We will replace the old tangle of web pages (that try to explain a confusing federation of tools) with a simple page about &ldquo;PLT Scheme.&rdquo; We have even streamlined the command-line flags for the main virtual machine.</p>
+
+<p>The development of PLT Scheme version 4.0 took about one year of hard work. In retrospect, that doesn&rsquo;t sound too bad, considering the scale of the existing code base, the number of things that we improved, and the total size of the documentation (about 2000 pages in PDF form). Still, you can imagine how happy we are to arrive at a stable release, and we hope that the improvements in PLT Scheme version 4.0 work as well for everyone else as they do for us.</p>
+
+<p>For a preview, see <a href="http://pre.plt-scheme.org/">http://pre.plt-scheme.org/</a>. The final version 4.0 release is just days away.</p></div>
+  <a class="more" href='/2008/06/plt-scheme-version-40-is-coming-soon.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>23 Feb 2008</p></col-1>
+
+<col-2>
+  <h1><a href='/2008/02/dirty-looking-hygiene.html'>Dirty Looking Hygiene</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>With the recent release of <a href="http://arclanguage.com/">Arc</a>, there has been some discussion over hygienic macros. Yes, hygienic macros are usually very convenient, but they can become messy in some &lsquo;corner&rsquo; cases. People who learn about macros in Scheme usually start with <code>syntax-rules</code>, and being the limited tool that it is, they often get the impression that for advanced uses (like a macro that captures an identifier) you need to use <code>syntax-case</code> which is this &ldquo;really obscure thing&rdquo;.</p>
+
+<p>For example, say that we want to implement an <code>if</code> form that is similar to Arc&rsquo;s <code>if</code>. This is pretty easy using <code>syntax-rules</code>:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="n">if*</span>
+    <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+      <span class="p">[(</span><span class="n">if*</span><span class="p">)</span> <span class="p">(</span><span class="nb">void</span><span class="p">)]</span>
+      <span class="p">[(</span><span class="n">if*</span> <span class="n">X</span><span class="p">)</span> <span class="n">X</span><span class="p">]</span>
+      <span class="p">[(</span><span class="n">if*</span> <span class="n">C</span> <span class="n">X</span> <span class="n">more</span> <span class="k">...</span><span class="p">)</span> <span class="p">(</span><span class="k">if</span> <span class="n">C</span> <span class="n">X</span> <span class="p">(</span><span class="n">if*</span> <span class="n">more</span> <span class="k">...</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+
+<p>But more important than being easy to write: it is also easy to read. In fact, the nice thing about <code>syntax-rules</code> is that you write more or less the specification of your transformation. Compare this to the specification of Arc&rsquo;s <code>if</code>, which appears in a comment before the definition of <code>ac-if</code> in "<code>ac.scm</code>":</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="c1">; (if) -&gt; nil</span>
+  <span class="c1">; (if x) -&gt; x</span>
+  <span class="c1">; (if t a ...) -&gt; a</span>
+  <span class="c1">; (if nil a b) -&gt; b</span>
+  <span class="c1">; (if nil a b c) -&gt; (if b c)</span>
+</pre></div>
+
+</div>
+
+<p>(Except that the comment mixes up the syntactic specification and the semantic evaluation.)</p>
+
+<p>As a side note, now that we have this definition, it is easy to construct a new language that is just like MzScheme, except for its <code>if</code> that behaves like the above:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">module</span> <span class="n">arc-like</span> <span class="n">mzscheme</span>
+    <span class="p">(</span><span class="k">define-syntax</span> <span class="n">if*</span> <span class="n">..._the</span> <span class="n">above</span> <span class="n">definition_...</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">provide</span> <span class="p">(</span><span class="n">all-from-except</span> <span class="n">mzscheme</span> <span class="k">if</span><span class="p">)</span>
+             <span class="p">(</span><span class="k">rename</span> <span class="n">if*</span> <span class="k">if</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>You can now write code that uses <code>"arc-like.scm"</code> as its language, using the new <code>if</code>. There is no problem in accommodating two languages with two different <code>if</code>&rsquo;s: the new form is compiled to the old one, and there is no confusion in which version you use in any module.</p>
+
+<p>Back to the macro issue: as I said above, you run into problems if you want to capture names, right? For example, if you want to implement Arc&rsquo;s <code>aif</code>. The usual <code>syntax-case</code> solution is to construct an identifier that has the lexical context of the input syntax. It&rsquo;s easy to abstract over all this &mdash; I posted a <a href="http://www.arclanguage.org/item?id=841">message</a> on the Arc forum showing how to define a <a href="http://tmp.barzilay.org/defmac.ss">defmac</a> macro that has the simplicity of <code>syntax-rules</code> with the added convenience of specifying keywords and captured names. This works for <em>some</em> cases, but there are still some <a href="http://download.plt-scheme.org/doc/372/html/mzscheme/mzscheme-Z-H-12.html#node_sec_12.2.1.1">subtle corner cases</a>.</p>
+
+<p>But there&rsquo;s a better solution in PLT Scheme, one that follows Paul Graham&rsquo;s intuition when he <a href="http://www.arclanguage.org/item?id=2526">says</a>: &ldquo;captured symbols are kind of freaky.&rdquo; The basic idea is a change of perspective: instead of (unhygienically) binding individual occurrences of <code>it</code> whenever <code>aif</code> is used, you define <code>it</code> once as a thing in its own right &mdash; a special context-dependent piece of syntax. Outside of an <code>aif</code> form, <code>it</code> has no meaning: we simply make it throw a syntax error. Uses of <code>aif</code> provide a meaning for <code>it</code> by locally changing its meaning (its expansion) to something useful: the binding that holds the result of evaluating the condition expression. (&ldquo;Locally&rdquo; means within a piece of syntax, so the new meaning is valid in a lexical-scope.)</p>
+
+<p>In PLT Scheme, the &ldquo;special context-dependent piece of syntax&rdquo; are <em>syntax parameters</em>, and you change them locally with <code>syntax-parameterize</code>.</p>
+
+<p>To continue the above example, here&rsquo;s how we make our <code>if*</code> anaphoric:</p>
+
+<ul>
+ <li>
+  <p>require the <code>(lib "stxparam.ss" "mzlib")</code> library,</p></li>
+ <li>
+  <p>define <code>it</code> as a syntax using <code>define-syntax-parameter</code>, and have it raise an error by default,</p></li>
+ <li>
+  <p>bind a temporary variable to the result of evaluating the condition,</p></li>
+ <li>
+  <p>wrap the positive branch with <code>syntax-parameterize</code>, using <code>make-rename-transformer</code>, which is a convenient way to make a macro that behaves like the new variable.</p></li></ul>
+
+<p>The implementation looks like this:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"stxparam.ss"</span> <span class="s2">"mzlib"</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">define-syntax-parameter</span> <span class="n">it</span>
+    <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">stx</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">raise-syntax-error</span> <span class="no">#f</span> <span class="s2">"can only be used inside `if&#39;"</span> <span class="n">stx</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">define-syntax</span> <span class="n">if*</span>
+    <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+      <span class="p">[(</span><span class="n">if*</span><span class="p">)</span> <span class="p">(</span><span class="nb">void</span><span class="p">)]</span>
+      <span class="p">[(</span><span class="n">if*</span> <span class="n">X</span><span class="p">)</span> <span class="n">X</span><span class="p">]</span>
+      <span class="p">[(</span><span class="n">if*</span> <span class="n">C</span> <span class="n">X</span> <span class="n">more</span> <span class="k">...</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">b</span> <span class="n">C</span><span class="p">])</span>
+         <span class="p">(</span><span class="k">if</span> <span class="n">b</span>
+           <span class="p">(</span><span class="n">syntax-parameterize</span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb">make-rename-transformer</span> <span class="o">#&#39;</span><span class="n">b</span><span class="p">)])</span> <span class="n">X</span><span class="p">)</span>
+           <span class="p">(</span><span class="n">if*</span> <span class="n">more</span> <span class="k">...</span><span class="p">)))]))</span>
+</pre></div>
+
+</div>
+
+<p>The resulting macro does not break hygiene. For example, <code>(let ([it 3]) (if #t it))</code> evaluates to <code>3</code>, because it shadows the global <code>it</code> that <code>if</code> changes. This is a change from a real unhygienic macro &mdash; but that&rsquo;s the whole point: we (the macro author) do not interfere with scopes in the user code.</p>
+
+<p>Note that <code>(if 1 (if 2 it))</code> still evaluates to <code>2</code>, because the outer <code>if</code> does not really bind <code>it</code> &mdash; it is not captured, just changed locally &mdash; so the inner <code>if</code> changes it again. Also, <code>(if #f it it)</code> raises the usual context error, since our macro changes <code>it</code> only in the positive branch.</p></div>
+  <a class="more" href='/2008/02/dirty-looking-hygiene.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>14 Jan 2008</p></col-1>
+
+<col-2>
+  <h1><a href='/2008/01/a-privacy-flaw-thwarted.html'>A Privacy Flaw, Thwarted</a></h1>
+  <div class="truncate">
+<p><em>posted by Shriram Krishnamurthi</em></p>
+
+<p>My student Brendan Hickey recently identified the following security hole.</p>
+
+<p>A university (let&rsquo;s call it Orange University) wants to let its graduating students vote on their graduation speaker. They used to do it by paper; catching up with the times, they now do it on the Web.</p>
+
+<p>They used to have a box into which you could type the name of your nominee. But that is surely problematic: people misspell names, you have to argue about how to count ambiguous votes, someone will vote for their pet bonobo, etc. Better (perhaps) to give them the names of all the students and let them choose. [Alert: if Orange U adopts a simple naming scheme for email addresses, a student can immediately screen-scrape a pretty plum list to sell a spammer. Brendan and I noticed this in a femtosecond; I don&rsquo;t know why this didn&rsquo;t occur to the university.]</p>
+
+<p>Anyway, now you have a Web page where people are going to choose, and the software that processes the responses must distinguish between these choices. You have to associate a key with each student. You&rsquo;ve already got a key for each candidate: their student ID number. So you use that as your key. Now anyone viewing the page source can immediately see which student ID number goes with which student name. So much for confidentiality.</p>
+
+<p>Whoops.</p>
+
+<p>I&rsquo;d like to point out that Pete Hopkins&rsquo;s <code>send/suspend/dispatch</code>, and the improved version of it by Jay McCarthy, identify and solve just this code structuring problem in a way that the privacy leak can never occur. For the most up-to-date presentation of it, read section 3.2 and section 4 of <a href="http://www.cs.brown.edu/~sk/Publications/Papers/Published/khmgpf-impl-use-plt-web-server-journal/">our paper</a>.</p>
+
+<p>Maybe Orange U should be using Scheme.</p></div>
+  <a class="more" href='/2008/01/a-privacy-flaw-thwarted.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Dec 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/12/the-design-of-extended-exercises.html'>The Design of Extended Exercises</a></h1>
+  <div class="truncate">
+<p><em>posted by Shriram Krishnamurthi</em></p>
+
+<p>One of the highlights of the TeachScheme! method is to create Extended Exercises. Several of these pepper <em>How to Design Programs</em>, and even more have been created since to deal with a variety of interesting problem scenarios (e.g., illustrating graphics via t-shirt design, explaining networking by having machines play roles in a theatrical play, demonstrating communication with foreign sites by processing data from a microfinance institution, etc). Through an Extended Exercise a student learns about how computer science connects to domains, develops practice building programs incrementally, learns to build earlier assignments that later assignments can depend on, and so forth.</p>
+
+<p>Here is a preliminary articulation of some principles that I think govern a good Extended Exercise, with an emphasis on their &ldquo;form factor&rdquo;.</p>
+
+<ul>
+ <li>
+  <p>Pick a domain. Whether the domain looks inward (a computing activity such as networking) or outward (such as social networking) doesn&rsquo;t matter. If it does look inward, try to make it more applicable through the judicious use of data (the same exercise can look very dry or very applied depending on what data you choose). For instance, our networking exercises is presented in terms of Shakespeare&rsquo;s Hamlet.</p></li>
+ <li>
+  <p>If necessary, write a Teachpack. A domain almost certainly needs a Teachpack to reduce the programming burden on students. For instance, the microfinance exercise uses a Teachpack to hide the ugly details of screen-scraping (which in turn need to be constantly updated by a vigilant maintainer).</p></li>
+ <li>
+  <p>Try to provide a non-trivial dataset in the Teachpack. Good data can make an assignment more enjoyable&mdash;e.g., our networking example provides an excerpt from Act 2, Scene 2 of Hamlet (&ldquo;What a piece of work is man!&rdquo;)&mdash;and in cases where the exercise depends on connecting to an external site (e.g., the microfinance example), the data may be essential.</p></li>
+ <li>
+  <p>Structure the assignment to have five to eight questions: not much fewer (too few steps) nor much more (too much to grasp).</p></li>
+ <li>
+  <p>Try to decompose the problem using good principles of stepwise refinement, using your own wisdom in these matters. By showing students several such examples, we hope for them to build up an intuition for the process. Your decomposition may not be strictly linear; that&rsquo;s okay. But it should be progressive.</p></li>
+ <li>
+  <p>Perhaps the most important point: At every step, try to have a full, working application. That means the Teachpack may need to export several interfaces, each one taking more parameters and accepting more functionality than the previous one. Otherwise the student needs to have all the parts working before they can understand whether even one works in context, leading to a frustrating learning experience and encouraging wanton hacking as they try (and invariably fail) to quickly get to a working system.</p></li>
+ <li>
+  <p>Design interfaces carefully to make judicious use of first-class functions. It is inevitable that students will need to provide functions (not just flat data) to what your Teachpack exports. Show them the invocations of your Teachpack in terms of named functions (that they define).</p></li>
+ <li>
+  <p>Try to provide a few extra-credit routes for ambitious students. Options include letting students peel back even more of the Teachpack, or adding interesting features.</p></li></ul></div>
+  <a class="more" href='/2007/12/the-design-of-extended-exercises.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Dec 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/12/plt-scheme-v372.html'>PLT Scheme v372</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 372 is now available from <a href="http://download.plt-scheme.org/">http://download.plt-scheme.org/</a></p>
+
+<p>This is mostly a bug-fix release. Changes:</p>
+
+<ul>
+ <li>
+  <p>DrScheme now supports name completion via Ctl-/ (Windows and X) or Cmd-/ (Mac OS X). Completion is sensitive to the current language in DrScheme, but it is not sensitive to lexical bindings.</p></li>
+ <li>
+  <p>DrScheme&rsquo;s stepper now supports the &ldquo;check-expect&rdquo;, &ldquo;check-within&rdquo;, and &ldquo;check-error&rdquo; forms of the testing.ss teachpack.</p></li>
+ <li>
+  <p>A number of bug fixes and small improvements for ProfessorJ. The grammar for the current release slightly differs from the one in HtDC.Feedback Welcome.</p></li></ul></div>
+  <a class="more" href='/2007/12/plt-scheme-v372.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>19 Dec 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/12/your-security-hole-is-my-fun-hack-or-computing-factorial-in-drscheme-with-a-click-powered-loop.html'>Your security hole is my fun hack, or: computing factorial in DrScheme with a click-powered loop.</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>One of the many changes in v4.0 is to close a security hole in DrScheme. Specifically, DrScheme v371 lets the program in the definitions window get a hold of the editor containing said program and manipulate it programmatically. There are lots of bad things one might do with this fact, like circumventing DrScheme&rsquo;s protections and cause it to crash, or even spontaneously exit.</p>
+
+<p>But, we can do something even more fun. Put the following program into a DrScheme window (in v371) and set the language to the mzscheme/textual language. Change &ldquo;input&rdquo; to whatever number you wish to compute the factorial of and then hit the Run button until your program transforms itself into the final result.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="n">input</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"mred.ss"</span> <span class="s2">"mred"</span><span class="p">)</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"class.ss"</span><span class="p">))</span>
+<span class="p">(</span><span class="k">let*</span> <span class="p">([</span><span class="n">ed</span> <span class="p">(</span><span class="k">let-syntax</span> <span class="p">([</span><span class="n">m</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">stx</span><span class="p">)</span> <span class="p">(</span><span class="k">with-syntax</span> <span class="p">([</span><span class="n">x</span> <span class="p">(</span><span class="nb">syntax-source</span> <span class="n">stx</span><span class="p">)])</span> <span class="o">#&#39;</span><span class="n">x</span><span class="p">))])</span>
+             <span class="p">(</span><span class="n">m</span><span class="p">))]</span>
+       <span class="p">[</span><span class="n">mth</span> <span class="p">(</span><span class="nb">regexp-match</span> 
+             <span class="sr">#rx"^; ([0-9]+) ([0-9]+)"</span> 
+             <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">get-text</span> <span class="mi">0</span> 
+                   <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">paragraph-end-position</span> <span class="mi">0</span><span class="p">)))]</span>
+       <span class="p">[</span><span class="n">lckd</span> <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">is-locked?</span><span class="p">)])</span>
+  <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">begin-edit-sequence</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">lock</span> <span class="no">#f</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="n">mth</span>
+      <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">n</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="p">(</span><span class="nb">list-ref</span> <span class="n">mth</span> <span class="mi">1</span><span class="p">))]</span>
+            <span class="p">[</span><span class="n">acc</span> <span class="p">(</span><span class="nb">string-&gt;number</span> <span class="p">(</span><span class="nb">list-ref</span> <span class="n">mth</span> <span class="mi">2</span><span class="p">))])</span>
+        <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">delete</span> <span class="mi">0</span> <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">paragraph-end-position</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">=</span> <span class="n">n</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">begin</span> <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">delete</span> <span class="mi">0</span> <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">paragraph-end-position</span> <span class="mi">0</span><span class="p">))</span>
+                   <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">insert</span> <span class="p">(</span><span class="nb">format</span> <span class="s2">"~a</span><span class="se">\n</span><span class="s2">#|"</span> <span class="n">acc</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+                   <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">insert</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">|#"</span> <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">last-position</span><span class="p">)))</span>
+            <span class="p">(</span><span class="k">begin</span> <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">delete</span> <span class="mi">0</span> <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">paragraph-end-position</span> <span class="mi">0</span><span class="p">))</span>
+                   <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">insert</span> <span class="p">(</span><span class="nb">format</span> <span class="s2">"; ~a ~a"</span> <span class="p">(</span><span class="nb">-</span> <span class="n">n</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb">*</span> <span class="n">n</span> <span class="n">acc</span><span class="p">))</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">))))</span>
+      <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">insert</span> <span class="p">(</span><span class="nb">format</span> <span class="s2">"; ~a 1</span><span class="se">\n</span><span class="s2">"</span> <span class="n">input</span><span class="p">)</span> <span class="mi">0</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">lock</span> <span class="n">lckd</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">send</span> <span class="n">ed</span> <span class="n">end-edit-sequence</span><span class="p">))</span>
+</pre></div>
+
+</div></div>
+  <a class="more" href='/2007/12/your-security-hole-is-my-fun-hack-or-computing-factorial-in-drscheme-with-a-click-powered-loop.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-10.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li class="active"><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-12.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

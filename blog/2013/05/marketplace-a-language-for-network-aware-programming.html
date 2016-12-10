@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Marketplace: A language for network-aware programming</title>
+    <meta name="description" content="_posted by Sam Tobin-Hochstadt_  We are happy to announce the release of Marketplace, a new programming language for building functional network programs. Marketplace combines two fundamental ideas in a new way: nested virtual machines and publish/subscri...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2013/05/marketplace-a-language-for-network-aware-programming.html">
+    <link rel="next" href="/2013/05/racket-v534.html">
+    <link rel="prev" href="/2013/06/racket-v535.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 May 2013</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Marketplace: A language for network-aware programming</h1>
+  </header>
+
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>We are happy to announce the release of Marketplace, a new programming language for building functional network programs. Marketplace combines two fundamental ideas in a new way: nested virtual machines and publish/subscribe messaging. Nesting allows programs to isolate processes and to delimit conversations. While publish/subscribe generalizes point-to-point and broadcast messaging, it smoothly turns the appearance and disappearance of participants and resources into presence and absence messages. Such messages make it particularly easy to start and stop services and to manage resources based on demand.</p>
+
+<p>Here is a simple TCP echo server written in Marketplace: </p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">marketplace</span>
+
+<span class="p">(</span><span class="n">endpoint</span> <span class="kd">#:subscriber</span> <span class="p">(</span><span class="n">tcp-channel</span> <span class="n">?</span> <span class="p">(</span><span class="n">tcp-listener</span> <span class="mi">5999</span><span class="p">)</span> <span class="n">?</span><span class="p">)</span>
+          <span class="kd">#:conversation</span> <span class="p">(</span><span class="n">tcp-channel</span> <span class="n">from</span> <span class="n">to</span> <span class="k">_</span><span class="p">)</span>
+          <span class="kd">#:on-presence</span> <span class="p">(</span><span class="n">spawn</span> <span class="kd">#:child</span> <span class="p">(</span><span class="n">echoer</span> <span class="n">from</span> <span class="n">to</span><span class="p">)))</span>
+
+<span class="c1">;; echoer: TcpAddress TcpAddress -&gt; Transition</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">echoer</span> <span class="n">from</span> <span class="n">to</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">transition</span> <span class="n">stateless</span>
+    <span class="p">(</span><span class="n">endpoint</span> <span class="kd">#:subscriber</span> <span class="p">(</span><span class="n">tcp-channel</span> <span class="n">from</span> <span class="n">to</span> <span class="n">?</span><span class="p">)</span>
+              <span class="kd">#:on-absence</span> <span class="p">(</span><span class="n">quit</span><span class="p">)</span>
+              <span class="p">[(</span><span class="n">tcp-channel</span> <span class="k">_</span> <span class="k">_</span> <span class="n">data</span><span class="p">)</span>
+               <span class="p">(</span><span class="n">send-message</span> <span class="p">(</span><span class="n">tcp-channel</span> <span class="n">to</span> <span class="n">from</span> <span class="n">data</span><span class="p">))])))</span>
+</pre></div>
+
+</div>
+
+<p>The initial endpoint subscribes to TCP messages on port 5999. When a conversational partner appears, the endpoint spawns a new process that runs an echoer process. The latter is stateless and subscribes to TCP messages. When it gets messages with payload data, it sends them back out with the opposite addressing; when the TCP conversation disappears, it quits.</p>
+
+<p>Thus far, we have built several real systems using Marketplace: a DNS server, a DNS proxy, and an SSH server.</p>
+
+<p>The DNS proxy has handled DNS traffic for ourselves and other members of our lab for the last several months.</p>
+
+<p>You can read an overview along with detailed documentation for Marketplace at <a href="http://tonyg.github.io/marketplace/">http://tonyg.github.io/marketplace/</a>.</p>
+
+<p>To get the sources for Marketplace as well as the applications point your browser to <a href="https://github.com/tonyg/marketplace">https://github.com/tonyg/marketplace</a>.</p>
+
+<p>Enjoy!</p>
+
+<p>Tony Garnock-Jones</p>
+
+<p>Sam Tobin-Hochstadt</p>
+
+<p>Matthias Felleisen</p>
+<!-- more-->
+
+<hr />
+
+<p>This looks really cool. I can&rsquo;t wait to try it out. How does it perform, and how robust is it against cracking attempts?</p>
+
+<p>— <em>Geoff Knauth, 30 May 2013</em></p>
+
+<hr />
+
+<p>Interesting. I guess it&rsquo;s inspired by Erlang. What&rsquo;s the reason for calling this a programming language, and not just a framework or library? I look forward to more information, and tutorials.</p>
+
+<p>— <em>Jon, 31 May 2013</em></p>
+
+<hr />
+
+<p>Geoff, we haven&rsquo;t yet tried to optimize this for performance, but the DNS proxy built with Marketplace serves all the DNS traffic for a bunch of people in our lab. As for security, that&rsquo;s all about what application you write using it.</p>
+
+<p>— <em>Sam Tobin-Hochstadt, 31 May 2013</em></p>
+
+<hr />
+
+<p>Jon, yes, Erlang is a big inspiration, among many other things. It&rsquo;s a language in the sense that it goes after <code>#lang</code>, and in the sense that it extends the programming model in a fundamental way. Ultimately, the distinction between framework, language, and library is fuzzy.</p>
+
+<p>— <em>Sam Tobin-Hochstadt, 31 May 2013</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2013/06/racket-v535.html">Racket v5.3.5</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2013/05/racket-v534.html">Racket v5.3.4</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

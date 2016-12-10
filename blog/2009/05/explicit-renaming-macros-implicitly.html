@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Explicit Renaming Macros; Implicitly</title>
+    <meta name="description" content="_posted by Eli Barzilay_  It's been one too many times that I hear respectable Schemers talk about how they like explicit renaming macros — not because they're more powerful, but because using them is close to using simple `defmacro`s. In this post I'll s...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/05/explicit-renaming-macros-implicitly.html">
+    <link rel="next" href="/2009/05/the-two-state-solution-native-and-serializable-continuations-in-the-plt-web-server.html">
+    <link rel="prev" href="/2009/05/typed-scheme-20.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>24 May 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Explicit Renaming Macros; Implicitly</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>It&rsquo;s been one too many times that I hear respectable Schemers talk about how they like explicit renaming macros — not because they&rsquo;re more powerful, but because using them is close to using simple <code>defmacro</code>s. In this post I&rsquo;ll show how you can easily write ER-like macros in PLT, just so I won&rsquo;t need to explain the same thing once again.</p>
+
+<p>Disclaimers:</p>
+
+<ul>
+ <li>
+  <p>If you&rsquo;re not interested in ER-macros, then you shouldn&rsquo;t read this.</p></li>
+ <li>
+  <p>I&rsquo;m not claiming that ER macros are not respectable, I&rsquo;m just surprised at the knee jerk reaction to <code>syntax-case</code>.</p></li>
+ <li>
+  <p>This is not an attempt at providing some portable library or even a PLT library. The intention is to show that <code>syntax-case</code>-style macros are &ldquo;as convenient&rdquo; as ER macros, if you really want to get down to that level.</p></li>
+ <li>
+  <p>This is also not an attempt at any kind of formal claim of equivalence in any direction, only a demonstration that you can get the same kind of convenience.</p></li>
+ <li>
+  <p>The bottom line here should be just the convenience point, addressed at people who like ER macros for that, and who think that <code>syntax-case</code> macros are somehow magical or that you lose the ability to play with S-expressions.</p></li></ul>
+
+<p>The important fact here is that while PLT&rsquo;s <code>syntax-case</code> macro system does not give you raw S-expressions, what you get is a simple wrapper holding them. A macro is a syntax transformer: a function that consumes a syntax value and returns one. For example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">foo</span> <span class="n">stx</span><span class="p">)</span>
+    <span class="o">#&#39;</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>is a macro that always expands to 123 (with <code>#'123</code> being the usual shorthand for <code>(syntax 123)</code>).</p>
+
+<p>A syntax object in PLT Scheme (the input to macro functions) is an S-expression, with some lexical information added — this includes the lexical context (in an opaque form), source location, and a few more things. To be more precise, a syntax value is a nested structure of wrappers holding lists and pairs, holding more wrappers, with identifiers at the leaves, where an identifier is a wrapper holding a symbol. It&rsquo;s easy to strip off all wrappers using <code>syntax-&gt;datum</code> if you like to work with S-expressions, but you <em>don&rsquo;t</em> want to strip it off of identifiers, since that will lose the important gravy. (In fact, the <code>defmacro</code> library works by stripping off all information, even from identifiers, then reconstructing it by trying to match names in the output form with the original input.)</p>
+
+<p>Instead of throwing away all information, what we want to do is preserve identifiers. We can use <code>syntax-&gt;list</code> for this: this is a function that takes a syntax value that contains a list, and strips off the top-level extra information leaving you with a list of syntaxes for the sub-expressions (returning <code>#f</code> if the input syntax does not hold a list). Once we have such a list, we can do the usual kind of processing with it, and when we&rsquo;re done turn the result back into a syntax using <code>datum-&gt;syntax</code> (which &ldquo;borrows&rdquo; the original input expression&rsquo;s information). For example,</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="nb">add1</span> <span class="n">stx</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="nb">+</span> <span class="o">#&#39;</span><span class="nb">+</span><span class="p">])</span>
+      <span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">stx</span> <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="nb">+</span> <span class="mi">1</span> <span class="o">,@</span><span class="p">(</span><span class="nb">cdr</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">stx</span><span class="p">)))</span> <span class="n">stx</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>That&rsquo;s a very simple example though; if you try something a little more complicated, you quickly find out that all this unwrapping is inconvenient:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">mylet</span> <span class="n">stx</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">*lambda</span> <span class="o">#&#39;</span><span class="k">lambda</span><span class="p">])</span>
+      <span class="p">(</span><span class="nb">datum-&gt;syntax</span>
+       <span class="n">stx</span>
+       <span class="o">`</span><span class="p">((</span><span class="o">,</span><span class="n">*lambda</span> <span class="o">,</span><span class="p">(</span><span class="nb">map</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">car</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">x</span><span class="p">)))</span>
+                         <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="p">(</span><span class="nb">cadr</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">stx</span><span class="p">))))</span>
+                   <span class="o">,@</span><span class="p">(</span><span class="nb">cddr</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">stx</span><span class="p">)))</span>
+         <span class="o">,@</span><span class="p">(</span><span class="nb">map</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb">cadr</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">x</span><span class="p">)))</span>
+                <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="p">(</span><span class="nb">cadr</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">stx</span><span class="p">)))))</span>
+       <span class="n">stx</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>(Note also the <code>*lambda</code> that is used to avoid the <code>lambda</code> expressions used in the meta-code.)</p>
+
+<p>What can help here is some helper function that receive a syntax value as its input, and turn all wrapped lists into real lists recursively, but will leave identifiers intact:</p>
+
+<div class="brush: (begin-for-syntax">
+ <div class="pygments">
+  <pre>    (define (strip stx)
+      (let ([maybe-list (syntax-&gt;list stx)])
+        ;; syntax-&gt;list returns #f if the syntax is not a list
+        (if maybe-list (map strip maybe-list) stx))))
+</pre></div>
+
+</div>
+
+<p>But as long as we&rsquo;re writing a syntax utility, we can make it do a litte more work: feed the resulting tree to <em>your</em> transformer, grab its result, and do the necessary <code>datum-&gt;syntax</code> voodoo on it:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">begin-for-syntax</span>
+    <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">er-like-transformer</span> <span class="n">transformer</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">strip</span> <span class="n">stx</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">maybe-list</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">stx</span><span class="p">)])</span>
+          <span class="c1">;; syntax-&gt;list returns #f if the syntax is not a list</span>
+          <span class="p">(</span><span class="k">if</span> <span class="n">maybe-list</span> <span class="p">(</span><span class="nb">map</span> <span class="n">strip</span> <span class="n">maybe-list</span><span class="p">)</span> <span class="n">stx</span><span class="p">)))</span>
+      <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">stx</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">stx</span> <span class="p">(</span><span class="n">transformer</span> <span class="p">(</span><span class="n">strip</span> <span class="n">stx</span><span class="p">))</span> <span class="n">stx</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<p>With this utility defined, the above macro becomes much easier to deal with:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="n">mylet</span>
+    <span class="p">(</span><span class="n">er-like-transformer</span>
+     <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nb">exp</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="n">vars</span>  <span class="p">(</span><span class="nb">map</span> <span class="nb">car</span> <span class="p">(</span><span class="nb">cadr</span> <span class="nb">exp</span><span class="p">)))</span>
+             <span class="p">(</span><span class="n">inits</span> <span class="p">(</span><span class="nb">map</span> <span class="nb">cadr</span> <span class="p">(</span><span class="nb">cadr</span> <span class="nb">exp</span><span class="p">)))</span>
+             <span class="p">(</span><span class="n">body</span>  <span class="p">(</span><span class="nb">cddr</span> <span class="nb">exp</span><span class="p">)))</span>
+         <span class="o">`</span><span class="p">((</span><span class="o">,</span><span class="p">(</span><span class="k">syntax</span> <span class="k">lambda</span><span class="p">)</span> <span class="o">,</span><span class="n">vars</span> <span class="o">,@</span><span class="n">body</span><span class="p">)</span>
+           <span class="o">,@</span><span class="n">inits</span><span class="p">)))))</span>
+ <span class="o">```</span>
+
+ <span class="ss">...and</span> <span class="k">this</span> <span class="n">is</span> <span class="n">almost</span> <span class="n">identical</span> <span class="n">to</span> <span class="n">the</span> <span class="n">explicit</span> <span class="n">renaming</span> <span class="nb">version</span> <span class="n">of</span> <span class="n">the</span> <span class="n">macro</span><span class="c1">; for example, compare it with the sample code in the [MIT-Scheme manual](http://groups.csail.mit.edu/mac/projects/scheme/documentation/scheme_3.html#SEC49).  The only change is that `(rename &#39;lambda)` is replaced with `(syntax lambda)`.</span>
+
+<span class="n">Obviously</span><span class="o">,</span> <span class="k">this</span> <span class="n">is</span> <span class="n">very</span> <span class="n">close</span><span class="o">,</span> <span class="n">but</span> <span class="n">doesn</span><span class="o">&#39;</span><span class="ss">t</span> <span class="n">show</span> <span class="n">intentional</span> <span class="n">captures.</span>  <span class="n">So</span> <span class="n">I</span> <span class="n">just</span> <span class="n">grabbed</span> <span class="n">the</span> <span class="o">`</span><span class="ss">loop</span><span class="o">`</span> <span class="ss">example</span> <span class="n">from</span> <span class="n">the</span> <span class="n">same</span> <span class="n">page</span><span class="o">,</span> <span class="k">and</span> <span class="n">did</span> <span class="n">the</span> <span class="n">same</span> <span class="n">change</span> <span class="n">—</span> <span class="k">only</span> <span class="k">this</span> <span class="k">time</span> <span class="n">I</span> <span class="n">used</span> <span class="o">`#&#39;</span><span class="ss">foo</span><span class="o">`</span> <span class="ss">instead</span> <span class="n">of</span> <span class="o">`</span><span class="p">(</span><span class="ss">syntax</span> <span class="ss">foo</span><span class="p">)</span><span class="o">`</span> <span class="p">(</span><span class="ss">and</span> <span class="ss">I</span> <span class="ss">also</span> <span class="ss">changed</span> <span class="ss">the</span> <span class="ss">one-sided</span> <span class="o">`</span><span class="ss">if</span><span class="o">`</span> <span class="ss">to</span> <span class="ss">a</span> <span class="o">`</span><span class="ss">when</span><span class="o">`</span><span class="p">)</span><span class="o">.</span>  <span class="n">The</span> <span class="n">resulting</span> <span class="n">macro</span> <span class="n">works</span> <span class="n">fine:</span>  
+
+<span class="o">```</span><span class="ss">racket</span>
+<span class="p">(</span><span class="k">define-syntax</span> <span class="n">loop</span>
+    <span class="p">(</span><span class="n">er-like-transformer</span>
+     <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="n">body</span> <span class="p">(</span><span class="nb">cdr</span> <span class="n">x</span><span class="p">)))</span>
+         <span class="o">`</span><span class="p">(</span><span class="o">,#&#39;</span><span class="nb">call-with-current-continuation</span>
+           <span class="p">(</span><span class="o">,#&#39;</span><span class="k">lambda</span> <span class="p">(</span><span class="ss">exit</span><span class="p">)</span>
+            <span class="p">(</span><span class="o">,#&#39;</span><span class="k">let</span> <span class="o">,#&#39;</span><span class="n">f</span> <span class="p">()</span> <span class="o">,@</span><span class="n">body</span> <span class="p">(</span><span class="o">,#&#39;</span><span class="n">f</span><span class="p">))))))))</span>
+
+  <span class="p">(</span><span class="k">define-syntax</span> <span class="n">while</span>
+    <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+      <span class="p">((</span><span class="n">while</span> <span class="n">test</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+       <span class="p">(</span><span class="n">loop</span> <span class="p">(</span><span class="k">when</span> <span class="p">(</span><span class="nb">not</span> <span class="n">test</span><span class="p">)</span> <span class="p">(</span><span class="nb">exit</span> <span class="no">#f</span><span class="p">))</span>
+             <span class="n">body</span> <span class="k">...</span><span class="p">))))</span>
+
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="n">x</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">while</span> <span class="p">(</span><span class="nb">&gt;</span> <span class="n">x</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">printf</span> <span class="s2">"~s</span><span class="se">\n</span><span class="s2">"</span> <span class="n">x</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">set!</span> <span class="n">x</span> <span class="p">(</span><span class="nb">-</span> <span class="n">x</span> <span class="mi">1</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<p>This is pretty close to a library, and indeed, as I was writing this text I found <a href="http://www.mail-archive.com/larceny-users@lists.ccs.neu.edu/msg00097.html">a post by Andre van Tonder</a> on the Larceny mailing list that uses a very similar approach and <em>does</em> make a library out of it. This is done by adding two arguments to the expected ER-transformation function — one is a <code>rename</code> function (since the above method uses <code>syntax</code> it is limited to immediate identifiers), and the other is always passed as <code>free-identifier=?</code>. Such a compatibility library is, however, not the purpose of this post.</p>
+
+<p>Finally, there is still a minor issue with this — PLT has an implicit <code>#%app</code> which is used wherever there are parentheses that stand for a function application — and in this code they are used unhygienically. This is usually not a noticeable problem, and if it is, you can add explicit <code>#%app</code>s. It might also be possible to find a more proper solution (e.g., use a hash table to keep track of lists that were disassembled by the client transformer), but at this point it might be better to just use the more natural <code>syntax-case</code> anyway.</p>
+<!-- more-->
+
+<hr />
+
+<p>turing tarpit? next corner right and there you are ;)</p>
+
+<p>As you are quite aware, your &ldquo;solution&rdquo; changes the cost of macro-expansion to quadric. This is in constrast to linear cost for native syntax-case AND native ER-macros. As it is quite possible to implement syntax-case in terms of ER-transformers (or syntactic-closures) without loosing the linear complexity, many people claim that these two are more basic than syntax-case &hellip; and therefore should be in the actual standard.</p>
+
+<p>Whats your opinion eli?</p>
+
+<p>— <em>derSlom, 24 May 2009</em></p>
+
+<hr />
+
+<p>to also add useful something besides nitpicking, I have been down that road as well: http://paste.lisp.org/display/41754</p>
+
+<p>— <em>derSlom, 24 May 2009</em></p>
+
+<hr />
+
+<p>Although I don&rsquo;t know of any formal proofs of this, I don&rsquo;t believe that either ER or syntactic closures can express syntax case, nor can syntax case (in the original formulation) express ER.</p>
+
+<p>Also, ER really doesn&rsquo;t have a clear specification, so it&rsquo;s hard to make sure that an ER implementation that matches the original note works with actual code.</p>
+
+<p>— <em>Sam TH, 24 May 2009</em></p>
+
+<hr />
+
+<p>derSlom: Yes, it is a demonstration of how to do ER-style for people who like that for the listed reason, and as a demonstration that syntax values don&rsquo;t require black magic, it&rsquo;s not a complete library. Expanding it into a library will require adding a hash table to (1) unwrap each syntax value once and get the cost loss back, and (2) to associate each unwrapped list with the lost syntactic information (which, I think, will also solve the `#%app&rsquo; problem). BTW, unlike your code, I&rsquo;m talking about a persistent hash, allowing you to add information to existing syntax values.</p>
+
+<p>Sam: that sounds right, but I explicitly avoided that too. I do think, though, that it&rsquo;s possible to express ER using something like the above &mdash; even with #%app.</p>
+
+<p>— <em>Eli Barzilay, 24 May 2009</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/05/typed-scheme-20.html">Typed Scheme 2.0</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/05/the-two-state-solution-native-and-serializable-continuations-in-the-plt-web-server.html">The Two State Solution: Native and Serializable Continuations in the PLT Web Server</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

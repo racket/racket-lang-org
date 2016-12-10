@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>200!</title>
+    <meta name="description" content="_posted by Asumu Takikawa_  About a month ago, inspired by a mailing list post by Tim Brown, Racketeers started to write more solutions to Rosetta Code tasks for Racket. Just today, we've reached 200 entries in the Racket category!  This is a nice milesto...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2013/03/200.html">
+    <link rel="next" href="/2013/02/racket-v533.html">
+    <link rel="prev" href="/2013/05/racketcon-2013.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>25 Mar 2013</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>200!</h1>
+  </header>
+
+<p><em>posted by Asumu Takikawa</em></p>
+
+<p>About a month ago, inspired by a mailing list post by Tim Brown, Racketeers started to write more solutions to <a href="http://rosettacode.org/wiki/Rosetta_Code">Rosetta Code</a> tasks for Racket. Just today, we&rsquo;ve reached 200 entries in the <a href="http://rosettacode.org/wiki/Category:Racket">Racket category</a>!</p>
+
+<p>This is a nice milestone, but we still have a ways to go. At 200 entries, Racket comes in at around 54th in the <a href="http://rosettacode.org/wiki/RC_POP.OUT">popularity</a> rankings. So if you&rsquo;re looking to practice your Racketeering skills, don&rsquo;t hesitate to work on some of the <a href="http://rosettacode.org/wiki/Reports:Tasks_not_implemented_in_Racket">remaining tasks</a>.</p>
+
+<p>To give you a taste of the kinds of solutions we have so far, here are some examples.</p>
+
+<p>Mandelbrot:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">iterations</span> <span class="n">a</span> <span class="n">z</span> <span class="n">i</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">z′</span> <span class="p">(</span><span class="nb">+</span> <span class="p">(</span><span class="nb">*</span> <span class="n">z</span> <span class="n">z</span><span class="p">)</span> <span class="n">a</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="k">or</span> <span class="p">(</span><span class="nb">=</span> <span class="n">i</span> <span class="mi">255</span><span class="p">)</span> <span class="p">(</span><span class="nb">&gt;</span> <span class="p">(</span><span class="nb">magnitude</span> <span class="n">z′</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span>
+      <span class="n">i</span>
+      <span class="p">(</span><span class="n">iterations</span> <span class="n">a</span> <span class="n">z′</span> <span class="p">(</span><span class="nb">add1</span> <span class="n">i</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">iter-&gt;color</span> <span class="n">i</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">=</span> <span class="n">i</span> <span class="mi">255</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">make-object</span> <span class="n">color%</span> <span class="s2">"black"</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">make-object</span> <span class="n">color%</span> 
+        <span class="p">(</span><span class="nb">*</span> <span class="mi">5</span> <span class="p">(</span><span class="nb">modulo</span> <span class="n">i</span> <span class="mi">15</span><span class="p">))</span> <span class="p">(</span><span class="nb">*</span> <span class="mi">32</span> <span class="p">(</span><span class="nb">modulo</span> <span class="n">i</span> <span class="mi">7</span><span class="p">))</span> 
+          <span class="p">(</span><span class="nb">*</span> <span class="mi">8</span> <span class="p">(</span><span class="nb">modulo</span> <span class="n">i</span> <span class="mi">31</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">mandelbrot</span> <span class="n">width</span> <span class="n">height</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">target</span> <span class="p">(</span><span class="n">make-screen-bitmap</span> <span class="n">width</span> <span class="n">height</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">dc</span> <span class="p">(</span><span class="k">new</span> <span class="n">bitmap-dc%</span> <span class="p">[</span><span class="n">bitmap</span> <span class="n">target</span><span class="p">]))</span>
+  <span class="p">(</span><span class="k">for*</span> <span class="p">([</span><span class="n">x</span> <span class="n">width</span><span class="p">]</span> <span class="p">[</span><span class="n">y</span> <span class="n">height</span><span class="p">])</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">real-x</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">*</span> <span class="mf">3.0</span> <span class="p">(</span><span class="nb">/</span> <span class="n">x</span> <span class="n">width</span><span class="p">))</span> <span class="mf">2.25</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">real-y</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">*</span> <span class="mf">2.5</span> <span class="p">(</span><span class="nb">/</span> <span class="n">y</span> <span class="n">height</span><span class="p">))</span> <span class="mf">1.25</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">send</span> <span class="n">dc</span> <span class="n">set-pen</span> 
+      <span class="p">(</span><span class="n">iter-&gt;color</span> 
+        <span class="p">(</span><span class="n">iterations</span> 
+          <span class="p">(</span><span class="nb">make-rectangular</span> <span class="n">real-x</span> <span class="n">real-y</span><span class="p">)</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">))</span> <span class="mi">1</span> <span class="o">&#39;</span><span class="ss">solid</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">send</span> <span class="n">dc</span> <span class="n">draw-point</span> <span class="n">x</span> <span class="n">y</span><span class="p">))</span>
+  <span class="n">target</span><span class="p">)</span>
+
+<span class="nb">&gt;</span> <span class="p">(</span><span class="n">mandelbrot300200</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Yin and Yang:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">yin-yang</span> <span class="n">d</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">base</span>
+    <span class="p">(</span><span class="n">hc-append</span> <span class="p">(</span><span class="n">inset/clip</span> <span class="p">(</span><span class="n">circle</span> <span class="n">d</span><span class="p">)</span> <span class="mi">0</span> <span class="mi">0</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">2</span><span class="p">))</span> <span class="mi">0</span><span class="p">)</span>
+               <span class="p">(</span><span class="n">inset/clip</span> <span class="p">(</span><span class="n">disk</span> <span class="n">d</span><span class="p">)</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">2</span><span class="p">))</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">with-top</span>
+    <span class="p">(</span><span class="n">ct-superimpose</span>
+     <span class="n">base</span>
+     <span class="p">(</span><span class="n">cc-superimpose</span> <span class="p">(</span><span class="n">colorize</span> <span class="p">(</span><span class="n">disk</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">2</span><span class="p">))</span> <span class="s2">"white"</span><span class="p">)</span>
+                     <span class="p">(</span><span class="n">disk</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">8</span><span class="p">)))))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">with-bottom</span>
+    <span class="p">(</span><span class="n">cb-superimpose</span>
+     <span class="n">with-top</span>
+     <span class="p">(</span><span class="n">cc-superimpose</span> <span class="p">(</span><span class="n">disk</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">2</span><span class="p">))</span>
+                     <span class="p">(</span><span class="n">colorize</span> <span class="p">(</span><span class="n">disk</span> <span class="p">(</span><span class="nb">/</span> <span class="n">d</span> <span class="mi">8</span><span class="p">))</span> <span class="s2">"white"</span><span class="p">))))</span>
+  <span class="p">(</span><span class="n">cc-superimpose</span> <span class="n">with-bottom</span> <span class="p">(</span><span class="n">circle</span> <span class="n">d</span><span class="p">)))</span>
+
+
+<span class="nb">&gt;</span> <span class="p">(</span><span class="n">yin-yang</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Animate a pendulum:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket</span>
+
+<span class="p">(</span><span class="k">require</span> <span class="n">2htdp/image</span>
+         <span class="n">2htdp/universe</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">pendulum</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">accel</span> <span class="n">θ</span><span class="p">)</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">sin</span> <span class="n">θ</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">θ</span> <span class="p">(</span><span class="nb">/</span> <span class="nb">pi</span> <span class="mf">2.5</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">θ′</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">θ′′</span> <span class="p">(</span><span class="n">accel</span> <span class="p">(</span><span class="nb">/</span> <span class="nb">pi</span> <span class="mf">2.5</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">x</span> <span class="n">θ</span><span class="p">)</span> <span class="p">(</span><span class="nb">+</span> <span class="mi">200</span> <span class="p">(</span><span class="nb">*</span> <span class="mi">150</span> <span class="p">(</span><span class="nb">sin</span> <span class="n">θ</span><span class="p">))))</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">y</span> <span class="n">θ</span><span class="p">)</span> <span class="p">(</span><span class="nb">*</span> <span class="mi">150</span> <span class="p">(</span><span class="nb">cos</span> <span class="n">θ</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">p-image</span> 
+      <span class="p">(</span><span class="n">underlay/xy</span> 
+        <span class="p">(</span><span class="n">add-line</span> 
+          <span class="p">(</span><span class="n">empty-scene</span> <span class="mi">400</span> <span class="mi">200</span><span class="p">)</span> <span class="mi">200</span> <span class="mi">0</span> <span class="p">(</span><span class="n">x</span> <span class="n">θ</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="n">θ</span><span class="p">)</span> <span class="s2">"black"</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="n">x</span> <span class="n">θ</span><span class="p">)</span> <span class="mi">5</span><span class="p">)</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="n">y</span> <span class="n">θ</span><span class="p">)</span> <span class="mi">5</span><span class="p">)</span> 
+              <span class="p">(</span><span class="n">circle</span> <span class="mi">5</span> <span class="s2">"solid"</span> <span class="s2">"blue"</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">set!</span> <span class="n">θ</span> <span class="p">(</span><span class="nb">+</span> <span class="n">θ</span> <span class="p">(</span><span class="nb">*</span> <span class="n">θ′</span> <span class="mf">0.04</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">set!</span> <span class="n">θ′</span> <span class="p">(</span><span class="nb">+</span> <span class="n">θ′</span> <span class="p">(</span><span class="nb">*</span> <span class="p">(</span><span class="n">accel</span> <span class="n">θ</span><span class="p">)</span> <span class="mf">0.04</span><span class="p">)))</span>
+    <span class="n">p-image</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">animate</span> <span class="p">(</span><span class="n">pendulum</span><span class="p">))</span>
+
+
+<span class="n">Jensen</span><span class="o">&#39;</span><span class="ss">s</span> <span class="n">Device:</span>
+
+<span class="o">```</span><span class="ss">racket</span>
+<span class="kn">#lang </span><span class="nn">algol60</span>
+<span class="k">begin</span>
+   <span class="n">integer</span> <span class="n">i</span><span class="c1">;</span>
+   <span class="n">real</span> <span class="n">procedure</span> <span class="n">sum</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="n">lo</span><span class="o">,</span> <span class="n">hi</span><span class="o">,</span> <span class="n">term</span><span class="p">)</span><span class="c1">;</span>
+      <span class="n">value</span> <span class="n">lo</span><span class="o">,</span> <span class="n">hi</span><span class="c1">;</span>
+      <span class="n">integer</span> <span class="n">i</span><span class="o">,</span> <span class="n">lo</span><span class="o">,</span> <span class="n">hi</span><span class="c1">;</span>
+      <span class="n">real</span> <span class="n">term</span><span class="c1">;</span>
+      <span class="n">comment</span> <span class="n">term</span> <span class="n">is</span> <span class="n">passed</span> <span class="n">by-name</span><span class="o">,</span> <span class="k">and</span> <span class="n">so</span> <span class="n">is</span> <span class="n">i</span><span class="c1">;</span>
+   <span class="k">begin</span>
+      <span class="n">real</span> <span class="n">temp</span><span class="c1">;</span>
+      <span class="n">temp</span> <span class="n">:=</span> <span class="mi">0</span><span class="c1">;</span>
+      <span class="k">for</span> <span class="n">i</span> <span class="n">:=</span> <span class="n">lo</span> <span class="n">step</span> <span class="mi">1</span> <span class="n">until</span> <span class="n">hi</span> <span class="k">do</span>
+         <span class="n">temp</span> <span class="n">:=</span> <span class="n">temp</span> <span class="nb">+</span> <span class="n">term</span><span class="c1">;</span>
+      <span class="n">sum</span> <span class="n">:=</span> <span class="n">temp</span>
+   <span class="n">end</span><span class="c1">;</span>
+   <span class="n">comment</span> <span class="n">note</span> <span class="n">the</span> <span class="n">correspondence</span> <span class="n">between</span> 
+   <span class="n">the</span> <span class="n">mathematical</span> <span class="n">notation</span> <span class="k">and</span> <span class="n">the</span> <span class="n">call</span> <span class="n">to</span> <span class="n">sum</span><span class="c1">;</span>
+   <span class="n">printnln</span> <span class="p">(</span><span class="n">sum</span> <span class="p">(</span><span class="n">i</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="n">1/i</span><span class="p">))</span>
+<span class="n">end</span>
+</pre></div>
+
+</div>
+
+<p>Thanks to all of the people who have contributed solutions so far!</p>
+<!-- more-->
+
+<hr />
+
+<p>Racket is climbing the rankings &hellip;</p>
+
+<p>http://timb.net/popular-languages.html</p>
+
+<p>— <em>Daniel Prager, 7 June 2013</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2013/05/racketcon-2013.html">RacketCon 2013</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2013/02/racket-v533.html">Racket v5.3.3</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

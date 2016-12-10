@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v5.0.1</title>
+    <meta name="description" content="_posted by Eli Barzilay_  Racket version 5.0.1 is now available from http://racket-lang.org/      Datalog is a lightweight deductive database system with Racket integration. It is now available in the `datalog` collection and with `#lang datalog`.     Rac...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2010/08/racket-v501.html">
+    <link rel="next" href="/2010/06/racket.html">
+    <link rel="prev" href="/2010/09/extending-typed-racket-part-1.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Aug 2010</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v5.0.1</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.0.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>Datalog is a lightweight deductive database system with Racket integration. It is now available in the <code>datalog</code> collection and with <code>#lang datalog</code>.</p></li>
+ <li>
+  <p>Racklog provides Prolog-style logic programming in Racket, adapted from Dorai Sitaram&rsquo;s Schelog package. It is available in the <code>racklog</code> collection and now as <code>#lang racklog</code>.</p></li>
+ <li>
+  <p>By default <code>make install</code> and <code>raco setup</code> compile collections in parallel on all available processors. (Use <code>raco setup -j 1</code> to disable, if necessary.)</p></li>
+ <li>
+  <p>Changes (as part of 5.0) in the <code>racket</code> language compared to the <code>scheme</code> language: constructor-style printing, a <code>struct</code> alternative to <code>define-struct</code> that fits more naturally with <code>match</code> and constructor-style printing, bytecode-dependency management via SHA&ndash;1 hashes instead of just timestamps (where the <code>openssl/sha1</code> library provides the SHA&ndash;1 hash function), a reorganization of <code>scheme/foreign</code> into <code>ffi/unsafe</code> and associated libraries, and new printing functions <code>eprintf</code> and <code>displayln</code>. Also, a generator from <code>racket/generator</code> is required to have the form <code>(generator () body ...)</code>, which supports a planned extension to let a generator accept arguments.</p></li>
+ <li>
+  <p>Changes to the <code>racket</code> language (since 5.0): internal-definition positions allow mixing expressions with definitions, full continuations can escape past a continuation barrier, custodians can attempt to terminate subprocesses and subprocess groups (see <code>current-subprocess-custodian-mode</code>, <code>subprocess-group-enabled</code>), the JIT supports additional unboxing flonum operations and unsafe variants, <code>ffi/unsafe</code> provides an asychronous-call mechanism to deal with foreign threads, a new "." modifier for format string directives (e.g., "~.s" and "~.a") limits the respective output to <code>(error-print-width)</code> characters.</p></li>
+ <li>
+  <p>The core type system of Typed Racket has been substantially revised. In particular, Typed Racket can now follow significantly more sophisticated reasoning about the relationships between predicates. Additionally, Typed Racket now allows variable arity types in more places, allowing programmers to specify variable-arity lists.</p></li>
+ <li>
+  <p>We are working on an optimizing version of Typed Racket that takes advantage of type information for certain classes of programs. This project is a work in progress. For those interested, see the documentation for <code>#:optimized</code>.</p></li>
+ <li>
+  <p>The <code>web-server/formlets</code> library adds a <code>formlet*</code> form that allows dynamic formlet construction, as opposed to <code>formlet</code> which requires syntactic Xexprs and static formlets. Several new library formlets are added.</p></li>
+ <li>
+  <p>The <code>syntax/parse</code> library has new support for matching literals at different phases using the <code>#:phase</code> argument for literals and literal sets.</p></li>
+ <li>
+  <p>RackUnit now includes a GUI test runner as <code>rackunit/gui</code>.</p></li>
+ <li>
+  <p>The <code>2htdp/image</code> library now includes <code>flip-vertical</code> and <code>flip-horizontal</code> operations that mirror images (vertically and horizontally).</p></li></ul>
+<!-- more-->
+
+<hr />
+
+<p>Can you please add a note to the download page when a compilable linux source is available? And while you&rsquo;re testing, try making an rpm with shared libraries enabled. I&rsquo;ve been trying to do that since 4.1.2 using the Fedora spec file, and mzscheme always seg faults.</p>
+
+<p>Thanks, Gene</p>
+
+<p>— <em>Gene Snider, 6 August 2010</em></p>
+
+<hr />
+
+<p>Thank you very much! Racket 5.0.1 successfully builds an rpm with shared libraries enabled on Fedora 14. Now to get the package maintainer up to speed.</p>
+
+<p>Gene</p>
+
+<p>— <em>Gene Snider, 14 August 2010</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2010/09/extending-typed-racket-part-1.html">Extending Typed Racket, Part 1</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2010/06/racket.html">Racket</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v5.1.2</title>
+    <meta name="description" content="_posted by Eli Barzilay_  Racket version 5.1.2 is now available from http://racket-lang.org/      The download page includes 64-bit installers for Mac OS X, Windows, and two Debian flavors. Racket now supports OS X Lion.     Racket now includes a new `rac...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2011/08/racket-v512.html">
+    <link rel="next" href="/2011/07/racketcon-recap.html">
+    <link rel="prev" href="/2011/08/racket-v513.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Aug 2011</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v5.1.2</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1.2 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>The download page includes 64-bit installers for Mac OS X, Windows, and two Debian flavors. Racket now supports OS X Lion.</p></li>
+ <li>
+  <p>Racket now includes a new <code>racket/place</code> library to support parallelism, complementing <code>racket/future</code>. Racket&rsquo;s parallel build process is now based on places instead of multiple OS processes.Places support share-nothing parallelism and message-passing communication. Compared to futures, places are heavyweight, but they have a simpler performance model.</p></li>
+ <li>
+  <p>The syntax-certificate system has been replaced by a syntax-taint system. Both certificates and taints were designed to protect otherwise inaccessible bindings from abuse when they appear in macro expansions. Taints are simpler and lighter, and the switch closes known holes in the certificate system. Macros that are not implemented with <code>syntax-rules</code> or <code>define-syntax-rule</code>, however, must explicitly use <code>syntax-protect</code> to protect their expansions from abuse.</p></li>
+ <li>
+  <p>The <code>net/url</code> library supports HTTPS connections, but beware that by default all sites are accepted (equivalent to ignoring a browser&rsquo;s warnings about untrusted certificates).</p></li>
+ <li>
+  <p>Error messages in the student languages use a simplified vocabulary and consistent phrasings. If you maintain curriculum material or teachpacks then please consider updating. See the “Error Message Composition Guidelines” section in the documentation for details.</p></li>
+ <li>
+  <p>Typed Racket: almost all core Racket data structures and operations are now accessible in Typed Racket (most of this work is due to prolific contributor Eric Dobson). The performance of the typechecker has been significantly improved.</p></li>
+ <li>
+  <p>The <code>scriblib/bibtex</code> library supports BibTeX-formatted citation databases in Scribble documents. BibTeX can be tricky to parse, so please report failed entries as bug reports.</p></li>
+ <li>
+  <p>The <code>for</code> forms now support an <code>#:unless</code> clause, and a nonnegative integer can be used as a sequence. The new <code>compose1</code> function creates single-valued composition functions. The <code>racket/function</code> library now provides <code>identity</code>, <code>thunk</code>, and <code>thunk*</code>.</p></li>
+ <li>
+  <p>The license has been clarified: we now use LGPLv2.1 uniformly. (The license file used to specify LGPLv2, contrary to the download pages.)</p></li></ul>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2011/08/racket-v513.html">Racket v5.1.3</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2011/07/racketcon-recap.html">RacketCon Recap</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

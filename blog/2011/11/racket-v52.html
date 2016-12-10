@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v5.2</title>
+    <meta name="description" content="_posted by Eli Barzilay_  Racket version 5.2 is now available from http://racket-lang.org/ Release Highlights::      DrRacket comes with an experimental, on-line check syntax tool, although this new tool is disabled default. See below for more information...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2011/11/racket-v52.html">
+    <link rel="next" href="/2011/10/on-eval-in-dynamic-languages-generally-and-in-racket-specifically.html">
+    <link rel="prev" href="/2012/02/zack-gallers-experience-with-stateful-vs-stateless-web-apps.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>09 Nov 2011</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v5.2</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.2 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> Release Highlights::</p>
+
+<ul>
+ <li>
+  <p>DrRacket comes with an experimental, on-line check syntax tool, although this new tool is disabled default. See below for more information.</p></li>
+ <li>
+  <p>The new <code>db</code> library offers a high-level, functional interface to popular relational database systems, including PostgreSQL, MySQL, and SQLite, as well as other systems via ODBC.</p></li>
+ <li>
+  <p>A new XREPL collection provides convenient commands for a plain racket REPL. It is particularly convenient for people who prefer console-based work and alternative editors. See also the new chapter on command-line tools and other editors at the end of the Racket Guide.</p></li>
+ <li>
+  <p>The <code>plot</code> collection has been reimplemented in Racket. It now offers PDF output, log axes, histograms, and more. Some code that uses <code>plot</code> will still work, and some will need light porting. The <code>plot/compat</code> module offers expedient backward compatibility.</p></li>
+ <li>
+  <p>DrRacket uses more conventional key bindings: <code>C-t</code> creates a new tab, <code>C-w</code> closes the current one, and <code>C-r</code> runs the definitions. On Mac OS X, the Command key is used. See “Defining Custom Shortcuts” in the DrRacket manual for an example that uses the old key bindings.</p></li>
+ <li>
+  <p>The new <code>raco link</code> command registers a directory as a collection, which allows the collection directory to reside outside the “<code>collects</code>” tree and without changing the PLTCOLLECTS environment variable.</p></li>
+ <li>
+  <p>Typed Racket:</p></li>
+ <li>
+  <p>Typed Racket provides static performance debugging support to show which code gets optimized and point out code that does not. Use the “Performance Report” button in DrRacket.</p></li>
+ <li>
+  <p>More intuitive types in printouts in the REPL and in error messages. Use <code>:query-result-type</code> to explore types, or <code>:print-type</code> for a full printout.</p></li>
+ <li>
+  <p>Typed Racket now supports defining function with optional arguments using the same syntax as Racket.</p></li>
+ <li>
+  <p>Redex now supports specifying (and testing and automatically typesetting) judgment forms including type systems and SOS-style operational semantics.</p></li>
+ <li>
+  <p>Fixed several GUI problems, including problems on Ubuntu 11.10 (GTK+ 3) and 64-bit Mac OS X.</p></li>
+ <li>
+  <p>Internal-definition expansion has changed to use <code>let*</code> semantics for sequences that contain no back references. This change removes a performance penalty for using internal definitions instead of <code>let</code> in common cases, and it only changes the meaning of programs that capture continuations in internal definitions. Internal definitions are now considered preferable in style to <code>let</code>.</p></li>
+ <li>
+  <p>Support for <code>begin-for-syntax</code> has been generalized; modules may now define and export both value bindings and syntax bindings (macros) at phase 1 and higher. Due to a bug, phase 1 syntax (or higher) is not available in DrRacket&rsquo;s <code>#lang</code>-based REPL. A simple workaround is to disable debugging in DrRacket (see “no debugging” radio button in detailed language dialog).</p></li></ul>
+
+<p>Additional Items::</p>
+
+<ul>
+ <li>
+  <p>The <code>racket/gui</code> library (and Slideshow) provides more support for multiple-screen displays.</p></li>
+ <li>
+  <p>DrRacket remembers whether an opened file used LF or CRLF line endings, and will continue using the same. When creating a new file, a preference determines how it is saved.</p></li>
+ <li>
+  <p><code>net/url</code> can now follow HTTP redirections.</p></li>
+ <li>
+  <p>The LNCS and JFP class files are no longer distributed with Racket. Instead, they are downloaded on demand.</p></li>
+ <li>
+  <p>The Algol language implementation is now available as a plain language using <code>#lang algol60</code>.</p></li>
+ <li>
+  <p>The Racket-to-C compiler (as accessed via <code>raco ctool</code> or <code>mzc</code>) has been removed; Racket&rsquo;s JIT has long provided better performance, and the FFI provides better access to C libraries.</p></li>
+ <li>
+  <p>Contracts can be applied to exports with the new <code>contract-out</code> form within <code>provide</code>, instead of a separate <code>provide/contract</code> form. (The new <code>contract-out</code> form is implemented as a new kind of “provide pre-transformer”.)</p></li>
+ <li>
+  <p>The <code>date*</code> structure type is an extension of <code>date</code> with <code>nanosecond</code> and <code>time-zone-name</code> fields.</p></li>
+ <li>
+  <p>New looping constructs: <code>for/sum</code> and <code>for/product</code>.</p></li>
+ <li>
+  <p>Direct calls to keyword-accepting functions are now optimized to eliminate the overhead of keywords. In addition, the compiler detects and logs warnings for keyword-argument mismatches.</p></li>
+ <li>
+  <p>The libfit interface is available from <code>plot/deprecated/fit</code>, and will be removed in the near future.</p></li>
+ <li>
+  <p>The Unix installer has been re-done, and it is now more robust.</p></li>
+ <li>
+  <p>The built-in reader and printer support for Honu is removed. (This functionality is re-implemented in Racket.)</p></li></ul>
+
+<p>On-line Check Syntax::  DrRacket now provides an on-line version of the syntax check tool, which means that syntax checking runs automatically while you continue to edit a program. With this tool enabled, its annotations (e.g., binding arrows) and actions (e.g., the renaming refactoring and direct documentation links) are almost always available. We have noticed that on-line syntax checking renders DrRacket unstable on occasion, perhaps because it relies on relatively new support for parallelism. Occurrences of the problem are rare, but they are not rare enough, which is why we have disabled the tool by default. At the same time, current users of the tool find it so valuable that we felt it should be included in the release. We expect to track down the remaining problems and enable the tool by default in near-future release. To enable on-line syntax checking (for <code>#lang</code>-based programs only), click on the red dot in the bottom right of DrRacket&rsquo;s window. To turn it off, click there again.</p>
+<!-- more-->
+
+<hr />
+
+<p>The new plot is awesome!</p>
+
+<p>— <em>deforce, 19 January 2012</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/02/zack-gallers-experience-with-stateful-vs-stateless-web-apps.html">Zack Galler&rsquo;s Experience with Stateful vs Stateless Web Apps</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2011/10/on-eval-in-dynamic-languages-generally-and-in-racket-specifically.html">On <code>eval</code> in dynamic languages generally and in Racket specifically</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

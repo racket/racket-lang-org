@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Modules, Packages and Collections</title>
+    <meta name="description" content="_posted by Vincent St-Amour_  Racket, the Racket docs and Racketeers use a number of terms to refer to various units of Racket code. Of those, module, package and collection refer to related but distinct concepts. Their exact relations and distinctions ca...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2015/08/modules-packages-and-collections.html">
+    <link rel="next" href="/2015/08/racket-v621.html">
+    <link rel="prev" href="/2015/09/racket-package-server-security-vulnerabilities.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>11 Aug 2015</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Modules, Packages and Collections</h1>
+  </header>
+
+<p><em>posted by Vincent St-Amour</em></p>
+
+<p>Racket, the Racket docs and Racketeers use a number of terms to refer to various units of Racket code. Of those, module, package and collection refer to related but distinct concepts. Their exact relations and distinctions can be confusing for new users. This is an attempt at explaining those concepts, what they are for, and how they relate to each other.</p>
+
+<p>To begin with the smallest of the three, a file that begins with #lang and the name of a language is a module. There are also other ways to construct modules, but let&rsquo;s not worry about those.</p>
+
+<p>A module is the basic unit of functionality for Racket code.</p>
+
+<p>Once your Racket programs get larger, though, you&rsquo;ll want to split them over multiple modules. This allows you to organize your source better, enables separate compilation, and makes it possible for you to mix and match modules written in different Racket languages (<a href="http://docs.racket-lang.org/guide/index.html">Racket</a>, <a href="http://docs.racket-lang.org/ts-guide/index.html">Typed Racket</a>, <a href="http://docs.racket-lang.org/datalog/index.html">Datalog</a>, <a href="http://docs.racket-lang.org/scribble/index.html">Scribble</a>, etc.).</p>
+
+<p>That&rsquo;s where packages and collections come in. They help you organize your modules.</p>
+
+<p>A package is an group of modules that you can install together, and that usually provide one piece of functionality. To pick a random example, take the <a href="http://pkg-build.racket-lang.org/doc/pict3d/index.html">pict3d</a> package from <a href="http://pkgs.racket-lang.org/">pkgs.racket-lang.org</a>. That package is a collection of modules which together implement a functional 3D engine. You can install it using raco pkg install pict3d, or via the graphical package manager in DrRacket.</p>
+
+<p>So, to sum up, packages are units of code distribution.</p>
+
+<p>A collection is a group of modules whose functionality is related to the same topic, for example data structures (the data collection), or wrapper libraries for use with Typed Racket (the typed collection). Modules are referred to and required using collection paths. For example, when you require racket/class, you&rsquo;re requiring the class module from the racket collection.</p>
+
+<p>Modules within a collection do not necessarily come from the same package, and may not be developed together. For example, some data structures in the data collection are provided as part of the core of Racket, such as the integer sets in <a href="http://docs.racket-lang.org/data/integer-set.html"><code>data/integer-set</code></a>. Other data structures are provided by additional packages which you may need to install separately, such as the hash-array-mapped tries in <code>data/hamt</code>, which are provided by the <a href="http://pkg-build.racket-lang.org/doc/hamt/index.html"><code>hamt</code></a> package. Having both of those in the data collection signals that they both provide data structures. If you develop your own data structures, putting them in the data collection is probably the right thing to do.</p>
+
+<p>Many packages, however, provide functionality that does not fall under existing categories, and provide their own, new collection. For example, the <code>pict3d</code> package we discussed above puts its modules in the <code>pict3d</code> collection. For that reason, the distinction between package and collection is sometimes a bit blurred.</p>
+
+<p>So, to sum up, collections are units of code classification.</p>
+
+<p>The term library does not have a technical meaning in Racket. We usually use it to refer to a package, or to a set of packages that are developed together. For example, the <a href="http://docs.racket-lang.org/rackunit/index.html">Rackunit</a> library is split across multiple packages: <code>rackunit</code>, <code>rackunit-lib</code>, <code>rackunit-gui</code>, <code>rackunit-plugin-lib</code>, <code>rackunit-doc</code> and <code>rackunit-test</code>. This allows packages to only depend on part of Rackunit. For example, a package for a string-processing library probably should not depend on the <a href="http://docs.racket-lang.org/gui/index.html">Racket GUI library</a> (to be deployed on headless servers, for example), and so should depend on the <code>rackunit-lib</code> package for its testing, instead of on the full <code>rackunit</code> package, which brings in GUI support via the <code>rackunit-gui</code> package, and would introduce a dependency to Racket&rsquo;s GUI library.</p>
+
+<p>Hopefully, this clarifies the Racket code organization terminology a bit.</p>
+<!-- more-->
+
+<hr />
+
+<p>Why was there no mention of &ldquo;units&rdquo; http://docs.racket-lang.org/reference/mzlib_unit.html ?</p>
+
+<p>— <em>Franklin Chen, 11 August 2015</em></p>
+
+<hr />
+
+<p>Units are also a modularity mechanism, but at a more local level. That is, they&rsquo;re used to organize code at and below the module-level, rather than above the module level, as collections and packages do.</p>
+
+<p>Units, in modern Racket, are also a &ldquo;niche&rdquo; feature, that&rsquo;s useful in very specific situations. In contrast, most Racket programmers writing programs that don&rsquo;t fit in a single file will end up working with packages and collections, whether they realize it or not.</p>
+
+<p>But to say a few words about them, units are first-class module-like values. Unlike Racket modules, they allow recursive linking, which allows for circular dependencies. They also allow dynamic linking, which makes it possible to &ldquo;swap in&rdquo; different implementations of the same signature. Dynamic linking also makes units useful for implementing plug-in systems, like the one in DrRacket, which can dynamically link in new plug-ins.</p>
+
+<p>— <em>Vincent St-Amour, 13 August 2015</em></p>
+
+<hr />
+
+<p>Thanks Vincent for an illuminating post. Regarding units, is it useful to think of modules as units with automatically generated signatures bounded together with the code?</p>
+
+<p>Modules cannot be recursively linked because they are values that are evaluated at compile/run time, while units can be because they can be represented by signature values that can be linked to arbitrary units satisfying the signatures. Is that a reasonable phrasing of the difference between modules and units?</p>
+
+<p>I&rsquo;m curious, what are the disadvantages of organizing code using only units versus using modules?</p>
+
+<p>— <em>Alexander McLin, 14 August 2015</em></p>
+
+<hr />
+
+<p>Alexander,</p>
+
+<p>The main thing modules and units have in common is that they are code containers that import and export names. Beyond that, the two systems are different enough that I don&rsquo;t think trying to understand one in terms of the other is helpful. Modules are static, while units are dynamic. Units are values, whereas modules are not. Modules interact nicely with macros, but units don&rsquo;t.</p>
+
+<p>Some of the disadvantages of using units instead of modules are: * units do not support importing / exporting macros * linking errors happen at run-time instead of compile-time * units are syntactically more heavyweight * the dynamic nature of units prevents some optimizations That said, units are the right tool for some use cases, but modules are what you want most of the time.</p>
+
+<p>Because units predate modules in Racket&rsquo;s history, there&rsquo;s a fair amount of code out there (including in the main distribution) that uses units in places where we&rsquo;d use modules today, e.g., parts of the net collection. That code is doing roughly what you&rsquo;re describing, so you may be interested in looking at the result. :)</p>
+
+<p>— <em>Vincent St-Amour, 16 August 2015</em></p>
+
+<hr />
+
+<p>Thank you Vincent!</p>
+
+<p>— <em>Alexander McLin, 17 August 2015</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2015/09/racket-package-server-security-vulnerabilities.html">Racket Package Server Security Vulnerabilities</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2015/08/racket-v621.html">Racket v6.2.1</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

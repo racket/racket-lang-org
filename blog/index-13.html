@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 13)</title>
+    <meta name="description" content="Racket Blog (page 13)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-13.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Aug 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/08/experience-report-scheme-in-commercial-web-application-development.html'>Experience Report: Scheme in Commercial Web Application Development</a></h1>
+  <div class="truncate">
+<p><em>posted by Noel</em></p>
+
+<p>Our paper &ldquo;Experience Report: Scheme in Commercial Web Application Development&rdquo; is online. As the title suggests, it describes our experiences over the past year developing a number of web-based applications in PLT Scheme. If we&rsquo;d chosen a language like Java or Ruby we could have used a large number of libraries developed for web apps, whereas PLT Scheme has relatively few libraries in this area, and they haven&rsquo;t been tested under high load. So we were gambling that Scheme would make us so productive we could develop our own libraries <em>and</em> the applications we were contracted to produce in the same time it would take to develop just the applications in another language. It was a gamble that paid off. You&rsquo;ll have to read the paper for all the details, but suffice to say we delivered the applications on time (and more are in development) and our libraries already compare well against big names like Ruby on Rails and J2EE.</p>
+
+<p>On thing that got cut from the paper was our use of <a href="http://www.flapjax-lang.org/">Flapjax</a> is parts of the interface. If you write complicated Javascript to take a look at it. It really does simplify event handling, and our code using Flapjax is half the size of our original code without it.</p>
+
+<p><strong>Update:</strong> This is more or less the same post as on <a href="http://www.untyped.com/untyping/archives/2007/08/a_scheme_case_s_1.html">Untyping</a></p></div>
+  <a class="more" href='/2007/08/experience-report-scheme-in-commercial-web-application-development.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>02 Aug 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/08/relationally-parametric-polymorphic-contracts.html'>Relationally-Parametric Polymorphic Contracts</a></h1>
+  <div class="truncate">
+<p><em>posted by Shriram Krishnamurthi</em></p>
+
+<p>We&rsquo;ve been making progress on the connection between types and contracts. This paper is a step towards answering the question,  “What would polymorphic types (a la Standard ML) look like in a contract world?” If you haven&rsquo;t thought much about polymorphic types, you may find the answer has some subtlety; if you have, hopefully you will find the answer reasonable.</p>
+
+<p>Arjun and I want to point out that some of the work in this paper was already in an earlier paper that Jacob and Robby wrote, but the material was excised from the public version, so we weren&rsquo;t aware of it. But there is some fresh material here as well, and anyway Robby and I have been gabbing about this question for years.</p></div>
+  <a class="more" href='/2007/08/relationally-parametric-polymorphic-contracts.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>30 Jul 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/07/control-resumed.html'>control, resumed</a></h1>
+  <div class="truncate">
+<p><em>posted by matthias</em></p>
+
+<p>Since at least some people helped me re-re-invent prompt after my last post, I thought I would remind people that PLT Scheme is the <em>only</em> production system in the world that provides delimited and (truly) composable continuations directly (and w/o loss of TCO properties). So here is the same fragment again:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"control.ss"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">generate-one-element-at-a-time</span> <span class="n">a-list</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">control-state</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">for-each</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">an-element-from-a-list</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">control</span> <span class="n">resume-here</span>
+    <span class="p">(</span><span class="k">set!</span> <span class="n">control-state</span> <span class="n">resume-here</span><span class="p">)</span>
+    <span class="n">an-element-from-a-list</span><span class="p">))</span>
+              <span class="n">a-list</span><span class="p">)</span>
+    <span class="o">&#39;</span><span class="ss">you-fell-off-the-end-off-the-list</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">generator</span><span class="p">)</span> <span class="p">(</span><span class="n">prompt</span> <span class="p">(</span><span class="n">control-state</span><span class="p">)))</span>
+  <span class="n">generator</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Take a look, compare and contrast with the previous post. Time permitting, I will continue to show you another control poem soon. P.S. See <a href="http://www.ccs.neu.edu/scheme/pubs/#icfp07-fyf">Adding Delimited and Composable Control to a Production Programming Environment</a> for details.</p></div>
+  <a class="more" href='/2007/07/control-resumed.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>27 Jul 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/07/callcc-and-self-modifying-code.html'><code>call/cc</code> and self-modifying code</a></h1>
+  <div class="truncate">
+<p><em>posted by matthias</em></p>
+
+<p>Today I wrote this short illustration of call/cc and posted it on wikipedia:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="c1">;; [LISTOF X] -&gt; ( -&gt; X u &#39;you-fell-off-the-end-off-the-list)</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">generate-one-element-at-a-time</span> <span class="n">a-list</span><span class="p">)</span>
+  <span class="c1">;; (-&gt; X u &#39;you-fell-off-the-end-off-the-list)</span>
+  <span class="c1">;; this is the actual generator, producing one item from a-list at a time</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">call/cc</span> <span class="n">control-state</span><span class="p">))</span> 
+  <span class="c1">;; [CONTINUATION X] -&gt; EMPTY</span>
+  <span class="c1">;; hand the next item from a-list to "return" (or an end-of-list marker)&#39;</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">control-state</span> <span class="n">return</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">for-each</span> 
+        <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">an-element-from-a-list</span><span class="p">)</span>
+           <span class="p">(</span><span class="k">set!</span> <span class="n">return</span> <span class="c1">;; fixed</span>
+             <span class="p">(</span><span class="nb">call/cc</span>
+               <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">resume-here</span><span class="p">)</span>
+                 <span class="p">(</span><span class="k">set!</span> <span class="n">control-state</span> <span class="n">resume-here</span><span class="p">)</span>
+                 <span class="p">(</span><span class="n">return</span> <span class="n">an-element-from-a-list</span><span class="p">)))))</span>
+        <span class="n">a-list</span><span class="p">)</span>
+     <span class="p">(</span><span class="n">return</span> <span class="o">&#39;</span><span class="ss">you-fell-off-the-end-off-the-list</span><span class="p">))</span>
+  <span class="c1">;; time to return the generator</span>
+  <span class="n">generator</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>It reminded of all the talk in the 1980s and 1990s that self-modifying code is bad. But look at the elegant assignment to <code>control-state</code> within its body. It&rsquo;s such a poem, I thought I&rsquo;d share it with people since nobody else blogs here anywya.</p></div>
+  <a class="more" href='/2007/07/callcc-and-self-modifying-code.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>14 Jun 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/06/small-is-beautiful-large-is-useful-and-scheme-is-both.html'>Small is Beautiful, Large is Useful, and Scheme is Both</a></h1>
+  <div class="truncate">
+<p><em>posted by matthias</em></p>
+
+<p> They say, Scheme is small and this is good.</p>
+
+<p> Have you heard of X? No? It is <strong>the</strong> smallest computational basis. It is a single function that can compute everything a Turing machine can compute; a Church lambda calculus; a Post model; a RAM; a what-have-you model of computation. Indeed, X is so simple that two equations suffice to specify it completely [<a href="http://www.andrew.cmu.edu/user/cebrown/notes/barendregt.html">Barendregt</a>, <a href="http://www.andrew.cmu.edu/user/cebrown/notes/barendregt.html#8">page 166</a>]. Imagine that: a complete language report in two lines; a compiler that fits in a few K instead of Ms; no more arguments about smallness.</p>
+
+<p> Small alone can&rsquo;t be any good. If you used X alone, your programs would be the size of the universe or something like that. That&rsquo;s what the theory of computability teaches us [<a href="http://en.wikipedia.org/wiki/Church-Turing_thesis">Church and Turing</a>]. Adding LAMBDA and a few primitives to get a pure functional language isn&rsquo;t good enough either. That&rsquo;s what the theory of expressiveness shows [<a href="http://www.ccs.neu.edu/scheme/pubs/#scp91-felleisen">Felleisen</a>; <a href="http://theory.stanford.edu/people/jcm/publications.htm">Mitchell</a>; <a href="http://portal.acm.org/citation.cfm?id=99583.99617">Riecke</a>]. And, using an R5RS Scheme to build large systems with many people at a dozen sites isn&rsquo;t doable either. That&rsquo;s what the PLT experience determined.</p>
+
+<p>When we set out to construct DrScheme using MzScheme, we also conducted an experiment:</p>
+
+<p> Could we really build a graphical system that manages (shared) resources and that provides excellent error feedback with just plain Scheme?</p>
+
+<p> Could we just add enough libraries to do all this? Or would we have to change the kernel of the language? As much as we tried to keep MzScheme small, it became clear quickly that we needed exceptions, structures, module-like features, a mechanism for concurrency, a way to manage resources such as windows, tcp connections, and so on. The list isn&rsquo;t infinite but it is much longer than I expected. Our &ldquo;Revenge of the Son of the LISP machine&rdquo; paper is a good summary for the state of the art around 1999 [<a href="http://www.cs.utah.edu/~mflatt/publications/index.html">Flatt and Son</a>].</p>
+
+<p>As language designers we stepped back time and again to look at our monster. What could we remove? What would we have to add in response? For some five years, we had first-class modules (units) and first-class classes in the core of the language. We had almost banned macros. They were so ugly I stopped teaching about them because I did want to use our own dog food in my courses but I couldn&rsquo;t stomach the macro system. It was such a step back from Eugene&rsquo;s extend-syntax. But then Matthew figured out the next big step in macro and module technology [<a href="http://www.cs.utah.edu/~mflatt/publications/index.html">Flatt, You Want It When?</a>]. And with that out went units and classes from the core and many other things. So we learned lessons, and we need to keep building systems to learn more.</p>
+
+<p>I have no question that the idea of Scheme is beautiful. At the same time, I have also learned that if I wish to use this beautiful idea in practice, I need to add the ingredients that it takes to build large systems. R6RS reflects this insight, and I am happy about it.</p></div>
+  <a class="more" href='/2007/06/small-is-beautiful-large-is-useful-and-scheme-is-both.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>09 Jun 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/06/r6rs-is-perfect.html'>R6RS is &ldquo;perfect&rdquo;</a></h1>
+  <div class="truncate">
+<p><em>posted by matthias</em></p>
+
+<p>When I read the &ldquo;side by side&rdquo; and &ldquo;head to head&rdquo; descriptions of the alternatives facing the Scheme community (see Comp.Lang.Scheme and the R6RS mailing list), I am wondering which one is which and which one is better.</p>
+
+<ul>
+ <li>
+  <p>Is it really good that Scheme (the spec) doesn&rsquo;t support a module system?</p></li>
+ <li>
+  <p>Is it really good that almost all major implementations support their own version of a module system?</p></li>
+ <li>
+  <p>Is it really good that programmers can&rsquo;t even leave the module structure intact when porting code?</p></li></ul>
+
+<p>Imagine your own similar questions and add them here. We have lived in a side-by-side universe for a long time, and there are quite a few programmers who have suffered from this not-really-the-same-language problem. Besides the module system, there are other not-quite-the-same-but-related features that implementations have and programmers wish to use. The R6RS process has pushed several major implementors/implementations to agree on a design for module systems and other constructs. Their report declares that they are ready to put a large amount of work in to get from r5rs to r6rs. I believe that this step would help the community in several arenas, listed in increasing order of relevance:</p>
+
+<ul>
+ <li>
+  <p>the academic publishing business</p></li>
+ <li>
+  <p>the fund raising business</p></li>
+ <li>
+  <p>adapting each others innovations</p></li>
+ <li>
+  <p>supporting programmers who learn on one and switch to another implementation</p></li>
+ <li>
+  <p>supporting commercial programmers who need reassurance that there is more than one implementation and implementor [ever attended Commercial Uses of Functional Programming?]</p></li></ul>
+
+<p>Is the document perfect? Is every construct exactly the &lsquo;right thing&rsquo;? Of course not! Guy and Gerry revised their first Scheme report because they didn&rsquo;t get it &lsquo;right&rsquo;. R3RS and R4RS and R5RS revised flaws in R(n&ndash;1)RS because the authors/editors didn&rsquo;t get it &lsquo;right&rsquo;. It is extremely difficult, and usually impossible, to get the design of a complex artifacts (such as a programming language) &lsquo;right&rsquo; the first time. In these cases, it&rsquo;s all about the feedback loop and revising your design based on observations. (Remember the &lsquo;science&rsquo; part in the name of our discipline?) Indeed, &lsquo;right&rsquo; doesn&rsquo;t exist; what exists is &lsquo;most pragmatic and internally beautiful,&rsquo; and nothing else.  Our choice is quite simple: move forward as a community with some amount of convergence (r6rs) or split into dozens of mutually incompatible sub-communities (status quo, including SRFIs). <em>Also posted as <a href="http://lists.r6rs.org/pipermail/r6rs-discuss/2007-June/002538.html"> &ldquo;R6RS is perfect&rdquo;</a> at the R6RS discussion list.</em></p></div>
+  <a class="more" href='/2007/06/r6rs-is-perfect.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>22 May 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/05/plt-scheme-version-370.html'>PLT Scheme version 370</a></h1>
+  <div class="truncate">
+<p><em>posted by Jens Axel Søgaard</em></p>
+
+<p>PLT Scheme version 370 is now available from</p>
+
+<p><a href="http://download.plt-scheme.org/">http://download.plt-scheme.org/</a></p>
+
+<p>Some highlights:</p>
+
+<ul>
+ <li>The conservative garbage collector (CGC) has been replaced with a precise garbage collector (3m) in the standard build. For most users, this change simply amounts to &ldquo;better performance in space and time&rdquo;. For example, a long-running DrScheme instance typically uses much less memory than before.</li></ul>
+
+<p>The new memory manager also supports a new &ldquo;Limit Memory&hellip;&rdquo; option (in DrScheme&rsquo;s &ldquo;Scheme&rdquo; menu) to limit the memory use of a programming running inside DrScheme.</p>
+
+<p>For those who work with C-implemented libraries and extensions, the switch to precise collection may complicate interoperability. To a large extent, however, (lib &ldquo;foreign.ss&rdquo;) works the same with both collectors. (But note that the 3m is a moving collector, so be careful with passing Scheme objects to C.)</p>
+
+<p>Although our pre-built binaries use the new collector, builds from source using the conservative collector are still supported.</p>
+
+<ul>
+ <li>For a program written with one of the the <a href="http://www.htdp.org">&ldquo;How to Design Programs&rdquo;</a> (HtDP) languages, DrScheme saves the program with meta-information that identifies the language and records the teachpacks used by the program. DrScheme&rsquo;s teachpack GUI now works only with the HtDP languages. In other languages, use require to access teachpacks.</li></ul>
+
+<p>The meta-information is in the form of a reader extension that turns the file content into a module-based program, which means that teaching-language files can be loaded directly into MzScheme or used with other PLT Scheme tools.</p>
+
+<ul>
+ <li>
+  <p>The HtDP &ldquo;world.ss&rdquo; and &ldquo;image.ss&rdquo; teachpacks have been revised, including support for the creation of animated GIFs.</p></li>
+ <li>
+  <p>Unit-based servlets are no longer supported in the web server. Use module-based servlets, instead. (Servlets can be implemented using a unit within a module, but the web server&rsquo;s API is provided through a module.)</p></li>
+ <li>
+  <p>A new (lib &ldquo;unit.ss&rdquo;) library replaces the old one and provides a simpler and more flexible syntax. The (lib &ldquo;unitsig.ss&rdquo;) library is deprecated but still available as (lib &ldquo;unitsig200.ss&rdquo;), and the old (lib &ldquo;unit.ss&rdquo;) is available as (lib &ldquo;unit200.ss&rdquo;).  Feedback Welcome,  <em>The PLT Scheme Team</em></p></li></ul></div>
+  <a class="more" href='/2007/05/plt-scheme-version-370.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>16 May 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/05/looking-for-small-scheme-scripts.html'>Looking for small Scheme scripts</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>As part of the <a href="http://www.ccs.neu.edu/%7Esamth/typed-scheme.html">Typed Scheme</a> project, we are looking for small Scheme scripts that we can port from PLT Scheme to Typed Scheme. We would like to investigate if Typed Scheme is capable of checking idiomatic PLT Scheme code, as represented by scripts written by members of the PLT Scheme community.</p>
+
+<p>Therefore, if you have a simple PLT Scheme program which handles a scripting/processing task, and you are willing to share it with us for the improvement of Typed Scheme, please let <a href="mailto:samth@ccs.neu.edu">me</a> know. Typed Scheme currently handles all of &lsquo;core&rsquo; MzScheme, as well as many of the collections (the major exceptions are the class and unit systems).</p>
+
+<p>In return, we will inform you of any bugs that we discover during the port.</p>
+
+<p>More information about Typed Scheme is available from the webpage: http://www.ccs.neu.edu/~samth/typed-scheme.html</p></div>
+  <a class="more" href='/2007/05/looking-for-small-scheme-scripts.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>10 May 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/05/adjusting-drschemes-keybindings.html'>Adjusting DrScheme&rsquo;s Keybindings</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>Check out Kyle Smith&rsquo;s blog post on how to change <a href="http://www.drscheme.org/">DrScheme</a>&rsquo;s keybindings:</p>
+
+<p><a href="http://schemekeys.blogspot.com/2007/05/keybinding-101-in-drscheme.html">Keybinding 101 in DrScheme</a></p></div>
+  <a class="more" href='/2007/05/adjusting-drschemes-keybindings.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>10 May 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/05/xml-transformation-in-scheme.html'>XML Transformation in Scheme</a></h1>
+  <div class="truncate">
+<p><em>posted by Noel</em></p>
+
+<p><a href="http://www.openqa.org/selenium/">Selenium</a> is a tool for testing web applications, the core of which is a Javascript library that controls a web browser. With the <a href="http://www.openqa.org/selenium-ide/">Selenium IDE</a> you can convert your actions in a web browser into tests, and with the <a href="http://www.openqa.org/selenium-rc/">Selenium Remote Control</a> you can control a web browser from code. I&rsquo;ve recently been working on adding Selenium Remote Control bindings to PLT Scheme, which has resulted in a nice and hopefully instructional demonstration of XML transformation in PLT Scheme</p>
+
+<p>The Selenium Remote Control is controlled by sending simple messages over HTTP. The format of the messages isn&rsquo;t important. What is, is that there are a lot of them, and the API is specified in a file called <code>iedoc.xml</code> that comes with Selenium. The Java/Python/Ruby bindings are generated using <a href="http://www.w3.org/Style/XSL/">XSL</a>. If I was to use XSL I&rsquo;d have a processing pipeline that uses three languages (XSL, Java, Scheme) which is two more than I&rsquo;d like. Hence I turned to <a href="http://planet.plt-scheme.org/display.ss?package=webit.plt&amp;owner=jim">WebIt!</a>, an XML transformation DSL written in Scheme, to create an all Scheme pipeline. The rest of this post wshows the steps I used to transform the Selenium API into Scheme code using WebIt! I think this is interesting in its own right, but also serves as a nice demonstration of the power of macros, which WebIt! makes extensive use of.</p>
+
+<p>My first step is to get an idea of the structure of the XML. The bits I&rsquo;m interested in look like this:</p>
+
+<div class="brush: html">
+ <div class="pygments">
+  <pre><span class="nt">&lt;function</span> <span class="na">name=</span><span class="s">"click"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"locator"</span><span class="nt">&gt;</span>an element locator<span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;comment&gt;</span>Clicks on a link, button, checkbox or radio button.
+  If the click action causes a new page to load (like a link usually
+  does), call waitForPageToLoad.<span class="nt">&lt;/comment&gt;</span>
+<span class="nt">&lt;/function&gt;</span>
+</pre></div>
+
+</div>
+
+<p>Let&rsquo;s read in the XML file and extract all the <code>function</code> elements. For this I&rsquo;ll use SSAX and SXPath:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span>
+ <span class="p">(</span><span class="k">planet</span> <span class="s2">"ssax.ss"</span> <span class="p">(</span><span class="s2">"lizorkin"</span> <span class="s2">"ssax.plt"</span> <span class="mi">1</span><span class="p">))</span>
+ <span class="p">(</span><span class="k">only</span> <span class="p">(</span><span class="k">planet</span> <span class="s2">"sxml.ss"</span> <span class="p">(</span><span class="s2">"lizorkin"</span> <span class="s2">"sxml.plt"</span> <span class="mi">1</span><span class="p">))</span> <span class="n">sxpath</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="n">api</span>
+  <span class="p">(</span><span class="nb">with-input-from-file</span> <span class="s2">"iedoc.xml"</span>
+    <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="n">ssax:xml-&gt;sxml</span> <span class="p">(</span><span class="nb">current-input-port</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">()))))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="n">functions</span>
+  <span class="p">((</span><span class="n">sxpath</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">//</span> <span class="ss">function</span><span class="p">))</span> <span class="n">api</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Ok, so we have all the functions. Now let&rsquo;s parse them into a more useful datastructure. Here&rsquo;s my first attempt:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">planet</span> <span class="s2">"xml.ss"</span> <span class="p">(</span><span class="s2">"jim"</span> <span class="s2">"webit.plt"</span> <span class="mi">1</span> <span class="mi">5</span><span class="p">)))</span>
+
+<span class="c1">;; struct function : string (listof string)</span>
+<span class="p">(</span><span class="k">define-struct</span> <span class="n">function</span> <span class="p">(</span><span class="n">name</span> <span class="n">params</span><span class="p">))</span>
+
+<span class="c1">;; parse-function : sxml -&gt; function</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">parse-function</span> <span class="n">fn</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">xml-match</span> <span class="n">fn</span>
+    <span class="p">[(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span><span class="p">)</span> <span class="k">...</span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k">_</span> <span class="k">...</span><span class="p">))</span>
+     <span class="p">(</span><span class="n">make-function</span> <span class="n">name</span> <span class="p">(</span><span class="nb">list</span> <span class="n">param-name</span> <span class="k">...</span><span class="p">))]))</span>
+
+<span class="p">(</span><span class="nb">map</span> <span class="n">parse-function</span> <span class="n">functions</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The <code>xml-match</code> macro is a pattern matcher for SXML. You specify the &ldquo;shape&rdquo; of the SXML, and if the input matches the pattern the following expressions are evaluated:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">xml-match</span> <span class="n">value</span>
+  <span class="p">[(</span><span class="n">pattern</span> <span class="n">expression</span> <span class="n">_..._</span><span class="p">)]</span><span class="n">_..._</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The simplified form of a pattern is:</p>
+
+<ul>
+ <li>
+  <p><code>(element _..._)</code> matches an element with the given name.</p></li>
+ <li>
+  <p><code>name: value</code> matches an attribute with the given name and value.</p></li>
+ <li>
+  <p><code>,binding</code> binds the value of <code>binding</code> to the given name in the scope of the following expressions.</p></li>
+ <li>
+  <p><code>...</code> matches zero or more of the preceeding patterns.</p></li></ul>
+
+<p>In our example the pattern is:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>     <span class="p">(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span><span class="p">)</span> <span class="k">...</span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k">_</span> <span class="k">...</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>So we&rsquo;re looking for an element called <code>function</code> with an attribute called <code>name</code> the value of which is bound to <code>name</code>. Then follows zero or more <code>param</code> elements, with attribute <code>name</code>, the value of which is bound to <code>param-name</code>. Finally we expect a <code>comment</code> element which can contain any amount of data. The use of <code>_</code> as the binding name is a common convention to indicate data we don&rsquo;t care about but must still match to make our pattern complete.</p>
+
+<p>I run the code in DrScheme and see the result:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="n">_xml-match:</span> <span class="n">no</span> <span class="n">matching</span> <span class="n">clause</span> <span class="n">found_</span>
+</pre></div>
+
+</div>
+
+<p>Oops. So our pattern isn&rsquo;t complete. We&rsquo;ve also seen one flaw of WebIt!: it doesn&rsquo;t give very good error messages. However we can easily fix this by adding a catch all pattern that raises an error telling us what we failed to match. The code follows. Notice that I&rsquo;ve also added pretty printing to make the unmatched SXML easier to read.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"pretty.ss"</span><span class="p">))</span>
+
+<span class="c1">;; parse-function : sxml -&gt; function</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">parse-function</span> <span class="n">fn</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">xml-match</span> <span class="n">fn</span>
+    <span class="p">[(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span><span class="p">)</span> <span class="k">...</span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k">_</span> <span class="k">...</span><span class="p">))</span>
+     <span class="p">(</span><span class="n">make-function</span> <span class="n">name</span> <span class="p">(</span><span class="nb">list</span> <span class="n">param-name</span> <span class="k">...</span><span class="p">))]</span>
+    <span class="p">[</span><span class="o">,</span><span class="n">err</span> <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">op</span> <span class="p">(</span><span class="nb">open-output-string</span><span class="p">)])</span>
+            <span class="p">(</span><span class="nb">pretty-print</span> <span class="n">err</span> <span class="n">op</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">error</span> <span class="p">(</span><span class="nb">format</span> <span class="s2">"Didn&#39;t match ~n~a~n"</span> <span class="p">(</span><span class="nb">get-output-string</span> <span class="n">op</span><span class="p">))))]))</span>
+</pre></div>
+
+</div>
+
+<p>Run this code and you&rsquo;ll see the error occurs as we don&rsquo;t allow the description to contain more than one element. This is easily fixed by extending the pattern to <code>,desc ...</code>. The next error is more interesting. The <code>function</code> element contains a <code>return</code> element. The WebIt! pattern language doesn&rsquo;t allows us to express optional patterns, so we have to duplicate our pattern and include the case of <code>return</code>. This also requires we extend the defintion of the <code>function</code> structure.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="c1">;; struct function : string string (listof string)</span>
+<span class="p">(</span><span class="k">define-struct</span> <span class="n">function</span> <span class="p">(</span><span class="n">name</span> <span class="n">return</span> <span class="n">params</span><span class="p">))</span>
+
+<span class="c1">;; parse-function : sxml -&gt; function</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">parse-function</span> <span class="n">fn</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">xml-match</span> <span class="n">fn</span>
+    <span class="p">[(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span> <span class="k">...</span><span class="p">)</span> <span class="k">...</span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k">_</span> <span class="k">...</span><span class="p">))</span>
+     <span class="p">(</span><span class="n">make-function</span> <span class="n">name</span> <span class="s2">"void"</span> <span class="p">(</span><span class="nb">list</span> <span class="n">param-name</span> <span class="k">...</span><span class="p">))]</span>
+    <span class="p">[(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">return</span> <span class="n">type:</span> <span class="o">,</span><span class="n">type</span> <span class="o">,</span><span class="n">return-desc</span> <span class="k">...</span><span class="p">)</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span> <span class="k">...</span><span class="p">)</span> <span class="k">...</span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k">_</span> <span class="k">...</span><span class="p">))</span>
+     <span class="p">(</span><span class="n">make-function</span> <span class="n">name</span> <span class="n">type</span> <span class="p">(</span><span class="nb">list</span> <span class="n">param-name</span> <span class="k">...</span><span class="p">))]</span>
+    <span class="p">[</span><span class="o">,</span><span class="n">err</span> <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">op</span> <span class="p">(</span><span class="nb">open-output-string</span><span class="p">)])</span>
+            <span class="p">(</span><span class="nb">pretty-print</span> <span class="n">err</span> <span class="n">op</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">error</span> <span class="p">(</span><span class="nb">format</span> <span class="s2">"Didn&#39;t match ~n~a~n"</span> <span class="p">(</span><span class="nb">get-output-string</span> <span class="n">op</span><span class="p">))))]))</span>
+</pre></div>
+
+</div>
+
+<p>This works! This is as far as I want to go in this article. We&rsquo;ve seen how we can use SSAX. SXPath, and WebIt! to create XML transforms in pure Scheme. There is a lot more to all of these packages but what we&rsquo;ve used is sufficient for many uses. The rest of the code to create Scheme from the API is quite straightforward and specific to Selenium. If you&rsquo;re curious read the source of the Selenium PLaneT package, which will be released soon.</p>
+
+<p><em>This post also appears on <a href="http://www.untyped.com/untyping">Untyping</a></em></p></div>
+  <a class="more" href='/2007/05/xml-transformation-in-scheme.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-12.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li class="active"><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-14.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

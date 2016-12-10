@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 6)</title>
+    <meta name="description" content="Racket Blog (page 6)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-6.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>16 Aug 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/08/racket-v513.html'>Racket v5.1.3</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1.3 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a>This is a bugfix release, resolving the DrRacket issue with the contour view. In addition, two tex files with problematic licensing were removed.</p></div>
+  <a class="more" href='/2011/08/racket-v513.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Aug 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/08/racket-v512.html'>Racket v5.1.2</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1.2 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>The download page includes 64-bit installers for Mac OS X, Windows, and two Debian flavors. Racket now supports OS X Lion.</p></li>
+ <li>
+  <p>Racket now includes a new <code>racket/place</code> library to support parallelism, complementing <code>racket/future</code>. Racket&rsquo;s parallel build process is now based on places instead of multiple OS processes.Places support share-nothing parallelism and message-passing communication. Compared to futures, places are heavyweight, but they have a simpler performance model.</p></li>
+ <li>
+  <p>The syntax-certificate system has been replaced by a syntax-taint system. Both certificates and taints were designed to protect otherwise inaccessible bindings from abuse when they appear in macro expansions. Taints are simpler and lighter, and the switch closes known holes in the certificate system. Macros that are not implemented with <code>syntax-rules</code> or <code>define-syntax-rule</code>, however, must explicitly use <code>syntax-protect</code> to protect their expansions from abuse.</p></li>
+ <li>
+  <p>The <code>net/url</code> library supports HTTPS connections, but beware that by default all sites are accepted (equivalent to ignoring a browser&rsquo;s warnings about untrusted certificates).</p></li>
+ <li>
+  <p>Error messages in the student languages use a simplified vocabulary and consistent phrasings. If you maintain curriculum material or teachpacks then please consider updating. See the “Error Message Composition Guidelines” section in the documentation for details.</p></li>
+ <li>
+  <p>Typed Racket: almost all core Racket data structures and operations are now accessible in Typed Racket (most of this work is due to prolific contributor Eric Dobson). The performance of the typechecker has been significantly improved.</p></li>
+ <li>
+  <p>The <code>scriblib/bibtex</code> library supports BibTeX-formatted citation databases in Scribble documents. BibTeX can be tricky to parse, so please report failed entries as bug reports.</p></li>
+ <li>
+  <p>The <code>for</code> forms now support an <code>#:unless</code> clause, and a nonnegative integer can be used as a sequence. The new <code>compose1</code> function creates single-valued composition functions. The <code>racket/function</code> library now provides <code>identity</code>, <code>thunk</code>, and <code>thunk*</code>.</p></li>
+ <li>
+  <p>The license has been clarified: we now use LGPLv2.1 uniformly. (The license file used to specify LGPLv2, contrary to the download pages.)</p></li></ul></div>
+  <a class="more" href='/2011/08/racket-v512.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Jul 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/07/racketcon-recap.html'>RacketCon Recap</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>We held <a href="http://con.racket-lang.org/">RacketCon</a> here at <a href="http://www.ccis.neu.edu/2011/">Northeastern</a> over the past weekend, and it was a great time! Matthew Flatt consulted his magic 8-ball about the future of Racket (it involves Hawaiian shirts); Matthias Felleisen announced the upcoming Realm of Racket book; Robby Findler demoed DrRacket with online syntax checking; Ryan Culpepper taught us how to make Rackety libraries; Prabhakar Ragde explained how the University of Waterloo teaches Racket and Program by Design to 1500 students a year (and how to embed math into Scribble documents).</p>
+
+<p>Danny Yoo has already <a href="http://blog.hashcollision.org/?p=162">blogged</a> about his talk about his <a href="http://hashcollision.org/whalesong/">Whalesong</a> Racket-&gt;JavaScript compiler. Hopefully other people will write more about some of the individual talks; I&rsquo;ll update this post to link to any that I see.</p>
+
+<p>As promised, the talks were videotaped by Jeff Dlouhy of the <a href="http://acm.ccs.neu.edu/">NUACM</a>; the videos are in post-production and should be up within a few weeks. We&rsquo;ll announce their availability on this blog. Slides from the individual talks will be up on the <a href="http://con.racket-lang.org/2011/">RacketCon webpage</a> soon.</p></div>
+  <a class="more" href='/2011/07/racketcon-recap.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Jun 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/06/come-to-racketcon.html'>Come to RacketCon!</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>Calling All Racketeers!</p>
+
+<p>Join us at RacketCon, 23 &amp; 24 July 2011. <a href="http://con.racket-lang.org/">http://con.racket-lang.org/</a></p>
+
+<p>The schedule for RacketCon is now available, and includes presentations by key members of the Racket team, including Matthew Flatt on the future of Racket and Matthias Felleisen on the Program By Design curriculum, as well as tutorials on building web applications and accessing low-level libraries.</p>
+
+<p>The meeting will take place at Northeastern University in Boston, MA. It will be an opportunity for developers, researchers, and educators using Racket, DrRacket, Program By Design, and related technologies to come together to share plans, ideas, and enthusiasm. To make it accessible, we will not charge any registration fees; we&rsquo;ll also serve you breakfast and lunch.</p>
+
+<p>We&rsquo;re excited about RacketCon, and hope you&rsquo;ll join us there. To register for RacketCon, please send an email with your name and affiliation to <a href="mailto:racketcon@racket-lang.org">racketcon@racket-lang.org</a>.</p>
+
+<p>Additional information, including registration, transportation and hotel information, can be found on the web page: <a href="http://con.racket-lang.org">http://con.racket-lang.org</a></p></div>
+  <a class="more" href='/2011/06/come-to-racketcon.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>26 May 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/05/multi-file-code-coverage-viewing-tool.html'>Multi-file code coverage viewing tool</a></h1>
+  <div class="truncate">
+<p><em>posted by John Clements</em></p>
+
+<p>I&rsquo;m very pleased to announce the availability of a multi-file code coverage viewer, written by Jonathan Walsh.</p>
+
+<p>Torn between separating your test cases into another file and actually seeing the coverage? Well, go ahead and pull them apart, because the multi-file coverage tool displays coverage information for the files required by the present one, including both percentage covered (on a line-by-line basis) and optionally a list of uncovered lines (no more inching through your code, looking for the red highlighting.</p>
+
+<p><a href="http://3.bp.blogspot.com/-d4j23yei4rc/Td6l0wv3UCI/AAAAAAAAAF8/ptD2u9KwevE/s1600/coverage-button.png"></a> Back End:</p>
+
+<p>One reason I expect this tool to be long-term robust is that it makes absolutely no changes to the back-end; that is, it just uses the existing code coverage framework. The only thing going on here is that the tool provides a way to store, load, and display this information. This means that the tool displays coverage for un-compiled files only. We thought about fiddling with this, but finally decided that the existing behavior was probably about as useful as anything else we&rsquo;d come up with, and a lot more robust.</p>
+
+<p>URL for docs:</p>
+
+<p><a href="http://planet.racket-lang.org/package-source/jowalsh/code-coverage.plt/1/3/planet-docs/code-coverage/index.html">http://planet.racket-lang.org/package-source/jowalsh/code-coverage.plt/1/3/planet-docs/code-coverage/index.html</a></p>
+
+<p>As you might expect, it&rsquo;s a one-line install:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket</span>
+
+<span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">planet</span> <span class="n">jowalsh/code-coverage</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Please let us know about bugs you discover!</p></div>
+  <a class="more" href='/2011/05/multi-file-code-coverage-viewing-tool.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>26 May 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/05/racket-on-floss-weekly.html'>Racket on FLOSS Weekly</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>Our own <a href="http://www.cs.utah.edu/~mflatt/">Matthew Flatt</a> was interviewed about Racket <a href="http://twit.tv/floss167">on FLOSS Weekly</a>. Also available on <a href="http://www.youtube.com/watch?v=vJGV7HaTdbg">YouTube</a>.</p></div>
+  <a class="more" href='/2011/05/racket-on-floss-weekly.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>30 Apr 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/04/racket-v511.html'>Racket v5.1.1</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>The new <code>racket/stream</code> library provides <code>stream-first</code>, <code>stream-rest</code>, a lazy <code>stream-cons</code>, and so on. Streams are a subtype of sequences, so they work in <code>for</code> forms. Some sequence generators, such as <code>in-range</code>, now produce streams. A <code>racket/sequence</code> library replaces the old <code>racket/stream</code> library.</p></li>
+ <li>
+  <p>The new <code>racket/syntax</code> library contains facilities useful for writing macros. The new <code>syntax/srcloc</code> and <code>syntax/location</code> libraries provide support for manipulating source locations.</p></li>
+ <li>
+  <p>The <code>racket/gui</code> library now supports multi-column list boxes and scrolling panels.</p></li>
+ <li>
+  <p>The new <code>ffi/file</code> library is useful for writing foreign library bindings that cooperate with Racket&rsquo;s security guard mechanism.</p></li>
+ <li>
+  <p>Generators from the <code>racket/generator</code> library can now have formal arguments that are used when the generator is fired up.</p></li>
+ <li>
+  <p>Single-precision floating-point support is now enabled by default. Single-precision floats print differently from their default double-precision counterparts, new primitives convert between the two precisions, and new reader syntax supports single-precision literals.</p></li>
+ <li>
+  <p>JIT improvements include a small change to aid x86 branch prediction on function-call returns, which can speed up some programs significantly.</p></li>
+ <li>
+  <p>Typed Racket:</p></li>
+ <li>
+  <p>The numeric tower has been entirely overhauled. TR programs can now use more precise types than before, and check more numeric properties, such as sign or range properties.</p></li>
+ <li>
+  <p>Fixnum optimizations have been improved and should apply more broadly.</p></li>
+ <li>
+  <p>The performance of the typechecker has been improved. In particular, dispatch on large union types should typecheck much faster than before.</p></li>
+ <li>
+  <p>The Stepper can now step through Lazy Racket programs.</p></li>
+ <li>
+  <p>The <code>racket/future</code> library includes <code>fsemaphore</code> values, the <code>future</code> primitive no longer freezes futures (so a future can spawn new futures), and <code>future</code> log messages are more informative.</p></li>
+ <li>
+  <p>PLaneT development links are now version-specific.</p></li>
+ <li>
+  <p>The <code>2htdp/image</code> library now includes <code>overlay/align</code>, <code>underlay/align</code>, <code>overlay/align/offset</code> and <code>underlay/align/offset</code>.</p></li>
+ <li>
+  <p>The network protocol for universes in <code>2htdp/universe</code> has changed, so that v5.1.1 is incompatible with earlier versions.</p></li>
+ <li>
+  <p>The &ldquo;DrScheme&rdquo; application (which simply ran DrRacket in the last few releases) has been removed. The &ldquo;MrEd&rdquo; GUI executables for Windows and Mac OS X have also been removed, although the &ldquo;mred&rdquo; console executable remains for Unix and Mac OS X to support old scripts.</p></li></ul></div>
+  <a class="more" href='/2011/04/racket-v511.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>04 Apr 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/04/writing-syntax-case-macros.html'>Writing <code>syntax-case</code> Macros</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Disclaimer: This is not really a tutorial on macros, it&rsquo;s more of a quick introduction to using Racket&rsquo;s <code>syntax-case</code>-based macros for people who are familiar with symbolic macros and miss their “simplicity”. It&rsquo;s also not comprehensive or thorough or complete, it&rsquo;s just intended to provide a rough quick overview of how to write macros. It was originally posted on comp.lang.scheme in a thread called “Idiot&rsquo;s guide to Scheme macros”, but I avoided that title here, since it&rsquo;s not a general purpose guide. (Also, it&rsquo;s yet another attempt to dispel the irrational “macrophobia” some people have when it gets to hygienic macros, leading them back to using <code>defmacro</code> with all its problems.)</p>
+
+<p>The main idea with Racket&rsquo;s macro system (and with other <code>syntax-case</code> systems) is that macros are syntax-to-syntax functions, just like the case of <code>defmacro</code>, except that instead of raw S-expressions you&rsquo;re dealing with syntax objects. This becomes very noticeable when identifiers are handled: instead of dealing with plain symbols, you&rsquo;re dealing with these syntax values (called “identifiers” in this case) that are essentially a symbol and <em>some opaque information</em> that represents the lexical scope for its source. In several <code>syntax-case</code> systems this is the only difference from <code>defmacro</code> macros, but in the Racket case this applies to everything — identifiers, numbers, other immediate constants, and even function applications, etc — they are all the same S-expression values that you&rsquo;re used to, except wrapped with additional information. Another thing that is unique to Racket is the extra information: in addition to the opaque lexical context, there is also source information and arbitrary properties (there are also certificates, but that&rsquo;s ignorable for this text).</p>
+
+<p>With this in mind, explaining the rest is not too difficult:</p>
+
+<ul>
+ <li>
+  <p><code>(syntax-source stx)</code>, <code>(syntax-position stx)</code>, <code>(syntax-line stx)</code>, <code>(syntax-column stx)</code> — retrieve parts of the source location information.</p></li>
+ <li>
+  <p><code>(syntax-e stx)</code> — takes a syntax value and returns the value it “wraps”. For example, if <code>stx</code> is an identifier you&rsquo;d get a symbol, and if it&rsquo;s a number you&rsquo;d get the number. If it&rsquo;s a simple parenthesized form, you&rsquo;d get a list of syntax values for the subforms. Note that the list can be improper, with the last element being a syntax object that contains a proper list. (But the list will actually be improper if the original syntax was a dotted list.)</p></li>
+ <li>
+  <p><code>(syntax-&gt;datum stx)</code> — takes a syntax value and returns the plain S-expression that it holds. This is done by recursive uses of <code>syntax-e</code>. (It would be a simple definition that does what you&rsquo;d think it should do.)</p></li>
+ <li>
+  <p><code>(syntax-&gt;list stx)</code> — sometimes you want to pull out the list of syntax values from a given parenthesized syntax, but <code>syntax-e</code> does too little (can still return an improper list) and <code>syntax-&gt;datum</code> does too much (gives you back raw S-expressions). <code>syntax-&gt;list</code> is a utility function that uses <code>syntax-e</code> as many times as needed to get back a proper list of syntax values. If that&rsquo;s not possible (if the input syntax was not a proper list), it returns <code>#f</code>, so it serves as a predicate too.</p></li>
+ <li>
+  <p><code>(syntax-property stx prop)</code> — returns the given property value from stx, if any, and <code>#f</code> if none. For example, try</p></li></ul>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb">syntax-property</span> <span class="o">#&#39;</span><span class="p">[</span><span class="n">foo</span><span class="p">]</span> <span class="o">&#39;</span><span class="ss">paren-shape</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>(The <code>#'</code> is similar to a quote, but for syntax values — I&rsquo;ll get to that later on.)</p>
+
+<ul>
+ <li>
+  <p>Note that there is <em>no</em> accessor for the opaque lexical scope, and as you&rsquo;ll see next, you don&rsquo;t need one.</p></li>
+ <li>
+  <p>To create a piece of syntax you use <code>datum-&gt;syntax</code>, and you give it an S-expression which will be the “contents” of the resulting syntax object. (The input can contain syntax values, which are left as is.) But when you do that you need to give it the other bits — including the lexical context thing, which you have no access to. The way that&rsquo;s done is:</p></li></ul>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">context-stx</span> <span class="n">input-sexpr</span><span class="p">)</span> 
+</pre></div>
+
+</div>
+
+<p>This returns a syntax value that wraps the <code>input-sexpr</code> value, using the lexical scope from <code>context-stx</code>. A common way to “break hygiene” and create a binding that is visible to the macro user&rsquo;s code is:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">stx</span> <span class="o">&#39;</span><span class="ss">foo</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>where <code>stx</code> is some syntax value that you get from the user input to the macro. It returns a <code>foo</code> identifier that has the same lexical context information as <code>stx</code>, so it&rsquo;s as if it came from there.</p>
+
+<p>Note that there is actually another optional argument that specifies the source (either using another syntax object, or as an explicit list), and another for copying the properties from — so an alternative to the above would be:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">stx</span> <span class="o">&#39;</span><span class="ss">foo</span> <span class="n">stx</span> <span class="n">stx</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>which also makes the source information and the properties be the same as those of <code>stx</code> (for example, this can matter in case of syntax errors).</p>
+
+<ul>
+ <li>
+  <p>There is also <code>(quote-syntax blah)</code> which creates a quoted syntax, with its lexical source from the place it appears.</p></li>
+ <li>
+  <p>Finally, <code>define-syntax</code> does the magic of tying a name with a transformer function.</p></li></ul>
+
+<p>And that&rsquo;s almost everything that you need in order to write hygienic (and non-hygienic) macros. Very inconveniently.</p>
+
+<p>For example, here&rsquo;s a simple <code>while</code> macro (use this in a file that starts with <code>#lang racket</code>):</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">subs</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">stx</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">datum-&gt;syntax</span>
+   <span class="n">stx</span>
+   <span class="o">`</span><span class="p">(</span><span class="ss">let</span> <span class="ss">loop</span> <span class="p">()</span>
+      <span class="p">(</span><span class="ss">when</span> <span class="o">,</span><span class="p">(</span><span class="nb">cadr</span> <span class="n">subs</span><span class="p">)</span>
+        <span class="o">,@</span><span class="p">(</span><span class="nb">cddr</span> <span class="n">subs</span><span class="p">)</span>
+        <span class="p">(</span><span class="ss">loop</span><span class="p">)))</span>
+   <span class="n">stx</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>which breaks like this:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="n">x</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="k">let</span> <span class="mi">5</span><span class="p">])</span>
+  <span class="p">(</span><span class="n">while</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">x</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">printf</span> <span class="s2">"x = ~s</span><span class="se">\n</span><span class="s2">"</span> <span class="n">x</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">set!</span> <span class="n">x</span> <span class="p">(</span><span class="nb">add1</span> <span class="n">x</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<p>The problem is that all of those quoted names are getting the context of the user input, which is not the right thing (it&rsquo;s close to a <code>defmacro</code>). To fix this, you need to <code>quote-syntax</code> all of these identifiers, so they&rsquo;ll have the macro source instead of the input source:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">subs</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">stx</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">datum-&gt;syntax</span>
+   <span class="n">stx</span>
+   <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="p">(</span><span class="k">quote-syntax</span> <span class="k">let</span><span class="p">)</span> <span class="o">,</span><span class="p">(</span><span class="k">quote-syntax</span> <span class="n">loop</span><span class="p">)</span> <span class="p">()</span>
+     <span class="p">(</span><span class="o">,</span><span class="p">(</span><span class="k">quote-syntax</span> <span class="k">when</span><span class="p">)</span> <span class="o">,</span><span class="p">(</span><span class="nb">cadr</span> <span class="n">subs</span><span class="p">)</span>
+      <span class="o">,@</span><span class="p">(</span><span class="nb">cddr</span> <span class="n">subs</span><span class="p">)</span>
+      <span class="p">(</span><span class="o">,</span><span class="p">(</span><span class="k">quote-syntax</span> <span class="n">loop</span><span class="p">))))</span>
+   <span class="n">stx</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>But that&rsquo;s clearly insane&hellip; More than being tedious, it&rsquo;s still incorrect since all of those function application parens will have the user&rsquo;s lexical context (Racket has a special implicit <code>#%app</code> macro that gets used in all function applications, and in this case the context of this application will make it unhygienic). Instead of doing this, a better approach would be to create the resulting syntax with the lexical context of the macro source by changing just that argument:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">subs</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">stx</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">datum-&gt;syntax</span>
+   <span class="p">(</span><span class="k">quote-syntax</span> <span class="n">here</span><span class="p">)</span>
+   <span class="o">`</span><span class="p">(</span><span class="ss">let</span> <span class="ss">loop</span> <span class="p">()</span>
+      <span class="p">(</span><span class="ss">when</span> <span class="o">,</span><span class="p">(</span><span class="nb">cadr</span> <span class="n">subs</span><span class="p">)</span>
+        <span class="o">,@</span><span class="p">(</span><span class="nb">cddr</span> <span class="n">subs</span><span class="p">)</span>
+        <span class="p">(</span><span class="ss">loop</span><span class="p">)))</span>
+   <span class="n">stx</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>And that&rsquo;s simple again, and works fine now.</p>
+
+<p>The problem is that it&rsquo;s tedious wrt to deconstructing the input (which happens to be trivial in this case), and wrt slapping together an output value — and that&rsquo;s where <code>syntax-case</code> comes in. It addresses the both by using pattern matching, where identifiers in patterns are bound as “syntax patterns”. A new form is added — <code>syntax</code> — which is similar to a <code>quote</code>, except that (a) it actually quotes things similarly to <code>quote-syntax</code>, with the lexical context of the <code>syntax</code> form; and (b) pattern variables are substituted with what they matched. With this, the above macro becomes much easier:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">test</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">syntax</span> <span class="p">(</span><span class="k">let</span> <span class="n">loop</span> <span class="p">()</span>
+               <span class="p">(</span><span class="k">when</span> <span class="n">test</span>
+                 <span class="n">body</span> <span class="k">...</span>
+                 <span class="p">(</span><span class="n">loop</span><span class="p">))))]))</span>
+</pre></div>
+
+</div>
+
+<p>The first line specifies that you want to match the <code>stx</code> input syntax, and that you have no “keywords” (in the same sense as in <code>syntax-rules</code>). The second line is the pattern that is matched against this input — with two pattern variables that match the second subexpression and the sequence of expressions from the third and on. (The first subexpression is matched against <code>_</code> which is a wild-card that matches anything without binding a pattern variable — the head part is often not needed, since it&rsquo;s just the macro name.) The last line is the output, specified using <code>syntax</code>, which means that it&rsquo;s very similar to the previous version where everything is given the lexical context of the macro and the two pattern variables are replaced with the two matches (so <code>body</code> gets spliced into the resulting syntax).</p>
+
+<p>Now, say that you want an unhygienic user-visible piece of syntax. For example, bind the always entertaining <code>it</code> thing to the test result. This:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">test</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">syntax</span> <span class="p">(</span><span class="k">let</span> <span class="n">loop</span> <span class="p">()</span>
+               <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+                 <span class="p">(</span><span class="k">when</span> <span class="n">it</span>
+                   <span class="n">body</span> <span class="k">...</span>
+                   <span class="p">(</span><span class="n">loop</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p>won&rsquo;t work because <code>it</code> has the macro source — it&rsquo;s hygienic and therefore not visible. Instead, you need to use <code>datum-&gt;syntax</code> with the user syntax:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">test</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">stx</span> <span class="o">&#39;</span><span class="ss">it</span><span class="p">)])</span>
+       <span class="p">(</span><span class="k">syntax</span> <span class="p">(</span><span class="k">let</span> <span class="n">loop</span> <span class="p">()</span>
+                 <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+                   <span class="p">(</span><span class="k">when</span> <span class="n">it</span>
+                     <span class="n">body</span> <span class="k">...</span>
+                     <span class="p">(</span><span class="n">loop</span><span class="p">))))))]))</span>
+</pre></div>
+
+</div>
+
+<p>But this doesn&rsquo;t really work since <code>it</code> needs to be bound as a pattern variable rather than a plain binding. <code>syntax-case</code> can be used here again: <code>(syntax-case &lt;name&gt; () [foo &lt;body&gt;])</code> will match <code>foo</code> against the <code>&lt;name&gt;</code> syntax, and if it&rsquo;s a name then it will be bound as a pattern variable in the <code>&lt;body&gt;</code>.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">test</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">syntax-case</span> <span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">stx</span> <span class="o">&#39;</span><span class="ss">it</span><span class="p">)</span> <span class="p">()</span>
+       <span class="p">[</span><span class="n">it</span> <span class="p">(</span><span class="k">syntax</span> <span class="p">(</span><span class="k">let</span> <span class="n">loop</span> <span class="p">()</span>
+                     <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+                       <span class="p">(</span><span class="k">when</span> <span class="n">it</span>
+                         <span class="n">body</span> <span class="k">...</span>
+                         <span class="p">(</span><span class="n">loop</span><span class="p">)))))])]))</span>
+</pre></div>
+
+</div>
+
+<p>Note that since <code>it</code> is a pattern variable, it doesn&rsquo;t need to be unquoted — <code>syntax</code> will do that.</p>
+
+<p>Finally, there are some more conveniences. First, <code>with-syntax</code> is a macro that binds pattern variables (by a similar translation to <code>syntax-case</code>):</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">test</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">with-syntax</span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">stx</span> <span class="o">&#39;</span><span class="ss">it</span><span class="p">)])</span>
+       <span class="p">(</span><span class="k">syntax</span> <span class="p">(</span><span class="k">let</span> <span class="n">loop</span> <span class="p">()</span>
+                 <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+                   <span class="p">(</span><span class="k">when</span> <span class="n">it</span>
+                     <span class="n">body</span> <span class="k">...</span>
+                     <span class="p">(</span><span class="n">loop</span><span class="p">))))))]))</span>
+</pre></div>
+
+</div>
+
+<p>and there&rsquo;s the <code>#'</code> reader macro for <code>syntax</code>:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">test</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">with-syntax</span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="n">stx</span> <span class="o">&#39;</span><span class="ss">it</span><span class="p">)])</span>
+       <span class="o">#&#39;</span><span class="p">(</span><span class="k">let</span> <span class="n">loop</span> <span class="p">()</span>
+           <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">it</span> <span class="n">test</span><span class="p">])</span>
+             <span class="p">(</span><span class="k">when</span> <span class="n">it</span>
+               <span class="n">body</span> <span class="k">...</span>
+               <span class="p">(</span><span class="n">loop</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p> and there are also <code>#`</code> and <code>#,</code> and <code>#,@</code> which are implemented by translating them to uses of <code>with-syntax</code>.</p>
+
+<p> Note that the last example uses the lexical context of the whole form for the new identifier, but that&rsquo;s not only the option. You could use any other part of the macro input — for example, you could use the macro keyword:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">while</span> <span class="n">stx</span><span class="p">)</span>
+<span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+  <span class="p">[(</span><span class="n">hd</span> <span class="n">test</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span> <span class="c1">; need the head now</span>
+   <span class="p">(</span><span class="k">with-syntax</span> <span class="p">([</span><span class="n">it</span> <span class="p">(</span><span class="nb">datum-&gt;syntax</span> <span class="o">#&#39;</span><span class="n">hd</span> <span class="o">&#39;</span><span class="ss">it</span><span class="p">)])</span>
+     <span class="k">...</span> <span class="n">same</span> <span class="k">...</span><span class="p">)]))</span>
+</pre></div>
+
+</div>
+
+<p> or the test expression (use <code>#'test</code>). Each of these choices has subtle differences that are especially important when you&rsquo;re composing macros (for example, using a second macro that <em>expands</em> to a <code>while</code>, where the test expression comes from that macro rather than the user code). Demonstrating these things is a popular way to pass the time in some circles, but I&rsquo;ll avoid it here. In fact, a great way to avoid this whole thing altogether is not create unhygienic bindings in the first place. It sounds like doing so excludes cases where you <em>really</em> want to have a new binding visible in user code, but Racket provides “syntax parameters” that can be used more conveniently (and less confusingly) — see <a href="../../2008/02/dirty-looking-hygiene.html">an earlier post</a> for a description of that. As a side note, these options are a good hint that a hygienic macro system is more expressive than a symbolic <code>defmacro</code> system, where no such choices exist. Creating such macros using <code>defmacro</code> can appear easier simply because of this lack of choice — in the same way that CPP-style string-based macros are “simpler” than <code>defmacro</code> since they&rsquo;re less expressive (just appending lexical tokens, no structural information).</p>
+
+<p> There are other important aspects of the Racket macro system that are not covered here. The most obvious of them is worth mentioning here: Racket separates the “runtime phase” from the “syntax phase”. For example, if you want to try these examples with “<code>#lang racket/base</code>”, you&rsquo;ll need to add <code>(require (for-syntax racket/base))</code> since the <code>racket/base</code> language doesn&rsquo;t have a full language in its syntax phase.</p>
+
+<p> Roughly speaking, this makes sure that source code is deterministically compilable by having each level live in its own world, limiting macros to deal only with the input syntax only and not runtime values. (For example, a CLOS implementation in this system cannot check the value of an identifier bound to a class to determine how some macro should expand.) This results in reliable compilations that do not depend on how things were loaded, or whatever happened on the REPL.</p>
+
+<p> The important bottom line here is that you get to write macros with the full language available — and phase separation means that Racket is explicitly designed to make running code at the macro level and using it by the compiler as robust as possible, so you don&rsquo;t have to worry about using any complex system as part of your macro. You just need to keep in mind that the macro world is completely separate from the runtime, and the direct benefit of not worrying about weird interactions with compilation and file loading orders.</p></div>
+  <a class="more" href='/2011/04/writing-syntax-case-macros.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>19 Mar 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/03/languages-as-libraries-pldi-2011.html'>Languages as Libraries, PLDI 2011</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>We&rsquo;ve just finished up the <a href="http://bit.ly/langlib">final version</a> of our <a href="http://pldi11.cs.utah.edu/">PLDI 2011</a> paper on language extension in Racket. The paper describes how the module system and the syntax system work together to support new languages with new static semantics, such as Typed Racket. Here&rsquo;s the abstract:</p>
+
+<blockquote>
+ <p>Programming language design benefits from constructs for extending the syntax and semantics of a host language. While C&rsquo;s string-based macros empower programmers to introduce notational shorthands, the parser-level macros of Lisp encourage experimentation with domain-specific languages. The Scheme programming language improves on Lisp with macros that respect lexical scope.</p></blockquote>
+
+<blockquote>
+ <p>The design of Racket—a descendant of Scheme—goes even further with the introduction of a full-fledged interface to the static semantics of the language. A Racket extension programmer can thus add constructs that are indistinguishable from “native” notation, large and complex embedded domain-specific languages, and even optimizing transformations for the compiler backend. This power to experiment with language design has been used to create a series of sub-languages for programming with first-class classes and modules, numerous languages for implementing the Racket system, and the creation of a complete and fully integrated typed sister language to Racket&rsquo;s untyped base language.</p></blockquote>
+
+<blockquote>
+ <p>This paper explains Racket&rsquo;s language extension API via an implementation of a small typed sister language. The new language provides a rich type system that accommodates the idioms of untyped Racket. Furthermore, modules in this typed language can safely exchange values with untyped modules. Last but not least, the implementation includes a type-based optimizer that achieves promising speedups. Although these extensions are complex, their Racket implementation is just a library, like any other library, requiring no changes to the Racket implementation.</p></blockquote>
+
+<p>To learn how to implement your own new language in Racket, start with <a href="http://docs.racket-lang.org/guide/languages.html">this documentation</a>.</p></div>
+  <a class="more" href='/2011/03/languages-as-libraries-pldi-2011.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>14 Feb 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/02/racket-v51.html'>Racket v5.1</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a>The most significant change in version 5.1 is a <a href="../../2010/12/racket-version-5.html">rewrite of the GUI library</a>. Unix/X users will see the biggest difference with this change, because DrRacket and all Racket GUI programs now take on the desktop theme for menus, buttons, and other GUI widgets.</p>
+
+<p>In the long run, Racket GUI programs on all platforms will improve as a result of the library rewrite. In the short run, beware that this first release of a new library will inevitably include a new set of bugs.</p>
+
+<p>Version 5.1 changes in more detail:</p>
+
+<ul>
+ <li>
+  <p>The <code>racket/draw</code> library&mdash;which implements the drawing half the GUI toolkit&mdash;can be used independent of the <code>racket/gui/base</code> library and without a graphics display (e.g., without an X11 connection).The new library has one small incompatibility with the old GUI toolbox: &rsquo;xor drawing is no longer supported. The new library has many additional features: rotation and general affine transformations, PDF and SVG drawing contexts, gradients, and alpha-channel bitmaps.</p></li>
+ <li>
+  <p>The GRacket executable is no longer strictly necessary for running GUI programs, because the <code>racket/gui/base</code> library can be used from Racket. To the degree that a platform distinguishes GUI and console applications, however, the GRacket executable still offers some additional GUI-specific functionality (e.g., single-instance support).The new <code>racket/gui/base</code> library includes small incompatibilities with the old GUI toolbox: the <code>send-event</code>, <code>current-ps-afm-file-paths</code>, and <code>current-ps-cmap-file-paths</code> functions have been removed. The <code>racket/gui/base</code> library re-exports <code>racket/draw</code>, so it includes the same drawing functionality as before (except for &rsquo;xor drawing).</p></li>
+ <li>
+  <p>The new <code>racket/snip</code> library can be used independently of <code>racket/gui/base</code> to work with graphical editor content (e.g., images in student programs). Like <code>racket/draw</code>, the <code>racket/snip</code> library is re-exported by <code>racket/gui/base</code>.</p></li>
+ <li>
+  <p>The Web Server includes a backwards incompatible change that prevents X-expressions and lists of bytes from being directly returned from servlets. This change will increase performance for those types of responses and allow easier experimentation with response types. Please see "<code>collects/web-server/compat/0/README</code>" in the installation to learn about porting your servlets forward. Don&rsquo;t worry. It&rsquo;s easy.</p></li>
+ <li>
+  <p>The new <code>raco demodularize</code> tool collapses a module&rsquo;s dependencies into a single module comprising the whole program. This transformation currently provides no performance improvement, but is the basis for cross-module optimization and dead-code elimination tools to come. The transformation is currently useful for static analysis of whole Racket programs.</p></li>
+ <li>
+  <p>The picturing-programs teachpack, formerly installed via PLaneT, is now bundled with the standard distribution. Use the teachpack with <code>(require picturing-programs)</code> instead of <code>(require installed-teachpacks/picturing-programs)</code>. The old PLaneT-based installation procedure still works, but it now merely installs a stub that invokes the bundled version.</p></li>
+ <li>
+  <p>Slideshow picts, <code>racket/draw</code> bitmaps, and images created with <code>2htdp/image</code> can now be used directly in Scribble documents. More generally, the new <code>file/convertible</code> protocol enables any value that is convertible to a PNG and/or PDF stream to be used as an image in a Scribble document.</p></li>
+ <li>
+  <p>The Same game sports a new look and an improved scoring system. (The current known high score is 12,429; can you beat that?)</p></li></ul></div>
+  <a class="more" href='/2011/02/racket-v51.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-5.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li class="active"><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-7.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 5)</title>
+    <meta name="description" content="Racket Blog (page 5)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-5.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>25 Aug 2012</p></col-1>
+
+<col-2>
+  <h1><a href='/2012/08/dynamic-programming-versus-memoization.html'>Dynamic Programming versus Memoization</a></h1>
+  <div class="truncate">
+<p><em>posted by Shriram Krishnamurthi</em></p>
+
+<p>[Edit on 2012&ndash;08&ndash;27, 12:31EDT: added code and pictures below. 2012&ndash;08&ndash;27, 13:10EDT: also incorporated some comments.]</p>
+
+<p>I wrote this on the Racket educators&rsquo; mailing list, and Eli Barzilay</p>
+
+<p>suggested I post it here as well.</p>
+
+<p>The article is about the difference between <strong>memoization</strong> and <strong>dynamic programming</strong> (DP). Before you read on, you should stop and ask yourself: <em>Do I think these two are the same concept?</em>; if you think they are different, <em>How do I think they differ?</em>; and for that matter, <em>Do I even think of them as related?</em></p>
+
+<p>Did you think? Okay, then read on.</p>
+
+<p>They most certainly are related, because they are both mechanisms for optimizing a computation by replacing repeated sub-computations with the storage and reuse of the result of those sub-computations. (That is, both trade off space for time.) In that description is already implicit an assumption: that the sub-computation will return the same result every time (or else you can&rsquo;t replace the computation with its value on subsequent invocations). You&rsquo;ve almost certainly heard of DP from an algorithms class. You&rsquo;ve probably heard of memoization if you&rsquo;re a member of this language&rsquo;s community, but many undergrads simply never see it because algorithms textbooks ignore it; and when they do mention it they demonstrate fundamental misunderstandings (as Algorithms by Dasgupta, Papadimitriou, and Vazirani does).</p>
+
+<p>Therefore, let&rsquo;s set aside precedent. I&rsquo;ll tell you how to think about them.</p>
+
+<p>Memoization is fundamentally a top-down computation and DP is fundamentally bottom-up. In memoization, we observe that a computational <em>tree</em> can actually be represented as a computational <em>DAG</em> (a directed acyclic graph: the single most underrated data structure in computer science); we then use a black-box to turn the tree into a DAG. But it allows the top-down description of the problem to remain unchanged. (As I left unstated originally but commenter23 below rightly intuited, the nodes are function calls, edges are call dependencies, and the arrows are directed from caller to callee. See the pictures later in this article.)</p>
+
+<p>In DP, we make the same observation, but construct the DAG from the bottom-up. That means we have to rewrite the computation to express the delta from each computational tree/DAG node to its parents. We also need a means for addressing/naming those parents (which we did not need in the top-down case, since this was implicit in the recursive call stack). This leads to inventions like DP tables, but people often fail to understand why they exist: it&rsquo;s primarily as a <em>naming mechanism</em> (and while we&rsquo;re at it, why not make it efficient to find a named element, ergo arrays and matrices).</p>
+
+<p>In both cases, there is the potential for space wastage. In memoization, it is very difficult to get rid of this waste (you could have custom, space-saving memoizers, as Vclav Pech points out in his comment below, but then the programmer risks using the wrong one&hellip;which to me destroys the beauty of memoization in the first place). In contrast, in DP it&rsquo;s easier to save space because you can just look at the delta function to see how far &ldquo;back&rdquo; it reaches; beyond there lies garbage, and you can come up with a cleverer representation that stores just the relevant part (the &ldquo;fringe&rdquo;). Once you understand this, you realize that the classic textbook linear, iterative computation of the fibonacci is just an extreme example of DP, where the entire &ldquo;table&rdquo; has been reduced to two iteration variables. (Did your algorithms textbook tell you that?)</p>
+
+<p>In my class, we work through some of the canonical DP algorithms as memoization problems instead, just so when students later encounter these as &ldquo;DP problems&rdquo; in algorithms classes, they (a) realize there is nothing canonical about this presentation, and (b) can be wise-asses about it.</p>
+
+<p>There are many trade-offs between memoization and DP that should drive the choice of which one to use.</p>
+
+<p><strong>Memoization</strong>:</p>
+
+<ul>
+ <li>
+  <p>leaves computational description unchanged (black-box)</p></li>
+ <li>
+  <p>avoids unnecessary sub-computations (i.e., saves time, and some space with it)</p></li>
+ <li>
+  <p>hard to save space absent a strategy for what sub-computations to dispose of</p></li>
+ <li>
+  <p>must alway check whether a sub-computation has already been done before doing it (which incurs a small cost)</p></li>
+ <li>
+  <p>has a time complexity that depends on picking a smart computation name lookup strategy In direct contrast, <strong>DP</strong>:</p></li>
+ <li>
+  <p>forces change in desription of the algorithm, which may introduce errors and certainly introduces some maintenance overhead</p></li>
+ <li>
+  <p>cannot avoid unnecessary sub-computations (and may waste the space associated with storing those results)</p></li>
+ <li>
+  <p>can more easily save space by disposing of unnecessary sub-computation results</p></li>
+ <li>
+  <p>has no need to check whether a computation has been done before doing it&mdash;the computation is rewritten to ensure this isn&rsquo;t necessary</p></li>
+ <li>
+  <p>has a space complexity that depends on picking a smart data storage strategy [NB: Small edits to the above list thanks to an exchange with Prabhakar Ragde.]</p></li></ul>
+
+<p>I therefore tell my students: first write the computation and observe whether it fits the DAG pattern; if it does, use memoization. Only if the space proves to be a problem and a specialized memo strategy won&rsquo;t help&mdash;or, even less likely, the cost of &ldquo;has it already been computed&rdquo; is also a problem&mdash;should you think about converting to DP. And when you do, do so in a methodical way, retaining structural similarity to the original. Every subsequent programmer who has to maintain your code will thank you.</p>
+
+<p>I&rsquo;ll end with a short quiz that I always pose to my class.</p>
+
+<p>Memoization is an optimization of a top-down, depth-first computation for an answer. DP is an optimization of a bottom-up, breadth-first computation for an answer. We should naturally ask, what about</p>
+
+<ul>
+ <li>
+  <p>top-down, breadth-first</p></li>
+ <li>
+  <p>bottom-up, depth-first Where do they fit into the space of techniques for avoiding recomputation by trading off space for time?</p></li>
+ <li>
+  <p>Do we already have names for them? If so, what?, or</p></li>
+ <li>
+  <p>Have we been missing one or two important tricks?, or</p></li>
+ <li>
+  <p>Is there a reason we don&rsquo;t have names for these?</p></li></ul>
+
+<h2 id="wheres-the-code">Where&rsquo;s the Code?</h2>
+
+<p>I&rsquo;ve been criticized for not including code, which is a fair complaint. First, please see the comment number 4 below by simli. For another, let me contrast the two versions of computing Levenshtein distance. For the dynamic programming version, see <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Wikipedia</a>, which provides pseudocode and memo tables as of this date (2012&ndash;08&ndash;27). Here&rsquo;s the Racket version:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="n">levenshtein</span>
+  <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">s</span> <span class="n">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">cond</span>
+     <span class="p">[(</span><span class="k">and</span> <span class="p">(</span><span class="nb">empty?</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">empty?</span> <span class="n">t</span><span class="p">))</span> <span class="mi">0</span><span class="p">]</span>
+     <span class="p">[(</span><span class="nb">empty?</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">length</span> <span class="n">t</span><span class="p">)]</span>
+     <span class="p">[(</span><span class="nb">empty?</span> <span class="n">t</span><span class="p">)</span> <span class="p">(</span><span class="nb">length</span> <span class="n">s</span><span class="p">)]</span>
+     <span class="p">[</span><span class="k">else</span>
+      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">equal?</span> <span class="p">(</span><span class="nb">first</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">first</span> <span class="n">t</span><span class="p">))</span>
+   <span class="p">(</span><span class="n">levenshtein</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">t</span><span class="p">))</span>
+   <span class="p">(</span><span class="nb">min</span> <span class="p">(</span><span class="nb">add1</span> <span class="p">(</span><span class="n">levenshtein</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">s</span><span class="p">)</span> <span class="n">t</span><span class="p">))</span>
+        <span class="p">(</span><span class="nb">add1</span> <span class="p">(</span><span class="n">levenshtein</span> <span class="n">s</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">t</span><span class="p">)))</span>
+        <span class="p">(</span><span class="nb">add1</span> <span class="p">(</span><span class="n">levenshtein</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">t</span><span class="p">)))))])))</span>
+</pre></div>
+
+</div>
+
+<p>The fact that <em>this</em> is not considered the more straightforward, reference implementation by the Wikipedia author is, I think, symptomatic of the lack of understanding that this post is about.</p>
+
+<p>Now let&rsquo;s memoize it (assuming a two-argument <code>memoize</code>):</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="n">levenshtein</span>
+  <span class="p">(</span><span class="n">memoize</span>
+    <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">s</span> <span class="n">t</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">cond</span>
+       <span class="p">[(</span><span class="k">and</span> <span class="p">(</span><span class="nb">empty?</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">empty?</span> <span class="n">t</span><span class="p">))</span> <span class="mi">0</span><span class="p">]</span>
+       <span class="p">[(</span><span class="nb">empty?</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">length</span> <span class="n">t</span><span class="p">)]</span>
+       <span class="p">[(</span><span class="nb">empty?</span> <span class="n">t</span><span class="p">)</span> <span class="p">(</span><span class="nb">length</span> <span class="n">s</span><span class="p">)]</span>
+       <span class="p">[</span><span class="k">else</span>
+ <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">equal?</span> <span class="p">(</span><span class="nb">first</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">first</span> <span class="n">t</span><span class="p">))</span>
+     <span class="p">(</span><span class="n">levenshtein</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">t</span><span class="p">))</span>
+     <span class="p">(</span><span class="nb">min</span> <span class="p">(</span><span class="nb">add1</span> <span class="p">(</span><span class="n">levenshtein</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">s</span><span class="p">)</span> <span class="n">t</span><span class="p">))</span>
+   <span class="p">(</span><span class="nb">add1</span> <span class="p">(</span><span class="n">levenshtein</span> <span class="n">s</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">t</span><span class="p">)))</span>
+   <span class="p">(</span><span class="nb">add1</span> <span class="p">(</span><span class="n">levenshtein</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">s</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest</span> <span class="n">t</span><span class="p">)))))]))))</span>
+</pre></div>
+
+</div>
+
+<p>All that changed is the insertion of the second line.</p>
+
+<h2 id="bring-on-the-pitchers">Bring on the Pitchers!</h2>
+
+<p>The easiest way to illustrate the tree-to-DAG conversion visually is via the Fibonacci computation. Here&rsquo;s a picture of the computational tree:</p>
+
+<p>Now let&rsquo;s see it with memoization. The calls are still the same, but the dashed ovals are the ones that don&rsquo;t compute but whose values are instead looked up, and their emergent arrows show which computation&rsquo;s value was returned by the memoizer.</p>
+
+<p><strong>Important</strong>: The above example is misleading because it suggests that memoization <em>linearizes</em> the computation, which in general it does not. If you want to truly understand the process, I suggest hand-tracing the Levenshtein computation with memoization. And to truly understand the <em>relationship</em> to DP, compare that hand-traced Levenshtein computation with the DP version. (Hint: you can save some manual tracing effort by lightly instrumenting your memoizer to print inputs and outputs. Also, make the memo table a global variable so you can observe it grow.)</p></div>
+  <a class="more" href='/2012/08/dynamic-programming-versus-memoization.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>24 Aug 2012</p></col-1>
+
+<col-2>
+  <h1><a href='/2012/08/fully-inlined-merge-sort.html'>Fully Inlined Merge Sort</a></h1>
+  <div class="truncate">
+<p><em>posted by Neil Toronto</em></p>
+
+<p>While writing the code for the <a href="http://en.wikipedia.org/wiki/Triangular_distribution">triangular distribution</a> in the upcoming math library, I found that I needed a function that sorts exactly three numbers. This kind of code is annoying to write and to get right. But it comes up rarely enough, and it seems simple enough, that I’ve never felt like making a library function for it.</p>
+
+<p>But what if I wrote a macro that generated code to sort n numbers very quickly, where n is known at expansion time, but the numbers themselves aren’t? I think I could justify putting that in a library.</p>
+
+<p>Here’s code that correctly sorts three numbers a, b and c:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">values</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">values</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">values</span> <span class="n">b</span> <span class="n">c</span> <span class="n">a</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">values</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">values</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">values</span> <span class="n">c</span> <span class="n">b</span> <span class="n">a</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<p>It’s an if tree. Notice that there are 6 leaf expressions, for the 3! = 6 possible permutations. Also, it never compares more than it has to. It’s optimal.The optimality came from my reasoning about transitivity. For example, only two comparisons are needed before returning (values a b c). I knew that both (&lt; a b) and (&lt; b c), so (&lt; a b c) must be true by transitivity.</p>
+
+<p>It would be nice if the macro generated optimal code by explicitly reasoning about transitivity, or as an emergent property of the sorting algorithm it uses.</p>
+
+<p>We’ll write a macro that does the latter, by generating a fully inlined merge sort.</p>
+
+<p>[Edit: The final inline sort macro is <a href="https://gist.github.com/3456604">here</a>.]</p>
+
+<h2 id="runtime-merge-sort">Runtime Merge Sort</h2>
+
+<p>Start with a simple, runtime merge sort:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">merge</span> <span class="n">as</span> <span class="n">bs</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">match*</span> <span class="p">(</span><span class="n">as</span> <span class="n">bs</span><span class="p">)</span>
+    <span class="p">[((</span><span class="nb">list</span><span class="p">)</span> <span class="n">bs</span><span class="p">)</span>  <span class="n">bs</span><span class="p">]</span>
+    <span class="p">[(</span><span class="n">as</span> <span class="p">(</span><span class="nb">list</span><span class="p">))</span>  <span class="n">as</span><span class="p">]</span>
+    <span class="p">[((</span><span class="nb">list</span> <span class="n">a</span> <span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="p">(</span><span class="nb">list</span> <span class="n">b</span> <span class="n">bs</span> <span class="k">...</span><span class="p">))</span>
+     <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="p">(</span><span class="n">merge</span> <span class="n">as</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="n">bs</span><span class="p">)))</span>
+         <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="p">(</span><span class="n">merge</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="n">as</span><span class="p">)</span> <span class="n">bs</span><span class="p">)))]))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">merge-sort</span> <span class="n">vs</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">match</span> <span class="n">vs</span>
+    <span class="p">[(</span><span class="nb">list</span><span class="p">)</span>  <span class="n">vs</span><span class="p">]</span>
+    <span class="p">[(</span><span class="nb">list</span> <span class="n">a</span><span class="p">)</span>  <span class="n">vs</span><span class="p">]</span>
+    <span class="p">[</span><span class="k">_</span>  <span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="n">lvs</span> <span class="n">rvs</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">split-at</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">quotient</span> <span class="p">(</span><span class="nb">length</span> <span class="n">vs</span><span class="p">)</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="p">(</span><span class="n">merge</span> <span class="p">(</span><span class="n">merge-sort</span> <span class="n">lvs</span><span class="p">)</span> <span class="p">(</span><span class="n">merge-sort</span> <span class="n">rvs</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+
+<p>Example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="n">merge-sort</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">5</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">10</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">5</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>To make a macro out of merge sort, we need to change two things. The most obvious is that it has to return syntax for an if instead of evaluating it. That’s easy for a novice macrologist: change the functions to operate on syntax, stick a syntax-quasiquote in front of the if, and unquote the bits inside that get evaluated at expansion time.</p>
+
+<p>But if we did only that, we’d end up with expanded code like this:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="p">(</span><span class="k">if</span> <span class="k">...</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="p">(</span><span class="k">if</span> <span class="k">...</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>It would be slow because cons allocates. We want the code to be fast.So the other change is to move the conses inside the ifs, and evaluate them at expansion time. We can then construct a values expression out of the resulting list.</p>
+
+<h2 id="accumulator-passing-style-wont-work">Accumulator-Passing Style Won’t Work</h2>
+
+<p> Novice functional programmers should know that accumulator-passing style (APS) moves conses inward. For example, this “add 1 to each element” function:</p>
+
+<p> <code>racket
+ (define (list-add1 vs)
+  (match vs
+    [(list)  (list)]
+    [(list v vs ...)
+     (cons (add1 v) (list-add1 vs))]))</code></p>
+
+<p>becomes this after conversion to APS:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">list-add1/acc</span> <span class="n">vs</span> <span class="p">[</span><span class="n">acc</span> <span class="p">(</span><span class="nb">list</span><span class="p">)])</span>
+  <span class="p">(</span><span class="k">match</span> <span class="n">vs</span>
+    <span class="p">[(</span><span class="nb">list</span><span class="p">)</span>  <span class="p">(</span><span class="nb">reverse</span> <span class="n">acc</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">list</span> <span class="n">v</span> <span class="n">vs</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="n">list-add1/acc</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">add1</span> <span class="n">v</span><span class="p">)</span> <span class="n">acc</span><span class="p">))]))</span>
+</pre></div>
+
+</div>
+
+<p>Now cons is where we want it: inside the recursive call, instead of in tail position. The problem is that APS doesn’t work on tree-shaped recursion.</p>
+
+<h2 id="continuation-passing-style-does-work">Continuation-Passing Style Does Work</h2>
+
+<p>In continuation-passing style (CPS), we pass a continuation k—i.e. “what happens next”— instead of an accumulator. The functions call k instead of returning values. For example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">list-add1/k</span> <span class="n">vs</span> <span class="p">[</span><span class="n">k</span> <span class="nb">identity</span><span class="p">])</span>
+  <span class="p">(</span><span class="k">match</span> <span class="n">vs</span>
+    <span class="p">[(</span><span class="nb">list</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">list</span><span class="p">))]</span>
+    <span class="p">[(</span><span class="nb">list</span> <span class="n">v</span> <span class="n">vs</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="n">list-add1/k</span> <span class="n">vs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="nb">add1</span> <span class="n">v</span><span class="p">)</span> <span class="n">vs</span><span class="p">))))]))</span>
+</pre></div>
+
+</div>
+
+<p>If we want, we can pass something besides identity as the base-case continuation:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="n">list-add1/k</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply</span> <span class="nb">values</span> <span class="n">vs</span><span class="p">)))</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+</pre></div>
+
+</div>
+
+<p>CPS turns every call into a tail call, so it moves conses inward even with tree-shaped recursion. As a demonstration, here’s a CPSed merge sort:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">merge/k</span> <span class="n">as</span> <span class="n">bs</span> <span class="n">k</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">match*</span> <span class="p">(</span><span class="n">as</span> <span class="n">bs</span><span class="p">)</span>
+    <span class="p">[((</span><span class="nb">list</span><span class="p">)</span> <span class="n">bs</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="n">bs</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="n">as</span> <span class="p">(</span><span class="nb">list</span><span class="p">))</span>  <span class="p">(</span><span class="n">k</span> <span class="n">as</span><span class="p">)]</span>
+    <span class="p">[((</span><span class="nb">list</span> <span class="n">a</span> <span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="p">(</span><span class="nb">list</span> <span class="n">b</span> <span class="n">bs</span> <span class="k">...</span><span class="p">))</span>
+     <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+         <span class="p">(</span><span class="n">merge/k</span> <span class="n">as</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="n">bs</span><span class="p">)</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="n">vs</span><span class="p">))))</span>
+         <span class="p">(</span><span class="n">merge/k</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">a</span> <span class="n">as</span><span class="p">)</span> <span class="n">bs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="n">b</span> <span class="n">vs</span><span class="p">)))))]))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">merge-sort/k</span> <span class="n">vs</span> <span class="n">k</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">match</span> <span class="n">vs</span>
+    <span class="p">[(</span><span class="nb">list</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="n">vs</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">list</span> <span class="n">a</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="n">vs</span><span class="p">)]</span>
+    <span class="p">[</span><span class="k">_</span>  <span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="n">lvs</span> <span class="n">rvs</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">split-at</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">quotient</span> <span class="p">(</span><span class="nb">length</span> <span class="n">vs</span><span class="p">)</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="p">(</span><span class="n">merge-sort/k</span>
+         <span class="n">lvs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">lvs</span><span class="p">)</span>
+               <span class="p">(</span><span class="n">merge-sort/k</span>
+                <span class="n">rvs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">rvs</span><span class="p">)</span>
+                      <span class="p">(</span><span class="n">merge/k</span> <span class="n">lvs</span> <span class="n">rvs</span> <span class="n">k</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p>You can read the last expression in merge-sort/k as, “Sort lvs. Then, with the sorted lvs, sort rvs. Then, with the sorted rvs, merge lvs and rvs.” Example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="n">merge-sort/k</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">5</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="nb">apply</span> <span class="nb">values</span> <span class="n">vs</span><span class="p">)))</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">5</span>
+</pre></div>
+
+</div>
+
+<h2 id="the-inline-sort-macro">The Inline Sort Macro</h2>
+
+<p>When we macro-ize the CPSed merge sort, we’ll turn the continuations into expansion-time functions. So not only will macro-ized CPS move conses inward, it’ll apply them all at expansion time!</p>
+
+<p>We’ll do it in three parts: the user-facing macro, the inline merge function, and the inline sort function.</p>
+
+<h2 id="the-user-facing-macro">The User-Facing Macro</h2>
+
+<p>Let’s put a nice face on inline sorting:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">inline-sort</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">lst</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">with-syntax</span> <span class="p">([(</span><span class="n">vs</span> <span class="k">...</span><span class="p">)</span>
+                    <span class="p">(</span><span class="nb">generate-temporaries</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">lst</span> <span class="k">...</span><span class="p">))])</span>
+       <span class="o">#`</span><span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">vs</span> <span class="n">lst</span><span class="p">]</span> <span class="k">...</span><span class="p">)</span>
+           <span class="o">#,</span><span class="p">(</span><span class="n">inline-sort/k</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">vs</span> <span class="k">...</span><span class="p">)</span>
+                            <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="o">#`</span><span class="p">(</span><span class="nb">values</span> <span class="o">#,@</span><span class="n">vs</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p>This macro does two things. First, it names the values to be sorted, so they don’t get re-evaluated every time they’re compared. Second, it calls inline-sort/k with a base-case continuation that converts syntax lists to values expressions.Note that the call #,(inline-sort/k &hellip;) happens at expansion time, and that the continuation (λ (vs) &hellip;) it passes is an expansion-time value.</p>
+
+<h2 id="the-inline-merge-function">The Inline Merge Function</h2>
+
+<p>Changing merge/k to operate on syntax at expansion time is as straightforward as possible:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-for-syntax</span> <span class="p">(</span><span class="n">inline-merge/k</span> <span class="n">as</span> <span class="n">bs</span> <span class="n">k</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="p">(</span><span class="nb">list</span> <span class="n">as</span> <span class="n">bs</span><span class="p">)</span> <span class="p">()</span>
+    <span class="p">[(()</span> <span class="n">bs</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="o">#&#39;</span><span class="n">bs</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="n">as</span> <span class="p">())</span>  <span class="p">(</span><span class="n">k</span> <span class="o">#&#39;</span><span class="n">as</span><span class="p">)]</span>
+    <span class="p">[((</span><span class="n">a</span> <span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="p">(</span><span class="n">b</span> <span class="n">bs</span> <span class="k">...</span><span class="p">))</span>
+     <span class="o">#`</span><span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+           <span class="o">#,</span><span class="p">(</span><span class="n">inline-merge/k</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">b</span> <span class="n">bs</span> <span class="k">...</span><span class="p">)</span>
+                             <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="o">#&#39;</span><span class="n">a</span> <span class="n">vs</span><span class="p">))))</span>
+           <span class="o">#,</span><span class="p">(</span><span class="n">inline-merge/k</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">a</span> <span class="n">as</span> <span class="k">...</span><span class="p">)</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">bs</span> <span class="k">...</span><span class="p">)</span>
+                             <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="p">(</span><span class="n">k</span> <span class="p">(</span><span class="nb">cons</span> <span class="o">#&#39;</span><span class="n">b</span> <span class="n">vs</span><span class="p">)))))]))</span>
+</pre></div>
+
+</div>
+
+<p>The only substantial changes are the quasiquotes and unquotes, and using syntax-case to destructure syntax lists instead of using match to destructure lists. Again, note that the recursive calls #,(inline-merge/k &hellip;) in each if branch happen at expansion time, and that their continuations are expansion-time values.We can see what kind of code merge/k returns by applying it at expansion time:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">begin-for-syntax</span>
+    <span class="p">(</span><span class="nb">print</span>
+     <span class="p">(</span><span class="nb">syntax-&gt;datum</span>
+      <span class="p">(</span><span class="n">inline-merge/k</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">#&#39;</span><span class="p">(</span><span class="n">b</span> <span class="n">c</span><span class="p">)</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">vs</span><span class="p">)</span> <span class="n">vs</span><span class="p">)))))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="ss">if</span> <span class="p">(</span><span class="ss">&lt;</span> <span class="ss">a</span> <span class="ss">b</span><span class="p">)</span> <span class="p">(</span><span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span><span class="p">)</span> <span class="p">(</span><span class="ss">if</span> <span class="p">(</span><span class="ss">&lt;</span> <span class="ss">a</span> <span class="ss">c</span><span class="p">)</span> <span class="p">(</span><span class="ss">b</span> <span class="ss">a</span> <span class="ss">c</span><span class="p">)</span> <span class="p">(</span><span class="ss">b</span> <span class="ss">c</span> <span class="ss">a</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>The syntax list #&rsquo;(b c) is assumed already sorted, meaning (&lt; b c) at runtime. Therefore, if (&lt; a b) at runtime, by transitivity, (&lt; a b c) at runtime, so the merge generates #&rsquo;(a b c). In other words, inline-merge/k’s assumption that its arguments are sorted is equivalent to reasoning about transitivity.</p>
+
+<h2 id="the-inline-sort-function">The Inline Sort Function</h2>
+
+<p>Lastly, the divide-and-conquer part:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">for-syntax</span> <span class="n">racket/list</span><span class="p">))</span>  <span class="c1">; for list functions</span>
+
+<span class="p">(</span><span class="k">define-for-syntax</span> <span class="p">(</span><span class="n">inline-sort/k</span> <span class="n">vs</span> <span class="n">k</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">vs</span> <span class="p">()</span>
+    <span class="p">[()</span>  <span class="p">(</span><span class="n">k</span> <span class="n">vs</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="n">a</span><span class="p">)</span>  <span class="p">(</span><span class="n">k</span> <span class="n">vs</span><span class="p">)]</span>
+    <span class="p">[</span><span class="k">_</span>  <span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">vs</span>  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">list?</span> <span class="n">vs</span><span class="p">)</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">syntax-&gt;list</span> <span class="n">vs</span><span class="p">))])</span>
+          <span class="p">(</span><span class="k">define-values</span> <span class="p">(</span><span class="n">lvs</span> <span class="n">rvs</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">split-at</span> <span class="n">vs</span> <span class="p">(</span><span class="nb">quotient</span> <span class="p">(</span><span class="nb">length</span> <span class="n">vs</span><span class="p">)</span> <span class="mi">2</span><span class="p">)))</span>
+          <span class="p">(</span><span class="n">inline-sort/k</span>
+           <span class="n">lvs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">lvs</span><span class="p">)</span>
+                 <span class="p">(</span><span class="n">inline-sort/k</span>
+                  <span class="n">rvs</span> <span class="p">(</span><span class="k">λ</span> <span class="p">(</span><span class="n">rvs</span><span class="p">)</span>
+                        <span class="p">(</span><span class="n">inline-merge/k</span> <span class="n">lvs</span> <span class="n">rvs</span> <span class="n">k</span><span class="p">))))))]))</span>
+</pre></div>
+
+</div>
+
+<p>This is changed similarly to merge/k. The only new change is using syntax-&gt;list to convert syntax to lists so we can use the functions length and split-at. Example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="n">inline-sort</span> <span class="mi">5</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">5</span>
+</pre></div>
+
+</div>
+
+<p>Of course, the result of evaluating an inline-sort doesn’t tell the whole story. Let’s fire up the macro stepper and see what (inline-sort 5 2 3) expands to. Copying from the macro stepper window and renaming temp variables, we get</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">let</span> <span class="p">([</span><span class="n">a</span> <span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="n">b</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="n">c</span> <span class="mi">3</span><span class="p">])</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">values</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="p">)</span>
+          <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">values</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">values</span> <span class="n">b</span> <span class="n">c</span> <span class="n">a</span><span class="p">)))</span>
+      <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">c</span><span class="p">)</span>
+          <span class="p">(</span><span class="nb">values</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="p">)</span>
+          <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">&lt;</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">values</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span>
+              <span class="p">(</span><span class="nb">values</span> <span class="n">c</span> <span class="n">b</span> <span class="n">a</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>It’s an if tree. Notice that there are 6 leaf expressions, for the 3! = 6 possible permutations. Also, it never compares more than it has to. It’s optimal.</p>
+
+<h2 id="inline-sort-properties">Inline Sort Properties</h2>
+
+<p>Inherited from the merge sort, the inline sort has the following properties (assuming a length-n list):</p>
+
+<ul>
+ <li>
+  <p>Time optimality: The depth of the if tree is O(n log(n)).</p></li>
+ <li>
+  <p>Size optimality: The number of leaves is exactly n!. The term “size optimality” is misleading, because that’s still a lot of code. I’ve seriously considered requiring any user of this macro to state how many permutations there are for the number of values they’re sorting. They’d have to prove to the macro that they know how much code they’re asking it to generate.Inline sort is wicked fast, as we should expect:</p></li></ul>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">define</span> <span class="n">vs</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">5</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">match-define</span> <span class="p">(</span><span class="nb">list</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="p">)</span> <span class="n">vs</span><span class="p">)</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="k">_</span>  <span class="p">(</span><span class="nb">in-range</span> <span class="mi">5</span><span class="p">)])</span>
+    <span class="p">(</span><span class="k">time</span> <span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="k">_</span>  <span class="p">(</span><span class="nb">in-range</span> <span class="mi">1000000</span><span class="p">)])</span>
+            <span class="p">(</span><span class="k">match-let</span> <span class="p">([(</span><span class="nb">list</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="p">)</span>  <span class="p">(</span><span class="nb">sort</span> <span class="n">vs</span> <span class="nb">&lt;</span><span class="p">)])</span>
+              <span class="p">(</span><span class="nb">void</span><span class="p">)))))</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">550</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">540</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">30</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">510</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">518</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">520</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">517</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">20</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">520</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">517</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">510</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">516</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">10</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="k">_</span>  <span class="p">(</span><span class="nb">in-range</span> <span class="mi">5</span><span class="p">)])</span>
+    <span class="p">(</span><span class="k">time</span> <span class="p">(</span><span class="k">for</span> <span class="p">([</span><span class="k">_</span>  <span class="p">(</span><span class="nb">in-range</span> <span class="mi">1000000</span><span class="p">)])</span>
+            <span class="p">(</span><span class="k">let-values</span> <span class="p">([(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="p">)</span>  <span class="p">(</span><span class="n">inline-sort</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="p">)])</span>
+              <span class="p">(</span><span class="nb">void</span><span class="p">)))))</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">20</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">28</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">30</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">27</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">30</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">27</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">30</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">27</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+<span class="n">cpu</span> <span class="n">time:</span> <span class="mi">20</span> <span class="n">real</span> <span class="n">time:</span> <span class="mi">27</span> <span class="n">gc</span> <span class="n">time:</span> <span class="mi">0</span>
+</pre></div>
+
+</div>
+
+<p>So about 20 times faster than sort on a length&ndash;4 list.I use it in Typed Racket, on floating-point numbers. Typed Racket’s optimizer replaces <code>&lt;</code> with <code>unsafe-fl&lt;</code>. This tells the compiler that the elements are floats, so it can keep them stack-allocated, which reduces allocations further. In all, for my particular use of inline-sort, it’s over 50 times faster than sort.And using it is a heckuvalot easier than writing an if tree and reasoning about transitivity every time I need to sort a handful of floats.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p> Writing macros in expansion-time CPS to fully inline a recursive function works out beautifully. I suspect that it will work on any recursive, polymorphic function whose well-foundedness follows only from the structure of the input data.Also, it can generate a metric truckload of code.Interesting note: I originally wrote inline-sort using only syntax-rules, passing the names of higher-order macros to other macros as continuations. Sorting a five-element list took almost 19000 expansion steps, which is ridiculously inefficient even for a 120-leaf if tree.</p></div>
+  <a class="more" href='/2012/08/fully-inlined-merge-sort.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>07 Aug 2012</p></col-1>
+
+<col-2>
+  <h1><a href='/2012/08/racket-v53.html'>Racket v5.3</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.3 is now available from</p>
+
+<p><a href="http://racket-lang.org/">http://racket-lang.org/</a> Release Highlights::</p>
+
+<ul>
+ <li>
+  <p>Submodules are nested module declarations that can be loaded and run independently from the enclosing module. See also the <a href="../../2012/06/submodules.html">overview of submodules</a>.</p></li>
+ <li>
+  <p>The futures visualizer is a graphical profiling tool for parallel programs using futures. The tool shows a detailed execution timeline depicting the migration of futures between threads, and gives detailed information about each runtime synchronization that occurred during program execution. In addition, <code>would-be-future</code> is a special type of future that always executes sequentially and records all potential barricades a regular future would encounter.</p></li>
+ <li>
+  <p>Optimization Coach (formerly Performance Report) reports information about Racket&rsquo;s inlining optimizations. Optimization Coach can be launched in any language through the View menu.</p></li>
+ <li>
+  <p>The new <code>images/flomap</code> library defines floating-point bitmaps and fast image processing operations on them. It is written in Typed Racket, so Typed Racket code may use it without the cost of contract checks.</p></li>
+ <li>
+  <p>The new <code>json</code> library supports parsing and generating JSON. (Originally based on Dave Herman&rsquo;s planet library.)</p></li>
+ <li>
+  <p><code>racket/string</code> is extended with a set of simplified string manipulation functions that are more convenient than using regexps. <code>regexp-match*</code> and friends can now be used with new keyword arguments to return specific matched regexp group/s and gaps between matches.</p></li>
+ <li>
+  <p>The new <code>racket/generic</code> library allows generic function definitions, which dispatch to methods added to a structure type via the new <code>#:methods</code> keyword.</p></li>
+ <li>
+  <p>The <code>class</code> form supports declaring a method abstract. An abstract method prevents a class from being instantiated unless it is overridden.</p></li>
+ <li>
+  <p>The contract library comes with support for interfaces, generics, prompts, continuation-marks, and structs.</p></li>
+ <li>
+  <p>Most error messages use a new multi-line format that is more consistent with contract errors and accommodates more information.</p></li>
+ <li>
+  <p>Typed Racket supports function definitions with keyword arguments; the startup time of Typed Racket programs has been sharply reduced.</p></li>
+ <li>
+  <p>The new <code>ffi/com</code> library replaces MysterX; a compatibility <code>mysterx</code> library remains, but without ActiveX support. The new <code>ffi/unsafe/com</code> library offers a more primitive and direct way to use COM classes and methods.</p></li>
+ <li>
+  <p>There is now a very complete completion code for zsh. It is not included in the distribution though; get it at http://goo.gl/DU8JK (This script and the bash completions will be included in the standard installers in future versions.)</p></li></ul>
+
+<p>Deprecation:  Effective this release:</p>
+
+<ul>
+ <li>
+  <p>The <code>tex2page</code> and <code>combinator-parser</code> libraries have been moved from the Racket distribution to PLaneT:</p>
+  <p> (require (planet plt/tex2page))  (require (planet plt/combinator-parser))</p></li>
+ <li>The following has been deprecated and will be removed in the January 2013 release:</li></ul>
+
+<p> the <code>planet</code> command-line tool; use <code>raco planet</code> instead.</p>
+
+<ul>
+ <li>The following has been deprecated and will be removed in the August 2013 release:</li></ul>
+
+<p> the <code>mzlib/class100</code> library; use <code>racket/class</code> instead.</p></div>
+  <a class="more" href='/2012/08/racket-v53.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Jun 2012</p></col-1>
+
+<col-2>
+  <h1><a href='/2012/06/submodules.html'>Submodules</a></h1>
+  <div class="truncate">
+<p><em>posted by Matthew Flatt</em></p>
+
+<p>A Racket submodule is a module that is syntactically nested within another module. Submodules will be supported in the next release of Racket, and they are available in the current <a href="http://pre.racket-lang.org/installers/">pre-release version</a>.</p>
+
+<p>Submodules provide nested namespaces, but that kind of nesting is already available through forms like <code>define-package</code>. The power of submodules is that they can be separately loaded and separately run relative to their enclosing modules, in the same way that top-level modules can be separately load and run. This separation of dependencies means that submodules can be used to add code and information to modules—such as tests, documentation, and parsing information—that is loaded only when specifically requested.</p>
+
+<h2 id="the-main-submodule">The <code>main</code> Submodule</h2>
+
+<p>One use of a submodule is to declare a <code>main</code> submodule. A <code>main</code> submodule is instantiated when the enclosing module is run as the main program, but not when the enclosing module is used as a library.</p>
+
+<p><code>"fish.rkt"</code></p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket/base</span>
+<span class="p">(</span><span class="k">provide</span> <span class="n">fish</span><span class="p">)</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">fish</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">(</span><span class="k">module+</span> <span class="n">main</span>
+  <span class="p">(</span><span class="nb">map</span> <span class="nb">displayln</span> <span class="n">fish</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p><code>"sum-fish.rkt"</code></p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket/base</span>
+<span class="p">(</span><span class="k">require</span> <span class="s2">"fish.rkt"</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">apply</span> <span class="nb">+</span> <span class="n">fish</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The <code>"fish.rkt"</code> module exports fish as a list of numbers. Running <code>"sum-fish.rkt"</code>, which imports <code>"fish.rkt"</code>, prints the sum of the numbers. Running <code>"fish.rkt"</code> directly, however, triggers the instantiation of the main submodule within <code>"fish.rkt"</code>, which displays each number in fish on its own line.</p>
+
+<p>A <code>(module+ main ....)</code> declaration is similar to the Python <code>if __name__ == "__main__":</code> idiom, but with a significant difference. Importing <code>"fish.rkt"</code> into another module ignores the main submodule completely, so that the main submodule’s code and its dependencies aren’t loaded.</p>
+
+<h2 id="unit-tests">Unit Tests</h2>
+
+<p>Another use for submodules—and one where independent loading matters more than for <code>"fish.rkt"</code>’s <code>main</code>—is for test suites. A <code>main</code> submodule could be used for tests, so that running the module runs its tests, but our preferred convention is to declare a <code>test</code> submodule:</p>
+
+<p><code>"fish2.rkt"</code></p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket/base</span>
+<span class="p">(</span><span class="k">provide</span> <span class="n">fish</span><span class="p">)</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">fish</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">(</span><span class="k">module+</span> <span class="n">test</span>
+  <span class="p">(</span><span class="k">require</span> <span class="n">rackunit</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">check</span> <span class="nb">andmap</span> <span class="nb">number?</span> <span class="n">fish</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>The new <code>raco test</code> shell command runs the <code>test</code> submodule of a given module, so that <code>raco test fish2.rkt</code> checks that all the values of the <code>fish</code> list are numbers. The <code>test</code> submodule imports <code>rackunit</code> for its check form, but that import does not create a dependency on <code>rackunit</code> (which is a substantial library) for modules that import <code>"fish2.rkt"</code>; the dependency is only for the test submodule.</p>
+
+<p>The <code>module+</code> form creates a dependency of the submodule on the enclosing module, since it implicitly imports all bindings of its enclosing module. The implicit import explains why the test submodule in <code>"fish2.rkt"</code> can use fish directly (i.e., it’s not simply because the submodule is syntactically nested). The implicit import includes all bindings from the enclosing module, including bindings that are not exported via provide, which supports unit tests for unexported functions.</p>
+
+<p>Finally, the <code>module+</code> form splices together multiple declarations of a particular submodule, which is useful for interleaving definitions and tests:</p>
+
+<p><code>"fish3.rkt"</code></p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket/base</span>
+<span class="p">(</span><span class="k">provide</span> <span class="n">fish</span> <span class="n">feed</span><span class="p">)</span>
+<span class="p">(</span><span class="k">module+</span> <span class="n">test</span> <span class="p">(</span><span class="k">require</span> <span class="n">rackunit</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">fish</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">(</span><span class="k">module+</span> <span class="n">test</span> <span class="p">(</span><span class="n">check</span> <span class="nb">andmap</span> <span class="nb">number?</span> <span class="n">fish</span><span class="p">))</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">feed</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span><span class="nb">+</span> <span class="n">n</span> <span class="mi">1</span><span class="p">))</span>
+<span class="p">(</span><span class="k">module+</span> <span class="n">test</span> <span class="p">(</span><span class="n">check-equal?</span> <span class="mi">3</span> <span class="p">(</span><span class="n">feed</span> <span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>Since tests are isolated to a submodule, it might make sense to “strip” tests from a set of modules to prepare them for distribution to end-users. Although we haven’t created the <code>raco strip</code> command, yet, it’s a likely future addition. In that way, submodules act like sections in an object-linking file format such as ELF.</p>
+
+<h2 id="core-submodule-forms">Core Submodule Forms</h2>
+
+<p>The <code>module+</code> form is actually just a macro that expands to a more primitive form for declaring submodules. The primitive submodule forms are <code>module</code> and <code>module*</code>, which reflect the two different directions that module dependencies can run: the <code>module*</code> form allows the submodule to import its enclosing module, while the <code>module</code> form allows the enclosing module to import the submodule.</p>
+
+<p>As a minor feature, submodules can be declared with <code>module</code> and used by a <code>require</code>—essentially the same within a module as interactively:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket/base</span>
+<span class="p">(</span><span class="k">module</span> <span class="n">zoo</span> <span class="n">racket/base</span>
+  <span class="p">(</span><span class="k">provide</span> <span class="n">tiger</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">tiger</span> <span class="s2">"Tony"</span><span class="p">))</span>
+<span class="p">(</span><span class="k">require</span> <span class="o">&#39;</span><span class="ss">zoo</span><span class="p">)</span>
+<span class="n">tiger</span>
+</pre></div>
+
+</div>
+
+<p>More significantly, <code>module</code> allows a submodule to be free of any dependency on its enclosing module, while the enclosing module similarly has no obligation to import the submodule.</p>
+
+<p>The <code>module*</code> form similarly implies no a priori dependency of the submodule on its enclosing module, except that a <code>#f</code> for the submodule’s initial import means an import of all of the enclosing module’s bindings. The <code>module+</code> form expands (after collecting all pieces of a submodule’s body) to a <code>module*</code> form with a <code>#f</code> initial import.</p>
+
+<h2 id="in-source-documentation">In-Source Documentation</h2>
+
+<p>A more interesting example is the <code>scribble/srcdoc</code> library, which supports documentation within a library’s source in a JavaDoc-like way:</p>
+
+<p><code>"fish4.rkt"</code></p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket</span>
+<span class="p">(</span><span class="k">require</span> <span class="n">scribble/srcdoc</span>
+         <span class="p">(</span><span class="n">for-doc</span> <span class="n">racket/base</span> <span class="n">scribble/manual</span><span class="p">))</span>
+<span class="p">(</span><span class="k">provide</span>
+ <span class="p">(</span><span class="n">thing-doc</span>
+  <span class="n">fish</span> <span class="p">(</span><span class="nb">listof</span> <span class="nb">number?</span><span class="p">)</span>
+  <span class="p">(</span><span class="s2">"Our fish, each represented as a number."</span><span class="p">)))</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">fish</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">(</span><span class="k">provide</span>
+ <span class="p">(</span><span class="n">proc-doc/names</span>
+  <span class="n">feed</span> <span class="p">(</span><span class="nb">number?</span> <span class="o">.</span> <span class="k">-&gt;</span> <span class="o">.</span> <span class="nb">number?</span><span class="p">)</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
+  <span class="p">(</span><span class="s2">"Feed 1 pound of food to the fish "</span> <span class="p">(</span><span class="n">racket</span> <span class="n">n</span><span class="p">)</span> <span class="s2">"."</span><span class="p">)))</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">feed</span> <span class="n">n</span><span class="p">)</span> <span class="p">(</span><span class="nb">+</span> <span class="n">n</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>The <code>scribble/srcdoc</code> library provides <code>thing-doc</code> and <code>proc-doc</code>, which can be used instead of a plain <code>provide</code> form to attach both a contract and documentation to the exported binding. The contract is used at run time to guard uses of the value. The contract is also included in the documentation with hyperlinks to bindings that are used in the contract, such as <code>number?</code>.</p>
+
+<p>In addition to provide forms, the <code>scribble/srcdoc</code> library provides <code>for-doc</code> for use within <code>require</code>. A <code>for-doc</code> imports forms that are used in the implementation of the documentation, as opposed to the implementation of the library. In <code>"fish4.rkt"</code>, <code>scribble/manual</code> is imported for the racket form that is used in the documentation of feed.</p>
+
+<p>These forms from <code>scribble/srcdoc</code> work together to construct a <code>srcdoc</code> submodule that contains documentation for the enclosing module without creating any documentation-related run-time overhead for the enclosing module. The module’s documentation is loaded from bytecode only when specifically requested from the <code>srcdoc</code> submodule for inclusion in a documentation build via <code>include-extracted</code>:</p>
+
+<p><code>"fish4.scrbl"</code></p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">scribble/manual</span>
+<span class="n">@</span><span class="p">(</span><span class="k">require</span> <span class="n">scribble/extract</span><span class="p">)</span>
+<span class="n">@title</span><span class="p">{</span><span class="n">Fish</span><span class="p">}</span>
+<span class="n">@defmodule</span><span class="p">[</span><span class="s2">"fish.rkt"</span><span class="p">]</span>
+<span class="n">@include-extracted</span><span class="p">[</span><span class="s2">"fish4.rkt"</span><span class="p">]</span>
+</pre></div>
+
+</div>
+
+<h2 id="implementing-languages">Implementing Languages</h2>
+
+<p>Top-level modules in Racket intentionally inherit no bindings from the top-level environment, so that (1) a module’s meaning is fixed independent of its load order or other effects, and (2) the initial import of a module can act as a “language” with complete control over the module’s meaning. That is, <code>#lang</code> is in principle the only top-level form in Racket. With only modules at the top level, however, macros cannot abstract over sets of top-level modules.</p>
+
+<p>Submodules provide more flexibility, in that a macro defined within a module can abstract over a set of submodules. As it happens, abstracting over a set of submodules is useful for defining a new language for use with <code>#lang</code>.</p>
+
+<p>A language for use with <code>#lang</code> is implemented by several pieces that live at different times, including the language’s parser, the language’s run-time support library, and the language’s syntax-coloring plug-in for DrRacket. Formerly, a programmer who implements a language with those three pieces was forced to write three different modules (or else tangle the different pieces in a single module, which invariably pulls too many dependencies into any one of them). Those pieces now can be in submodules, which opens the possibility for new abstractions that conveniently generate the various pieces of a language.</p>
+
+<p>For example, if you want to define an <code>ocean</code> language that is <code>racket/base</code> plus <code>fish</code>, it’s enough to install the following module as <code>"main.rkt"</code> in an <code>"ocean"</code> collection (e.g., in an <code>"ocean"</code> directory is that is registered as a collection with the command <code>raco link ocean</code>):</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">racket/base</span>
+<span class="p">(</span><span class="k">provide</span> <span class="p">(</span><span class="k">all-from-out</span> <span class="n">racket/base</span><span class="p">)</span>
+         <span class="n">fish</span><span class="p">)</span>
+<span class="p">(</span><span class="k">define</span> <span class="n">fish</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">displayln</span> <span class="s2">"Fish are swimming"</span><span class="p">)</span>
+<span class="p">(</span><span class="k">module</span> <span class="n">reader</span> <span class="n">syntax/module-reader</span>
+  <span class="kd">#:language</span> <span class="o">&#39;</span><span class="ss">ocean</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>When Racket sees a module that starts <code>#lang ocean</code>, it does not simply load the <code>"main.rkt"</code> module of the <code>"ocean"</code> collection. Instead, <code>#lang</code> looks for a reader submodule of the <code>"main.rkt"</code> module. The reader module above does not depend on its enclosing module, so that parsing a module in the ocean language does not trigger the “Fish are swimming” printout. Instead, the <code>#:language 'ocean</code> part of the reader submodule indicates that a module parsed from <code>#lang ocean</code> starts by importing the <code>ocean</code> module, so the bindings of <code>ocean</code> are available in the program, and “Fish are swimming” will print when the program is run.</p>
+
+<h2 id="submodules-are-like">Submodules are Like&hellip;</h2>
+
+<p>At some level, syntactic nesting of modules is an obvious feature to include in a module system. Nevertheless, Racket’s submodules are not like nested modules in most languages—including Python, Chez, or ML—where nesting is for namespace management and nested modules are always instantiated along with the enclosing module. Racket submodules can be used in a similar way, but the fact that submodules are separately loadable makes them available to solve a larger class of problems.</p>
+
+<p>If I had to pick just one analogy, I’d say that submodules are most like a generalization of annotations in the Java sense. Java annotations allow the decoration of code with metadata, and the annotations are preserved through run time, so that annotations can be inspected in source, in compiled code, or reflectively at run time. Java annotations are limited to data, so that any abstraction or programatic interpretation of the data depends on yet another external tool and language, or else the code part (such as test to run for a <code>@Test</code> annotation) is difficult to separate from the main program. C# attributes are slightly more general, in that the data can have associated methods, but attribute code is still mingled with run-time code. Submodules generalize annotations to make them “live,” so that the language of annotations can include expressions, functions, and even syntactic extensions, while allowing the annotation/submodule code to stay separate from the base code.</p>
+
+<p>For more information on submodules, see the pre-release Guide section.</p></div>
+  <a class="more" href='/2012/06/submodules.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>02 Apr 2012</p></col-1>
+
+<col-2>
+  <h1><a href='/2012/04/scribble-your-blogs.html'>Scribble Your Blogs</a></h1>
+  <div class="truncate">
+<p><em>posted by Ryan Culpepper</em></p>
+
+<p>Scribble is a great language for writing documentation. Now it&rsquo;s a great language for writing blog posts, too. I&rsquo;ve just released a tool called Scriblogify that compiles Scribble documents and posts them as blog entries. Scriblogify is a more polished and automated version of the scripts I&rsquo;ve been using for several months to prepare posts for <a href="http://macrologist.blogspot.com">my own blog</a>.</p>
+
+<p>To get Scriblogify, just download it from <a href="http://planet.racket-lang.org/">PLaneT</a>:</p>
+
+<p><code>(require(planetryanc/scriblogify:1))</code></p>
+
+<p>or</p>
+
+<p><code>raco planet install ryanc scriblogify.plt 1 0</code></p>
+
+<p>The package automatically installs a raco subcommand (<code>raco scriblogify</code>) that can be used to configure Scriblogify and process and upload blog posts.</p>
+
+<p>Configure Scriblogify by running</p>
+
+<p><code>raco scriblogify --setup</code></p>
+
+<p>That will open a browser window with the Scriblogify configuration servlet. The servlet will prompt you to authorize Scriblogify to access your Blogger and Picasa Web Albums accounts (only the Blogger/Picasa combination is currently supported) and then create one or more profiles—named combinations of blogs and web albums to upload to.</p>
+
+<p>Scriblogify automatically handles images computed in your Scribble documents by uploading them to a web album. For example, here are some images computed with the slideshow/pict library:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">require</span> <span class="n">slideshow/pict</span><span class="p">)</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">define</span> <span class="n">rainbow-colors</span>
+    <span class="o">&#39;</span><span class="p">(</span><span class="s2">"red"</span> <span class="s2">"orange"</span> <span class="s2">"yellow"</span> <span class="s2">"green"</span> <span class="s2">"blue"</span> <span class="s2">"purple"</span><span class="p">))</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">for/list</span> <span class="p">([</span><span class="n">c</span> <span class="n">rainbow-colors</span><span class="p">])</span>
+    <span class="p">(</span><span class="n">colorize</span> <span class="p">(</span><span class="n">filled-rounded-rectangle</span> <span class="mi">20</span> <span class="mi">20</span><span class="p">)</span> <span class="n">c</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span><span class="p">)</span>
+
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">for/list</span> <span class="p">([</span><span class="n">c</span> <span class="n">rainbow-colors</span><span class="p">]</span>
+             <span class="p">[</span><span class="n">dir</span> <span class="p">(</span><span class="nb">in-cycle</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">right</span> <span class="ss">left</span><span class="p">))])</span>
+    <span class="p">(</span><span class="n">standard-fish</span> <span class="mi">25</span> <span class="mi">25</span> <span class="kd">#:color</span> <span class="n">c</span> <span class="kd">#:direction</span> <span class="n">dir</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span><span class="p">)</span>
+
+<span class="nb">&gt;</span> <span class="p">(</span><span class="n">cc-superimpose</span>
+   <span class="p">(</span><span class="n">cc-superimpose</span> <span class="p">(</span><span class="n">cloud</span> <span class="mi">100</span> <span class="mi">80</span> <span class="s2">"lightblue"</span><span class="p">)</span>
+                   <span class="p">(</span><span class="n">cloud</span> <span class="mi">90</span> <span class="mi">70</span> <span class="s2">"white"</span><span class="p">))</span>
+   <span class="p">(</span><span class="n">hc-append</span> <span class="mi">10</span>
+    <span class="p">(</span><span class="n">standard-fish</span> <span class="mi">30</span> <span class="mi">30</span> <span class="kd">#:color</span> <span class="s2">"red"</span> <span class="kd">#:direction</span> <span class="o">&#39;</span><span class="ss">right</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">standard-fish</span> <span class="mi">25</span> <span class="mi">20</span> <span class="kd">#:color</span> <span class="s2">"blue"</span> <span class="kd">#:direction</span> <span class="o">&#39;</span><span class="ss">left</span><span class="p">)))</span>
+<span class="n">image</span>
+</pre></div>
+
+</div>
+
+<p>By Scribbling your blog entries, you get Scribble&rsquo;s nice code formatting, colorizing, and documentation links for free—well, once you&rsquo;ve updated your blog&rsquo;s CSS (see below). If you&rsquo;re blogging about bleeding-edge work, there&rsquo;s an option to make Scriblogify link to the <a href="http://pre.racket-lang.org/docs/html/">nightly build docs</a> (updated daily) instead of the <a href="http://docs.racket-lang.org/">release docs</a> (updated every 3 months).</p>
+
+<p>Scriblogify&rsquo;s documentation has more details, including how to update your blog&rsquo;s CSS for Scribbled content and what bloggable Scribble documents look like.You can see the source for this blog post <a href="https://github.com/rmculpepper/scriblogify/blob/v1.0/samples/scribble-your-blogs.scrbl">here</a>. This blog entry was created with the following command:raco  <code>scriblogify -p the-racket-blog scribble-your-blogs.scrbl</code></p>
+
+<p>Now go forth and Scribble your blogs.</p></div>
+  <a class="more" href='/2012/04/scribble-your-blogs.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>26 Mar 2012</p></col-1>
+
+<col-2>
+  <h1><a href='/2012/03/fixed-racket-v521-installers.html'>Fixed Racket v5.2.1 Installers</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Dear Racketeers,</p>
+
+<p>We have just released a <a href="http://racket-lang.org/download/">DrRacket version 5.2.1</a> that starts fine today. The fixed version has replaced the 5.2.1 installers. This version andthe original 5.2.1 differ only in this one fix.</p></div>
+  <a class="more" href='/2012/03/fixed-racket-v521-installers.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>02 Feb 2012</p></col-1>
+
+<col-2>
+  <h1><a href='/2012/02/racket-v521.html'>Racket v5.2.1</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.2.1 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> Release Highlights::</p>
+
+<ul>
+ <li>
+  <p>Performance improvements include the use of <code>epoll()</code>/<code>kqueue()</code> instead of <code>select()</code> for the Racket thread scheduler, cross-module inlining of small functions, and the use of SSE instead of x87 for JIT-compiled floating-point operations on platforms where SSE is always available (including x86_64 platforms). A related change is the interning of literal numbers, strings, byte strings, characters, and regexps that appear in code and syntax objects.</p></li>
+ <li>
+  <p>DrRacket uses a set of composable ray-traced icons available from the new <code>images</code> library collection.</p></li>
+ <li>
+  <p>Typed Racket&rsquo;s <code>typecheck-fail</code> form allows macro creators to customize the error messages that Typed Racket produces. This is especially useful when creating pattern matching macros.</p></li>
+ <li>
+  <p>The performance of Redex&rsquo;s matcher has been substantially improved; depending on the model you should see improvements between 2x and 50x in the time it takes to reduce terms.</p></li>
+ <li>
+  <p>Plots look nicer and are more correct at very small and very large scales. New features include customizable dual axis ticks and transforms (e.g., log axes, date and currency ticks, axis interval collapse and stretch), stacked histograms, and 3D vector fields. The legacy <code>fit</code> function and libfit have been removed.</p></li>
+ <li>
+  <p>The <code>2htdp/universe</code> library&rsquo;s <code>big-bang</code> form supports an experimental game pad key handler.</p></li>
+ <li>
+  <p>The <code>db</code> library now supports nested transactions and PostgreSQL arrays. Bugs involving MySQL authentication and memory corruption in the SQLite bindings have been fixed.</p></li>
+ <li>
+  <p>The Macro Stepper tool in DrRacket no longer executes a program after expanding it.</p></li>
+ <li>
+  <p>In the DMdA teaching languages, infinite recursive signatures (&ldquo;streams&rdquo;, for example) with no intervening <code>mixed</code> are now supported, and the signatures of record definitions without fields now have generators for use with <code>property</code>.</p></li>
+ <li>
+  <p>MysterX&rsquo;s ActiveX support is deprecated and will be removed in the next release. MysterX&rsquo;s core COM functionality will become deprecated in the next release, but COM functionality will be supported for the foreseeable future as a compatibility layer over a forthcoming <code>ffi/com</code> library.</p></li></ul></div>
+  <a class="more" href='/2012/02/racket-v521.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>01 Feb 2012</p></col-1>
+
+<col-2>
+  <h1><a href='/2012/02/zack-gallers-experience-with-stateful-vs-stateless-web-apps.html'>Zack Galler&rsquo;s Experience with Stateful vs Stateless Web Apps</a></h1>
+  <div class="truncate">
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>Communication using HTTP between client and server is a simple problem of halted computation. A client computes a request, transmits and halts, waiting for a server response. On receipt, the server computes a response, transmits and halts, waiting for the next client request. This much is well known. Racket&rsquo;s magnificent <em>stateful</em> Web server does three things on the server side:</p>
+
+<ul>
+ <li>
+  <p>it reifies a Racket continuation, capturing where the server computation has halted.</p></li>
+ <li>
+  <p>it externalizes the continuation, creating a URL-representation that uniquely maps to the Racket continuation</p></li>
+ <li>
+  <p>it disseminates the externalized continuation to interested clients, typically via HTTP response, but alternately via SMTP or any other protocol. Then, it waits. Later, when presented with an externalized continuation, a quick inverse mapping occurs, the underlying Racket continuation is invoked, and the server processes the new client request. Rinse and repeat. The problem with this approach is twofold</p></li>
+ <li>
+  <p>the reified Racket continuations live in server memory. And there&rsquo;s no safe way to garbage collect, as the continuations could be invoked at any time. There are strategies to reclaim memory, but <em>some</em> load level will noticeably decrease the performance of your application. And its not possible to figure out what that load level is prior to finishing your application. This is a problem.</p></li>
+ <li>
+  <p>Again, the reified Racket continuations live in server memory and cannot be moved. So there&rsquo;s no way to scale an application to more than one server. It&rsquo;s a necessarily one machine system. This makes problem #1 worse. Racket&rsquo;s yet more magnificent <em>stateless</em> Web server does exactly the same three things:</p></li>
+ <li>
+  <p>to reify, it rewrites the entire call stack into a format known as <a href="https://en.wikipedia.org/wiki/Administrative_normal_form">A-Normal Form</a> (ANF).</p></li>
+ <li>
+  <p>to externalize, the ANF&rsquo;d stack is encoded for transmission over HTTP.</p></li>
+ <li>
+  <p>and then it&rsquo;s sent over to the client (dissemination). Later, when presented with encoded stack, the stateless server performs an inverse transform to reconstruct the call stack, at which point the server keeps going. So we&rsquo;ve lost the invocation step and substituted a reconstruction. But in exchange, we&rsquo;ve eliminated continuations from server memory, and solved both enumerated problems above. Neat trick.</p></li></ul>
+
+<p>I provide a few lessons learned for the archives for the next person to attempt porting <code>#lang racket</code> to <code>#lang web-server</code> code. First, the predicate <code>serializable?</code> from <code>racket/serialize</code> is invaluable. The <code>#lang web-server</code> code will not transform if there are non-serializable constructs in the dynamic extent of the invocation of <code>send/suspend</code>, such as a local binding or argument. Second, invocations of native continuations reified with <code>call/cc</code> frequently throw errors related to continuation prompts, such as “attempt to cross a continuation barrier” or “no corresponding prompt tag in continuation”. In all cases, I was able to remedy the situation by enclosing the invocation in <code>call-with-continuation-prompt</code>. This may be an error in the system, but it is unclear at this time. Third, the transformation does not allow parameters or <code>dynamic-wind</code>, because the internal data-structures representing them are not serializable, but continuation-marks can be used to reimplement the piece of the functionality you need.</p>
+
+<p>Finally, thank you to the Racket team. I think the stateless Web language is important technology and must have required an enormous amount of work to implement. Anecdotally, application speed seems at or better than the stateful code. To learn more about the stateless Web application infrastructure, <a href="http://docs.racket-lang.org/web-server/stateless.html">consult the manual</a> or post to the <a href="http://lists.racket-lang.org/">mailing list</a>. (This post was written by Zack Galler with minor edits before posting by Jay McCarthy.)</p></div>
+  <a class="more" href='/2012/02/zack-gallers-experience-with-stateful-vs-stateless-web-apps.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>09 Nov 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/11/racket-v52.html'>Racket v5.2</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>Racket version 5.2 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a> Release Highlights::</p>
+
+<ul>
+ <li>
+  <p>DrRacket comes with an experimental, on-line check syntax tool, although this new tool is disabled default. See below for more information.</p></li>
+ <li>
+  <p>The new <code>db</code> library offers a high-level, functional interface to popular relational database systems, including PostgreSQL, MySQL, and SQLite, as well as other systems via ODBC.</p></li>
+ <li>
+  <p>A new XREPL collection provides convenient commands for a plain racket REPL. It is particularly convenient for people who prefer console-based work and alternative editors. See also the new chapter on command-line tools and other editors at the end of the Racket Guide.</p></li>
+ <li>
+  <p>The <code>plot</code> collection has been reimplemented in Racket. It now offers PDF output, log axes, histograms, and more. Some code that uses <code>plot</code> will still work, and some will need light porting. The <code>plot/compat</code> module offers expedient backward compatibility.</p></li>
+ <li>
+  <p>DrRacket uses more conventional key bindings: <code>C-t</code> creates a new tab, <code>C-w</code> closes the current one, and <code>C-r</code> runs the definitions. On Mac OS X, the Command key is used. See “Defining Custom Shortcuts” in the DrRacket manual for an example that uses the old key bindings.</p></li>
+ <li>
+  <p>The new <code>raco link</code> command registers a directory as a collection, which allows the collection directory to reside outside the “<code>collects</code>” tree and without changing the PLTCOLLECTS environment variable.</p></li>
+ <li>
+  <p>Typed Racket:</p></li>
+ <li>
+  <p>Typed Racket provides static performance debugging support to show which code gets optimized and point out code that does not. Use the “Performance Report” button in DrRacket.</p></li>
+ <li>
+  <p>More intuitive types in printouts in the REPL and in error messages. Use <code>:query-result-type</code> to explore types, or <code>:print-type</code> for a full printout.</p></li>
+ <li>
+  <p>Typed Racket now supports defining function with optional arguments using the same syntax as Racket.</p></li>
+ <li>
+  <p>Redex now supports specifying (and testing and automatically typesetting) judgment forms including type systems and SOS-style operational semantics.</p></li>
+ <li>
+  <p>Fixed several GUI problems, including problems on Ubuntu 11.10 (GTK+ 3) and 64-bit Mac OS X.</p></li>
+ <li>
+  <p>Internal-definition expansion has changed to use <code>let*</code> semantics for sequences that contain no back references. This change removes a performance penalty for using internal definitions instead of <code>let</code> in common cases, and it only changes the meaning of programs that capture continuations in internal definitions. Internal definitions are now considered preferable in style to <code>let</code>.</p></li>
+ <li>
+  <p>Support for <code>begin-for-syntax</code> has been generalized; modules may now define and export both value bindings and syntax bindings (macros) at phase 1 and higher. Due to a bug, phase 1 syntax (or higher) is not available in DrRacket&rsquo;s <code>#lang</code>-based REPL. A simple workaround is to disable debugging in DrRacket (see “no debugging” radio button in detailed language dialog).</p></li></ul>
+
+<p>Additional Items::</p>
+
+<ul>
+ <li>
+  <p>The <code>racket/gui</code> library (and Slideshow) provides more support for multiple-screen displays.</p></li>
+ <li>
+  <p>DrRacket remembers whether an opened file used LF or CRLF line endings, and will continue using the same. When creating a new file, a preference determines how it is saved.</p></li>
+ <li>
+  <p><code>net/url</code> can now follow HTTP redirections.</p></li>
+ <li>
+  <p>The LNCS and JFP class files are no longer distributed with Racket. Instead, they are downloaded on demand.</p></li>
+ <li>
+  <p>The Algol language implementation is now available as a plain language using <code>#lang algol60</code>.</p></li>
+ <li>
+  <p>The Racket-to-C compiler (as accessed via <code>raco ctool</code> or <code>mzc</code>) has been removed; Racket&rsquo;s JIT has long provided better performance, and the FFI provides better access to C libraries.</p></li>
+ <li>
+  <p>Contracts can be applied to exports with the new <code>contract-out</code> form within <code>provide</code>, instead of a separate <code>provide/contract</code> form. (The new <code>contract-out</code> form is implemented as a new kind of “provide pre-transformer”.)</p></li>
+ <li>
+  <p>The <code>date*</code> structure type is an extension of <code>date</code> with <code>nanosecond</code> and <code>time-zone-name</code> fields.</p></li>
+ <li>
+  <p>New looping constructs: <code>for/sum</code> and <code>for/product</code>.</p></li>
+ <li>
+  <p>Direct calls to keyword-accepting functions are now optimized to eliminate the overhead of keywords. In addition, the compiler detects and logs warnings for keyword-argument mismatches.</p></li>
+ <li>
+  <p>The libfit interface is available from <code>plot/deprecated/fit</code>, and will be removed in the near future.</p></li>
+ <li>
+  <p>The Unix installer has been re-done, and it is now more robust.</p></li>
+ <li>
+  <p>The built-in reader and printer support for Honu is removed. (This functionality is re-implemented in Racket.)</p></li></ul>
+
+<p>On-line Check Syntax::  DrRacket now provides an on-line version of the syntax check tool, which means that syntax checking runs automatically while you continue to edit a program. With this tool enabled, its annotations (e.g., binding arrows) and actions (e.g., the renaming refactoring and direct documentation links) are almost always available. We have noticed that on-line syntax checking renders DrRacket unstable on occasion, perhaps because it relies on relatively new support for parallelism. Occurrences of the problem are rare, but they are not rare enough, which is why we have disabled the tool by default. At the same time, current users of the tool find it so valuable that we felt it should be included in the release. We expect to track down the remaining problems and enable the tool by default in near-future release. To enable on-line syntax checking (for <code>#lang</code>-based programs only), click on the red dot in the bottom right of DrRacket&rsquo;s window. To turn it off, click there again.</p></div>
+  <a class="more" href='/2011/11/racket-v52.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>18 Oct 2011</p></col-1>
+
+<col-2>
+  <h1><a href='/2011/10/on-eval-in-dynamic-languages-generally-and-in-racket-specifically.html'>On <code>eval</code> in dynamic languages generally and in Racket specifically</a></h1>
+  <div class="truncate">
+<p><em>posted by Matthew Flatt</em></p>
+
+<p>The <code>eval</code> function is at the heart of a dynamic language, and it strikes many newcomers as an amazingly powerful tool. At the same time, experienced programmers avoid <code>eval</code>, because unnecessary use creates trouble. It&rsquo;s not easy to explain why <code>eval</code> should be avoided or when it"s appropriate to use <code>eval</code>, but I&rsquo;ll take another stab at it here.</p>
+
+<h2 id="what-is-eval">What is <code>eval</code>?</h2>
+
+<p>Consider the following &ldquo;program&rdquo; in English prose:</p>
+
+<blockquote>
+ <p>Assume that your favorite color is red. Now imagine a balloon that is  your favorite color. Paint a canvas the same color as the balloon.</p></blockquote>
+
+<p>As English goes, that&rsquo;s a fairly clear program with a fairly well-defined result. When I follow those instructions, at least, I will always produce a red canvas (assuming that I have a canvas and some red paint, but a potential lack of art supplies is not the point here).</p>
+
+<p>I would come up with a red canvas even if I read the instructions when surrounded by people who speak only Chinese, obviously, since I&rsquo;m the one reading the instructions. Furthermore, it would be straightforward to translate the program to Chinese, and then a person who reads Chinese would produce a red canvas.</p>
+
+<p>A translator might even take the liberty of simplifying the program to just</p>
+
+<blockquote>
+ <p>Paint a canvas red.</p></blockquote>
+
+<p>The translation loses some of the poetry of the original, but the result is the same.</p>
+
+<p>In Racket terms, the paragraph corresponds to a module. It can be compiled (i.e., translated) and optimized (i.e., simplified). A program can be made up of multiple modules that are written in different languages, but since each module can be reliably translated, they can all be compiled into some common language to run the program.</p>
+
+<p>Here&rsquo;s a different program:</p>
+
+<blockquote>
+ <p>Tell the person next to you &ldquo;Assume that your favorite color is red.&rdquo; Tell the person &ldquo;Now, imagine a balloon that is your favorite color.&rdquo; Tell the person &ldquo;Paint canvas the same color as the balloon.&rdquo;</p></blockquote>
+
+<p>Getting a red canvas back may be a little trickier in this case. If the person next to me speaks only Chinese, then my program may fail with a message-not-understood error.</p>
+
+<p>If I want to translate the program to Chinese, then it&rsquo;s not clear whether the parts in quotes should be translated. Maybe I mean for a person who can read Chinese but only sound out English to run the program when surrounded by English speakers, or maybe I mean for a Chinese person to run the program when surrounded by Chinese people. Either way, I have to be a lot more specific to a translator. For more complex programs, the instructions to the translator can become complex and fragile.</p>
+
+<p>Finally, a translator probably won&rsquo;t feel comfortable simplifying the program to</p>
+
+<blockquote>
+ <p>Tell the person next to you &ldquo;Paint a canvas red.&rdquo;</p></blockquote>
+
+<p>because there could be all sorts of environmental conditions that make the result different&mdash;such as people who are willing to paint but unwilling to accept assumptions about their favorite colors.</p>
+
+<p>The paragraph with &ldquo;tell the person&hellip;&rdquo; is a program that uses <code>eval</code>. It can&rsquo;t be compiled and optimized as well as the earlier paragraph, and the language context in which it is run may change the result. The quotes around sentences correspond to the quote in front of an expression passed to <code>eval</code> in Racket; there&rsquo;s no particular reason that the language for <code>eval</code> will match the language of the program that has the quoted text. The issues become even more complex if you try to implement different parts of the program in different languages.</p>
+
+<p>If the analogy to multiple spoken languages seems strange&mdash;maybe your language is Javascript, period&mdash;the problem of translation to another language is really a proxy for program understanding. There&rsquo;s a direct connection to performance and optimization (i.e., translation to efficient machine code), but using <code>eval</code> also makes a program more difficult to understand for the same reasons that it makes the program more difficult to translate. For example, a reader of your program may not be able to tell whether &ldquo;assume your favorite color is red&rdquo; is just a rhetorical device to get to a red canvas or whether some new instructions will arrive that will ask for your favorite color.</p>
+
+<h2 id="when-is-eval-good">When is <code>eval</code> Good?</h2>
+
+<p>The program with &ldquo;tell the person next to you&rdquo; above uses <code>eval</code> in a bad way. The task could just as well be performed by the person reading the instructions, instead of getting another nearby person involved.</p>
+
+<p>Some other uses <code>eval</code> are both good and necessary. For example, consider the following program:</p>
+
+<blockquote>
+ <p>Ask the construction manager for instructions. Walk to the building  site and convey those instructions to the construction crew.</p></blockquote>
+
+<p>This program uses <code>eval</code> when it conveys instructions to the construction crew, but no quoted forms appear in the program. The absence of quoted code is one sign that <code>eval</code> may be appropriate. Note that the program could work no matter what language the manager and crew speak, although there is an implicit (and sometimes non-trivial) assumption that the manager and crew speak the same language.</p>
+
+<p>Here&rsquo;s another example:</p>
+
+<blockquote>
+ <p>Go outside, and tell each member of the construction crew &ldquo;take a  lunch break, now.&rdquo;</p></blockquote>
+
+<p>There&rsquo;s a quoted program in this case, but it&rsquo;s crucial to ask other people to run the quoted program, instead of just taking the lunch break yourself. That is, <code>eval</code> is really necessary. The implementor of this program takes on the burden of making sure that the instructions are in a suitable language, however, and may need to parameterize the quoted program by an explicit action to translate it to a language understood by the construction crew.</p>
+
+<p>Here&rsquo;s one more reasonable example:</p>
+
+<blockquote>
+ <p>Ask the construction manager for instructions. Follow them.</p></blockquote>
+
+<p>In this case, it&rsquo;s the construction manager&rsquo;s problem to give you instructions in a language that you understand.</p>
+
+<p>Here&rsquo;s a questionable example:</p>
+
+<blockquote>
+ <p>Decide how long to work before lunch, say N hours, and write a note  to yourself to work N hours. Add to the note by telling yourself to  take a lunch break afterward.</p></blockquote>
+
+<p>If you could really write that program without quotes, then it&rsquo;s probably ok. The example is misleading, though, because languages don&rsquo;t usually support</p>
+
+<blockquote>
+ <p>write a note to yourself to work N hours</p></blockquote>
+
+<p>You&rsquo;d have to write instead</p>
+
+<blockquote>
+ <p>write a note to yourself that says &ldquo;work&rdquo; followed by the number N  and then &ldquo;hours&rdquo;</p></blockquote>
+
+<p>and the quote marks are where the problem comes in. If you translate the program to Chinese, then you have to be careful to somehow translate &ldquo;work&rdquo; and &ldquo;hours&rdquo; to Chinese, too.</p>
+
+<p>The point here is not that programs without quoted text are clearly good or that programs with quoted text are clearly bad. The real point is that a programmer has to be especially careful about passing around instructions and using quoted instructions. Using <code>eval</code> means accepting the burden of using instructions will make sense by the time they are delivered. That burdened is best avoided, which is why experienced programmers avoid <code>eval</code>, but some of the examples illustrate cases where the burden is not avoidable or where the actions enabled by <code>eval</code> make the burden worthwhile.</p>
+
+<h2 id="using-eval-in-racket">Using <code>eval</code> in Racket</h2>
+
+<p>In the context of Racket, the multiple-language analogy is relatively accurate, because Racket is about having many programming languages work together and allowing programmers to define ever better languages and language constructs. In Racket, it&rsquo;s especially likely that a library written in one language is used in a context where another language is the default.</p>
+
+<p>Newcomers to Racket sometimes stumble over the fact that</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre> <span class="kn">#lang </span><span class="nn">racket</span>
+ <span class="p">(</span><span class="k">define</span> <span class="n">my-x</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="nb">eval</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">+</span> <span class="ss">my-x</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>or even</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre> <span class="kn">#lang </span><span class="nn">racket</span>
+ <span class="p">(</span><span class="nb">eval</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">+</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>does not work at all, and yet if the program</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre> <span class="kn">#lang </span><span class="nn">racket</span>
+ <span class="p">(</span><span class="k">define</span> <span class="n">my-x</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>is loaded into a read-eval-print loop&mdash;for example, by clicking the &ldquo;Run&rdquo; button in DrRacket and then typing into the lower interactions panel&mdash;then</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre> <span class="p">(</span><span class="nb">eval</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">+</span> <span class="ss">my-x</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>works as expected.</p>
+
+<p>DrRacket&rsquo;s interactions window has to use <code>eval</code> in the sense that it reads an expression to evaluate and then passes it on to the interpreter for an answer. More generally, to make various pieces of the environment fit together, DrRacket sets <code>eval</code> globally to use the module&rsquo;s language while evaluating expressions in the interactions window. In Racket terminology, DrRacket sets the <code>current-namespace</code> parameter to the module&rsquo;s namespace when it initializes the interactions window. In contrast, while the module body is being evaluated, <code>eval</code> treats expressions as being in the language that is empty by default, which is why <code>eval</code> during the module evaluation produces a different result from <code>eval</code> during the interactions windows.</p>
+
+<p>You may wonder why DrRacket doesn&rsquo;t initialize the namespace of <code>eval</code> to be the module&rsquo;s namespace from the start, so that in-module uses of <code>eval</code> and the interactions window behave the same. In a program that is implemented by multiple modules, which module&rsquo;s language should be used? In particular, if the language it&rsquo;s always the main module&rsquo;s language, then a module may behave differently on its own than as part of a larger program. In the process of developing Racket and DrRacket, we&rsquo;ve seen many such problems, and so Racket now arranges for the default language to be empty (which is different from any useful language) to help programmers remember that there&rsquo;s a language issue to consider whenever <code>eval</code> is used.</p>
+
+<p>The Racket Guide&rsquo;s chapter 15 covers in more depth the issues and namespace tools of Racket for harnessing the power of <code>eval</code>:</p>
+
+<p> <a href="http://docs.racket-lang.org/guide/reflection.html">http://docs.racket-lang.org/guide/reflection.html</a></p>
+
+<p>Think of <code>eval</code> as a power tool. For some tasks, there&rsquo;s no real substitute, and so we want <code>eval</code> around. At the same time, <code>eval</code> should be used with care. In dynamic languages generally, that means a reluctant and targeted use <code>eval</code>. In Racket specifically, it means knowing the namespace toolbox and being as explicit as possible about the intended context for dynamic evaluation.</p></div>
+  <a class="more" href='/2011/10/on-eval-in-dynamic-languages-generally-and-in-racket-specifically.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-4.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li class="active"><a href="/index-5.html">5</a></li>
+  <li><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-6.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

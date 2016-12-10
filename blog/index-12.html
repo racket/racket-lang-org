@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 12)</title>
+    <meta name="description" content="Racket Blog (page 12)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-12.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>12 Nov 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/11/getting-rid-of-set-car-and-set-cdr.html'>Getting rid of <code>set-car!</code> and <code>set-cdr!</code></a></h1>
+  <div class="truncate">
+<p><em>posted by Matthew Flatt</em></p>
+
+<h2 id="functional-is-beautiful">Functional is Beautiful</h2>
+
+<p>Scheme is a “mostly functional” language. Although Schemers don’t hesitate to use <code>set!</code> when mutation solves a problem best, Scheme programmers prefer to think functionally. Purely functional programs are easier to test, they make better and more reliable APIs, and our environments, compilers, and run-time systems take advantage of functional style.</p>
+
+<p>A Schemer’s functional bias is especially strong when writing programs that process and produce lists. The <code>map</code> function, which does both, is a thing of beauty:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="nb">map</span> <span class="n">f</span> <span class="n">l</span><span class="p">)</span>
+   <span class="p">(</span><span class="k">cond</span>
+     <span class="p">[(</span><span class="nb">null?</span> <span class="n">l</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">()]</span>
+     <span class="p">[</span><span class="k">else</span> <span class="p">(</span><span class="nb">cons</span> <span class="p">(</span><span class="n">f</span> <span class="p">(</span><span class="nb">car</span> <span class="n">l</span><span class="p">))</span> <span class="p">(</span><span class="nb">map</span> <span class="n">f</span> <span class="p">(</span><span class="nb">cdr</span> <span class="n">l</span><span class="p">)))]))</span>
+</pre></div>
+
+</div>
+
+<p>The <code>map</code> function is most beautiful when the given <code>f</code> is functional. If <code>f</code> has side-effects, the the above implementation over-specifies <code>map</code>, which is traditionally allowed to process the list in any order that it wants (though PLT Scheme guarantees left-to-right order, as above). Arguably, when some other Schemer provides a non-functional <code>f</code>, then it’s their problem; they have to deal with the consequences (which may well be minor compared to some benefits of using mutation).</p>
+
+<p>The <code>map</code> function might also receive a non-list, but the <code>map</code> implementor can guard against such misuse of <code>map</code> by wrapping it with a check,</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">checked-map</span> <span class="n">f</span> <span class="n">l</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">list?</span> <span class="n">l</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">map</span> <span class="n">f</span> <span class="n">l</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb">error</span> <span class="o">&#39;</span><span class="ss">map</span> <span class="s2">"not a list"</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>and then exporting <code>checked-map</code> instead of the raw <code>map</code>. This kind of checking gives nicer error messages, and it helps hide implementation details of <code>map</code>. We could further also imagine that the raw <code>map</code> is compiled without run-time checks on <code>car</code> and <code>cdr</code>.</p>
+
+<h2 id="the-problem-with-mutable-pairs">The Problem with Mutable Pairs</h2>
+
+<p>What if someone calls <code>checked-map</code> like this?:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>  <span class="p">(</span><span class="k">define</span> <span class="n">l</span> <span class="p">(</span><span class="nb">list</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">checked-map</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                 <span class="p">(</span><span class="n">set-cdr!</span> <span class="p">(</span><span class="nb">cddr</span> <span class="n">l</span><span class="p">)</span> <span class="mi">5</span><span class="p">))</span>
+               <span class="n">l</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The <code>f</code> provided to <code>map</code> in this case is not purely functional. Moreover, it uses mutation in a particularly unfortunate way: the <code>list?</code> test in <code>checked-map</code> succeeds, because the argument is initially a list, and the mutation is ultimately discovered by a call to <code>cdr</code> &mdash; but only if checks haven&rsquo;t been disabled.</p>
+
+<p>If you’re a Schemer, then unless you’ve seen this before, or unless you thought a bit about the title of this section, then you probably didn&rsquo;t think of the above test case for <code>map</code>. A Schemer’s view of lists is so deeply functional that it&rsquo;s hard to make this particular leap.</p>
+
+<p>Furthermore, this example is not contrived. If you have either Chez Scheme version 6.1 or a pre&ndash;200 MzScheme sitting around, calling <code>map</code> as above leads to a seg fault or an invalid memory access:</p>
+
+<div class="brush: bash">
+ <div class="pygments">
+  <pre>  Chez Scheme Version 6.1
+  Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">1998</span> Cadence Research Systems
+
+  &gt; <span class="o">(</span>define l <span class="o">(</span>list <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> 5<span class="o">))</span>
+  &gt; <span class="o">(</span>map <span class="o">(</span>lambda <span class="o">(</span>x<span class="o">)</span> <span class="o">(</span><span class="nb">set</span>-cdr! <span class="o">(</span>cddr l<span class="o">)</span> 5<span class="o">))</span> l<span class="o">)</span>
+
+  Error: invalid memory reference.
+  Some debugging context may have been lost.
+</pre></div>
+
+</div>
+
+<p>The <code>map</code> example illustrates how mutable pairs can break a Schemer’s natural and ingrained model of programming. Of course, if optimizing and providing friendly error messages for <code>map</code> were the only issues with mutable pairs, then it wouldn’t matter; Scheme implementors are smart enough to (eventually) get this right. Unfortunately, the underlying problem is more pervasive.</p>
+
+<p>In the API for a typical Scheme library, lists can be used for many kinds of input and output. Flags for options might be provided in a list. A function might provide information about the current configuration (e.g., the current items in a GUI list box) in a list. Procedures or methods that deal gracefully with list mutation are few and far between. In most cases, the result of unexpected mutation is merely a bad error message; sometimes, however, unexpected mutation of a list can break the library’s internal invariants. In the worst case, the library whose internal invariants are broken plays some role in a system’s overall security.</p>
+
+<p>Mutable lists also interfere with the language’s extensibility. The PLT Scheme contract system, for example, offers a way to wrap an exported function with a contract that constrains its input and outputs, which are optionally (in principle) enforced by run-time checks. Higher-order contracts, such as “a list of functions that consume and produce numbers”, require wrappers on sub-pieces, and these wrappers can be installed only by copying the enclosing list. Copying a mutable list changes the semantics of a program, however, whereas contracts are supposed to enforce invariants without otherwise changing the program. Copying an immutable list creates no such problem.</p>
+
+<p>Finally, mutable lists make the language’s specification messy. The R6RS editors spent considerable energy trying to pin down the exception-raising guarantees of <code>map</code>; the possibility of mutable pairs made it difficult to provide much of a guarantee. The standard says that implementations should check that the lists provided to<code>map</code> are the same length, but it’s not worth much to require that check, since an argument’s length as a list can change via mutation to the list’s pairs.</p>
+
+<h2 id="switching-to-immutable-pairs">Switching to Immutable Pairs</h2>
+
+<p>The designers of PLT Scheme long ago recognized the problems of mutable pairs, and we introduced functions like <code>cons-immutable</code> and<code>list-immutable</code> to support programming with immutable lists. These additions solved some problems &mdash; but only in the cases where we were careful to use immutable lists. The R6RS editors also recognized the problems of mutable pairs, so that <code>set-car!</code> and <code>set-cdr!</code> were banished to their own library &mdash; but programmers are still free to use that library.</p>
+
+<p>While these are worthwhile steps for many reasons, they do not solve the underlying problem. Library implementors who deal in lists must still either set up elaborate guards against mutation, pretend that the problem doesn&rsquo;t matter, or require the use of a special immutable-list datatype that is incompatible with libraries whose authors set up elaborate guards or ignore the problem.</p>
+
+<p>Why all this hassle? If most Scheme code really does use and expect pairs in a functional way, can&rsquo;t we just switch to immutable pair? Most Scheme code will still work, untold security holes will have been closed, specifications will become instantly tighter, and language extensions like contracts will work better.</p>
+
+<p>Schemers have been reluctant to make this leap, because it has never been clear just how much code relies on mutable pairs. We don’t know how much the switch will cost in porting time and long-term incompatibility, and we don’t really know how much we will gain. We won&rsquo;t know until we try it.</p>
+
+<p>For PLT Scheme v4.0, we’re going to try it. In our main dialects of Scheme (such as the <code>mzscheme</code> language), <code>cons</code> will create immutable pairs, and <code>pair?</code> and <code>list?</code> will recognize only immutable pairs and lists. The <code>set-car!</code> and <code>set-cdr</code> procedures will not exist. A new set of procedure <code>mcons</code>, <code>mcar</code>, <code>mcdr</code>, <code>set-mcar!</code>, and <code>set-mcdr!</code> will support mutable pairs. (A related v4.0 change is that <code>define-struct</code> by default creates immutable structure types.)</p>
+
+<p>Of course, PLT Scheme v4.0 will support an R5RS language where <code>cons</code> is <code>mcons</code>, and so on, so many old programs can still run easily in the new version. The difference is that interoperability between R5RS libraries and PLT Scheme libraries will be less direct than before.</p>
+
+<h2 id="experience-so-far">Experience So Far</h2>
+
+<p>PLT Scheme v3.99.0.2 exists already in a branch of our SVN repository, and it will soon move to the SVN trunk. That is, we have already ported at least a half million lines of Scheme code to a dialect without <code>set-car!</code> and <code>set-cdr!</code>.</p>
+
+<p>The conversion took about eight hours. Obviously, relatively little code had to change. The following are the typical porting scenarios:</p>
+
+<ul>
+ <li>
+  <p>The <code>reverse!</code> and <code>append!</code> functions were frequently used for “linear updates” by performance-conscious implementors. As our underlying Scheme implementation has improved, however, the performance benefits of these functions has become less. All uses could be replaced with <code>reverse</code> and <code>append</code>.</p></li>
+ <li>
+  <p>The <code>set-cdr!</code> operation was often used to implement an internal queue. Such internal queues were easily changed to use <code>mcons</code>,<code>mcar</code>, <code>mcdr</code>, and <code>set-mcdr!</code>.</p></li>
+ <li>
+  <p>An association-list mapping was sometimes updated with <code>set-cdr!</code> when a mapping was present, otherwise the list was extended. Since the extension case was supported, it was easy to just update the list functionally. (The relevant lists were short; if the lists were long, the right change would be to use a hash table instead of a list.)</p></li>
+ <li>
+  <p>A pair was sometime used for an updatable mapping where a distinct structure type is better. The quick solution was to throw in a mutable box in place of the value.</p></li></ul>
+
+<p>The PLT Scheme code might be better positioned for the switch than arbitrary Scheme code. Most of it was written by a handful of people who understood the problems of mutable pairs, and who might therefore shy away from them. However, the PLT Scheme code base includes a lot of code that was not written specifically for PLT Scheme, including Slatex, Tex2page, and many SRFI reference implementations. With the exception of SRFI&ndash;9, which generalizes <code>set!</code> to work with pairs, the SRFI implementations were remarkably trouble free. (Thanks to Olin Shivers for making mutation optional in the “linear update” functions like <code>reverse!</code> from SRFIs 1 and 32.)</p>
+
+<p>In addition, we looked at a number of standard Scheme benchmarks, which can be found here:</p>
+
+<p><a href="http://svn.plt-scheme.org/plt/trunk/collects/tests/mzscheme/benchmarks/common/"> http://svn.plt-scheme.org/plt/trunk/collects/tests/mzscheme/benchmarks/common/</a></p>
+
+<p>Of the 28 benchmarks, eight of them mutate pairs. Four of those are trivially converted to functional programs, along the lines of the scenarios above. One, <code>destruct</code>, is designed specifically to test mutation performance, so it makes no sense to port. Another, <code>sort1</code>, is a sorting algorithm that inherently relies on mutation; a functional sort is obviously possible, but that would be a different benchmark. The <code>conform</code> benchmark uses mutable pairs for tables in a relatively non-local way; as a modern Scheme program, it would probably be written with structures, but it’s not trivial to port. The <code>peval</code> benchmark uses pairs to represent Scheme programs, and it partially evaluates the program by mutating it, so it is not trivial to port. To summarize, out of 28 old, traditional benchmark programs, only two represent interesting programs that are not easily adapted to immutable pairs. (They run in PLT Scheme’s R5RS language, of course.)</p>
+
+<p>Finally, we selected a useful third-party library that is not included with PLT Scheme. We checked the generic SSAX implementation (not the PLT Scheme version), and we found a couple of uses of <code>set-car!</code> and <code>set-cdr!</code>. Again, they fall into the above queue and association-list categories that are easily and locally converted.</p>
+
+<p>Meanwhile, as we start to use v3.99 to run scripts in our day-to-day work, immutable pairs have so far created no difficulty at all. So far, then, our optimism in trying immutable pairs seems to be justified; it just might work.</p>
+
+<h2 id="but-its-lisp-tradition">But It’s Lisp Tradition!</h2>
+
+<p>A typical response to news of the demise of mutable pairs is that it will create lot of trouble, because mutable pairs are Scheme tradition, and surely lots of useful old code exploits them in lots of places.</p>
+
+<p>We’re eager to hear whether anyone has such code. Our initial hypothesis is that practically all old code falls into one of two categories:</p>
+
+<ul>
+ <li>
+  <p>The code is easily ported to immutable pairs, along the same lines as above (i.e., local queues and small association lists).</p></li>
+ <li>
+  <p>The code so old and generic that it can be run as an R5RS program. It won’t call into the large PLT Scheme set of libraries that will expect immutable pairs, and it can easily be used as a library with wrappers that convert mutable pairs back and forth with immutable pairs.</p></li></ul>
+
+<p>Frankly, we’re not so eager to hear opinions based on guesswork about existing code and how it might get used. Download v3.99 from SVN or as a nightly build when it becomes available; let us know your guesses about how running your old code would go, but then let us know what actually happens.</p>
+
+<p>The immutable-pairs plan for v4.0 is not set in stone, but we won’t make the decision based on guesswork. More libraries (other than R5RS) to aid compatibility may be useful, but so far we don’t have a tangible need for them. In any case, we’ll revert to mutable pairs only if significant experience with the pre-release version demonstrates that it really won’t work.</p></div>
+  <a class="more" href='/2007/11/getting-rid-of-set-car-and-set-cdr.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>14 Sep 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/09/dont-say-abstract-instead-say-general.html'>Don&rsquo;t say &ldquo;abstract&rdquo; (instead say &ldquo;general&rdquo;)</a></h1>
+  <div class="truncate">
+<p><em>posted by John Clements</em></p>
+
+<p>The word &ldquo;abstract&rdquo; is common in computer science. An abstract thing is one where some part of the whole is unspecified. For instance, the expression &ldquo;3*x + 3&rdquo; is an abstraction of the expression &ldquo;3*4+3&rdquo;, because the &ldquo;x&rdquo; is unspecified. Likewise, a function is an abstraction over some set of values, supplied when the function is called.</p>
+
+<p>The word &ldquo;general&rdquo; is not at all common in computer science. In non-computer-science use, the word &ldquo;general&rdquo; is used to describe things that may be applied to more than one thing or situation. For instance, a &ldquo;more general solution&rdquo; is one that applies not just to the problem at hand, but instead to a larger set of problems.</p>
+
+<p>From a computer science perspective, things that are abstract are also general. Things that are general are also abstract. Substituting the word &ldquo;general&rdquo; for the word &ldquo;abstract&rdquo; would not be a terrible hurdle.</p>
+
+<p>From a non-computer-science perspective, however, &ldquo;general&rdquo; and &ldquo;abstract&rdquo; have very different implications. Something that is general is better: it is more useful, it applies more frequently. Something that is abstract, though, is worse: it is lacking detail, it is non-concrete.</p>
+
+<p>This is one difference&mdash;the major difference?&mdash;between computer science (and of course mathematics) and the real world: the abstract is no less concrete. We can abstract over expressions using functions, and we can even abstract over syntactic things, using hygienic macros. The result of such abstraction is a perfectly well-defined element in our universe of expressions.</p>
+
+<p>In computer science, then, the pejorative sense of the word &ldquo;abstract&rdquo; is misleading, and the use of the terms &ldquo;abstract&rdquo; and &ldquo;abstraction&rdquo; merely provides ammunition for those who wish that we could all still be writing assembly language.</p>
+
+<p>I suggest instead the use of the word &ldquo;general.&rdquo;</p>
+
+<p>John &ldquo;purveyor of barbarous neologisms&rdquo; Clements</p></div>
+  <a class="more" href='/2007/09/dont-say-abstract-instead-say-general.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>09 Sep 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/09/completions-in-drscheme-finally.html'>Completions in DrScheme (finally)</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>DrScheme now supports a language- sensitive (but not lexical- scope sensitive) completion feature. Type -/ and see what names are available to finish off the word you&rsquo;re typing.</p>
+
+<p>Thanks to <a href="http://www.cs.uchicago.edu/~jacobm/">Jacob</a> (and do follow that link; we all need a little more love in our lives) and <a href="http://turingcompletewasteoftime.blogspot.com/">Mike</a> for taking the initiative to actually implement what is probably the most requested feature in DrScheme at the moment.</p></div>
+  <a class="more" href='/2007/09/completions-in-drscheme-finally.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>06 Sep 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/09/how-many-occurrences-of-car-in-the-plt-source-code.html'>How many occurrences of car in the PLT source code?</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>Lets play a guessing game. See who can guess:</p>
+
+<ul>
+ <li>
+  <p>How many occurrences of the identifier <code>car</code> there are in the PLT tree (when using <code>read</code> and just counting the symbols that come out)?</p></li>
+ <li>
+  <p>Where does <code>car</code> rank on the list of the most commonly used identifiers?</p></li>
+ <li>
+  <p>What is the most common identifier, and how many occurrences of it are there?</p></li></ul>
+
+<p>UPDATE: The two files <code>raw-hattori</code> and <code>raw-kajitani.ss</code> are generated files containing solutions to <a href="http://en.wikipedia.org/wiki/Nonogram">Paint by Numbers</a> problems and about 30,000 occurrences of <code>x</code> and <code>o</code>. Discounting them, this is the list of the top ten identifiers and the number of occurrences:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">((</span><span class="k">define</span> <span class="mi">25294</span><span class="p">)</span>
+ <span class="p">(</span><span class="k">quote</span> <span class="mi">24101</span><span class="p">)</span>
+ <span class="p">(</span><span class="k">lambda</span> <span class="mi">18883</span><span class="p">)</span>
+ <span class="p">(</span><span class="k">let</span> <span class="mi">14796</span><span class="p">)</span>
+ <span class="p">(</span><span class="k">send</span> <span class="mi">14349</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">x</span> <span class="mi">11877</span><span class="p">)</span>
+ <span class="p">(</span><span class="k">if</span> <span class="mi">11118</span><span class="p">)</span>
+ <span class="p">(</span><span class="k">...</span> <span class="mi">8474</span><span class="p">)</span>
+ <span class="p">(</span><span class="nb">car</span> <span class="mi">7610</span><span class="p">)</span>
+ <span class="p">(</span><span class="k">syntax</span> <span class="mi">6537</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>The identifier <code>cdr</code> ranks 21st with 5,259 occurrences, <code>let*</code> has 3,066 which, when combined with <code>let</code> comes out at 17,862, still not enough to pass <code>lambda</code>. Speaking of combining, <code>λ</code> has 2,271 occurrences, which is also not enough to move <code>lambda</code>. Finally <code>map</code> comes in 32nd with 3,853 occurrences and <code>foldl</code> beats out <code>foldr</code> (1168th place with 75 occurrences vs 1451st place with 58 occurrences).</p></div>
+  <a class="more" href='/2007/09/how-many-occurrences-of-car-in-the-plt-source-code.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Sep 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/09/birthday-easter-eggs-in-drscheme.html'>Birthday Easter Eggs in DrScheme</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>DrScheme has five birthday easter eggs in it, one for each of the main contributers to the PLT Scheme infrastructure (<a href="http://www.ccs.neu.edu/%7Ematthias/">Matthias</a>, <a href="http://www.cs.utah.edu/%7Emflatt/">Matthew</a>, <a href="http://www.barzilay.org/">Eli</a>, <a href="http://www.cs.brown.edu/%7Esk/">Shriram</a>, and <a href="http://www.cs.uchicago.edu/%7Erobby/">me</a>). I put four of them in there, and mostly concentrated on making them fun. Matthew added mine and the best part of that one is figuring out on earth it shows up (it is quite tricky to find the code that actually makes that one appear).</p>
+
+<p>I don&rsquo;t want to ruin the fun of searching for the Easter Eggs yourself, but just to get you started, do have a look at <code>plt/collects/framework/private/bday.ss</code>  for Matthias, Matthew, Shriram, and Eli&rsquo;s birthdays. Mine is July 2nd.</p>
+
+<p>Happy Hunting!</p></div>
+  <a class="more" href='/2007/09/birthday-easter-eggs-in-drscheme.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>22 Aug 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/08/new-debugger-features.html'>New Debugger Features</a></h1>
+  <div class="truncate">
+<p><em>posted by Greg Cooper</em></p>
+
+<p>As Eli mentioned, v371 introduces support for debugging several files at a time, as well as new buttons for stepping Over and Out of expressions in the debugger.</p>
+
+<p>Debugging across multiple files is easy. Start by opening the &ldquo;main&rdquo; file that you want to debug and all of the files it requires (directly or indirectly) that you want to debug along with it. Then click Debug in the main file&rsquo;s frame. For example, if I wanted to see what the FrTime dataflow engine (in frp-core.ss) does when a particular program (say demo-module.ss) runs, I would open these two files and click Debug in the frame for demo-module.ss.</p>
+
+<p>As each required file loads, DrScheme offers the option of debugging it. If you choose &ldquo;yes&rdquo;, then the file is included in the debugging session, so you can set breakpoints and step into it. (Note that this will make the code in the file run more slowly, and single-stepping at calls to its functions will bring you into it.) A file can only participate in one debugging session at a time, so if you&rsquo;re already debugging it with some other program, DrScheme will tell you so (instead of asking whether to debug it). For best results, all of the files you debug should be modules. Once a file is included in the debugging session, you can set breakpoints and step into it as if you were debugging it by itself.</p>
+
+<p>As soon as you can debug programs that span several files, it&rsquo;s particularly valuable to be able to do more than set breakpoints and single-step. This is the motivation for the new Over and Out buttons, which are also quite simple. If the execution marker is at the start of an expression that&rsquo;s not in tail position, then you can step over the entire expression, which is equivalent to setting a one-shot breakpoint at the end of the expression and continuing. (If you&rsquo;ve set breakpoints inside the expression, or inside any functions it calls, then execution may suspend before reaching the end.) Likewise, if execution is suspended and the current expression is evaluating within a debugging-enabled context, then you can step out to the innermost such context. This would be difficult to simulate by hand, since you&rsquo;d need to keep track of recent callers.</p>
+
+<p>At any given point, either or both of the Over and Out buttons may be disabled, but over the course of a session they can eliminate a lot of tedium.</p>
+
+<p>The screenshot above shows a session debugging frp-core.ss as used by demo-module.ss. Execution is suspended on a right paren, so stepping Over is disabled, but we see the expression&rsquo;s value at the upper left, we&rsquo;ve moused over b to see its value at the upper right, and it&rsquo;s possible to step Out.</p></div>
+  <a class="more" href='/2007/08/new-debugger-features.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>18 Aug 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/08/plt-scheme-v371.html'>PLT Scheme v371</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 371 is now available from</p>
+
+<p> <a href="http://download.plt-scheme.org/">http://download.plt-scheme.org/</a></p>
+
+<p>This is mostly a bug-fix release.</p>
+
+<p>Changes:</p>
+
+<ul>
+ <li>The debugger now works across multiple files and supports &ldquo;step over&rdquo; and &ldquo;step out&rdquo; operations.</li>
+ <li>HtDP teachpacks: the world.ss teachpack now exports two add-line functions: one from image.ss and one for adding lines to scenes.</li>
+ <li>ProfessorJ now includes a language level between Intermediate and Advanced, Intermediate + access, that includes all of Intermediate and introduces access modifiers and overloading. The language manuals contain the complete details.Feedback Welcome.</li></ul></div>
+  <a class="more" href='/2007/08/plt-scheme-v371.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>07 Aug 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/08/plt-modules-and-separate-compilation.html'>PLT Modules and Separate Compilation</a></h1>
+  <div class="truncate">
+<p><em>posted by Richard Cobbe</em></p>
+
+<p>For my summer job this year, I&rsquo;m programming in Common Lisp; this is the first time I&rsquo;ve used the language for anything more than toy examples. The experience has given me new appreciation for the PLT module system and how it enables separate compilation.</p>
+
+<p>Lisp has a package system, of course, but it&rsquo;s not the same thing. It&rsquo;s primarily a tool to make sure that the symbols in one part of the program don&rsquo;t collide with the symbols in another part (unless you ask them to). Packages aren&rsquo;t about abstraction: while you can specify which symbols are exported from the package and which aren&rsquo;t, that&rsquo;s just a suggestion that&rsquo;s not enforced by the language.</p>
+
+<p>(You&rsquo;ll notice, by the way, that I used the word &ldquo;symbol&rdquo; and not &ldquo;identifier,&rdquo; which is the more common term in the study of programming languages, in the previous paragraph. That&rsquo;s deliberate: the Lisp package system works on symbols, not identifiers, so it also affects quoted, literal symbols. In my experience, this is sometimes helpful, sometimes a real pain, and usually completely unexpected. But that&rsquo;s a topic for another post.)</p>
+
+<p>Also, there&rsquo;s no real relationship between Lisp packages and files. One package can be spread across multiple files, and one file can contain code in several different packages.</p>
+
+<p>All this means that separate compilation in Lisp is a real problem. There is a system, ASDF, that attempts to address this need. (For more details, consult <a href="http://www.cliki.net/asdf">the closest thing to a homepage</a> that I could find for ASDF.) I&rsquo;m no expert on ASDF, but essentially the programmer specifies the dependencies between source files, in a set of files that exist parallel to the Lisp source. (ASDF does support grouping source files into larger chunks and specifying dependencies between those chunks, but as far as I can tell that&rsquo;s largely a convenience thing.)</p>
+
+<p>The key thing for separate compilation, of course, is the dependencies. With ASDF, the programmer specifies those manually, and then ASDF basically does a topological sort such that if file a depends on file b, then ASDF ensures that a is compiled and loaded before b is compiled, and again before B is loaded. (This should start sounding a little familiar to folks who&rsquo;ve worked in the area where PLT&rsquo;s modules and macros intersect.)</p>
+
+<p>So far, so good. Unfortunately, there are a couple of problems with this setup. First, the dependencies between files are specified outside the language. This means that, if you happen to forget one, the results are not well-defined. If ASDF happens to choose an order that&rsquo;s consistent with the dependency you left out, everything will just work, and you won&rsquo;t have any indication that there&rsquo;s a problem. If, however, it doesn&rsquo;t, then you&rsquo;ll get random &ldquo;undefined function&rdquo; and &ldquo;undefined symbol&rdquo; errors&mdash;if you&rsquo;re lucky (at least in SBCL, the implementation of Common Lisp that I use at my job). In PLT, by contrast, inter-module dependencies are part of the language, so the compiler will always give you an undefined-identifier error when it tries to compile a module in which you&rsquo;ve forgotten a require form. Big win, in my opinion (although we could argue about whether this should be an error or a warning, and whether the compiler should report lots of errors or just one before giving up completely).</p>
+
+<p>Second, because ASDF lives outside the compiler, it can&rsquo;t be very smart about how macros affect separate compilation. I don&rsquo;t fully understand this, perhaps because the folks who&rsquo;ve been mentoring me at my job haven&rsquo;t thought it worth the time to explain it to me fully. But it appears that, if you change a macro that&rsquo;s used in other files, or change a function that&rsquo;s called by a macro at expansion time, you have to do the effect of a make clean in a distressingly large number of cases. This is a real problem when you&rsquo;ve got a large source base (~200K LOC, I think) and you&rsquo;re trying to speed up builds, as we are, and it&rsquo;s especially problematic if you&rsquo;re trying to run unrelated parts of the build in parallel.</p>
+
+<p>I&rsquo;ve certainly griped about the complexity of the interaction between PLT&rsquo;s modules and macros in the past. But after this summer, I have to say it&rsquo;s awfully nice to have a module system that Just Works for separate compilation. Nicely done, Matthew.</p>
+
+<p>(I&rsquo;ve pointed the folks at work at Matthew&rsquo;s <a href="http://www.cs.utah.edu/plt/publications/macromod.pdf">ICFP 02 paper</a>, but as that technique requires a lot of support from the compiler, and we don&rsquo;t have the resources to add the necessary support to SBCL ourselves, I don&rsquo;t know that it&rsquo;ll be more than a &ldquo;wouldn&rsquo;t it be nice if we could do that?&rdquo;)</p>
+
+<p>(Answer to rhetorical question in preceding paragraph: Yes. Yes it would.)</p></div>
+  <a class="more" href='/2007/08/plt-modules-and-separate-compilation.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>06 Aug 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/08/macros-and-hygiene-resumed.html'>macros and hygiene, resumed</a></h1>
+  <div class="truncate">
+<p><em>posted by matthias</em></p>
+
+<p>The Friday entry demonstrates how to break hygiene for a macro that defines a generator. Ryan Culpepper, the local macrologist, reminded me that expanding into this macro goes wrong in the syntax-case world:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="n">define-that-expands-into-define/y</span> 
+  <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+    <span class="p">((</span><span class="k">_</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span> 
+     <span class="p">(</span><span class="n">define/y</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span> <span class="n">body</span> <span class="k">...</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="n">define-that-expands-into-define/y</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="o">&#39;</span><span class="ss">finished</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>Run this in Pretty Big [DrScheme] and you get a strange note concerning MrEd&rsquo;s yield or run it in MzScheme [Textual] and you get an error message about &lsquo;yield&rsquo; being unbound.</p>
+
+<p>What gives? The &lsquo;stx&rsquo; of <code>datum-&gt;syntax-object</code> is the syntactic context of the new macro but it doesn&rsquo;t bind yield; it just uses it. So the definition of <code>yield</code> in <code>define/y</code> must be a different one according to the hygiene standards. Ergo yield is free at the top-level [MzScheme] or bound to the yield import from MrEd [Pretty Big].</p>
+
+<p>How can we try to fix this? The explanation suggests we use a different macro definition for <code>define/y</code>, one that uses a context that is guaranteed from the body of an instance of <code>define/y</code>:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"control.ss"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">define/y</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span> <span class="n">body0</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">with-syntax</span> 
+         <span class="p">((</span><span class="n">yield-name</span> 
+           <span class="p">(</span><span class="n">datum-&gt;syntax-object</span> <span class="p">(</span><span class="k">syntax</span> <span class="n">body0</span><span class="p">)</span> <span class="o">&#39;</span><span class="ss">yield</span><span class="p">)))</span>
+       <span class="p">(</span><span class="k">syntax</span>
+        <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span>
+          <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">yield-name</span> <span class="n">x</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">control</span> <span class="n">resume-here</span>
+             <span class="p">(</span><span class="k">set!</span> <span class="n">name</span> 
+                   <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+                     <span class="p">(</span><span class="n">prompt</span> <span class="p">(</span><span class="n">resume-here</span> <span class="o">&#39;</span><span class="ss">dummy</span><span class="p">))))</span>
+             <span class="n">x</span><span class="p">))</span>
+          <span class="p">(</span><span class="n">prompt</span> <span class="n">body0</span> <span class="n">body</span> <span class="k">...</span><span class="p">))))]))</span>
+
+<span class="p">(</span><span class="k">define-syntax</span> <span class="n">define-that-expands-into-define/y</span> 
+  <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+    <span class="p">((</span><span class="k">_</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span> 
+     <span class="p">(</span><span class="n">define/y</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span> <span class="n">body</span> <span class="k">...</span><span class="p">))))</span>
+
+<span class="c1">;; --- try it out ---</span>
+
+<span class="p">(</span><span class="n">define-that-expands-into-define/y</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="o">&#39;</span><span class="ss">finished</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="p">(</span><span class="n">bar</span><span class="p">)</span> <span class="p">(</span><span class="n">bar</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Run it. You will find that it works as expected.</p>
+
+<p>Tomorrow, time permitting, I will tell you what&rsquo;s wrong with it and how you can fix it.</p></div>
+  <a class="more" href='/2007/08/macros-and-hygiene-resumed.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Aug 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/08/control-and-macros.html'>control and macros</a></h1>
+  <div class="truncate">
+<p><em>posted by matthias</em></p>
+
+<p>After reading the posts on control operators, Vlado Zlatanov decided to look into <code>prompt, control, fcontrol</code> and the rest of the goodies in <code>control.ss</code>.</p>
+
+<p>So based on the example from the blog post I did this python-like snippet:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">define/y</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span> 
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="o">&#39;</span><span class="ss">finished</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>He decided to look into turning it into a macro, such that the above ends up being correct code. When he got stuck, he asked on our mailing list and the resulting dialog was so informative that I decided to blog it.</p>
+
+<p>My first replay was this suggestion:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">define-syntax</span> <span class="n">define/y</span>
+  <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">yield-name</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">define</span> <span class="n">exit-with</span> <span class="no">#f</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">switch-control-context</span> <span class="n">th</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">call/cc</span> 
+          <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">set!</span> <span class="n">exit-with</span> <span class="n">k</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">th</span><span class="p">))))</span>
+       <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">yield-name</span> <span class="n">x</span><span class="p">)</span>
+         <span class="p">(</span><span class="nb">call/cc</span> 
+          <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">resume-here</span><span class="p">)</span>
+            <span class="p">(</span><span class="k">set!</span> <span class="n">name</span> 
+               <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> 
+                 <span class="p">(</span><span class="n">switch-control-context</span> 
+                  <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> 
+                     <span class="p">(</span><span class="n">resume-here</span> <span class="o">&#39;</span><span class="ss">dummy</span><span class="p">)))))</span>
+            <span class="p">(</span><span class="n">exit-with</span> <span class="n">x</span><span class="p">))))</span>
+       <span class="p">(</span><span class="n">switch-control-context</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="n">body</span> <span class="k">...</span><span class="p">)))]))</span>
+</pre></div>
+
+</div>
+
+<p>I sent this out with two suggestions.</p>
+
+<p>First, use <code>control.ss</code> to simplify the code. Second, use <code>syntax-case</code> to eliminate the need for the programmer-user of <code>define/y</code> to specify the name of <code>yield</code>.</p>
+
+<p>So, here is the prompt-based code:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"control.ss"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define-syntax</span> <span class="n">define/y</span>
+  <span class="p">(</span><span class="k">syntax-rules</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="n">yield-name</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">yield-name</span> <span class="n">x</span><span class="p">)</span>
+         <span class="p">(</span><span class="n">control</span> <span class="n">resume-here</span>
+            <span class="p">(</span><span class="k">set!</span> <span class="n">name</span>
+                  <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+                    <span class="p">(</span><span class="n">prompt</span> <span class="p">(</span><span class="n">resume-here</span> <span class="o">&#39;</span><span class="ss">dummy</span><span class="p">))))</span>
+            <span class="n">x</span><span class="p">))</span>
+       <span class="p">(</span><span class="n">prompt</span> <span class="n">body</span> <span class="k">...</span><span class="p">))]))</span>
+
+<span class="p">(</span><span class="n">define/y</span> <span class="n">yield</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span> 
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="o">&#39;</span><span class="ss">finished</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">equal?</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span> <span class="p">(</span><span class="n">step</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>This time I include a test case that assures the proper return behavior of <code>yield</code>. The definition of <code>define/y</code> shows how to mark the return point with <code>prompt</code> and how to switch to this point with <code>control</code> so that your generator can resume the traversal at the place where it was interrupted.</p>
+
+<p>For the second challenge, I wrote this definition:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k">require</span> <span class="p">(</span><span class="k">lib</span> <span class="s2">"control.ss"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define-syntax</span> <span class="p">(</span><span class="n">define/y</span> <span class="n">stx</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">syntax-case</span> <span class="n">stx</span> <span class="p">()</span>
+    <span class="p">[(</span><span class="k">_</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span> <span class="n">body</span> <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="k">with-syntax</span> 
+         <span class="p">((</span><span class="n">yield-name</span> <span class="p">(</span><span class="n">datum-&gt;syntax-object</span> <span class="n">stx</span> <span class="o">&#39;</span><span class="ss">yield</span><span class="p">)))</span>
+       <span class="p">(</span><span class="k">syntax</span>
+        <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">name</span> <span class="n">arg</span> <span class="k">...</span><span class="p">)</span>
+          <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">yield-name</span> <span class="n">x</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">control</span> <span class="n">resume-here</span>
+             <span class="p">(</span><span class="k">set!</span> <span class="n">name</span> 
+                   <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+                     <span class="p">(</span><span class="n">prompt</span> <span class="p">(</span><span class="n">resume-here</span> <span class="o">&#39;</span><span class="ss">dummy</span><span class="p">))))</span>
+             <span class="n">x</span><span class="p">))</span>
+          <span class="p">(</span><span class="n">prompt</span> <span class="n">body</span> <span class="k">...</span><span class="p">))))]))</span>
+
+<span class="p">(</span><span class="n">define/y</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span> 
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">2</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">yield</span> <span class="mi">3</span><span class="p">)</span>
+  <span class="o">&#39;</span><span class="ss">finished</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">equal?</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="nb">list</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span> <span class="p">(</span><span class="n">step</span><span class="p">)</span> <span class="p">(</span><span class="n">step</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>If you compare the two macro definitions, you notice very little difference. Indeed, what really differs is the &ldquo;interface&rdquo; (the API), that is, the way you can use the macro: see the test case. What also differs is that the definition uses <code>syntax-case</code> and <code>with-syntax</code> to inject <code>yield</code> into the body of <code>define/y</code>.</p>
+
+<p>In response, Vlado wrote &ldquo;but isn&rsquo;t this non-hygienic.&rdquo; Here is my response:</p>
+
+<p>Hygiene is a uniformity default imposed on the expander with a provision for programmers to choose the non-default. I chose this word carefully when I coined the phrase. So what you have <em>is</em> a hygienic solution.</p>
+
+<p>In other words, injecting an identifier into a macro is not a violation of hygiene at all. It&rsquo;s just means using the full power of the macro system.</p></div>
+  <a class="more" href='/2007/08/control-and-macros.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-11.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li class="active"><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-13.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

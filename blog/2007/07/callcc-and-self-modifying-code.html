@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>`call/cc` and self-modifying code</title>
+    <meta name="description" content="_posted by matthias_  Today I wrote this short illustration of call/cc and posted it on wikipedia:      ;; [LISTOF X] -> ( -> X u 'you-fell-off-the-end-off-the-list) (define (generate-one-element-at-a-time a-list)   ;; (-> X u 'you-fell-off-the-end-off-th...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/07/callcc-and-self-modifying-code.html">
+    <link rel="next" href="/2007/06/small-is-beautiful-large-is-useful-and-scheme-is-both.html">
+    <link rel="prev" href="/2007/07/control-resumed.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>27 Jul 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1><code>call/cc</code> and self-modifying code</h1>
+  </header>
+
+<p><em>posted by matthias</em></p>
+
+<p>Today I wrote this short illustration of call/cc and posted it on wikipedia:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="c1">;; [LISTOF X] -&gt; ( -&gt; X u &#39;you-fell-off-the-end-off-the-list)</span>
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">generate-one-element-at-a-time</span> <span class="n">a-list</span><span class="p">)</span>
+  <span class="c1">;; (-&gt; X u &#39;you-fell-off-the-end-off-the-list)</span>
+  <span class="c1">;; this is the actual generator, producing one item from a-list at a time</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">generator</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">call/cc</span> <span class="n">control-state</span><span class="p">))</span> 
+  <span class="c1">;; [CONTINUATION X] -&gt; EMPTY</span>
+  <span class="c1">;; hand the next item from a-list to "return" (or an end-of-list marker)&#39;</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">control-state</span> <span class="n">return</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">for-each</span> 
+        <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">an-element-from-a-list</span><span class="p">)</span>
+           <span class="p">(</span><span class="k">set!</span> <span class="n">return</span> <span class="c1">;; fixed</span>
+             <span class="p">(</span><span class="nb">call/cc</span>
+               <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="n">resume-here</span><span class="p">)</span>
+                 <span class="p">(</span><span class="k">set!</span> <span class="n">control-state</span> <span class="n">resume-here</span><span class="p">)</span>
+                 <span class="p">(</span><span class="n">return</span> <span class="n">an-element-from-a-list</span><span class="p">)))))</span>
+        <span class="n">a-list</span><span class="p">)</span>
+     <span class="p">(</span><span class="n">return</span> <span class="o">&#39;</span><span class="ss">you-fell-off-the-end-off-the-list</span><span class="p">))</span>
+  <span class="c1">;; time to return the generator</span>
+  <span class="n">generator</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>It reminded of all the talk in the 1980s and 1990s that self-modifying code is bad. But look at the elegant assignment to <code>control-state</code> within its body. It&rsquo;s such a poem, I thought I&rsquo;d share it with people since nobody else blogs here anywya.</p>
+<!-- more-->
+
+<hr />
+
+<p>This is really beautiful. :)</p>
+
+<p>— <em>Jianshi Huang, 28 July 2007</em></p>
+
+<hr />
+
+<p>A pretty little ditty, to be sure. Much of object-oriented programming relies on self-modifying code, if you think about it. Consider the strategy pattern or the state pattern. In object-oriented programs it may appear that we are changing the data, but we are really changing the code.</p>
+
+<p>— <em>I, Object, 28 July 2007</em></p>
+
+<hr />
+
+<p>Hello, a quick question:</p>
+
+<p>I&rsquo;m not a scheme guru, but the posted code seems a bit off. Specifically, it looks to me like &lsquo;return&rsquo; is only bound the first time generator is called, so if you used it like:</p>
+
+<p> (generator)  &hellip;  (generator)</p>
+
+<p>On the second call, it would jump back to the first call (since that&rsquo;s what the continuation stored in &lsquo;return&rsquo; is). It seems like it should instead be something like (totally untested):</p>
+
+<p> &hellip;  (lambda (an-element-from-a-list)  (set! return  (call/cc  (lambda (resume-here)  (set! control-state resume-here)  (return an-element-from-a-list)))))  &hellip;</p>
+
+<p>However, as I said, I don&rsquo;t write a lot of scheme, so maybe I&rsquo;m missing something.</p>
+
+<p>Apologies for the terrible formatting, but I&rsquo;m not sure how to tell blogger to display stuff as code.</p>
+
+<p>Cheers.</p>
+
+<p>— <em>Dan Doel, 28 July 2007</em></p>
+
+<hr />
+
+<p>this is a terrible misuse of call/cc. here is a better implementation:</p>
+
+<p>(define (one-at-a-time lst)  (lambda ()  (if (null? lst)  &rsquo;you-fell-off-the-end  (let ((x (car lst)))  (set! lst (cdr lst))  x))))</p>
+
+<p>— <em>Gavin, 29 July 2007</em></p>
+
+<hr />
+
+<p>@Gavin: Actually, it is exactly what the recent call/cc hype was about: To allow implicit (foreach) instead of explicit state machines, esp. in the context of web applications. Imagine the state getting a little bit more complicated. (You&rsquo;d need to hide the call/cc in an abstraction for the generator programmer as well, though.)</p>
+
+<p>— <em>Andreas Krey, 29 July 2007</em></p>
+
+<hr />
+
+<p>call/cc is indeed a bad choice if all you&rsquo;re doing is making a generator out of a flat list. However, the technique mentioned works about equally well for turning folds over arbitrary data structures into generators/cursors.</p>
+
+<p>For instance, writing a generator for a binary tree using only the analogues to car/cdr is a pain (I imagine you&rsquo;d manage a stack of nodes to be visited by hand). However, writing an in-order traversal is simple. This example shows that you can turn the latter into the former automatically and generically using call/cc.</p>
+
+<p>Of course, for the particular case of turning a fold into a cursor, delimited continuations are, perhaps, even nicer (and, in a sense, this example might be mimicking delimited continuations with call/cc + state). Something like:</p>
+
+<p>(define (mk-generator traversal structure)  (define (generator) (control-loop))</p>
+
+<p> (define (control-loop)  (reset  (traversal  (lambda (element)  (shift  (lambda (k)  (set! control-loop (lambda () (k #f)))  element)))  structure)  &rsquo;traversal-done))</p>
+
+<p> generator)</p>
+
+<p>Which, handily, avoids having to worry about keeping track of a return continuation for this problem.</p>
+
+<p>The problem of turning folds into cursors in various languages, and the advantages of structuring a collection library in such a way are discussed in more depth here.</p>
+
+<p>— <em>Dan Doel, 29 July 2007</em></p>
+
+<hr />
+
+<ol>
+ <li>
+  <p>Thanks for pointing out the bug.</p></li>
+ <li>
+  <p>This (correct) code is a poem on turning a loop into a generator. It is not serious code.</p></li>
+ <li>
+  <p>And yes, it is writing code like that many times, which first suggested delimited continuations to me in the fall of 1984; it just took three years to write it up.</p></li></ol>
+
+<p>— <em>matthias, 29 July 2007</em></p>
+
+<hr />
+
+<p>Matthias, sorry to be commenting on such an old blog post ;-)</p>
+
+<p>This is a pretty cool example, but I think it would be clearer if the internal defines were desugared into a letrec. It&rsquo;s very odd to see a function definition mutated from inside the function in the first place, but somehow it seems more natural in a letrec. More importantly (for me at least), is that I can understand right away what the continuation of the letrec would be, but it&rsquo;s not at all obvious with the internal define &mdash; it looks as though the continuation of the (define (generator) &hellip;) code would continue by defining control-state again.</p>
+
+<p>— <em>Michael, 30 January 2008</em></p>
+
+<hr />
+
+<p>This is cute; it took me a minute to understand what was going on. On the other hand, a few years ago I would have been scratching my head for hours.</p>
+
+<p>One complaint though: this code holds onto a return continuation longer than necessary, introducing the possibility of memory leaks and/or poor GC performance.</p>
+
+<p>Is there some kind of generic technique for destroying a reference to a continuation &ldquo;on the way out&rdquo; as you call it?</p>
+
+<p>— <em>Leon Smith, 3 April 2008</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/07/control-resumed.html">control, resumed</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/06/small-is-beautiful-large-is-useful-and-scheme-is-both.html">Small is Beautiful, Large is Useful, and Scheme is Both</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

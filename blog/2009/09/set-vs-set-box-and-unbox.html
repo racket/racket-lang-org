@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>`set!` vs. `set-box!` and `unbox`</title>
+    <meta name="description" content="_posted by Robby Findler_  A few weeks ago I was chatting with some PLT folks and was surprised to hear them say that they avoided `set!` because using `set-box!` and `unbox` was easier to see what was going on.  This struck me as wrong since one might pa...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/09/set-vs-set-box-and-unbox.html">
+    <link rel="next" href="/2009/07/plt-scheme-v421.html">
+    <link rel="prev" href="/2009/10/plt-scheme-v422.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>21 Sep 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1><code>set!</code> vs. <code>set-box!</code> and <code>unbox</code></h1>
+  </header>
+
+<p><em>posted by Robby Findler</em></p>
+
+<p>A few weeks ago I was chatting with some PLT folks and was surprised to hear them say that they avoided <code>set!</code> because using <code>set-box!</code> and <code>unbox</code> was easier to see what was going on.</p>
+
+<p>This struck me as wrong since one might pass boxes around and then you can&rsquo;t be sure which box you&rsquo;re mutating, but you cannot pass variable references around and thus which variable you&rsquo;re using is always lexically apparent. (Of course, when you add <code>lambda</code> into the mix that isn&rsquo;t really true, since you can capture a variable in a closure and pass that around.)</p>
+
+<p>Their point seemed to be that you had to write something special at each use of the box, unlike with <code>set!</code> where you simply write a variable reference and it might be getting a changing quantity and it might not be. This made me realize I could do something to help, at least, and so I changed Check Syntax so that it colored <code>set!</code>&rsquo;d variables in red, like this:</p>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/10/plt-scheme-v422.html">PLT Scheme v4.2.2</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/07/plt-scheme-v421.html">PLT Scheme v4.2.1</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

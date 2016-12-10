@@ -1,0 +1,33 @@
+<article>
+  @(local-require gregor)
+
+<row>
+
+<col-1>  
+  <p class='date-and-tags'>@(~t (iso8601->date date-8601) "dd MMM YYYY")</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>@|title|</h1>
+  </header>
+  @|content|
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+@when[newer-uri]{@list{<h2><span class="label">next</span> <a class="next" href="@|newer-uri|">@|newer-title|</a></h2>}}
+
+@when[older-uri]{@list{<h2><span class="label">prev</span> <a class="previous" href="@|older-uri|">@|older-title|</a></h2>}}
+
+</col-2>
+</row>
+</footer>
+  
+</article>

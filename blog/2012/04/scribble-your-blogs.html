@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Scribble Your Blogs</title>
+    <meta name="description" content="_posted by Ryan Culpepper_  Scribble is a great language for writing documentation. Now it's a great language for writing blog posts, too. I've just released a tool called Scriblogify that compiles Scribble documents and posts them as blog entries. Scribl...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2012/04/scribble-your-blogs.html">
+    <link rel="next" href="/2012/03/fixed-racket-v521-installers.html">
+    <link rel="prev" href="/2012/06/submodules.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div><img class="legacy-logo" src="/img/logo-and-text-inverted.png"/></div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>02 Apr 2012</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Scribble Your Blogs</h1>
+  </header>
+
+<p><em>posted by Ryan Culpepper</em></p>
+
+<p>Scribble is a great language for writing documentation. Now it&rsquo;s a great language for writing blog posts, too. I&rsquo;ve just released a tool called Scriblogify that compiles Scribble documents and posts them as blog entries. Scriblogify is a more polished and automated version of the scripts I&rsquo;ve been using for several months to prepare posts for <a href="http://macrologist.blogspot.com">my own blog</a>.</p>
+
+<p>To get Scriblogify, just download it from <a href="http://planet.racket-lang.org/">PLaneT</a>:</p>
+
+<p><code>(require(planetryanc/scriblogify:1))</code></p>
+
+<p>or</p>
+
+<p><code>raco planet install ryanc scriblogify.plt 1 0</code></p>
+
+<p>The package automatically installs a raco subcommand (<code>raco scriblogify</code>) that can be used to configure Scriblogify and process and upload blog posts.</p>
+
+<p>Configure Scriblogify by running</p>
+
+<p><code>raco scriblogify --setup</code></p>
+
+<p>That will open a browser window with the Scriblogify configuration servlet. The servlet will prompt you to authorize Scriblogify to access your Blogger and Picasa Web Albums accounts (only the Blogger/Picasa combination is currently supported) and then create one or more profiles—named combinations of blogs and web albums to upload to.</p>
+
+<p>Scriblogify automatically handles images computed in your Scribble documents by uploading them to a web album. For example, here are some images computed with the slideshow/pict library:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="nb">&gt;</span> <span class="p">(</span><span class="k">require</span> <span class="n">slideshow/pict</span><span class="p">)</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">define</span> <span class="n">rainbow-colors</span>
+    <span class="o">&#39;</span><span class="p">(</span><span class="s2">"red"</span> <span class="s2">"orange"</span> <span class="s2">"yellow"</span> <span class="s2">"green"</span> <span class="s2">"blue"</span> <span class="s2">"purple"</span><span class="p">))</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">for/list</span> <span class="p">([</span><span class="n">c</span> <span class="n">rainbow-colors</span><span class="p">])</span>
+    <span class="p">(</span><span class="n">colorize</span> <span class="p">(</span><span class="n">filled-rounded-rectangle</span> <span class="mi">20</span> <span class="mi">20</span><span class="p">)</span> <span class="n">c</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span><span class="p">)</span>
+
+<span class="nb">&gt;</span> <span class="p">(</span><span class="k">for/list</span> <span class="p">([</span><span class="n">c</span> <span class="n">rainbow-colors</span><span class="p">]</span>
+             <span class="p">[</span><span class="n">dir</span> <span class="p">(</span><span class="nb">in-cycle</span> <span class="o">&#39;</span><span class="p">(</span><span class="ss">right</span> <span class="ss">left</span><span class="p">))])</span>
+    <span class="p">(</span><span class="n">standard-fish</span> <span class="mi">25</span> <span class="mi">25</span> <span class="kd">#:color</span> <span class="n">c</span> <span class="kd">#:direction</span> <span class="n">dir</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(</span><span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span> <span class="ss">image</span><span class="p">)</span>
+
+<span class="nb">&gt;</span> <span class="p">(</span><span class="n">cc-superimpose</span>
+   <span class="p">(</span><span class="n">cc-superimpose</span> <span class="p">(</span><span class="n">cloud</span> <span class="mi">100</span> <span class="mi">80</span> <span class="s2">"lightblue"</span><span class="p">)</span>
+                   <span class="p">(</span><span class="n">cloud</span> <span class="mi">90</span> <span class="mi">70</span> <span class="s2">"white"</span><span class="p">))</span>
+   <span class="p">(</span><span class="n">hc-append</span> <span class="mi">10</span>
+    <span class="p">(</span><span class="n">standard-fish</span> <span class="mi">30</span> <span class="mi">30</span> <span class="kd">#:color</span> <span class="s2">"red"</span> <span class="kd">#:direction</span> <span class="o">&#39;</span><span class="ss">right</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">standard-fish</span> <span class="mi">25</span> <span class="mi">20</span> <span class="kd">#:color</span> <span class="s2">"blue"</span> <span class="kd">#:direction</span> <span class="o">&#39;</span><span class="ss">left</span><span class="p">)))</span>
+<span class="n">image</span>
+</pre></div>
+
+</div>
+
+<p>By Scribbling your blog entries, you get Scribble&rsquo;s nice code formatting, colorizing, and documentation links for free—well, once you&rsquo;ve updated your blog&rsquo;s CSS (see below). If you&rsquo;re blogging about bleeding-edge work, there&rsquo;s an option to make Scriblogify link to the <a href="http://pre.racket-lang.org/docs/html/">nightly build docs</a> (updated daily) instead of the <a href="http://docs.racket-lang.org/">release docs</a> (updated every 3 months).</p>
+
+<p>Scriblogify&rsquo;s documentation has more details, including how to update your blog&rsquo;s CSS for Scribbled content and what bloggable Scribble documents look like.You can see the source for this blog post <a href="https://github.com/rmculpepper/scriblogify/blob/v1.0/samples/scribble-your-blogs.scrbl">here</a>. This blog entry was created with the following command:raco  <code>scriblogify -p the-racket-blog scribble-your-blogs.scrbl</code></p>
+
+<p>Now go forth and Scribble your blogs.</p>
+<!-- more-->
+
+<hr />
+
+<p>This comment has been removed by the author.</p>
+
+<p>— <em>Unknown, 2 April 2012</em></p>
+
+<hr />
+
+<p>This is awesome! I actually rolled my own Scribble-blog hack at http://cscheid.net (click on any post and you can see the scribble source).</p>
+
+<p>If I could run this on my own backend, I&rsquo;d love to get rid of my kludgy setup.</p>
+
+<p>— <em>Unknown, 2 April 2012</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/06/submodules.html">Submodules</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2012/03/fixed-racket-v521-installers.html">Fixed Racket v5.2.1 Installers</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>
