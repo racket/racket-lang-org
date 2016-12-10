@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v6.6</title>
+    <meta name="description" content="_posted by Vincent St-Amour_  Racket version 6.6 is now available from http://racket-lang.org/      The new Macro Profiler command-line tool (`raco macro-profiler`) shows how macros contribute to the final expanded code size of a program.     Typed Racket...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2016/07/racket-v66.html">
+    <link rel="next" href="/2016/04/racket-v65.html">
+    <link rel="prev" href="/2016/10/racket-v67.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>22 Jul 2016</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v6.6</h1>
+  </header>
+
+<p><em>posted by Vincent St-Amour</em></p>
+
+<p>Racket version 6.6 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>The new Macro Profiler command-line tool (<code>raco macro-profiler</code>) shows how macros contribute to the final expanded code size of a program.</p></li>
+ <li>
+  <p>Typed Racket supports intersection types. This allows the type system to track more information, and for programmers to express more precise types.</p></li>
+ <li>
+  <p>Typed Racket produces up to 4x smaller compiled files compared with Racket 6.5, reducing the size of the Racket distribution by 50M.</p></li>
+ <li>
+  <p>Typed Racket issues warnings in cases where the contract generated for <code>Any</code> was not strict enough in the past. These warnings will become errors in a future release. Warnings are enabled via View -&gt; Show Log in DrRacket, and shown by default on command-line Racket.</p></li>
+ <li>
+  <p>Typed Racket enforces uses of <code>cast</code> more correctly, by checking both the &ldquo;casted-to&rdquo; and &ldquo;casted-from&rdquo; types. Previously, only the former were checked. In some cases, this will produce contract errors in programs that did not have errors before.</p></li>
+ <li>
+  <p><code>syntax-parse</code> raises an error when an ellipsis pattern has an empty match rather than diverging, and it logs a warning when it statically detects a nullable pattern, such as <code>((~seq) ...)</code>. In the next version of Racket, it will reject the pattern instead, and it will remove special handling that currently makes some uses of such patterns terminate.</p></li>
+ <li>
+  <p><code>htdp/dir</code>: The <code>create-dir</code> function delivers data information for files in a new field. The domain of its functions are backwards compatible.</p></li></ul>
+
+<p>The following people contributed to this release:</p>
+
+<p>Alex Knauth, Alexander Shopov, Alexis King, Andrew Kent, Asumu Takikawa, Ben Greenman, Bernardo Sulzbach, Brian Lachance, Chris Jester-Young, Dan Feltey, Eric Dobson, Georges Dupéron, Gustavo Massaccesi, James Bornholt, Jay McCarthy, John Clements, Leandro Facchinetti, Leif Andersen, Maksim Kochkin, Matthew Flatt, Matthias Felleisen, Mike Sperber, Paul Stansifer, Pedro Caldeira, Philip McGrath, Robby Findler, Ryan Culpepper, Sam Tobin-Hochstadt, Spencer Florence, Stephen Chang, Stephen De Gabrielle, Tim Brown, Tony Garnock-Jones, Vincent St-Amour, WarGrey Gyoudmon Ju, William J. Bowman, and Zeina Migeed.</p>
+
+<p>Feedback Welcome</p>
+<!-- more-->
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2016/10/racket-v67.html">Racket v6.7</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2016/04/racket-v65.html">Racket v6.5</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

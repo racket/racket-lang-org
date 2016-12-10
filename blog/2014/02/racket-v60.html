@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v6.0</title>
+    <meta name="description" content="_posted by Ryan Culpepper_  Racket version 6.0 is now available from  http://racket-lang.org/  Racket 6.0 has a new package system, including a catalog of hundreds of already-available packages. Please visit  http://pkgs.racket-lang.org/  for an overview ...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2014/02/racket-v60.html">
+    <link rel="next" href="/2013/12/typed-racket-and-classes.html">
+    <link rel="prev" href="/2014/03/the-new-racket-home-page.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>26 Feb 2014</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v6.0</h1>
+  </header>
+
+<p><em>posted by Ryan Culpepper</em></p>
+
+<p>Racket version 6.0 is now available from</p>
+
+<p><a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<p>Racket 6.0 has a new package system, including a catalog of hundreds of already-available packages. Please visit</p>
+
+<p><a href="http://pkgs.racket-lang.org/">http://pkgs.racket-lang.org/</a></p>
+
+<p>for an overview of the packages.</p>
+
+<p>Racket versions 5.3.4 through 5.3.6 included &ldquo;beta&rdquo; versions of the package system. Racket version 6.0 incorporates many improvements suggested by preliminary experiences in those versions:</p>
+
+<ul>
+ <li>
+  <p>A package is treated as a single collection by default, so it is even easier to use a GitHub repository as a package. Get started quickly:<a href="http://docs.racket-lang.org/pkg/getting-started.html"> http://docs.racket-lang.org/pkg/getting-started.html</a></p></li>
+ <li>
+  <p>DrRacket includes a new package manager GUI, available via the File|Package Manager &hellip; menu item. The GUI is also available as a stand-alone program via the &ldquo;gui-pkg-manager&rdquo; package.</p></li>
+ <li>
+  <p>The main Racket distribution has been separated into about 200 packages. The Racket installer combines the core system with bundled versions of these packages.</p></li></ul>
+
+<p>Alternatively, you may now install a Minimal Racket distribution — which is about 1/10 the size of the main distribution — and add only those packages that you need.</p>
+
+<ul>
+ <li>Package installation supports pre-built packages that include compiled byte code and rendered documentation, meaning packages can be installed quickly when built versions are available. All packages in the main distribution are available in pre-built form.</li></ul>
+
+<p>The recent 5.92 and 5.93 releases served as release candidates for 6.0, and 6.0 includes a few additional repairs related to the package system.</p>
+
+<p>Further improvements to the package system are in the works, notably including package documentation on the package-catalog web site.</p>
+
+<p>COMPATIBILITY NOTE: PLaneT, the previous Racket package system, will remain in place for the foreseeable future, but we expect all package work to shift to the new system.</p>
+
+<p>Beyond the package system, this release brings a number of other changes:</p>
+
+<ul>
+ <li>
+  <p>Racket&rsquo;s HTML documentation has a new and improved look, thanks to Matthew Butterick.</p></li>
+ <li>
+  <p>The documentation includes a style guide, <a href="http://docs.racket-lang.org/style/">&ldquo;How to Program Racket&rdquo;</a>.</p></li>
+ <li>
+  <p>Racket&rsquo;s JIT compiler supports the ARM architecture.</p></li>
+ <li>
+  <p>Racket supports the Mac&rsquo;s Retina display mode.</p></li>
+ <li>
+  <p>The performance of the Typed Racket compiler improved by 50% on some typed programs; e.g., see <a href="http://bit.ly/1d0Ye4z">http://bit.ly/1d0Ye4z</a></p></li>
+ <li>
+  <p>The profiler provides a new mode that uses the errortrace library to produce fine-grained profiles.</p></li>
+ <li>
+  <p>A new contract profiler reports how much time programs spend checking contracts, and which contracts are most expensive.</p></li>
+ <li>
+  <p>The math/flonum library exports fast 105-bit precision operations.</p></li>
+ <li>
+  <p>Check Syntax handles generated identifiers, especially those introduced by struct (e.g. field selectors) and Redex (e.g., e_1, e_2)</p></li>
+ <li>
+  <p>2htdp/batch-io includes functions for dealing with html/xml in files and web sites as X-expressions plus conveniences for web-based graph traversals.</p></li>
+ <li>
+  <p>The `gen:set&rsquo; generic interface extends set operations to work on user-defined types that implement set methods, as well as on other set-like built-in types, such as lists.</p></li>
+ <li>
+  <p>Picts support conversion to SVG format.</p></li>
+ <li>
+  <p>Under unix, Racket provides desktop entries (.desktop files) for its graphical executables.</p></li></ul>
+<!-- more-->
+
+<hr />
+
+<p>How do I install the minimal set? So far I can only find it mentioned in announcements but can never find any instruction.</p>
+
+<p>— <em>Yi D, 27 February 2014</em></p>
+
+<hr />
+
+<p>To install Minimal Racket, follow the &ldquo;All Versions&rdquo; link from the download page, and then click "[download Racket Minimal]" on the first row of the table.</p>
+
+<p>We plan to revise the download page so that the Minimal Racket option easier to find.</p>
+
+<p>— <em>Matthew Flatt, 27 February 2014</em></p>
+
+<hr />
+
+<p>Will there be a section on compiling for ARM? Is it possible to target Android and use NDK? I have not been finding much on this.</p>
+
+<p>— <em>Chris Gill, 19 March 2014</em></p>
+
+<hr />
+
+<p>Why don&rsquo;t you provide source packages?</p>
+
+<p>— <em>Des Nerger, 27 April 2014</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2014/03/the-new-racket-home-page.html">The new Racket home page</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2013/12/typed-racket-and-classes.html">Typed Racket and Classes</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

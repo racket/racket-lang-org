@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 14)</title>
+    <meta name="description" content="Racket Blog (page 14)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-14.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>10 May 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/05/adjusting-drschemes-keybindings.html'>Adjusting DrScheme&rsquo;s Keybindings</a></h1>
+  <div class="truncate">
+<p><em>posted by Robby Findler</em></p>
+
+<p>Check out Kyle Smith&rsquo;s blog post on how to change <a href="http://www.drscheme.org/">DrScheme</a>&rsquo;s keybindings:</p>
+
+<p><a href="http://schemekeys.blogspot.com/2007/05/keybinding-101-in-drscheme.html">Keybinding 101 in DrScheme</a></p></div>
+  <a class="more" href='/2007/05/adjusting-drschemes-keybindings.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>10 May 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/05/xml-transformation-in-scheme.html'>XML Transformation in Scheme</a></h1>
+  <div class="truncate">
+<p><em>posted by Noel</em></p>
+
+<p><a href="http://www.openqa.org/selenium/">Selenium</a> is a tool for testing web applications, the core of which is a Javascript library that controls a web browser. With the <a href="http://www.openqa.org/selenium-ide/">Selenium IDE</a> you can convert your actions in a web browser into tests, and with the <a href="http://www.openqa.org/selenium-rc/">Selenium Remote Control</a> you can control a web browser from code. I&rsquo;ve recently been working on adding Selenium Remote Control bindings to PLT Scheme, which has resulted in a nice and hopefully instructional demonstration of XML transformation in PLT Scheme</p>
+
+<p>The Selenium Remote Control is controlled by sending simple messages over HTTP. The format of the messages isn&rsquo;t important. What is, is that there are a lot of them, and the API is specified in a file called <code>iedoc.xml</code> that comes with Selenium. The Java/Python/Ruby bindings are generated using <a href="http://www.w3.org/Style/XSL/">XSL</a>. If I was to use XSL I&rsquo;d have a processing pipeline that uses three languages (XSL, Java, Scheme) which is two more than I&rsquo;d like. Hence I turned to <a href="http://planet.plt-scheme.org/display.ss?package=webit.plt&amp;owner=jim">WebIt!</a>, an XML transformation DSL written in Scheme, to create an all Scheme pipeline. The rest of this post wshows the steps I used to transform the Selenium API into Scheme code using WebIt! I think this is interesting in its own right, but also serves as a nice demonstration of the power of macros, which WebIt! makes extensive use of.</p>
+
+<p>My first step is to get an idea of the structure of the XML. The bits I&rsquo;m interested in look like this:</p>
+
+<div class="brush: html">
+ <div class="pygments">
+  <pre><span class="nt">&lt;function</span> <span class="na">name=</span><span class="s">"click"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"locator"</span><span class="nt">&gt;</span>an element locator<span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;comment&gt;</span>Clicks on a link, button, checkbox or radio button.
+  If the click action causes a new page to load (like a link usually
+  does), call waitForPageToLoad.<span class="nt">&lt;/comment&gt;</span>
+<span class="nt">&lt;/function&gt;</span>
+</pre></div>
+
+</div>
+
+<p>Let&rsquo;s read in the XML file and extract all the <code>function</code> elements. For this I&rsquo;ll use SSAX and SXPath:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="s2">"ssax.ss"</span> <span class="p">(</span><span class="s2">"lizorkin"</span> <span class="s2">"ssax.plt"</span> <span class="mi">1</span><span class="p">))</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/creatingunits.html#(form._((lib._racket/unit..rkt)._only))" style="color: inherit">only</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="s2">"sxml.ss"</span> <span class="p">(</span><span class="s2">"lizorkin"</span> <span class="s2">"sxml.plt"</span> <span class="mi">1</span><span class="p">))</span> <span class="n">sxpath</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">api</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/file-ports.html#(def._((lib._racket/private/base..rkt)._with-input-from-file))" style="color: inherit">with-input-from-file</a></span> <span class="s2">"iedoc.xml"</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">()</span> <span class="p">(</span><span class="n">ssax:xml-&gt;sxml</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/port-ops.html#(def._((quote._~23~25kernel)._current-input-port))" style="color: inherit">current-input-port</a></span><span class="p">)</span> <span class="o">'</span><span class="p">()))))</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">functions</span>
+  <span class="p">((</span><span class="n">sxpath</span> <span class="o">'</span><span class="p">(</span><span class="ss">//</span> <span class="ss">function</span><span class="p">))</span> <span class="n">api</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Ok, so we have all the functions. Now let&rsquo;s parse them into a more useful datastructure. Here&rsquo;s my first attempt:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="s2">"xml.ss"</span> <span class="p">(</span><span class="s2">"jim"</span> <span class="s2">"webit.plt"</span> <span class="mi">1</span> <span class="mi">5</span><span class="p">)))</span>
+
+<span class="c1">;; struct function : string (listof string)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define-struct.html#(form._((lib._racket/private/base..rkt)._define-struct))" style="color: inherit">define-struct</a></span> <span class="n">function</span> <span class="p">(</span><span class="n">name</span> <span class="n">params</span><span class="p">))</span>
+
+<span class="c1">;; parse-function : sxml -&gt; function</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">parse-function</span> <span class="n">fn</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">xml-match</span> <span class="n">fn</span>
+    <span class="p">[(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span><span class="p">)</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))</span>
+     <span class="p">(</span><span class="n">make-function</span> <span class="n">name</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="n">param-name</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))]))</span>
+
+<span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._map))" style="color: inherit">map</a></span> <span class="n">parse-function</span> <span class="n">functions</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The <code>xml-match</code> macro is a pattern matcher for SXML. You specify the &ldquo;shape&rdquo; of the SXML, and if the input matches the pattern the following expressions are evaluated:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">xml-match</span> <span class="n">value</span>
+  <span class="p">[(</span><span class="n"><a href="http://docs.racket-lang.org/syntax/stxparse-specifying.html#(form._((lib._syntax/parse..rkt)._pattern))" style="color: inherit">pattern</a></span> <span class="n">expression</span> <span class="n">_..._</span><span class="p">)]</span><span class="n">_..._</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The simplified form of a pattern is:</p>
+
+<ul>
+ <li>
+  <p><code>(element _..._)</code> matches an element with the given name.</p></li>
+ <li>
+  <p><code>name: value</code> matches an attribute with the given name and value.</p></li>
+ <li>
+  <p><code>,binding</code> binds the value of <code>binding</code> to the given name in the scope of the following expressions.</p></li>
+ <li>
+  <p><code>...</code> matches zero or more of the preceeding patterns.</p></li></ul>
+
+<p>In our example the pattern is:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre>     <span class="p">(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span><span class="p">)</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>So we&rsquo;re looking for an element called <code>function</code> with an attribute called <code>name</code> the value of which is bound to <code>name</code>. Then follows zero or more <code>param</code> elements, with attribute <code>name</code>, the value of which is bound to <code>param-name</code>. Finally we expect a <code>comment</code> element which can contain any amount of data. The use of <code>_</code> as the binding name is a common convention to indicate data we don&rsquo;t care about but must still match to make our pattern complete.</p>
+
+<p>I run the code in DrScheme and see the result:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="n">_xml-match:</span> <span class="n">no</span> <span class="n">matching</span> <span class="n">clause</span> <span class="n">found_</span>
+</pre></div>
+
+</div>
+
+<p>Oops. So our pattern isn&rsquo;t complete. We&rsquo;ve also seen one flaw of WebIt!: it doesn&rsquo;t give very good error messages. However we can easily fix this by adding a catch all pattern that raises an error telling us what we failed to match. The code follows. Notice that I&rsquo;ve also added pretty printing to make the unmatched SXML easier to read.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._lib))" style="color: inherit">lib</a></span> <span class="s2">"pretty.ss"</span><span class="p">))</span>
+
+<span class="c1">;; parse-function : sxml -&gt; function</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">parse-function</span> <span class="n">fn</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">xml-match</span> <span class="n">fn</span>
+    <span class="p">[(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span><span class="p">)</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))</span>
+     <span class="p">(</span><span class="n">make-function</span> <span class="n">name</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="n">param-name</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))]</span>
+    <span class="p">[</span><span class="o">,</span><span class="n">err</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">op</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stringport.html#(def._((quote._~23~25kernel)._open-output-string))" style="color: inherit">open-output-string</a></span><span class="p">)])</span>
+            <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pretty-print.html#(def._((lib._racket/pretty..rkt)._pretty-print))" style="color: inherit">pretty-print</a></span> <span class="n">err</span> <span class="n">op</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/exns.html#(def._((quote._~23~25kernel)._error))" style="color: inherit">error</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"Didn't <a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a> ~n~a~n"</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stringport.html#(def._((quote._~23~25kernel)._get-output-string))" style="color: inherit">get-output-string</a></span> <span class="n">op</span><span class="p">))))]))</span>
+</pre></div>
+
+</div>
+
+<p>Run this code and you&rsquo;ll see the error occurs as we don&rsquo;t allow the description to contain more than one element. This is easily fixed by extending the pattern to <code>,desc ...</code>. The next error is more interesting. The <code>function</code> element contains a <code>return</code> element. The WebIt! pattern language doesn&rsquo;t allows us to express optional patterns, so we have to duplicate our pattern and include the case of <code>return</code>. This also requires we extend the defintion of the <code>function</code> structure.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="c1">;; struct function : string string (listof string)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define-struct.html#(form._((lib._racket/private/base..rkt)._define-struct))" style="color: inherit">define-struct</a></span> <span class="n">function</span> <span class="p">(</span><span class="n">name</span> <span class="n">return</span> <span class="n">params</span><span class="p">))</span>
+
+<span class="c1">;; parse-function : sxml -&gt; function</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">parse-function</span> <span class="n">fn</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">xml-match</span> <span class="n">fn</span>
+    <span class="p">[(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))</span>
+     <span class="p">(</span><span class="n">make-function</span> <span class="n">name</span> <span class="s2">"void"</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="n">param-name</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))]</span>
+    <span class="p">[(</span><span class="n">function</span> <span class="n">name:</span> <span class="o">,</span><span class="n">name</span>
+               <span class="p">(</span><span class="n">return</span> <span class="n">type:</span> <span class="o">,</span><span class="n">type</span> <span class="o">,</span><span class="n">return-desc</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+               <span class="p">(</span><span class="n">param</span> <span class="n">name:</span> <span class="o">,</span><span class="n">param-name</span> <span class="o">,</span><span class="n">desc</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span>
+               <span class="p">(</span><span class="n">comment</span> <span class="o">,</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))</span>
+     <span class="p">(</span><span class="n">make-function</span> <span class="n">name</span> <span class="n">type</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="n">param-name</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))]</span>
+    <span class="p">[</span><span class="o">,</span><span class="n">err</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">op</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stringport.html#(def._((quote._~23~25kernel)._open-output-string))" style="color: inherit">open-output-string</a></span><span class="p">)])</span>
+            <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pretty-print.html#(def._((lib._racket/pretty..rkt)._pretty-print))" style="color: inherit">pretty-print</a></span> <span class="n">err</span> <span class="n">op</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/exns.html#(def._((quote._~23~25kernel)._error))" style="color: inherit">error</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"Didn't <a href="http://docs.racket-lang.org/reference/match.html#(form._((lib._racket/match..rkt)._match))" style="color: inherit">match</a> ~n~a~n"</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stringport.html#(def._((quote._~23~25kernel)._get-output-string))" style="color: inherit">get-output-string</a></span> <span class="n">op</span><span class="p">))))]))</span>
+</pre></div>
+
+</div>
+
+<p>This works! This is as far as I want to go in this article. We&rsquo;ve seen how we can use SSAX. SXPath, and WebIt! to create XML transforms in pure Scheme. There is a lot more to all of these packages but what we&rsquo;ve used is sufficient for many uses. The rest of the code to create Scheme from the API is quite straightforward and specific to Selenium. If you&rsquo;re curious read the source of the Selenium PLaneT package, which will be released soon.</p>
+
+<p><em>This post also appears on <a href="http://www.untyped.com/untyping">Untyping</a></em></p></div>
+  <a class="more" href='/2007/05/xml-transformation-in-scheme.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 May 2007</p></col-1>
+
+<col-2>
+  <h1><a href='/2007/05/macros-matter.html'>Macros Matter</a></h1>
+  <div class="truncate">
+<p><em>posted by matthias</em></p>
+
+<p>Thank you Jens for setting up this Blog.</p>
+
+<p>PLT Scheme is a 12-year old project now and it is definitely time to open it up to the world. The language and the project has contributed numerous ideas and products to the world. This covers programming languages (units, mixins, an implementation of cml-style concurrency, etc); programming tools (drscheme, check-syntax, transparent repls, module browsers, etc), programming pedagogy (htdp, htdc); program engineering (we resurrected the &ldquo;expression&rdquo; problem, web programming and continuations); and some more.</p>
+
+<p>Time and again, people have asked me what I consider the one &lsquo;feature&rsquo; that distinguishes us from the rest of the hordes of programming languages. I always respond with a single word:</p>
+
+<p><strong>Macros.</strong></p>
+
+<p>We have pushed macros hard, and we have accomplished a lot with them. I conjecture that without macros, we would never have achieved the level of productivity that this group displays.</p>
+
+<p>Of course, everyone else in academia works on types. ML&rsquo;s module type system of the third kind and Haskell&rsquo;s system-complete type system are serious challenges to anyone. It is probably true that you shouldn&rsquo;t consider yourself a programmer if you can&rsquo;t read and write some of those type-laden programs, and I seriously believe that they are the next generation of influential languages.</p>
+
+<p>For the generation-after-the-next then, I see &ldquo;macros&rdquo; as one of the big topics (next to concurrency). A real programmer will have to know how Lisp and Scheme-style macros can reduce labor by orders of magnitude, how macros provide the tools for creating the &ldquo;ultimate abstraction&rdquo; in the form of domain-specific and embedded languages (Hudak&rsquo;s words). And there is no better place to start with than PLT Scheme&rsquo;s macro system.</p>
+
+<p>So I would like to dedicate this blog to all things macros and everything else that matters in (and to) PLT Scheme.</p></div>
+  <a class="more" href='/2007/05/macros-matter.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-13.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li class="active"><a href="/index-14.html">14</a></li>
+  <li class="disabled"><a href="#">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

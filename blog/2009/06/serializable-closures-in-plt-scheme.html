@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Serializable Closures in PLT Scheme</title>
+    <meta name="description" content="_posted by Jay McCarthy_  PLT Scheme supports an extensible serialization system for structures. A structure is serializable if it has a `prop:serializable` property. There are many properties in PLT Scheme for other extensions, such as applicable structu...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/06/serializable-closures-in-plt-scheme.html">
+    <link rel="next" href="/2009/06/plt-scheme-v42.html">
+    <link rel="prev" href="/2009/07/plt-scheme-v421.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>23 Jun 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Serializable Closures in PLT Scheme</h1>
+  </header>
+
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>PLT Scheme supports an extensible <a href="http://docs.plt-scheme.org/reference/serialization.html">serialization</a> system for structures. A structure is serializable if it has a <code>prop:serializable</code> property. There are many <a href="http://docs.plt-scheme.org/search/index.html?q=prop%3A">properties</a> in PLT Scheme for other extensions, such as <a href="http://docs.plt-scheme.org/reference/procedures.html#(def._((lib._scheme/base..ss)._prop~3aprocedure))">applicable structures</a> and <a href="http://docs.plt-scheme.org/reference/booleans.html#(def._((quote._~23~25kernel)._prop~3aequal+hash))">custom equality predicates</a>.</p>
+
+<p>The <a href="http://docs.plt-scheme.org/web-server/index.html">PLT Web</a> application development framework uses these features to provide <a href="http://docs.plt-scheme.org/web-server/stateless.html#(part._.Serializable_.Continuations)">serializable continuations</a> through a number of source transformations and a serializable closure structure.</p>
+
+<p><em>Warning: This remainder post refers to features only available in the latest SVN revision of PLT Scheme.</em></p>
+
+<p>I&rsquo;ve recently made these closures more accessible to non-Web programs through <code>web-server/lang/serial-lambda</code>. Here&rsquo;s a demo:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">scheme</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="n">web-server/lang/serial-lambda</span>
+         <span class="n">scheme/serialize</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">f</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">z</span> <span class="mi">5</span><span class="p">])</span>
+    <span class="p">(</span><span class="n">serial-lambda</span>
+     <span class="p">(</span><span class="n">x</span> <span class="n">y</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">test-it</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"~S~n"</span> <span class="p">(</span><span class="n">f</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">fs</span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/reference/serialization.html#(def._((lib._racket/private/serialize..rkt)._serialize))" style="color: inherit">serialize</a></span> <span class="n">f</span><span class="p">)])</span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"~S~n"</span> <span class="n">fs</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">df</span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/reference/serialization.html#(def._((lib._racket/private/serialize..rkt)._deserialize))" style="color: inherit">deserialize</a></span> <span class="n">fs</span><span class="p">)])</span>
+      <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"~S~n"</span> <span class="n">df</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"~S~n"</span> <span class="p">(</span><span class="n">df</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)))))</span>
+
+<span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="p">(</span><span class="n">test-it</span><span class="p">)</span>
+<span class="mi">8</span>
+<span class="p">((</span><span class="mi">2</span><span class="p">)</span> <span class="mi">1</span> <span class="p">((</span><span class="s2">#"/Users/jay/Dev/svn/plt/collects/web-server/exp/test-serial.ss"</span> <span class="o">.</span> <span class="s2">"lifted.6"</span><span class="p">))</span> <span class="mi">0</span> <span class="p">()</span> <span class="p">()</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">5</span><span class="p">))</span>
+<span class="o">#</span><span class="p">(</span><span class="ss">struct:7a410aca70b31e88b4c2f0fe77fa7ffe:0</span> <span class="ss">#</span><span class="p">)</span>
+<span class="mi">8</span>
+</pre></div>
+
+</div>
+
+<p>Now, let&rsquo;s see how it is implemented. <a href="http://svn.plt-scheme.org/plt/trunk/collects/web-server/lang/serial-lambda.ss"><code>web-server/lang/serial-lambda</code></a> is thin wrapper around <a href="http://svn.plt-scheme.org/plt/trunk/collects/web-server/lang/closure.ss"><code>web-server/lang/closure</code></a>, which has two syntax transformer functions: <code>define-closure!</code> which defines the closure structure and <code>make-closure</code> which instantiates the closure. (The two tasks are separated to easily provide a user top-level definition syntax for named closures with different free identifires, rather than simply anonymous lambdas with fixed free identifiers.)</p>
+
+<p><code>make-closure</code> does the following:</p>
+
+<ol>
+ <li>
+  <p>Expands the procedure syntax using <a href="http://docs.plt-scheme.org/reference/stxtrans.html#(def._((quote._~23~25kernel)._local-expand))"><code>local-expand</code></a>, so it can use <a href="http://docs.plt-scheme.org/syntax/syntax-helpers.html#(def._((lib._syntax/free-vars..ss)._free-vars))"><code>free-vars</code></a> to compute the free identifires.</p></li>
+ <li>
+  <p>Uses <code>define-closure!</code> to define the structure and get the name for the constructor.</p></li>
+ <li>
+  <p>Instantiates the closure with the current values of the free identifiers.</p></li></ol>
+
+<p>The more interesting work is done by <code>define-closure!</code>. At a high-level, it needs to do the following:</p>
+
+<ol>
+ <li>
+  <p>Create a deserialization function.</p></li>
+ <li>
+  <p>Create a serialization function that references the deserializer.</p></li>
+ <li>
+  <p>Define the closure structure type that references the serializer.</p></li>
+ <li>
+  <p>Provide the deserializer from the current module so that arbitrary code can deserialize instances of this closure type.</p></li></ol>
+
+<p>These tasks are complicated in a few ways:</p>
+
+<ul>
+ <li>
+  <p>The deserializer needs the closure structure type definition to create instances and the serializer needs the closure structure type to access their fields.</p></li>
+ <li>
+  <p>The serializer needs the syntactic identifier of the deserializer so that <code>scheme/serialize</code> can <a href="http://docs.plt-scheme.org/reference/Module_Names_and_Loading.html#(def._((quote._~23~25kernel)._dynamic-require))"><code>dynamic-require</code></a> it during deserialization.</p></li>
+ <li>
+  <p>The deserializer must be defined at the top-level, so it may be provided.</p></li>
+ <li>
+  <p>All this may occur in a syntactic expression context.</p></li></ul>
+
+<p>Thankfully, the PLT Scheme <a href="http://docs.plt-scheme.org/reference/Macros.html">macro system</a> is powerful to support all this.</p>
+
+<ul>
+ <li>
+  <p><a href="http://docs.plt-scheme.org/reference/stxtrans.html#(def._((quote._~23~25kernel)._syntax-local-lift-expression))"><code>syntax-local-lift-expression</code></a> allows a syntax transformer to lift an expression to the top-level of a module and returns the identifier it is bound to.</p></li>
+ <li>
+  <p><a href="http://docs.plt-scheme.org/search/index.html?q=syntax-local-lift-values-expression"><code>syntax-local-lift-values-expression</code></a> (added in 4.2.0.3) provides the same for expressions that return multiple values, such as <a href="http://docs.plt-scheme.org/reference/creatingmorestructs.html#(def._((quote._~23~25kernel)._make-struct-type))"><code>make-struct-type</code></a>, which is used to define structures.</p></li>
+ <li>
+  <p><a href="http://docs.plt-scheme.org/search/index.html?q=syntax-local-lift-provide"><code>syntax-local-lift-provide</code></a> (added in 4.2.0.4) allows a syntax transformer to lift a provide to the top-level.</p></li></ul>
+
+<p>The only complicated piece is allowing the deserializer and serializer to refer to the closure structure constructor and accessors. This is easily accomplished by first defining lifting boxes that will hold these values and initializing them when the structure type is defined. This is safe because all accesses to the boxes are under lambdas that are guaranteed not to be run before the structure type is defined.</p>
+
+<p><strong>An aside on the closure representation.</strong> The closure is represented as a structure with one field: the environment. The environment is represented as a thunk that returns <em>n</em> values, one for each of the free identifiers. This ensures that references that were under lambdas in the original syntax, remain under lambdas in the closure construction, so the serializable closures work correctly inside <code>letrec</code>. This thunk is applied by the serializer and the free values are stored in a vector. The closure also uses the <code>prop:procedure</code> structure property to provide an application function that simply invokes the environment thunk and binds its names, then <code>apply</code>s the original procedure syntax to the arguments.</p>
+
+<p><strong>An aside on the serializer.</strong> The deserializer is bound to lifted identifier which is represented in PLT Scheme as an unreadable symbol. Version 4.2.0.5 added support for (de)serializing these.</p>
+<!-- more-->
+
+<hr />
+
+<p>Awesome. Serialization is one of the things I&rsquo;m looking for right now, so I&rsquo;m glad my favorite distro is making it easier.</p>
+
+<p>— <em>Zachary, 3 January 2010</em></p>
+
+<hr />
+
+<p>This is very, very, shiny. I might use this in my master&rsquo;s thesis.</p>
+
+<p>— <em>Alex, 12 February 2010</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/07/plt-scheme-v421.html">PLT Scheme v4.2.1</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/06/plt-scheme-v42.html">PLT Scheme v4.2</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

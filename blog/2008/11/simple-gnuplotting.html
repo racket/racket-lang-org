@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Simple GnuPLoTting</title>
+    <meta name="description" content="_posted by vyzo_  gnuplot is a very powerful and widely used interactive data plotting program. It can generate two-dimenational and three-dimensional surface plots, either on screen or print to files with a wide-array of supported formats. If you are not...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2008/11/simple-gnuplotting.html">
+    <link rel="next" href="/2008/11/plt-scheme-v413.html">
+    <link rel="prev" href="/2009/01/plt-scheme-v414.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>24 Nov 2008</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Simple GnuPLoTting</h1>
+  </header>
+
+<p><em>posted by vyzo</em></p>
+
+<p><a href="http://www.gnuplot.info/">gnuplot</a> is a very powerful and widely used interactive data plotting program. It can generate two-dimenational and three-dimensional surface plots, either on screen or print to files with a wide-array of supported formats. If you are not familiar with it, you can get an idea of its capabilities <a href="http://gnuplot.sourceforge.net/demo/">here</a></p>
+
+<p>A new package, <a href="http://planet.plt-scheme.org/display.ss?package=gnuplot.plt&amp;amp;owner=vyzo">gnuplot.plt</a>, is now available on planet which allows you to programmatically interact with gnuplot processes and generate plots on the fly. The package provides a simple interface that abstracts gnuplot&rsquo;s quirky syntax and takes care of data marshalling using temporary files.</p>
+
+<p>Without further ado, here is to every computer scientist&rsquo;s favorite growth curves:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">vyzo/gnuplot</span><span class="p">))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">gplot</span> <span class="p">(</span><span class="n">gnuplot-spawn</span><span class="p">))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">data</span> 
+  <span class="p">(</span><span class="n">gnuplot-data</span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span> <span class="mi">90</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">((</span><span class="n">x</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._/))" style="color: inherit">/</a></span> <span class="n">x</span> <span class="mf">10.</span><span class="p">))))</span>
+         <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="n">x</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._log))" style="color: inherit">log</a></span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._*))" style="color: inherit">*</a></span> <span class="n">x</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._log))" style="color: inherit">log</a></span> <span class="n">x</span><span class="p">))</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._expt))" style="color: inherit">expt</a></span> <span class="n">x</span> <span class="mi">2</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._expt))" style="color: inherit">expt</a></span> <span class="mi">2</span> <span class="n">x</span><span class="p">)))))))</span>
+<span class="c1">;; png output options</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">png</span> <span class="o">'</span><span class="p">(</span><span class="ss">png</span> <span class="ss">enhanced</span> <span class="ss">transparent</span> <span class="ss">font</span> <span class="p">(</span><span class="ss">str</span> <span class="ss">arial</span><span class="p">)))</span>
+<span class="c1">;; on screen plot</span>
+<span class="p">(</span><span class="n">gnuplot-set</span> <span class="n">gplot</span> <span class="o">'</span><span class="p">(</span><span class="ss">title</span> <span class="p">(</span><span class="ss">str</span> <span class="s2">"growth curves"</span><span class="p">)))</span>
+<span class="p">(</span><span class="n">gnuplot-plot</span> <span class="n">gplot</span> 
+  <span class="kd">#:range</span> <span class="o">'</span><span class="p">(()</span> <span class="p">(</span><span class="mi">1</span> <span class="mi">1000</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">gnuplot-item</span> <span class="n">data</span> <span class="o">'</span><span class="p">(</span><span class="ss">using</span> <span class="p">(</span><span class="ss">seq:</span> <span class="mi">1</span> <span class="mi">1</span><span class="p">)</span> <span class="ss">title</span> <span class="p">(</span><span class="ss">str</span> <span class="s2">"x"</span><span class="p">)</span> <span class="ss">with</span> <span class="ss">line</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">gnuplot-item</span> <span class="n">data</span> <span class="o">'</span><span class="p">(</span><span class="ss">using</span> <span class="p">(</span><span class="ss">seq:</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">)</span> <span class="ss">title</span> <span class="p">(</span><span class="ss">str</span> <span class="s2">"log(x)"</span><span class="p">)</span> <span class="ss">with</span> <span class="ss">line</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">gnuplot-item</span> <span class="n">data</span> <span class="o">'</span><span class="p">(</span><span class="ss">using</span> <span class="p">(</span><span class="ss">seq:</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">)</span> <span class="ss">title</span> <span class="p">(</span><span class="ss">str</span> <span class="s2">"xlog(x)"</span><span class="p">)</span> <span class="ss">with</span> <span class="ss">line</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">gnuplot-item</span> <span class="n">data</span> <span class="o">'</span><span class="p">(</span><span class="ss">using</span> <span class="p">(</span><span class="ss">seq:</span> <span class="mi">1</span> <span class="mi">4</span><span class="p">)</span> <span class="ss">title</span> <span class="p">(</span><span class="ss">str</span> <span class="s2">"x^2"</span><span class="p">)</span> <span class="ss">with</span> <span class="ss">line</span><span class="p">))</span>
+  <span class="p">(</span><span class="n">gnuplot-item</span> <span class="n">data</span> <span class="o">'</span><span class="p">(</span><span class="ss">using</span> <span class="p">(</span><span class="ss">seq:</span> <span class="mi">1</span> <span class="mi">5</span><span class="p">)</span> <span class="ss">title</span> <span class="p">(</span><span class="ss">str</span> <span class="s2">"2^x"</span><span class="p">)</span> <span class="ss">with</span> <span class="ss">line</span><span class="p">)))</span>
+<span class="c1">;; replot to png</span>
+<span class="p">(</span><span class="n">gnuplot-hardcopy</span> <span class="n">gplot</span> <span class="s2">"/tmp/grow.png"</span> <span class="kd">#:term</span> <span class="n">png</span><span class="p">)</span>
+<span class="c1">;; redo with logscale</span>
+<span class="p">(</span><span class="n">gnuplot-set</span> <span class="n">gplot</span> <span class="o">'</span><span class="p">(</span><span class="ss">logscale</span> <span class="ss">y</span><span class="p">))</span>
+<span class="p">(</span><span class="n">gnuplot-replot</span> <span class="n">gplot</span><span class="p">)</span>
+<span class="p">(</span><span class="n">gnuplot-hardcopy</span> <span class="n">gplot</span> <span class="s2">"/tmp/loggrow.png"</span> <span class="kd">#:term</span> <span class="n">png</span><span class="p">)</span>
+</pre></div>
+
+</div>
+<!-- more-->
+
+<hr />
+
+<p>Hi, perhaps this is a really stupid question, but which language was your code snippet written in? If I try and run it with DrScheme in ASL it throws an error on the require function. I can get it to execute with Essentials of Programming Languages 3rd language, but then I had to define add1 and build-list. After that, it still errors on the gnuploy-hardcopy, which I presume means this is the wrong language.</p>
+
+<p>— <em>Daniel, 23 December 2008</em></p>
+
+<hr />
+
+<p>Hi Daniel,</p>
+
+<p>Add the line</p>
+
+<pre><code>#lang scheme</code></pre>
+
+<p>and run it in the &ldquo;module&rdquo; language.</p>
+
+<p>Merry Christmas, Jens Axel</p>
+
+<p>— <em>Jens Axel Søgaard, 24 December 2008</em></p>
+
+<hr />
+
+<p>Thanks! I was about to code an interface to gnuplot, and I see you&rsquo;ve already done it. I owe you a beer (at least).</p>
+
+<p>— <em>Geoff Knauth, 27 October 2011</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/01/plt-scheme-v414.html">PLT Scheme v4.1.4</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2008/11/plt-scheme-v413.html">PLT Scheme v4.1.3</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

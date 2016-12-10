@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Blog (page 9)</title>
+    <meta name="description" content="Racket Blog (page 9)">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="all">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/index-9.html">
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>01 Jun 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/06/plt-scheme-v42.html'>PLT Scheme v4.2</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.2 is now available from <a href="http://plt-scheme.org/">http://plt-scheme.org/</a> Internally, this version includes a conversion from C++ to Scheme for part of the GUI toolbox &mdash; specifically, 25k lines of code that implement the general text and pasteboard editor. This conversion is a start on a larger reimplementation of the GUI toolbox. Although we believe that this change will help make PLT Scheme better in the long run, we must expect bugs in the short term due to porting errors. Users should therefore be aware of the change, even though the new implementation is meant to behave the same as previous versions.</p>
+
+<ul>
+ <li>
+  <p>A new statistical profiler is now available; see the &ldquo;profiler&rdquo; manual for more information. Currently, the profiler supports only textual output, but future plans include a GUI interface and DrScheme integration.</p></li>
+ <li>
+  <p>The <code>world</code> teachpack is now deprecated. Its replacement <code>universe</code> has a new interface that uses strings instead of symbols and characters.</p></li>
+ <li>
+  <p>Web-server: Native continuations in the stateless servlet language support capturing continuations from untransformed contexts; soft state library for stateless servlets.</p></li>
+ <li>
+  <p>DrScheme&rsquo;s Stepper can now jump to a selected program expression.</p></li>
+ <li>
+  <p>New in <code>scheme/base</code>: <code>hash-has-key?</code>, <code>hash-ref!</code>, <code>in-sequences</code>, <code>in-cycle</code>. New in <code>scheme</code>: <code>count</code>, <code>make-list</code> (from <code>scheme/list</code>), <code>const</code> (from <code>scheme/function</code>).</p></li>
+ <li>
+  <p>Some performance improvements, including faster start-up for small programs. The latter is a result of delaying module invocations at higher phases (compile time, meta-compile time, etc.) until compilation is demanded at the next lower phase; this on-demand instantiation is per-phase, as opposed to per-module within a phase.</p></li></ul>
+
+<p>[Note that mirror sites can take a while to catch up with the new downloads.]</p>
+
+<p>Feedback Welcome.</p></div>
+  <a class="more" href='/2009/06/plt-scheme-v42.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>25 May 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/05/typed-scheme-20.html'>Typed Scheme 2.0</a></h1>
+  <div class="truncate">
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>Typed Scheme version 2.0 is now available from SVN.</p>
+
+<p>One persistent limitation of Typed Scheme has been that while this expression works as expected:</p>
+
+<p><code>(if (number? x) (add1 x) 7)</code></p>
+
+<p>The simple transformation of making <code>x</code> a part of a structure breaks Typed Scheme&rsquo;s ability to reason about the code. So this expression doesn&rsquo;t typecheck:</p>
+
+<p><code>(if (number? (car x)) (add1 (car x)) 7)</code></p>
+
+<p>With the newest version of Typed Scheme, now available in SVN, both of these will now work. In general, Typed Scheme can now follow paths into arbitrary immutable structures, including pairs.</p>
+
+<p>This is part of a more general reworking of underlying mechanisms of the Typed Scheme typechecker, which makes it both simpler and more flexible. I hope that it will be possible, sing this new foundation to add additional features that make more programs easy to express in Typed Scheme.</p>
+
+<p>Of course, these changes mean that Typed Scheme may be more unstable, so if you notice any new bugs, please let us know.</p>
+
+<p>Unfortunately, this won&rsquo;t be available in the upcoming 4.2 release, but it will be in the release after that.</p>
+
+<p>If you have any questions or comments or feature requests for Typed Scheme, please let us know.</p></div>
+  <a class="more" href='/2009/05/typed-scheme-20.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>24 May 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/05/explicit-renaming-macros-implicitly.html'>Explicit Renaming Macros; Implicitly</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>It&rsquo;s been one too many times that I hear respectable Schemers talk about how they like explicit renaming macros — not because they&rsquo;re more powerful, but because using them is close to using simple <code>defmacro</code>s. In this post I&rsquo;ll show how you can easily write ER-like macros in PLT, just so I won&rsquo;t need to explain the same thing once again.</p>
+
+<p>Disclaimers:</p>
+
+<ul>
+ <li>
+  <p>If you&rsquo;re not interested in ER-macros, then you shouldn&rsquo;t read this.</p></li>
+ <li>
+  <p>I&rsquo;m not claiming that ER macros are not respectable, I&rsquo;m just surprised at the knee jerk reaction to <code>syntax-case</code>.</p></li>
+ <li>
+  <p>This is not an attempt at providing some portable library or even a PLT library. The intention is to show that <code>syntax-case</code>-style macros are &ldquo;as convenient&rdquo; as ER macros, if you really want to get down to that level.</p></li>
+ <li>
+  <p>This is also not an attempt at any kind of formal claim of equivalence in any direction, only a demonstration that you can get the same kind of convenience.</p></li>
+ <li>
+  <p>The bottom line here should be just the convenience point, addressed at people who like ER macros for that, and who think that <code>syntax-case</code> macros are somehow magical or that you lose the ability to play with S-expressions.</p></li></ul>
+
+<p>The important fact here is that while PLT&rsquo;s <code>syntax-case</code> macro system does not give you raw S-expressions, what you get is a simple wrapper holding them. A macro is a syntax transformer: a function that consumes a syntax value and returns one. For example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">foo</span> <span class="n">stx</span><span class="p">)</span>
+    <span class="o">#'</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>is a macro that always expands to 123 (with <code>#'123</code> being the usual shorthand for <code>(syntax 123)</code>).</p>
+
+<p>A syntax object in PLT Scheme (the input to macro functions) is an S-expression, with some lexical information added — this includes the lexical context (in an opaque form), source location, and a few more things. To be more precise, a syntax value is a nested structure of wrappers holding lists and pairs, holding more wrappers, with identifiers at the leaves, where an identifier is a wrapper holding a symbol. It&rsquo;s easy to strip off all wrappers using <code>syntax-&gt;datum</code> if you like to work with S-expressions, but you <em>don&rsquo;t</em> want to strip it off of identifiers, since that will lose the important gravy. (In fact, the <code>defmacro</code> library works by stripping off all information, even from identifiers, then reconstructing it by trying to match names in the output form with the original input.)</p>
+
+<p>Instead of throwing away all information, what we want to do is preserve identifiers. We can use <code>syntax-&gt;list</code> for this: this is a function that takes a syntax value that contains a list, and strips off the top-level extra information leaving you with a list of syntaxes for the sub-expressions (returning <code>#f</code> if the input syntax does not hold a list). Once we have such a list, we can do the usual kind of processing with it, and when we&rsquo;re done turn the result back into a syntax using <code>datum-&gt;syntax</code> (which &ldquo;borrows&rdquo; the original input expression&rsquo;s information). For example,</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">stx</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="o">#'</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span><span class="p">])</span>
+      <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">stx</span> <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">1</span> <span class="o">,@</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cdr))" style="color: inherit">cdr</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">stx</span><span class="p">)))</span> <span class="n">stx</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>That&rsquo;s a very simple example though; if you try something a little more complicated, you quickly find out that all this unwrapping is inconvenient:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="p">(</span><span class="n">mylet</span> <span class="n">stx</span><span class="p">)</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">*lambda</span> <span class="o">#'</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span><span class="p">])</span>
+      <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span>
+       <span class="n">stx</span>
+       <span class="o">`</span><span class="p">((</span><span class="o">,</span><span class="n">*lambda</span> <span class="o">,</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._map))" style="color: inherit">map</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._car))" style="color: inherit">car</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">x</span><span class="p">)))</span>
+                         <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">stx</span><span class="p">))))</span>
+                   <span class="o">,@</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cddr))" style="color: inherit">cddr</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">stx</span><span class="p">)))</span>
+         <span class="o">,@</span><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._map))" style="color: inherit">map</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">x</span><span class="p">)))</span>
+                <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">stx</span><span class="p">)))))</span>
+       <span class="n">stx</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>(Note also the <code>*lambda</code> that is used to avoid the <code>lambda</code> expressions used in the meta-code.)</p>
+
+<p>What can help here is some helper function that receive a syntax value as its input, and turn all wrapped lists into real lists recursively, but will leave identifiers intact:</p>
+
+<div class="brush: (begin-for-syntax">
+ <div class="pygments">
+  <pre>    (define (strip stx)
+      (let ([maybe-list (syntax-&gt;list stx)])
+        ;; syntax-&gt;list returns #f if the syntax is not a list
+        (if maybe-list (map strip maybe-list) stx))))
+</pre></div>
+
+</div>
+
+<p>But as long as we&rsquo;re writing a syntax utility, we can make it do a litte more work: feed the resulting tree to <em>your</em> transformer, grab its result, and do the necessary <code>datum-&gt;syntax</code> voodoo on it:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/begin.html#(form._((quote._~23~25kernel)._begin-for-syntax))" style="color: inherit">begin-for-syntax</a></span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">er-like-transformer</span> <span class="n">transformer</span><span class="p">)</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">strip</span> <span class="n">stx</span><span class="p">)</span>
+        <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">maybe-list</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._syntax-~3elist))" style="color: inherit">syntax-&gt;list</a></span> <span class="n">stx</span><span class="p">)])</span>
+          <span class="c1">;; syntax-&gt;list returns #f if the syntax is not a list</span>
+          <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((quote._~23~25kernel)._if))" style="color: inherit">if</a></span> <span class="n">maybe-list</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._map))" style="color: inherit">map</a></span> <span class="n">strip</span> <span class="n">maybe-list</span><span class="p">)</span> <span class="n">stx</span><span class="p">)))</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">stx</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/stxops.html#(def._((quote._~23~25kernel)._datum-~3esyntax))" style="color: inherit">datum-&gt;syntax</a></span> <span class="n">stx</span> <span class="p">(</span><span class="n">transformer</span> <span class="p">(</span><span class="n">strip</span> <span class="n">stx</span><span class="p">))</span> <span class="n">stx</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<p>With this utility defined, the above macro becomes much easier to deal with:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="n">mylet</span>
+    <span class="p">(</span><span class="n">er-like-transformer</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._exp))" style="color: inherit">exp</a></span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">((</span><span class="n">vars</span>  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._map))" style="color: inherit">map</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._car))" style="color: inherit">car</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._exp))" style="color: inherit">exp</a></span><span class="p">)))</span>
+             <span class="p">(</span><span class="n">inits</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._map))" style="color: inherit">map</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cadr))" style="color: inherit">cadr</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._exp))" style="color: inherit">exp</a></span><span class="p">)))</span>
+             <span class="p">(</span><span class="n">body</span>  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cddr))" style="color: inherit">cddr</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._exp))" style="color: inherit">exp</a></span><span class="p">)))</span>
+         <span class="o">`</span><span class="p">((</span><span class="o">,</span><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span><span class="p">)</span> <span class="o">,</span><span class="n">vars</span> <span class="o">,@</span><span class="n">body</span><span class="p">)</span>
+           <span class="o">,@</span><span class="n">inits</span><span class="p">)))))</span>
+ <span class="o">```</span>
+
+ <span class="ss">...and</span> <span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._this))" style="color: inherit">this</a></span> <span class="n">is</span> <span class="n">almost</span> <span class="n">identical</span> <span class="n">to</span> <span class="n">the</span> <span class="n">explicit</span> <span class="n">renaming</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/runtime.html#(def._((quote._~23~25kernel)._version))" style="color: inherit">version</a></span> <span class="n">of</span> <span class="n">the</span> <span class="n">macro</span><span class="c1">; for example, compare it with the sample code in the [MIT-Scheme manual](http://groups.csail.mit.edu/mac/projects/scheme/documentation/scheme_3.html#SEC49).  The only change is that `(rename &#39;lambda)` is replaced with `(syntax lambda)`.</span>
+
+<span class="n">Obviously</span><span class="o">,</span> <span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._this))" style="color: inherit">this</a></span> <span class="n">is</span> <span class="n">very</span> <span class="n">close</span><span class="o">,</span> <span class="n">but</span> <span class="n">doesn</span><span class="o">'</span><span class="ss">t</span> <span class="n">show</span> <span class="n">intentional</span> <span class="n">captures.</span>  <span class="n">So</span> <span class="n">I</span> <span class="n">just</span> <span class="n">grabbed</span> <span class="n">the</span> <span class="o">`</span><span class="ss">loop</span><span class="o">`</span> <span class="ss">example</span> <span class="n">from</span> <span class="n">the</span> <span class="n">same</span> <span class="n">page</span><span class="o">,</span> <span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._and))" style="color: inherit">and</a></span> <span class="n">did</span> <span class="n">the</span> <span class="n">same</span> <span class="n">change</span> <span class="n">—</span> <span class="k"><a href="http://docs.racket-lang.org/reference/creatingunits.html#(form._((lib._racket/unit..rkt)._only))" style="color: inherit">only</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/createclass.html#(form._((lib._racket/private/class-internal..rkt)._this))" style="color: inherit">this</a></span> <span class="k"><a href="http://docs.racket-lang.org/reference/time.html#(form._((lib._racket/private/more-scheme..rkt)._time))" style="color: inherit">time</a></span> <span class="n">I</span> <span class="n">used</span> <span class="o">`#'</span><span class="ss">foo</span><span class="o">`</span> <span class="ss">instead</span> <span class="n">of</span> <span class="o">`</span><span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="ss">foo</span><span class="p">)</span><span class="o">`</span> <span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._and))" style="color: inherit">and</a></span> <span class="ss">I</span> <span class="ss">also</span> <span class="ss">changed</span> <span class="ss">the</span> <span class="ss">one-sided</span> <span class="o">`</span><span class="ss"><a href="http://docs.racket-lang.org/reference/if.html#(form._((quote._~23~25kernel)._if))" style="color: inherit">if</a></span><span class="o">`</span> <span class="ss">to</span> <span class="ss">a</span> <span class="o">`</span><span class="ss"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span><span class="o">`</span><span class="p">)</span><span class="o">.</span>  <span class="n">The</span> <span class="n">resulting</span> <span class="n">macro</span> <span class="n">works</span> <span class="n">fine:</span>  
+
+<span class="o">```</span><span class="ss">racket</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="n">loop</span>
+    <span class="p">(</span><span class="n">er-like-transformer</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+       <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">((</span><span class="n">body</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cdr))" style="color: inherit">cdr</a></span> <span class="n">x</span><span class="p">)))</span>
+         <span class="o">`</span><span class="p">(</span><span class="o">,#'</span><span class="nb"><a href="http://docs.racket-lang.org/reference/cont.html#(def._((quote._~23~25kernel)._call-with-current-continuation))" style="color: inherit">call-with-current-continuation</a></span>
+           <span class="p">(</span><span class="o">,#'</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/Exiting.html#(def._((quote._~23~25kernel)._exit))" style="color: inherit">exit</a></span><span class="p">)</span>
+            <span class="p">(</span><span class="o">,#'</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="o">,#'</span><span class="n">f</span> <span class="p">()</span> <span class="o">,@</span><span class="n">body</span> <span class="p">(</span><span class="o">,#'</span><span class="n">f</span><span class="p">))))))))</span>
+
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define-syntax))" style="color: inherit">define-syntax</a></span> <span class="n">while</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax-rules))" style="color: inherit">syntax-rules</a></span> <span class="p">()</span>
+      <span class="p">((</span><span class="n">while</span> <span class="n">test</span> <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">)</span>
+       <span class="p">(</span><span class="n">loop</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/when_unless.html#(form._((lib._racket/private/letstx-scheme..rkt)._when))" style="color: inherit">when</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/booleans.html#(def._((quote._~23~25kernel)._not))" style="color: inherit">not</a></span> <span class="n">test</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Exiting.html#(def._((quote._~23~25kernel)._exit))" style="color: inherit">exit</a></span> <span class="no">#f</span><span class="p">))</span>
+             <span class="n">body</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span><span class="p">))))</span>
+
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">((</span><span class="n">x</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">while</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._~3e))" style="color: inherit">&gt;</a></span> <span class="n">x</span> <span class="mi">0</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"~s</span><span class="se">\n</span><span class="s2">"</span> <span class="n">x</span><span class="p">)</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/set_.html#(form._((quote._~23~25kernel)._set!))" style="color: inherit">set!</a></span> <span class="n">x</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._-))" style="color: inherit">-</a></span> <span class="n">x</span> <span class="mi">1</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+
+<p>This is pretty close to a library, and indeed, as I was writing this text I found <a href="http://www.mail-archive.com/larceny-users@lists.ccs.neu.edu/msg00097.html">a post by Andre van Tonder</a> on the Larceny mailing list that uses a very similar approach and <em>does</em> make a library out of it. This is done by adding two arguments to the expected ER-transformation function — one is a <code>rename</code> function (since the above method uses <code>syntax</code> it is limited to immediate identifiers), and the other is always passed as <code>free-identifier=?</code>. Such a compatibility library is, however, not the purpose of this post.</p>
+
+<p>Finally, there is still a minor issue with this — PLT has an implicit <code>#%app</code> which is used wherever there are parentheses that stand for a function application — and in this code they are used unhygienically. This is usually not a noticeable problem, and if it is, you can add explicit <code>#%app</code>s. It might also be possible to find a more proper solution (e.g., use a hash table to keep track of lists that were disassembled by the client transformer), but at this point it might be better to just use the more natural <code>syntax-case</code> anyway.</p></div>
+  <a class="more" href='/2009/05/explicit-renaming-macros-implicitly.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>18 May 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/05/the-two-state-solution-native-and-serializable-continuations-in-the-plt-web-server.html'>The Two State Solution: Native and Serializable Continuations in the PLT Web Server</a></h1>
+  <div class="truncate">
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>One of the annoyance of the <a href="http://docs.plt-scheme.org/web-server/stateless.html">stateless Web application</a> language that comes with the PLT Web Server is that you can&rsquo;t call <em>third-party higher-order library procedures with arguments that try to capture serializable continuations</em>. (I know, you try to do that all the time.) For example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span>
+ <span class="mi">3</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+   <span class="p">(</span><span class="n">call-with-serializable-current-continuation</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/reference/serialization.html#(def._((lib._racket/private/serialize..rkt)._serialize))" style="color: inherit">serialize</a></span> <span class="n">k</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>The problem is that the stateless language performs a transformation on your program to extract the continuations into a serializable representation. If you really need to do this, we&rsquo;ve developed a compromise called &ldquo;The Two State Solution&rdquo;: one state on the client and the other on the server. Only the third-party parts of the continuation (in this case, the code inside <code>build-list</code>) are stored on the server; everything else is shipped to the client. You just need to annotate your code slightly to indicate where the transition is:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">serial-&gt;native</span>
+ <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span>
+  <span class="mi">3</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">native-&gt;serial</span>
+     <span class="p">(</span><span class="n">call-with-serializable-current-continuation</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">(</span><span class="n"><a href="http://docs.racket-lang.org/reference/serialization.html#(def._((lib._racket/private/serialize..rkt)._serialize))" style="color: inherit">serialize</a></span> <span class="n">k</span><span class="p">)))))))</span>
+</pre></div>
+
+</div>
+
+<p><code>serial-&gt;native</code> signals the transition to the third-party and <code>native-&gt;serial</code> signals the transition back.</p>
+
+<p>It is still a little annoying to find when you&rsquo;ve called these <em>third-party higher-order library procedures with arguments that try to capture serializable continuations</em>, so there&rsquo;s a simple macro that provides a transitioning wrapper for you:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">define-native</span> <span class="p">(</span><span class="n">build-list/native</span> <span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt).__))" style="color: inherit">_</a></span> <span class="n">ho</span><span class="p">)</span> <span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>expands to:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">build-list/native</span> <span class="n">fst</span> <span class="n">snd</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">serial-&gt;native</span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span>
+    <span class="n">fst</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="n">args</span>
+      <span class="p">(</span><span class="n">native-&gt;serial</span>
+       <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/procedures.html#(def._((lib._racket/private/base..rkt)._apply))" style="color: inherit">apply</a></span> <span class="n">snd</span> <span class="n">args</span><span class="p">))))))</span>
+</pre></div>
+
+</div>
+
+<p>This new feature is documented in the <a href="http://faculty.cs.byu.edu/~jay/plt-doc/web-server/stateless.html#(part._.Serializable_.Continuations)">online manual</a>, of course.</p></div>
+  <a class="more" href='/2009/05/the-two-state-solution-native-and-serializable-continuations-in-the-plt-web-server.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>18 May 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/05/soft-state-in-the-plt-web-server.html'>Soft State in the PLT Web Server</a></h1>
+  <div class="truncate">
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>Many Web applications and network protocols have values in the continuation that are necessary to complete the computation, but that may be recomputed if they are not available. This is &ldquo;soft state&rdquo;.</p>
+
+<p>For example, a Web application may cache a user&rsquo;s preferences from a database and deliver it to a Web browser as a hidden value; when the value is returned to the application in subsequent steps, it is used to customize the display. However, if the preferences were not available (or were corrupted in some way), the application could retrieve them from the database.</p>
+
+<p>When using the PLT Web Server&rsquo;s native continuations, this roughly corresponds to the use of a <em>weak box</em>: a box that the GC is allowed to erase the contents of. When using the PLT Web Server&rsquo;s serializable continuations it roughly corresponds to a weak box and a <em>weak hash table</em> (that holds its keys weakly) to give the box a serializable value as an identifier.</p>
+
+<p>This programming pattern is a bit difficult to get right. So, a library that implements it is now provided with PLT Scheme: <a href="http://faculty.cs.byu.edu/~jay/plt-doc/web-server/stateless.html#(part._.Soft_.State)"><code>web-server/lang/soft</code></a>.</p>
+
+<p>Here&rsquo;s a trivial example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">web-server</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._provide))" style="color: inherit">provide</a></span> <span class="n">interface-version</span> <span class="n">start</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">interface-version</span> <span class="o">'</span><span class="ss">stateless</span><span class="p">)</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">softie</span>
+  <span class="p">(</span><span class="n">soft-state</span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"Doing a long computation...~n"</span><span class="p">)</span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/threads.html#(def._((quote._~23~25kernel)._sleep))" style="color: inherit">sleep</a></span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">soft-state-ref</span> <span class="n">softie</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._printf))" style="color: inherit">printf</a></span> <span class="s2">"Done~n"</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">start</span>
+   <span class="p">(</span><span class="n">send/suspend</span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">k-url</span><span class="p">)</span>
+      <span class="o">`</span><span class="p">(</span><span class="ss">html</span> <span class="p">(</span><span class="ss">body</span> <span class="p">(</span><span class="ss">a</span> <span class="p">([</span><span class="ss">href</span> <span class="o">,</span><span class="n">k-url</span><span class="p">])</span> <span class="s2">"Done"</span><span class="p">)))))))</span>
+</pre></div>
+
+</div></div>
+  <a class="more" href='/2009/05/soft-state-in-the-plt-web-server.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>18 May 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/05/scheme-workshop-deadline-not-extended.html'>Scheme Workshop: deadline NOT extended!</a></h1>
+  <div class="truncate">
+<p><em>posted by John Clements</em></p>
+
+<p>We&rsquo;re holding the line on our submission deadline; it&rsquo;s still June 5, so that gives you about three weeks to write something awesome.</p>
+
+<p>Re-posting the entire CfP on a blog seems a bit tacky, so instead I&rsquo;ll just post the link:</p>
+
+<p><a href="http://blog.plt-scheme.org/2009/01/cfp-scheme-workshop-2009.html"> http://blog.plt-scheme.org/2009/01/cfp-scheme-workshop&ndash;2009.html</a></p>
+
+<p>We look forward to your submissions!</p></div>
+  <a class="more" href='/2009/05/scheme-workshop-deadline-not-extended.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>06 May 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/05/what-is-sendsuspend.html'>What is <code>send/suspend</code>?</a></h1>
+  <div class="truncate">
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>I often ponder what <a href="http://docs.plt-scheme.org/web-server/servlet.html#(def._((lib._web-server/servlet/web..ss)._send/suspend))"><code>send/suspend</code></a> really is. It is a lot like <code>call/cc</code>, but has the curious property that the continuation escapes in a single way and is only called in a particular context. I often wonder if there is something weaker than <code>call/cc</code> that implements <code>send/suspend</code>.</p>
+
+<p>Today I wrote a little dispatcher that uses threads to implement <code>send/suspend</code>. In this implementation, _send_ing truly _suspend_s the computation.</p>
+
+<p>Here&rsquo;s the code: <a href="http://www.copypastecode.com/codes/view/5003">http://www.copypastecode.com/codes/view/5003</a></p>
+
+<p>The trick is to have channels for communicating responses and requests. When you run this example, you should be able to add two numbers. But, in contrast to the normal <code>send/suspend</code>, all the URLs are one-shots, because once the computation is resumed, it moves forward&hellip; it is never saved.</p>
+
+<p>This implementation technique also precludes clever implementations of <code>send/suspend/dispatch</code>, like:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">send/suspend/dispatch</span> <span class="n">mk-page</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/cont.html#(form._((lib._racket/private/more-scheme..rkt)._let/cc))" style="color: inherit">let/cc</a></span> <span class="n">k0</span>
+    <span class="p">(</span><span class="n">send/back</span>
+     <span class="p">(</span><span class="n">mk-page</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/cont.html#(form._((lib._racket/private/letstx-scheme..rkt)._let/ec))" style="color: inherit">let/ec</a></span> <span class="n">k1</span> 
+          <span class="p">(</span><span class="n">k0</span> <span class="p">(</span><span class="n">handler</span> <span class="p">(</span><span class="n">send/suspend</span> <span class="n">k1</span><span class="p">)))))))))</span>
+</pre></div>
+
+</div></div>
+  <a class="more" href='/2009/05/what-is-sendsuspend.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>29 Mar 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/03/the-drscheme-repl-isnt-the-one-in-emacs.html'>the DrScheme repl isn&rsquo;t the one in Emacs</a></h1>
+  <div class="truncate">
+<p><em>posted by matthias</em></p>
+
+<p>Dear old Lisper,</p>
+
+<p>You have found drscheme and it is almost like your old Lisp machine. It is easy to program in it, it has things that nobody else has, and we all love parentheses. But after some initial enthusiasm you are wondering why in the world, we decided not to provide commands for sending individual definitions and expressions from the Definitions window to the Interactions window, aka, REPL.</p>
+
+<p>It wasn&rsquo;t an accident. It was by design after some difficult experiences. I am personally a product of the Emacs world that you are describing below, and my advisor Dan Friedman was called the &ldquo;Lispman&rdquo; on his door sign at Indiana.</p>
+
+<p>When I first discovered the idea of sending individual expressions and definitions from a buffer to a repl, it was a near-religious revelation to me. I wanted everyone to know this trick and use it. When I started teaching the freshman course at Rice, I told our chairman so and he asked &ldquo;why&rdquo;. I was shocked, awed, and I failed to explain to him how it mattered. He was a mathematician and I wrote it off. They don&rsquo;t know.</p>
+
+<p>Then I started watching my sophomores and juniors at Rice in lab. Now that was a true disappointment. Few if any used this trick and when they did, they more often tripped up and got the repl into a state where they didn&rsquo;t know what was going on.</p>
+
+<p>In the mid 90s, I wrote some more Little books with Dan, and boy, time and again, I watched him stumble across the state of the repl. I even watched him re-start the repl and load the whole buffer more often than not.</p>
+
+<p>Why? In the presence of macros and higher-order functions and other beasts, it is difficult for masters of the universe with 30 years of experience to keep track of things. What do you think students with 10 or 20 days worth of experience will do? Is it really such a deep principle of computing to create the objects incrementally in the repl as opposed to thinking systematically through the design of a program?</p>
+
+<p>I decided not and asked Robby to make DrScheme&rsquo;s repl transparent. That is, it re-starts the repl and re-loads the buffer every time. I consider this behavior a suitable compromise: have a repl but don&rsquo;t confuse yourself with send-defs and send-exprs. This is especially true in an age when sending an entire buffer takes as much time as sending an individual expression or definition. Soon we&rsquo;ll get &ldquo;compilation behind your back&rdquo; so that only the current buffer is re-interpreted. It&rsquo;ll start things even faster.</p>
+
+<p>Even though I had used the incremental mode for more than a decade when I switched from Emacs to DrScheme in 1998, I have hardly ever looked back. I miss a few other things but the incremental repl is one of those rituals old Lispers acquired and never questioned &hellip; but it isn&rsquo;t fundamental and critical to anything. (Note there is no qualifying clauses, no when no if no but. I really mean this last sentence the way I spelled it.)</p></div>
+  <a class="more" href='/2009/03/the-drscheme-repl-isnt-the-one-in-emacs.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>22 Mar 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/03/plt-scheme-v415.html'>PLT Scheme v4.1.5</a></h1>
+  <div class="truncate">
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.1.5 is now available from  <a href="http://plt-scheme.org/">http://plt-scheme.org/</a></p>
+
+<ul>
+ <li>Web Server:
+  <ul>
+   <li>new URL-based dispatching library <code>web-server/dispatch</code>,</li>
+   <li>customizable continuation serialization policies for the stateless web language <code>web-server/stuffers</code>,</li>
+   <li>abstraction of serve/servlet to build simpler dispatchers <code>web-server/servlet-env</code>,</li>
+   <li>HTTP Digest authentication support <code>web-server/http/digest-auth</code>,</li>
+   <li>built-in cookie support in <code>web-server/http/cookie</code> and <code>web-server/http/cookie-parse</code>,</li>
+   <li>highlighting and pretty-printing of errors in Xexpr constructions,</li>
+   <li>load control dispatcher for limit concurrent sessions <code>web-server/dispatchers/limit</code>.</li></ul></li>
+ <li>Scribble:
+  <ul>
+   <li>Literate programming is now available using the new <code>scribble/lp</code> language.</li>
+   <li>A new <code>at-exp</code> language makes it convenient to use the scribble reader&rsquo;s @-expressions for general code.</li>
+   <li>The <code>scribble/text</code> preprocessor language has been extended to deal with indentation and other formatting issues.</li>
+   <li>The &ldquo;scribble&rdquo; command-line tool accepts a <code>--pdf</code> flag to render PDFs (via pdflatex).</li></ul></li>
+ <li>
+  <p>DrScheme now provides feedback when PLaneT downloads and installs new packages.</p></li>
+ <li>Units &amp; Contracts:
+  <ul>
+   <li>Elements of unit signatures can now be associated with contracts via the <code>contracted</code> signature form.</li>
+   <li>A contract combinator for units, <code>unit/c</code>, has been added.</li>
+   <li>The new <code>with-contract</code> form provides a nestable submodule contract boundary, protecting a group of definitions from the surrounding code with contracts.</li>
+   <li>The <code>define/contract</code> form has been reworked and new define forms have been added: <code>define-struct/contract</code> and <code>define-unit/contract</code>.</li></ul></li>
+ <li>
+  <p>Language levels and teachpacks from the DeinProgramm project for the German textbook &ldquo;Die Macht der Abstraktion&rdquo; by Herbert Klaeren and Michael Sperber have been added.</p></li>
+ <li>Misc:
+  <ul>
+   <li>Typed Scheme now comes with several more pre-wrapped libraries, found in the <code>typed</code> collection.</li>
+   <li>The <code>xml</code> and <code>html</code> collections are now contracted.</li>
+   <li>Binding parsing in net/cgi now interacts with <code>net/uri-codec</code>&rsquo;s configuration parameters.</li>
+   <li>DrScheme captures logging output.</li>
+   <li>Check syntax: it is now possible to tack arrows crossing the currently selected text.</li>
+   <li>New <code>bitwise-bit-field</code> function.</li></ul></li>
+ <li>The usual pile of bugfixes. (Notable: <code>scheme/package</code> works, <code>deflate</code> compression fixed, DrScheme language dialog issue resolved, <code>match</code> fixes, Windows networking, and much more.)</li></ul>
+
+<p>[Note that mirror sites can take a while to catch up with the new downloads.]</p>
+
+<p>Feedback Welcome.</p></div>
+  <a class="more" href='/2009/03/plt-scheme-v415.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<article class="index" id="home">
+<row>
+
+<col-1>
+  <p class='date-and-tags'>12 Mar 2009</p></col-1>
+
+<col-2>
+  <h1><a href='/2009/03/maintaining-self-references-in-planet-packages.html'>Maintaining self-references in Planet packages</a></h1>
+  <div class="truncate">
+<p><em>posted by Carl Eastlund</em></p>
+
+<p><a href="http://docs.plt-scheme.org/planet/index.html">PLaneT packages</a> may refer to themselves (i.e. include <a href="http://docs.plt-scheme.org/guide/module-paths.html">module paths</a> referring to some part of the same package) for a number of reasons. One module may <a href="http://docs.plt-scheme.org/reference/require.html#%28form._%28%28lib._scheme/base..ss%29._require%29%29">require</a> another. <a href="http://docs.plt-scheme.org/scribble/index.html">Scribble</a> documentation traces <a href="http://docs.plt-scheme.org/reference/require.html#%28form._%28%28lib._scheme/base..ss%29._for-label%29%29">for-label</a> imports to construct hypertext links. DrScheme <a href="http://docs.plt-scheme.org/tools/adding-languages.html">language levels</a> may <a href="http://docs.plt-scheme.org/tools/drscheme_language.html#%28meth._%28%28%28lib._drscheme/tool-lib..ss%29._drscheme%7E3alanguage%7E3asimple-module-based-language%7E3c%7E25%7E3e%29._get-module%29%29">provide a module path</a> for an initial <a href="http://docs.plt-scheme.org/guide/eval.html#%28part._namespaces%29">namespace</a>.</p>
+
+<p>In each of these cases, we want the module path to refer to the <a href="http://docs.plt-scheme.org/planet/Using_PLaneT.html#%28part._.Fine-.Grained_.Control_.Over_.Package_.Imports%29">same version</a> of the same package that it occurs in. On the other hand, we do not want to have to manually search and replace the version number every time we update. Before I solved this problem I would often release some new version x.0 of a package, only to find some lingering dependency on y.0 that my search/replace had not caught. Of course, then I had to go back and replace all occurrences of both x.0 and y.0 with x.1 and release again. To avoid this headache, we need a way to express self-referential module paths with precise, implicit version numbers.</p>
+
+<p>The built-in module paths don&rsquo;t quite support this. The relevant forms are PLaneT paths with version numbers, PLaneT paths without version numbers, and relative paths:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">my/package:1:0/dir/file</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">my/package/dir/file</span><span class="p">)</span>
+<span class="s2">"../dir/file.ss"</span>
+</pre></div>
+
+</div>
+
+<p>PLaneT paths with version numbers suffer from the search and replace problem: they become obsolete, and must be changed with every new release.</p>
+
+<p>PLaneT paths without version numbers &ldquo;upgrade&rdquo; with a new release: they automatically refer to the latest version of a package. Unfortunately, this means they aren&rsquo;t really &ldquo;self&rdquo;-references. As soon as version 2.0 is released, every version-free reference to the package refers to 2.0. Even the references in version 1.0 get implicitly updated, and become forward references rather than self-references.</p>
+
+<p>Relative paths are precise, in that they always refer to the same version of the same package. However, because they implicitly refer to the directory containing the source code, they are only valid within a single file. They cannot be reliably passed to DrScheme for a language level namespace, traced for documentation links by Scribble, or used by other such external tools.</p>
+
+<p>None of these options provides precise, stable, externally comprehensible, self-referential module paths.</p>
+
+<p>To fill this need, I have released (planet <a href="http://planet.plt-scheme.org/package-source/cce/scheme.plt/4/1/planet-docs/main/planet.html">cce/scheme:4:1/planet</a>). This module provides PLaneT package authors with several macros that construct references to the current package in require imports, Scribble documentation, and dynamic values. The self-referential modules paths are constructed automatically at compile time based on the <a href="http://docs.plt-scheme.org/reference/stxops.html">source location</a> of the macro use and the <a href="http://docs.plt-scheme.org/planet/search-order.html#%28part._.Acceptable_.Local_.Package%29">local PLaneT package database</a>. Their expanded form always includes an explicit package name and version number (both major and minor). Here I will summarize their use, with (planet my/package:1:0/dir/file) as a running example. For full details, see the <a href="http://planet.plt-scheme.org/package-source/cce/scheme.plt/4/1/planet-docs/main/index.html">online documentation</a> or install the <a href="http://planet.plt-scheme.org/display.ss?package=scheme.plt&amp;amp;owner=cce">package</a>.</p>
+
+<p>To import a module from within a PLaneT package, use the this-package-in require transformer. To re-export bindings from a module imported this way, use the this-package-out provide transformer, or use require/provide/this-package in place of both.</p>
+
+<p>For example, you might want to import and re-export bindings from dir/file:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">my/package:1:0/dir/file</span><span class="p">))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._provide))" style="color: inherit">provide</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._all-from-out))" style="color: inherit">all-from-out</a></span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">my/package:1:0/dir/file</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>You can leave out the package name and version number, thus making the code invariant across upgrades, by writing:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="p">(</span><span class="n">this-package-in</span> <span class="n">dir/file</span><span class="p">))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._provide))" style="color: inherit">provide</a></span> <span class="p">(</span><span class="n">this-package-out</span> <span class="n">dir/file</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Or, you can further simplify it:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">require/provide/this-package</span> <span class="n">dir/file</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>All three of the above are equivalent (in version 1.0).</p>
+
+<p>In Scribble documentation, a module often refers to itself via <a href="http://docs.plt-scheme.org/scribble/doc-modules.html#%28form._%28%28lib._scribble/manual..ss%29._defmodule%29%29">defmodule</a>, <a href="http://docs.plt-scheme.org/scribble/doc-modules.html#%28form._%28%28lib._scribble/manual..ss%29._declare-exporting%29%29">declare-exporting</a>, or <a href="http://docs.plt-scheme.org/scribble/scribble_manual_code.html#%28form._%28%28lib._scribble/manual..ss%29._schememodname%29%29">schememodname</a>. I provide the extensions defmodule/this-package, declare-exporting/this-package, and schememodname/this-package, respectively. These macros allow the user to supply a path such as dir/file, or to omit one to refer to the package as a whole (or its main module). In positions where the original macros allow a sequence of module paths, these forms allow two sequences, one for self-referential module paths and one for other paths.</p>
+
+<p>To document an entire module, one might first write:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">defmodule</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">my/package:1:0</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>The automatic self-reference version is simply:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">defmodule/this-package</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>In more complicated cases, one might document a sub-part of a package or present bindings from multiple sources:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">defmodule</span> <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">my/package:1:0/dir/file</span><span class="p">)</span>
+  <span class="kd">#:use-sources</span>
+  <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._planet))" style="color: inherit">planet</a></span> <span class="n">my/package:1:0/private/impl</span><span class="p">)</span> <span class="n">somewhere/else</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+<p>These self-references can still be automated:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="n">defmodule/this-package</span> <span class="n">dir/file</span>
+  <span class="kd">#:use-sources</span>
+  <span class="p">[</span><span class="n">private/impl</span><span class="p">]</span>
+  <span class="p">[</span><span class="n">somewhere/else</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+<p>Finally, I provide this-package-version-symbol for constructing PLaneT package symbols as runtime values. This macro is analogous to <a href="http://docs.plt-scheme.org/planet/Utility_Libraries.html#%28form._%28%28lib._planet/util..ss%29._this-package-version%29%29">this-package-version</a> from the <a href="http://docs.plt-scheme.org/planet/Utility_Libraries.html#%28mod-path._planet/util%29">planet/util</a> collection, but it constructs a symbol rather than an s-expression. You can use this symbol to construct a module path for a DrScheme language level, or escape it with unsyntax in Scribble&rsquo;s <a href="http://docs.plt-scheme.org/scribble/scribble_manual_code.html#%28form._%28%28lib._scribble/manual..ss%29._schemeblock%29%29">schemeblock</a> typesetting to create self-referential example code.</p>
+
+<p>This list of utilities may not be complete. Users may need to write new macros for self-referential PLaneT packages. To that end, (planet <a href="http://planet.plt-scheme.org/package-source/cce/scheme.plt/4/1/planet-docs/main/syntax.html">cce/scheme:4:1/syntax</a>) provides syntax-source-planet-package. This function is analogous to <a href="http://docs.plt-scheme.org/planet/Utility_Libraries.html#%28form._%28%28lib._planet/util..ss%29._this-package-version%29%29">this-package-version</a>, but operates on <a href="http://docs.plt-scheme.org/guide/stx-obj.html">syntax objects</a> and is designed to be used in <a href="http://docs.plt-scheme.org/guide/proc-macros.html">macro transformers</a>. There are also -owner, -name, -major, -minor, and -symbol versions following the same analogy.</p>
+
+<p>I find these tools useful for maintaining my PLaneT packages, and I hope other authors will too. If you do give them a try, please send <a href="http://planet.plt-scheme.org/trac/newticket">feedback</a> on what does or doesn&rsquo;t work, or what might be improved. I would eventually like to add a refined version to the PLT Scheme collections once we get enough experience to know that these tools are fairly complete and usable.</p></div>
+  <a class="more" href='/2009/03/maintaining-self-references-in-planet-packages.html'>more →</a>
+<col-2>
+
+</row>
+
+</article>
+<footer>
+ <ul class="pagination">
+  <li><a href="/index-8.html">
+    <quote>&larr;</quote></a></li>
+  <li><a href="/index.html">1</a></li>
+  <li><a href="/index-2.html">2</a></li>
+  <li><a href="/index-3.html">3</a></li>
+  <li><a href="/index-4.html">4</a></li>
+  <li><a href="/index-5.html">5</a></li>
+  <li><a href="/index-6.html">6</a></li>
+  <li><a href="/index-7.html">7</a></li>
+  <li><a href="/index-8.html">8</a></li>
+  <li class="active"><a href="/index-9.html">9</a></li>
+  <li><a href="/index-10.html">10</a></li>
+  <li><a href="/index-11.html">11</a></li>
+  <li><a href="/index-12.html">12</a></li>
+  <li><a href="/index-13.html">13</a></li>
+  <li><a href="/index-14.html">14</a></li>
+  <li><a href="/index-10.html">
+    <quote>&rarr;</quote></a></li></ul></footer>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

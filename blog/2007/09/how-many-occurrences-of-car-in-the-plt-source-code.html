@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>How many occurrences of car in the PLT source code?</title>
+    <meta name="description" content="_posted by Robby Findler_  Lets play a guessing game. See who can guess:      How many occurrences of the identifier `car` there are in the PLT tree (when using `read` and just counting the symbols that come out)?     Where does `car` rank on the list of ...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/09/how-many-occurrences-of-car-in-the-plt-source-code.html">
+    <link rel="next" href="/2007/09/birthday-easter-eggs-in-drscheme.html">
+    <link rel="prev" href="/2007/09/completions-in-drscheme-finally.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>06 Sep 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>How many occurrences of car in the PLT source code?</h1>
+  </header>
+
+<p><em>posted by Robby Findler</em></p>
+
+<p>Lets play a guessing game. See who can guess:</p>
+
+<ul>
+ <li>
+  <p>How many occurrences of the identifier <code>car</code> there are in the PLT tree (when using <code>read</code> and just counting the symbols that come out)?</p></li>
+ <li>
+  <p>Where does <code>car</code> rank on the list of the most commonly used identifiers?</p></li>
+ <li>
+  <p>What is the most common identifier, and how many occurrences of it are there?</p></li></ul>
+
+<p>UPDATE: The two files <code>raw-hattori</code> and <code>raw-kajitani.ss</code> are generated files containing solutions to <a href="http://en.wikipedia.org/wiki/Nonogram">Paint by Numbers</a> problems and about 30,000 occurrences of <code>x</code> and <code>o</code>. Discounting them, this is the list of the top ten identifiers and the number of occurrences:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">((</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="mi">25294</span><span class="p">)</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/quote.html#(form._((quote._~23~25kernel)._quote))" style="color: inherit">quote</a></span> <span class="mi">24101</span><span class="p">)</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._lambda))" style="color: inherit">lambda</a></span> <span class="mi">18883</span><span class="p">)</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="mi">14796</span><span class="p">)</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/ivaraccess.html#(form._((lib._racket/private/class-internal..rkt)._send))" style="color: inherit">send</a></span> <span class="mi">14349</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">x</span> <span class="mi">11877</span><span class="p">)</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((quote._~23~25kernel)._if))" style="color: inherit">if</a></span> <span class="mi">11118</span><span class="p">)</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._......))" style="color: inherit">...</a></span> <span class="mi">8474</span><span class="p">)</span>
+ <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._car))" style="color: inherit">car</a></span> <span class="mi">7610</span><span class="p">)</span>
+ <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/stx-patterns.html#(form._((lib._racket/private/stxcase-scheme..rkt)._syntax))" style="color: inherit">syntax</a></span> <span class="mi">6537</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>The identifier <code>cdr</code> ranks 21st with 5,259 occurrences, <code>let*</code> has 3,066 which, when combined with <code>let</code> comes out at 17,862, still not enough to pass <code>lambda</code>. Speaking of combining, <code>λ</code> has 2,271 occurrences, which is also not enough to move <code>lambda</code>. Finally <code>map</code> comes in 32nd with 3,853 occurrences and <code>foldl</code> beats out <code>foldr</code> (1168th place with 75 occurrences vs 1451st place with 58 occurrences).</p>
+<!-- more-->
+
+<hr />
+
+<p>I remember reading in Lisp In Small Pieces that CDR is statistically more often encountered that CAR&hellip; So my final answer is &ldquo;less CARs than CDRs in the source code of PLT&rdquo;</p>
+
+<p>— <em>Adrien, 6 September 2007</em></p>
+
+<hr />
+
+<p>That is a good guess, but it turns out not to be the case. Maybe we just write code where we say (car l) several times in the loop body but only recur in one place, so there&rsquo;s only one (cdr l) but multiple (car l)s. I know some would call that blasphemous programming &hellip;</p>
+
+<p>— <em>Robby, 6 September 2007</em></p>
+
+<hr />
+
+<p>Ok, I&rsquo;ll bite&hellip;</p>
+
+<p>My first thought was: probably some generic variable name, like x. But when I look at a few source fies of my own, I don&rsquo;t see a lot of xs.</p>
+
+<p>I do see a lot more quotes than I expected, though. So, I&rsquo;ll guess quote, though I think it&rsquo;s not a very good guess.</p>
+
+<p>I wouldn&rsquo;t think that car shows up much at all, actually. Maybe a few hundred times?</p>
+
+<p>— <em>Matthew Flatt, 6 September 2007</em></p>
+
+<hr />
+
+<p>quote is not a bad guess. Its up there. x isn&rsquo;t bad either. Neither are at the very top, tho.</p>
+
+<p>— <em>Robby, 6 September 2007</em></p>
+
+<hr />
+
+<p>Urr&hellip; &ldquo;let&rdquo;? Unfortunately, the &ldquo;let"s are probably going to be diluted by the presence of "let*&rdquo;. I would probably cast my vote for &ldquo;list&rdquo; or maybe even&hellip; &ldquo;map&rdquo;? No, no, probably not. Okay, my best (bad) guess is &ldquo;list&rdquo;.</p>
+
+<p>— <em>John Clements, 6 September 2007</em></p>
+
+<hr />
+
+<p>let is pretty high but, surprisingly enough, if you add let*&rsquo;s numbers to let, then let does not move in the list! list is a bit lower. Still fairly frequent, but not up there with let or quote. map is even lower than list.</p>
+
+<p>— <em>Robby, 6 September 2007</em></p>
+
+<hr />
+
+<p>My guess would be for <code>define' and</code>quote&rsquo;. But when I run a count I get <code>set!' in the first place.
+
+— *Eli, 6 September 2007*
+
+* * *
+
+Yes, that was a joke.  But my count must be different because I got</code>x&rsquo; in the lead. (With a good gap behind it.)</p>
+
+<p>— <em>Eli, 6 September 2007</em></p>
+
+<hr />
+
+<p>Cheater!</p>
+
+<p>Guesses only, please!</p>
+
+<p>— <em>Robby, 6 September 2007</em></p>
+
+<hr />
+
+<p>My (pre-counting) guess was <code>define' or</code>quote&rsquo;. My count showed `x&rsquo; which is Matthew&rsquo;s guess.</p>
+
+<p>— <em>Eli, 6 September 2007</em></p>
+
+<hr />
+
+<p>Okay, we have a winner, then! define tops the list and quote is next.</p>
+
+<p>I&rsquo;ll not reveal the actual numbers yet in case someone actually wants to try to guess them or to guess where car shows up.</p>
+
+<p>— <em>Robby, 6 September 2007</em></p>
+
+<hr />
+
+<p>Ok, I&rsquo;ll guess the car is quite far down the list. Maybe 1% of identifiers, or so. I think with map/fold/etc. and pattern matching car is used quite infrequently.</p>
+
+<p>— <em>Noel, 7 September 2007</em></p>
+
+<hr />
+
+<p>I hadn&rsquo;t thought to count percentages. You&rsquo;re 1/2 right &hellip;. the top of the list is already in the 2% range! Indeed, once you&rsquo;re past define and quote, everything is 1.x percent or less.</p>
+
+<p>car is well above map and none of the folds crack the top 100.</p>
+
+<p>— <em>Robby, 7 September 2007</em></p>
+
+<hr />
+
+<p>Haaa! I lost because of blasphemous programming! :D</p>
+
+<p>— <em>Adrien, 9 September 2007</em></p>
+
+<hr />
+
+<p>:)</p>
+
+<p>You might want to try to verify that hypothesis &mdash; see if there are multiple (car l)s on the same identifier. I&rsquo;m sure one could write a script to count such things&hellip;</p>
+
+<p>— <em>Robby, 9 September 2007</em></p>
+
+<hr />
+
+<p>I presume that the count for quote includes &rsquo;; I can hardly imagine writing quote as an identifier any more, except perhaps in the context &rsquo;quote.</p>
+
+<p>In addition, it&rsquo;s not surprising that foldl beats foldr in an eager language.</p>
+
+<p>— <em>John Cowan, 26 January 2008</em></p>
+
+<hr />
+
+<p>Yes, that&rsquo;s right quote refers to uses to &rsquo; as we all (quote &hellip;)</p>
+
+<p>— <em>Robby, 26 January 2008</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/09/completions-in-drscheme-finally.html">Completions in DrScheme (finally)</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/09/birthday-easter-eggs-in-drscheme.html">Birthday Easter Eggs in DrScheme</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

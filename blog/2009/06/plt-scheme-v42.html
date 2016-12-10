@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>PLT Scheme v4.2</title>
+    <meta name="description" content="_posted by Eli Barzilay_  PLT Scheme version 4.2 is now available from http://plt-scheme.org/ Internally, this version includes a conversion from C++ to Scheme for part of the GUI toolbox -- specifically, 25k lines of code that implement the general text ...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2009/06/plt-scheme-v42.html">
+    <link rel="next" href="/2009/05/typed-scheme-20.html">
+    <link rel="prev" href="/2009/06/serializable-closures-in-plt-scheme.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>01 Jun 2009</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>PLT Scheme v4.2</h1>
+  </header>
+
+<p><em>posted by Eli Barzilay</em></p>
+
+<p>PLT Scheme version 4.2 is now available from <a href="http://plt-scheme.org/">http://plt-scheme.org/</a> Internally, this version includes a conversion from C++ to Scheme for part of the GUI toolbox &mdash; specifically, 25k lines of code that implement the general text and pasteboard editor. This conversion is a start on a larger reimplementation of the GUI toolbox. Although we believe that this change will help make PLT Scheme better in the long run, we must expect bugs in the short term due to porting errors. Users should therefore be aware of the change, even though the new implementation is meant to behave the same as previous versions.</p>
+
+<ul>
+ <li>
+  <p>A new statistical profiler is now available; see the &ldquo;profiler&rdquo; manual for more information. Currently, the profiler supports only textual output, but future plans include a GUI interface and DrScheme integration.</p></li>
+ <li>
+  <p>The <code>world</code> teachpack is now deprecated. Its replacement <code>universe</code> has a new interface that uses strings instead of symbols and characters.</p></li>
+ <li>
+  <p>Web-server: Native continuations in the stateless servlet language support capturing continuations from untransformed contexts; soft state library for stateless servlets.</p></li>
+ <li>
+  <p>DrScheme&rsquo;s Stepper can now jump to a selected program expression.</p></li>
+ <li>
+  <p>New in <code>scheme/base</code>: <code>hash-has-key?</code>, <code>hash-ref!</code>, <code>in-sequences</code>, <code>in-cycle</code>. New in <code>scheme</code>: <code>count</code>, <code>make-list</code> (from <code>scheme/list</code>), <code>const</code> (from <code>scheme/function</code>).</p></li>
+ <li>
+  <p>Some performance improvements, including faster start-up for small programs. The latter is a result of delaying module invocations at higher phases (compile time, meta-compile time, etc.) until compilation is demanded at the next lower phase; this on-demand instantiation is per-phase, as opposed to per-module within a phase.</p></li></ul>
+
+<p>[Note that mirror sites can take a while to catch up with the new downloads.]</p>
+
+<p>Feedback Welcome.</p>
+<!-- more-->
+
+<hr />
+
+<p>The rate of progress on PLT is quite impressive. I just wish that downloading and installing updates were a bit more automatic. Maybe it&rsquo;ll be included in 4.3? <em>crosses fingers</em> ;-)</p>
+
+<p>— <em>Kyle Cronin, 1 June 2009</em></p>
+
+<hr />
+
+<p>Kyle: You can check for updates from the help menu, and this will also have an option to check for updates every some time. When there is an update, you get the option of going to the website to download the new one. (Making the actual update happen automatically would be pretty difficult&hellip;)</p>
+
+<p>— <em>Eli Barzilay, 1 June 2009</em></p>
+
+<hr />
+
+<p>I tried to install the 4.2 version, and I got &ldquo;Error launching installer&rdquo;. I tried this multiple times from multiple mirrors. Doesn&rsquo;t work. My system is a laptop with: Windows XP Professional Version 2002 Service Pack 3, Intel Core 2 Duo CPU, T7250 @ 2.00GHz, 2GB RAM.</p>
+
+<p>— <em>y, 29 July 2009</em></p>
+
+<hr />
+
+<p>Hi</p>
+
+<p>I installed drscheme 4.2 recently and everything was fine and working until I restarted my system and when I tried running the development environment again I get a strange error, Uninstalling/Reinstalling even to another location does not help. please help me, I tried looking for a location wherin temporary or configuration data are stored, but i couldnt find any, this error seems to be related with the splash screen:</p>
+
+<p>draw-bitmap in dc(%): expected argument of type (bitmap% object&gt;) given #f</p>
+
+<p> === context === C:\Users\mehdi\Documents\PLT\collects\drscheme\private\drscheme-normal.ss:208:15</p>
+
+<p>I forgot, my OS is Vista Home Basic.</p>
+
+<p>Thank you.</p>
+
+<p>— <em>arcana, 29 July 2009</em></p>
+
+<hr />
+
+<p>Ok I have found the bug&hellip;</p>
+
+<p>How to explain this, 30th of july is the buggy day&hellip; May be it&rsquo;s because this is a special day, i&rsquo;ve heard that drscheme&rsquo;s splash screen shows information about the special days, and most likely, an icon or a bitmap is missing in there, that is why a &ldquo;false&rdquo; parameter is passed instead of a bitmap object.</p>
+
+<p>However, I&rsquo;ve taken a look at scheme-normal.ss, it seems that the special days are hard coded, unfortunately I&rsquo;m not even an American so I&rsquo;ve got no idea what special event is today!</p>
+
+<p>Anyway, sorry for disturbance !</p>
+
+<p>— <em>arcana, 29 July 2009</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2009/06/serializable-closures-in-plt-scheme.html">Serializable Closures in PLT Scheme</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2009/05/typed-scheme-20.html">Typed Scheme 2.0</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>I Write Funny-Lookin' Racket Code: An Alternate Style for Delimiters and Indentation</title>
+    <meta name="description" content="_posted by Carl Eastlund_  A lot of people are quite surprised when they see the Racket code I write. Let's say I needed a function to render hash table values as expressions that would produce the same value. A &quot;normal&quot; Racketeer might write something li...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2012/09/i-write-funny-lookin-racket-code-an-alternate-style-for-delimiters-and-indentation.html">
+    <link rel="next" href="/2012/08/racketcon-2012.html">
+    <link rel="prev" href="/2012/10/the-3n1-problem.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>28 Sep 2012</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>I Write Funny-Lookin&rsquo; Racket Code: An Alternate Style for Delimiters and Indentation</h1>
+  </header>
+
+<p><em>posted by Carl Eastlund</em></p>
+
+<p>A lot of people are quite surprised when they see the Racket code I write. Let&rsquo;s say I needed a function to render hash table values as expressions that would produce the same value. A &ldquo;normal&rdquo; Racketeer might write something like the following.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">hash-&gt;expr</span> <span class="n">ht</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="o">'</span><span class="ss"><a href="http://docs.racket-lang.org/reference/hashtables.html#(def._((quote._~23~25kernel)._hash))" style="color: inherit">hash</a></span>
+        <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/for.html#(form._((lib._racket/private/base..rkt)._for/fold))" style="color: inherit">for/fold</a></span> <span class="p">([</span><span class="n">args</span> <span class="o">'</span><span class="p">()])</span>
+                  <span class="p">([(</span><span class="n">k</span> <span class="n">v</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/sequences.html#(def._((lib._racket/private/base..rkt)._in-hash))" style="color: inherit">in-hash</a></span> <span class="n">ht</span><span class="p">)])</span>
+          <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="o">'</span><span class="ss"><a href="http://docs.racket-lang.org/reference/quote.html#(form._((quote._~23~25kernel)._quote))" style="color: inherit">quote</a></span> <span class="n">k</span><span class="p">)</span>
+                <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="o">'</span><span class="ss"><a href="http://docs.racket-lang.org/reference/quote.html#(form._((quote._~23~25kernel)._quote))" style="color: inherit">quote</a></span> <span class="n">v</span><span class="p">)</span>
+                      <span class="n">args</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>There might be a few variances in style, especially depending on whether one has Racket or Emacs set up to indent <code>for/fold</code> specially. Almost no one, however, would come up with the code I write.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">hash-&gt;expr</span> <span class="n">ht</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="o">'</span><span class="ss"><a href="http://docs.racket-lang.org/reference/hashtables.html#(def._((quote._~23~25kernel)._hash))" style="color: inherit">hash</a></span>
+    <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/for.html#(form._((lib._racket/private/base..rkt)._for/fold))" style="color: inherit">for/fold</a></span>
+        <span class="p">{[</span><span class="n">args</span> <span class="o">'</span><span class="p">()]}</span>
+        <span class="p">{[{</span><span class="n">k</span> <span class="n">v</span><span class="p">}</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/sequences.html#(def._((lib._racket/private/base..rkt)._in-hash))" style="color: inherit">in-hash</a></span> <span class="n">ht</span><span class="p">)]}</span>
+      <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="o">'</span><span class="ss"><a href="http://docs.racket-lang.org/reference/quote.html#(form._((quote._~23~25kernel)._quote))" style="color: inherit">quote</a></span> <span class="n">k</span><span class="p">)</span>
+        <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._cons))" style="color: inherit">cons</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="o">'</span><span class="ss"><a href="http://docs.racket-lang.org/reference/quote.html#(form._((quote._~23~25kernel)._quote))" style="color: inherit">quote</a></span> <span class="n">v</span><span class="p">)</span>
+          <span class="n">args</span><span class="p">)))))</span>
+</pre></div>
+
+</div>
+
+<p>The biggest reaction I get is from the presence of <code>{</code>curly braces<code>}</code>, but those are largely incidental as far as I&rsquo;m concerned. It&rsquo;s all about the indentation to me.</p>
+
+<p>A while back I found that my <code>.emacs</code> file was growing in proportion to my Racket code&mdash;all of it I had ever written, in fact. Every new macro in my code or in the latest Racket version needed a line like: <code>(put 'for/fold 'scheme-indent-function 2)</code>This would tell Emacs <em>more or less</em> how I wanted it to indent the given form. So long as I followed the use patterns Emacs could cope with. For instance, with <code>for/fold</code>, Emacs could cope with both of the &ldquo;special&rdquo; arguments on the same line as the macro name, or both on separate lines. Changing that up got weird results.</p>
+
+<p>Also, function arguments would lead to significant rightward-creep in my indentation. Adding up the lengths of a list of strings, for instance, might look like this:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._foldl))" style="color: inherit">foldl</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span>
+       <span class="mi">0</span>
+       <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._map))" style="color: inherit">map</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/strings.html#(def._((quote._~23~25kernel)._string-length))" style="color: inherit">string-length</a></span>
+            <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span> <span class="s2">"There"</span>
+                  <span class="s2">"are"</span>
+                  <span class="s2">"thirty-four"</span>
+                  <span class="s2">"characters"</span>
+                  <span class="s2">"here."</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>This wastes a lot of space on the left, and to me it doesn&rsquo;t do enough for readability to justify it. I don&rsquo;t need my eyes drawn to <code>0</code> and <code>+</code> nearly that much.</p>
+
+<p>I discovered a new style of indentation in the {_Little_, <em>Seasoned</em>, <em>Reasoned</em>} <em>Schemer</em> series of books by Dan Friedman and his many cohorts. These books always start a new indentation level at a fixed distance in from the previous one, regardless of the cause for the indentation. Arguments on the same line as the function or macro name are ignored; they do not &ldquo;push&rdquo; indentation over to the right at all.</p>
+
+<p>This indentation style has a lot of appeal to me for a number of reasons. One, it wastes no space on the left. Two, it never needs to &ldquo;know&rdquo; what a given macro means. It doesn&rsquo;t matter if you&rsquo;re applying <code>+</code> or <code>lambda</code> or <code>for/fold</code>, all lines beyond the first move two (or however many) characters to the right. I saw a light at the end of the tunnel: no more <code>.emacs</code> customization for every new form!</p>
+
+<p>This style leaves two issues. One, how to indent <code>cond</code>? The <em>Little</em> books treat <code>cond</code> differently, indenting each clause only as far as the keyword <code>cond</code>, while other form&rsquo;s arguments are pushed in slightly farther than the function or macro name. Two, how to &ldquo;fix&rdquo; forms like <code>for/fold</code> where a few lines really ought to be indented differently? A straight-up interpretation of this style would generate code like this:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/for.html#(form._((lib._racket/private/base..rkt)._for/fold))" style="color: inherit">for/fold</a></span>
+  <span class="p">([</span><span class="n">x</span> <span class="mi">0</span><span class="p">])</span>
+  <span class="p">([</span><span class="n">str</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/sequences.html#(def._((lib._racket/private/base..rkt)._in-list))" style="color: inherit">in-list</a></span> <span class="o">'</span><span class="p">(</span><span class="s2">"12"</span> <span class="s2">"characters"</span><span class="p">))])</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">n</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/strings.html#(def._((quote._~23~25kernel)._string-length))" style="color: inherit">string-length</a></span> <span class="n">str</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="n">x</span> <span class="n">n</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Now we can&rsquo;t tell visually where the <code>for/fold</code> iteration clauses leave off and the loop body definitions and expressions begin.</p>
+
+<p>The <code>cond</code> issue is easy enough to resolve. In Racket, unlike in vanilla Scheme, we use <code>[</code>brackets<code>]</code> around <code>cond</code> clauses. The same goes for a number of other repeated clauses, in fact: <code>let</code>, <code>match</code>, <code>syntax-parse</code>, and so forth. So I decided my new, custom indentation style would indent <code>[</code>brackets<code>]</code> differently from <code>(</code>parentheses<code>)</code>. Parens indent one farther than brackets. That way,</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="n">x</span> <span class="mi">1</span><span class="p">]</span>
+      <span class="p">[</span><span class="n">y</span> <span class="mi">2</span><span class="p">])</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="n">x</span> <span class="n">y</span><span class="p">))</span><span class="o">`</span><span class="ss">doesn</span><span class="o">'</span><span class="ss">t</span> <span class="n">become</span>
+
+<span class="o">`</span><span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/let.html#(form._((lib._racket/private/letstx-scheme..rkt)._let))" style="color: inherit">let</a></span> <span class="p">([</span><span class="ss">x</span> <span class="mi">1</span><span class="p">]</span>
+       <span class="p">[</span><span class="ss">y</span> <span class="mi">2</span><span class="p">])</span>
+  <span class="p">(</span><span class="ss"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="ss">x</span> <span class="ss">y</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Since I already use <code>[</code>brackets<code>]</code> every time I have a repeated, non-expression clause, this rule does exactly what I need it to do.</p>
+
+<p>Once I had differentiated <code>[]</code> from <code>()</code>, resolving the <code>for/fold</code> issue was obvious. I needed a new indentation rule and a new lexical marker: <code>{</code>braces<code>}</code>. Now every time I have a <em>fixed number</em> of special non-expression forms in a macro, I wrap them in braces. Anything in braces is indented slightly farther (four spaces rather than two) than ordinary sub-expressions. So my <code>for/fold</code> example comes out like this.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/for.html#(form._((lib._racket/private/base..rkt)._for/fold))" style="color: inherit">for/fold</a></span>
+    <span class="p">{[</span><span class="n">x</span> <span class="mi">0</span><span class="p">]}</span>
+    <span class="p">{[</span><span class="n">str</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/sequences.html#(def._((lib._racket/private/base..rkt)._in-list))" style="color: inherit">in-list</a></span> <span class="o">'</span><span class="p">(</span><span class="s2">"12"</span> <span class="s2">"characters"</span><span class="p">))]}</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">n</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/strings.html#(def._((quote._~23~25kernel)._string-length))" style="color: inherit">string-length</a></span> <span class="n">str</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="n">x</span> <span class="n">n</span><span class="p">))</span>
+</pre></div>
+
+</div>
+
+<p>Suddently it&rsquo;s quite clear which parts are &ldquo;special&rdquo; in the <code>for/fold</code> macro.</p>
+
+<p>So now I write code using <code>(</code>parentheses<code>)</code> for definitions, expressions, and anything else resembling a nestable, expandable term (e.g. <code>match</code> patterns, syntax templates), <code>[</code>brackets<code>]</code> for repeated, non-expandable clauses (e.g. <code>cond</code> clauses, <code>let</code> bindings), and <code>{</code>braces<code>}</code> for non-repeated, non-expandable forms (e.g. <code>lambda</code> formals, <em>groups</em> of <code>let</code> bindings). And I don&rsquo;t bother to align function arguments; I tend to treat the most significant argument as an &ldquo;accumulator&rdquo;, and put everything else on one line if I can.</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._foldl))" style="color: inherit">foldl</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">0</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/map..rkt)._map))" style="color: inherit">map</a></span> <span class="nb"><a href="http://docs.racket-lang.org/reference/strings.html#(def._((quote._~23~25kernel)._string-length))" style="color: inherit">string-length</a></span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((quote._~23~25kernel)._list))" style="color: inherit">list</a></span>
+      <span class="s2">"There"</span>
+      <span class="s2">"are"</span>
+      <span class="s2">"thirty-four"</span>
+      <span class="s2">"characters"</span>
+      <span class="s2">"here."</span><span class="p">)))</span>
+</pre></div>
+
+</div>
+
+<p>The way I read this code, the first line tells us we are performing a summation; the second line tells us we want the length of each string; the third line tells us we have a list coming; and the rest give its contents. The result &ldquo;accumulates&rdquo; from a list to its lengths to their sum as the indentation cascades out and up from the inside.</p>
+
+<p>With these three rules, I now write my Racket code without bothering to customize my <code>.emacs</code> file as I go. I just use delimiters judiciously to tell Emacs how I want everything indented, and everything comes out pretty much how I want it.</p>
+
+<p>For anyone interested in installing this indentation mode or looking at its source code, I&rsquo;ve put the file up on GitHub at:</p>
+
+<p><a href="https://github.com/carl-eastlund/simple-sexp">https://github.com/carl-eastlund/simple-sexp</a></p>
+
+<p>To use it, just put it somewhere your Emacs knows to look for Elisp code and add <code>(require 'simple-sexp)</code> to your <code>.emacs</code> file.</p>
+
+<p><strong>Addendum:</strong> Oh, and there&rsquo;s some structured s-expression editing code in that file as well. It preserves matched parens, brackets, braces, and quotes (for strings). It&rsquo;s probably a much inferior implementation of things like paredit; this code represents the flailings of an Elisp novice. Use at your own peril.</p>
+<!-- more-->
+
+<hr />
+
+<p>Beautiful!</p>
+
+<p>— <em>Robby Findler, 28 September 2012</em></p>
+
+<hr />
+
+<p>There is a good reason for the arguments of a function to be lined up: it makes the sexpr tree easily visible, no thoughts on how things match up needed. And indeed, as someone who is used to having this very visible structure, I find the two-space indentation for all arguments except for the first that is left on the first line much harder to read. Combined with multiple expressions on the first line I can see how this can get to be even worse (though not with simple "+" and &ldquo;0&rdquo;). (Obviously, you&rsquo;ll disagree as someone who is used to not getting these visual cues, which is why these are fertile flamewar materials.)</p>
+
+<p>In addition, IIUC, the curly brace thing is a way that forces you to specify stuff on each and every form, instead of making your editor know about these forms &mdash; and in that case it looks like a bad deal for me, sacrificing visual readability, and overall requiring me to do more work than adding one more name into my editor configuration.</p>
+
+<p>— <em>Eli Barzilay, 28 September 2012</em></p>
+
+<hr />
+
+<p>re:Eli &mdash;</p>
+
+<p>Yep, this style definitely isn&rsquo;t for everyone, and it&rsquo;s definitely got some huge tradeoffs. I am acutely aware that I sometimes sacrifice the ability to easily tell how many arguments something has, and that&rsquo;s one place I&rsquo;m not sure I made the right decision. I am careful to only put multiple things on the same line if they&rsquo;re right after the function name, or in the case of functions like error or printf where I&rsquo;m just filling in values for the "~a" or "~s" escapes. Otherwise, after the first line, I definitely want a clear visual marker of how many arguments there are.</p>
+
+<p>As for the curly braces, I like that I have to put some thought into the indentation myself. The braces give more than just whitespace to say what&rsquo;s &ldquo;special&rdquo;. Frankly I&rsquo;m annoyed at how much extra duty () does, and I prefer making an explicit distinction.</p>
+
+<p>But I&rsquo;m definitely not trying to sway anyone here away from traditional Racket style, just presenting my own odd habits.</p>
+
+<p>— <em>Carl Eastlund, 28 September 2012</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2012/10/the-3n1-problem.html">The 3n+1 problem</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2012/08/racketcon-2012.html">RacketCon 2012</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

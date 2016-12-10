@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket v6.3</title>
+    <meta name="description" content="_posted by Ryan Culpepper_  Racket version 6.3 is now available from http://racket-lang.org/      Racket's macro expander uses a new representation of binding called &quot;set of scopes&quot;. The new binding model provides a simpler explanation of how macros prese...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2015/11/racket-v63.html">
+    <link rel="next" href="/2015/10/retiring-unstable.html">
+    <link rel="prev" href="/2016/02/racket-v64.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>23 Nov 2015</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket v6.3</h1>
+  </header>
+
+<p><em>posted by Ryan Culpepper</em></p>
+
+<p>Racket version 6.3 is now available from <a href="http://racket-lang.org/">http://racket-lang.org/</a></p>
+
+<ul>
+ <li>
+  <p>Racket&rsquo;s macro expander uses a new representation of binding called &ldquo;set of scopes&rdquo;. The new binding model provides a simpler explanation of how macros preserve binding, especially across module boundaries and in hygiene-bending expansions. The new expander is mostly compatible with existing Racket macros, but there are some incompatibilities. For the formally inclined, a research paper on this macro system will appear at POPL next year: <a href="http://www.cs.utah.edu/plt/scope-sets/">http://www.cs.utah.edu/plt/scope-sets/</a></p></li>
+ <li>
+  <p>Racket&rsquo;s GUI library now uses Gtk+ 3 when available, instead of Gtk+ 2. Set the <code>PLT_GTK2</code> environment variable to select Gtk+ 2.</p></li>
+ <li>
+  <p>Added a new Redex tutorial based on a week-long workshop in SLC.</p></li>
+ <li>
+  <p>Better syntax error checking for Redex patterns that do not use holes correctly.</p></li>
+ <li>
+  <p>The blueboxes are more agressive about finding names to look up in the docs, meaning they are useful much more often.</p></li>
+ <li>
+  <p>Submodules are now fully supported in Typed Racket. Previously, some uses of submodules would produce internal errors, making it hard to <code>module+ test</code> and <code>module+ main</code> effectively in Typed Racket. The switch to the set-of-scopes expander fixed these problems, and submodules are now happily at home in Typed Racket.</p></li>
+ <li>
+  <p>The <code>typed/racket/unsafe</code> library provides import and export forms that circumvent contract generation. This improves performance for typed-untyped interaction at the cost of safety and debuggability.</p></li>
+ <li>
+  <p>Typed Racket provides experimental support for units (from <code>racket/unit</code>).</p></li>
+ <li>
+  <p>The experimental <code>define-new-subtype</code> form allows overlaying finer distinctions between otherwise identical types, similar to Haskell&rsquo;s <code>new type</code>.</p></li>
+ <li>
+  <p>The <code>Promise</code> type constructor changes in a backwards-incompatible way to exclude promises created with <code>promise/name</code>.</p></li>
+ <li>
+  <p>The <code>unstable-*</code> packages are out of the main distribution. Most of their contents have been either merged with established Racket libraries or spun off as their own packages. This change is backwards compatible for packages that properly list their dependencies. <a href="../../2015/10/retiring-unstable.html">Full details</a></p></li>
+ <li>
+  <p>edu: <code>big-bang</code> supports a display-mode clause so that world programs can take over the entire screen.</p></li></ul>
+
+<p>Feedback welcome</p>
+<!-- more-->
+
+<hr />
+
+<p>How to run the installer silently when we would like to distribute this to teachers with SCCM 2012.</p>
+
+<p>— <em>Ari Toivola, 25 November 2015</em></p>
+
+<hr />
+
+<p>I believe you broke the 2htdp/planetcute libraries with this release.</p>
+
+<p>At least, I get an error just like this page now shows: http://docs.racket-lang.org/teachpack/2htdpPlanet_Cute_Images.html</p>
+
+<p>(require 2htdp/planetcute)</p>
+
+<p>in the REPL:</p>
+
+<blockquote>
+ <p>character-cat-girl g1: unbound identifier;  also, no #%top syntax transformer is bound in: g1</p></blockquote>
+
+<p>— <em>lalamine, 5 December 2015</em></p>
+
+<hr />
+
+<p>Ari: To run the Windows installer silently, supply the /S command-line argument</p>
+
+<p>— <em>Matthew Flatt, 9 December 2015</em></p>
+
+<hr />
+
+<p>lalamine: Thanks for the report! I cam able to replicate the problem with planetcute in v6.3. It looks like the problem happens only in interactive modes like the REPL and docs, and not when used within a module.</p>
+
+<p>The problem seems to be fixed in our development snapshots. Unfortunately, I don&rsquo;t know how it got broken or fixed, so we&rsquo;ll have to investigate more to ensure that the bug stays fixed.</p>
+
+<p>— <em>Matthew Flatt, 9 December 2015</em></p>
+
+<hr />
+
+<p>I see this bug; glad it&rsquo;s getting fixed. My daughter has made an awesome maze runner game with the planetcute images, so she was distressed about the broken compile. :)</p>
+
+<p>— <em>Peter, 10 December 2015</em></p>
+
+<hr />
+
+<p>It will force the use of dedicated AMD graphics of a 15-inch MacBook Pro but the previous version does not require it, it is consuming more battery than before.</p>
+
+<p>— <em>霏芃宋, 5 January 2016</em></p>
+
+<hr />
+
+<p>Regarding AMD graphics: The only change in graphics visible from that changelog is about the underlying graphical library Gtk. Can you check if setting PLT_GTK2=y before starting DrRacket makes a difference?</p>
+
+<p>— <em>Paolo Giarrusso, 21 January 2016</em></p>
+
+<hr />
+
+<p>Do you have a portable distribution for Windows anywhere? I used to use zipped binary snapshots for this purpose but they don&rsquo;t seem to be available any longer, only *.exe versions.</p>
+
+<p>— <em>Kevin Havener, 2 February 2016</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2016/02/racket-v64.html">Racket v6.4</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2015/10/retiring-unstable.html">Retiring <code>unstable</code></a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

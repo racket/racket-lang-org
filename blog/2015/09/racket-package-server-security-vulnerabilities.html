@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Racket Package Server Security Vulnerabilities</title>
+    <meta name="description" content="_posted by Sam Tobin-Hochstadt_  Recently, we discovered several security vulnerabilities with how both the Racket package catalog server and the Racket package client work. The vulnerabilities have now all been fixed, and we do not know of any exploitati...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2015/09/racket-package-server-security-vulnerabilities.html">
+    <link rel="next" href="/2015/08/modules-packages-and-collections.html">
+    <link rel="prev" href="/2015/10/retiring-unstable.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>22 Sep 2015</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Racket Package Server Security Vulnerabilities</h1>
+  </header>
+
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>Recently, we discovered several security vulnerabilities with how both the Racket package catalog server and the Racket package client work. The vulnerabilities have now all been fixed, and we do not know of any exploitation of them. However, we encourage you to take the following steps:</p>
+
+<ul>
+ <li>
+  <p>Change your password on the <a href="http://pkgs.racket-lang.org">http://pkgs.racket-lang.org</a> site.</p></li>
+ <li>
+  <p>Check any packages you have uploaded to the site, to ensure that no unexpected changes have been made to them.</p></li>
+ <li>
+  <p>Do not use the released versions of the raco pkg catalog-archive command, or the <code>file/untar</code> and <code>file/unzip</code> libraries, on untrusted inputs. If you use these tools or libraries, use a snapshot build available from <a href="http://pre.racket-lang.org/">http://pre.racket-lang.org/</a>.</p></li></ul>
+
+<h2 id="the-errors-and-how-they-were-fixed">The errors, and how they were fixed</h2>
+
+<p>A total of 5 errors related to package handling were reported to us by Tony Garnock-Jones and Asumu Takikawa. Two were XSS vulnerabilities relating to handling user input in the package administration dialog. One was an error where unsanitized email addresses with path name components in them could allow a malicious user to impersonate someone else, whom they shared an email suffix with (such addresses are illegal on most mail servers, like Outlook and GMail, but not illegal in SMTP itself.) Two were errors in handling MANIFEST files and tar/zip archives, which allowed decompression to write to arbitrary locations on the file system. These last errors affected not only the server, which decompresses packages to analyze them, but also clients using the commands described above.</p>
+
+<p>The relevant server-side code was fixed to appropriately sanitize user input. The package handling libraries now reject any attempts to navigate up the filesystem hierarchy, meaning that these attacks are no longer possible.</p>
+
+<p>Unfortunately, due to the nature of these attacks, we cannot be sure that they were not exploited, but we have no evidence that they were. Therefore, we encourage anyone with an account to change their password, and to treat the password as compromised. Please also check your existing packages to make sure they are as you left them.</p>
+
+<p>Furthermore, using the <code>file/untar</code> and <code>file/unzip</code> libraries, the raco pkg catalog-archive command, and the internal functions that manipulate packages is not safe on untrusted inputs in released versions of Racket. Since raco pkg install executes code, it is already unsafe to use on untrusted packages, but simply extracting malicious packages is also unsafe.</p>
+
+<p>We have not released a new version of Racket, but encourage anyone who needs to perform these commands to use a snapshot build. The next version of Racket will be released on-schedule in October. If, however, you would benefit from a patched version of Racket 6.2.1, please let us know.</p>
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2015/10/retiring-unstable.html">Retiring <code>unstable</code></a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2015/08/modules-packages-and-collections.html">Modules, Packages and Collections</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

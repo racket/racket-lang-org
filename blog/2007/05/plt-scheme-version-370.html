@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>PLT Scheme version 370</title>
+    <meta name="description" content="_posted by Jens Axel Søgaard_  PLT Scheme version 370 is now available from  http://download.plt-scheme.org/  Some highlights:   The conservative garbage collector (CGC) has been replaced with a precise garbage collector (3m) in the standard build. For mo...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2007/05/plt-scheme-version-370.html">
+    <link rel="next" href="/2007/05/looking-for-small-scheme-scripts.html">
+    <link rel="prev" href="/2007/06/r6rs-is-perfect.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>22 May 2007</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>PLT Scheme version 370</h1>
+  </header>
+
+<p><em>posted by Jens Axel Søgaard</em></p>
+
+<p>PLT Scheme version 370 is now available from</p>
+
+<p><a href="http://download.plt-scheme.org/">http://download.plt-scheme.org/</a></p>
+
+<p>Some highlights:</p>
+
+<ul>
+ <li>The conservative garbage collector (CGC) has been replaced with a precise garbage collector (3m) in the standard build. For most users, this change simply amounts to &ldquo;better performance in space and time&rdquo;. For example, a long-running DrScheme instance typically uses much less memory than before.</li></ul>
+
+<p>The new memory manager also supports a new &ldquo;Limit Memory&hellip;&rdquo; option (in DrScheme&rsquo;s &ldquo;Scheme&rdquo; menu) to limit the memory use of a programming running inside DrScheme.</p>
+
+<p>For those who work with C-implemented libraries and extensions, the switch to precise collection may complicate interoperability. To a large extent, however, (lib &ldquo;foreign.ss&rdquo;) works the same with both collectors. (But note that the 3m is a moving collector, so be careful with passing Scheme objects to C.)</p>
+
+<p>Although our pre-built binaries use the new collector, builds from source using the conservative collector are still supported.</p>
+
+<ul>
+ <li>For a program written with one of the the <a href="http://www.htdp.org">&ldquo;How to Design Programs&rdquo;</a> (HtDP) languages, DrScheme saves the program with meta-information that identifies the language and records the teachpacks used by the program. DrScheme&rsquo;s teachpack GUI now works only with the HtDP languages. In other languages, use require to access teachpacks.</li></ul>
+
+<p>The meta-information is in the form of a reader extension that turns the file content into a module-based program, which means that teaching-language files can be loaded directly into MzScheme or used with other PLT Scheme tools.</p>
+
+<ul>
+ <li>
+  <p>The HtDP &ldquo;world.ss&rdquo; and &ldquo;image.ss&rdquo; teachpacks have been revised, including support for the creation of animated GIFs.</p></li>
+ <li>
+  <p>Unit-based servlets are no longer supported in the web server. Use module-based servlets, instead. (Servlets can be implemented using a unit within a module, but the web server&rsquo;s API is provided through a module.)</p></li>
+ <li>
+  <p>A new (lib &ldquo;unit.ss&rdquo;) library replaces the old one and provides a simpler and more flexible syntax. The (lib &ldquo;unitsig.ss&rdquo;) library is deprecated but still available as (lib &ldquo;unitsig200.ss&rdquo;), and the old (lib &ldquo;unit.ss&rdquo;) is available as (lib &ldquo;unit200.ss&rdquo;).  Feedback Welcome,  <em>The PLT Scheme Team</em></p></li></ul>
+<!-- more-->
+
+<hr />
+
+<p>The reference documentation is wonderful, but where can I go to find out the changes (and the reasoning behind them) to unit.ss? Mailing list discussions would be perfect, if they exist. Thanks for any help!</p>
+
+<p>— <em>charmless, 22 May 2007</em></p>
+
+<hr />
+
+<p>Chapters 4, 5, and 6 of my Ph.D. dissertation describe the new unit system, and my rational behind its various features. However, it doesn&rsquo;t really describe the old system or attempt a comparison between the new and old systems. Also, Matthew has made a few small syntactic changes from what is described in my dissertation for the v370 system.</p>
+
+<p>— <em>Scott Owens, 23 May 2007</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2007/06/r6rs-is-perfect.html">R6RS is &ldquo;perfect&rdquo;</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2007/05/looking-for-small-scheme-scripts.html">Looking for small Scheme scripts</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

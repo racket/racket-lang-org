@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Extending Typed Racket, Part 1</title>
+    <meta name="description" content="_posted by Sam Tobin-Hochstadt_  The Typed Racket team is pleased to announce a number of new additions to our system. We'll be writing a few blog posts about them, all of which you can read here.  This post begins with the core of the Typed Racket type s...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2010/09/extending-typed-racket-part-1.html">
+    <link rel="next" href="/2010/08/racket-v501.html">
+    <link rel="prev" href="/2010/10/the-two-state-solution-native-and-serializable-continuations-accord.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>15 Sep 2010</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>Extending Typed Racket, Part 1</h1>
+  </header>
+
+<p><em>posted by Sam Tobin-Hochstadt</em></p>
+
+<p>The Typed Racket team is pleased to announce a number of new additions to our system. We&rsquo;ll be writing a few blog posts about them, all of which you can read here.</p>
+
+<p>This post begins with the core of the Typed Racket type system. The fundamental idea at the heart of Typed Racket is called occurrence typing. This is the technique that allows us to typecheck existing Racket programs without requiring rewrites. Here&rsquo;s a simple example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((quote._~23~25kernel)._if))" style="color: inherit">if</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._number~3f))" style="color: inherit">number?</a></span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">x</span><span class="p">)</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The typechecker can figure out from the use of <code>number?</code> that the second occurrence of <code>x</code> is always going to be a number. This simple form of occurrence typing is enough to take Typed Racket a long way. But because we want to be able to handle all the sophisticated reasoning that programmers are already using to write their Racket programs, we have been working on extending the system further.</p>
+
+<p>The new design of our system is described in a paper, <a href="http://www.ccs.neu.edu/scheme/pubs/#icfp10-thf">Logical Types for Untyped Languages</a>, in the upcoming International Conference on Functional Programming. The introduction provides an overview that&rsquo;s acessible to any Racket programmer, but here&rsquo;s the key example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._cond))" style="color: inherit">cond</a></span>
+  <span class="p">[(</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._and))" style="color: inherit">and</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._number~3f))" style="color: inherit">number?</a></span> <span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/strings.html#(def._((quote._~23~25kernel)._string~3f))" style="color: inherit">string?</a></span> <span class="n">y</span><span class="p">))</span> <span class="n">—</span> <span class="mi">1</span> <span class="n">—</span><span class="p">]</span>
+  <span class="p">[(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/number-types.html#(def._((quote._~23~25kernel)._number~3f))" style="color: inherit">number?</a></span> <span class="n">x</span><span class="p">)</span>                   <span class="n">—</span> <span class="mi">2</span> <span class="n">—</span><span class="p">]</span>
+  <span class="p">[</span><span class="k"><a href="http://docs.racket-lang.org/reference/if.html#(form._((lib._racket/private/letstx-scheme..rkt)._else))" style="color: inherit">else</a></span>                          <span class="n">—</span> <span class="mi">3</span> <span class="n">—</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+<p>In expression 1, we know that <code>x</code> is a number and <code>y</code> is a string. In 2, we know that <code>x</code> is a number and <code>y</code> is not a string, by the logical properties of <code>and</code> and <code>cond</code>. This form of logical reasoning is enabled by the new foundation of the system, and makes the entire system significantly more expressive.</p>
+
+<p>All of these improvements are available in the current version of Racket.</p>
+<!-- more-->
+
+<hr />
+
+<blockquote>
+ <p>The typechecker can figure out from the use of number? that the occurrence of x is always going to be a number.</p></blockquote>
+
+<p>Presumably that should be &ldquo;the second occurrence of x&rdquo;?</p>
+
+<p>— <em>alexey-rom, 15 September 2010</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2010/10/the-two-state-solution-native-and-serializable-continuations-accord.html">The Two-State Solution: Native and Serializable Continuations Accord</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2010/08/racket-v501.html">Racket v5.0.1</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>

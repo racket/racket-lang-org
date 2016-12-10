@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>The Two-State Solution: Native and Serializable Continuations Accord</title>
+    <meta name="description" content="_posted by Jay McCarthy_  The Racket Web Server allows an expressive way of writing Web applications using first-class continuations to capture the control-flow of the server while it is waiting for the client to respond. For example:      #lang web-serve...">
+    <meta name="author"      content="The Unknown Author">
+    <meta name="keywords"    content="">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <link rel="icon"      href="/favicon.ico">
+    <link rel="canonical" href="http://blog.racket-lang.org/2010/10/the-two-state-solution-native-and-serializable-continuations-accord.html">
+    <link rel="next" href="/2010/09/extending-typed-racket-part-1.html">
+    <link rel="prev" href="/2010/11/racket-v502.html">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/blog-fonts.css">
+    <!-- Feeds -->
+    <link rel="alternate" type="application/atom+xml" href="/feeds/all.atom.xml" title="Atom Feed">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all.rss.xml" title="RSS Feed">
+    <!-- JS -->
+    </head>
+  <body>
+<row class="one-column" id="logo"><col-1><a href="http://racket-lang.org"><div id="logo-container"><img id="logo" src="/img/racket-logo.svg"/> Racket</div></a></col-1><col-2><p><a href="/index.html">blog</a></p></col-2></row>
+<article>
+<row>
+
+<col-1>
+  <p class='date-and-tags'>03 Oct 2010</p>
+
+</col-1>
+
+<col-2>
+  <header>
+  <h1>The Two-State Solution: Native and Serializable Continuations Accord</h1>
+  </header>
+
+<p><em>posted by Jay McCarthy</em></p>
+
+<p>The Racket Web Server allows an expressive way of writing Web applications using first-class continuations to capture the control-flow of the server while it is waiting for the client to respond. For example:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">web-server/insta</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">get-number</span> <span class="n">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._string-~3enumber))" style="color: inherit">string-&gt;number</a></span>
+   <span class="p">(</span><span class="n">extract-binding/single</span>
+    <span class="o">'</span><span class="ss">num</span>
+    <span class="p">(</span><span class="n">request-bindings</span>
+     <span class="p">(</span><span class="n">send/suspend</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">k-url</span><span class="p">)</span>
+        <span class="o">`</span><span class="p">(</span><span class="ss">html</span> 
+          <span class="p">(</span><span class="ss">body</span>
+           <span class="p">(</span><span class="ss">form</span> <span class="p">([</span><span class="ss">action</span> <span class="o">,</span><span class="n">k-url</span><span class="p">])</span>
+                 <span class="o">,</span><span class="n">p</span> <span class="ss">nbsp</span> <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">name</span> <span class="s2">"num"</span><span class="p">]))</span>
+                 <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">type</span> <span class="s2">"submit"</span><span class="p">])))))))))))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">how-many</span>
+    <span class="p">(</span><span class="n">get-number</span> <span class="s2">"How many numbers to add?"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._number-~3estring))" style="color: inherit">number-&gt;string</a></span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._foldr))" style="color: inherit">foldr</a></span> 
+    <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">0</span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span> 
+     <span class="n">how-many</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+       <span class="p">(</span><span class="n">get-number</span> 
+        <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"Provide number: ~a"</span> 
+                <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">i</span><span class="p">))))))))</span>
+</pre></div>
+
+</div>
+
+<p>This application creates a re-usable <code>get-number</code> interaction abstraction and uses it in a number of different contexts. In particular, it uses it in the higher-order context of <code>build-list</code>. This application also reuses useful third-party library functions like <code>foldr</code>, etc.</p>
+
+<p>Such an application would be complicated to write in a traditional Web programming environment because the continuation of each <code>get-number</code> invocation is considerably more complex than is typical. Yet, the first-class continuations in Racket ensure that this continuation is captured exactly, correctly, every time.</p>
+
+<p>Unfortunately, the native first-class continuations of Racket are not serializable, so they impose a per-session resource expenditure on the server. This can be alleviated through <a href="http://docs.racket-lang.org/web-server/servlet.html#(part._managers)">expiration policies</a>, but such policies are inherently unsound because continuations URLs are global roots.</p>
+
+<p>In the past, PLT has <a href="http://cs.brown.edu/~sk/Publications/Papers/Published/mfgkf-web-restructuring-cps-journal/">provided tools</a> that automatically restructure this kind of program into one that uses serializable continuations through an acronym soup of source transformations: CPS, lambda-lifting, defunctionalization, SPS, and so on. These tools effectively create automatically what most Web programmers write manually, except the tools don&rsquo;t mistakes. But the tools also don&rsquo;t take into consideration what functions actually contribute to the interaction context and transform library functions like <code>foldr</code> (which is unnecessary in the continuation) the same as functions like <code>build-list</code> (which <em>are</em> necessary.)</p>
+
+<p>Our <a href="http://faculty.cs.byu.edu/~jay/static/icfp065-mccarthy.pdf">past work</a> (based on <a href="http://cs.brown.edu/~sk/Publications/Papers/Published/pcmkf-cont-from-gen-stack-insp/">another PLT paper</a>) alleviates this problem by only requiring functions like <code>build-list</code> to be transformed. From the perspective of a programmer, &ldquo;transformed&rdquo; is tantamount to &ldquo;rewritten&rdquo; because the source code for a third-party library may not be readily available. Programmers would have to program <code>add-many-numbers.com</code> as:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">web-server</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="n">web-server/servlet-env</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">get-number</span> <span class="n">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._string-~3enumber))" style="color: inherit">string-&gt;number</a></span>
+   <span class="p">(</span><span class="n">extract-binding/single</span>
+    <span class="o">'</span><span class="ss">num</span>
+    <span class="p">(</span><span class="n">request-bindings</span>
+     <span class="p">(</span><span class="n">send/suspend</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">k-url</span><span class="p">)</span>
+        <span class="o">`</span><span class="p">(</span><span class="ss">html</span> 
+          <span class="p">(</span><span class="ss">body</span>
+           <span class="p">(</span><span class="ss">form</span> <span class="p">([</span><span class="ss">action</span> <span class="o">,</span><span class="n">k-url</span><span class="p">])</span>
+                 <span class="o">,</span><span class="n">p</span> <span class="ss">nbsp</span> <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">name</span> <span class="s2">"num"</span><span class="p">]))</span>
+                 <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">type</span> <span class="s2">"submit"</span><span class="p">])))))))))))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span> <span class="n">n</span> <span class="n">f</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/for.html#(form._((lib._racket/private/base..rkt)._for/list))" style="color: inherit">for/list</a></span> <span class="p">([</span><span class="n">i</span> <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/sequences.html#(def._((lib._racket/private/base..rkt)._in-range))" style="color: inherit">in-range</a></span> <span class="n">n</span><span class="p">)])</span>
+    <span class="p">(</span><span class="n">f</span> <span class="n">i</span><span class="p">)))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">how-many</span>
+    <span class="p">(</span><span class="n">get-number</span> <span class="s2">"How many numbers to add?"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._number-~3estring))" style="color: inherit">number-&gt;string</a></span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._foldr))" style="color: inherit">foldr</a></span> 
+    <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">0</span>
+    <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span>
+     <span class="n">how-many</span>
+     <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+       <span class="p">(</span><span class="n">get-number</span> 
+        <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"Provide number: ~a"</span>
+                <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">i</span><span class="p">))))))))</span>
+<span class="c1">; This requires a pre-release version</span>
+<span class="c1">; to run in an un-named DrRacket buffer</span>
+<span class="p">(</span><span class="n">serve/servlet</span> <span class="n">start</span> <span class="kd">#:stateless?</span> <span class="no">#t</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>where <code>build-list</code> has been re-implemented, but functions like <code>foldr</code> have not. This application, despite its striking similarity to the first, requires absolutely no per-session server state, so it is considerably more scalable.</p>
+
+<p>Do we need to re-implement <code>build-list</code>? What if the third-party, higher-order function (<code>build-list</code>) that we use with a higher-order argument that causes Web interaction (<code>get-number</code>) is too complicated to re-implement?</p>
+
+<p>Naturally this blog post would not exist if we didn&rsquo;t solve this problem.</p>
+
+<p>Our new approach, dubbed The Two-State Solution, allows the programmer to transparently use a very small amount of per-session server state to store <em>just</em> the part of the continuation inside functions like <code>build-list</code> while serializing everything else to the client.</p>
+
+<p>The key is to use <a href="http://docs.racket-lang.org/reference/eval-model.html#(part._prompt-model)">delimited, composable continuations</a> to isolate the appropriate part of the continuation. The programmer designates this piece of the continuation through the <code>serial-&gt;native</code> and <code>native-&gt;serial</code> annotations. The programmer can write the application as:</p>
+
+<div class="brush: racket">
+ <div class="pygments">
+  <pre><span class="kn">#lang </span><span class="nn">web-server</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/require.html#(form._((lib._racket/private/base..rkt)._require))" style="color: inherit">require</a></span> <span class="n">web-server/servlet-env</span><span class="p">)</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">get-number</span> <span class="n">p</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._string-~3enumber))" style="color: inherit">string-&gt;number</a></span>
+   <span class="p">(</span><span class="n">extract-binding/single</span>
+    <span class="o">'</span><span class="ss">num</span>
+    <span class="p">(</span><span class="n">request-bindings</span>
+     <span class="p">(</span><span class="n">send/suspend</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">k-url</span><span class="p">)</span>
+        <span class="o">`</span><span class="p">(</span><span class="ss">html</span> 
+          <span class="p">(</span><span class="ss">body</span>
+           <span class="p">(</span><span class="ss">form</span> <span class="p">([</span><span class="ss">action</span> <span class="o">,</span><span class="n">k-url</span><span class="p">])</span>
+                 <span class="o">,</span><span class="n">p</span> <span class="ss">nbsp</span> <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">name</span> <span class="s2">"num"</span><span class="p">]))</span>
+                 <span class="p">(</span><span class="ss">input</span> <span class="p">([</span><span class="ss">type</span> <span class="s2">"submit"</span><span class="p">])))))))))))</span>
+<span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="p">(</span><span class="n">start</span> <span class="n">req</span><span class="p">)</span>
+  <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/define.html#(form._((lib._racket/private/base..rkt)._define))" style="color: inherit">define</a></span> <span class="n">how-many</span>
+    <span class="p">(</span><span class="n">get-number</span> <span class="s2">"How many numbers to add?"</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._number-~3estring))" style="color: inherit">number-&gt;string</a></span>
+   <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._foldr))" style="color: inherit">foldr</a></span> 
+    <span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._+))" style="color: inherit">+</a></span> <span class="mi">0</span>
+    <span class="p">(</span><span class="n">serial-&gt;native</span>
+     <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/pairs.html#(def._((lib._racket/private/list..rkt)._build-list))" style="color: inherit">build-list</a></span>
+      <span class="n">how-many</span>
+      <span class="p">(</span><span class="k"><a href="http://docs.racket-lang.org/reference/lambda.html#(form._((lib._racket/private/base..rkt)._~ce~bb))" style="color: inherit">λ</a></span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">native-&gt;serial</span>
+         <span class="p">(</span><span class="n">get-number</span> 
+          <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/Writing.html#(def._((quote._~23~25kernel)._format))" style="color: inherit">format</a></span> <span class="s2">"Provide number: ~a"</span>
+                  <span class="p">(</span><span class="nb"><a href="http://docs.racket-lang.org/reference/generic-numbers.html#(def._((quote._~23~25kernel)._add1))" style="color: inherit">add1</a></span> <span class="n">i</span><span class="p">))))))))))</span>
+<span class="c1">; This requires a pre-release version</span>
+<span class="c1">; to run in an un-named DrRacket buffer</span>
+<span class="p">(</span><span class="n">serve/servlet</span> <span class="n">start</span> <span class="kd">#:stateless?</span> <span class="no">#t</span><span class="p">)</span>
+</pre></div>
+
+</div>
+
+<p>The important distinction here is that both the <code>build-list</code> and the <code>get-number</code> abstractions do not need to change. We simply mark the context as being a &ldquo;serial&rdquo; or &ldquo;native&rdquo; context through the annotation forms. This re-written version will be more scalable than a purely native version, but represents an easier to achieve step in the evolution of a program, because third-party, higher-order functions can be used as is.</p>
+
+<p>This work will be presented at <a href="http://splashcon.org/index.php?option=com_content&amp;amp;view=article&amp;amp;id=122&amp;amp;Itemid=91">OOPSLA 2010</a>. It is also described in a paper with same name this blog post:<a href="http://faculty.cs.byu.edu/~jay/static/oopsla026-mccarthy.pdf">The Two-State Solution: Native and Serializable Continuations Accord</a>.</p>
+<!-- more-->
+
+<hr />
+
+<p>Awesome sauce. Can&rsquo;t wait to try it out!</p>
+
+<p>I came across racket a couple of weeks ago when a link to your site came up on HN.</p>
+
+<p>This is some seriously great kit you&rsquo;ve put together. I&rsquo;m having a lot of fun with this language. Coming from CL, it&rsquo;s actually a rather pleasant transition. Definitely a step-up from the Python/C++ I do at my day job.</p>
+
+<p>Keep up the good work! :)</p>
+
+<p>— <em>j_king, 2 November 2010</em></p>
+
+<hr />
+<col-2>
+
+</row>
+
+<footer>
+<row>
+<col-1>
+</col-1>
+<col-2>
+<h2><span class="label">next</span> <a class="next" href="/2010/11/racket-v502.html">Racket v5.0.2</a></h2>
+
+<h2><span class="label">prev</span> <a class="previous" href="/2010/09/extending-typed-racket-part-1.html">Extending Typed Racket, Part 1</a></h2>
+
+</col-2>
+</row>
+</footer>
+
+</article>
+
+<row class="one-column" id="bottom"><col-1></col-1><col-2>
+<p>Made with <a href="https://github.com/greghendershott/frog">Frog</a>, a static-blog generator written in Racket.
+<br /><a href="https://github.com/racket/racket-lang-org">Source code</a> for this blog.</col-2></row>
+  </body>
+</html>
