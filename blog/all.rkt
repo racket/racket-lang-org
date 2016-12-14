@@ -1,7 +1,9 @@
 #lang plt-web
 (require plt-web/style
-         racket/dict racket/match racket/runtime-path racket/path
-         racket/system compiler/find-exe
+         racket/runtime-path
+         racket/path
+         racket/system
+         raco/all-tools
          "../identity.rkt"
          "../testing.rkt")
 
@@ -12,10 +14,16 @@
 
 (define-runtime-path blog-dir ".")
 (define css-dir (simplify-path (build-path blog-dir "css/")))
-(define raco-path (let-values ([(base name _) (split-path (find-exe))])
-                    (build-path base "raco")))
-(system (format "~a frog -b" raco-path)) ; frog rebuild: generates blog html
-(system (format "~a pollen render ~a" raco-path css-dir)) ; pollen rebuild: generates css
+
+(define v (all-tools))
+;; frog rebuild: generates blog html
+(parameterize ([current-directory (simplify-path blog-dir)]
+                [current-command-line-arguments (vector "-b")])
+  (dynamic-require (second (hash-ref v "frog")) #f))
+;; pollen rebuild: generates css
+(parameterize ([current-directory (simplify-path blog-dir)]
+               [current-command-line-arguments (vector "render" (path->string css-dir))])
+  (dynamic-require (second (hash-ref v "pollen")) #f))
 
 (define (excluded-path? path)
   (define-values (base name _) (split-path path))
