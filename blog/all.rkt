@@ -2,7 +2,6 @@
 (require plt-web/style
          racket/runtime-path
          racket/path
-         racket/system
          raco/all-tools
          "../identity.rkt"
          "../testing.rkt")
