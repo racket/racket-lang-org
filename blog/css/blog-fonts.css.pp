@@ -1,3 +1,5 @@
+#lang pollen
+
 @font-face {
 font-family: charter;
 font-style: normal;
