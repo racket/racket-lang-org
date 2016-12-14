@@ -62,6 +62,7 @@
 (upload "www" "www.racket-lang.org")
 (upload "pre" "pre.racket-lang.org")
 (upload "con" "con.racket-lang.org")
+(upload "blog" "blog.racket-lang.org")
 (upload "drracket" "www.drracket.org")
 (upload "download" "download.racket-lang.org" #:shallow? #t)
 
