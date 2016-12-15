@@ -18,6 +18,8 @@
                "css-tools" ; for rcon
                "sugar"
                "txexpr"
+               "gregor-lib"
+               "frog"
                ("s3-sync" #:version "1.9")))
 
 (define pkg-desc "Sources for http://racket-lang.org")
