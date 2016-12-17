@@ -3,6 +3,8 @@ Sources:
 
 * www: actual content of main site.
 
+* blog: actual content of blog.
+
 * download: content of download site (only installer pages and such)
 
 * */all.rkt: files that just require all the necessary modules to build
