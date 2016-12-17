@@ -20,7 +20,6 @@
   (page #:site drracket-site
         #:title "DrRacket" #:extra-headers (lazy headers) (center-div logo)))
 
-(require (only-in "../www/all.rkt" main))
 
 (define (logo)
   (define (text->lines text)
@@ -58,7 +57,7 @@
                                      }})
                         colors)))
    (meta http-equiv: "refresh"
-         content: (list "2;URL=" (url-of main)))))
+         content: (list "2;URL=" "https://racket-lang.org"))))
 
 (define char-matrix
   @list|{
