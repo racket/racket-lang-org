@@ -10,6 +10,7 @@
 (define releases "releases")
 (define first-version-with-releases-page "5.92")
 (define first-version-with-generic-linux "6.5")
+(define version-with-touchbar-bug "6.7")
 
 (provide render-download-page)
 (define (render-download-page [release current-release] [package 'racket]
@@ -92,6 +93,14 @@
                    others too.}
              @list{The Linux build is generic enough that it should work on most
                    distributions, including relatively old distributions.})}
+      @(if (equal? version version-with-touchbar-bug)
+           @div[id: "macos_touchbar_explain"
+                style: note-style]{
+                @div{@b{MacBook Pro with Touch Bar users:}}
+                @list{To avoid a bug in this version that prevents programs from working
+                      with the Touch Bar, use the 32-bit version or try a
+                      @pre:installers{snapshot build}.}}
+           null)
       @div[id: "builtpkgs_explain"
            style: note-style]{
         @div{@b{About source distributions:}} The @b{Source + built packages}
@@ -106,7 +115,7 @@
            Windows or Mac OS X, download and build a @b{Minimal Racket} distribution
            instead of a @b{Racket} distribution, and then install packages
            with @div{@tt{raco pkg install -i main-distribution}}}
-    @downloader-script[package (map car all-packages)]
+    @downloader-script[package (map car all-packages) version]
     @noscript{
       Installers are available for the following platforms:
       @ul{@(for/list ([i (in-list all-installers)]
@@ -238,7 +247,7 @@
        appropriate building block for all kinds of software, and to clarify how
        we view the license of Racket.}}})
 
-(define (downloader-script package packages)
+(define (downloader-script package packages version)
   @script/inline[type: 'text/javascript]{@||
     var do_jump, selection_changed;
     var packages = [@(string-join (map (lambda (s) (format "\"~s\"" s)) packages) ", ")];
@@ -292,6 +301,11 @@
     linux_ppa_s = document.getElementById("linux_ppa").style;
     source_expl_s = document.getElementById("source_explain").style;
     builtpkgs_expl_s = document.getElementById("builtpkgs_explain").style;
+    @(if (equal? version version-with-touchbar-bug)
+         @list{
+            macos_touchbar_expl_s = document.getElementById("macos_touchbar_explain").style;
+         }
+         null)
     selection_changed_timer = false;
     selection_changed = function() {
       var package_selector = document.getElementById("package_selector");
@@ -341,6 +355,14 @@
          && some_selector_matches(/built/))
         ? "block"
         : "none";
+      @(if (equal? version version-with-touchbar-bug)
+           @list{
+             macos_touchbar_expl_s.display =
+              (selector[selector.selectedIndex].text.search(/Mac.*64/) >= 0)
+               ? "block"
+               : "none";
+           }
+           null)
     }
     //
     function initialize_selector(selector) {
