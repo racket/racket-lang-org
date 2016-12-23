@@ -275,10 +275,10 @@
       (define next-pos (step last-pos next-dir))      
       (values next-dir (cons next-pos trail-acc))))
   
-  (define shift-x 90)
+  (define shift-x 120)
   (define shift-y 380)
-  (define scale-x 8)
-  (define scale-y 8); was 8
+  (define scale-x 9)
+  (define scale-y scale-x)
   (cond
     [(not simplified)
      (for ([start (in-list trail)]
