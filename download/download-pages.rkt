@@ -111,8 +111,8 @@
            additional Racket packages.}
       @div[id: "source_explain"
            style: note-style]{
-        @div{@b{About sources for Windows and Mac OS X:}} To build from source for
-           Windows or Mac OS X, download and build a @b{Minimal Racket} distribution
+        @div{@b{About sources for Windows and Mac OS:}} To build from source for
+           Windows or Mac OS, download and build a @b{Minimal Racket} distribution
            instead of a @b{Racket} distribution, and then install packages
            with @div{@tt{raco pkg install -i main-distribution}}}
     @downloader-script[package (map car all-packages) version]
@@ -346,7 +346,7 @@
         : "none";
       source_expl_s.display =
         (selector[selector.selectedIndex].text.search(/Unix Source/) >= 0
-         && !some_selector_matches(/(Windows|Mac OS X) Source/))
+         && !some_selector_matches(/(Windows|Mac OS) Source/))
         ? "block"
         : "none";
       builtpkgs_expl_s.display =

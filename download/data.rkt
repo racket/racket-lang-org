@@ -6,7 +6,7 @@
   ;; of package to replace argument
   `(;; source platforms
     ["win"  "Windows source"]
-    ["mac"  "Mac OS X source"]
+    ["mac"  "Mac OS source"]
     ["unix" "Unix source"]
     ["src-builtpkgs" (("Racket" . "Unix Source + built packages")
                       ("Minimal Racket" . "Source + built packages"))]
@@ -19,7 +19,7 @@
     ["x86_64-win32" "Windows (x64, 64-bit)"]
     ["(ppc|i386|x86_64)-(?:osx-mac|macosx)"
      ,(λ (_ cpu)
-        (format "Mac OS X (~a)"
+        (format "Mac OS (~a)"
                 (cond
                  [(equal? cpu "ppc") "PPC"]
                  [(equal? cpu "i386") "Intel 32-bit"]
