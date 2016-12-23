@@ -57,7 +57,7 @@
 
 (define (draw-drracket)
   (start "drracket")
-  (define pt (make-rectangular 125 80)) ; x y coords
+  (define pt (make-rectangular 125 100)) ; x y coords
   (for ([a (in-range 0 (* 100 pi) (exp 1))])
        (draw-complex-line-relative pt (make-polar 500 a)))
   (finish))
@@ -65,7 +65,7 @@
 (define (draw-scheme)
   (start "scheme")
   (define step 20) ; between ribs
-  (let ([top-pt 500-50i][bottom-pt 500+200i])
+  (let ([top-pt 500-0i][bottom-pt 500+200i])
     (for ([x (in-range -150 500 step)])
          (define controla (make-rectangular x 50))
          (define controlb (make-rectangular x 125))
@@ -275,8 +275,8 @@
       (define next-pos (step last-pos next-dir))      
       (values next-dir (cons next-pos trail-acc))))
   
-  (define shift-x 120)
-  (define shift-y 380)
+  (define shift-x 90)
+  (define shift-y 403)
   (define scale-x 9)
   (define scale-y scale-x)
   (cond
