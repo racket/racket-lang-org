@@ -20,6 +20,8 @@
                "txexpr"
                "gregor-lib"
                "frog"
+               "lazy" ; for home page sample
+               "datalog" ; for home page sample
                ("s3-sync" #:version "1.9")))
 
 (define pkg-desc "Sources for http://racket-lang.org")
