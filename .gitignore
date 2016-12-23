@@ -1,6 +1,15 @@
 # Racket compiled files
 compiled/
 
+# Generated files
+/www/css/fonts/fonts.css
+/www/css/styles.css
+/www/img/illos/
+/www/index.html
+/www/js/functions.js
+/www/plt.html
+/www/template.html
+
 # common backups, autosaves, lock files, OS meta-files
 *~
 \#*
