@@ -427,6 +427,10 @@ a, a:hover {
 
 /* smartphones only */
 @media all and (max-width:460px) { 
+/* set max size for feature box to keep them all the same size */
+  .feature { height : 8.5rem; }
+  .feature > .inner {display: none;} /* prevents passthrough clicks */
+  .active_expander.feature > .inner { display: block; }
   .disappearing-late {display: none;}
   /* smartphones don't do hover effects, so provide fallback behavior */
   .active_expander > .inner {opacity: 1;}
