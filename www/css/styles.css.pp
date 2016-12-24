@@ -110,7 +110,7 @@ top-section {
     opacity: .3;
 }
 
-.lang > .inner tt {
+.lang > .inner :first-child tt {
     font-size: 85%;
     white-space: pre;
 }
