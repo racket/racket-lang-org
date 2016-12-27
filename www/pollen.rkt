@@ -18,7 +18,7 @@
   (list* 'div '((id "doc")) 
          (decode-elements elems
                           #:string-proc smart-quotes
-                          #:exclude-tags '(style script tt))))
+                          #:exclude-tags '(style script pre code))))
 
 
 (define (cover path)

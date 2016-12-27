@@ -82,32 +82,32 @@
 ◊special-section{
 
 ◊lang["#lang racket" #:id "lang1"]{
-◊tt{(◊docs{require} ◊link["http://docs.racket-lang.org/teachpack/2htdpimage.html?q=2htdp%2Fimage"]{2htdp/image}) ; draw a picture
+◊pre{(◊docs{require} ◊link["http://docs.racket-lang.org/teachpack/2htdpimage.html?q=2htdp%2Fimage"]{2htdp/image}) ; draw a picture
 (◊docs{let} sierpinski ([n 8])
   (◊docs{cond}
     [(◊docs{zero?} n) (◊docs{triangle} 2 'solid 'red)]
     [else (◊docs{define} t (sierpinski (- n 1)))
           (◊docs{freeze} (◊docs{above} t (◊docs{beside} t t)))]))}
 
-The ◊tt{2htdp/image} library provides easy-to-use functions for making images.
+The ◊code{2htdp/image} library provides easy-to-use functions for making images.
 
 ◊doclink["quick"]{Racket tutorial ◊(begin 'rarr)}}
 
 ◊lang["#lang scribble/base" #:id "lang2"]{
-◊tt{@; Generate a PDF or HTML document
+◊pre{@; Generate a PDF or HTML document
 @◊docs{title}{Bottles: @◊docs{italic}{Abridged}}
 @(◊docs{apply} 
   ◊docs{itemlist}
   (◊docs{for/list} ([n (◊docs{in-range} 100 0 -1)])
     @◊docs{item}{@(◊docs{format} "~a" n) bottles.}))}
 
-The ◊tt{scribble/base} language generates documents using a prose-friendly syntax.
+The ◊code{scribble/base} language generates documents using a prose-friendly syntax.
 
 ◊link["http://docs.racket-lang.org/scribble/getting-started.html"]{Scribble tutorial ◊(begin 'rarr)}
 }
 
 ◊lang["#lang typed/racket" #:id "lang3"]{
-◊tt{;; Using higher-order occurrence typing
+◊pre{;; Using higher-order occurrence typing
 (◊docs{define-type} SrN (◊docs{U} ◊docs{String} ◊docs{Number}))
 (◊docs{:} tog ((◊docs{Listof} SrN) -> ◊docs{String}))
 (◊docs{define} (tog l)
@@ -121,19 +121,19 @@ Typed Racket's "gradual" typing lets you add types after you've been working in 
 } 
 
 ◊lang["#lang datalog" #:id "lang4"]{
-◊tt{ancestor(A, B) :- parent(A, B).
+◊pre{ancestor(A, B) :- parent(A, B).
 ancestor(A, B) :-
   parent(A, C), ancestor(C, B).
 parent(john, douglas).
 parent(bob, john).
 ancestor(A, B)?}
 
-You can use Racket to build other languages — like ◊tt{datalog}, a logic-programming language.
+You can use Racket to build other languages — like ◊code{datalog}, a logic-programming language.
 
 ◊link["http://docs.racket-lang.org/datalog/Tutorial.html?q=datalog"]{Datalog tutorial ◊(begin 'rarr)}} 
 
 ◊lang["#lang racket/gui" #:id "lang5"]{
-◊tt{(◊docs{define} f (◊docs{new} frame% [label "Guess"]))
+◊pre{(◊docs{define} f (◊docs{new} frame% [label "Guess"]))
 (◊docs{define} n (◊docs{random} 5)) (◊docs{send} f show #t)
 (◊docs{define} ((check i) btn evt)
   (◊docs{message-box} "." (◊docs{if} (◊docs{=} i n) "Yes" "No")))
@@ -146,14 +146,14 @@ Racket's GUI language and libraries makes cross-platform applications easy.
 } 
 
 ◊lang["#lang web-server/insta" #:id "lang6"]{
-◊tt{;; A "hello world" web server
+◊pre{;; A "hello world" web server
 (◊docs{define} (start request)
   (◊docs{response/xexpr}
    '(html
      (head (title "Racket"))
      (body "Hello World"))))}
 
-The ◊tt{web-server/insta} language lets you quickly prototype server-side web applications.
+The ◊code{web-server/insta} language lets you quickly prototype server-side web applications.
 
 ◊link["http://docs.racket-lang.org/continue/index.html?q=web%20applications"]{Web-application tutorial ◊(begin 'rarr)}
 } 

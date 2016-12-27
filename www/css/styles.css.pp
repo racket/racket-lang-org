@@ -31,6 +31,7 @@ p {
   line-height: 1.4;
 }
 
+
 li > p:last-child {
   margin-bottom: 0em;
 }
@@ -107,14 +108,8 @@ top-section {
     padding: 0.5rem;
     padding-top: 0;
     padding-bottom: 0.25rem;
-    opacity: .3;
+    opacity: .5;
 }
-
-.lang > .inner tt {
-    font-size: 85%;
-    white-space: pre;
-}
-
 
 .lang .click-here {
   opacity: 0;
@@ -163,7 +158,8 @@ top-section {
 .lang > .name {
     padding: 0.25rem;
     font-size: 90%;
-  font-family: source-code-pro;
+    font-family: source-code-pro;
+    font-weight: bolder;
 }
 
 ul.doclinks {
@@ -344,13 +340,14 @@ div.book {
   width: 50%;
 }
 
-pre {
-  font-size: 1.1rem;
-  line-height: 1.5rem;
+code, pre {
+  font-family: "source-code-pro";
 }
 
-tt, pre {
-  font-family: "source-code-pro";
+pre {
+  margin-bottom: 1em;
+  font-size: 85%;
+  line-height: 1.65;
 }
 
 pre a {
