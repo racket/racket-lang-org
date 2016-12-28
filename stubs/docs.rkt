@@ -1,7 +1,8 @@
 #lang plt-web
 
 (require (only-in "../www/resources.rkt" www-site)
-         "../testing.rkt")
+         "../testing.rkt"
+         plt-web/private/image-version)
 
 (define docs-site (site "stubs/docs" 
                         #:url (rewrite-for-testing "https://docs.racket-lang.org/")
@@ -21,18 +22,31 @@
  (plain #:site docs-site
         #:file "doc-site.js"
         @list{
-              @(site-navbar-dynamic-js docs-site)
-              AddOnLoad(AddNavbarToBody);
+              function AddLogoToMainDiv()
+              {
+               var main_div = document.getElementsByClassName("main")[0];
+               var h = document.createElement('div');
+               h.setAttribute("class", "docsite-logo");
+               h.innerHTML = "<a href=\"@(url-of (resource "www/" #f))\"><img src=\"@(url-of (resource "www/" #f))@(format "logo-and-text~a.png" (image-version-suffix))\" alt=\"Racket\" /></a>";
+               main_div.insertBefore(h, main_div.firstChild);
+               }
+              AddOnLoad(AddLogoToMainDiv);
               }))
 (void
  (plain #:site docs-site
         #:file "doc-site.css"
         @list{
-              @"@"import url("@(site-css-path docs-site)");
-              .navsettop, .tocset { top: 60px; }
-              .versionbox { top: 64px; }
-              .hide_when_on_the_web { display: none; }
-              }))
+              .docsite-logo
+              {
+               float: right;
+               position: relative;
+               top: -2.5em;
+               left: 1.3em;
+               }
+              .docsite-logo img
+              {
+               width: 8em;
+               }}))
 
 (provide docs-path)
 (define (docs-path [path ""])
