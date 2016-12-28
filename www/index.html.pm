@@ -198,7 +198,7 @@ Documentation & tutorials
 ◊section{
 News
 
-◊link["http://blog.racket-lang.org/2015/11/racket-v63.html"]{Racket version 6.7} is available
+◊link["http://blog.racket-lang.org/2016/10/racket-v67.html"]{Racket version 6.7} is available
 
 ◊link["https://con.racket-lang.org/"]{(sixth RacketCon)} was held in St. Louis on September 18, 2016.
 }
