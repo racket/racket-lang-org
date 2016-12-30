@@ -21,7 +21,7 @@
                "gregor-lib"
                "frog"
                "rackunit-lib"
-               ("s3-sync" #:version "1.9")))
+               ("s3-sync" #:version "1.10")))
 
 (define pkg-desc "Sources for http://racket-lang.org")
 

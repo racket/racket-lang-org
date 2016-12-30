@@ -1,7 +1,8 @@
 #lang racket
 (require racket/cmdline
          s3-sync/web
-         s3-sync/routing-rule)
+         s3-sync/routing-rule
+         net/url-string)
 ;; For routing rules:
 (require "download/data.rkt"
          version/utils)
@@ -70,12 +71,32 @@
 
 (step "Additional Routing Rules")
 
+(define download-mirror-url
+  (string->url (mirror-url (car mirrors))))
+
+(define download-mirror-host (url-host download-mirror-url))
+(define download-mirror-path (let ([l (reverse 
+                                       ;; Strip "installers/" from path:
+                                       (cddr (reverse (url-path download-mirror-url))))])
+                               (if (null? l)
+                                   ""
+                                   (string-append (url->string (url #f #f #f #f #f l null #f))
+                                                  "/"))))
+
 (define routing-rules
-  (for/list ([r (in-list all-releases)]
-             #:when (version<=? "5.92" (release-version r)))
-    (redirect-prefix-routing-rule #:old-prefix (format "releases/~a/installers" (release-version r))
-                                  #:new-prefix (format "installers/~a" (release-version r))
-                                  #:new-host "mirror.racket-lang.org")))
+  (cons
+   (redirect-prefix-routing-rule #:old-prefix "installers"
+                                 #:new-prefix (format "~ainstallers" download-mirror-path)
+                                 #:new-host download-mirror-host
+                                 #:redirect-code "302")
+   (for/list ([r (in-list all-releases)]
+              #:when (version<=? "5.92" (release-version r)))
+     (redirect-prefix-routing-rule #:old-prefix (format "releases/~a/installers" (release-version r))
+                                   #:new-prefix (format "~ainstallers/~a" 
+                                                        download-mirror-path
+                                                        (release-version r))
+                                   #:new-host download-mirror-host
+                                   #:redirect-code "302"))))
 
 (unless dry-run?
   (add-routing-rules "download.racket-lang.org"
