@@ -47,7 +47,7 @@
     'calpoly "California Polytechnic State University"
     #:location "San Luis Obispo, CA"
     #:url "http://www.brinckerhoff.org/"
-    #:pubs "http://www.brinckerhoff.org/pubs/"
+    #:pubs "http://www.brinckerhoff.org/pubs.html"
     (person 'clements "John Clements"
             #:url "http://www.brinckerhoff.org/"))
    (place ; -------------------------------------------------------------------
