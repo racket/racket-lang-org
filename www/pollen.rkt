@@ -1,6 +1,14 @@
 #lang racket/base
 (provide (all-defined-out))
-(require pollen/decode pollen/tag txexpr racket/list sugar/list racket/match sugar/debug)
+(require pollen/decode
+         pollen/tag
+         txexpr
+         racket/list
+         sugar/list
+         racket/match
+         sugar/debug
+         openssl/sha1
+         racket/runtime-path)
 
 (define-tag-function (feature attrs elems)
   (match-define (cons name xs) elems)
@@ -98,16 +106,8 @@
       (apply link (format "~a#~a" path url-tag) #:class docs-class linkname)]
     [else `(@ ,@linkname)]))
 
-(define (timestamp)
-  (define d (seconds->date (current-seconds)))
-  (for/sum ([field (in-list (list
-                             (date-minute d)
-                             (date-hour d)
-                             (date-day d)
-                             (date-month d)
-                             (date-year d)))]
-            [power (in-naturals)])
-           (* (expt 10 (* 2 power)) field)))
 
-(define (timestamp-string)
-  (number->string (timestamp)))
+(define-runtime-path styles.css.pp "./css/styles.css.pp")
+(define-runtime-path fonts.css.pp "./css/fonts/fonts.css.pp")
+(define-runtime-path functions.js.pp "./js/functions.js.pp")
+(define (file-hash path) (call-with-input-file path sha1))

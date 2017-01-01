@@ -8,10 +8,9 @@
 of a CSS or JS file only for each request with a distinct query string.
 Therefore, append a timestamp string to these requests, 
 to ensure that after an S3 sync, the most recent version is served.}
-◊(define ts-str (timestamp-string))
-<link rel="stylesheet" href="css/styles.css?ts=◊|ts-str|" media="screen"/>
-<link rel="stylesheet" href="css/fonts/fonts.css?ts=◊|ts-str|" media="screen"/>
-<script type="text/javascript" src="js/functions.js?ts=◊|ts-str|"></script>
+<link rel="stylesheet" href="css/styles.css?hash=◊|(file-hash styles.css.pp)|" media="screen"/>
+<link rel="stylesheet" href="css/fonts/fonts.css?hash=◊|(file-hash fonts.css.pp)|" media="screen"/>
+<script type="text/javascript" src="js/functions.js?hash=◊|(file-hash functions.js.pp)|"></script>
 </head>
 <body>
 ◊(->html doc)
