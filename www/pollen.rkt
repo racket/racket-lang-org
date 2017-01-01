@@ -97,3 +97,17 @@
       (define-values (path url-tag) (xref-tag->path+anchor xref definition-tag #:external-root-url "http://docs.racket-lang.org/"))
       (apply link (format "~a#~a" path url-tag) #:class docs-class linkname)]
     [else `(@ ,@linkname)]))
+
+(define (timestamp)
+  (define d (seconds->date (current-seconds)))
+  (for/sum ([field (in-list (list
+                             (date-minute d)
+                             (date-hour d)
+                             (date-day d)
+                             (date-month d)
+                             (date-year d)))]
+            [power (in-naturals)])
+           (* (expt 10 (* 2 power)) field)))
+
+(define (timestamp-string)
+  (number->string (timestamp)))
