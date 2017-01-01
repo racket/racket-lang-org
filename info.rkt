@@ -14,13 +14,14 @@
                "plot-gui-lib"
                "plot-lib"
                "math-lib"
-               "pollen" ; for rcon
-               "css-tools" ; for rcon
+               "pollen"
+               "css-tools"
                "sugar"
                "txexpr"
                "gregor-lib"
                "frog"
                "rackunit-lib"
+               "openssl/sha1"
                ("s3-sync" #:version "1.10")))
 
 (define pkg-desc "Sources for http://racket-lang.org")
