@@ -5,6 +5,9 @@
 ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{solve problems · make languages}}
 
 ◊div{
+
+◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
+
 ◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
 
 ◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
@@ -21,27 +24,27 @@
 ◊doclink["web-server"]{Web applications}
 ◊doclink["db"]{Database}
 ◊doclink["math"]{Math & statistics}
-◊link["http://docs.racket-lang.org"]{full list ◊begin['rarr]}
+◊link["https://docs.racket-lang.org"]{full list ◊begin['rarr]}
 }
 } 
 
 
 ◊feature["Cross-platform" #:id "f6"]{Racket runs on Linux, macOS, and Windows. Develop on one; deploy to all three.
 ◊doclinks{
-◊link["http://docs.racket-lang.org/pkg/index.html"]{Package system}
-◊link["http://docs.racket-lang.org/framework/index.html"]{GUI framework}
+◊link["https://docs.racket-lang.org/pkg/index.html"]{Package system}
+◊link["https://docs.racket-lang.org/framework/index.html"]{GUI framework}
 ◊link["https://docs.racket-lang.org/raco/exe.html"]{Standalone binaries}
-◊link["http://docs.racket-lang.org/foreign/index.html"]{Foreign interface}
+◊link["https://docs.racket-lang.org/foreign/index.html"]{Foreign interface}
 }
 }
 
 
 ◊feature["Powerful macros & languages" #:id "f5"]{Racket's crown jewel is its macro system, which lets you freely extend the language.
 ◊doclinks{
-◊link["http://docs.racket-lang.org/guide/macros.html"]{Intro to macros}
-◊link["http://docs.racket-lang.org/reference/Macros.html"]{Macros in depth}
-◊link["http://docs.racket-lang.org/reference/syntax-model.html"]{Racket syntax model}
-◊link["http://docs.racket-lang.org/guide/hash-languages.html"]{Making new languages}
+◊link["https://docs.racket-lang.org/guide/macros.html"]{Intro to macros}
+◊link["https://docs.racket-lang.org/reference/Macros.html"]{Macros in depth}
+◊link["https://docs.racket-lang.org/reference/syntax-model.html"]{Racket syntax model}
+◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{Making new languages}
 }
 }
 
@@ -51,7 +54,7 @@
 ◊doclinks{
 ◊link["https://github.com/racket"]{Racket repositories}
 ◊link["https://github.com/racket/racket"]{Main repository}
-◊link["https://racket-lang.org/people.html"]{The PLT Group}
+◊link["plt.html"]{The PLT Group}
 ◊link["https://groups.google.com/forum/#!forum/racket-users"]{Racket mailing list}
 }
 }
@@ -70,19 +73,21 @@
 
 ◊feature["The best of Scheme and Lisp" #:id "f4"]{Racket started life as a Scheme implementation, but then grew into new areas.
 ◊doclinks{
-◊link["http://www.ccs.neu.edu/home/matthias/manifesto/"]{The Racket Manifesto}
-◊link["http://docs.racket-lang.org/guide/to-scheme.html"]{Racket essentials}
-◊link["http://docs.racket-lang.org/style/index.html"]{How to program Racket}
+◊link["https://www.ccs.neu.edu/home/matthias/manifesto/"]{The Racket Manifesto}
+◊link["https://docs.racket-lang.org/guide/to-scheme.html"]{Racket essentials}
+◊link["https://docs.racket-lang.org/style/index.html"]{How to program Racket}
 ◊doclink["r6rs"]{Using R6RS Scheme}
 }
 }
 }
 
+◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{Racket is a ◊link["https://docs.racket-lang.org/quick/index.html"]{general-purpose programming language} as well as the ◊link["https://www.ccs.neu.edu/home/matthias/manifesto/"]{world's first ecosystem} for developing and deploying new languages. Make your ◊link["https://docs.racket-lang.org/guide/languages.html"]{dream language}, or use one of the dozens ◊link["https://pkgs.racket-lang.org/"]{already available}, including these —}
+
 
 ◊special-section{
 
 ◊lang["#lang racket" #:id "lang1"]{
-◊pre{(◊docs{require} ◊link["http://docs.racket-lang.org/teachpack/2htdpimage.html?q=2htdp%2Fimage"]{2htdp/image}) ; draw a picture
+◊pre{(◊docs{require} ◊link["https://docs.racket-lang.org/teachpack/2htdpimage.html?q=2htdp%2Fimage"]{2htdp/image}) ; draw a picture
 (◊docs{let} sierpinski ([n 8])
   (◊docs{cond}
     [(◊docs{zero?} n) (◊docs{triangle} 2 'solid 'red)]
@@ -103,7 +108,7 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
 
 The ◊code{scribble/base} language generates documents using a prose-friendly syntax.
 
-◊link["http://docs.racket-lang.org/scribble/getting-started.html"]{Scribble tutorial ◊(begin 'rarr)}
+◊link["https://docs.racket-lang.org/scribble/getting-started.html"]{Scribble tutorial ◊(begin 'rarr)}
 }
 
 ◊lang["#lang typed/racket" #:id "lang3"]{
@@ -116,7 +121,7 @@ The ◊code{scribble/base} language generates documents using a prose-friendly s
 
 Typed Racket's "gradual" typing lets you add types after you've been working in untyped mode.
 
-◊link["http://docs.racket-lang.org/ts-guide/quick.html?q=typed%20racket"]{Typed Racket tutorial ◊(begin 'rarr)}
+◊link["https://docs.racket-lang.org/ts-guide/quick.html?q=typed%20racket"]{Typed Racket tutorial ◊(begin 'rarr)}
 
 } 
 
@@ -130,7 +135,7 @@ ancestor(A, B)?}
 
 You can use Racket to build other languages — like ◊code{datalog}, a logic-programming language.
 
-◊link["http://docs.racket-lang.org/datalog/Tutorial.html?q=datalog"]{Datalog tutorial ◊(begin 'rarr)}} 
+◊link["https://docs.racket-lang.org/datalog/Tutorial.html?q=datalog"]{Datalog tutorial ◊(begin 'rarr)}} 
 
 ◊lang["#lang racket/gui" #:id "lang5"]{
 ◊pre{(◊docs{define} f (◊docs{new} frame% [label "Guess"]))
@@ -142,7 +147,7 @@ You can use Racket to build other languages — like ◊code{datalog}, a logic-p
 
 Racket's GUI language and libraries makes cross-platform applications easy.
 
-◊link["http://docs.racket-lang.org/gui/windowing-overview.html?q=gui"]{GUI tutorial ◊(begin 'rarr)}
+◊link["https://docs.racket-lang.org/gui/windowing-overview.html?q=gui"]{GUI tutorial ◊(begin 'rarr)}
 } 
 
 ◊lang["#lang web-server/insta" #:id "lang6"]{
@@ -155,7 +160,7 @@ Racket's GUI language and libraries makes cross-platform applications easy.
 
 The ◊code{web-server/insta} language lets you quickly prototype server-side web applications.
 
-◊link["http://docs.racket-lang.org/continue/index.html?q=web%20applications"]{Web-application tutorial ◊(begin 'rarr)}
+◊link["https://docs.racket-lang.org/continue/index.html?q=web%20applications"]{Web-application tutorial ◊(begin 'rarr)}
 } 
 }
 
@@ -198,7 +203,7 @@ Documentation & tutorials
 ◊section{
 News
 
-◊link["http://blog.racket-lang.org/2016/10/racket-v67.html"]{Racket version 6.7} is available
+◊link["https://blog.racket-lang.org/2016/10/racket-v67.html"]{Racket version 6.7} is available
 
 ◊link["https://con.racket-lang.org/"]{(sixth RacketCon)} was held in St. Louis on September 18, 2016.
 }
@@ -223,7 +228,7 @@ Community
 Books
 
 
-◊link["http://www.htdp.org/"]{How to Design Programs}
+◊link["https://www.htdp.org/"]{How to Design Programs}
 A principled approach to programming.
 
 

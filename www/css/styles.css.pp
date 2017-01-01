@@ -215,8 +215,7 @@ div#f6 {
   border: 0.1rem solid ◊|link-color|;
   color: ◊|link-color|;
   border-radius: 0.3rem;
-  background: #fafaff;
-  padding: 0rem 0.6rem;
+  padding: 0rem 0.4em;
   font-family: source-code-pro;
   letter-spacing: 0.05em;
   font-size: 80%;
@@ -229,13 +228,9 @@ div#f6 {
   margin-left: 0.3rem;
 }
 
-.top-button#download:before {
-  content: "\e069";
-  font-family: feather;
-  padding-right: 0.5em;
-  position: relative;
-  font-size: 90%;
-  top: -0.12em;
+.top-button#download{
+  background: ◊|link-color|;
+  color: #fafaff;  
 }
 
 section#samples {
@@ -244,6 +239,12 @@ section#samples {
 
 section.one-column-body-text section-content > li {
   width: 100%;
+}
+
+section#pull-quote section-content > li {
+  padding: 0.5em 0;
+  color: #555;
+  font-size: 120%;
 }
 
 section#logo * {
