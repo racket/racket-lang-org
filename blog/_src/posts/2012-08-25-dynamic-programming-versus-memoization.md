@@ -10,7 +10,6 @@
 
 
 I wrote this on the Racket educators' mailing list, and Eli Barzilay
-
 suggested I post it here as well.
 
 
@@ -63,6 +62,9 @@ There are many trade-offs between memoization and DP that should drive the choic
 * must alway check whether a sub-computation has already been done before doing it (which incurs a small cost)
 
 * has a time complexity that depends on picking a smart computation name lookup strategy
+
+
+
 In direct contrast, **DP**:
 
 
@@ -75,6 +77,7 @@ In direct contrast, **DP**:
 * has no need to check whether a computation has been done before doing it--the computation is rewritten to ensure this isn't necessary
 
 * has a space complexity that depends on picking a smart data storage strategy
+
 [NB: Small edits to the above list thanks to an exchange with Prabhakar Ragde.]
 
 
