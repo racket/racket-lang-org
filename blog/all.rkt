@@ -2,6 +2,7 @@
 (require plt-web/style
          racket/runtime-path
          racket/path
+         racket/system
          raco/all-tools
          "../identity.rkt"
          "../testing.rkt")
@@ -13,6 +14,9 @@
 
 (define-runtime-path blog-dir ".")
 (define css-dir (simplify-path (build-path blog-dir "css/")))
+
+(unless (system "python -c 'import pygments'")
+  (error "pygments required to preserve doc links for code on the blog"))
 
 (define v (all-tools))
 ;; frog rebuild: generates blog html
