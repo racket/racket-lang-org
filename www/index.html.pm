@@ -203,9 +203,10 @@ Documentation & tutorials
 ◊section{
 News
 
+(seventh RacketCon) will be held in Seattle on October 7, 2017, followed by Racketeer Office Hours on October 8.
+
 ◊link["https://blog.racket-lang.org/2016/10/racket-v67.html"]{Racket version 6.7} is available
 
-◊link["https://con.racket-lang.org/"]{(sixth RacketCon)} was held in St. Louis on September 18, 2016.
 }
 
 ◊section{
