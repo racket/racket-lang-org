@@ -20,9 +20,10 @@
 
 (define v (all-tools))
 ;; pollen rebuild
-(parameterize ([current-directory (simplify-path www-dir)])
-  (parameterize ([current-command-line-arguments (vector "render" "-r")])
-    (dynamic-require (second (hash-ref v "pollen")) #f)))
+(parameterize ([current-directory (simplify-path www-dir)]
+               [current-command-line-arguments (vector "render" "-r")]
+               [current-namespace (make-base-namespace)])
+  (dynamic-require (second (hash-ref v "pollen")) #f))
 
 (define (excluded-path? path)
   (define-values (base name _) (split-path path))
@@ -39,5 +40,5 @@
 (for ([path (in-directory www-dir)]
       #:unless (or (directory-exists? path)
                    (excluded-path? path)))
-     (define relpath (find-relative-path (simplify-path www-dir) (simplify-path path)))
-     (copyfile #:site www-2016-site path (path->string relpath)))
+  (define relpath (find-relative-path (simplify-path www-dir) (simplify-path path)))
+  (copyfile #:site www-2016-site path (path->string relpath)))
