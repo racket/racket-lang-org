@@ -155,13 +155,13 @@ Bring on the Pitchers!
 The easiest way to illustrate the tree-to-DAG conversion visually is via the Fibonacci computation. Here's a picture of the computational tree:
 
 
-
+![Fibonacci tree](/img/fib-tree.jpg)
 
 
 Now let's see it with memoization. The calls are still the same, but the dashed ovals are the ones that don't compute but whose values are instead looked up, and their emergent arrows show which computation's value was returned by the memoizer.
 
 
-
+![Fibonacci DAG](/img/fib-dag.jpg)
 
 
 **Important**: The above example is misleading because it suggests that memoization _linearizes_ the computation, which in general it does not. If you want to truly understand the process, I suggest hand-tracing the Levenshtein computation with memoization. And to truly understand the _relationship_ to DP, compare that hand-traced Levenshtein computation with the DP version. (Hint: you can save some manual tracing effort by lightly instrumenting your memoizer to print inputs and outputs. Also, make the memo table a global variable so you can observe it grow.)

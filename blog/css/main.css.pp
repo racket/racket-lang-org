@@ -391,6 +391,24 @@ ul ul { ◊; nested list
   margin-left: 2rem;
 }
 
+
+/* images notated in markdown */
+/* are inside div.figure and have a p.caption afterward */
+
+.figure {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.figure img {
+  width: 35rem;  
+}
+
+.figure p.caption {
+  display: none;
+}
+
+
 /* frog seems to hard-code the paginator on index page */
 ul.pagination {
   display: flex;
