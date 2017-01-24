@@ -1,0 +1,59 @@
+1485290323
+Racket version 6.8 is now available from
+
+    http://racket-lang.org/
+
+- Racket sports a new logo, courtesy of Matthew Butterick.
+
+- MacBook Pro laptops with touch bars are supported.
+
+- Support for FreeBSD on PowerPC.
+
+- Initial support for GTK3 on Wayland is available. GL contexts, GC
+  blits, and dialog placement currently do not work.
+
+- The macro stepper provides a command-line interface via the
+  `raco macro-stepper` command.
+
+- Typed Racket more efficiently represents and computes types and
+  propositions, resulting in faster type checking for many programs.
+  For more details, see this blog post by Andrew Kent:
+  https://pnwamk.github.io/blog/2017/01/08/some-changes-in-typed-racket-v6-8/
+
+- The bytecode optimizer can reduce more expressions of the form
+  `(equal? x y)` to `(eqv? x y)` or `(eq? x y)` when the type of `x` or
+  `y` is known.
+
+- The bytecode optimizer avoids dropping stack frames in some reductions.
+  This provides better stack traces for errors when errotrace is enabled.
+
+- The bytecode compiler detects more optimization opportunities,
+  including when variables always hold a boolean value. In particular in
+  expressions like (or (symbol? x) (something)), the optimizations
+  avoid the creation of an intermediate variable to store the result of
+  (symbol? x).
+
+- The `syntax` form preserves syntax properties on all template pieces.
+
+- The `scribble/html/extra` module provides renderers for HTML elements
+  that are part of the WHATWG HTML standard but not part of the `scribble/html`
+  `scribble/html` language by default (e.g., `map`, `time`, `video`).
+
+- The DeinProgramm teaching languages support pattern matching using the
+  `match` form.
+
+- In the DeinProgramm languages, `define-record-procedures` supports
+  specifying signatures as part of the form, instantly enabling
+  properties quantifying over such records.
+
+The following people contributed to this release:
+Aleksej Saushev, Alex Knauth, Alexander Hedges, Alexander Shopov, Alexis
+King, Andrew Kent, Asumu Takikawa, Ben Greenman, Celeste Hollenbeck,
+Craig Allen, Don March, Georges Dupéron, Gustavo Massaccesi, James
+Bornholt, Jay McCarthy, Jerry James, John Clements, Juan Francisco
+Cantero Hurtado, Leandro Facchinetti, Leif Andersen, Matthew Butterick,
+Matthew Flatt, Matthias Felleisen, Max New, Mike Sperber, Phil Nguyen,
+Reid D McKenzie, Reuben Thomas, Robby Findler, Ryan Culpepper, Sam
+Tobin-Hochstadt, Shu-Hung You, Spencer Florence, Stephen Chang, Tim
+Brown, Tony Garnock-Jones, Vincent St-Amour, WarGrey Gyoudmon Ju, and
+William G Hatch.
