@@ -5,27 +5,28 @@
 *posted by Jack Firth*
 
 Today I wanted to write about function application. Specifically, how to redefine and customize
-application with Racket. We'll also look at some Racket packages the define interesting and useful
+application with Racket. We'll also look at some Racket packages that define interesting and useful
 forms of function application.
 
 ## The theory
 
-Application defines one half of *lambda calculus*, the formal model underlying much of modern
-functional programming. The other half is *abstraction*, which creates new functions. Creating and
-applying functions lies at the heart of Racket and many other functional languages.
+Application is the process of combining a function and arguments to evaluate a result. Application
+defines one half of *lambda calculus*, the formal model underlying much of modern functional
+programming. The other half is *abstraction*, which is creating new functions. Creating and applying
+functions is the heart of Racket and many other functional languages.
 
 So how are functions applied in Racket? What makes `(if (< 5 10) 'foo 'bar)` a macro use and
 `(< 5 10)` a function use?
 
-That's actually a trick question, because function application *is* a macro in Racket. During macro
-expansion, the Racket expander inspects the first element of an expression to determine if it has a
-binding to a macro. If it doesn't, rather than assume the expression is a function application, the
-expander inserts an *artificial* identifier named `#%app`[racket] into the expression. So in the
-above example, the expression `(< 5 10)` is converted to `(#%app < 5 10)`. This `#%app`[racket]
-identifier doesn't refer to a single specific `#%app`[racket] like the `if`[racket] refers to
-`if`[racket] from `racket/base`[racket], rather it refers to whatever the enclosing environment
-defines `#%app`[racket] to be (which by default means ordinary function application from
-`racket/base`[racket]).
+That's actually a trick question, because function application *is* a macro in Racket. During
+[macro expansion][1], the Racket expander inspects the first element of an expression to determine
+if it has a binding to a macro. If it doesn't, rather than assume the expression is a function
+application, the expander inserts an *artificial* identifier named `#%app`[racket] into the
+expression. So in the above example, the expression `(< 5 10)` is converted to `(#%app < 5 10)`.
+This `#%app`[racket] identifier doesn't refer to a single specific `#%app`[racket] like the
+`if`[racket] refers to `if`[racket] from `racket/base`[racket], rather it refers to whatever the
+enclosing environment defines `#%app`[racket] to be (which by default means ordinary function
+application from `racket/base`[racket]).
 
 However, imported modules can provide their own definitions of function application by providing an
 `#%app`[racket] macro. Let's define our own `#%app`[racket] that, in addition to applying a
@@ -102,7 +103,8 @@ arguments to functions like `map` and `filter`:
 The `rackjure`[racket] package redefines `#%app` to make working with nested dictionaries easier.
 Dictionaries can be used to get and set values for keys when used as procedures, and when
 dictionaries are the *second* value of a function application the first value is interpreted as a
-key and the dictionary's associated value is looked up. See [the documentation][2] for details.
+key and the dictionary's associated value is looked up. See [the `rackjure` documentation][2] for
+details.
 
 [1]: https://github.com/samth/fancy-app
 [2]: http://docs.racket-lang.org/rackjure/index.html#%28part._dict-app%29
