@@ -84,7 +84,7 @@ Applying #<procedure:+> to arguments '(6 11)
 
 Redefinition of `#%app`[racket] is occasionally used when defining new languages, but a much more
 pedestrian use is to add some notational shorthand to make certain constructs more convenient. For
-example, consider the [`fancy-app`][1] package. This package provides an `#%app`[racket] macro that
+example, consider the [`fancy-app`][2] package. This package provides an `#%app`[racket] macro that
 behaves just like normal function application *unless* one or more underscores are used. In that
 case, the function application is converted to a lambda that takes as input one argument for each
 underscore. For example, `(format "Hello ~a" _)` is equivalent to
@@ -103,8 +103,9 @@ arguments to functions like `map` and `filter`:
 The `rackjure`[racket] package redefines `#%app` to make working with nested dictionaries easier.
 Dictionaries can be used to get and set values for keys when used as procedures, and when
 dictionaries are the *second* value of a function application the first value is interpreted as a
-key and the dictionary's associated value is looked up. See [the `rackjure` documentation][2] for
+key and the dictionary's associated value is looked up. See [the `rackjure` documentation][3] for
 details.
 
-[1]: https://github.com/samth/fancy-app
-[2]: http://docs.racket-lang.org/rackjure/index.html#%28part._dict-app%29
+[1]: http://docs.racket-lang.org/reference/syntax-model.html#%28part._expand-steps%29
+[2]: https://github.com/samth/fancy-app
+[3]: http://docs.racket-lang.org/rackjure/index.html#%28part._dict-app%29
