@@ -205,6 +205,8 @@ News
 
 ◊link["https://blog.racket-lang.org/2017/01/racket-v6-8.html"]{Racket version 6.8} is available.
 
+New! ◊link["https://devswag.com/products/racket"]{Racket stickers} — the indispensable accessory for laptops and textbooks.
+
 (seventh RacketCon) will be held in Seattle on October 7, 2017, followed by Racketeer Office Hours on October 8.
 
 }
