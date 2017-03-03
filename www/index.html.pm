@@ -81,7 +81,7 @@
 }
 }
 
-◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{Racket is a ◊link["https://docs.racket-lang.org/quick/index.html"]{general-purpose programming language} as well as the ◊link["https://www.ccs.neu.edu/home/matthias/manifesto/"]{world's first ecosystem} for developing and deploying new languages. Make your ◊link["https://docs.racket-lang.org/guide/languages.html"]{dream language}, or use one of the dozens ◊link["https://pkgs.racket-lang.org/"]{already available}, including these —}
+◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{Racket is a ◊link["https://docs.racket-lang.org/quick/index.html"]{general-purpose programming language} as well as the ◊link["https://www.ccs.neu.edu/home/matthias/manifesto/"]{world's first ecosystem} for developing and deploying new languages. Make your ◊link["https://docs.racket-lang.org/guide/languages.html"]{dream language}, or use one of the dozens ◊link["http://docs.racket-lang.org/search/index.html?q=H%3A"]{already available}, including these —}
 
 
 ◊special-section{
