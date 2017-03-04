@@ -174,11 +174,11 @@ To test that it works, let's embed some C syntax in our Racket program:
 > At this point, running `$ raco setup --check-pkg-deps scratch`[bash] will
 > report an undeclared dependency on [`at-exp-lib`](http://docs.racket-lang.org/scribble/reader-internals.html#%28mod-path._at-exp%29).
 > Make sure to add `at-exp-lib` to the `deps`[racket] list in your
-> `info.rkt` file.
+> `info.rkt` file, or run `$ raco setup --fix-pkg-deps scratch`[bash]
 
 > Using [`prefix-in`[racket]](http://docs.racket-lang.org/reference/require.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._prefix-in%29%29)
 > is not necessary; it just clarifies where
-> `read`[racket] and `read-syntax`[racket] come from.}
+> `read`[racket] and `read-syntax`[racket] come from.
 
 > If you think inline C _strings_ are interesting, you should
 > definitely watch Jay McCarthy's RacketCon 2016
