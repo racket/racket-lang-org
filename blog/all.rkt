@@ -16,7 +16,7 @@
 (define css-dir (simplify-path (build-path blog-dir "css/")))
 
 (unless (system "python -c 'import pygments'")
-  (error "pygments required to preserve doc links for code on the blog"))
+  (error 'python "pygments required to preserve doc links for code on the blog"))
 
 (define v (all-tools))
 ;; frog rebuild: generates blog html
