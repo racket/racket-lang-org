@@ -33,8 +33,8 @@
 (define-runtime-path illo-dir "img/illos/")
 
 (define (start name)
-  (when (not (directory-exists? illo-dir))
-    (make-directory illo-dir))
+  (unless (directory-exists? illo-dir)
+    (make-directory* illo-dir))
   (current-target (make-bitmap hmax vmax))
   (current-dc (if (eq? 'svg (current-format))
                   (new svg-dc% [width hmax]
