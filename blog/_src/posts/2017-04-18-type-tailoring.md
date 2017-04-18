@@ -1,6 +1,5 @@
-
     Title: Type Tailoring
-    Date: 2017-02-26T16:35:47
+    Date: 2017-04-18T16:35:47
     Tags:
 
 _posted by Ben Greenman_
