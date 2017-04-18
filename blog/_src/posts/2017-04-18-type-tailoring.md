@@ -2,7 +2,7 @@
     Date: 2017-04-18T16:35:47
     Tags:
 
-_posted by Ben Greenman_
+*posted by Ben Greenman*
 
 Type tailoring is a technique for adding _domain-specific_ type checkers to a
  typed host language.
