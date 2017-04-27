@@ -1,0 +1,73 @@
+1493310997
+Racket version 6.9 is now available from
+
+    http://racket-lang.org/
+
+---
+
+Security Announcement:
+
+A security vulnerability in the `racket/sandbox` library and Typed
+Racket allowed malicious Typed Racket code to escape the sandbox.
+This vulnerability has been fixed in Racket version 6.9. Anyone using
+`racket/sandbox` to execute untrustworthy code with access to Typed
+Racket should upgrade to version 6.9 immediately.
+
+While this known vulnerability has been eliminated, it is possible that
+similar errors in other installed collections could also be exploited,
+although we are not currently aware of any existing vulnerabilities. We
+recommend that if you use the Racket sandbox to execute untrustworthy
+Racket code, you should also employ additional operating system or
+virtual machine level protections. The documentation for `racket/sandbox`
+has been updated to list recommended security practices for using the
+library.
+
+Thanks to Scott Moore for identifying this vulnerability.
+
+---
+
+- The official package catalog Web site is revised to have a new user
+  experience.
+
+- The Northwestern snapshot site keeps weekly snapshots going up to 12
+  weeks into the past. Those provide a middle ground for users who want
+  access to new features earlier than stable releases, but want less
+  churn than nightly builds.
+
+- DrRacket provides a refactoring tool to remove unused requires in
+  modules.
+
+- DrRacket's #lang-line customization support works better with buggy
+  (i.e., in development) languages.
+
+- The web server's cookie libraries, including "id cookie" authentication,
+  support RFC 6265.
+
+- The `db` library supports PostgreSQL's UUID type.
+
+- The `raco` command lists matching commands when passed an ambiguous
+  command prefix.
+
+- The bytecode compiler detects more optimization opportunities for
+  structure operations.
+
+- Scribble can produce output via XeLaTeX as an alternative to LaTeX.
+
+- Scribble supports the `acmart` LaTeX style, for use with ACM
+  publications.
+
+- Scribble supports the use of CJK characters in tags.
+
+---
+
+The following people contributed to this release:
+Alex Knauth, Alexander Shopov, Alexis King, Andrew Kent, Asumu Takikawa,
+Ben Greenman, Daniel Feltey, David Van Horn, Georges Dupéron, Greg
+Hendershott, Gustavo Massaccesi, Ingo Blechschmidt, James Bornholt,
+James Whang, Jay McCarthy, Jeff Shelley, John Clements, Jordan Johnson,
+Leandro Facchinetti, Leif Andersen, Marc Burns, Matthew Butterick,
+Matthew Eric Bassett, Matthew Flatt, Matthias Felleisen, Michael Myers,
+Mike Sperber, Philip McGrath, Philippe Meunier, Robby Findler, Royall
+Spence, Ryan Culpepper, Sam Caldwell, Sam Tobin-Hochstadt, Shu-Hung You,
+Spencer Florence, Stephen Chang, Tony Garnock-Jones, Vincent St-Amour,
+WarGrey Gyoudmon Ju, Wei Tang, and William G Hatch.
