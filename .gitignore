@@ -18,4 +18,11 @@ compiled/
 *.bak
 TAGS
 rcon/2015/pollen-cache/*
+rcon/2015/*.html
 rcon/2016/pollen-cache/*
+rcon/2016/*.svg
+rcon/2016/*.html
+rcon/2017/*.css
+rcon/2017/*.svg
+rcon/2017/*.html
+rcon/2017/*.css
