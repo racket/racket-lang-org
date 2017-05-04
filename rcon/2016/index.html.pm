@@ -23,7 +23,7 @@
 ◊keynote-speaker["" "Emina Torlak"]{Synthesis and Verification for All}
 
 ◊gap[0.5]
-◊rlink["2016/torlak.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=nOyIKCszNeI"]{Video}
+◊rlink["torlak.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=nOyIKCszNeI"]{Video}
 
 Rosette is a programming language for creating new programming tools. It extends Racket with a few constructs that make it easy to build advanced tools for program verification and synthesis. Building these tools usually takes months or years of work, as well as expertise in many fields, from formal methods to programming languages to software engineering. With Rosette, creating such a tool is as easy as defining a new domain-specific language in Racket. Once you define your language, you get the tools for (almost) free. This talk will provide a brief introduction to Rosette, concluding with a whirlwind tour of recent applications to finding bugs in radiotherapy software, generating efficent code for ultra low-power hardware, and creating custom tutors for K-12 algebra.
 
@@ -47,7 +47,7 @@ I've been devoting the year 2016 strictly to Racket projects. The most ambitious
 
 ◊folded{
 ◊speaker["" "Stephen Chang and Alex Knauth"]{Type Systems as Macros}
-◊rlink["2016/chang-knauth1.pdf"]{Slides (Part 1)} ◊rlink["2016/chang-knauth2.pdf"]{Slides (Part 2)} ◊link["https://www.youtube.com/watch?v=j5Hauz6cewM"]{Video}
+◊rlink["chang-knauth1.pdf"]{Slides (Part 1)} ◊rlink["chang-knauth2.pdf"]{Slides (Part 2)} ◊link["https://www.youtube.com/watch?v=j5Hauz6cewM"]{Video}
 
 The Racket Manifesto says that "Racket is a programming language for creating new programming languages". Yet, nearly all languages created with Racket are untyped, ignoring the significant typed portion of the PL spectrum. Typed Racket demonstrates that creating typed languages in Racket is possible ... with monumental effort. This talk attempts to give hope to the common Racket programmer who wishes to create typed languages with Racket, yet does not possess multiple PhDs. Specifically, I'll demonstrate a technique for embedding type checking directly into macro definitions, in a manner that is compatible with the language-creation patterns that Racket programmers are already familiar with, thus leading to typed languages with little effort.
 
@@ -56,7 +56,7 @@ The Racket Manifesto says that "Racket is a programming language for creating ne
 
 ◊folded{
 ◊speaker["" "Byron Davies"]{Racket Does Dijkstra}
-◊rlink["2016/davies.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=rshoZA7F3dQ"]{Video}
+◊rlink["davies.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=rshoZA7F3dQ"]{Video}
 
 In the name of Systems Integrity Assurance, ◊link["http://Ontopilot.com"]{Ontopilot.com} is prototyping new tools for automatically finding bugs in software, using Dijkstra Guarded Commands and weakest precondition (WP). One member of our team developed a new method for applying WP methods to software, and has used it successfully to find nearly intractable bugs in operating systems and other software. We’re automating the method and incorporating the new Micron Automata Process to make it possible to apply our approach to million-line programs. To prove the concept, we have implemented the method in Racket, using Syntax as the intermediate language before conversion to Dijkstra Guarded Commands, and using the Syntax Browser to examine and debug the multiple representations used to convert a programming language into mathematical logic.
 
@@ -65,7 +65,7 @@ In the name of Systems Integrity Assurance, ◊link["http://Ontopilot.com"]{Onto
 
 ◊folded{
 ◊speaker["" "Jack Firth"]{Language Integrated Nitpicking: Syntax Warnings in Racket}
-◊rlink["2016/firth.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=i6wXy3MZm64"]{Video}
+◊rlink["firth.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=i6wXy3MZm64"]{Video}
 
 Many popular languages automatically warn developers of potential mistakes with static analysis: dangerous patterns, use of deprecated features, and inconsistent variable names are all caught by automated tools, making it easier for programmers to stay on the same page. This talk presents a Racket library for adding syntax warnings and suggesting refactors via the macro system. True to Racket's philosophy, library users can define their own warnings with equal power to built in suggestions. Next time you argue over style guide rules, resolve it with a new syntax warning so it never comes up again!
 
@@ -75,7 +75,7 @@ Many popular languages automatically warn developers of potential mistakes with 
 
 ◊folded{
 ◊speaker["" "Alexis King"]{Languages in an Afternoon}
-◊rlink["2016/king.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=TfehOLha-18"]{Video}
+◊rlink["king.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=TfehOLha-18"]{Video}
 
 Racket is not just a programming language; it is a programming language platform. Ideally, it could be more than a platform, but a greenhouse—a perfect tool for incubating new languages and growing mature ones (general purpose or domain specific). This talk presents a survey of Racket’s tools for building languages, the process it takes to add an entirely new, fully-integrated language to the ecosystem, and the places where that process could be streamlined to achieve the dream of designing, implementing, and applying an entirely new programming language in a single afternoon.
 
@@ -83,7 +83,7 @@ Racket is not just a programming language; it is a programming language platform
 
 ◊folded{
 ◊speaker["" "Geoffrey S. Knauth"]{Racket is my Mjolnir}
-◊rlink["2016/knauth.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=VB5vqBlRRkk"]{Video}
+◊rlink["knauth.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=VB5vqBlRRkk"]{Video}
 
 Weather services around the world rely on binary and compressed data formats that were formalized in the days when Fortran was dominant and bandwidth was extremely expensive. The formats were revolutionary in the 1980s, but now, though compact and commonplace, they are not as easy to work with as more modern general purpose formats used in other disciplines. In order to see what’s in these files, decoders have been written with APIs in Fortran, C and Python, but those decoders, now in beta, require programs that use them to expect input files to be of a specific subtype. Even the Python interface, which offers some amount of interactive and scripting potential, expects a person to have some knowledge of the structure and contents in advance.
 
@@ -93,7 +93,7 @@ Racket offers the additional capability of using customizable domain specific la
 
 ◊folded{
 ◊speaker["" "Jay McCarthy"]{R-r-r-r-REMIX!}
-◊rlink["2016/mccarthy.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=r1kE3R26dK0"]{Video}
+◊rlink["mccarthy.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=r1kE3R26dK0"]{Video}
 
 Parentheses getting you down? Not enough dots in your life? Can't tell a parenthesis from a brace or bracket? Standard library inconsistency getting you down? #lang remix is the droid you're looking for. It's Racket with delicious, buttery C-like syntax and a new standard library that remixes old forms to increase their Racketosity over 9,000!!!! Come for the dots, stay for the ◊tt{def+}.
 
@@ -102,7 +102,7 @@ Parentheses getting you down? Not enough dots in your life? Can't tell a parenth
 
 ◊folded{
 ◊speaker["" "Scott Moore"]{Contracts for Security}
-◊rlink["2016/moore.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=nVa_Hl45vNU"]{Video}
+◊rlink["moore.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=nVa_Hl45vNU"]{Video}
 
 The Principle of Least Privilege says that software shouldn't be executed with more authority than it needs to get its job done. Shill is a shell scripting language designed to make it easy to follow the Principle of Least Privilege—every Shill script comes with a contract (built with Racket's contract library) that describes exactly what it can do. By combining careful language design with system-level sandboxing, Shill's security guarantees let users run third-party scripts with confidence. This talk gives an overview of Shill and describes how Racket streamlined its design and implementation.
 
@@ -111,7 +111,7 @@ The Principle of Least Privilege says that software shouldn't be executed with m
 
 ◊folded{
 ◊speaker["" "Linh Chi Nguyen"]{Population game simulation in Racket}
-◊rlink["2016/nguyen.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=KZ_YnOFkVx0"]{Video}
+◊rlink["nguyen.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=KZ_YnOFkVx0"]{Video}
 
 As part of our research in social science, we simulate a population of agents playing an abstract game and let them evolve to see what kind of strategies survive and emerge in the long run. As an example, we describe the simulation of the repeated Prisoner's Dilemma game. It has been quite a journey in Racket. We love the vibe and would like to share the insights we have accumulated about Racket programming. We also show how the technical result could be interpreted or translated into cultural meaning. After all, the bridge between economics (especially game theory) and programming is getting crowded with practitioners and intellectual musings from both fields. We look forward to a fun and interesting discussion at RacketCon.
 
@@ -120,7 +120,7 @@ As part of our research in social science, we simulate a population of agents pl
 
 ◊folded{
 ◊speaker["" "Rodrigo Setti"]{Generative Art with Racket}
-◊rlink["2016/setti.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=JuBJ5OD-bQw"]{Video}
+◊rlink["setti.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=JuBJ5OD-bQw"]{Video}
 
 Stamps is a language built on top of Racket, in which one can describe high-level generating rules for 2D shapes, and which takes care of interpreting those rules and rendering. It is easy to create beautiful art that resembles smooth biological forms, as well as recursive fractal-like works. In this talk I introduce my first non-trivial Racket project, and talk about my particular experience developing it.
 
@@ -128,7 +128,7 @@ Stamps is a language built on top of Racket, in which one can describe high-leve
 
 ◊folded{
 ◊speaker["" "Bruce Steinberg"]{Functional Lighting}
-◊rlink["2016/steinberg.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=iQOkRUmIfso"]{Video}
+◊rlink["steinberg.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=iQOkRUmIfso"]{Video}
 
 I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-racket"]{an application for controlling Phillips Hue Bulbs in theatrical settings}. As a professional lighting designer specializing in new and experimental work, I often find myself in galleries and other untraditional settings. Rather than bringing in an entire rig (and unhelpfully transforming the space into a theatre), I've used ◊link["http://www2.meethue.com/en-us/"]{Phillip Hue Bulbs} instead. They allow wireless individual control of fixtures, even when they are all powered via a single track or outlet. Using functional logic to determine the most efficient json commands, ◊em{Simple Hue Control} offers a designer a familiar programming interface for creating beautiful shows.
 
@@ -136,7 +136,7 @@ I’ve been working on ◊link["https://github.com/brucehs/simple-hue-control-ra
 
 ◊folded{
 ◊speaker["" "Andy Wingo"]{Spelunking through JPEG with Racket}
-◊rlink["2016/wingo.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=wsYvh5dAWN4"]{Video}
+◊rlink["wingo.pdf"]{Slides} ◊link["https://www.youtube.com/watch?v=wsYvh5dAWN4"]{Video}
 
 JPEG is a funny thing.  Photos are our lives and our memories, our first steps and our friends, and yet how much do we know about how they work?  This talk explores the JPEG format in a graphical way, using a Racket library to dissect, reconstruct, encode, and decode JPEG files.
 
