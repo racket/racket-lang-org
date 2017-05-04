@@ -85,6 +85,9 @@
 (define (head which . xs)
   `(div ((class "head") (id ,(format "~a" which)))
         ,@(for/list ([c (in-string "cmyw")])
-                    `(div ((class ,(format "movable ~a" c))
-                           (style ,(format "transform: translate3d(~arem,~arem,0)" (- (random 2) 2) (- (random 2) 2)))
-                           (id ,(symbol->string (gensym)))) ,@xs))))
+                    (define the-div
+                      `(div ((class ,(format "movable ~a" c))
+                             (style ,(format "transform: translate3d(~arem,~arem,0)" (- (random 2) 2) (- (random 2) 2)))
+                             (id ,(symbol->string (gensym)))) ,@xs))
+                    ;; use aria-hidden = "true" attribute to hide duplicates from screen readers
+                    (if (not (char=? c #\w)) (attr-set the-div 'aria-hidden "true") the-div))))
