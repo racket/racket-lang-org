@@ -233,7 +233,7 @@ Community
 Books
 
 
-◊link["https://www.htdp.org/"]{How to Design Programs}
+◊link["http://www.htdp.org/"]{How to Design Programs}
 A principled approach to programming.
 
 
