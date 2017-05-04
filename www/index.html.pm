@@ -207,6 +207,8 @@ News
 
 New! ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
 
+New! ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
+
 New! ◊link["https://devswag.com/products/racket"]{Racket stickers} — the indispensable accessory for laptops and textbooks.
 
 (seventh RacketCon) will be held in Seattle on October 7, 2017, followed by Racketeer Office Hours on October 8.
