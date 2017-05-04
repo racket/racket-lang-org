@@ -161,17 +161,17 @@ div.book {
   width: 50%;
 }
 
-pre, div.pygments {
+pre, div.pygments, .SCodeFlow {
   font-size: 1rem;
   line-height: 1.5rem;
 }
 
-tt, pre, code {
+tt, pre, code, .RktSym, .RktMod, .RktVal {
   font-family: "source-code-pro";
 }
 
 
-code {
+code, .RktSym, .RktMod, .RktVal {
     font-size: 90%;
     background: #fcfcfc;  
     padding: 0rem 0.2rem 0rem 0.2rem;
@@ -179,14 +179,13 @@ code {
     font-weight: bolder;
 }
 
-div.pygments {
-      background: #fcfcfc;
+div.pygments, .SCodeFlow {
+    background: #fcfcfc;
     padding: 0.5rem;
     border-top: 1px solid #ebebeb;
     border-bottom: 1px solid #ebebeb;
     margin-bottom: 1.2rem;
 }
-
 
 pre a {
   font-weight: bolder;
