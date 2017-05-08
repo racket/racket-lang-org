@@ -59,6 +59,12 @@ RacketCon attendees benefit from a ◊link["https://gc.synxis.com/rez.aspx?Hotel
 
 ◊gap[0]
 
+◊h3{◊xtarget["sponsor"]{Sponsor RacketCon}}
+
+If you or your company would like to sponsor RacketCon, please ◊a['((href "mailto:con@racket-lang.org"))]{get in touch}.
+
+◊gap[0]
+
 ◊h3{Previous RacketCons}
 
 ◊(define (conlink year) 
