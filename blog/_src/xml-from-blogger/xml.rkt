@@ -1,5 +1,5 @@
 #lang at-exp racket
-(require xml txexpr pollen/unstable/convert pollen/core gregor frog/xexpr2text frog/bodies-page racket/runtime-path)
+(require xml txexpr pollen/unstable/convert pollen/core gregor frog/private/xexpr2text frog/private/bodies-page racket/runtime-path)
 (provide write-mds)
 
 (define-runtime-path blog-xml-file "blog.xml")
