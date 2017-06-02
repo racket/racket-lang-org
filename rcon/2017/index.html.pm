@@ -14,7 +14,7 @@
 ◊h2{◊xlink["register"]{◊this-rc-date}}
 ◊h2{◊link["https://goo.gl/maps/Dja57qoLBvs"]{University of Washington}}
 ◊;{◊h2{◊xlink{Speakers}}}
-◊;{◊h2{◊xlink{Register}}}
+◊h2{◊xlink{Register}}
 ◊;{◊h2{◊xlink{Schedule}}}
 
 
@@ -53,8 +53,7 @@ Keynote description
 
 ◊h3{◊xtarget["register"]{Register}}
 
-Registration is not open yet. Stay tuned!
-
+◊link["https://www.eventbrite.com/e/racketcon-2017-tickets-34928590354"]{Via Eventbrite.}
 RacketCon attendees benefit from a ◊link["https://gc.synxis.com/rez.aspx?Hotel=76675&Chain=10069&arrive=10/6/2017&depart=10/8/2017&adult=1&child=0&group=4AM98Y"]{group rate} at the ◊link["http://www.hoteldeca.com/"]{Hotel Deca} near the venue.
 
 ◊gap[0]
