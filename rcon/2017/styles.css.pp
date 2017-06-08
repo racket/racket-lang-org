@@ -305,6 +305,9 @@ schedule > row + row {
 
 .two-col .speaker {
   margin-bottom: 0.5rem;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
 
