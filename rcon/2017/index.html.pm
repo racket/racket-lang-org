@@ -13,7 +13,7 @@
 
 ◊h2{◊xlink["register"]{◊this-rc-date}}
 ◊h2{◊link["https://goo.gl/maps/Dja57qoLBvs"]{University of Washington}}
-◊;{◊h2{◊xlink{Speakers}}}
+◊h2{◊xlink{Speakers}}
 ◊h2{◊xlink{Register}}
 ◊;{◊h2{◊xlink{Schedule}}}
 
@@ -37,12 +37,25 @@ Keynote description
 
 
 ◊gap[1.5]
-
+}
 
 ◊h3{◊xtarget["speakers"]{Speakers}}
 
-◊gap[0]
+◊gap[0.5]
 
+◊div[#:class "two-col"]{
+◊speaker["" "Leif Andersen" ""]{}
+◊speaker["" "Dan Anderson" ""]{}
+◊speaker["" "Jack Firth" ""]{}
+◊speaker["" "Jay McCarthy" ""]{}
+◊speaker["" "Mangpo Phitchaya Phothilimthana" ""]{}
+◊speaker["" "Prabhakar Ragde" ""]{}
+◊speaker["" "Mark Wunsch" ""]{}
+◊speaker["" "Vishesh Yadav" ""]{}
+◊speaker["" "and more to come!" ""]{}
+}
+
+◊;{
 ◊h3{Sponsors}
 
 ◊inline-list['sponsor]{
