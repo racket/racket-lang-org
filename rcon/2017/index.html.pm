@@ -100,6 +100,9 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 
 ◊h3{◊xtarget["schedule"]{Day 1}}
 
+Keynote and talks. Schedule to come!
+
+◊;{
 ◊schedule[
 ◊row{◊at{9:00–9:30} ◊desc{Registration}}
 ◊row{◊at{9:30} ◊desc{Welcome}}
@@ -128,7 +131,7 @@ Speaker 12}}
 ◊row{◊at{17:30–17:45} ◊desc{Break}}
 ◊row{◊at{17:45–} ◊desc{Town Hall Meeting / General Q&A}}
 ]
-
+}
 
 
 
