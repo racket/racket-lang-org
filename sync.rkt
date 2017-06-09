@@ -111,3 +111,5 @@
 (if save-temps?
     (printf "Files saved in ~a\n" tmp-dir)
     (delete-directory/files tmp-dir))
+
+(printf "\n\nIf you updated any CSS file, please purge it from the Cloudflare cache.\n\n")
