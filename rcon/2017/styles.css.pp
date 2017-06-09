@@ -25,6 +25,13 @@
 }
 
 @font-face{
+    font-family: 'cooper-hewitt';
+    font-weight: bold;
+    font-style: normal;
+    src: url('fonts/CooperHewitt-Medium.woff') format('woff');
+}
+
+@font-face{
     font-family: 'bungee-shade';
     font-weight: normal;
     font-style: normal;
@@ -73,6 +80,7 @@
   width: 100%;
 }
 
+
 tt {
   font-family: "Source Code Pro", monospace;
   font-size: 90%;
@@ -82,11 +90,13 @@ tt {
 ◊(define anchor-bright-color "cyan")
 
 
+/* links */
 a, a:visited {
   color: ◊|anchor-color|;
   text-decoration: none;
-  border-bottom: 0.08rem solid ◊|anchor-color|;
+  border-bottom: 0.15rem solid ◊|anchor-color|;
   transition: color 0.15s, border-bottom 0.15s;
+  font-weight: bold;
 }
 
 a:hover {
@@ -141,6 +151,10 @@ body {
 
 em {
   font-style: italic;
+}
+
+strong {
+  font-weight: bold;
 }
 
 div#doc {
@@ -213,8 +227,8 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.05rem;
   margin-left: 0;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.8rem;
 }
 
 .speaker-name {
@@ -310,6 +324,21 @@ schedule > row + row {
   break-inside: avoid;
 }
 
+
+/* Set a size for our map container, the Google Map will take up 100% of this container */
+#map {
+    width: 35rem;
+    height: 20rem;
+    pointer-events: none;
+}
+#map * {
+    width: auto;
+}
+
+#map a {
+    border: none;
+    font-weight: normal;
+}
 
 ◊|mobile-overrides| {
     html{
