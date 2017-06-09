@@ -35,7 +35,7 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 ◊;{`div` appears at reg size; change this to `bio` once we have desc}
 ◊div{◊link["https://www.cs.indiana.edu/~dfried/"]{Dan Friedman} is a professor at Indiana University in the Department of Computer Science, where he studies programming languages. His books include ◊em{The Little Schemer} (with Matthias Felleisen) and ◊em{Essentials of Programming Languages} (Mitchell Wand, co-author).
 
-◊link["http://webyrd.net/"]{Will Byrd} is an assistant professor at the University of Utah in the School of Computering, where he studies programming languages and program synthesis. For over ten years he has worked on ◊link["http://minikanren.org/"]{ miniKanren}, an embedded domain-specific language for constraint logic programming. miniKanren is described in his book ◊em{The Reasoned Schemer} (Dan Friedman and Oleg Kiselyov, co-authors).}
+◊link["http://webyrd.net/"]{Will Byrd} is research assistant professor at the University of Utah in the School of Computing, where he studies programming languages and program synthesis. For over ten years he has worked on ◊link["http://minikanren.org/"]{ miniKanren}, an embedded domain-specific language for constraint logic programming. miniKanren is described in his book ◊em{The Reasoned Schemer} (Dan Friedman and Oleg Kiselyov, co-authors).}
 
 ◊h3{◊xtarget["venue"]{Venue}}
 
