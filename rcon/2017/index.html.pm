@@ -170,7 +170,10 @@ New for (seventh RacketCon) — Racketeer Office Hours, a day devoted to collab
 ◊h3{Sponsors}
 
 ◊inline-list['sponsor]{
-◊link["pollenpub.com"]{Matthew Butterick}}
+◊link["http://blackswanlearning.com/"]{Black Swan Learning Corp}
+◊link["https://www.comcasttechnologysolutions.com/"]{◊img[#:src "comcast-technology-solutions-vrt-black-with-transparent-background.png" #:style "width:25%;"]{}}
+◊link["pollenpub.com"]{Matthew Butterick}
+}
 
 ◊gap[1]
 
