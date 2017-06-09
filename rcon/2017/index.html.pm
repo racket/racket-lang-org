@@ -82,7 +82,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 
 ◊;{ for now, just a quick display }
 
-◊div[#:class "two-col" #:style "font-size: 130%"]{
+◊div[#:style "font-size: 130%"]{
 ◊link["https://github.com/LeifAndersen"]{Leif Andersen}
 ◊link["https://www.viewpoint.org/"]{Dan Anderson}
 ◊link["https://github.com/jackfirth"]{Jack Firth}
