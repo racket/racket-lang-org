@@ -32,10 +32,17 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 
 ◊gap[2.5]
 
-◊;{`div` appears at reg size; change this to `bio` once we have desc}
-◊div{◊link["https://www.cs.indiana.edu/~dfried/"]{Dan Friedman} is a professor at Indiana University in the Department of Computer Science, where he studies programming languages. His books include ◊em{The Little Schemer} (with Matthias Felleisen) and ◊em{Essentials of Programming Languages} (Mitchell Wand, co-author).
+◊h3{The Reasoned Racketeers}
 
-◊link["http://webyrd.net/"]{Will Byrd} is research assistant professor at the University of Utah in the School of Computing, where he studies programming languages and program synthesis. For over ten years he has worked on ◊link["http://minikanren.org/"]{ miniKanren}, an embedded domain-specific language for constraint logic programming. miniKanren is described in his book ◊em{The Reasoned Schemer} (Dan Friedman and Oleg Kiselyov, co-authors).}
+◊div{As Racketeers we are familiar with functional programming: each pure function we write produces one output value when given zero or more input values.  What if we erase this distinction between inputs and outputs, and only think about the ◊em{relationships} between these values?  We end up with ◊em{relational} programming, which lets us run our programs backwards: we can infer the "input" values that produce a desired "output" value.  We can also reorder our code arbitrarily, without changing the meaning of our programs.  By writing an interpreter for a subset of Racket using this approach, the interpreter inherits the ability to synthesize Racket programs from example inputs and outputs, among other interesting abilities.
+
+We will demonstrate all of these features using ◊link["http://minikanren.org/"]{miniKanren}, a domain-specific language for constraint logic programming that is itself embedded in Racket.
+}
+
+◊bio{◊link["https://www.cs.indiana.edu/~dfried/"]{Daniel P. Friedman} is Professor of Computer Science at Indiana University.  He is co-author of ◊em{The Little Schemer}, 4th ed., ◊em{The Seasoned Schemer}, ◊em{The Reasoned Schemer}, 2nd ed., ◊em{The Little Prover}, ◊em{Scheme and the Art of Programming}, and ◊em{Essentials of Programming Languages}, 3rd ed., all published by MIT press.
+
+◊link["http://webyrd.net/"]{William E. Byrd} is a Research Assistant Professor in the School of Computing at the University of Utah.  He is co-author of ◊em{The Reasoned Schemer}, 2nd ed., and runs weekly online hangouts on ◊link["http://minikanren.org/"]{miniKanren} and relational programming.  Will is also interested in the intersection of programming languages and biology.  Ask him about the scanning tunneling microscope (STM) he is building.
+}
 
 ◊h3{◊xtarget["venue"]{Venue}}
 
