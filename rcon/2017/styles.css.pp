@@ -124,12 +124,18 @@ div.payload {
 
 
 
-div.bio {
+.bio {
   font-size: 90%;
 }
 
-div.bio a{
+.bio a{
   font-weight: bolder;
+}
+
+.bio img {
+  width: 6rem;
+  float: left;
+  margin-right: 1rem;
 }
 
 
@@ -269,7 +275,8 @@ a:hover span.title {
 }
 
 sponsor+sponsor:before, con+con:before, h2+h2:before {
-  content: "\00A0\00A0·\00A0\00A0";
+  content: "·";
+  padding: 0.5rem;
 }
 
 
@@ -327,9 +334,8 @@ schedule > row + row {
 
 /* Set a size for our map container, the Google Map will take up 100% of this container */
 #map {
-    width: 35rem;
-    height: 20rem;
-    pointer-events: none;
+    width: 80vw;
+    height: 50vw;
 }
 #map * {
     width: auto;
@@ -356,6 +362,15 @@ schedule > row + row {
         height: 2rem;
         top: 0rem;
         left: 1rem;
+    }
+
+    h2 {
+      display: list-item;
+    }
+
+    h2+h2:before {
+      content: "";
+      padding: 0;
     }
 
   .two-col {

@@ -9,7 +9,7 @@
 
 ◊gap[3]
 
-◊(define this-rc-date "7–8 October 2017")
+◊(define this-rc-date "7–8 October 2017")
 
 ◊h2{◊xlink["register"]{◊this-rc-date}}
 ◊h2{◊xlink{Venue}}
@@ -23,14 +23,14 @@
 RacketCon is for developers, contributors, programmers, educators, and bystanders. It's an opportunity for all of us to share plans, ideas, and enthusiasm, and help shape the future of Racket.
 
 
-◊gap[0.5]
+◊gap[0]
 
 ◊h3{◊xtarget["speakers"]{◊head["a"]{Keynote}}}
 
 ◊head["b"]{Dan Friedman}
 ◊head["b"]{& Will Byrd}
 
-◊gap[2.5]
+◊gap[1]
 
 ◊h3{The Reasoned Racketeers}
 
@@ -39,14 +39,16 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 We will demonstrate all of these features using ◊link["http://minikanren.org/"]{miniKanren}, a domain-specific language for constraint logic programming that is itself embedded in Racket.
 }
 
-◊bio{◊link["https://www.cs.indiana.edu/~dfried/"]{Daniel P. Friedman} is Professor of Computer Science at Indiana University.  He is co-author of ◊em{The Little Schemer}, 4th ed., ◊em{The Seasoned Schemer}, ◊em{The Reasoned Schemer}, 2nd ed., ◊em{The Little Prover}, ◊em{Scheme and the Art of Programming}, and ◊em{Essentials of Programming Languages}, 3rd ed., all published by MIT press.
+◊bio{
 
-◊link["http://webyrd.net/"]{William E. Byrd} is a Research Assistant Professor in the School of Computing at the University of Utah.  He is co-author of ◊em{The Reasoned Schemer}, 2nd ed., and runs weekly online hangouts on ◊link["http://minikanren.org/"]{miniKanren} and relational programming.  Will is also interested in the intersection of programming languages and biology.  Ask him about the scanning tunneling microscope (STM) he is building.
+◊img[#:src "dfried.jpg"] ◊link["https://www.cs.indiana.edu/~dfried/"]{Daniel P. Friedman} is Professor of Computer Science at Indiana University.  He is co-author of ◊em{The Little Schemer}, 4th ed., ◊em{The Seasoned Schemer}, ◊em{The Reasoned Schemer}, 2nd ed., ◊em{The Little Prover}, ◊em{Scheme and the Art of Programming}, and ◊em{Essentials of Programming Languages}, 3rd ed., all published by MIT press.
+
+◊img[#:src "webyrd.jpg"] ◊link["http://webyrd.net/"]{William E. Byrd} is a Research Assistant Professor in the School of Computing at the University of Utah.  He is co-author of ◊em{The Reasoned Schemer}, 2nd ed., and runs weekly online hangouts on ◊link["http://minikanren.org/"]{miniKanren} and relational programming.  Will is also interested in the intersection of programming languages and biology.  Ask him about the scanning tunneling microscope (STM) he is building.
 }
 
 ◊h3{◊xtarget["venue"]{Venue}}
 
-For the first time this year, RacketCon happens in Seattle. We'll be at Mary Gates Hall on the University of Washington campus. We thank ◊link["https://homes.cs.washington.edu/~emina/index.html"]{Emina Torlak} and the UW ◊link["https://www.cs.washington.edu/"]{School of Computer Science & Engineering} for hosting us.
+For the first time this year, RacketCon happens in Seattle. We'll be at ◊link["https://goo.gl/maps/ENXQWSbp6Zo"]{Mary Gates Hall} on the University of Washington campus. We thank ◊link["https://homes.cs.washington.edu/~emina/index.html"]{Emina Torlak} and the UW ◊link["https://www.cs.washington.edu/"]{School of Computer Science & Engineering} for hosting us.
 
 ◊;iframe[#:src "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2314.149470473195!2d-122.3093303405857!3d47.656477572249656!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x549014f2ab81c35f%3A0x6dda64382ddc87a4!2sMary+Gates+Hall%2C+1851+NE+Grant+Ln%2C+Seattle%2C+WA+98105!5e0!3m2!1sen!2sus!4v1496964066706" #:width "600" #:height "450" #:frameborder "0" #:style "border:0" #:allowfullscreen "true"]
 
@@ -105,7 +107,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 
 
 
-◊h3{◊xtarget["schedule"]{Day 1}}
+◊h3{◊xtarget["schedule"]{Saturday Oct 7}}
 
 Keynote and talks. Schedule to come!
 
@@ -142,17 +144,15 @@ Speaker 12}}
 
 
 
-◊h3{Night 1}
-
-
+◊h3{Saturday evening}
 
 ◊schedule[
-◊row{◊at{19:00–23:00} ◊desc{Food & drink at local brewpub ◊link["http://www.elysianbrewing.com/locations/elysian-fields/"]{Elysian Fields}}}
+◊row{◊at{19:00–23:00} ◊desc{Food & drink at local brewpub ◊link["http://www.elysianbrewing.com/locations/elysian-fields/"]{Elysian Fields}}}
 ]
 
 
 
-◊h3{Day 2}
+◊h3{Sunday Oct 8}
 
 New for (seventh RacketCon) — Racketeer Office Hours, a day devoted to collaborating on existing projects, planning new ones, and getting help and advice from other members of the community. Racket's core developers & many others will be there — bring your questions & projects!
 
@@ -205,6 +205,7 @@ Sponsorship slots are still available! If you or your company would like to spon
 
 ◊gap[2]
 
-◊div[#:style "font-style:italic"]{"Everyone has a universe of beautiful things in their head. Maintaining a nurturing environment for conflicting interests is important. And Racket has it. So if you worry that you do weird and insignificant stuff, I tell you that the world has taught you wrong and Racket is your refugee shelter. Please do not hesitate."}
+◊em{"Everyone has a universe of beautiful things in their head. Maintaining a nurturing environment for conflicting interests is important. And Racket has it. So if you worry that you do weird and insignificant stuff, I tell you that the world has taught you wrong and Racket is your refugee shelter. Please do not hesitate."}
+
 — Satisfied Customer, RacketCon 2016
 
