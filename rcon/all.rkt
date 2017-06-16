@@ -43,7 +43,7 @@
 (define (copy-con-site! starting-dir year #:current [current? #f])
   (for* ([p (in-directory starting-dir)]
          [fn (in-value (filename p))]
-         [ext (in-list '(#".html" #".css" #".svg" #".png"))]
+         [ext (in-list '(#".html" #".css" #".svg" #".png" #".jpg"))]
          #:unless (or (not (path-has-extension? fn ext))
                       (excluded-path? fn)
                       (and current? (equal? fn (string->path "index.html")))))
