@@ -107,7 +107,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 
 
 
-◊h3{◊xtarget["schedule"]{Saturday Oct 7}}
+◊h3{◊xtarget["schedule"]{Saturday Oct 7}}
 
 Keynote and talks. Schedule to come!
 

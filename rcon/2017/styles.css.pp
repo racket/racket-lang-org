@@ -334,8 +334,9 @@ schedule > row + row {
 
 /* Set a size for our map container, the Google Map will take up 100% of this container */
 #map {
+    max-width: 900px;
     width: 80vw;
-    height: 50vw;
+    height: 40vw;
 }
 #map * {
     width: auto;
