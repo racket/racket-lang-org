@@ -122,5 +122,20 @@ Bloomington IN
 
 }
 
+◊section{
+PLT books
+
+
+◊link["https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/"]{Programming Languages: 
+Application and Interpretation}
+For undergraduates, graduate students, and experts.
+
+
+◊link["https://redex.racket-lang.org/"]{Semantics Engineering 
+with PLT Redex}
+Semantics automation for language engineers.
+}
+
+
 
 

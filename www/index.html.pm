@@ -203,13 +203,13 @@ Documentation & tutorials
 ◊section{
 News
 
+Tickets now available for ◊link["https://con.racket-lang.org/"]{(seventh RacketCon)} in Seattle, 7–8 Oct 2017.
+
 ◊link["https://blog.racket-lang.org/2017/04/racket-v6-9.html"]{Racket version 6.9} is available.
 
 New! ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
 
 New! ◊link["https://devswag.com/products/racket"]{Racket stickers} — the indispensable accessory for laptops and textbooks.
-
-(seventh RacketCon) will be held in Seattle on October 7, 2017, followed by Racketeer Office Hours on October 8.
 
 }
 
@@ -222,6 +222,8 @@ Community
 
 ◊link["https://botbot.me/freenode/racket/"]{#racket IRC on freenode.net}
 
+◊link["https://racket.slack.com/"]{Slack channel} (visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
+
 ◊link["https://twitter.com/racketlang"]{@racketlang on Twitter}
 
 ◊link["plt.html"]{PLT: the team behind Racket}
@@ -233,27 +235,21 @@ Community
 Books
 
 
-◊link["https://www.htdp.org/"]{How to Design Programs}
-A principled approach to programming.
-
-
 ◊link["https://www.realmofracket.com/"]{Realm of Racket}
 Learn to program with Racket, one game at a time.
 
+◊link["http://beautifulracket.com/"]{Beautiful Racket}
+Make your own programming languages with Racket.
 
-◊link["https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/"]{Programming Languages: 
-Application and Interpretation}
-For undergraduates, graduate students, and experts.
-
-
-◊link["https://redex.racket-lang.org/"]{Semantics Engineering 
-with PLT Redex}
-Semantics automation for language engineers.
 }
 
 
 ◊section{
 Education
+
+◊link["https://www.htdp.org/"]{How to Design Programs}
+A principled approach to programming.
+
 
 ◊link["http://programbydesign.org/"]{Program by Design}
 A workshop to train teachers using ◊link["http://htdp.org/" #:style "color:gray"]{How to Design Programs} in the classroom
