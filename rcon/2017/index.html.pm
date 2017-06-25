@@ -188,6 +188,18 @@ New for (seventh RacketCon) — Racketeer Office Hours, a day devoted to collab
 Sponsorship slots are still available! If you or your company would like to sponsor RacketCon, please ◊a[#:href "mailto:con@racket-lang.org"]{get in touch}.
 
 
+◊h3{Friendly Environment Policy}
+
+The Racket community aims to improve the world through programming. It started with the goal of introducing everyone to the wonderful world ofprogram design, with a spirit of full inclusion and no emphasis on any specific group.  Over time it has grown into a full-fledged professional community with a well-known reputation for helpfulness and openness on its on-line communication channels. The organizers want to encourage an equally open exchange of ideas at RacketCon, the community's in-person meet-up.
+
+This spirit requires an environment that enables all to participate without fear of personal harassment. We define harassment as unwelcome or hostile behavior, that is, behavior that focuses on people instead of ideas. ◊link["http://www.acm.org/sigs/volunteer_resources/officers_manual/anti-harassment-policy"]{The ACM's anti-harassment policy} lists a variety of specific unacceptable factors and behaviors. The organizers consider responses such as “just joking,” or “teasing,” or being “playful” as unacceptable.
+
+Anyone witnessing or subject to unacceptable behavior should notify one of the RacketCon organizers (Matthew Flatt, Vincent St-Amour).
+
+If a participant engages in harassing behavior, the conference organizers may take any action they deem appropriate, from a warning of the offender to an expulsion from the conference [without refund].
+
+[The wording of this policy is directly derived from ◊link["http://snapl.org/2015/policy.html"]{that of the SNAPL conference}, with thanks.]
+
 
 ◊h3{Previous RacketCons}
 
