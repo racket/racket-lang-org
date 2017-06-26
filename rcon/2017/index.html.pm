@@ -79,6 +79,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊div[#:class "two-col"]{
 ◊speaker["" "Leif Andersen" ""]{}
 ◊speaker["" "Dan Anderson" ""]{}
+◊speaker["" "David Christiansen" ""]{}
 ◊speaker["" "Jack Firth" ""]{}
 ◊speaker["" "Jay McCarthy" ""]{}
 ◊speaker["" "Mangpo Phitchaya Phothilimthana" ""]{}
@@ -94,6 +95,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊div[#:style "font-size: 130%"]{
 ◊link["https://github.com/LeifAndersen"]{Leif Andersen}
 ◊link["https://www.viewpoint.org/"]{Dan Anderson}
+◊link["http://davidchristiansen.dk/"]{David Christiansen}
 ◊link["https://github.com/jackfirth"]{Jack Firth}
 ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}
 ◊link["https://people.eecs.berkeley.edu/~mangpo/www/home.html"]{Mangpo Phitchaya Phothilimthana}
