@@ -84,6 +84,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊speaker["" "Jay McCarthy" ""]{}
 ◊speaker["" "Mangpo Phitchaya Phothilimthana" ""]{}
 ◊speaker["" "Prabhakar Ragde" ""]{}
+◊speaker["" "David Vanderson" ""]{}
 ◊speaker["" "Mark Wunsch" ""]{}
 ◊speaker["" "Vishesh Yadav" ""]{}
 ◊speaker["" "and more to come!" ""]{}
@@ -100,6 +101,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}
 ◊link["https://people.eecs.berkeley.edu/~mangpo/www/home.html"]{Mangpo Phitchaya Phothilimthana}
 ◊link["https://cs.uwaterloo.ca/~plragde/"]{Prabhakar Ragde}
+◊link["https://github.com/david-vanderson/"]{David Vanderson}
 ◊link["http://www.markwunsch.com/"]{Mark Wunsch}
 ◊link["https://www.twistedplane.com/"]{Vishesh Yadav}
 … and more to come!
