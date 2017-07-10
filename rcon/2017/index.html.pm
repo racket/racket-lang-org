@@ -81,9 +81,11 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊speaker["" "Dan Anderson" ""]{}
 ◊speaker["" "David Christiansen" ""]{}
 ◊speaker["" "Jack Firth" ""]{}
+◊speaker["" "Alexis King" ""]{}
 ◊speaker["" "Jay McCarthy" ""]{}
 ◊speaker["" "Mangpo Phitchaya Phothilimthana" ""]{}
 ◊speaker["" "Prabhakar Ragde" ""]{}
+◊speaker["" "David Storrs" ""]{}
 ◊speaker["" "David Vanderson" ""]{}
 ◊speaker["" "Mark Wunsch" ""]{}
 ◊speaker["" "Vishesh Yadav" ""]{}
@@ -98,9 +100,11 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊link["https://www.viewpoint.org/"]{Dan Anderson}
 ◊link["http://davidchristiansen.dk/"]{David Christiansen}
 ◊link["https://github.com/jackfirth"]{Jack Firth}
+◊link["https://lexi-lambda.github.io/"]{Alexis King}
 ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}
 ◊link["https://people.eecs.berkeley.edu/~mangpo/www/home.html"]{Mangpo Phitchaya Phothilimthana}
 ◊link["https://cs.uwaterloo.ca/~plragde/"]{Prabhakar Ragde}
+◊link["http://biomantica.com"]{David Storrs}
 ◊link["https://github.com/david-vanderson/"]{David Vanderson}
 ◊link["http://www.markwunsch.com/"]{Mark Wunsch}
 ◊link["https://www.twistedplane.com/"]{Vishesh Yadav}
