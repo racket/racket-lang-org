@@ -74,31 +74,67 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 
 ◊gap[0.5]
 
-◊;{ save this when we have speaker bios. For now they look overlarge}
-◊;{
-◊div[#:class "two-col"]{
-◊speaker["" "Leif Andersen" ""]{}
-◊speaker["" "Dan Anderson" ""]{}
-◊speaker["" "David Christiansen" ""]{}
-◊speaker["" "Jack Firth" ""]{}
-◊speaker["" "Alexis King" ""]{}
-◊speaker["" "Jay McCarthy" ""]{}
-◊speaker["" "Mangpo Phitchaya Phothilimthana" ""]{}
-◊speaker["" "Prabhakar Ragde" ""]{}
-◊speaker["" "David Storrs" ""]{}
-◊speaker["" "David Vanderson" ""]{}
-◊speaker["" "Mark Wunsch" ""]{}
-◊speaker["" "Vishesh Yadav" ""]{}
-◊speaker["" "and more to come!" ""]{}
-}
+◊div{
+◊folded{
+◊speaker["" "Leif Andersen"]{Movies as Programs: The Story of a Racket}
+Racket is more than a programming language. It is a programming language for making new languages. In fact, it is a programming language for making languages for making movies. Video is a language made from the sweat and parenthesis provided by the Racket ecosystem. It integrates into Racket from concept to final rendering. Come for the video demos, stay form the language tower.
+
+◊bio{◊link["http://leifandersen.net/"]{Leif Andersen} is a PhD student at Northeastern University and a core Racket developer. She is interested in compilers, low-level performance tools, creative and unusual DSLs, and the interactions between programing languages and their ecosystems. Mix these in a pot and Video pops out.}}
+
+◊link["https://www.viewpoint.org/"]{◊speaker["" "Dan Anderson" ""]}
+
+◊folded{
+◊speaker["" "David Christiansen"]{A Little Bit of Dependent Types}
+You can use the functional programming techniques that you're familiar with from Racket to write mathematical proofs. An upcoming book in the spirit of "The Little Schemer" will demonstrate how to do this, and tell you how to write your own proof system in Racket. This talk is a little taste of #lang pie, where programming and proving meet.
+
+◊bio{◊link["http://davidchristiansen.dk/"]{David Christiansen} is a postdoc at Indiana University. In the past, he wrote most of the metaprogramming features and much of the interactive environment for Idris, a language with dependent types. Together with Dan Friedman, he is a co-author of an upcoming book on dependent types in the tradition of The Little Schemer.}}
+
+◊folded{
+◊speaker["" "Deren Dohoda"]{Prototype to Production: A Racket Experience Report}
+With the rise in adoption and decrease in price of single-board computers, high-level languages like Racket can find good use in embedded scenarios which are not real-time. Features of the language support all stages of development with few downsides.
+
+◊bio{◊link["http://www.pion-inc.com"]{Deren Dohoda} is the Engineering Manager at Pion Inc and has worked at all phases of product development, deployment, and support for 17 years.}}
+
+◊link["https://github.com/jackfirth"]{◊speaker["" "Jack Firth" ""]}
+
+◊link["https://lexi-lambda.github.io/"]{◊speaker["" "Alexis King" ""]}
+
+◊link["https://jeapostrophe.github.io/home/"]{◊speaker["" "Jay McCarthy" ""]}
+
+◊link["https://people.eecs.berkeley.edu/~mangpo/www/home.html"]{◊speaker["" "Mangpo Phitchaya Phothilimthana" ""]}
+
+◊folded{
+◊speaker["" "Prabhakar Ragde"]{Proust: A Nano Proof Assistant}
+Three things that don't normally go together are intuitionistic type theory, Racket as a teaching language, and a required sophomore course in logic and computation. I'll describe how I've been teaching the course by having students code a small proof assistant (Proust) in Racket and using it to do their homework. Its construction proceeds in stages through propositional and predicate logic, going as far as recursive functions on natural numbers before a lateral transition to Coq.
+
+◊bio{◊link["https://cs.uwaterloo.ca/~plragde/"]{Prabhakar Ragde} has been a professor of Computer Science at the University of Waterloo since 1988. He first encountered Racket fifteen years ago when looking for a way to introduce his young daughters to CS. Now more than two thousand students a year take Waterloo courses that use Racket to introduce them to CS, and he can't go a day without using a lambda.}}
+
+◊folded{
+◊speaker["" "David Storrs"]{Racket and Business}
+Racket is the official language at Biomantica Inc, the biotech startup I co-founded. I had a little experience with it in advance and my cofounder learned it from scratch as we worked. In this talk we'll go over why we chose it, the pros and cons we've found, the process of learning Racket on the job, and thoughts on how it worked out in practice.
+
+◊bio{◊link["http://biomantica.com"]{David Storrs} started programming professionally when Netscape and IE were duking it out for market share. He's done a lot of web+devops work, and at least a little of most other types of programming -- financial software, medical software, video games, etc. He's co-founder of Biomantica Inc, a biotech software company whose initial product focuses on big data transport between scientific or corporate collaborators who may be continents apart.}}
+
+◊link["https://github.com/david-vanderson/"]{◊speaker["" "David Vanderson" ""]}
+
+◊link["http://www.markwunsch.com/"]{◊speaker["" "Mark Wunsch" ""]}
+
+◊folded{
+◊speaker["" "Vishesh Yadav"]{RacketScript}
+Want to embrace the power of Racket in the ugly JavaScript world? RacketScript can compile Racket (ok! not all of it) to JavaScript. I'll will demonstrate how the RacketScript compiler works, currently implemented features of Racket, and how it differs from Racket and other Racket to JavaScript compilers.
+
+◊bio{◊link["https://www.twistedplane.com/"]{Vishesh Yadav} is a Software Engineer at Nutanix where he works on distributed storage systems. He started hacking in Racket while pursuing M.S. in Computer Science from Northeastern University, where he also got interested in programming languages.}}
+
 }
 
 ◊;{ for now, just a quick display }
 
+◊;{
 ◊div[#:style "font-size: 130%"]{
-◊link["https://github.com/LeifAndersen"]{Leif Andersen}
+◊link["http://leifandersen.net/"]{Leif Andersen}
 ◊link["https://www.viewpoint.org/"]{Dan Anderson}
 ◊link["http://davidchristiansen.dk/"]{David Christiansen}
+◊link["http://www.pion-inc.com"]{Deren Dohoda}
 ◊link["https://github.com/jackfirth"]{Jack Firth}
 ◊link["https://lexi-lambda.github.io/"]{Alexis King}
 ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}
@@ -110,7 +146,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊link["https://www.twistedplane.com/"]{Vishesh Yadav}
 … and more to come!
 }
-
+}
 
 
 
