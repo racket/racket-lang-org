@@ -117,7 +117,12 @@ Racket is the official language at Biomantica Inc, the biotech startup I co-foun
 
 ◊link["https://github.com/david-vanderson/"]{◊speaker["" "David Vanderson" ""]}
 
-◊link["http://www.markwunsch.com/"]{◊speaker["" "Mark Wunsch" ""]}
+◊folded{
+◊speaker["" "Mark Wunsch"]{Overscan - A Toolkit for Live Video Broadcasting}
+This talk introduces ◊link["https://github.com/mwunsch/overscan"]{Overscan}, a live-coding environment for video compositing and broadcasting written in Racket. Inspired by tools like Sonic Pi, Overtone, and Extempore, Overscan encourages experimentation and dynamism in live streaming. Platforms like Twitch, Facebook Live, and Youtube Live offer the opportunity for everyone to have an audience, but the tools for broadcasting are static and fixed. Overscan provides a DSL to simplify the encoding and broadcasting of live video while still giving the user the full range of expressiveness of Racket. In this talk, I will demonstrate the design and usage of Overscan before diving into its internals. Building Overscan was a lesson in yak-shaving, and participants will come away with a new appreciation for Racket's Foreign Function Interface.
+
+◊bio{◊link["http://www.markwunsch.com/"]{Mark Wunsch}}
+}
 
 ◊folded{
 ◊speaker["" "Vishesh Yadav"]{RacketScript}
