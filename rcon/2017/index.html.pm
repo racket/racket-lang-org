@@ -95,6 +95,8 @@ With the rise in adoption and decrease in price of single-board computers, high-
 
 ◊bio{◊link["http://www.pion-inc.com"]{Deren Dohoda} is the Engineering Manager at Pion Inc and has worked at all phases of product development, deployment, and support for 17 years.}}
 
+◊link["https://github.com/charlescearl"]{◊speaker["" "Charles Earl" ""]}
+
 ◊link["https://github.com/jackfirth"]{◊speaker["" "Jack Firth" ""]}
 
 ◊link["https://lexi-lambda.github.io/"]{◊speaker["" "Alexis King" ""]}
@@ -115,8 +117,6 @@ Racket is the official language at Biomantica Inc, the biotech startup I co-foun
 
 ◊bio{◊link["http://biomantica.com"]{David Storrs} started programming professionally when Netscape and IE were duking it out for market share. He's done a lot of web+devops work, and at least a little of most other types of programming -- financial software, medical software, video games, etc. He's co-founder of Biomantica Inc, a biotech software company whose initial product focuses on big data transport between scientific or corporate collaborators who may be continents apart.}}
 
-◊link["https://github.com/david-vanderson/"]{◊speaker["" "David Vanderson" ""]}
-
 ◊folded{
 ◊speaker["" "Mark Wunsch"]{Overscan - A Toolkit for Live Video Broadcasting}
 This talk introduces ◊link["https://github.com/mwunsch/overscan"]{Overscan}, a live-coding environment for video compositing and broadcasting written in Racket. Inspired by tools like Sonic Pi, Overtone, and Extempore, Overscan encourages experimentation and dynamism in live streaming. Platforms like Twitch, Facebook Live, and Youtube Live offer the opportunity for everyone to have an audience, but the tools for broadcasting are static and fixed. Overscan provides a DSL to simplify the encoding and broadcasting of live video while still giving the user the full range of expressiveness of Racket. In this talk, I will demonstrate the design and usage of Overscan before diving into its internals. Building Overscan was a lesson in yak-shaving, and participants will come away with a new appreciation for Racket's Foreign Function Interface.
@@ -131,28 +131,6 @@ Want to embrace the power of Racket in the ugly JavaScript world? RacketScript c
 ◊bio{◊link["https://www.twistedplane.com/"]{Vishesh Yadav} is a Software Engineer at Nutanix where he works on distributed storage systems. He started hacking in Racket while pursuing M.S. in Computer Science from Northeastern University, where he also got interested in programming languages.}}
 
 }
-
-◊;{ for now, just a quick display }
-
-◊;{
-◊div[#:style "font-size: 130%"]{
-◊link["http://leifandersen.net/"]{Leif Andersen}
-◊link["https://www.viewpoint.org/"]{Dan Anderson}
-◊link["http://davidchristiansen.dk/"]{David Christiansen}
-◊link["http://www.pion-inc.com"]{Deren Dohoda}
-◊link["https://github.com/jackfirth"]{Jack Firth}
-◊link["https://lexi-lambda.github.io/"]{Alexis King}
-◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}
-◊link["https://people.eecs.berkeley.edu/~mangpo/www/home.html"]{Mangpo Phitchaya Phothilimthana}
-◊link["https://cs.uwaterloo.ca/~plragde/"]{Prabhakar Ragde}
-◊link["http://biomantica.com"]{David Storrs}
-◊link["https://github.com/david-vanderson/"]{David Vanderson}
-◊link["http://www.markwunsch.com/"]{Mark Wunsch}
-◊link["https://www.twistedplane.com/"]{Vishesh Yadav}
-… and more to come!
-}
-}
-
 
 
 
