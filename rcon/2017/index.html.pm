@@ -95,7 +95,7 @@ With the rise in adoption and decrease in price of single-board computers, high-
 
 ◊bio{◊link["http://www.pion-inc.com"]{Deren Dohoda} is the Engineering Manager at Pion Inc and has worked at all phases of product development, deployment, and support for 17 years.}}
 
-◊link["https://github.com/charlescearl"]{◊speaker["" "Charles Earl" ""]}
+◊link["https://charlesearl.blog/"]{◊speaker["" "Charles Earl" ""]}
 
 ◊link["https://github.com/jackfirth"]{◊speaker["" "Jack Firth" ""]}
 
