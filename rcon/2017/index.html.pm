@@ -103,7 +103,15 @@ With the rise in adoption and decrease in price of single-board computers, high-
 
 ◊link["https://jeapostrophe.github.io/home/"]{◊speaker["" "Jay McCarthy" ""]}
 
-◊link["https://people.eecs.berkeley.edu/~mangpo/www/home.html"]{◊speaker["" "Mangpo Phitchaya Phothilimthana" ""]}
+◊folded{
+◊speaker["" "Mangpo Phitchaya Phothilimthana"]{High-Coverage Hint Generation for Racket Programming Assignments}
+In massive programming courses, automated hint generation offers the promise of zero-cost, zero-latency assistance for students who are struggling to make progress on solving a program. 
+
+In this talk, I will describe a robust hint generation system for Racket programming assignments that extends the hint coverage of the mutation-based approach using two complementary techniques. A syntax checker detects common syntax misconception errors in individual subexpressions to guide students to partial solutions that can be evaluated for the semantic correctness. A mutation-based approach is then used to generate hints for almost-correct programs. If the mutation-based approach fails, a case analyzer detects missing program branches to guide students to partial solutions with reasonable structures. Our system itself is implemented in Racket. We utilize Rosette, a solver-aided language embedded in Racket, as a constraint solver to prove program equivalence.
+
+After analyzing over 75,000 program submissions and 8,789 hint requests from UC Berkeley’s introductory computer science course, we found that using all three techniques together could offer hints for any program, no matter how far it was from a correct solution. Furthermore, our analysis shows that hints contributed to students’ progress while still encouraging the students to solve problems by themselves.
+
+◊bio{◊link["https://people.eecs.berkeley.edu/~mangpo/www/home.html"]{Phitchaya Mangpo Phothilimthana} is a PhD student from UC Berkeley working with Professor Ras Bodik. Her PhD thesis focuses on designing programming models and using program synthesis to build smart compilers for unconventional hardwares (from an ultra-low-power spatial architecture to programmable network cards). She is also interested in applying program synthesis to other domains, including educational tools.}}
 
 ◊folded{
 ◊speaker["" "Prabhakar Ragde"]{Proust: A Nano Proof Assistant}
