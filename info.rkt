@@ -5,7 +5,7 @@
 (define deps '("graph"
                "gui-lib"
                "base"
-               ("plt-web-lib" #:version "1.2")
+               ("plt-web-lib" #:version "1.3")
                "at-exp-lib"
                "net-lib"
                "racket-index"

@@ -70,7 +70,7 @@
   @columns[8 #:center? #t #:center-text? #t #:row? #t]{
       @(let* ([sep   @list{@nbsp @bull @nbsp}]
               [links (λ links @(div style: "margin: 1ex 4ex;" (add-between links sep)))]
-              [docs  @list{@|docs|/@|version|/html}])
+              [docs  (html-docs-link version)])
          (list
           @row{
             @links[@list{Release: @nbsp @(release-page release){Announcement}}
@@ -136,6 +136,16 @@
   (let ([t (make-hash)])
     (λ (rel) (hash-ref! t rel (λ () (release-page* rel))))))
 
+(define (html-docs-link ver)
+  (if (version<? ver first-version-with-releases-page)
+      @list{@|docs|/@|ver|/html}
+      @list{@|releases|/@|ver|/doc}))
+
+(define (pdf-docs-link ver)
+  (if (version<? ver first-version-with-releases-page)
+      @list{@|docs|/@|ver|/pdf}
+      @list{@|releases|/@|ver|/pdf-doc}))
+
 (define all-version-pages
   (let ()
     (define (make-page rel pkg)
@@ -193,9 +203,9 @@
                                      #:when (member p (hash-ref release=>packages r)))
                             ((make-page r p) (package->name p)))
                           " ")}
-                      @td{@a[href: @list{@|docs|/@|ver|/html}]{[HTML]} @;
+                      @td{@a[href: @html-docs-link[ver]]{[HTML]} @;
                           @nbsp @;
-                          @a[href: @list{@|docs|/@|ver|/pdf}]{[PDF]}}}
+                          @a[href: @pdf-docs-link[ver]]{[PDF]}}}
                     @sep}))
           @tr[class: 'version-row]{
             @td{Development}
