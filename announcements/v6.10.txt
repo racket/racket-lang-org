@@ -1,0 +1,62 @@
+1501523732
+Racket v6.10
+
+Note: Graphical Racket programs such as DrRacket are affected by a bug
+in the Windows 10 Creators update which can lead to blue screens and
+require reboots. We are aware of the issue, and have mitigated it in
+DrRacket, which reduces the incidence of crashes. Microsoft has
+diagnosed the issue and will release a fix in a future Windows update.
+Additional details are available here:
+    https://github.com/racket/racket/issues/1671
+
+* Internally, Racket's intermediate compatibility layer over
+  operating-system facilities has been moved into its own library,
+  "rktio", so it can be used in future Racket implementations. This
+  change should be transparent, but the refactoring moves code that
+  has many compiler and OS dependencies, so we expect a new glitch or
+  two in less-common build and execution environments. Please report
+  problems at https://github.com/racket/racket/issues .
+
+* Racket supports cross-compilation of executables in more cases,
+  including executables that depend on packages for foreign libraries.
+
+* The `struct` form supports an `#:authentic` annotation to declare
+  that chaperones and impersonators are never allowed on instances of
+  the declared structure type. This annotation is intended for use on
+  a library's internal data structures, where it won't interfere with
+  contracts or other forms of extension at a library's interface. It
+  can sometimes provide a small performance boost.
+
+* RackUnit adds `nested-info` and `string-info` to grant custom checks
+  more control over the display and layout of check failure info.
+
+* The `raco test` command provides the `++arg` and `++args` flags to
+  pass arguments to tested programs.
+
+* Typed Racket has types for immutable, mutable, and weak hashtables; in
+  other words the type `(HashTable K V)` is a union `(U
+  (Immutable-HashTable K V) (Mutable-HashTable K V) (Weak-HashTable K
+  V))`. Standard library functions may have more specific return types.
+  For example, `hash-set` has type `(-> (HashTable K V) K V
+  (Immutable-HashTable K V))`.  When an immutable hashtable flows from
+  untyped code to typed code, Typed Racket may use a flat contract to
+  verify its type (provided the table's key and value types are flat).
+
+* The Typed Racket Optimizer is disabled in untrusted contexts (e.g.,
+  sandboxes). This prevents unsoundness in the Typed Racket type system
+  from being used to get access to unsafe operations.
+
+* Racket's internal runtime adds a `scheme_atexit` procedure with
+  identical behavior as `atexit` defined in libc.
+
+The following people contributed to this release:
+Alex Knauth, Alexander McLin, Alexis King, Andrew Kent, Ben Greenman,
+Ben Noordhuis, Carlo Dapor, Conor Finegan, Daniel Feltey, Ethan Estrada,
+Georges Dupéron, Gary F. Baumgartner, Gianluca Ciccarelli, Gustavo
+Massaccesi, Harold Carr, Jack Firth, Jay McCarthy, John Clements,
+Kimball Germane, Leandro Facchinetti, Lehi Toskin, Leif Andersen,
+Matthew Butterick, Matthew Flatt, Matthias Felleisen, Michael Orlitzky,
+Milo Turner, Mohsen Keyhani, Philip McGrath, Robby Findler, Rob Bassi,
+Ryan Culpepper, Sam Caldwell, Sam Tobin-Hochstadt, Scott Moore, Spencer
+Florence, Stephen Chang, Stephen De Gabrielle, Vincent St-Amour, WarGrey
+Gyoudmon Ju, and William J. Bowman.
