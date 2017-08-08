@@ -126,13 +126,6 @@ Racket is the official language at Biomantica Inc, the biotech startup I co-foun
 ◊bio{◊link["http://biomantica.com"]{David Storrs} started programming professionally when Netscape and IE were duking it out for market share. He's done a lot of web+devops work, and at least a little of most other types of programming -- financial software, medical software, video games, etc. He's co-founder of Biomantica Inc, a biotech software company whose initial product focuses on big data transport between scientific or corporate collaborators who may be continents apart.}}
 
 ◊folded{
-◊speaker["" "Mark Wunsch"]{Overscan - A Toolkit for Live Video Broadcasting}
-This talk introduces ◊link["https://github.com/mwunsch/overscan"]{Overscan}, a live-coding environment for video compositing and broadcasting written in Racket. Inspired by tools like Sonic Pi, Overtone, and Extempore, Overscan encourages experimentation and dynamism in live streaming. Platforms like Twitch, Facebook Live, and Youtube Live offer the opportunity for everyone to have an audience, but the tools for broadcasting are static and fixed. Overscan provides a DSL to simplify the encoding and broadcasting of live video while still giving the user the full range of expressiveness of Racket. In this talk, I will demonstrate the design and usage of Overscan before diving into its internals. Building Overscan was a lesson in yak-shaving, and participants will come away with a new appreciation for Racket's Foreign Function Interface.
-
-◊bio{◊link["http://www.markwunsch.com/"]{Mark Wunsch}}
-}
-
-◊folded{
 ◊speaker["" "Vishesh Yadav"]{RacketScript}
 Want to embrace the power of Racket in the ugly JavaScript world? RacketScript can compile Racket (ok! not all of it) to JavaScript. I'll will demonstrate how the RacketScript compiler works, currently implemented features of Racket, and how it differs from Racket and other Racket to JavaScript compilers.
 
