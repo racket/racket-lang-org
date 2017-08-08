@@ -81,7 +81,15 @@ Racket is more than a programming language. It is a programming language for mak
 
 ◊bio{◊link["http://leifandersen.net/"]{Leif Andersen} is a PhD student at Northeastern University and a core Racket developer. She is interested in compilers, low-level performance tools, creative and unusual DSLs, and the interactions between programing languages and their ecosystems. Mix these in a pot and Video pops out.}}
 
-◊link["https://www.viewpoint.org/"]{◊speaker["" "Dan Anderson" ""]}
+◊folded{
+◊speaker["" "Dan Anderson and Anthony Pineci"]{A Methodology for Teaching Kalman Filtering to High School students}
+The universe library of Dr Racket is interesting in its use of state and the contracts of the functions of the main loop (big-bang) are particularily apropos in the field of robotics. In this talk we will present a layered approach for teaching high school students about Kalman filtering using the universe teachpack. The approach develops the functions for one-dimensional movement both for exact motion and inexact motion. One-dimensional particle systems are introduced and then the model is extended for the full Kalman filtering algorithms using matrices. In the process, students learn how to develop physical models for their objects using standard trignometric and algebraic ideas. Models are extended to include two-dimensional models.
+
+◊bio{◊link["https://www.viewpoint.org/"]{Dan Anderson} teaches Middle School and Upper School computer science courses at Viewpoint School. Mr. Anderson received his B.S. in Physics from U.C.L.A. and his M.S. in Building Systems (Civil Engineering) from Colorado University at Boulder. Before he started teaching he was a photovoltaic manufacturing engineer for Solec International.
+
+His teaching methodology uses programming languages to communicate increasingly abstract concepts to children from 7th grade through 12th grade. His courses are designed to substantially augment a student’s comprehension of topics in mathematics and science. He uses the HTDP curriculum for his first year of instruction and he has added material to teach Virtual Reality and Artificial Intelligence courses for students on top of that foundation.
+
+◊link["https://www.viewpoint.org/"]{Anthony Pineci} is a high school student in the 12th grade at Viewpoint School. He has been a student of Dan Anderson since 7th grade. He has experience in machine learning, writing the code for a neural network and using it to predict the outcome of the March Madness basketball bracket. He also has gained knowledge about kalman filtering and particle filters in implementing algorithms for self-driving cars, and gained experience teaching when helping other students write the same code.}}
 
 ◊folded{
 ◊speaker["" "David Christiansen"]{A Little Bit of Dependent Types}
@@ -99,7 +107,11 @@ With the rise in adoption and decrease in price of single-board computers, high-
 
 ◊link["https://github.com/jackfirth"]{◊speaker["" "Jack Firth" ""]}
 
-◊link["https://lexi-lambda.github.io/"]{◊speaker["" "Alexis King" ""]}
+◊folded{
+◊speaker["" "Alexis King"]{Hackett, a Haskell for Racketeers}
+Racket, as a language, excels at and encourages a style of linguistic abstraction using metaprogramming. One of the most potentially useful tools to a metaprogrammer is intimate knowledge of expressions’ types, but existing general purpose, statically typed languages do not make that information easily accessible to the macro writer. This talk presents an early, experimental version of Hackett, an embedding of a Haskell-style type system in Racket’s macro system. Hackett attempts to provide a robust typechecker with friendly, powerful type inference for general-purpose programs that simultaneously exposes that information to Racket’s ordinary macro-writing facilities.
+
+◊bio{◊link["https://lexi-lambda.github.io/"]{Alexis King} is a software engineer at CJ Affiliate, primarily writing Haskell and generally encouraging functional programming. In her free time, she spends time thinking about types, macros, programming languages, and making friendly software.}}
 
 ◊link["https://jeapostrophe.github.io/home/"]{◊speaker["" "Jay McCarthy" ""]}
 
