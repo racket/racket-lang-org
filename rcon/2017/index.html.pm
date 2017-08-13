@@ -113,7 +113,11 @@ Racket, as a language, excels at and encourages a style of linguistic abstractio
 
 ◊bio{◊link["https://lexi-lambda.github.io/"]{Alexis King} is a software engineer at CJ Affiliate, primarily writing Haskell and generally encouraging functional programming. In her free time, she spends time thinking about types, macros, programming languages, and making friendly software.}}
 
-◊link["https://jeapostrophe.github.io/home/"]{◊speaker["" "Jay McCarthy" ""]}
+◊folded{
+◊speaker["" "Jay McCarthy"]{Teaching and Designing Microarchitecture in Racket}
+In my computer architecture course, we study the full stack of CPU design from basic components (like adders) through microarchitecture, microcode, IO & interrupt systems, and through assembly using the MIC-1 by Tanenbaum. Students use tools for simulating the CPU, compiling the microcode, and assembling the macrocode. In previous years, I used a C-based suite (3779 LOC) which was very painful to use and maintain. For my most recent offering, I rewrote all of the tools in Racket (with 55% less code, including an extensive test-suite and more features!) In order to do this well, I wrote a general purpose hardware description DSL in Racket with three different backends, including compilers to C and LLVM IR. In this talk, I'll discuss how to design compilers and DSLs like this in Racket and give a brief explanation of some fun microarchitecture points.
+
+◊bio{◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy} can't fathom not using one of his favorite languages (C, Coq, and Racket---in reverse order of favor) in his classes. Since he already taught this course using a C simulator, he was forced to write an HDL in Racket. Next year, I guess he'll be doing Coq-based verification of circuits. *shudder* When he's not writing Racket programs, he is a core Racket developer, associate professor at UMass Lowell, and a very happy father.}}
 
 ◊folded{
 ◊speaker["" "Mangpo Phitchaya Phothilimthana"]{High-Coverage Hint Generation for Racket Programming Assignments}
