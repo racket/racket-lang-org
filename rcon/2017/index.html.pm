@@ -105,7 +105,10 @@ With the rise in adoption and decrease in price of single-board computers, high-
 
 ◊link["https://charlesearl.blog/"]{◊speaker["" "Charles Earl" ""]}
 
-◊link["https://github.com/jackfirth"]{◊speaker["" "Jack Firth" ""]}
+◊folded{
+◊speaker["" "Jack Firth"]{A RackUnit Toolkit: Growing Racket's Testing Ecosystem}
+Testing in Racket can be downright joyful. Submodules and RackUnit make simple unit tests easy and quick to write, even in an unfamiliar codebase. But Racket's testing story has more than a few holes when it comes to more complex tests. This talk discusses the current state of Racket's testing ecosystem and presents a toolkit of packages to improve it. The toolkit packages add support for unit testing side effects with mocks, integration testing with fixtures, and abstracting over tests with composable first-class assertions. The packages are for the most part independent but designed to work together, and are built on top of a few general purpose libraries that can be used for non-testing purposes. There's far more work to be done however, and this talk highlights what other forms of testing aspiring Racketeers ought to write packages for so I don't have to.
+◊bio{◊link["https://github.com/jackfirth"]{Jack Firth} is a software engineer at Google, primarily working on Google's continuous integration and testing infrastructure and platforms. His interests include domain specific languages, distributed systems, and figuring out how to stop software from breaking all the time. He also likes punching things.}}
 
 ◊folded{
 ◊speaker["" "Alexis King"]{Hackett, a Haskell for Racketeers}
