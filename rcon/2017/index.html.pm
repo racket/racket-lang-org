@@ -115,6 +115,12 @@ Testing in Racket can be downright joyful. Submodules and RackUnit make simple u
 ◊bio{◊link["https://github.com/jackfirth"]{Jack Firth} is a software engineer at Google, primarily working on Google's continuous integration and testing infrastructure and platforms. His interests include domain specific languages, distributed systems, and figuring out how to stop software from breaking all the time. He also likes punching things.}}
 
 ◊folded{
+◊speaker["" "William G Hatch"]{Rash: Reckless Shell Programming in Racket}
+Do you enjoy automating with shell scripts, but find you need to toss out your Bash implementation in favor of using a "real" programming language as your script grows?  Do you find yourself writing in Racket wishing you could throw down a quick pipeline of five processes without several lines of port and process juggling?  Do you wish your interactive Bash shell were more like a Racket repl, or that your Racket repl were more like Bash?  In this talk I describe my solution to these problems and more:  Rash, the shell language for Racket.
+
+◊bio{◊link["http://willghatch.net/blog/"]{William Hatch} is a PhD student at the University of Utah, with interests in language extensibility, DSLs, and education.  He loves Unix shells, and does most of his computing in a terminal emulator.  In his spare time he enjoys music, yo-yoing, orange juice, and relaxing at home with his wife.}}
+
+◊folded{
 ◊speaker["" "Alexis King"]{Hackett, a Haskell for Racketeers}
 Racket, as a language, excels at and encourages a style of linguistic abstraction using metaprogramming. One of the most potentially useful tools to a metaprogrammer is intimate knowledge of expressions’ types, but existing general purpose, statically typed languages do not make that information easily accessible to the macro writer. This talk presents an early, experimental version of Hackett, an embedding of a Haskell-style type system in Racket’s macro system. Hackett attempts to provide a robust typechecker with friendly, powerful type inference for general-purpose programs that simultaneously exposes that information to Racket’s ordinary macro-writing facilities.
 
