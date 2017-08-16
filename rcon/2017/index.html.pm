@@ -103,7 +103,11 @@ With the rise in adoption and decrease in price of single-board computers, high-
 
 ◊bio{◊link["http://www.pion-inc.com"]{Deren Dohoda} is the Engineering Manager at Pion Inc and has worked at all phases of product development, deployment, and support for 17 years.}}
 
-◊link["https://charlesearl.blog/"]{◊speaker["" "Charles Earl" ""]}
+◊folded{
+◊speaker["" "Charles Earl"]{Deep Learning with Racket: An Experience Report}
+What can we gain by looking at deep learning through the lens of functional programming? This question has gained attention over the last few years as increasingly complex neural network architectures are developed. I recently started developing a framework for specifying and training neural networks in Racket. In this talk, I'll give a report on the project and invite discussion on future work.
+
+◊bio{◊link["https://charlesearl.blog/"]{Charles Earl} has enjoyed programming in Lisp since the '80s. He now works as a data scientist at Automattic -- the parent company of WordPress -- building systems that use machine learning and natural language processing.}}
 
 ◊folded{
 ◊speaker["" "Jack Firth"]{A RackUnit Toolkit: Growing Racket's Testing Ecosystem}
