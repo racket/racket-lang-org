@@ -77,7 +77,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊div{
 ◊folded{
 ◊speaker["" "Leif Andersen"]{Movies as Programs: The Story of a Racket}
-Racket is more than a programming language. It is a programming language for making new languages. In fact, it is a programming language for making languages for making movies. Video is a language made from the sweat and parenthesis provided by the Racket ecosystem. It integrates into Racket from concept to final rendering. Come for the video demos, stay form the language tower.
+Racket is more than a programming language. It is a programming language for making new languages. In fact, it is a programming language for making languages for making movies. Video is a language made from the sweat and parenthesis provided by the Racket ecosystem. It integrates into Racket from concept to final rendering. Come for the video demos, stay for the language tower.
 
 ◊bio{◊link["http://leifandersen.net/"]{Leif Andersen} is a PhD student at Northeastern University and a core Racket developer. She is interested in compilers, low-level performance tools, creative and unusual DSLs, and the interactions between programing languages and their ecosystems. Mix these in a pot and Video pops out.}}
 
