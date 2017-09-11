@@ -166,38 +166,37 @@ Want to embrace the power of Racket in the ugly JavaScript world? RacketScript c
 
 ◊h3{◊xtarget["schedule"]{Saturday Oct 7}}
 
-Keynote and talks. Schedule to come!
+Keynote and talks.
 
-◊;{
 ◊schedule[
 ◊row{◊at{9:00–9:30} ◊desc{Registration}}
 ◊row{◊at{9:30} ◊desc{Welcome}}
-◊row{◊at{9:30–10:30} ◊desc{Keynote: Dan Friedman & Will Byrd}}
+◊row{◊at{9:30–10:30} ◊desc{Keynote: Dan Friedman & Will Byrd: The Reasoned Racketeers}}
 ◊row{◊at{10:30–11:00} ◊desc{Break}}
 ◊row{◊at{11:00–12:00} ◊desc{
-Speaker 1
-Speaker 2
-Speaker 3}}
+Deren Dohoda: Prototype to Production: A Racket Experience Report
+Leif Andersen: Movies as Programs: The Story of a Racket
+Jack Firth: A RackUnit Toolkit: Growing Racket's Testing Ecosystem}}
 ◊row{◊at{12:00–14:00} ◊desc{Lunch}}
-◊row{◊at{14:00} ◊desc{Contributor Awards}}
+◊; ◊row{◊at{14:00} ◊desc{Contributor Awards}} ◊; if we have them
 ◊row{◊at{14:00–15:00} ◊desc{
-Speaker 4
-Speaker 5
-Speaker 6}}
+Jay McCarthy: Teaching and Designing Microarchitecture in Racket
+Mangpo Phitchaya Phothilimthana: High-Coverage Hint Generation for Racket Programming Assignments
+Prabhakar Ragde: Proust: A Nano Proof Assistant}}
 ◊row{◊at{15:00–15:15} ◊desc{Break}}
-◊row{◊at{15:15–16:15} ◊desc{
-Speaker 7
-Speaker 8
-Speaker 9}}
-◊row{◊at{16:15–16:30} ◊desc{Break}}
-◊row{◊at{16:30–17:30} ◊desc{
-Speaker 10
-Speaker 11
-Speaker 12}}
-◊row{◊at{17:30–17:45} ◊desc{Break}}
-◊row{◊at{17:45–} ◊desc{Town Hall Meeting / General Q&A}}
+◊row{◊at{15:15–16:30} ◊desc{
+David Christiansen: A Little Bit of Dependent Types
+Vishesh Yadav: RacketScript
+David Storrs: Racket and Business
+Alexis King: Hackett, a Haskell for Racketeers}}
+◊row{◊at{16:30–16:45} ◊desc{Break}}
+◊row{◊at{16:45–17:45} ◊desc{
+Charles Earl: Deep Learning with Racket: An Experience Report
+Dan Anderson and Anthony Pineci: A Methodology for Teaching Kalman Filtering to High School students
+William G Hatch: Rash: Reckless Shell Programming in Racket
+◊; 14 goes here, if we have one, and extend until 18:00
+}}
 ]
-}
 
 
 
