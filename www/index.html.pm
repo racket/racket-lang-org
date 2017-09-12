@@ -168,7 +168,7 @@ The ◊code{web-server/insta} language lets you quickly prototype server-side we
 ◊section{
 Software
 
-◊link["https://download.racket-lang.org/"]{Download Racket v6.10}
+◊link["https://download.racket-lang.org/"]{Download Racket v6.10.1}
 
 ◊link["https://github.com/plt/racket/"]{Source code}
 
@@ -203,7 +203,7 @@ Documentation & tutorials
 ◊section{
 News
 
-◊link["https://blog.racket-lang.org/2017/07/racket-v6-10.html"]{Racket version 6.10} is available.
+◊link["https://blog.racket-lang.org/2017/09/racket-v6-10-1.html"]{Racket version 6.10.1} is available.
 
 Tickets now available for ◊link["https://con.racket-lang.org/"]{(seventh RacketCon)} in Seattle, 7–8 Oct 2017.
 
