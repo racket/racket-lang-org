@@ -1,0 +1,14 @@
+1505251462
+Racket v6.10.1
+
+Version 6.10.1 patches the recent v6.10 release in three small ways:
+
+ * On Linux, corrects a mishandling of file-stream ports that can block
+   on input or output (such as pipes between processes), where closing
+   a blocked port may cause a port that's opened later to be
+   incorrectly reported as blocked.
+
+ * On Windows, corrects a crash in the handling of symbolic links.
+
+ * On all platforms, corrects the peer-side results from
+   `tcp-addresses`.
