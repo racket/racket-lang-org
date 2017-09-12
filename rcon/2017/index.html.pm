@@ -210,16 +210,29 @@ William G Hatch: Rash: Reckless Shell Programming in Racket
 
 ◊h3{Sunday Oct 8}
 
-New for (seventh RacketCon) — Racketeer Office Hours, a day devoted to collaborating on existing projects, planning new ones, and getting help and advice from other members of the community. Racket's core developers & many others will be there — bring your questions & projects!
+New for (seventh RacketCon) — Racketeer Office Hours!
 
+The day begins with an open discussion about the state of Racket, happenings in the last year, plans for the future. The floor is open to any questions and comments you may have.
 
-◊div[#:class "two-col"]{
+Following this discussion are office hours proper. Bring your projects to get assistance from experienced members of the community, start new ones inspired by what you saw on Saturday, or pick from a list of suggested tasks to help us improve Racket!
+
+◊schedule[
+◊row{◊at{10:00–11:00} ◊desc{Town Hall Meeting}}
+◊row{◊at{11:00–11:45} ◊desc{Racket Development Mini-Tutorials}}
+◊row{◊at{11:45–12:00} ◊desc{Project Introductions}}
+◊row{◊at{12:00–13:00} ◊desc{Lunch}}
+◊row{◊at{13:00–open}  ◊desc{Office Hours / Hackathon}}
+]
+
+◊div{
+◊b{Participating:}
 ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt} (Racket core)
 ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler} (Racket core, DrRacket)
 ◊link["http://www.ccs.neu.edu/home/samth/"]{Sam Tobin-Hochstadt} (Racket core, Typed Racket)
 ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy} (Racket core, web)
 ◊link["http://users.eecs.northwestern.edu/~stamourv/"]{Vincent St-Amour} (Typed Racket, optimizer, Racket releases)
 ◊link["http://beautifulracket.com"]{Matthew Butterick} (Pollen)
+And many more!
 }
 
 ◊;{
