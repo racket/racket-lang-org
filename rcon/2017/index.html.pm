@@ -166,8 +166,6 @@ Want to embrace the power of Racket in the ugly JavaScript world? RacketScript c
 
 ◊h3{◊xtarget["schedule"]{Saturday Oct 7}}
 
-Keynote and talks.
-
 ◊schedule[
 ◊row{◊at{9:00–9:30} ◊desc{Registration}}
 ◊row{◊at{9:30} ◊desc{Welcome}}
@@ -212,7 +210,7 @@ William G Hatch: Rash: Reckless Shell Programming in Racket
 
 New for (seventh RacketCon) — Racketeer Office Hours!
 
-The day begins with an open discussion about the state of Racket, happenings in the last year, plans for the future. The floor is open to any questions and comments you may have.
+The day begins with an open discussion about the state of Racket, happenings in the last year, and plans for the future. The floor is open to any questions and comments you may have.
 
 Following this discussion are office hours proper. Bring your projects to get assistance from experienced members of the community, start new ones inspired by what you saw on Saturday, or pick from a list of suggested tasks to help us improve Racket!
 
