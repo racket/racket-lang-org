@@ -115,6 +115,12 @@ Testing in Racket can be downright joyful. Submodules and RackUnit make simple u
 ◊bio{◊link["https://github.com/jackfirth"]{Jack Firth} is a software engineer at Google, primarily working on Google's continuous integration and testing infrastructure and platforms. His interests include domain specific languages, distributed systems, and figuring out how to stop software from breaking all the time. He also likes punching things.}}
 
 ◊folded{
+◊speaker["" "Andrew Gwozdziewycz"]{Simplifying Slideshow for DWIM Presentations that Stick, Quick}
+Slideshow is a programming language for producing presentations. It's extremely powerful, and has great tooling, but it's anything but simple, even for experienced Racketeers. I present "slideshow/simple", a language inspired by markdown and a tool called "sent" that simplifies the creation of DWIM presentations, for when you just need to put something on screen without a lot of fuss.
+
+◊bio{◊link["http://apgwoz.com/"]{Andrew Gwozdziewycz} is an engineer at Heroku focused on metrics and operations for customers. Since his coworkers think Racket "has too many parentheses", or is "too complicated", or just flat out say, "huh?", he's forced to use much lesser languages--mostly Go--which he's definitely not a fan of.}}
+
+◊folded{
 ◊speaker["" "William G Hatch"]{Rash: Reckless Shell Programming in Racket}
 Do you enjoy automating with shell scripts, but find you need to toss out your Bash implementation in favor of using a "real" programming language as your script grows?  Do you find yourself writing in Racket wishing you could throw down a quick pipeline of five processes without several lines of port and process juggling?  Do you wish your interactive Bash shell were more like a Racket repl, or that your Racket repl were more like Bash?  In this talk I describe my solution to these problems and more:  Rash, the shell language for Racket.
 
@@ -192,7 +198,7 @@ Alexis King: Hackett, a Haskell for Racketeers}}
 Charles Earl: Deep Learning with Racket: An Experience Report
 Dan Anderson and Anthony Pineci: A Methodology for Teaching Kalman Filtering to High School students
 William G Hatch: Rash: Reckless Shell Programming in Racket
-◊; 14 goes here, if we have one, and extend until 18:00
+Andrew Gwozdziewycz: Simplifying Slideshow for DWIM Presentations that Stick, Quick
 }}
 ]
 
