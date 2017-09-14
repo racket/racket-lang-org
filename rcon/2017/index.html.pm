@@ -194,7 +194,7 @@ Vishesh Yadav: RacketScript
 David Storrs: Racket and Business
 Alexis King: Hackett, a Haskell for Racketeers}}
 ◊row{◊at{16:30–16:45} ◊desc{Break}}
-◊row{◊at{16:45–17:45} ◊desc{
+◊row{◊at{16:45–18:00} ◊desc{
 Charles Earl: Deep Learning with Racket: An Experience Report
 Dan Anderson and Anthony Pineci: A Methodology for Teaching Kalman Filtering to High School students
 William G Hatch: Rash: Reckless Shell Programming in Racket
