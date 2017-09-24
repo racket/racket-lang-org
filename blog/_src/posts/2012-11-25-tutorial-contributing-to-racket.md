@@ -13,7 +13,7 @@ I've been a longtime user and sometimes fanboy of [Racket](http://racket-lang.or
 
 
 
-I've been using Racket for a while, so I knew roughly where to lookto put my code, tests, and documentation.  A newer user might not know,so this post outlines, in some detail, the steps I went through to puttogether a tiny feature extension for Racket.  
+I've been using Racket for a while, so I knew roughly where to lookto put my code, tests, and documentation.  A newer user might not know, so this post outlines, in some detail, the steps I went through to put together a tiny feature extension for Racket.  
 
 
 
@@ -22,9 +22,7 @@ I've been using Racket for a while, so I knew roughly where to lookto put my cod
 A Tiny Feature
 ---
 
-I'm dabbling in the implementation of a [small scripting language called Pyret](http://github.com/brownplt/pyret-lang) to study features of scripting objects.  The language has a parser, which generates AST nodes.  The nodes keep track of their location in the original program for error reporting, unbound identifier reporting, and the like.  I wanted to write some test cases for our
-
-parser, which generates things like:
+I'm dabbling in the implementation of a [small scripting language called Pyret](http://github.com/brownplt/pyret-lang) to study features of scripting objects.  The language has a parser, which generates AST nodes.  The nodes keep track of their location in the original program for error reporting, unbound identifier reporting, and the like.  I wanted to write some test cases for our parser, which generates things like:
 
 
 ```racket
@@ -56,7 +54,7 @@ I thought `check-match` was pretty useful, and figured I'd see if the Racket fol
 
 
 Getting and Extending Racket
---- 
+---
 
 [Racket's repo](http://github.com/plt/racket) is hosted on Github.  The easiest way to contribute is to [fork it](https://help.github.com/articles/fork-a-repo), and then check out your own copy.  The check-out and build process is fairly standard; you should, however, make a directory called `build/` to hold the binaries that will be created:
 
@@ -141,7 +139,7 @@ We'll build up our commit in those stages.
 Adding Tests
 ---
 
-First, I need to know how I'm going to test this to make sure I don't screw anything up with my edits.  There's actually a whole collection for tests in `collects/tests/`, which includes a rackunit subdirectory.  Conveniently, this has been further divided into files that correspond to the files from the RackUnit collection itself:
+First, I need to know how I'm going to test this to make sure I don't screw anything up with my edits.  There's actually a whole collection for tests in `collects/tests/`, which includes a RackUnit subdirectory.  Conveniently, this has been further divided into files that correspond to the files from the RackUnit collection itself:
 
 ```bash
 $ ls collects/tests/rackunit/
@@ -319,7 +317,7 @@ The Racket folks maintain a list of [Intro Projects](https://github.com/plt/rack
 * * *
 
 For reference, cross-ref with Greg's post on infrequent contributions to Racket:
-www.greghendershott.com/2013/04/a-guide-for-infrequent-contributors-to-racket.html
+<www.greghendershott.com/2013/04/a-guide-for-infrequent-contributors-to-racket.html>
 
 — *Laurent, 30 April 2013*
 
