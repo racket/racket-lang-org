@@ -1,7 +1,7 @@
 
     Title:Tutorial: Contributing to Racket
     Date:2012-11-25T17:02:00.001-05:00
-    Tags:
+    Tags: 
 
 *posted by Joe Gibbs Politz*
 
@@ -317,7 +317,7 @@ The Racket folks maintain a list of [Intro Projects](https://github.com/plt/rack
 * * *
 
 For reference, cross-ref with Greg's post on infrequent contributions to Racket:
-<www.greghendershott.com/2013/04/a-guide-for-infrequent-contributors-to-racket.html>
+<http://www.greghendershott.com/2013/04/a-guide-for-infrequent-contributors-to-racket.html>
 
 — *Laurent, 30 April 2013*
 
