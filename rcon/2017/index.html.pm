@@ -173,7 +173,7 @@ Want to embrace the power of Racket in the ugly JavaScript world? RacketScript c
 ◊h3{◊xtarget["schedule"]{Saturday Oct 7}}
 
 ◊schedule[
-◊row{◊at{9:00–9:30} ◊desc{Registration}}
+◊row{◊at{8:30–9:30} ◊desc{Breakfast & Registration}}
 ◊row{◊at{9:30} ◊desc{Welcome}}
 ◊row{◊at{9:30–10:30} ◊desc{Keynote: Dan Friedman & Will Byrd: The Reasoned Racketeers}}
 ◊row{◊at{10:30–11:00} ◊desc{Break}}
@@ -221,6 +221,7 @@ The day begins with an open discussion about the state of Racket, happenings in 
 Following this discussion are office hours proper. Bring your projects to get assistance from experienced members of the community, start new ones inspired by what you saw on Saturday, or pick from a list of suggested tasks to help us improve Racket!
 
 ◊schedule[
+◊row{◊at{9:00–10:00} ◊desc{Breakfast}}
 ◊row{◊at{10:00–11:00} ◊desc{Town Hall Meeting}}
 ◊row{◊at{11:00–11:45} ◊desc{Racket Development Mini-Tutorials}}
 ◊row{◊at{11:45–12:00} ◊desc{Project Introductions}}
