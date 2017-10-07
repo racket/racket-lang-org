@@ -264,11 +264,6 @@ And many more!
 ◊link["pollenpub.com"]{Matthew Butterick}
 }
 
-◊gap[1]
-
-
-Sponsorship slots are still available! If you or your company would like to sponsor RacketCon, please ◊a[#:href "mailto:con@racket-lang.org"]{get in touch}.
-
 
 ◊h3{Friendly Environment Policy}
 
