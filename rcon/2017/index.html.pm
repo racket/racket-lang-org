@@ -23,7 +23,14 @@
 RacketCon is for developers, contributors, programmers, educators, and bystanders. It's an opportunity for all of us to share plans, ideas, and enthusiasm, and help shape the future of Racket.
 
 
-◊gap[0]
+◊gap[2]
+
+◊h3{◊head["a"]{Live Stream}}
+
+◊link["https://www.youtube.com/watch?v=et0C4ijed04"]{Morning Livestream Archive}
+Stay tuned for the afternoon livestream!
+
+◊gap[2]
 
 ◊h3{◊xtarget["speakers"]{◊head["a"]{Keynote}}}
 
