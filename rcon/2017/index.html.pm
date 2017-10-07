@@ -27,8 +27,8 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 
 ◊h3{◊head["a"]{Live Stream}}
 
-◊link["https://www.youtube.com/watch?v=et0C4ijed04"]{Morning Livestream Archive}
-Stay tuned for the afternoon livestream!
+◊link["https://www.youtube.com/watch?v=et0C4ijed04"]{Morning Live Stream Archive}
+◊link["https://www.youtube.com/watch?v=WI8uA4KjQJk"]{Afternoon Live Stream}
 
 ◊gap[2]
 
