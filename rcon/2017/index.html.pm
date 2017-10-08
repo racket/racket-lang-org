@@ -28,7 +28,7 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 ◊h3{◊head["a"]{Live Stream}}
 
 ◊link["https://www.youtube.com/watch?v=et0C4ijed04"]{Morning Live Stream Archive}
-◊link["https://www.youtube.com/watch?v=WI8uA4KjQJk"]{Afternoon Live Stream}
+◊link["https://www.youtube.com/watch?v=WI8uA4KjQJk"]{Afternoon Live Stream Archive}
 
 ◊gap[2]
 
@@ -230,10 +230,16 @@ Following this discussion are office hours proper. Bring your projects to get as
 ◊schedule[
 ◊row{◊at{9:00–10:00} ◊desc{Breakfast}}
 ◊row{◊at{10:00–11:00} ◊desc{Town Hall Meeting}}
-◊row{◊at{11:00–11:45} ◊desc{Racket Development Mini-Tutorials}}
+◊row{◊at{11:00–11:45} ◊desc{Racket Development Mini-Tutorials
+Ben Greenman: Contributing to the Racket codebase
+Stephen Chang: Packaging Racket projects
+Spencer Florence and Jesse Tov: Scribbling documentation
+}}
 ◊row{◊at{11:45–12:00} ◊desc{Project Introductions}}
 ◊row{◊at{12:00–13:00} ◊desc{Lunch}}
-◊row{◊at{13:00–open}  ◊desc{Office Hours / Hackathon}}
+◊row{◊at{13:00–open}  ◊desc{Office Hours / Hackathon
+◊link["https://github.com/racket/racket/wiki/Racketeer-Office-Hours-2017-Task-Ideas"]{Task Ideas}
+}}
 ]
 
 ◊div{
