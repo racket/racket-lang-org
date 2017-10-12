@@ -25,7 +25,7 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 
 ◊gap[2]
 
-◊h3{◊head["a"]{Live Stream}}
+◊h3{Live Stream}
 
 ◊link["https://www.youtube.com/watch?v=et0C4ijed04"]{Morning Live Stream Archive}
 ◊link["https://www.youtube.com/watch?v=WI8uA4KjQJk"]{Afternoon Live Stream Archive}
@@ -84,6 +84,8 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊div{
 ◊folded{
 ◊speaker["" "Leif Andersen"]{Movies as Programs: The Story of a Racket}
+◊rlink["2017/andersen.pdf"]{Slides} ◊; TODO remove the 2017 once this page goes in that directory
+
 Racket is more than a programming language. It is a programming language for making new languages. In fact, it is a programming language for making languages for making movies. Video is a language made from the sweat and parenthesis provided by the Racket ecosystem. It integrates into Racket from concept to final rendering. Come for the video demos, stay for the language tower.
 
 ◊bio{◊link["http://leifandersen.net/"]{Leif Andersen} is a PhD student at Northeastern University and a core Racket developer. She is interested in compilers, low-level performance tools, creative and unusual DSLs, and the interactions between programming languages and their ecosystems. Mix these in a pot and Video pops out.}}
@@ -112,41 +114,55 @@ With the rise in adoption and decrease in price of single-board computers, high-
 
 ◊folded{
 ◊speaker["" "Charles Earl"]{Deep Learning with Racket: An Experience Report}
+◊rlink["2017/earl.pdf"]{Slides}
+
 What can we gain by looking at deep learning through the lens of functional programming? This question has gained attention over the last few years as increasingly complex neural network architectures are developed. I recently started developing a framework for specifying and training neural networks in Racket. In this talk, I'll give a report on the project and invite discussion on future work.
 
 ◊bio{◊link["https://charlesearl.blog/"]{Charles Earl} has enjoyed programming in Lisp since the '80s. He now works as a data scientist at Automattic -- the parent company of WordPress -- building systems that use machine learning and natural language processing.}}
 
 ◊folded{
 ◊speaker["" "Jack Firth"]{A RackUnit Toolkit: Growing Racket's Testing Ecosystem}
+◊rlink["2017/firth.pdf"]{Slides}
+
 Testing in Racket can be downright joyful. Submodules and RackUnit make simple unit tests easy and quick to write, even in an unfamiliar codebase. But Racket's testing story has more than a few holes when it comes to more complex tests. This talk discusses the current state of Racket's testing ecosystem and presents a toolkit of packages to improve it. The toolkit packages add support for unit testing side effects with mocks, integration testing with fixtures, and abstracting over tests with composable first-class assertions. The packages are for the most part independent but designed to work together, and are built on top of a few general purpose libraries that can be used for non-testing purposes. There's far more work to be done however, and this talk highlights what other forms of testing aspiring Racketeers ought to write packages for so I don't have to.
 ◊bio{◊link["https://github.com/jackfirth"]{Jack Firth} is a software engineer at Google, primarily working on Google's continuous integration and testing infrastructure and platforms. His interests include domain specific languages, distributed systems, and figuring out how to stop software from breaking all the time. He also likes punching things.}}
 
 ◊folded{
 ◊speaker["" "Andrew Gwozdziewycz"]{Simplifying Slideshow for DWIM Presentations that Stick, Quick}
+◊rlink["2017/gwozdziewycz.pdf"]{Slides} ◊link["https://github.com/apg/racket-con-2017"]{Source}
+
 Slideshow is a programming language for producing presentations. It's extremely powerful, and has great tooling, but it's anything but simple, even for experienced Racketeers. I present "slideshow/simple", a language inspired by markdown and a tool called "sent" that simplifies the creation of DWIM presentations, for when you just need to put something on screen without a lot of fuss.
 
 ◊bio{◊link["http://apgwoz.com/"]{Andrew Gwozdziewycz} is an engineer at Heroku focused on metrics and operations for customers. Since his coworkers think Racket "has too many parentheses", or is "too complicated", or just flat out say, "huh?", he's forced to use much lesser languages--mostly Go--which he's definitely not a fan of.}}
 
 ◊folded{
 ◊speaker["" "William G Hatch"]{Rash: Reckless Shell Programming in Racket}
+◊rlink["2017/hatch.pdf"]{Slides}
+
 Do you enjoy automating with shell scripts, but find you need to toss out your Bash implementation in favor of using a "real" programming language as your script grows?  Do you find yourself writing in Racket wishing you could throw down a quick pipeline of five processes without several lines of port and process juggling?  Do you wish your interactive Bash shell were more like a Racket repl, or that your Racket repl were more like Bash?  In this talk I describe my solution to these problems and more:  Rash, the shell language for Racket.
 
 ◊bio{◊link["http://willghatch.net/blog/"]{William Hatch} is a PhD student at the University of Utah, with interests in language extensibility, DSLs, and education.  He loves Unix shells, and does most of his computing in a terminal emulator.  In his spare time he enjoys music, yo-yoing, orange juice, and relaxing at home with his wife.}}
 
 ◊folded{
 ◊speaker["" "Alexis King"]{Hackett, a Haskell for Racketeers}
+◊rlink["2017/king.pdf"]{Slides}
+
 Racket, as a language, excels at and encourages a style of linguistic abstraction using metaprogramming. One of the most potentially useful tools to a metaprogrammer is intimate knowledge of expressions’ types, but existing general purpose, statically typed languages do not make that information easily accessible to the macro writer. This talk presents an early, experimental version of Hackett, an embedding of a Haskell-style type system in Racket’s macro system. Hackett attempts to provide a robust typechecker with friendly, powerful type inference for general-purpose programs that simultaneously exposes that information to Racket’s ordinary macro-writing facilities.
 
 ◊bio{◊link["https://lexi-lambda.github.io/"]{Alexis King} is a software engineer at CJ Affiliate, primarily writing Haskell and generally encouraging functional programming. In her free time, she spends time thinking about types, macros, programming languages, and making friendly software.}}
 
 ◊folded{
 ◊speaker["" "Jay McCarthy"]{Teaching and Designing Microarchitecture in Racket}
+◊rlink["2017/mccarthy.pdf"]{Slides}
+
 In my computer architecture course, we study the full stack of CPU design from basic components (like adders) through microarchitecture, microcode, IO & interrupt systems, and through assembly using the MIC-1 by Tanenbaum. Students use tools for simulating the CPU, compiling the microcode, and assembling the macrocode. In previous years, I used a C-based suite (3779 LOC) which was very painful to use and maintain. For my most recent offering, I rewrote all of the tools in Racket (with 55% less code, including an extensive test-suite and more features!) In order to do this well, I wrote a general purpose hardware description DSL in Racket with three different backends, including compilers to C and LLVM IR. In this talk, I'll discuss how to design compilers and DSLs like this in Racket and give a brief explanation of some fun microarchitecture points.
 
 ◊bio{◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy} can't fathom not using one of his favorite languages (C, Coq, and Racket---in reverse order of favor) in his classes. Since he already taught this course using a C simulator, he was forced to write an HDL in Racket. Next year, I guess he'll be doing Coq-based verification of circuits. *shudder* When he's not writing Racket programs, he is a core Racket developer, associate professor at UMass Lowell, and a very happy father.}}
 
 ◊folded{
 ◊speaker["" "Mangpo Phitchaya Phothilimthana"]{High-Coverage Hint Generation for Racket Programming Assignments}
+◊rlink["2017/phothilimthana.pdf"]{Slides}
+
 In massive programming courses, automated hint generation offers the promise of zero-cost, zero-latency assistance for students who are struggling to make progress on solving a program. 
 
 In this talk, I will describe a robust hint generation system for Racket programming assignments that extends the hint coverage of the mutation-based approach using two complementary techniques. A syntax checker detects common syntax misconception errors in individual subexpressions to guide students to partial solutions that can be evaluated for the semantic correctness. A mutation-based approach is then used to generate hints for almost-correct programs. If the mutation-based approach fails, a case analyzer detects missing program branches to guide students to partial solutions with reasonable structures. Our system itself is implemented in Racket. We utilize Rosette, a solver-aided language embedded in Racket, as a constraint solver to prove program equivalence.
@@ -163,6 +179,8 @@ Three things that don't normally go together are intuitionistic type theory, Rac
 
 ◊folded{
 ◊speaker["" "David Storrs"]{Racket and Business}
+◊link["https://tinyurl.com/David-Storrs-7th-RacketCon"]{Slides}
+
 Racket is the official language at Biomantica Inc, the biotech startup I co-founded. I had a little experience with it in advance and my cofounder learned it from scratch as we worked. In this talk we'll go over why we chose it, the pros and cons we've found, the process of learning Racket on the job, and thoughts on how it worked out in practice.
 
 ◊bio{◊link["http://biomantica.com"]{David Storrs} started programming professionally when Netscape and IE were duking it out for market share. He's done a lot of web+devops work, and at least a little of most other types of programming -- financial software, medical software, video games, etc. He's co-founder of Biomantica Inc, a biotech software company whose initial product focuses on big data transport between scientific or corporate collaborators who may be continents apart.}}
@@ -233,7 +251,7 @@ Following this discussion are office hours proper. Bring your projects to get as
 ◊row{◊at{11:00–11:45} ◊desc{Racket Development Mini-Tutorials
 Ben Greenman: ◊link["https://github.com/bennn/racket-lang-org/blob/pr-blog/blog/_src/posts/2017-09-27-tutorial-contributing-to-racket.md"]{Contributing to the Racket codebase}
 Stephen Chang: Packaging Racket projects
-Spencer Florence and Jesse Tov: Scribbling documentation
+Spencer Florence and Jesse Tov: ◊link["https://gist.github.com/florence/b3fcc1df922008604e64362484dc1c28"]{Scribbling documentation}
 }}
 ◊row{◊at{11:45–12:00} ◊desc{Project Introductions}}
 ◊row{◊at{12:00–13:00} ◊desc{Lunch}}
