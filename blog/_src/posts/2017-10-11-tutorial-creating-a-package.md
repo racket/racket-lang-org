@@ -53,12 +53,14 @@ github repos or even local directories may act as packages as well.
 ## Local Package Installation
 
 It's best to follow this tutorial with a running example. We'll use [this
-one][repo].
+one][repo]. To start, `clone` the repo with `git` and `cd` to the repo root
+directory.
 
-Our example starts with a [`bestfit.rkt` file][repo-bestfit] that computes
-best-fit lines for Racket's [`plot`][doc-plot] library.
+The rest of the tutorial assumes all files are in a `plot-bestfit/`
+directory.
 
-We assume the file resides in a directory named `plot-bestfit/`.
+The [`bestfit.rkt` file][repo-bestfit] in our library computes best-fit lines
+for Racket's [`plot`][doc-plot] library.
 
 A [`test-plot.rkt` file][repo-testplot] (in the same directory) uses the
 `plot`, `math`, and `bestfit.rkt` libraries, importing them like this:
@@ -89,6 +91,7 @@ command, executed from the parent directory, is identical to the above command:
 ```bash
 # run from parent of `plot-bestfit/` directory
 # you may need to run `raco pkg remove plot-bestfit` before trying this command
+# (don't forget the `/`! omitting it will install from the pkg server instead)
 $ raco pkg install plot-bestfit/
 ```
 
@@ -216,6 +219,16 @@ various options. In our `info.rkt` file, we have one sublist that contains only
 the documentation source file and does not specify any other options.
 
 See the [notes from the "Scribbling documentation" tutorial](https://gist.github.com/florence/b3fcc1df922008604e64362484dc1c28) to learn how to write documentation.
+
+When we are done writing our docs, we can use the `raco` tools to compile and
+view them in rendered form.
+
+```bash
+# re-compiles `bestfit` collection and its docs
+$ raco setup bestfit
+# launch browser to view local docs
+$ raco docs
+```
 
 ## `raco pkg new`
 
