@@ -271,29 +271,34 @@ catalog, and then download and install the package source files from that repo.
 ## Single- vs Multi-Collection Packages
 
 The package we created in this tutorial consists of a single
-collection. Packages may alternatively contain several modules spanning
-multiple collections.
+collection. Alternatively, packages may contain several modules spanning
+multiple collections. For example, a package might want to add a module to both
+the `data` and `file` collections.
 
-To create a multi-collection package, simply change the `collection` entry in
-`info.rkt` to have value `'multi`. This directs Racket package installation to
-treat each subdirectory in the package as its own collection (or partial
-collection). See the [documentation][doc-multipkg] for more details.
+Such packages must be declared as multi-collection packages by changing the
+`collection` entry in `info.rkt` to have value `'multi`. This directs Racket
+package installation to treat each subdirectory in the package as its own
+collection (or partial collection). See the [documentation][doc-multipkg] for
+more details.
 
-A common organization structure splits a package's contents into four separate
-collections:
+## A Final Note on Multi-Package Libraries
 
-- a base collection `X` with just an `info.rkt` file,
-- an `X-lib` collection that contains the source files for `X`,
-- an `X-doc` collection with the documentation files,
-- and an `X-test` collection with the tests for the package.
+If you've browsed the Racket source files at all, you may have noticed that
+many core libraries further subdivide their contents into *several
+packages*. The organization is typically arranged as:
 
-where the `info.rkt` in the base `X` collection typically specifies `X-lib` and
-`X-doc` as dependencies. An advantage of this organization is that a user may
-now install and use the package without downloading the tests (and installing
-its dependencies).
+- a base package `X` with just an `info.rkt` file,
+- an `X-lib` package that contains most of the source files,
+- an `X-doc` package with the documentation files,
+- and an `X-test` package with the test files.
+
+In this setup, the `info.rkt` in the base `X` package typically
+specifies `X-lib` and `X-doc` as dependencies. This division enables users to
+more finely manage dependencies, i.e., a programmer may want to use the main
+package but may not want to install the tests (and its dependencies).
 
 See the [pict package](https://github.com/racket/pict)
-for a concrete example of a package organized in this manner.
+for a concrete example of a library organized in this manner.
 
 [doc-multipkg]: http://docs.racket-lang.org/pkg/Package_Concepts.html?#%28tech._multi._collection._package%29
 [doc-scribblings]: http://docs.racket-lang.org/raco/setup-info.html?#%28idx._%28gentag._11._%28lib._scribblings%2Fraco%2Fraco..scrbl%29%29%29
