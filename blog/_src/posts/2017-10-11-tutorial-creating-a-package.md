@@ -21,6 +21,7 @@ Specifically, this post explains how to:
 ## Packages vs Collections
 
 Before getting started, we first clarify some terminology.
+([This blog post][blog-pkgs] explains packages and collections in more depth.)
 
 In Racket, a library is just a [module][doc-module] (typically in its own file)
 that exports some bindings. A programmer may import such a module using a
@@ -49,6 +50,7 @@ github repos or even local directories may act as packages as well.
 [doc-module]: http://docs.racket-lang.org/guide/module-basics.html
 [doc-collect]: http://docs.racket-lang.org/guide/module-basics.html#%28tech._collection%29
 [doc-package]: http://docs.racket-lang.org/pkg/Package_Concepts.html?#%28tech._package%29
+[blog-pkgs]: http://blog.racket-lang.org/2015/08/modules-packages-and-collections.html
 
 ## Local Package Installation
 
