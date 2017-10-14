@@ -272,16 +272,31 @@ catalog, and then download and install the package source files from that repo.
 
 The package we created in this tutorial consists of a single
 collection. Alternatively, packages may contain several modules spanning
-multiple collections. For example, a package might want to add a module to both
-the `data` and `file` collections.
+multiple collections.
 
 Such packages must be declared as multi-collection packages by changing the
 `collection` entry in `info.rkt` to have value `'multi`. This directs Racket
 package installation to treat each subdirectory in the package as its own
-collection (or partial collection). See the [documentation][doc-multipkg] for
-more details.
+collection (or partial collection).
+
+For example, the [`drracket` package][repo-drracket] leverages this
+organization style to implement its toolbar. Specifically, it adds a `tool.rkt`
+module to many different collections, such as the `macro-debugger` and
+`scribble`, in order to access their callback hooks. Observe that in addition
+to the package's root `info.rkt`, *each* collection in this kind of package
+uses its own `info.rkt` to specify collection-specific information such as
+documentation.
+
+Indeed, any package that wishes to add to an existing collection, even if it's
+just one collection, should be declared as `'multi`. See the
+[`persistent-array` package][repo-persist] for an example.
+
+[repo-drracket]: https://github.com/racket/drracket/tree/master/drracket
+[repo-persist]: https://github.com/samth/persistent-array
 
 ## A Final Note on Multi-Package Libraries
+
+**NOTE:** Most programmers will not need to worry about this section.
 
 If you've browsed the Racket source files at all, you may have noticed that
 many core libraries further subdivide their contents into *several
@@ -292,13 +307,12 @@ packages*. The organization is typically arranged as:
 - an `X-doc` package with the documentation files,
 - and an `X-test` package with the test files.
 
-In this setup, the `info.rkt` in the base `X` package typically
-specifies `X-lib` and `X-doc` as dependencies. This division enables users to
-more finely manage dependencies, i.e., a programmer may want to use the main
-package but may not want to install the tests (and its dependencies).
+In this setup, the `info.rkt` in the base `X` package typically specifies
+`X-lib` and `X-doc` as dependencies. This division enables users to more finely
+manage dependencies, i.e., a programmer may want to use the main package but
+may not want to install the tests (and its dependencies).
 
 See the [pict package](https://github.com/racket/pict)
 for a concrete example of a library organized in this manner.
 
-[doc-multipkg]: http://docs.racket-lang.org/pkg/Package_Concepts.html?#%28tech._multi._collection._package%29
 [doc-scribblings]: http://docs.racket-lang.org/raco/setup-info.html?#%28idx._%28gentag._11._%28lib._scribblings%2Fraco%2Fraco..scrbl%29%29%29
