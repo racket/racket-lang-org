@@ -174,6 +174,8 @@ After analyzing over 75,000 program submissions and 8,789 hint requests from UC 
 
 ◊folded{
 ◊speaker["" "Prabhakar Ragde"]{Proust: A Nano Proof Assistant}
+◊rlink["2017/ragde.pdf"]{Slides}
+
 Three things that don't normally go together are intuitionistic type theory, Racket as a teaching language, and a required sophomore course in logic and computation. I'll describe how I've been teaching the course by having students code a small proof assistant (Proust) in Racket and using it to do their homework. Its construction proceeds in stages through propositional and predicate logic, going as far as recursive functions on natural numbers before a lateral transition to Coq.
 
 ◊bio{◊link["https://cs.uwaterloo.ca/~plragde/"]{Prabhakar Ragde} has been a professor of Computer Science at the University of Waterloo since 1988. He first encountered Racket fifteen years ago when looking for a way to introduce his young daughters to CS. Now more than two thousand students a year take Waterloo courses that use Racket to introduce them to CS, and he can't go a day without using a lambda.}}
