@@ -188,6 +188,8 @@ Racket is the official language at Biomantica Inc, the biotech startup I co-foun
 
 ◊folded{
 ◊speaker["" "Vishesh Yadav"]{RacketScript}
+◊rlink["2017/yadav.pdf"]{Slides}
+
 Want to embrace the power of Racket in the ugly JavaScript world? RacketScript can compile Racket (ok! not all of it) to JavaScript. I'll will demonstrate how the RacketScript compiler works, currently implemented features of Racket, and how it differs from Racket and other Racket to JavaScript compilers.
 
 ◊bio{◊link["https://www.twistedplane.com/"]{Vishesh Yadav} is a Software Engineer at Nutanix where he works on distributed storage systems. He started hacking in Racket while pursuing M.S. in Computer Science from Northeastern University, where he also got interested in programming languages.}}
