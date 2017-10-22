@@ -222,6 +222,8 @@ Community
 
 ◊link["https://botbot.me/freenode/racket/"]{#racket IRC on freenode.net}
 
+◊link["https://drive.google.com/open?id=1i3zN11e_6te5ytduAiv1cidrIi4&usp=sharing"]{World Map}
+
 ◊link["https://racket.slack.com/"]{Slack channel} (visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
 
 ◊link["https://twitter.com/racketlang"]{@racketlang on Twitter}
