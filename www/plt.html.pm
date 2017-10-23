@@ -15,9 +15,9 @@
 
 
 ◊section{
-◊div{PLT shareholders
+◊div{Recognized Contributors
 
-◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{Racket is developed by a broad community of contributors. The following people are among the long-term contributors who have been recognized for their work by being made PLT shareholders.}}
+◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{Racket is developed by a broad community of contributors. The following people are among the long-term contributors who have have earned special recognition for their work.}}
 
 ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}
 
@@ -93,7 +93,11 @@
 
 
 ◊section{
-PLT research
+
+◊div{PLT research
+◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
+Racket was originally created by the PLT research group, and many
+researchers continue to use Racket and contribute to it.}}
 
 ◊link["http://www.ccs.neu.edu/racket/"]{Northeastern University}
 Boston MA
@@ -123,7 +127,9 @@ Bloomington IN
 }
 
 ◊section{
-PLT books
+◊div{Books using Racket
+◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
+Racket is used in numerous textbooks to help teach a variety of subjects.}}
 
 
 ◊link["https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/"]{Programming Languages: 
