@@ -203,9 +203,9 @@ Documentation & tutorials
 ◊section{
 News
 
-◊link["https://con.racket-lang.org/"]{(seventh RacketCon)} was held in Seattle, 7–8 Oct 2017.
+◊link["https://blog.racket-lang.org/2017/10/racket-v6-11.html"]{Racket version 6.11} is available.
 
-◊link["https://blog.racket-lang.org/2017/09/racket-v6-10-1.html"]{Racket version 6.10.1} is available.
+◊link["https://con.racket-lang.org/"]{(seventh RacketCon)} was held in Seattle, 7–8 Oct 2017.
 
 New! ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
 
