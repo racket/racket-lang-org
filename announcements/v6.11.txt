@@ -6,7 +6,7 @@ Racket v6.11
   describe more interesting properties of values, especially integers.
   For example, this type shows that the `max` function always produces a
   number at least as big as its inputs:
-  `(-> [x : Integer] [y : Integer]
+  `(-> ([x : Integer] [y : Integer])
        (Refine [z : Integer] (and (>= z x) (>= z y))))`
 
 * DrRacket's Program Contour is significantly more efficient; using it
