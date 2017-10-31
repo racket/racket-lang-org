@@ -254,7 +254,7 @@ Following this discussion are office hours proper. Bring your projects to get as
 ◊row{◊at{9:00–10:00} ◊desc{Breakfast}}
 ◊row{◊at{10:00–11:00} ◊desc{Town Hall Meeting}}
 ◊row{◊at{11:00–11:45} ◊desc{Racket Development Mini-Tutorials
-Ben Greenman: ◊link["https://github.com/bennn/racket-lang-org/blob/pr-blog/blog/_src/posts/2017-09-27-tutorial-contributing-to-racket.md"]{Contributing to the Racket codebase}
+Ben Greenman: ◊link["https://blog.racket-lang.org/2017/09/tutorial-contributing-to-racket.html"]{Contributing to the Racket codebase}
 Stephen Chang: Packaging Racket projects
 Spencer Florence and Jesse Tov: ◊link["https://gist.github.com/florence/b3fcc1df922008604e64362484dc1c28"]{Scribbling documentation}
 }}
