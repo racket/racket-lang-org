@@ -168,7 +168,7 @@ The ◊code{web-server/insta} language lets you quickly prototype server-side we
 ◊section{
 Software
 
-◊link["https://download.racket-lang.org/"]{Download Racket v6.10.1}
+◊link["https://download.racket-lang.org/"]{Download Racket v6.11}
 
 ◊link["https://github.com/plt/racket/"]{Source code}
 
