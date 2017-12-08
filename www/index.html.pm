@@ -238,8 +238,15 @@ Books
 ◊link["https://www.realmofracket.com/"]{Realm of Racket}
 Learn to program with Racket, one game at a time.
 
-◊link["http://beautifulracket.com/"]{Beautiful Racket}
+◊link["https://beautifulracket.com/"]{Beautiful Racket}
 Make your own programming languages with Racket.
+
+◊link["http://lisp.sh/serverracket-now-available/"]{Server: Racket}
+Develop a web application with Racket.
+
+
+◊link["books.html"]{All Racket books}
+
 
 }
 

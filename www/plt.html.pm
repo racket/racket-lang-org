@@ -126,22 +126,6 @@ Bloomington IN
 
 }
 
-◊section{
-◊div{Books using Racket
-◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
-Racket is used in numerous textbooks to help teach a variety of subjects.}}
-
-
-◊link["https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/"]{Programming Languages: 
-Application and Interpretation}
-For undergraduates, graduate students, and experts.
-
-
-◊link["https://redex.racket-lang.org/"]{Semantics Engineering 
-with PLT Redex}
-Semantics automation for language engineers.
-}
-
 
 
 
