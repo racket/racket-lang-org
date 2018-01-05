@@ -9,7 +9,7 @@
                "at-exp-lib"
                "net-lib"
                "racket-index"
-               "scribble-lib"
+               ("scribble-lib" #:version "1.28")
                "syntax-color-lib"
                "plot-gui-lib"
                "plot-lib"
