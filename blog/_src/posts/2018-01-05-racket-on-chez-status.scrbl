@@ -150,7 +150,7 @@ to try} running @hyperlink["https://racket-lang.org/"]{Racket} on
 almost six months since my last
 @hyperlink["https://groups.google.com/d/msg/racket-dev/rkXuHNAmQaA/hjgPZHErAwAJ"]{status
 report}. As of @hyperlink["https://con.racket-lang.org/"]{RacketCon
-2018}, DrRacket could start up on Chez Scheme (but just barely, and
+2017}, DrRacket could start up on Chez Scheme (but just barely, and
 just in time for the demo).
 
 The @hyperlink["https://github.com/racket/racket7/"]{current
