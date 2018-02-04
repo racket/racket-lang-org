@@ -167,7 +167,7 @@ pre, div.pygments {
 }
 
 tt, pre, code {
-  font-family: "source-code-pro";
+  font-family: fira-mono;
 }
 
 

@@ -158,7 +158,7 @@ top-section {
 .lang > .name {
     padding: 0.25rem;
     font-size: 90%;
-    font-family: source-code-pro;
+    font-family: fira-mono;
     font-weight: bolder;
 }
 
@@ -212,16 +212,20 @@ div#f6 {
 
 
 .top-button {
-  border: 0.1rem solid ◊|link-color|;
+  border: 1px solid ◊|link-color|;
   color: ◊|link-color|;
   border-radius: 0.3rem;
-  padding: 0rem 0.4em;
-  font-family: source-code-pro;
+  padding: 0.2rem 0.4em;
+  font-family: fira-mono;
   letter-spacing: 0.05em;
   font-size: 80%;
   text-transform: uppercase;
   position: relative;
   top: -0.2rem;
+}
+
+a.top-button {
+  font-weight: inherit;
 }
 
 .top-button + .top-button {
@@ -342,7 +346,7 @@ div.book {
 }
 
 code, pre {
-  font-family: "source-code-pro";
+  font-family: fira-mono;
 }
 
 pre {
