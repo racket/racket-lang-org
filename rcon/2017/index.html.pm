@@ -18,7 +18,7 @@
 ◊h2{◊xlink{Schedule}}
 
 
-(seventh RacketCon) is the meeting for everyone interested in ◊link["http://racket-lang.org"]{Racket} — a ◊link["https://docs.racket-lang.org/quick/index.html"]{general-purpose programming language} that's also the ◊link["https://www.ccs.neu.edu/home/matthias/manifesto/"]{world’s first ecosystem} for developing and deploying new languages. 
+(seventh RacketCon) is the meeting for everyone interested in ◊link["http://racket-lang.org"]{Racket} — a ◊link["https://docs.racket-lang.org/quick/index.html"]{general-purpose programming language} that's also the ◊link["http://felleisen.org/matthias/manifesto/"]{world’s first ecosystem} for developing and deploying new languages. 
 
 RacketCon is for developers, contributors, programmers, educators, and bystanders. It's an opportunity for all of us to share plans, ideas, and enthusiasm, and help shape the future of Racket.
 

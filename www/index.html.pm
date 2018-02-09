@@ -73,7 +73,7 @@
 
 ◊feature["The best of Scheme and Lisp" #:id "f4"]{Racket started life as a Scheme implementation, but then grew into new areas.
 ◊doclinks{
-◊link["https://www.ccs.neu.edu/home/matthias/manifesto/"]{The Racket Manifesto}
+◊link["http://felleisen.org/matthias/manifesto/"]{The Racket Manifesto}
 ◊link["https://docs.racket-lang.org/guide/to-scheme.html"]{Racket essentials}
 ◊link["https://docs.racket-lang.org/style/index.html"]{How to program Racket}
 ◊doclink["r6rs"]{Using R6RS Scheme}
