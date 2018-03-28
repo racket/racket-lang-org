@@ -48,15 +48,17 @@
          #:unless (or (not (path-has-extension? fn ext))
                       (excluded-path? fn)
                       (and current? (equal? fn (string->path "index.html")))))
-        (copyfile #:site con-site (build-path starting-dir fn)
-                  (string-join (map ~a (append
-                                        (if current? null (list year))
-                                        (list fn))) "/")))
-  (for* ([p (in-directory (build-path starting-dir "fonts"))])
-        (copyfile #:site con-site p
-                  (string-join (map ~a (append
-                                        (if current? null (list year))
-                                        (list "fonts" (filename p)))) "/"))))
+    (copyfile #:site con-site (build-path starting-dir fn)
+              (string-join (map ~a (append
+                                    (if current? null (list year))
+                                    (list fn))) "/")))
+  (define font-dir (build-path starting-dir "fonts"))
+  (when (directory-exists? font-dir)
+    (for* ([p (in-directory font-dir)])
+      (copyfile #:site con-site p
+                (string-join (map ~a (append
+                                      (if current? null (list year))
+                                      (list "fonts" (filename p)))) "/")))))
 
 (define-runtime-path 2015-dir "2015")
 (pollen-rebuild! 2015-dir)
