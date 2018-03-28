@@ -1,3 +1,4 @@
+#!/usr/bin/env racket
 #lang plt-web
 (require plt-web/style
          racket/runtime-path
@@ -61,20 +62,24 @@
 (pollen-rebuild! 2015-dir)
 (copy-con-site! 2015-dir 2015)
 
-
 (define-runtime-path 2016-dir "2016")
 (pollen-rebuild! 2016-dir)
 (copy-con-site! 2016-dir 2016)
 
-
+;; 2017
 (define-runtime-path 2017-dir "2017")
 (pollen-rebuild! 2017-dir)
-(copy-con-site! 2017-dir 2017 #:current #t)
+(copy-con-site! 2017-dir 2017)
 
-(define-runtime-path 2017-index "2017/index.html")
+;; 2018
+(define-runtime-path 2018-dir "2018")
+(pollen-rebuild! 2018-dir)
+(copy-con-site! 2018-dir 2018 #:current #t)
+
+(define-runtime-path 2018-index "2018/index.html")
 (define index
   (page* #:site con-site
          #:link-title "RacketCon" #:title "RacketCon"
          #:extra-headers style-header
          #:id 'con
-         @copyfile[#:site con-site 2017-index]))
+         @copyfile[#:site con-site 2018-index]))

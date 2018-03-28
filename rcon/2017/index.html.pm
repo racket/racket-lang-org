@@ -85,7 +85,7 @@ RacketCon attendees also get a fantastic ◊link["https://gc.synxis.com/rez.aspx
 ◊div{
 ◊folded{
 ◊speaker["" "Leif Andersen"]{Movies as Programs: The Story of a Racket}
-◊rlink["2017/andersen.pdf"]{Slides} ◊; TODO remove the 2017 once this page goes in that directory
+◊rlink["andersen.pdf"]{Slides}
 
 Racket is more than a programming language. It is a programming language for making new languages. In fact, it is a programming language for making languages for making movies. Video is a language made from the sweat and parenthesis provided by the Racket ecosystem. It integrates into Racket from concept to final rendering. Come for the video demos, stay for the language tower.
 
@@ -115,7 +115,7 @@ With the rise in adoption and decrease in price of single-board computers, high-
 
 ◊folded{
 ◊speaker["" "Charles Earl"]{Deep Learning with Racket: An Experience Report}
-◊rlink["2017/earl.pdf"]{Slides}
+◊rlink["earl.pdf"]{Slides}
 
 What can we gain by looking at deep learning through the lens of functional programming? This question has gained attention over the last few years as increasingly complex neural network architectures are developed. I recently started developing a framework for specifying and training neural networks in Racket. In this talk, I'll give a report on the project and invite discussion on future work.
 
@@ -123,14 +123,14 @@ What can we gain by looking at deep learning through the lens of functional prog
 
 ◊folded{
 ◊speaker["" "Jack Firth"]{A RackUnit Toolkit: Growing Racket's Testing Ecosystem}
-◊rlink["2017/firth.pdf"]{Slides}
+◊rlink["firth.pdf"]{Slides}
 
 Testing in Racket can be downright joyful. Submodules and RackUnit make simple unit tests easy and quick to write, even in an unfamiliar codebase. But Racket's testing story has more than a few holes when it comes to more complex tests. This talk discusses the current state of Racket's testing ecosystem and presents a toolkit of packages to improve it. The toolkit packages add support for unit testing side effects with mocks, integration testing with fixtures, and abstracting over tests with composable first-class assertions. The packages are for the most part independent but designed to work together, and are built on top of a few general purpose libraries that can be used for non-testing purposes. There's far more work to be done however, and this talk highlights what other forms of testing aspiring Racketeers ought to write packages for so I don't have to.
 ◊bio{◊link["https://github.com/jackfirth"]{Jack Firth} is a software engineer at Google, primarily working on Google's continuous integration and testing infrastructure and platforms. His interests include domain specific languages, distributed systems, and figuring out how to stop software from breaking all the time. He also likes punching things.}}
 
 ◊folded{
 ◊speaker["" "Andrew Gwozdziewycz"]{Simplifying Slideshow for DWIM Presentations that Stick, Quick}
-◊rlink["2017/gwozdziewycz.pdf"]{Slides} ◊link["https://github.com/apg/racket-con-2017"]{Source}
+◊rlink["gwozdziewycz.pdf"]{Slides} ◊link["https://github.com/apg/racket-con-2017"]{Source}
 
 Slideshow is a programming language for producing presentations. It's extremely powerful, and has great tooling, but it's anything but simple, even for experienced Racketeers. I present "slideshow/simple", a language inspired by markdown and a tool called "sent" that simplifies the creation of DWIM presentations, for when you just need to put something on screen without a lot of fuss.
 
@@ -138,7 +138,7 @@ Slideshow is a programming language for producing presentations. It's extremely 
 
 ◊folded{
 ◊speaker["" "William G Hatch"]{Rash: Reckless Shell Programming in Racket}
-◊rlink["2017/hatch.pdf"]{Slides}
+◊rlink["hatch.pdf"]{Slides}
 
 Do you enjoy automating with shell scripts, but find you need to toss out your Bash implementation in favor of using a "real" programming language as your script grows?  Do you find yourself writing in Racket wishing you could throw down a quick pipeline of five processes without several lines of port and process juggling?  Do you wish your interactive Bash shell were more like a Racket repl, or that your Racket repl were more like Bash?  In this talk I describe my solution to these problems and more:  Rash, the shell language for Racket.
 
@@ -146,7 +146,7 @@ Do you enjoy automating with shell scripts, but find you need to toss out your B
 
 ◊folded{
 ◊speaker["" "Alexis King"]{Hackett, a Haskell for Racketeers}
-◊rlink["2017/king.pdf"]{Slides}
+◊rlink["king.pdf"]{Slides}
 
 Racket, as a language, excels at and encourages a style of linguistic abstraction using metaprogramming. One of the most potentially useful tools to a metaprogrammer is intimate knowledge of expressions’ types, but existing general purpose, statically typed languages do not make that information easily accessible to the macro writer. This talk presents an early, experimental version of Hackett, an embedding of a Haskell-style type system in Racket’s macro system. Hackett attempts to provide a robust typechecker with friendly, powerful type inference for general-purpose programs that simultaneously exposes that information to Racket’s ordinary macro-writing facilities.
 
@@ -154,7 +154,7 @@ Racket, as a language, excels at and encourages a style of linguistic abstractio
 
 ◊folded{
 ◊speaker["" "Jay McCarthy"]{Teaching and Designing Microarchitecture in Racket}
-◊rlink["2017/mccarthy.pdf"]{Slides}
+◊rlink["mccarthy.pdf"]{Slides}
 
 In my computer architecture course, we study the full stack of CPU design from basic components (like adders) through microarchitecture, microcode, IO & interrupt systems, and through assembly using the MIC-1 by Tanenbaum. Students use tools for simulating the CPU, compiling the microcode, and assembling the macrocode. In previous years, I used a C-based suite (3779 LOC) which was very painful to use and maintain. For my most recent offering, I rewrote all of the tools in Racket (with 55% less code, including an extensive test-suite and more features!) In order to do this well, I wrote a general purpose hardware description DSL in Racket with three different backends, including compilers to C and LLVM IR. In this talk, I'll discuss how to design compilers and DSLs like this in Racket and give a brief explanation of some fun microarchitecture points.
 
@@ -162,7 +162,7 @@ In my computer architecture course, we study the full stack of CPU design from b
 
 ◊folded{
 ◊speaker["" "Mangpo Phitchaya Phothilimthana"]{High-Coverage Hint Generation for Racket Programming Assignments}
-◊rlink["2017/phothilimthana.pdf"]{Slides}
+◊rlink["phothilimthana.pdf"]{Slides}
 
 In massive programming courses, automated hint generation offers the promise of zero-cost, zero-latency assistance for students who are struggling to make progress on solving a program. 
 
@@ -174,7 +174,7 @@ After analyzing over 75,000 program submissions and 8,789 hint requests from UC 
 
 ◊folded{
 ◊speaker["" "Prabhakar Ragde"]{Proust: A Nano Proof Assistant}
-◊rlink["2017/ragde.pdf"]{Slides}
+◊rlink["ragde.pdf"]{Slides}
 
 Three things that don't normally go together are intuitionistic type theory, Racket as a teaching language, and a required sophomore course in logic and computation. I'll describe how I've been teaching the course by having students code a small proof assistant (Proust) in Racket and using it to do their homework. Its construction proceeds in stages through propositional and predicate logic, going as far as recursive functions on natural numbers before a lateral transition to Coq.
 
@@ -190,7 +190,7 @@ Racket is the official language at Biomantica Inc, the biotech startup I co-foun
 
 ◊folded{
 ◊speaker["" "Vishesh Yadav"]{RacketScript}
-◊rlink["2017/yadav.pdf"]{Slides}
+◊rlink["yadav.pdf"]{Slides}
 
 Want to embrace the power of Racket in the ugly JavaScript world? RacketScript can compile Racket (ok! not all of it) to JavaScript. I'll will demonstrate how the RacketScript compiler works, currently implemented features of Racket, and how it differs from Racket and other Racket to JavaScript compilers.
 
