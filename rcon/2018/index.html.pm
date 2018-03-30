@@ -25,8 +25,7 @@ We plan on live streaming the event, as we have in the past.
 
 ◊h3{◊xtarget["speakers"]{Keynote}}
 
-◊head["b"]{To be}
-◊head["b"]{announced}
+◊head["b"]{Kent Dybvig}
 
 ◊h3{◊xtarget["venue"]{Venue}}
 
@@ -53,6 +52,14 @@ This past year, you did something amazing with Racket. Now it is the time to sha
 
 ◊bio{◊link["https://qph.fs.quoracdn.net/main-qimg-3abb243ec3f0aad890ce845a02fa99fb"]{You} are an amazing and precious programmer with a great deal to offer the RacketCon community. Please contact the ◊link["mailto:jay.mccarthy@gmail.com"]{organizers} with the full details of your talk.}}
 
+◊folded{
+◊speaker["" "Christopher Lemmer Webber and Morgan Lemmer-Webber"]{Racket for Everyone (Else)}
+
+Racket currently historically targets two groups: young programmers (learn by building games) and programming language theorists.  We believe Racket is well positioned to meet a wide variety of people in-between these groups.  Morgan will present on our use of Racket for non-programmers.  Using Racket, Dr. Racket, and Scribble, we have run a series of successful workshops on “programmable publishing”.  Although these were marketed to humanities students, this method can be applied to a wide variety of disciplines including the social sciences and mathematics.  It can be applied outside of the university for creative writing, community outreach, and other populations with publishing needs.  The common thread through these communities is users who don’t view themselves as programmers or who would like to program but don’t think they have the ability or resources to learn.  Because of its accessibility, we use scribble as a gateway into basic programming skills where participants can apply their fledgling skills to a practical output that relates to their daily lives.  Chris will present on Racket for the general programmer.  Racket is as batteries-included as Python and is well set up to be just as general.  How can we reach a general audience?  What can we gain by doing so?
+
+◊bio{◊strong{Christopher Lemmer Webber} is a user freedom advocate with who focuses on network freedom.  Chris is co-editor of the W3C ActivityPub protocol which provides federated communication for decentralized social networks.  They have been programming in lisp for some time and have recently come to love Racket and have been co-running the "Programmable Publishing: Digital Humanities for Everyone" workshops using Racket and Scribble with Morgan Lemmer-Webber.}
+
+◊bio{◊strong{Morgan Lemmer-Webber} is a PhD Candidate in the department of Art History at the University of Wisconsin, Madison. Her dissertation focuses on the real and symbolic associations between women and textile production in the Roman Empire. She has been the lead developer for the Digital Humanities project "A colonial merchant: The ledger of William Ramsay" since 2015. She has recently developed materials for and co-taught a series of workshops to teach basic programming skills to humanities majors using Racket and Scribble with Christopher Lemmer Webber.}}
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
