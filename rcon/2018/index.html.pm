@@ -59,7 +59,24 @@ Racket currently historically targets two groups: young programmers (learn by bu
 
 ◊bio{◊strong{Christopher Lemmer Webber} is a user freedom advocate with who focuses on network freedom.  Chris is co-editor of the W3C ActivityPub protocol which provides federated communication for decentralized social networks.  They have been programming in lisp for some time and have recently come to love Racket and have been co-running the "Programmable Publishing: Digital Humanities for Everyone" workshops using Racket and Scribble with Morgan Lemmer-Webber.}
 
-◊bio{◊strong{Morgan Lemmer-Webber} is a PhD Candidate in the department of Art History at the University of Wisconsin, Madison. Her dissertation focuses on the real and symbolic associations between women and textile production in the Roman Empire. She has been the lead developer for the Digital Humanities project "A colonial merchant: The ledger of William Ramsay" since 2015. She has recently developed materials for and co-taught a series of workshops to teach basic programming skills to humanities majors using Racket and Scribble with Christopher Lemmer Webber.}}
+◊bio{◊strong{Morgan Lemmer-Webber} is a PhD Candidate in the department of Art History at the University of Wisconsin, Madison. Her dissertation focuses on the real and symbolic associations between women and textile production in the Roman Empire. She has been the lead developer for the Digital Humanities project "A colonial merchant: The ledger of William Ramsay" since 2015. She has recently developed materials for and co-taught a series of workshops to teach basic programming skills to humanities majors using Racket and Scribble with Christopher Lemmer Webber.}
+
+◊speaker["" "Eric Griffis"]{Dataflow network programming with Neuron}
+
+Neuron is a framework for high-level network programming in Racket. Its
+language-oriented approach builds upon familiar abstractions like channels,
+ports, threads, and evaluators with support for a simple but powerful form of
+exploratory dataflow network programming and information flow control. In this
+talk, I'll show how Neuron can be used to design composable networks of
+communicating processes, lift procedures and modules onto the network, and
+integrate with existing software infrastructure like the Web.
+
+◊bio{◊strong{Eric Griffis} is a highly intuitive, life-long programmer with an acute
+sensitivity to the impact of software on society. His interests include
+programmable software infrastructure, social software ecosystems, and software
+as organism versus mechanism.}
+
+}
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
