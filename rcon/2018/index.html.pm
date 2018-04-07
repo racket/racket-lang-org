@@ -63,18 +63,17 @@ Racket currently historically targets two groups: young programmers (learn by bu
 
 ◊speaker["" "Eric Griffis"]{Dataflow network programming with Neuron}
 
-Neuron is a framework for high-level network programming in Racket. Its
-language-oriented approach builds upon familiar abstractions like channels,
-ports, threads, and evaluators with support for a simple but powerful form of
-exploratory dataflow network programming and information flow control. In this
-talk, I'll show how Neuron can be used to design composable networks of
-communicating processes, lift procedures and modules onto the network, and
-integrate with existing software infrastructure like the Web.
+Neuron is a framework for high-level network programming in Racket. Its language-oriented approach builds upon familiar abstractions like channels, ports, threads, and evaluators with support for a simple but powerful form of exploratory dataflow network programming and information flow control. In this talk, I'll show how Neuron can be used to design composable networks of communicating processes, lift procedures and modules onto the network, and integrate with existing software infrastructure like the Web.
 
-◊bio{◊strong{Eric Griffis} is a highly intuitive, life-long programmer with an acute
-sensitivity to the impact of software on society. His interests include
-programmable software infrastructure, social software ecosystems, and software
-as organism versus mechanism.}
+◊bio{◊strong{Eric Griffis} is a highly intuitive, life-long programmer with an acute sensitivity to the impact of software on society. His interests include programmable software infrastructure, social software ecosystems, and software as organism versus mechanism.}
+
+◊speaker["" "Stephen R. Foster"]{I Pivoted My Startup to Use Racket.  Can We Pivot the World?}
+
+Every year, my company teaches coding to over 5000 students in San Diego.  Topics range from: robotics, game design, web design, virtual reality, Java, Python, physical computing, and Minecraft modding.  Why so many topics?  That's what the market wants, so that's what we provide.  In 2018, I took on the seemingly impossible challenge of unifying all our topics under a single language of instruction.  That language was Racket.  This talk reports on our use of Racket and Racket-embedded DSLs to teach a broad spectrum of computing topics. 
+
+Due to the resounding success of our Racket pivot, I'm convinced that Racket is an educational power-tool for computer science education.  I used to say that my mission was to teach coding to every child in the world.  I can now confidently refine that mission: I want to teach Racket to every child in the world.  This talk outlines the growth vision for ThoughtSTEM -- a vision that will bring broad-spectrum Racket-based education beyond San Diego and into 20 more major American cities by the end of 2022.  Ultimately, I want to see DrRacket on every computer in America, as a basic tool that everybody knows how to use -- as familiar and useful as a web browser or a word processor.  Can we make this happen?  I think we can.
+
+◊bio{◊strong{Stephen R. Foster}, Ph.D. is the CEO and Co-Founder of ThoughtSTEM, an NSF-funded ed-tech company whose mission is to teach computer science to every child in the world.  ThoughtSTEM has launched multiple educational titles -- LearnToMod and CodeSpells, both of which have been featured in venues such as Wired, the Guardian, and Rock, Paper, Shotgun.  ThoughtSTEM's software is used by over 100,000 people world-wide.  ThoughtSTEM also runs coding after-school programs and summer camps in San Diego, teaching over 5000 students face-to-face every year.}
 
 }
 }
