@@ -132,9 +132,7 @@ Them
 ◊h3{Sponsors (big-bang tier)}
 
 ◊inline-list['sponsor]{
-Me
-And
-Us
+◊link["https://lisp.sh"]{Jesse Alama}
 }
 
 ◊h3{Friendly Environment Policy}
