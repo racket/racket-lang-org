@@ -60,13 +60,17 @@ Racket currently historically targets two groups: young programmers (learn by bu
 ◊bio{◊strong{Christopher Lemmer Webber} is a user freedom advocate with who focuses on network freedom.  Chris is co-editor of the W3C ActivityPub protocol which provides federated communication for decentralized social networks.  They have been programming in lisp for some time and have recently come to love Racket and have been co-running the "Programmable Publishing: Digital Humanities for Everyone" workshops using Racket and Scribble with Morgan Lemmer-Webber.}
 
 ◊bio{◊strong{Morgan Lemmer-Webber} is a PhD Candidate in the department of Art History at the University of Wisconsin, Madison. Her dissertation focuses on the real and symbolic associations between women and textile production in the Roman Empire. She has been the lead developer for the Digital Humanities project "A colonial merchant: The ledger of William Ramsay" since 2015. She has recently developed materials for and co-taught a series of workshops to teach basic programming skills to humanities majors using Racket and Scribble with Christopher Lemmer Webber.}
+}
 
+◊folded{
 ◊speaker["" "Eric Griffis"]{Dataflow network programming with Neuron}
 
 Neuron is a framework for high-level network programming in Racket. Its language-oriented approach builds upon familiar abstractions like channels, ports, threads, and evaluators with support for a simple but powerful form of exploratory dataflow network programming and information flow control. In this talk, I'll show how Neuron can be used to design composable networks of communicating processes, lift procedures and modules onto the network, and integrate with existing software infrastructure like the Web.
 
 ◊bio{◊strong{Eric Griffis} is a highly intuitive, life-long programmer with an acute sensitivity to the impact of software on society. His interests include programmable software infrastructure, social software ecosystems, and software as organism versus mechanism.}
+}
 
+◊folded{
 ◊speaker["" "Stephen R. Foster"]{I Pivoted My Startup to Use Racket.  Can We Pivot the World?}
 
 Every year, my company teaches coding to over 5000 students in San Diego.  Topics range from: robotics, game design, web design, virtual reality, Java, Python, physical computing, and Minecraft modding.  Why so many topics?  That's what the market wants, so that's what we provide.  In 2018, I took on the seemingly impossible challenge of unifying all our topics under a single language of instruction.  That language was Racket.  This talk reports on our use of Racket and Racket-embedded DSLs to teach a broad spectrum of computing topics. 
@@ -118,8 +122,8 @@ Wow, That's a Racket 4
 
 ◊h3{Sunday September 30}
 
-We anticipate another edition of Racketeer Office Hours, but details
-are to be announced.
+We will have another edition of Racketeer Office Hours, with details
+to be announced.
 
 ◊h3{Sponsors (#%kernel tier)}
 
