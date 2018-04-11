@@ -78,8 +78,18 @@ Every year, my company teaches coding to over 5000 students in San Diego.  Topic
 Due to the resounding success of our Racket pivot, I'm convinced that Racket is an educational power-tool for computer science education.  I used to say that my mission was to teach coding to every child in the world.  I can now confidently refine that mission: I want to teach Racket to every child in the world.  This talk outlines the growth vision for ThoughtSTEM -- a vision that will bring broad-spectrum Racket-based education beyond San Diego and into 20 more major American cities by the end of 2022.  Ultimately, I want to see DrRacket on every computer in America, as a basic tool that everybody knows how to use -- as familiar and useful as a web browser or a word processor.  Can we make this happen?  I think we can.
 
 ◊bio{◊strong{Stephen R. Foster}, Ph.D. is the CEO and Co-Founder of ThoughtSTEM, an NSF-funded ed-tech company whose mission is to teach computer science to every child in the world.  ThoughtSTEM has launched multiple educational titles -- LearnToMod and CodeSpells, both of which have been featured in venues such as Wired, the Guardian, and Rock, Paper, Shotgun.  ThoughtSTEM's software is used by over 100,000 people world-wide.  ThoughtSTEM also runs coding after-school programs and summer camps in San Diego, teaching over 5000 students face-to-face every year.}
-
 }
+
+◊folded{
+◊speaker["" "David Storrs"]{Batteries Included: Commercializing Racket}
+
+The Racket ecosystem (toolchain, libraries, documentation, etc) is surprisingly robust considering the comparatively small userbase of Racket as compared to more mainstream languages such as Java, Perl, and C++.  There are some holes in what's available, but there are some impressively esoteric items as well -- things that you might not need too often, but when you need them you *really* need them.
+
+Biomantica Inc is a bioinformatics company built entirely on Racket.  This talk will cover our experience with Racket packages, documentation, etc, as it relates to our business.
+
+◊bio{◊strong{David} started programming professionally in 1995 and has worked in fields as diverse as medical software, financial software, video games, publishing, and (of course) web programming.  Biomantica is his third (fourth, depending on how you count) startup.  He's been working with Racket since late 2015 and is dreading the idea of ever going back to a more mainstream language.}
+}
+
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
