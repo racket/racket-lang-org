@@ -90,6 +90,14 @@ Biomantica Inc is a bioinformatics company built entirely on Racket.  This talk 
 ◊bio{◊strong{David} started programming professionally in 1995 and has worked in fields as diverse as medical software, financial software, video games, publishing, and (of course) web programming.  Biomantica is his third (fourth, depending on how you count) startup.  He's been working with Racket since late 2015 and is dreading the idea of ever going back to a more mainstream language.}
 }
 
+◊folded{
+◊speaker["" "Nadeem Abdul Hamid"]{Sinbad: Sailing the Waves of Data}
+
+Sinbad is a software library, intended for use in introductory programming courses, that makes it very easy to uniformly access online data sources provided in standard formats. The library provides unified support for XML, JSON, and CSV/TSV data sources, automated caching facilities (useful for having offline access to data), sampling features (for development/testing on subsets of large data sources), and binding to instances of user-defined structures. On top of all of that, a primary pedagogical goal has been to make the interface as simple and intuitive as possible for novice programmers.
+
+◊bio{◊strong{Nadeem Abdul Hamid} is an associate professor of computer science at Berry College.}
+}
+
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
