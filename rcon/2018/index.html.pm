@@ -154,6 +154,7 @@ Them
 ◊h3{Sponsors (big-bang tier)}
 
 ◊inline-list['sponsor]{
+◊link["https://github.com/david-vanderson/"]{David Vanderson}
 ◊link["https://lisp.sh"]{Jesse Alama}
 }
 
