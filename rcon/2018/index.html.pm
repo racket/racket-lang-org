@@ -98,6 +98,15 @@ Sinbad is a software library, intended for use in introductory programming cours
 ◊bio{◊strong{Nadeem Abdul Hamid} is an associate professor of computer science at Berry College.}
 }
 
+◊folded{
+◊speaker["" "Pavel Panchekha"]{Verifying Web Pages with Racket and Z3}
+
+Making a website accessible, usable, and attractive is important, but CSS's complexity makes it easy for layouts to break for some users, on some browsers, at some font sizes, or on some devices. Cassius is a new project for reasoning about all possible renderings of a web page. In this talk, I'll describe how Cassius uses the Z3 equation solver to look for mis-rendered web pages and how Racket makes it possible to implement the CSS standard accurately and concisely.
+
+◊bio{◊strong{Pavel Panchekha} is a graduate student at the Paul G. Allen School for Computer Science and Engineering at the University of Washington, where he is a member of the Programming Languages and Software Engineering (PLSE) group. He received a BS in mathematics from MIT. His research focuses on domain-specific tools for non-expert developers, with other projects in floating-point computation.}
+}
+
+
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
