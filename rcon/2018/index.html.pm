@@ -106,6 +106,12 @@ Making a website accessible, usable, and attractive is important, but CSS's comp
 ◊bio{◊strong{Pavel Panchekha} is a graduate student at the Paul G. Allen School for Computer Science and Engineering at the University of Washington, where he is a member of the Programming Languages and Software Engineering (PLSE) group. He received a BS in mathematics from MIT. His research focuses on domain-specific tools for non-expert developers, with other projects in floating-point computation.}
 }
 
+◊folded{
+◊speaker["" "Jon Zeppieri"]{How to Ask for the Time in Racket}
+
+◊bio{◊strong{Jon Zeppieri} is a software developer at CarePort Health in Boston where he has been overheard on multiple occasions asking "Yes, but 'today' in what time zone?" He discovered Racket in the late '90s, when it was called PLT Scheme, and has used it ever since.}
+}
+
 
 }
 
