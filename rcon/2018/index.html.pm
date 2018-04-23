@@ -129,6 +129,13 @@ DrRacket is an amazing IDE. Written in Racket for Racket and more, one can write
 ◊bio{After years of self-taught programming in Pascal, BASIC and C, ◊strong{Laurent Orseau} learned PLT Scheme (Racket's name at the time) as an undergrad. But it wasn't until the end of his PhD in AI at the INSA of Rennes (France) that he realized the tremendous capabilities of the Lisp/Scheme family, and the amazing set of features that Racket offered. He stuck with it ever since, through 7 years in academia at AgroParisTech (France) and even now as a research scientist at DeepMind (London, UK), despite the supremacy of other mainstream languages in his environment. He developed several projects in Racket, notably RWind, MrEd Designer 3, Towers and Quickscript.}
 }
 
+◊folded{
+◊speaker["" "Jesse Tov"]{A #lang for data structures students}
+
+At Northwestern, undergraduates take a data structures course in their third quarter, after only 20 weeks of programming instruction. I teach data structures primarily as a programming course, which raises the question: What language should students program in? I was dissatisfied with most professional languages, as they present too much distracting complexity for these inexperienced students. The students were dissatisfied with Racket-like teaching languages. As a compromise, I designed Data Structures Student Language 2, which offers Python-like syntax, but with sensible semantics and a minimal library. In this talk, I will show you some of the syntax and semantics of DSSL2 and discuss how it is implemented as a Racket #lang.
+
+◊bio{◊strong{Jesse Tov} is an Assistant Professor of Instruction at Northwestern University. Previously he was a lecturer at Northeastern and Harvard Universities. He likes cooking, dogs, and functional programming, whatever that means.}
+}
 
 }
 
