@@ -112,6 +112,23 @@ Making a website accessible, usable, and attractive is important, but CSS's comp
 ◊bio{◊strong{Jon Zeppieri} is a software developer at CarePort Health in Boston where he has been overheard on multiple occasions asking "Yes, but 'today' in what time zone?" He discovered Racket in the late '90s, when it was called PLT Scheme, and has used it ever since.}
 }
 
+◊folded{
+◊speaker["" "Philip McGrath"]{Digital Ricœur: Racket in the
+Humanities}
+
+Digital Ricœur is a project to digitize the works of philosopher Paul Ricœur and provide analysis tools for scholars, including those with no technical background. The project is built by a small team, all of whom have "day jobs" outside of software development. Racket's distinctive features have been a key to our success, both for our user-facing portal website and many internal tools. This talk will present our experience with Racket in practice, from the web server and cross-platform GUI toolkit to unexpected benefits of contracts and Scribble.
+
+◊bio{◊strong{Philip McGrath} has been developing for the web for most of his life, and Racket has been his language of choice for the last several years. By day, Philip studies musicology and composition at the University of Chicago and performs as a singer and conductor, with a particular focus on medieval and Renaissance music.}
+}
+
+◊folded{
+◊speaker["" "Laurent Orseau"]{How to Ask for the Time in Racket}
+
+DrRacket is an amazing IDE. Written in Racket for Racket and more, one can write plugins in Racket to extend its functionalities. This plugin system is very general, but this comes at a cost: the development time is significant even for small functionalities, and requires to restart DrRacket at every change. For a large range of small scripts, Quickscript (formerly the Script Plugin) allows to write simple (and not so simple) scripts for DrRacket without needing to restart it and with much smaller development time, even making it possible to write short-lived scripts for single purposes. Sharing scripts written with Quickscript is as simple as sharing a code snippet.
+
+◊bio{After years of self-taught programming in Pascal, BASIC and C, ◊strong{Laurent Orseau} learned PLT Scheme (Racket's name at the time) as an undergrad. But it wasn't until the end of his PhD in AI at the INSA of Rennes (France) that he realized the tremendous capabilities of the Lisp/Scheme family, and the amazing set of features that Racket offered. He stuck with it ever since, through 7 years in academia at AgroParisTech (France) and even now as a research scientist at DeepMind (London, UK), despite the supremacy of other mainstream languages in his environment. He developed several projects in Racket, notably RWind, MrEd Designer 3, Towers and Quickscript.}
+}
+
 
 }
 
