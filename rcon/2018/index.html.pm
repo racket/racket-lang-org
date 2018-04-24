@@ -137,6 +137,18 @@ At Northwestern, undergraduates take a data structures course in their third qua
 ◊bio{◊strong{Jesse Tov} is an Assistant Professor of Instruction at Northwestern University. Previously he was a lecturer at Northeastern and Harvard Universities. He likes cooking, dogs, and functional programming, whatever that means.}
 }
 
+◊folded{
+◊speaker["" "Jesse Alama"]{Language-oriented programming: A cultural anthropology}
+
+Racket’s more than just a batteries-included Lisp. It’s about solving problems by making languages; language-oriented programming is the name of the game. The idea has an immediate intuitive appeal. Perhaps it’s what drove you to Racket in the first place. And if it wasn’t, chances are good, if you stick around the community for a while, that you’ll find yourself thinking about languages.
+
+But what are we talking about when we talk about “language-oriented programming”? Looking around the Racket community & among its fellow travelers, one finds that “make your own language” has a variety of senses. Although some common core ideas can be enumerated, they get expressed in different ways. At times, one wonders: are we all talking about the same thing?
+
+To help foster the growth of language-oriented programming in general—and Racket in particular as the best environment for solving problems in that way—it’s important that we understand the diversity of meanings of “language-oriented programming” and kindred expressions. A good place to help develop that understanding is the Racket community itself and its principal drivers. Here I present the results of a survey of core Racket developers about what “make your own language” means to them.
+
+◊bio{◊strong{Jesse Alama} counts himself lucky for having been exposed early in life to Scheme. After enjoying Common Lisp for several years, he wanted something new; he flirted with Clojure but then settled on Racket a few years ago and has never looked back. Although in his day job he works at an ecommerce company, for most of his adult life Jesse was involved in academia, doing philosophy of mathematics, automated theorem proving & proof checking, and mathematical logic.}
+}
+
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
