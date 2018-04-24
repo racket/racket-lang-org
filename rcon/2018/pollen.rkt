@@ -114,5 +114,7 @@
       [else
        (error 'figlet "Figlet is not installed and cache not available")]))
   (display-to-file fstr fstr-cache #:exists 'replace)
-  `(div ((class "head") (id ,(format "~a" which)))
+  `(div ((class "head")
+         (id ,(format "~a" which))
+         (aria-label ,str))
         ,fstr))
