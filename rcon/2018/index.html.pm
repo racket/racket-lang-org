@@ -25,7 +25,7 @@ We plan on live streaming the event, as we have in the past.
 
 ◊h3{◊xtarget["speakers"]{Keynote}}
 
-◊head["b"]{Kent Dybvig}
+◊head["d"]{Kent Dybvig}
 
 ◊h3{◊xtarget["venue"]{Venue}}
 
