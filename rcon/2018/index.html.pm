@@ -45,12 +45,6 @@ RacketCon attendees also get a fantastic ◊link["http://group.curiocollection.c
 ◊h3{◊xtarget["speakers"]{Speakers}}
 
 ◊div{
-◊folded[#:open #t]{
-◊speaker["" "Your Name Here"]{Your Next Amazing RacketCon Talk}
-
-This past year, you did something amazing with Racket. Now it is the time to share it.
-
-◊bio{◊link["https://qph.fs.quoracdn.net/main-qimg-3abb243ec3f0aad890ce845a02fa99fb"]{You} are an amazing and precious programmer with a great deal to offer the RacketCon community. Please contact the ◊link["mailto:jay.mccarthy@gmail.com"]{organizers} with the full details of your talk.}}
 
 ◊folded{
 ◊speaker["" "Christopher Lemmer Webber and Morgan Lemmer-Webber"]{Racket for Everyone (Else)}
@@ -147,6 +141,16 @@ But what are we talking about when we talk about “language-oriented programmin
 To help foster the growth of language-oriented programming in general—and Racket in particular as the best environment for solving problems in that way—it’s important that we understand the diversity of meanings of “language-oriented programming” and kindred expressions. A good place to help develop that understanding is the Racket community itself and its principal drivers. Here I present the results of a survey of core Racket developers about what “make your own language” means to them.
 
 ◊bio{◊strong{Jesse Alama} counts himself lucky for having been exposed early in life to Scheme. After enjoying Common Lisp for several years, he wanted something new; he flirted with Clojure but then settled on Racket a few years ago and has never looked back. Although in his day job he works at an ecommerce company, for most of his adult life Jesse was involved in academia, doing philosophy of mathematics, automated theorem proving & proof checking, and mathematical logic.}
+}
+
+◊folded{
+◊speaker["" "Jörgen Brandt"]{Petri Net Flavored Places: An Advanced Transition System for Distributed Computing in Racket}
+
+Places provide a way to specify parallel and distributed computation in Racket. Using places we can set up independent services that communicate via channels. Often state machines are used in this setting to model session state, resource allocation, or service start order. However, plain state machines often suffer from the explosion of the state space as soon as multiple state variables appear in combination. Also some applications have only an infinite representation, if modeled as a state machine.
+
+In this talk, we address these challenges by introducing pnet, a Racket library that allows to define Racket places as Petri nets. Petri nets are a class of transition systems representing state as tokens produced and consumed by transitions. We consider several examples for Petri nets as Racket places such as a worker pool and consider the possibility of driving the pnet library from a tailor-made DSL or using it to construct distributed programming languages.
+
+◊bio{◊strong{Jörgen Brandt} is a PhD student based in Berlin. He is interested in programming languages and distributed systems and maintains the distributed programming language Cuneiform.}
 }
 
 }
