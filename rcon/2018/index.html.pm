@@ -107,8 +107,7 @@ Making a website accessible, usable, and attractive is important, but CSS's comp
 }
 
 ◊folded{
-◊speaker["" "Philip McGrath"]{Digital Ricœur: Racket in the
-Humanities}
+◊speaker["" "Philip McGrath"]{Digital Ricœur: Racket in the Humanities}
 
 Digital Ricœur is a project to digitize the works of philosopher Paul Ricœur and provide analysis tools for scholars, including those with no technical background. The project is built by a small team, all of whom have "day jobs" outside of software development. Racket's distinctive features have been a key to our success, both for our user-facing portal website and many internal tools. This talk will present our experience with Racket in practice, from the web server and cross-platform GUI toolkit to unexpected benefits of contracts and Scribble.
 
