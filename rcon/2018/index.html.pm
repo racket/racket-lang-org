@@ -122,7 +122,7 @@ Digital Ricœur is a project to digitize the works of philosopher Paul Ricœur a
 }
 
 ◊folded{
-◊speaker["" "Laurent Orseau"]{How to Ask for the Time in Racket}
+◊speaker["" "Laurent Orseau"]{Quickscript, a tool to quickly write scripts to extend DrRacket's functionalities}
 
 DrRacket is an amazing IDE. Written in Racket for Racket and more, one can write plugins in Racket to extend its functionalities. This plugin system is very general, but this comes at a cost: the development time is significant even for small functionalities, and requires to restart DrRacket at every change. For a large range of small scripts, Quickscript (formerly the Script Plugin) allows to write simple (and not so simple) scripts for DrRacket without needing to restart it and with much smaller development time, even making it possible to write short-lived scripts for single purposes. Sharing scripts written with Quickscript is as simple as sharing a code snippet.
 
