@@ -152,8 +152,6 @@ In this talk, we address these challenges by introducing pnet, a Racket library 
 ◊bio{◊strong{Jörgen Brandt} is a PhD student based in Berlin. He is interested in programming languages and distributed systems and maintains the distributed programming language Cuneiform.}
 }
 
-XXX
-
 ◊folded{
 ◊speaker["" "Chris GauthierDickey"]{Bringing Back Design by Numbers}
 
