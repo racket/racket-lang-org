@@ -152,6 +152,16 @@ In this talk, we address these challenges by introducing pnet, a Racket library 
 ◊bio{◊strong{Jörgen Brandt} is a PhD student based in Berlin. He is interested in programming languages and distributed systems and maintains the distributed programming language Cuneiform.}
 }
 
+XXX
+
+◊folded{
+◊speaker["" "Chris GauthierDickey"]{Bringing Back Design by Numbers}
+
+"Design by Numbers," by John Maeda, was a formative book on learning how to program mixed with a design perspective which later influenced the creation of Processing and other languages targeting artists and designers. While the book is now out of print, working versions of the language itself have mostly disappeared. We decided to reconstruct the Design by Numbers language using Racket's #lang facilities as a way to explore beginning languages and to allow our artist colleagues an easy way to access this language and its interesting set of features once again. In this talk, we go through the process of creating a #lang in Racket from scratch and also describe the challenges in reconstructing the semantics of the language which only became apparent after example programs did not have the same results as the text.
+
+◊bio{◊strong{Chris GauthierDickey} is an Associate Professor in Computer Science and the Director of Game Development Programs at the University of Denver where he's interested in how beginners work with and learn new programming languages. He was introduced to the Design by Numbers book and language by his colleague Jeff Edgington where they collaborated to reconstruct the language.}
+}
+
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
