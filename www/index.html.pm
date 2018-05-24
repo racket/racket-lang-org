@@ -207,7 +207,7 @@ News
 
 ◊link["https://blog.racket-lang.org/2018/01/racket-v6-12.html"]{Racket version 6.12} is available.
 
-◊link["https://con.racket-lang.org/"]{(seventh RacketCon)} was held in Seattle, 7–8 Oct 2017.
+◊link["https://con.racket-lang.org/"]{(eighth RacketCon)} will be held in St. Louis, 29–30 Sept 2018.
 
 New! ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
 
