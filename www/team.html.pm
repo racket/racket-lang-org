@@ -14,6 +14,14 @@
 
 
 ◊section{
+◊div{Racket World Map}
+
+◊iframe[#:src "https://www.google.com/maps/d/u/0/embed?mid=1i3zN11e_6te5ytduAiv1cidrIi4" #:width "640" #:height "480" #:align "top"]
+}
+
+
+
+◊section{
 ◊div{Recognized Contributors
 
 ◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{Racket is developed by a broad community of contributors. The following people have earned special recognition for their work.}}
