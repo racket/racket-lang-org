@@ -15,10 +15,6 @@
 
 }
 
-◊pre{(eighth RacketCon)}
-
-
-
 ◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{◊link["https://con.racket-lang.org/"]{◊pre{(eighth RacketCon)}}, is the meeting for everyone interested in Racket—a general-purpose programming language that’s also the world’s first ecosystem for developing and deploying new languages. RacketCon is for developers, contributors, programmers, educators, and bystanders. It’s an opportunity for all of us to share plans, ideas, and enthusiasm, and help shape the future of Racket. September 29–30 in St. Louis, Missouri.  ◊link["https://con.racket-lang.org/"]{Join us!}}
 
 
