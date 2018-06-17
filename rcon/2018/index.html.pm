@@ -38,7 +38,7 @@ This year, RacketCon will join the ◊link["https://icfp18.sigplan.org"]{Interna
 ◊row{◊at{Standard} ◊desc{$100 individual · $60 student (after September 8)}}
 ]
 
-Buy your ticket at ◊link["https://tinyurl.com/RacketCon2018Tickets"]{TBA}.
+Buy your ticket at ◊link["https://www.eventbrite.com/e/racketcon-2018-tickets-47064849231"]{Eventbrite}.
 
 RacketCon attendees also get a fantastic ◊link["http://group.curiocollection.com/RacketCon2018"]{group rate} at the ◊link["http://curiocollection3.hilton.com/en/hotels/missouri/st-louis-union-station-hotel-curio-collection-by-hilton-STLCUQQ/index.html"]{Union Station Hotel} itself.
 
