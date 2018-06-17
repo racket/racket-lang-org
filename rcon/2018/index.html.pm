@@ -160,6 +160,14 @@ In this talk, we address these challenges by introducing pnet, a Racket library 
 ◊bio{◊strong{Chris GauthierDickey} is an Associate Professor in Computer Science and the Director of Game Development Programs at the University of Denver where he's interested in how beginners work with and learn new programming languages. He was introduced to the Design by Numbers book and language by his colleague Jeff Edgington where they collaborated to reconstruct the language.}
 }
 
+◊folded{
+◊speaker["" "David Thrane Christiansen"]{Saving it for later: language-supported to-do lists in DrRacket}
+
+While writing a program, much of the time is spent working with programs that are not yet complete. Frequently, however, this incompleteness is indicated only by a comment next to a call to error.  The DrRacket to-do list is a plugin for keeping track of which parts of a program are incomplete, providing a convenient list of what remains to be written. In some languages, such as Pie, the to-do list can even provide support for completing the task. The to-do list can work with any #lang, and I'll show you how to add support for it to your language.
+
+◊bio{◊strong{David} is a programming languages and verification researcher/engineer at Galois, Inc. Previously, he was a core contributor to the Idris language and its interactive tooling. Together with Dan Friedman, he is a co-author of The Little Typer.}
+}
+
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
