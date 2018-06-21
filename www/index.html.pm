@@ -16,9 +16,6 @@
 }
 
 
-◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{Applications are now being accepted for ◊link["https://summer-school.racket-lang.org/2018/"]{Racket School 2018}, a five-day intensive class about creating programming languages with Racket. July 9–13 in Salt Lake City. Financial support available for qualifying students. ◊link["https://summer-school.racket-lang.org/2018/"]{Join us!}}
-
-
 ◊special-section{
 
 ◊feature["Batteries included" #:id "f1"]{Racket's extensive standard library gets your projects off the ground quickly.
