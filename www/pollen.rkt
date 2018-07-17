@@ -2,11 +2,11 @@
 (provide (all-defined-out))
 (require pollen/decode
          pollen/tag
-         txexpr
+         (prefix-in puc: pollen/unstable/convert)
          racket/list
+         racket/string
          sugar/list
          racket/match
-         sugar/debug
          openssl/sha1
          racket/runtime-path)
 
@@ -111,3 +111,6 @@
 (define-runtime-path fonts.css.pp "./css/fonts/fonts.css.pp")
 (define-runtime-path functions.js.pp "./js/functions.js.pp")
 (define (file-hash path) (call-with-input-file path sha1))
+
+(define (html->xexpr . strs)
+  (puc:html->xexpr (string-join strs "")))

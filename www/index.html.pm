@@ -15,7 +15,7 @@
 
 }
 
-◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{News: ◊link["https://con.racket-lang.org/"]{(eighth RacketCon)} is for developers, contributors, programmers, educators, and bystanders, September 29–30 in St. Louis, Missouri.  ◊link["https://con.racket-lang.org/"]{Join us!}}
+◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{◊link["https://con.racket-lang.org/"]{(eighth RacketCon)} is for developers, contributors, programmers, educators, and bystanders. September 29–30 in St. Louis, Missouri.  ◊link["https://con.racket-lang.org/"]{Join us!}}
 
 
 ◊special-section{
@@ -82,7 +82,7 @@
 }
 }
 
-◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{Racket is a ◊link["https://docs.racket-lang.org/quick/index.html"]{general-purpose programming language} as well as the ◊link["https://www.ccs.neu.edu/home/matthias/manifesto/"]{world's first ecosystem} for developing and deploying new languages. Make your ◊link["https://docs.racket-lang.org/guide/languages.html"]{dream language}, or use one of the dozens ◊link["http://docs.racket-lang.org/search/index.html?q=H%3A"]{already available}, including these —}
+◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{Racket is a ◊link["https://docs.racket-lang.org/quick/index.html"]{general-purpose programming language} as well as the ◊link["https://www.ccs.neu.edu/home/matthias/manifesto/"]{world's first ecosystem} for language-oriented programming. Make your ◊link["https://docs.racket-lang.org/guide/languages.html"]{dream language}, or use one of the dozens ◊link["http://docs.racket-lang.org/search/index.html?q=H%3A"]{already available}, including these —}
 
 
 ◊special-section{
@@ -208,26 +208,29 @@ News
 
 ◊link["https://con.racket-lang.org/"]{(eighth RacketCon)} will be held in St. Louis, 29–30 Sept 2018.
 
-New! ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
+◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
 
-New! ◊link["https://devswag.com/products/racket"]{Racket stickers} — the indispensable accessory for laptops and textbooks.
+◊link["https://devswag.com/products/racket"]{Racket stickers} — the indispensable accessory for laptops and textbooks.
 
 }
 
 ◊section{
 Community
 
-◊link["https://lists.racket-lang.org/"]{Mailing list}
+◊link["https://lists.racket-lang.org/"]{Mailing list} and ◊link["https://blog.racket-lang.org/"]{blog}
 
-◊link["https://blog.racket-lang.org/"]{Blog}
-
-◊link["https://botbot.me/freenode/racket/"]{#racket IRC on freenode.net}
+◊link["https://botbot.me/freenode/racket/"]{#racket IRC} on freenode.net
 
 ◊link["https://racket.slack.com/"]{Slack channel} (visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
 
-◊link["https://twitter.com/racketlang"]{@racketlang on Twitter}
+◊link["https://twitter.com/racketlang"]{@racketlang} on Twitter
 
-◊link["plt.html"]{PLT: the team behind Racket}
+◊link["team.html"]{Team}
+
+◊link["sfc.html"]{Software Freedom Conservancy}
+
+◊link["sfc.html"]{Donate to Racket} 
+Make a tax-deductible contribution to support our work.
 
 }
 

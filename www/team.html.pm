@@ -1,6 +1,5 @@
 #lang pollen
 
-
 ◊top-section{
 ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{◊link["index.html"]{◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket} ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
 
@@ -17,7 +16,7 @@
 ◊section{
 ◊div{Recognized Contributors
 
-◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{Racket is developed by a broad community of contributors. The following people are among the long-term contributors who have have earned special recognition for their work.}}
+◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{Racket is developed by a broad community of contributors. The following people have earned special recognition for their work.}}
 
 ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}
 
@@ -96,8 +95,7 @@
 
 ◊div{PLT research
 ◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
-Racket was originally created by the PLT research group, and many
-researchers continue to use Racket and contribute to it.}}
+Racket was originally created by the PLT research group, an affiliation of computer-science researchers at these universities.}}
 
 ◊link["http://www.ccs.neu.edu/racket/"]{Northeastern University}
 Boston MA
