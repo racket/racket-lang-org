@@ -27,6 +27,8 @@ We plan on live streaming the event, as we have in the past.
 
 ◊head["d"]{Kent Dybvig}
 
+◊bio{◊strong{R. Kent Dybvig} is a Distinguished Engineer at Cisco Systems, Inc. and Professor Emeritus of Computer Science at Indiana University. He is the creator and primary developer of Chez Scheme and author of The Scheme Programming Language, published by MIT Press.  He served as chair of the editorial committee for the Revised^6 Report on Scheme from 2006 until its completion in 2008.}
+
 ◊h3{◊xtarget["venue"]{Venue}}
 
 This year, RacketCon will join the ◊link["https://icfp18.sigplan.org"]{International Conference on Functional Programming} (ICFP) and ◊link["https://www.thestrangeloop.com/"]{Strange Loop} for a week of programming revelry in St. Louis, Missouri at the ◊link["http://curiocollection3.hilton.com/en/hotels/missouri/st-louis-union-station-hotel-curio-collection-by-hilton-STLCUQQ/index.html"]{Union Station Hotel}. Specifically, we are in the Jeffersonian and Knickerbocker rooms.
