@@ -216,9 +216,7 @@ to be announced.
 ◊h3{Sponsors (#%kernel tier)}
 
 ◊inline-list['sponsor]{
-You
-And
-Them
+◊link["https://beautifulracket.com/about-the-author.html"]{Matthew Butterick}
 }
 
 ◊h3{Sponsors (big-bang tier)}
