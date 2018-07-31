@@ -49,21 +49,41 @@ RacketCon attendees also get a fantastic ◊link["http://group.curiocollection.c
 ◊div{
 
 ◊folded{
-◊speaker["" "Christopher Lemmer Webber and Morgan Lemmer-Webber"]{Racket for Everyone (Else)}
+◊speaker["" "Jesse Tov"]{A #lang for data structures students}
 
-Racket currently historically targets two groups: young programmers (learn by building games) and programming language theorists.  We believe Racket is well positioned to meet a wide variety of people in-between these groups.  Morgan will present on our use of Racket for non-programmers.  Using Racket, Dr. Racket, and Scribble, we have run a series of successful workshops on “programmable publishing”.  Although these were marketed to humanities students, this method can be applied to a wide variety of disciplines including the social sciences and mathematics.  It can be applied outside of the university for creative writing, community outreach, and other populations with publishing needs.  The common thread through these communities is users who don’t view themselves as programmers or who would like to program but don’t think they have the ability or resources to learn.  Because of its accessibility, we use scribble as a gateway into basic programming skills where participants can apply their fledgling skills to a practical output that relates to their daily lives.  Chris will present on Racket for the general programmer.  Racket is as batteries-included as Python and is well set up to be just as general.  How can we reach a general audience?  What can we gain by doing so?
+At Northwestern, undergraduates take a data structures course in their third quarter, after only 20 weeks of programming instruction. I teach data structures primarily as a programming course, which raises the question: What language should students program in? I was dissatisfied with most professional languages, as they present too much distracting complexity for these inexperienced students. The students were dissatisfied with Racket-like teaching languages. As a compromise, I designed Data Structures Student Language 2, which offers Python-like syntax, but with sensible semantics and a minimal library. In this talk, I will show you some of the syntax and semantics of DSSL2 and discuss how it is implemented as a Racket #lang.
 
-◊bio{◊strong{Christopher Lemmer Webber} is a user freedom advocate with who focuses on network freedom.  Chris is co-editor of the W3C ActivityPub protocol which provides federated communication for decentralized social networks.  They have been programming in lisp for some time and have recently come to love Racket and have been co-running the "Programmable Publishing: Digital Humanities for Everyone" workshops using Racket and Scribble with Morgan Lemmer-Webber.}
-
-◊bio{◊strong{Morgan Lemmer-Webber} is a PhD Candidate in the department of Art History at the University of Wisconsin, Madison. Her dissertation focuses on the real and symbolic associations between women and textile production in the Roman Empire. She has been the lead developer for the Digital Humanities project "A colonial merchant: The ledger of William Ramsay" since 2015. She has recently developed materials for and co-taught a series of workshops to teach basic programming skills to humanities majors using Racket and Scribble with Christopher Lemmer Webber.}
+◊bio{◊strong{Jesse Tov} is an Assistant Professor of Instruction at Northwestern University. Previously he was a lecturer at Northeastern and Harvard Universities. He likes cooking, dogs, and functional programming, whatever that means.}
 }
 
 ◊folded{
-◊speaker["" "Eric Griffis"]{Dataflow network programming with Neuron}
+◊speaker["" "Ryan Culpepper"]{Profiling Macros}
+}
 
-Neuron is a framework for high-level network programming in Racket. Its language-oriented approach builds upon familiar abstractions like channels, ports, threads, and evaluators with support for a simple but powerful form of exploratory dataflow network programming and information flow control. In this talk, I'll show how Neuron can be used to design composable networks of communicating processes, lift procedures and modules onto the network, and integrate with existing software infrastructure like the Web.
+◊folded{
+◊speaker["" "Chris GauthierDickey"]{Bringing Back Design by Numbers}
 
-◊bio{◊strong{Eric Griffis} is a highly intuitive, life-long programmer with an acute sensitivity to the impact of software on society. His interests include programmable software infrastructure, social software ecosystems, and software as organism versus mechanism.}
+"Design by Numbers," by John Maeda, was a formative book on learning how to program mixed with a design perspective which later influenced the creation of Processing and other languages targeting artists and designers. While the book is now out of print, working versions of the language itself have mostly disappeared. We decided to reconstruct the Design by Numbers language using Racket's #lang facilities as a way to explore beginning languages and to allow our artist colleagues an easy way to access this language and its interesting set of features once again. In this talk, we go through the process of creating a #lang in Racket from scratch and also describe the challenges in reconstructing the semantics of the language which only became apparent after example programs did not have the same results as the text.
+
+◊bio{◊strong{Chris GauthierDickey} is an Associate Professor in Computer Science and the Director of Game Development Programs at the University of Denver where he's interested in how beginners work with and learn new programming languages. He was introduced to the Design by Numbers book and language by his colleague Jeff Edgington where they collaborated to reconstruct the language.}
+}
+
+◊folded{
+◊speaker["" "Jesse Alama"]{Language-oriented programming: A cultural anthropology}
+
+Racket’s more than just a batteries-included Lisp. It’s about solving problems by making languages; language-oriented programming is the name of the game. The idea has an immediate intuitive appeal. Perhaps it’s what drove you to Racket in the first place. And if it wasn’t, chances are good, if you stick around the community for a while, that you’ll find yourself thinking about languages.
+
+But what are we talking about when we talk about “language-oriented programming”? Looking around the Racket community & among its fellow travelers, one finds that “make your own language” has a variety of senses. Although some common core ideas can be enumerated, they get expressed in different ways. At times, one wonders: are we all talking about the same thing?
+
+To help foster the growth of language-oriented programming in general—and Racket in particular as the best environment for solving problems in that way—it’s important that we understand the diversity of meanings of “language-oriented programming” and kindred expressions. A good place to help develop that understanding is the Racket community itself and its principal drivers. Here I present the results of a survey of core Racket developers about what “make your own language” means to them.
+
+◊bio{◊strong{Jesse Alama} counts himself lucky for having been exposed early in life to Scheme. After enjoying Common Lisp for several years, he wanted something new; he flirted with Clojure but then settled on Racket a few years ago and has never looked back. Although in his day job he works at an ecommerce company, for most of his adult life Jesse was involved in academia, doing philosophy of mathematics, automated theorem proving & proof checking, and mathematical logic.}
+}
+
+◊folded{
+◊speaker["" "Jon Zeppieri"]{How to Ask for the Time in Racket}
+
+◊bio{◊strong{Jon Zeppieri} is a software developer at CarePort Health in Boston where he has been overheard on multiple occasions asking "Yes, but 'today' in what time zone?" He discovered Racket in the late '90s, when it was called PLT Scheme, and has used it ever since.}
 }
 
 ◊folded{
@@ -87,6 +107,40 @@ Biomantica Inc is a bioinformatics company built entirely on Racket.  This talk 
 }
 
 ◊folded{
+◊speaker["" "Christopher Lemmer Webber and Morgan Lemmer-Webber"]{Racket for Everyone (Else)}
+
+Racket currently historically targets two groups: young programmers (learn by building games) and programming language theorists.  We believe Racket is well positioned to meet a wide variety of people in-between these groups.  Morgan will present on our use of Racket for non-programmers.  Using Racket, Dr. Racket, and Scribble, we have run a series of successful workshops on “programmable publishing”.  Although these were marketed to humanities students, this method can be applied to a wide variety of disciplines including the social sciences and mathematics.  It can be applied outside of the university for creative writing, community outreach, and other populations with publishing needs.  The common thread through these communities is users who don’t view themselves as programmers or who would like to program but don’t think they have the ability or resources to learn.  Because of its accessibility, we use scribble as a gateway into basic programming skills where participants can apply their fledgling skills to a practical output that relates to their daily lives.  Chris will present on Racket for the general programmer.  Racket is as batteries-included as Python and is well set up to be just as general.  How can we reach a general audience?  What can we gain by doing so?
+
+◊bio{◊strong{Christopher Lemmer Webber} is a user freedom advocate with who focuses on network freedom.  Chris is co-editor of the W3C ActivityPub protocol which provides federated communication for decentralized social networks.  They have been programming in lisp for some time and have recently come to love Racket and have been co-running the "Programmable Publishing: Digital Humanities for Everyone" workshops using Racket and Scribble with Morgan Lemmer-Webber.}
+
+◊bio{◊strong{Morgan Lemmer-Webber} is a PhD Candidate in the department of Art History at the University of Wisconsin, Madison. Her dissertation focuses on the real and symbolic associations between women and textile production in the Roman Empire. She has been the lead developer for the Digital Humanities project "A colonial merchant: The ledger of William Ramsay" since 2015. She has recently developed materials for and co-taught a series of workshops to teach basic programming skills to humanities majors using Racket and Scribble with Christopher Lemmer Webber.}
+}
+
+◊folded{
+◊speaker["" "Philip McGrath"]{Digital Ricœur: Racket in the Humanities}
+
+Digital Ricœur is a project to digitize the works of philosopher Paul Ricœur and provide analysis tools for scholars, including those with no technical background. The project is built by a small team, all of whom have "day jobs" outside of software development. Racket's distinctive features have been a key to our success, both for our user-facing portal website and many internal tools. This talk will present our experience with Racket in practice, from the web server and cross-platform GUI toolkit to unexpected benefits of contracts and Scribble.
+
+◊bio{◊strong{Philip McGrath} has been developing for the web for most of his life, and Racket has been his language of choice for the last several years. By day, Philip studies musicology and composition at the University of Chicago and performs as a singer and conductor, with a particular focus on medieval and Renaissance music.}
+}
+
+◊folded{
+◊speaker["" "David Thrane Christiansen"]{Saving it for later: language-supported to-do lists in DrRacket}
+
+While writing a program, much of the time is spent working with programs that are not yet complete. Frequently, however, this incompleteness is indicated only by a comment next to a call to error.  The DrRacket to-do list is a plugin for keeping track of which parts of a program are incomplete, providing a convenient list of what remains to be written. In some languages, such as Pie, the to-do list can even provide support for completing the task. The to-do list can work with any #lang, and I'll show you how to add support for it to your language.
+
+◊bio{◊strong{David} is a programming languages and verification researcher/engineer at Galois, Inc. Previously, he was a core contributor to the Idris language and its interactive tooling. Together with Dan Friedman, he is a co-author of The Little Typer.}
+}
+
+◊folded{
+◊speaker["" "Laurent Orseau"]{Quickscript, a tool to quickly write scripts to extend DrRacket's functionalities}
+
+DrRacket is an amazing IDE. Written in Racket for Racket and more, one can write plugins in Racket to extend its functionalities. This plugin system is very general, but this comes at a cost: the development time is significant even for small functionalities, and requires to restart DrRacket at every change. For a large range of small scripts, Quickscript (formerly the Script Plugin) allows to write simple (and not so simple) scripts for DrRacket without needing to restart it and with much smaller development time, even making it possible to write short-lived scripts for single purposes. Sharing scripts written with Quickscript is as simple as sharing a code snippet.
+
+◊bio{After years of self-taught programming in Pascal, BASIC and C, ◊strong{Laurent Orseau} learned PLT Scheme (Racket's name at the time) as an undergrad. But it wasn't until the end of his PhD in AI at the INSA of Rennes (France) that he realized the tremendous capabilities of the Lisp/Scheme family, and the amazing set of features that Racket offered. He stuck with it ever since, through 7 years in academia at AgroParisTech (France) and even now as a research scientist at DeepMind (London, UK), despite the supremacy of other mainstream languages in his environment. He developed several projects in Racket, notably RWind, MrEd Designer 3, Towers and Quickscript.}
+}
+
+◊folded{
 ◊speaker["" "Nadeem Abdul Hamid"]{Sinbad: Sailing the Waves of Data}
 
 Sinbad is a software library, intended for use in introductory programming courses, that makes it very easy to uniformly access online data sources provided in standard formats. The library provides unified support for XML, JSON, and CSV/TSV data sources, automated caching facilities (useful for having offline access to data), sampling features (for development/testing on subsets of large data sources), and binding to instances of user-defined structures. On top of all of that, a primary pedagogical goal has been to make the interface as simple and intuitive as possible for novice programmers.
@@ -103,48 +157,6 @@ Making a website accessible, usable, and attractive is important, but CSS's comp
 }
 
 ◊folded{
-◊speaker["" "Jon Zeppieri"]{How to Ask for the Time in Racket}
-
-◊bio{◊strong{Jon Zeppieri} is a software developer at CarePort Health in Boston where he has been overheard on multiple occasions asking "Yes, but 'today' in what time zone?" He discovered Racket in the late '90s, when it was called PLT Scheme, and has used it ever since.}
-}
-
-◊folded{
-◊speaker["" "Philip McGrath"]{Digital Ricœur: Racket in the Humanities}
-
-Digital Ricœur is a project to digitize the works of philosopher Paul Ricœur and provide analysis tools for scholars, including those with no technical background. The project is built by a small team, all of whom have "day jobs" outside of software development. Racket's distinctive features have been a key to our success, both for our user-facing portal website and many internal tools. This talk will present our experience with Racket in practice, from the web server and cross-platform GUI toolkit to unexpected benefits of contracts and Scribble.
-
-◊bio{◊strong{Philip McGrath} has been developing for the web for most of his life, and Racket has been his language of choice for the last several years. By day, Philip studies musicology and composition at the University of Chicago and performs as a singer and conductor, with a particular focus on medieval and Renaissance music.}
-}
-
-◊folded{
-◊speaker["" "Laurent Orseau"]{Quickscript, a tool to quickly write scripts to extend DrRacket's functionalities}
-
-DrRacket is an amazing IDE. Written in Racket for Racket and more, one can write plugins in Racket to extend its functionalities. This plugin system is very general, but this comes at a cost: the development time is significant even for small functionalities, and requires to restart DrRacket at every change. For a large range of small scripts, Quickscript (formerly the Script Plugin) allows to write simple (and not so simple) scripts for DrRacket without needing to restart it and with much smaller development time, even making it possible to write short-lived scripts for single purposes. Sharing scripts written with Quickscript is as simple as sharing a code snippet.
-
-◊bio{After years of self-taught programming in Pascal, BASIC and C, ◊strong{Laurent Orseau} learned PLT Scheme (Racket's name at the time) as an undergrad. But it wasn't until the end of his PhD in AI at the INSA of Rennes (France) that he realized the tremendous capabilities of the Lisp/Scheme family, and the amazing set of features that Racket offered. He stuck with it ever since, through 7 years in academia at AgroParisTech (France) and even now as a research scientist at DeepMind (London, UK), despite the supremacy of other mainstream languages in his environment. He developed several projects in Racket, notably RWind, MrEd Designer 3, Towers and Quickscript.}
-}
-
-◊folded{
-◊speaker["" "Jesse Tov"]{A #lang for data structures students}
-
-At Northwestern, undergraduates take a data structures course in their third quarter, after only 20 weeks of programming instruction. I teach data structures primarily as a programming course, which raises the question: What language should students program in? I was dissatisfied with most professional languages, as they present too much distracting complexity for these inexperienced students. The students were dissatisfied with Racket-like teaching languages. As a compromise, I designed Data Structures Student Language 2, which offers Python-like syntax, but with sensible semantics and a minimal library. In this talk, I will show you some of the syntax and semantics of DSSL2 and discuss how it is implemented as a Racket #lang.
-
-◊bio{◊strong{Jesse Tov} is an Assistant Professor of Instruction at Northwestern University. Previously he was a lecturer at Northeastern and Harvard Universities. He likes cooking, dogs, and functional programming, whatever that means.}
-}
-
-◊folded{
-◊speaker["" "Jesse Alama"]{Language-oriented programming: A cultural anthropology}
-
-Racket’s more than just a batteries-included Lisp. It’s about solving problems by making languages; language-oriented programming is the name of the game. The idea has an immediate intuitive appeal. Perhaps it’s what drove you to Racket in the first place. And if it wasn’t, chances are good, if you stick around the community for a while, that you’ll find yourself thinking about languages.
-
-But what are we talking about when we talk about “language-oriented programming”? Looking around the Racket community & among its fellow travelers, one finds that “make your own language” has a variety of senses. Although some common core ideas can be enumerated, they get expressed in different ways. At times, one wonders: are we all talking about the same thing?
-
-To help foster the growth of language-oriented programming in general—and Racket in particular as the best environment for solving problems in that way—it’s important that we understand the diversity of meanings of “language-oriented programming” and kindred expressions. A good place to help develop that understanding is the Racket community itself and its principal drivers. Here I present the results of a survey of core Racket developers about what “make your own language” means to them.
-
-◊bio{◊strong{Jesse Alama} counts himself lucky for having been exposed early in life to Scheme. After enjoying Common Lisp for several years, he wanted something new; he flirted with Clojure but then settled on Racket a few years ago and has never looked back. Although in his day job he works at an ecommerce company, for most of his adult life Jesse was involved in academia, doing philosophy of mathematics, automated theorem proving & proof checking, and mathematical logic.}
-}
-
-◊folded{
 ◊speaker["" "Jörgen Brandt"]{Petri Net Flavored Places: An Advanced Transition System for Distributed Computing in Racket}
 
 Places provide a way to specify parallel and distributed computation in Racket. Using places we can set up independent services that communicate via channels. Often state machines are used in this setting to model session state, resource allocation, or service start order. However, plain state machines often suffer from the explosion of the state space as soon as multiple state variables appear in combination. Also some applications have only an infinite representation, if modeled as a state machine.
@@ -155,23 +167,11 @@ In this talk, we address these challenges by introducing pnet, a Racket library 
 }
 
 ◊folded{
-◊speaker["" "Chris GauthierDickey"]{Bringing Back Design by Numbers}
+◊speaker["" "Eric Griffis"]{Dataflow network programming with Neuron}
 
-"Design by Numbers," by John Maeda, was a formative book on learning how to program mixed with a design perspective which later influenced the creation of Processing and other languages targeting artists and designers. While the book is now out of print, working versions of the language itself have mostly disappeared. We decided to reconstruct the Design by Numbers language using Racket's #lang facilities as a way to explore beginning languages and to allow our artist colleagues an easy way to access this language and its interesting set of features once again. In this talk, we go through the process of creating a #lang in Racket from scratch and also describe the challenges in reconstructing the semantics of the language which only became apparent after example programs did not have the same results as the text.
+Neuron is a framework for high-level network programming in Racket. Its language-oriented approach builds upon familiar abstractions like channels, ports, threads, and evaluators with support for a simple but powerful form of exploratory dataflow network programming and information flow control. In this talk, I'll show how Neuron can be used to design composable networks of communicating processes, lift procedures and modules onto the network, and integrate with existing software infrastructure like the Web.
 
-◊bio{◊strong{Chris GauthierDickey} is an Associate Professor in Computer Science and the Director of Game Development Programs at the University of Denver where he's interested in how beginners work with and learn new programming languages. He was introduced to the Design by Numbers book and language by his colleague Jeff Edgington where they collaborated to reconstruct the language.}
-}
-
-◊folded{
-◊speaker["" "David Thrane Christiansen"]{Saving it for later: language-supported to-do lists in DrRacket}
-
-While writing a program, much of the time is spent working with programs that are not yet complete. Frequently, however, this incompleteness is indicated only by a comment next to a call to error.  The DrRacket to-do list is a plugin for keeping track of which parts of a program are incomplete, providing a convenient list of what remains to be written. In some languages, such as Pie, the to-do list can even provide support for completing the task. The to-do list can work with any #lang, and I'll show you how to add support for it to your language.
-
-◊bio{◊strong{David} is a programming languages and verification researcher/engineer at Galois, Inc. Previously, he was a core contributor to the Idris language and its interactive tooling. Together with Dan Friedman, he is a co-author of The Little Typer.}
-}
-
-◊folded{
-◊speaker["" "Ryan Culpepper"]{Profiling Macros}
+◊bio{◊strong{Eric Griffis} is a highly intuitive, life-long programmer with an acute sensitivity to the impact of software on society. His interests include programmable software infrastructure, social software ecosystems, and software as organism versus mechanism.}
 }
 
 }
@@ -184,8 +184,8 @@ While writing a program, much of the time is spent working with programs that ar
 ◊row{◊at{9:05–10:15} ◊desc{Keynote: Kent Dybvig}}
 ◊row{◊at{10:15–10:40} ◊desc{Break}}
 ◊row{◊at{10:40–12:00} ◊desc{
-Ryan Culpepper
 Jesse Tov
+Ryan Culpepper
 Chris GauthierDickey
 Jesse Alama}}
 ◊row{◊at{12:00–14:00} ◊desc{Lunch at Landry's}}
