@@ -216,6 +216,15 @@ Eric Griffis
 
 ◊h3{Sunday September 30}
 
+This year during Office Hours we are organizing a handful of small groups of Racketeers to lead focused sections. Groups will be loosely united around a common field such as "types" or "web programming". There are two different kinds of groups which we're calling "teams" and "workshops":
+
+Teams are Racketeers who wish to work on community projects in a specific field. For example, a "testing team" may choose a set of Racket testing packages to improve with documentation, features, bug fixes, etc.
+
+Workshops are Racketeers who wish to give Racket newcomers hands-on lessons in a specific field, such as with some sort of tutorial project.
+
+Please see the coordination page on the wiki:
+◊link["https://github.com/racket/racket/wiki/2018-RacketCon-Office-Hours-Teams-&-Workshops"]{2018 RacketCon Office Hours Teams & Workshops}.
+
 ◊schedule[
 ◊row{◊at{8:30–9:00} ◊desc{Breakfast & Registration}}
 ◊row{◊at{9:00} ◊desc{Welcome}}
