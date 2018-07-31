@@ -170,50 +170,63 @@ While writing a program, much of the time is spent working with programs that ar
 ◊bio{◊strong{David} is a programming languages and verification researcher/engineer at Galois, Inc. Previously, he was a core contributor to the Idris language and its interactive tooling. Together with Dan Friedman, he is a co-author of The Little Typer.}
 }
 
+◊folded{
+◊speaker["" "Ryan Culpepper"]{Profiling Macros}
+}
+
 }
 
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
 
 ◊schedule[
-◊row{◊at{8:30–9:30} ◊desc{Breakfast & Registration}}
-◊row{◊at{9:30} ◊desc{Welcome}}
-◊row{◊at{9:30–10:30} ◊desc{Keynote: TBA}}
-◊row{◊at{10:30–11:00} ◊desc{Break}}
-◊row{◊at{11:00–12:00} ◊desc{
-Amazing Talk 1
-Amazing Talk 2
-Amazing Talk 3}}
-◊row{◊at{12:00–14:00} ◊desc{Lunch}}
-◊; ◊row{◊at{14:00} ◊desc{Contributor Awards}} ◊; if we have them
+◊row{◊at{8:30–9:00} ◊desc{Breakfast & Registration}}
+◊row{◊at{9:00} ◊desc{Welcome}}
+◊row{◊at{9:05–10:15} ◊desc{Keynote: Kent Dybvig}}
+◊row{◊at{10:15–10:40} ◊desc{Break}}
+◊row{◊at{10:40–12:00} ◊desc{
+Ryan Culpepper
+Jesse Tov
+Chris GauthierDickey
+Jesse Alama}}
+◊row{◊at{12:00–14:00} ◊desc{Lunch at Landry's}}
 ◊row{◊at{14:00–15:00} ◊desc{
-Extraordinary Talk 1
-Extraordinary Talk 2
-Extraordinary Talk 3}}
-◊row{◊at{15:00–15:15} ◊desc{Break}}
-◊row{◊at{15:15–16:30} ◊desc{
-Superb Talk 1
-Superb Talk 2
-Superb Talk 3
-Superb Talk 4}}
-◊row{◊at{16:30–16:45} ◊desc{Break}}
-◊row{◊at{16:45–18:00} ◊desc{
-Wow, That's a Racket 1
-Wow, That's a Racket 2
-Wow, That's a Racket 3
-Wow, That's a Racket 4
+Jon Zeppieri
+Stephen R. Foster
+David Storrs}}
+◊row{◊at{15:00–15:20} ◊desc{Break}}
+◊row{◊at{15:20–16:40} ◊desc{
+Christopher Lemmer Webber and Morgan Lemmer-Webber
+Philip McGrath
+David Thrane Christiansen
+Laurent Orseau}}
+◊row{◊at{16:40–17:00} ◊desc{Break}}
+◊row{◊at{17:00–18:20} ◊desc{
+Nadeem Abdul Hamid
+Pavel Panchekha
+Jörgen Brandt
+Eric Griffis
 }}
 ]
 
 ◊h3{Saturday evening}
 
 ◊schedule[
-◊row{◊at{19:00–23:00} ◊desc{Food & drink at local destination.}}
+◊row{◊at{19:00–23:00} ◊desc{Food & drink at Morgan Street.}}
 ]
 
 ◊h3{Sunday September 30}
 
-We will have another edition of Racketeer Office Hours, with details
-to be announced.
+◊schedule[
+◊row{◊at{8:30–9:00} ◊desc{Breakfast & Registration}}
+◊row{◊at{9:00} ◊desc{Welcome}}
+◊row{◊at{9:05–10:00} ◊desc{State of Racket: Matthew Flatt}}
+◊row{◊at{10:00–10:30} ◊desc{Break}}
+◊row{◊at{10:30–12:00} ◊desc{Session 1: Workshops}}
+◊row{◊at{12:00–14:00} ◊desc{Lunch at Maggie O'Brien's}}
+◊row{◊at{14:00–15:30} ◊desc{Session 2: Teams & Workshops}}
+◊row{◊at{15:30–15:45} ◊desc{Break}}
+◊row{◊at{15:45–17:00} ◊desc{Session 3: Teams}}
+]
 
 ◊h3{Sponsors (#%kernel tier)}
 
