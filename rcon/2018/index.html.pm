@@ -57,8 +57,11 @@ At Northwestern, undergraduates take a data structures course in their third qua
 }
 
 ◊folded{
-◊speaker["" "Ryan Culpepper"]{Profiling Macros}
-}
+◊speaker["" "Ryan Culpepper"]{The Cost of Sugar}
+
+Racket allows programmers to adapt the language to their needs, from defining simple syntactic abbreviations to creating entire new languages hosted within Racket. Macros are the primary source of this power. But macros have costs, too. One kind of cost is compiled code size (which indirectly also affects compilation time).
+
+This talk is about the code size cost of macros. In particular, I'll talk about how to measure the costs associated with macros, I'll explain how to reduce those costs, and I'll tell some stories about costly macros in the Racket ecosystem.}
 
 ◊folded{
 ◊speaker["" "Chris GauthierDickey"]{Bringing Back Design by Numbers}
