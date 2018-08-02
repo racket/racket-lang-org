@@ -3,6 +3,7 @@
 ◊(define debug-width 0)
 ◊(define max-width 1000)
 ◊(define link-color "rgb(6, 121, 167)")
+◊(define left-col-width "13rem")
 
 ◊(make-media-query 16 8 max-width 60 .5)   
 
@@ -26,21 +27,13 @@ body {
   margin: auto;
 }
 
-#doc {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-     border: ◊|debug-width|px solid blue
-}
-
 
 row {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  border: ◊|debug-width|px solid red;
+  display: grid;
+  grid-template-columns: [left] ◊|left-col-width| [right] auto;
   align-items: baseline;
+  border: ◊|debug-width|px solid red;
 }
 
 row#logo {
@@ -115,27 +108,28 @@ col-1 + col-2 {
 }
 
 col-1 {
-  width: 20rem;
+  grid-column: left;
   font-size: 115%;
   text-align: right;
   padding-right: 1rem;
 }
 
 col-2 {
- display: flex;
+  grid-column: right;
+  display: flex;
  flex-direction: row;
  flex-wrap: wrap;
- width: 100%;
+}
+
+pre {
+  white-space: pre-wrap;
 }
 
 article#home col-2 div.truncate {
   opacity: 0.6;
 }
 
-
-
 row#book col-2 {
-  
   flex-direction: row;
   flex-wrap: wrap;
 }
@@ -457,8 +451,15 @@ footer + row#bottom {
 @media all and (max-width:550px) {
   html { font-size: 15px; }
   body { padding: 0.75rem; }
-  row { flex-direction: column; }
-  row#logo { flex-direction: row; }
+  row#logo {
+    grid-template-columns: [left] ◊|left-col-width| [right] auto;
+    grid-template-rows: inherit;
+  }
+  row { 
+    display: grid;
+    grid-template-rows: [left] auto [right] auto;
+    grid-template-columns: auto;
+  }
   col-1 + col-2{ margin: 0; }
   col-1 { text-align: left; }
 }
