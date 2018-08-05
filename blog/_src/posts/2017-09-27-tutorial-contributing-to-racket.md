@@ -190,7 +190,7 @@ $ ./racket/bin/raco test -l tests/racket/test
 ```
 <br/>
 
-> Estimated time for `setup`: 1-4 hours
+> Estimated time for `setup`: 0-3 hours
 
 > Estimated time for `test`: 1 hour
 
