@@ -171,7 +171,7 @@ Software
 
 ◊link["https://download.racket-lang.org/"]{Download Racket v7.0}
 
-◊link["https://github.com/plt/racket/"]{Source code}
+◊link["https://github.com/racket/racket/"]{Source code}
 
 ◊link["https://github.com/racket/racket/issues"]{Bug reports}
 

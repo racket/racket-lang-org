@@ -35,11 +35,11 @@ Finally, we've taken this opportunity to shift our web hosting entirely to Amazo
 
 While the new pages have been under development for quite a while, we're still happy to take bug reports, suggestions and (especially) patches: all of the site can be found here:
 
- [https://github.com/plt/racket/tree/master/pkgs/plt-services/meta/new-web](https://github.com/plt/racket/tree/master/pkgs/plt-services/meta/new-web)
+ [https://github.com/racket/racket/tree/master/pkgs/plt-services/meta/new-web](https://github.com/racket/racket/tree/master/pkgs/plt-services/meta/new-web)
 
 with the framework for building the site here:
 
- [https://github.com/plt/racket/tree/master/pkgs/plt-web-pkgs](https://github.com/plt/racket/tree/master/pkgs/plt-web-pkgs)
+ [https://github.com/racket/racket/tree/master/pkgs/plt-web-pkgs](https://github.com/racket/racket/tree/master/pkgs/plt-web-pkgs)
 
 
 

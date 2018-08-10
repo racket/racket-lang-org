@@ -32,7 +32,7 @@
         @~
         We will also run a Hackathon on Sunday in the same room as
         RacketCon. For details, see the
-        @a[href: "https://github.com/plt/racket/wiki/RacketCon-Hackathon-2012"]{
+        @a[href: "https://github.com/racket/racket/wiki/RacketCon-Hackathon-2012"]{
           wiki page}.
         }
 
