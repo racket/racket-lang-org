@@ -5,17 +5,17 @@
 
 *posted by Asumu Takikawa*
 
-Racket now has a new look for its web presence. You can see it at[ http://racket-lang.org](http://racket-lang.org/) (modulo DNS propagation).                                                    
+Racket now has a new look for its web presence. You can see it at[ http://racket-lang.org](http://racket-lang.org/) (modulo DNS propagation).
 
 
 
-The new pages improve on the old in several ways:                                                                    
+The new pages improve on the old in several ways:
 
 
 
 
 
-* More information is now on the front page.                                                                    
+* More information is now on the front page.
 
 * The site works much better small devices, such as phones.
 
@@ -35,11 +35,11 @@ Finally, we've taken this opportunity to shift our web hosting entirely to Amazo
 
 While the new pages have been under development for quite a while, we're still happy to take bug reports, suggestions and (especially) patches: all of the site can be found here:
 
- [https://github.com/plt/racket/tree/master/pkgs/plt-services/meta/new-web](https://github.com/plt/racket/tree/master/pkgs/plt-services/meta/new-web)
+ [https://github.com/racket/racket/tree/master/pkgs/plt-services/meta/new-web](https://github.com/racket/racket/tree/master/pkgs/plt-services/meta/new-web)
 
 with the framework for building the site here:
 
- [https://github.com/plt/racket/tree/master/pkgs/plt-web-pkgs](https://github.com/plt/racket/tree/master/pkgs/plt-web-pkgs)
+ [https://github.com/racket/racket/tree/master/pkgs/plt-web-pkgs](https://github.com/racket/racket/tree/master/pkgs/plt-web-pkgs)
 
 
 

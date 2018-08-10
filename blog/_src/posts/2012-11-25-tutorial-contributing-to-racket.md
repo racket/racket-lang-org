@@ -1,7 +1,7 @@
 
     Title:Tutorial: Contributing to Racket
     Date:2012-11-25T17:02:00.001-05:00
-    Tags: 
+    Tags:
 
 *posted by Joe Gibbs Politz*
 
@@ -13,7 +13,7 @@ I've been a longtime user and sometimes fanboy of [Racket](http://racket-lang.or
 
 
 
-I've been using Racket for a while, so I knew roughly where to lookto put my code, tests, and documentation.  A newer user might not know, so this post outlines, in some detail, the steps I went through to put together a tiny feature extension for Racket.  
+I've been using Racket for a while, so I knew roughly where to lookto put my code, tests, and documentation.  A newer user might not know, so this post outlines, in some detail, the steps I went through to put together a tiny feature extension for Racket.
 
 
 
@@ -56,7 +56,7 @@ I thought `check-match` was pretty useful, and figured I'd see if the Racket fol
 Getting and Extending Racket
 ---
 
-[Racket's repo](http://github.com/plt/racket) is hosted on Github.  The easiest way to contribute is to [fork it](https://help.github.com/articles/fork-a-repo), and then check out your own copy.  The check-out and build process is fairly standard; you should, however, make a directory called `build/` to hold the binaries that will be created:
+[Racket's repo](http://github.com/racket/racket) is hosted on Github.  The easiest way to contribute is to [fork it](https://help.github.com/articles/fork-a-repo), and then check out your own copy.  The check-out and build process is fairly standard; you should, however, make a directory called `build/` to hold the binaries that will be created:
 
 
 ```bash
@@ -143,12 +143,12 @@ First, I need to know how I'm going to test this to make sure I don't screw anyt
 
 ```bash
 $ ls collects/tests/rackunit/
-all-rackunit-tests.rkt  monad-test.rkt                
-base-test.rkt           pr10950.rkt                   
-check-info-test.rkt     result-test.rkt               
-check-test.rkt          run-tests.rkt                 
-counter-test.rkt        standalone-check-test.rkt     
-format-test.rkt         standalone.rkt                
+all-rackunit-tests.rkt  monad-test.rkt
+base-test.rkt           pr10950.rkt
+check-info-test.rkt     result-test.rkt
+check-test.rkt          run-tests.rkt
+counter-test.rkt        standalone-check-test.rkt
+format-test.rkt         standalone.rkt
 hash-monad-test.rkt     standalone-test-case-test.rkt
 location-test.rkt       test-case-test.rkt
 ```
@@ -208,7 +208,7 @@ The actual implementation of `check-match` is turns the pieces into an instance 
      (check-match actual expected #t)]))
 ```
 
-In reality, this gives lousy error reporting, so the [actual implementation](https://github.com/plt/racket/blob/e264e4148884f0675bd21e889525ccb7239eb4b4/collects/rackunit/private/check.rkt#L286) leverages the helpful [with-check-info](http://docs.racket-lang.org/rackunit/api.html#(form._((lib._rackunit/main..rkt)._with-check-info))) form to populate the test with reporting information for failures.
+In reality, this gives lousy error reporting, so the [actual implementation](https://github.com/racket/racket/blob/e264e4148884f0675bd21e889525ccb7239eb4b4/collects/rackunit/private/check.rkt#L286) leverages the helpful [with-check-info](http://docs.racket-lang.org/rackunit/api.html#(form._((lib._rackunit/main..rkt)._with-check-info))) form to populate the test with reporting information for failures.
 
 With the implementation in place, it's time to run the tests, and figure out if what I did broke anything.  To run a particular test suite, Racket provides a tool called `raco` that was built by the `make install` above. To run our tests, we do (from the base `racket/` directory):
 
@@ -305,10 +305,10 @@ Looks good!
 Letting Racketeers Know
 ---
 
-I packaged everything up in a [single commit](https://github.com/jpolitz/racket/commit/023d2278c1bb9819451790d774ae8e67a5d46f22), and sent the whole thing off to the Racket folks with a [pull request](https://github.com/plt/racket/pull/171).  They then reviewed it and incorporated it into [their HEAD](https://github.com/plt/racket/commit/e264e4148884f0675bd21e889525ccb7239eb4b4) the next day.
+I packaged everything up in a [single commit](https://github.com/jpolitz/racket/commit/023d2278c1bb9819451790d774ae8e67a5d46f22), and sent the whole thing off to the Racket folks with a [pull request](https://github.com/racket/racket/pull/171).  They then reviewed it and incorporated it into [their HEAD](https://github.com/racket/racket/commit/e264e4148884f0675bd21e889525ccb7239eb4b4) the next day.
 
 
-The Racket folks maintain a list of [Intro Projects](https://github.com/plt/racket/wiki/Intro-Projects), so there's easy places to start if you want to follow this tutorial and get involved!
+The Racket folks maintain a list of [Intro Projects](https://github.com/racket/racket/wiki/Intro-Projects), so there's easy places to start if you want to follow this tutorial and get involved!
 
 <!-- more -->
 
@@ -322,4 +322,3 @@ For reference, cross-ref with Greg's post on infrequent contributions to Racket:
 — *Laurent, 30 April 2013*
 
 * * *
-

@@ -36,7 +36,7 @@
         @~
         We will also run a Hackathon on Saturday (28th) in the same room as
         RacketCon from 10AM-5PM. For details, see the
-        @a[href: "https://github.com/plt/racket/wiki/RacketCon-Hackathon-2013"]{
+        @a[href: "https://github.com/racket/racket/wiki/RacketCon-Hackathon-2013"]{
          wiki page}.
         }
 

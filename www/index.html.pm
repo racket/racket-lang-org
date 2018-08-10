@@ -27,7 +27,7 @@
 ◊doclink["math"]{Math & statistics}
 ◊link["https://docs.racket-lang.org"]{full list ◊begin['rarr]}
 }
-} 
+}
 
 
 ◊feature["Cross-platform" #:id "f6"]{Racket runs on Linux, macOS, and Windows. Develop on one; deploy to all three.
@@ -102,7 +102,7 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
 ◊lang["#lang scribble/base" #:id "lang2"]{
 ◊pre{@; Generate a PDF or HTML document
 @◊docs{title}{Bottles: @◊docs{italic}{Abridged}}
-@(◊docs{apply} 
+@(◊docs{apply}
   ◊docs{itemlist}
   (◊docs{for/list} ([n (◊docs{in-range} 100 0 -1)])
     @◊docs{item}{@(◊docs{format} "~a" n) bottles.}))}
@@ -124,7 +124,7 @@ Typed Racket's "gradual" typing lets you add types after you've been working in 
 
 ◊link["https://docs.racket-lang.org/ts-guide/quick.html?q=typed%20racket"]{Typed Racket tutorial ◊(begin 'rarr)}
 
-} 
+}
 
 ◊lang["#lang datalog" #:id "lang4"]{
 ◊pre{ancestor(A, B) :- parent(A, B).
@@ -136,7 +136,7 @@ ancestor(A, B)?}
 
 You can use Racket to build other languages — like ◊code{datalog}, a logic-programming language.
 
-◊link["https://docs.racket-lang.org/datalog/Tutorial.html?q=datalog"]{Datalog tutorial ◊(begin 'rarr)}} 
+◊link["https://docs.racket-lang.org/datalog/Tutorial.html?q=datalog"]{Datalog tutorial ◊(begin 'rarr)}}
 
 ◊lang["#lang racket/gui" #:id "lang5"]{
 ◊pre{(◊docs{define} f (◊docs{new} frame% [label "Guess"]))
@@ -149,7 +149,7 @@ You can use Racket to build other languages — like ◊code{datalog}, a logic-p
 Racket's GUI language and libraries makes cross-platform applications easy.
 
 ◊link["https://docs.racket-lang.org/gui/windowing-overview.html?q=gui"]{GUI tutorial ◊(begin 'rarr)}
-} 
+}
 
 ◊lang["#lang web-server/insta" #:id "lang6"]{
 ◊pre{;; A "hello world" web server
@@ -162,7 +162,7 @@ Racket's GUI language and libraries makes cross-platform applications easy.
 The ◊code{web-server/insta} language lets you quickly prototype server-side web applications.
 
 ◊link["https://docs.racket-lang.org/continue/index.html?q=web%20applications"]{Web-application tutorial ◊(begin 'rarr)}
-} 
+}
 }
 
 
@@ -171,7 +171,7 @@ Software
 
 ◊link["https://download.racket-lang.org/"]{Download Racket v7.0}
 
-◊link["https://github.com/plt/racket/"]{Source code}
+◊link["https://github.com/racket/racket/"]{Source code}
 
 ◊link["https://github.com/racket/racket/issues"]{Bug reports}
 
@@ -229,7 +229,7 @@ Community
 
 ◊link["sfc.html"]{Software Freedom Conservancy}
 
-◊link["sfc.html"]{Donate to Racket} 
+◊link["sfc.html"]{Donate to Racket}
 Make a tax-deductible contribution to support our work.
 
 }

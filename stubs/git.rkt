@@ -510,14 +510,14 @@
      cloning the repository using git's own network protocol
   @~ @cmd{git clone http://@|git-host|/plt.git}@br
      clone the repository over http
-  @~ @cmd{git clone http://github.com/plt/racket.git}@br
+  @~ @cmd{git clone http://github.com/racket/racket.git}@br
      this uses the repository mirror on github, which is automatically kept in
      sync (you can also use @cmd{https://...})}
   and some present a web interface for additional information:
   @ul*{
   @~ @cmd{@selflink{http://@|git-host|/plt}}@br
      a web interface to inspect the repository
-  @~ @cmd{@selflink{https://github.com/plt/racket}}@br
+  @~ @cmd{@selflink{https://github.com/racket/racket}}@br
      github's fancier web interface}}
 
 @section{Start working: git commits vs subversion commits}
@@ -2767,7 +2767,7 @@
   or achieved as described in the previous subsection.  In the case of
   contributing to the @cmd{plt} repository, the contributor can maintain a
   public fork of the @cmd{plt} repository (eg, by forking the @cmd{plt} github
-  mirror at @selflink{https://github.com/plt/racket} directly on github).
+  mirror at @selflink{https://github.com/racket/racket} directly on github).
 @~
   In this workflow there is no need to mail patches — instead, the receiver
   simply pulls them directly from the sender's repository.  For example,
@@ -2843,7 +2843,7 @@
      @~ Send the resulting text to @cmd{dev@at-racket}
      @~ You're done — thanks!}
 @p{Alternatively, you can fork the @cmd{plt} repository on github:
-   @cmd{https://github.com/plt/racket}, commit, then do a pull request.  Note:
+   @cmd{https://github.com/racket/racket}, commit, then do a pull request.  Note:
    it is better to send a note about your pull request to @cmd{dev@at-racket},
    or you can do the pull request directly with git as listed above (using
    github to have a public repository).}
@@ -2892,13 +2892,13 @@
   previous section.  However, with github there is an easy way to deal with
   it.
 @~
-  A pull request has a URL like @cmd{https://github.com/plt/racket/pull/123}
+  A pull request has a URL like @cmd{https://github.com/racket/racket/pull/123}
   which you can use in your browser to inspect the changes.  To apply the
   changes locally, a convenient feature is that you can add a @cmd{.patch}
   suffix to every pull request URL which will have a text version of the patch.
   This means that applying the patch is particularly easy on the command line,
   for example:
-  @pre{curl https://github.com/plt/racket/pull/123.patch | git am}
+  @pre{curl https://github.com/racket/racket/pull/123.patch | git am}
   will fetch the patch text and apply it (and you can now push as usual, or
   locally inspect the ptach and possibly edit it in the usual ways).}
 

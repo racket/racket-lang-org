@@ -8,7 +8,7 @@ and many other package repos, all found on GitHub. If you have time and
 if you wish to get involved, please take a look at the GitHub repos and
 find your favorite places to learn, fix, and enhance our world.
 
-The core repo is at https://github.com/plt/racket, and the
+The core repo is at https://github.com/racket/racket, and the
 package repos are listed at https://github.com/racket/.
 
 core repo
