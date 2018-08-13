@@ -1,7 +1,7 @@
 
     Title:Tutorial: Contributing to Racket
     Date:2012-11-25T17:02:00.001-05:00
-    Tags:
+    Tags: 
 
 *posted by Joe Gibbs Politz*
 
@@ -13,7 +13,7 @@ I've been a longtime user and sometimes fanboy of [Racket](http://racket-lang.or
 
 
 
-I've been using Racket for a while, so I knew roughly where to lookto put my code, tests, and documentation.  A newer user might not know, so this post outlines, in some detail, the steps I went through to put together a tiny feature extension for Racket.
+I've been using Racket for a while, so I knew roughly where to lookto put my code, tests, and documentation.  A newer user might not know, so this post outlines, in some detail, the steps I went through to put together a tiny feature extension for Racket.  
 
 
 
@@ -143,12 +143,12 @@ First, I need to know how I'm going to test this to make sure I don't screw anyt
 
 ```bash
 $ ls collects/tests/rackunit/
-all-rackunit-tests.rkt  monad-test.rkt
-base-test.rkt           pr10950.rkt
-check-info-test.rkt     result-test.rkt
-check-test.rkt          run-tests.rkt
-counter-test.rkt        standalone-check-test.rkt
-format-test.rkt         standalone.rkt
+all-rackunit-tests.rkt  monad-test.rkt                
+base-test.rkt           pr10950.rkt                   
+check-info-test.rkt     result-test.rkt               
+check-test.rkt          run-tests.rkt                 
+counter-test.rkt        standalone-check-test.rkt     
+format-test.rkt         standalone.rkt                
 hash-monad-test.rkt     standalone-test-case-test.rkt
 location-test.rkt       test-case-test.rkt
 ```
@@ -322,3 +322,4 @@ For reference, cross-ref with Greg's post on infrequent contributions to Racket:
 — *Laurent, 30 April 2013*
 
 * * *
+
