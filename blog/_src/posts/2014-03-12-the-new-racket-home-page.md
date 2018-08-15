@@ -5,17 +5,17 @@
 
 *posted by Asumu Takikawa*
 
-Racket now has a new look for its web presence. You can see it at[ http://racket-lang.org](http://racket-lang.org/) (modulo DNS propagation).                                                    
+Racket now has a new look for its web presence. You can see it at[ http://racket-lang.org](http://racket-lang.org/) (modulo DNS propagation).
 
 
 
-The new pages improve on the old in several ways:                                                                    
+The new pages improve on the old in several ways:
 
 
 
 
 
-* More information is now on the front page.                                                                    
+* More information is now on the front page.
 
 * The site works much better small devices, such as phones.
 
