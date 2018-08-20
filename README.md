@@ -26,15 +26,15 @@ To build:
 * Run any "*.rkt" to build a page and things that it references.
   (Use `-h' as usual.)
 
-* You can choose `-w' (the default) for web mode, `-l' for local using
+* You can choose `-w` (the default) for web mode, `-l` for local using
   "file://" references, or `-r` for' local mode using relative
-  references. Normally, you'll want to use `-l' for testing, and then
-  use `-w' for deployment.
+  references. Normally, you'll want to use `-l` for testing, and then
+  use `-w` for deployment.
 
-* Use `-o <dir>' to specify a directory where the built contents is
+* Use `-o <dir>` to specify a directory where the built contents is
   placed, otherwise the content will be placed in the current
   directory.  As a safety measure, the target directory must not
-  overlap with any installed directory.  (Use `-f' in scripts to avoid
+  overlap with any installed directory.  (Use `-f` in scripts to avoid
   answering the question about deleting existing files.)
 
 * Set the $GIT_DIR environment variable to point to the ".git"
