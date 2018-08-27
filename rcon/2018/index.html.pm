@@ -251,6 +251,7 @@ Please see the coordination page on the wiki:
 ◊inline-list['sponsor]{
 ◊link["https://github.com/david-vanderson/"]{David Vanderson}
 ◊link["https://lisp.sh"]{Jesse Alama}
+◊link["http://blackswanlearning.com"]{Black Swan Learning}
 }
 
 ◊h3{Friendly Environment Policy}
