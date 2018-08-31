@@ -191,7 +191,8 @@ Jesse Tov
 Ryan Culpepper
 Chris GauthierDickey and Jeffrey Edgington
 Jesse Alama}}
-◊row{◊at{12:00–14:00} ◊desc{Lunch at Landry's}}
+◊row{◊at{12:00–12:05} ◊desc{Brief Announcements and Group Picture}}
+◊row{◊at{12:05–14:00} ◊desc{Lunch at Landry's}}
 ◊row{◊at{14:00–15:00} ◊desc{
 Jon Zeppieri
 Stephen R. Foster
