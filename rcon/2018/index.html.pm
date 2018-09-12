@@ -182,7 +182,7 @@ Neuron is a framework for high-level network programming in Racket. Its language
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
 
 ◊schedule[
-◊row{◊at{8:30–9:00} ◊desc{Breakfast & Registration}}
+◊row{◊at{8:30–9:00} ◊desc{Registration}}
 ◊row{◊at{9:00} ◊desc{Welcome}}
 ◊row{◊at{9:05–10:15} ◊desc{Keynote: Kent Dybvig}}
 ◊row{◊at{10:15–10:40} ◊desc{Break}}
