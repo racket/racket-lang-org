@@ -47,7 +47,9 @@
   (dynamic-require 'racket-lang-org/all #f)
   (dynamic-require '(submod racket-lang-org/all main) #f))
 
-(define (upload dir site #:shallow? [shallow? #f])
+(define (upload dir site
+                #:shallow? [shallow? #f]
+                #:link-mode [link-mode 'redirect])
   (step (format "Uploading ~a" site))
   (s3-web-sync (build-path "generated" dir)
                site
@@ -55,7 +57,7 @@
                #:dry-run? dry-run?
                #:shallow? shallow?
                #:upload? #t
-               #:link-mode 'redirect
+               #:link-mode link-mode
                #:check-metadata? check-metadata?
                #:jobs jobs
                #:log displayln))
@@ -63,6 +65,7 @@
 (upload "www" "www.racket-lang.org")
 (upload "pre" "pre.racket-lang.org")
 (upload "con" "con.racket-lang.org")
+(upload "school" "school.racket-lang.org" #:link-mode 'redirects)
 (upload "blog" "blog.racket-lang.org")
 (upload "drracket" "www.drracket.org")
 (upload "download" "download.racket-lang.org" #:shallow? #t)
@@ -102,7 +105,6 @@
   (add-routing-rules "download.racket-lang.org"
                      routing-rules
                      #:log-info displayln))
-
 
 ;; ----------------------------------------
 

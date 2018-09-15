@@ -22,6 +22,12 @@
 (pollen-rebuild! 2019-dir)
 (copy-school-site! 2019-dir 2019)
 
+;; Redirect root index.html to 2019/index.html
+(void
+ (symlink #:site school-site
+          "2019/index.html"
+          "index.html"))
+
 ;; suppress index page
 #|
 (define-runtime-path 2019-index "2019/index.html")
