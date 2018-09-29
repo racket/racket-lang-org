@@ -31,7 +31,7 @@ We plan on live streaming the event, as we have in the past.
 
 ◊h3{◊xtarget["venue"]{Venue}}
 
-This year, RacketCon will join the ◊link["https://icfp18.sigplan.org"]{International Conference on Functional Programming} (ICFP) and ◊link["https://www.thestrangeloop.com/"]{Strange Loop} for a week of programming revelry in St. Louis, Missouri at the ◊link["http://curiocollection3.hilton.com/en/hotels/missouri/st-louis-union-station-hotel-curio-collection-by-hilton-STLCUQQ/index.html"]{Union Station Hotel}. Specifically, we are in the Jeffersonian and Knickerbocker rooms.
+This year, RacketCon will join the ◊link["https://icfp18.sigplan.org"]{International Conference on Functional Programming} (ICFP) and ◊link["https://www.thestrangeloop.com/"]{Strange Loop} for a week of programming revelry in St. Louis, Missouri at the ◊link["http://curiocollection3.hilton.com/en/hotels/missouri/st-louis-union-station-hotel-curio-collection-by-hilton-STLCUQQ/index.html"]{Union Station Hotel}. Specifically, we are in the Illinois Central room on Saturday and in the Jeffersonian and Knickerbocker rooms on Sunday.
 
 ◊h3{◊xtarget["register"]{Register}}
 
