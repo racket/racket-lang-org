@@ -21,7 +21,8 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 
 ◊h3{Live Stream}
 
-We plan on live streaming the event, as we have in the past.
+See the recorded ◊link["https://www.youtube.com/watch?v=CLjXhr_TgP8"]{morning stream}
+and ◊link["https://www.youtube.com/watch?v=pv0lLciMI24"]{afternoon stream}.
 
 ◊h3{◊xtarget["speakers"]{Keynote}}
 
@@ -182,7 +183,7 @@ Neuron is a framework for high-level network programming in Racket. Its language
 ◊h3{◊xtarget["schedule"]{Saturday September 29}}
 
 ◊schedule[
-◊row{◊at{8:30–9:00} ◊desc{Registration}}
+◊row{◊at{8:30–9:00} ◊desc{Breakfast & Registration}}
 ◊row{◊at{9:00} ◊desc{Welcome}}
 ◊row{◊at{9:05–10:15} ◊desc{Keynote: Kent Dybvig}}
 ◊row{◊at{10:15–10:40} ◊desc{Break}}
@@ -230,7 +231,7 @@ Please see the coordination page on the wiki:
 ◊link["https://github.com/racket/racket/wiki/2018-RacketCon-Office-Hours-Teams-&-Workshops"]{2018 RacketCon Office Hours Teams & Workshops}.
 
 ◊schedule[
-◊row{◊at{8:30–9:00} ◊desc{Breakfast & Registration}}
+◊row{◊at{8:30–9:00} ◊desc{Registration}}
 ◊row{◊at{9:00} ◊desc{Welcome}}
 ◊row{◊at{9:05–10:00} ◊desc{State of Racket: Matthew Flatt}}
 ◊row{◊at{10:00–10:30} ◊desc{Break}}
