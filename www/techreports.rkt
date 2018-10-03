@@ -25,7 +25,10 @@
             #:description "Racket Graphics Toolkit")))
 
 (define (doc-url doc [fmt 'html] [ver 'recent])
-  (format "https://download.racket-lang.org/docs/~a/~a/~a~a" ver fmt doc
+  (format "https://download.racket-lang.org/releases/~a/~adoc/~a~a"
+          (if (eq? ver 'recent) (release-version (car all-releases)) ver)
+          (if (eq? 'html fmt) "" "pdf-")
+          doc
           (if (eq? 'html fmt) "" (format ".~a" fmt))))
 
 (define (TR num docname title authors* #:description [desc title]
