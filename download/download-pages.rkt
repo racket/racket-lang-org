@@ -113,8 +113,16 @@
            style: note-style]{
         @div{@b{About sources for Windows and Mac OS:}} To build from source for
            Windows or Mac OS, download and build a @b{Minimal Racket} distribution
-           instead of a @b{Racket} distribution, and then install packages
-           with @div{@tt{raco pkg install -i main-distribution}}}
+           instead of a @b{Racket} distribution, then (when on Windows) install the @tt{racket-lib} package
+           with @div{@nbsp @nbsp @tt{raco pkg install -i racket-lib}}
+           and then (on both Windows and Mac OS) install packages
+           with @div{@nbsp @nbsp @tt{raco pkg install -i main-distribution}}}
+      @div[id: "win_source_explain"
+           style: note-style]{
+        @div{@b{About source builds on Windows:}} After building @b{Minimal Racket}
+           from source, install the @tt{racket-lib} package with
+           with @div{@nbsp @nbsp @tt{raco pkg install -i racket-lib}}
+           before installing other packages.}
     @downloader-script[package (map car all-packages) version]
     @noscript{
       Installers are available for the following platforms:
@@ -310,6 +318,7 @@
     linux_expl_s = document.getElementById("linux_explain").style;
     linux_ppa_s = document.getElementById("linux_ppa").style;
     source_expl_s = document.getElementById("source_explain").style;
+    win_source_expl_s = document.getElementById("win_source_explain").style;
     builtpkgs_expl_s = document.getElementById("builtpkgs_explain").style;
     @(if (equal? version version-with-touchbar-bug)
          @list{
@@ -357,6 +366,12 @@
       source_expl_s.display =
         (selector[selector.selectedIndex].text.search(/Unix Source/) >= 0
          && !some_selector_matches(/(Windows|Mac OS) Source/))
+        ? "block"
+        : "none";
+      win_source_expl_s.display =
+        (selector[selector.selectedIndex].text.search(/Source/) >= 0
+         && !some_selector_matches(/Unix Source/)
+         && !some_selector_matches(/Windows Source/))
         ? "block"
         : "none";
       builtpkgs_expl_s.display =
