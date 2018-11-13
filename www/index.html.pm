@@ -15,9 +15,6 @@
 
 }
 
-◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{◊link["https://con.racket-lang.org/"]{(eighth RacketCon)} is for developers, contributors, programmers, educators, and bystanders. September 29–30 in St. Louis, Missouri.  ◊link["https://con.racket-lang.org/"]{Join us!}}
-
-
 ◊special-section{
 
 ◊feature["Batteries included" #:id "f1"]{Racket's extensive standard library gets your projects off the ground quickly.
@@ -206,7 +203,7 @@ News
 
 ◊link["https://blog.racket-lang.org/2018/10/racket-v7-1.html"]{Racket version 7.1} is available.
 
-◊link["https://con.racket-lang.org/"]{(eighth RacketCon)} will be held in St. Louis, 29–30 Sept 2018.
+◊link["https://con.racket-lang.org/"]{(eighth RacketCon)} was held in St. Louis, 29–30 Sept 2018.
 
 ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
 
