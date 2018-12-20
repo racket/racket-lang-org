@@ -201,6 +201,8 @@ Documentation & tutorials
 ◊section{
 News
 
+◊link["https://racketfest.com"]{Racketfest}, a new Racket event, is happening in Berlin, 23 March 2019.
+
 ◊link["https://blog.racket-lang.org/2018/10/racket-v7-1.html"]{Racket version 7.1} is available.
 
 ◊link["https://con.racket-lang.org/2019/"]{Racket Week 2019} (= RacketCon + Racket School) will happen in Salt Lake City, 8–14 July 2019.
