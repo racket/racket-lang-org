@@ -39,6 +39,8 @@ Software Freedom Conservancy
 137 Montague St #380
 Brooklyn NY 11201
 
+EIN: 41-2203632
+
 Thank you for supporting Racket!
 }
 
