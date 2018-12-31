@@ -34,6 +34,8 @@
    ;; source files
    (member (path-get-extension name) '(#".rkt" #".p" #".pp" #".pm"))))
 
+
+
 (define (copy-annual-site! site starting-dir year #:current [current? #f])
   (for* ([p (in-directory starting-dir)]
          [fn (in-value (filename p))]
@@ -41,14 +43,20 @@
          #:unless (or (not (path-has-extension? fn ext))
                       (excluded-path? fn)
                       (and current? (equal? fn (string->path "index.html")))))
-    (copyfile #:site site (build-path starting-dir fn)
-              (string-join (map ~a (append
-                                    (if current? null (list year))
-                                    (list fn))) "/")))
-  (define font-dir (build-path starting-dir "fonts"))
-  (when (directory-exists? font-dir)
-    (for* ([p (in-directory font-dir)])
-      (copyfile #:site site p
-                (string-join (map ~a (append
-                                      (if current? null (list year))
-                                      (list "fonts" (filename p)))) "/")))))
+        (copyfile #:site site (build-path starting-dir fn)
+                  (string-join (map ~a (append
+                                        (if current? null (list year))
+                                        (list fn))) "/")))
+
+  (define (copy-subdir-if-extant subdir-name)
+    (define subdir (build-path starting-dir subdir-name))
+    (when (directory-exists? subdir)
+      (for ([p (in-directory subdir)])
+           (copyfile #:site site p
+                     (string-join
+                      (map ~a (append
+                               (if current? null (list year))
+                               (list subdir-name (filename p)))) "/")))))
+  
+  (copy-subdir-if-extant "fonts")
+  (copy-subdir-if-extant "slides"))
