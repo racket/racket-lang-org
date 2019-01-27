@@ -63,7 +63,7 @@
       arguments, classes, static types, and even curly braces.}
 
 
-    @heading{Racket is a Scheme}
+    @heading{Racket is (kind of) a Scheme}
 
     @nested{Racket is still a dialect of Lisp and a descendant of Scheme.  The
       tools developed by PLT will continue to support R5RS, R6RS, the old
