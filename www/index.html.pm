@@ -166,7 +166,7 @@ The ◊code{web-server/insta} language lets you quickly prototype server-side we
 ◊section{
 Software
 
-◊link["https://download.racket-lang.org/"]{Download Racket v7.1}
+◊link["https://download.racket-lang.org/"]{Download Racket v7.2}
 
 ◊link["https://github.com/racket/racket/"]{Source code}
 
@@ -203,7 +203,7 @@ News
 
 ◊link["https://racketfest.com"]{Racketfest}, a new Racket event, is happening in Berlin, 23 March 2019.
 
-◊link["https://blog.racket-lang.org/2018/10/racket-v7-1.html"]{Racket version 7.1} is available.
+◊link["https://blog.racket-lang.org/2019/01/racket-v7-2.html"]{Racket version 7.2} is available.
 
 ◊link["https://con.racket-lang.org/2019/"]{Racket Week 2019} (= RacketCon + Racket School) will happen in Salt Lake City, 8–14 July 2019.
 
