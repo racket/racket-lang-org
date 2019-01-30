@@ -141,7 +141,7 @@ Many plots in this report are intended to tease out reasons for the
 performance difference between Racket CS and current Racket. From the
 explorations, so far, its does @emph{not} appear that the performance
 difference is an inevitable trade-off from putting Racket together in
-a batter way. Part of the problem is that some new code on top of Chez
+a better way. Part of the problem is that some new code on top of Chez
 Scheme needs to be refined. Perhaps more significantly, there are some
 trade-offs in the space of compilation timing (ahead-of-time or
 just-in-time) and code representation (machine code versus bytecode)
