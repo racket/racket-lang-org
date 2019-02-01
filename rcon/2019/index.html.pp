@@ -88,7 +88,7 @@ function select_all() {
 }
 
 function update_clock() {
-    const registration_opens = new Date("February 1, 2019");
+    const registration_opens = new Date("February 10, 2019");
     const now = new Date();
     const diff = registration_opens.getTime() - now.getTime();
     const new_inner_text = `in ${Math.floor(diff)}ms`;
