@@ -224,6 +224,8 @@ Community
 
 ◊link["https://racket.slack.com/"]{Slack channel} (visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
 
+◊link["https://github.com/racket/racket/wiki"]{Wiki}
+
 ◊link["https://twitter.com/racketlang"]{@racketlang} on Twitter
 
 ◊link["team.html"]{Team}
