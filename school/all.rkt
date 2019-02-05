@@ -17,25 +17,23 @@
 (define-syntax-rule (copy-school-site! ARG ...)
   (copy-annual-site! school-site ARG ...))
 
-;; 2019 (placeholder page)
+;; 2019 
 (define-runtime-path 2019-dir "2019")
 (pollen-rebuild! 2019-dir)
-(copy-school-site! 2019-dir 2019)
+(copy-school-site! 2019-dir 2019 #:current #t)
 
 ;; Redirect root index.html to 2019/index.html
-(void
+;; (used only when placeholder page exists)
+#;(void
  (symlink #:site school-site
           "2019/index.html"
           "index.html"))
 
-;; suppress index page
-#|
-(define-runtime-path 2019-index "2019/index.html")
+(define-runtime-path current-school-index "2019/index.html")
 (provide index)
 (define index
   (page* #:site school-site
          #:link-title "Racket School" #:title "Racket School"
          #:id 'school
-         @copyfile[#:site school-site 2019-index]))
+         @copyfile[#:site school-site current-school-index]))
 
-|#
