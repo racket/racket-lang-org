@@ -35,18 +35,17 @@
 ;; 2018
 (define-runtime-path 2018-dir "2018")
 (pollen-rebuild! 2018-dir)
-(copy-con-site! 2018-dir 2018 #:current #t)
+(copy-con-site! 2018-dir 2018)
 
-;; 2019 (placeholder page)
+;; 2019
 (define-runtime-path 2019-dir "2019")
 (pollen-rebuild! 2019-dir)
-(copy-con-site! 2019-dir 2019)
+(copy-con-site! 2019-dir 2019 #:current #t)
 
-
-(define-runtime-path 2018-index "2018/index.html")
+(define-runtime-path current-con-index "2019/index.html")
 (define index
   (page* #:site con-site
          #:link-title "RacketCon" #:title "RacketCon"
          #:extra-headers style-header
          #:id 'con
-         @copyfile[#:site con-site 2018-index]))
+         @copyfile[#:site con-site current-con-index]))
