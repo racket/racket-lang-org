@@ -76,6 +76,8 @@ This track will be taught by ◊link["http://www.ccs.neu.edu/home/matthias/"]{Ma
 
 ]
 
+Still don't know which track is right for you? ◊link["https://goo.gl/forms/TpHfA42zNvnpnzI23"]{Click here for help}.
+
 
 ◊h3{◊xtarget["brw"]{Track 2: Beautiful Racket Workshop}}
 
@@ -119,6 +121,9 @@ This track will be taught by ◊link["https://beautifulracket.com/about-the-auth
 ◊li{No computer-science training required.}
 
 ]
+
+Still don't know which track is right for you? ◊link["https://goo.gl/forms/TpHfA42zNvnpnzI23"]{Click here for help}.
+
 
 
 ◊h3{◊xtarget{Location}}
