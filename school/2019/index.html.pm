@@ -33,11 +33,11 @@ For the first time, Racket School will be immediately followed by ◊link["https
 
 ◊h3{◊xtarget["htdl"]{Track 1: How to Design Languages}}
 
-A five-day program that will run July 8–12 (Monday–Friday). 
+A five-day class that will run July 8–12 (Monday–Friday). 
 
-It will be taught by ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}, ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}, ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}, and ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}.
+This track will be taught by ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}, ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}, ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}, and ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}.
 
-This track will cover:
+◊em{This track will cover:}
 
 ◊ul[
 
@@ -53,7 +53,7 @@ This track will cover:
 
 ]
 
-This track is good for:
+◊em{This track is good for:}
 
 ◊ul[
 
@@ -72,27 +72,25 @@ This track is good for:
 
 ◊ul[
 
-◊li{Course-based or self-directed Racket programming experience beyond
- ◊link["https://htpd.org/"]{How to Design Programs} and
- ◊link["http://realmofracket.com"]{Realm of Racket} is needed.} 
+◊li{Course-based or self-directed Racket programming experience beyond ◊link["https://htpd.org/"]{How to Design Programs} and ◊link["http://realmofracket.com"]{Realm of Racket} is needed.} 
 
 ]
 
 
 ◊h3{◊xtarget["brw"]{Track 2: Beautiful Racket Workshop}}
 
-A three-day program that will run July 10–12 (Wednesday–Friday), based on the language-making techniques described in ◊link["https://beautifulracket.com/"]{Beautiful Racket}.
+A three-day class that will run July 10–12 (Wednesday–Friday).
 
 This track will be taught by ◊link["https://beautifulracket.com/about-the-author.html"]{Matthew Butterick}, author of ◊link["https://beautifulracket.com/"]{Beautiful Racket} and ◊link["https://pollenpub.com/"]{Pollen}.
 
 
-◊em{You will learn:}
+◊em{This track will cover:}
 
 ◊ul[
 
-◊li{How to make programming languages in Racket.}
+◊li{How to make programming languages in Racket, starting from the techniques described in ◊link["https://beautifulracket.com/"]{Beautiful Racket}.}
 
-◊li{Racket's tools for language-oriented programming, including the macro system and the DrRacket IDE.}
+◊li{Racket's tools for language-oriented programming, including the macro system, libraries, and the DrRacket IDE.}
 
 ]
 
