@@ -12,6 +12,8 @@
            (define-runtime-path rp-name (expand-user-path file))
            (font-face-declaration fam rp-name kwargs ...)))]))
 
+(define-runtime-path styles-source "styles.css.pp")
+
 (define (int->pixel-row int)
   (reverse (for/list ([bit (in-range 8)])
              (if (bitwise-bit-set? int bit) 1 0))))
