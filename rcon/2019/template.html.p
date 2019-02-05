@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+◊;{The Cloudflare caching system serves a fresh copy 
+of a CSS or JS file only for each request with a distinct query string.
+Therefore, append a timestamp string to CSS requests, 
+to ensure that after an S3 sync, the most recent version is served.}
+◊(local-require racket/file)
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
-<link rel="stylesheet" type="text/css" media="all" href="styles.css" />
+<title>ninth RacketCon</title>
+<link rel="stylesheet" href="styles.css?hash=◊|(equal-hash-code (file->string styles-source))|" media="all" />
 <script type="text/javascript">
 function toggle_div(id) {
     e = document.getElementById(id);
