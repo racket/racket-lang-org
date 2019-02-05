@@ -23,9 +23,9 @@
 
 ◊h3{◊xtarget["overview"]{Overview}}
 
-◊link["http://racket-lang.org/" ◊img[#:style "float:left;width:5rem;padding-right:0.5rem" #:src "http://racket-lang.org/img/racket-logo.svg"]] The ◊link["http://racket-lang.org/"]{Racket} team has spent over thirty years developing and refining a coherent intellectual tradition for studying and building programming languages. ◊strong{Racket School will introduce you to Racket's framework for language-oriented programming,} as spelled out in this recent ◊link[cacm]{cover article in the ◊strong{Communications of the ACM}}.
+◊link["http://racket-lang.org/" ◊img[#:style "float:left;width:5rem;padding-right:0.5rem" #:src "http://racket-lang.org/img/racket-logo.svg"]] The ◊link["http://racket-lang.org/"]{Racket} The Racket team has spent over thirty years developing and refining language-oriented programming (LOP), an approach to software development through the lenses of programming languages and especially the use of domain-specifici languages (DSLs).  Racket School will introduce you to Racket’s framework for language-oriented programming, as spelled out in this recent ◊link[cacm]{cover article in the ◊strong{Communications of the ACM}}. 
 
-This year, Racket School is divided into two tracks, offering two approaches to learning language-oriented programming in Racket.
+This year, Racket School is divided into two tracks, using two different pedagogical approaches. 
 
 For the first time, Racket School will be immediately followed by ◊link["https://con.racket-lang.org"]{RacketCon}, the annual Racket conference, on July 13 & 14. ◊strong{All Racket School tickets include admission to RacketCon.} We hope you'll stay for both events!
 
@@ -35,23 +35,21 @@ For the first time, Racket School will be immediately followed by ◊link["https
 
 A five-day program that will run July 8–12 (Monday–Friday). 
 
-It will be taught by ◊link["http://www.ccs.neu.edu/home/stchang/"]{Stephen Chang}, ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}, ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}, ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}, and ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}.
+It will be taught by ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}, ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}, ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}, and ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}.
 
 This track will cover:
 
 ◊ul[
 
-◊li{the spectrum of programming languages;}
+◊li{the spectrum of DSLs within a programming language;}
 
-◊li{modules and syntax, or languages as libraries;}
+◊li{the Racket tools for creating DSLs;}
 
-◊li{DrRacket's support for language-oriented programming;}
+◊li{the process of creating these various DSLs with Racket;}
 
-◊li{a domain-specific language for adding types to languages;}
+◊li{a meta-DSL for creating typed embedded DSLs;}
 
-◊li{tools and techniques for implementing notational conveniences; and}
-
-◊li{research challenges in language-oriented programming.}
+◊li{the research challenges in language-oriented programming.}
 
 ]
 
@@ -59,15 +57,25 @@ This track is good for:
 
 ◊ul[
 
-◊li{current PhD students who want training in a systematic approach to language creation,}
+◊li{academic researchers at all levels who wish to understand LOP research,}
 
-◊li{post-docs already versed in other DSL approaches who wish to study the alternative Racket philosophy,} 
+◊li{professionals who wish to learn in depth how to rapidly build DSLs,} 
 
-◊li{senior undergraduates and master's students who wish to prepare themselves for a PhD program,}
+◊li{students who wish to explore a potential area of research for a PhD, and}
 
-◊li{industrial developers who are looking to broaden and deepen their toolkit, and}
+◊li{faculty at all levels who wish to explore an approach to teaching LOP.}
 
-◊li{any computing professionals who want a preview of research results that will impact computing in coming years.}
+]
+
+
+◊em{Prerequisites:}
+
+◊ul[
+
+◊li{Course-based or self-directed Racket programming experience beyond
+ ◊link["https://htpd.org/"]{How to Design Programs} and
+ ◊link["http://realmofracket.com"]{Realm of Racket} is needed.} 
+
 ]
 
 
