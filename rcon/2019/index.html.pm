@@ -78,7 +78,7 @@ To be announced soon!
 ◊(define (conlink year) 
   (link (format "con.racket-lang.org/~a" year) year))
 
-◊inline-list['con]{
+◊inline-list['div]{
 ◊conlink{2018}
 ◊conlink{2017}
 ◊conlink{2016}

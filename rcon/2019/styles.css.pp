@@ -197,9 +197,15 @@ a:hover span.title {
   font-size: 1rem;
 }
 
-con + con:before {
-  content: "·";
-  padding: 0.5rem;
+.conlist {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  -webkt-flex-wrap: wrap;
+}
+
+.conlist div {
+  padding: 0.4rem;
 }
 
 

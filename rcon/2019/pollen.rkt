@@ -127,7 +127,7 @@
 
 (define (inline-list tag . xs-in)
   (define xs (filter-split xs-in whitespace?))
-  `(div ,@(map (λ(s) `(,tag ,@s)) xs)))
+  `(div ((class "conlist")) ,@(map (λ(s) `(,tag ,@s)) xs)))
 
 
 (define (link url-in . xs-in)
