@@ -98,7 +98,6 @@ body {
   max-width:◊|max-viewport-width|px;
   min-height: 2000px;
   -webkit-font-smoothing: subpixel-antialiased; /* corrects safari rendering */
-  font-feature-settings: 'kern' 1, 'liga' 1;
   background: ◊|dark-gray|;
   line-height: 1.6;
 }
