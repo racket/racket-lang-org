@@ -5,6 +5,9 @@
 /* (c) Copyright 1989-1992, Bitstream Inc., Cambridge, MA. You are hereby granted permission under all Bitstream propriety rights to use, copy, modify, sublicense, sell, and redistribute the 4 Bitstream Charter (r) Type 1 outline fonts and the 4 Courier Type 1 outline fonts for any purpose and without restriction; provided, that this notice is left intact on all copies of such fonts and that Bitstream's trademark is acknowledged as shown below on all unmodified copies of the 4 Charter Type 1 fonts. BITSTREAM CHARTER is a registered trademark of Bitstream Inc. */
 
 ◊; these charter woffs are from manual-fonts.css in the Racket docs
+◊; don't use font-feature-settings CSS tag with these fonts,
+◊; because they don't have the tables and get garbled
+◊; ok to use text-rendering: optimizeLegibility;
 ◊(ffd "charter-web" "fonts/charter_regular.woff" #:base64 #t)
 ◊(ffd "charter-web" "fonts/charter_bold.woff" #:font-weight "bold" #:base64 #t)
 ◊(ffd "charter-web" "fonts/charter_italic.woff" #:font-style "italic" #:base64 #t)
@@ -98,6 +101,7 @@ body {
   max-width:◊|max-viewport-width|px;
   min-height: 2000px;
   -webkit-font-smoothing: subpixel-antialiased; /* corrects safari rendering */
+  text-rendering: optimizeLegibility;
   background: ◊|dark-gray|;
   line-height: 1.6;
 }
