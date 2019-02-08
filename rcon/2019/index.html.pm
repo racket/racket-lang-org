@@ -87,3 +87,9 @@ To be announced soon!
 ◊conlink{2013}
 ◊conlink{2012}
 ◊conlink{2011}}
+
+◊gap[1]
+
+◊em{My dominant feeling at RacketCon was: “wait hold on are you trying to tell me you people been here doing this the whole time?”} 
+
+Satisfied Customer, RacketCon 2018

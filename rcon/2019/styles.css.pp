@@ -75,6 +75,10 @@ a:hover, .buy-button:hover {
 
 }
 
+em {
+  font-style: italic;
+}
+
 strong {
   font-weight: bolder;
 }
