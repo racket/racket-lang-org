@@ -22,7 +22,6 @@
                "frog"
                "rackunit-lib"
                "pict-lib"
-               "xenomorph"
                "draw-lib"
                ("s3-sync" #:version "1.10")))
 

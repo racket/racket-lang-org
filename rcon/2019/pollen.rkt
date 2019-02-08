@@ -1,6 +1,6 @@
 #lang pollen/mode racket
 (require (for-syntax racket/syntax) racket/runtime-path
-         racket/draw (prefix-in x: xenomorph) json txexpr sugar/list pollen/decode racket/string)
+         racket/draw json txexpr sugar/list pollen/decode racket/string)
 (provide (all-defined-out) xexpr->html)
 
 (define-syntax (ffd/rp stx)
