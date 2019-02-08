@@ -1,0 +1,38 @@
+#! /bin/sh
+#|
+exec racket -t "$0" ${1+"$@"}
+|#
+
+#lang racket
+
+(define prelude 
+"
+#lang scribble/manual 
+
+@(require (for-label racket))
+
+@title{Plotting}
+
+@codeblock0{
+")
+
+(define postlude "}")
+
+(with-output-to-file "general-purpose-2.scrbl"
+  #:exists 'replace
+  (lambda ()
+    (displayln prelude)
+    (for ((l (file->lines "general-purpose-2.rkt")))
+      (displayln l))
+    (displayln postlude)))
+
+(define command
+  #<< --here--
+scribble --html ++xref-in setup/xref load-collections-xref\
+ --redirect-main "http://docs.plt-scheme.org/"\
+ --dest general-purpose//\
+ general-purpose-2.scrbl
+ --here--
+  )
+
+(system command)

@@ -19,6 +19,7 @@
 ◊h2{◊xlink{Schedule}}
 ◊h2{◊xlink{Accommodation}}
 ◊h2{◊xlink{Tickets}}
+◊h2{◊xlink{Housing}}
 ◊h2{◊xlink["previous"]{Previous Racket Schools}}
 
 ◊h3{◊xtarget["overview"]{Domain-Specific Languages from Racket}}
@@ -57,11 +58,11 @@ This track will be taught by ◊link["https://www.ccs.neu.edu/home/matthias/"]{M
 
 ◊ul[
 
-◊li{academic researchers at all levels who wish to understand LOP research,}
+◊li{academic researchers who wish to understand LOP research,}
 
 ◊li{professionals who wish to learn in depth how to rapidly build DSLs,} 
 
-◊li{students who wish to explore a potential area of research for a PhD, and}
+◊li{students who wish to explore a potential area of research for a PhD,}
 
 ◊li{faculty at all levels who wish to explore an approach to teaching LOP.}
 
@@ -197,6 +198,11 @@ border-radius: 0.5rem;
 ◊strong{Academic} tickets are available to participants from academic institutions that need a subsidy. Tuition and travel reimbursement available for qualifying students. ◊link["https://goo.gl/forms/xgOx51hXvVYYIYXf2"]{Click here to apply}.
 
 Eventbrite fees are added during checkout.
+
+◊h3{◊xtarget{Housing}}
+
+Subsidized housing is available in the University of Utah campus dorms. The cost is $40/night. ◊link["https://forms.gle/spaMYg1LL4CK3J8p9"]{Register here.}
+
 
 
 ◊h3{◊xtarget["previous"]{Previous Racket Schools}}

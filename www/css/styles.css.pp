@@ -1,8 +1,7 @@
 #lang pollen
-◊(require css-tools)
+◊(require css-tools racket-lang-org/www/color)
 ◊(define debug-width 0)
-◊(define max-width 1000)
-◊(define link-color "rgb(6, 121, 167)")
+◊(define max-width 1050)
 
 ◊(make-media-query 16 8 max-width 60 .5)   
 
@@ -24,6 +23,7 @@ body {
   padding-top: 1rem;
   max-width: ◊|max-width|px;
   margin: auto;
+  background-color: ◊|site-background-color|;
 }
 
 p {
@@ -57,6 +57,82 @@ top-section {
   margin-bottom: 0.5rem;
 }
 
+.selected-tab {
+  ◊|selected-tab-css|
+}
+.selected-tab:hover {
+  ◊|selected-tab-hover-css|
+}
+.unselected-tab {
+  ◊|unselected-tab-css|
+}
+.unselected-tab:hover {
+  ◊|unselected-tab-hover-css|
+}
+
+.frontpage-card {
+  box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)
+}
+
+.frontpage-button {
+  border:none;
+  display:inline-block;
+  padding:8px 16px;
+  vertical-align:middle;
+  overflow:hidden;
+  text-decoration:none;
+  text-align:center;
+  cursor:pointer;
+  white-space:nowrap;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+.frontpage-button:disabled{cursor:not-allowed;opacity:0.3}
+
+.frontpage-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.frontpage-bar-heading {
+  cursor:pointer;
+  font-size:130%;
+  color:◊|tab-heading-text-color|;
+  white-space:nowrap;
+  text-align:center;
+}
+
+.frontpage-bar-heading:hover {
+  color: ◊|tab-heading-text-hover-color|;
+}
+.frontpage-bar-item {
+    font-family: "cooper-hewitt";
+    font-size: 100%;
+    text-align: center;
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
+}
+.frontpage-bar-flex2 {
+    flex: 2;
+}
+.frontpage-bar-flex3 {
+    flex: 3;
+}
+.frontpage-bar-flex4 {
+    flex: 4;
+}
+.frontpage-bar-flex5 {
+    flex: 5;
+}
+.frontpage-bar-flex6 {
+    flex: 6;
+}
+
 .expander {
     display:flex;
     flex-direction: column;
@@ -71,10 +147,9 @@ top-section {
 }
 
 .lang {
-    ~height: 5.5rem;
-    height: 10rem;
+    ~height: 11.5rem;
+    height: 21rem;
 }
-
 
 .expander > div {
     width: 100%;
@@ -116,6 +191,11 @@ top-section {
   font-size: 80%;
   margin-left: 1rem;
 }
+
+.mitem {
+  font-size: 50%;
+}
+
 
 .lang:hover .click-here {
   opacity: 0.8;
@@ -175,37 +255,43 @@ ul.doclinks li {
 
 
 div#f1 {
-    background: white url("../img/illos/batteries.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f2 {
-    background: white url("../img/illos/oss.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f3 {
-    background: white url("../img/illos/drracket.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f4 {
-    background: white url("../img/illos/scheme.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f5 {
-    background: white url("../img/illos/lang.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f6 {
-    background: white url("../img/illos/platform.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -234,7 +320,7 @@ a.top-button {
 
 .top-button#download{
   background: ◊|link-color|;
-  color: #fafaff;  
+  color: ◊|download-button-text-color|;  
 }
 
 section#samples {
@@ -274,7 +360,7 @@ section#book {
 
 section {
   padding-top: 0.5rem;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid ◊|tab-heading-color|;
 }
 
 section-title, section-content {
@@ -300,7 +386,7 @@ section-content {
  justify-content: space-between;
  flex-wrap: wrap;
  width: 100%;
-  color:gray;
+  color:◊|plain-text-color|;
   font-size: 90%;
 }
 
@@ -353,6 +439,10 @@ pre {
   margin-bottom: 1em;
   font-size: 85%;
   line-height: 1.65;
+}
+
+.narrow {
+  width: 400px;
 }
 
 pre a {
@@ -412,6 +502,15 @@ a, a:hover {
 }
 
 
+.langwww {
+    ~height: 11.5rem;
+    height: 12rem;
+    padding: 0.5rem;
+    padding-top: 0;
+    padding-bottom: 0.25rem;
+    opacity: .5;
+}
+
 @media all and (max-width:650px) {
 @media all and (max-width:650px){html {font-size: 16px;}}
 @media all and (max-width:590.0px){html {font-size: 15px;}}
@@ -438,5 +537,7 @@ a, a:hover {
   .active_expander > .inner {opacity: 1;}
   .expander, .expander:hover, .active_expander:hover {border-color: none;}
   .active_expander {border-color: gray;}
+
+}
 
 }

@@ -1,17 +1,8 @@
 #lang pollen
 
-◊top-section{
-◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{◊link["index.html"]{◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket} ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
+◊(require (only-in "index.html.pm" top))
 
-◊div{
-◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
-
-◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
-
-◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
-}
-}
-
+◊(top)
 
 ◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{In June 2018, Racket ◊link["https://sfconservancy.org/news/2018/jun/12/racketjoins/"]{became a member} of ◊link["https://sfconservancy.org/"]{Software Freedom Conservancy}, a nonprofit organization that promotes open-source software. 
 }

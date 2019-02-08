@@ -1,17 +1,8 @@
 #lang pollen
 
-◊top-section{
-◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{◊link["index.html"]{◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket} ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
+◊(require (only-in "index.html.pm" top))
 
-◊div{
-◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
-
-◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
-
-◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
-}
-}
-
+◊(top)
 
 ◊section{
 ◊div{Racket World Map}
@@ -52,7 +43,7 @@
 
 ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}
 
-◊link["http://www.cs.wpi.edu/~kfisler/"]{Kathi Fisler}
+◊link["https://cs.brown.edu/~kfisler/"]{Kathi Fisler}
 
 ◊link["http://www.deinprogramm.de/sperber/"]{Michael Sperber}
 
@@ -135,9 +126,6 @@ Lowell MA
 ◊link["http://www.brinckerhoff.org/"]{California Polytechnic 
 State University}
 San Luis Obispo CA
-
-◊link["https://web.cs.wpi.edu/~kfisler/"]{Worcester Polytechnic Institute}
-Worcester MA
 
 ◊link["http://homes.soic.indiana.edu/samth/"]{Indiana University}
 Bloomington IN

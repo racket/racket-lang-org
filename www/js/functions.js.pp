@@ -15,3 +15,4 @@ function cancel_bubble(e) {
     evt.cancelBubble = true;
   }
 }
+
