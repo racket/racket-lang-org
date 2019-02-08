@@ -23,7 +23,7 @@
 
 ◊h3{◊xtarget["overview"]{Overview}}
 
-◊link["https://racket-lang.org/" ◊img[#:style "float:left;width:5rem;padding-right:0.5rem" #:src "https://racket-lang.org/img/racket-logo.svg"]] The ◊link["https://racket-lang.org/"]{Racket} The Racket team has spent over thirty years developing and refining language-oriented programming (LOP), an approach to software development through the lenses of programming languages and especially the use of domain-specifici languages (DSLs).  Racket School will introduce you to Racket’s framework for language-oriented programming, as spelled out in this recent ◊link[cacm]{cover article in the ◊strong{Communications of the ACM}}. 
+◊link["http://racket-lang.org/" ◊img[#:style "float:left;width:5rem;padding-right:0.5rem" #:src "http://racket-lang.org/img/racket-logo.svg"]] The ◊link["http://racket-lang.org/"]{Racket} team has spent over thirty years developing and refining language-oriented programming (LOP), an approach to software development through the lenses of programming languages and especially the use of domain-specific languages (DSLs).  Racket School will introduce you to Racket’s framework for language-oriented programming, as spelled out in this recent ◊link[cacm]{cover article in the ◊strong{Communications of the ACM}}. 
 
 This year, Racket School is divided into two tracks, using two different pedagogical approaches. 
 
