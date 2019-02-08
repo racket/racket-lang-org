@@ -1,0 +1,8 @@
+- the spacing at the top of the tabs is inconsistent
+
+- thing look bad on mobile phones
+
+- when the webpage gets smaller, the images in the lop tabs don't
+  shrink but the program text does
+
+- figure out some better colorschemes?

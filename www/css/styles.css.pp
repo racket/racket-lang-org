@@ -1,8 +1,7 @@
 #lang pollen
-◊(require css-tools)
+◊(require css-tools racket-lang-org/www/color)
 ◊(define debug-width 0)
-◊(define max-width 1000)
-◊(define link-color "rgb(6, 121, 167)")
+◊(define max-width 1050)
 
 ◊(make-media-query 16 8 max-width 60 .5)   
 
@@ -24,6 +23,7 @@ body {
   padding-top: 1rem;
   max-width: ◊|max-width|px;
   margin: auto;
+  background-color: ◊|site-background-color|;
 }
 
 p {
@@ -47,7 +47,6 @@ li > p:last-child {
 section, top-section {
   width: 100%;
   display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
   align-items: baseline;
 }
@@ -55,6 +54,87 @@ section, top-section {
 top-section {
   justify-content: space-between;
   margin-bottom: 0.5rem;
+}
+
+section {
+ flex-direction: column;
+}
+
+/* these two are to get the button layout at
+   the top of the page to look reasonable */
+@media not all and (max-width:460px) {
+ top-section {
+   flex-direction: row;
+ }
+}
+
+@media all and (max-width:460px) {
+ top-section {
+   flex-direction: column;
+ }
+}
+
+
+
+.selected-tab {
+  ◊|selected-tab-css|
+}
+.selected-tab:hover {
+  ◊|selected-tab-hover-css|
+}
+.unselected-tab {
+  ◊|unselected-tab-css|
+}
+.unselected-tab:hover {
+  ◊|unselected-tab-hover-css|
+}
+
+.frontpage-card {
+  box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)
+}
+
+.frontpage-button {
+  border:none;
+  display:inline-block;
+  padding:8px 16px;
+  vertical-align:middle;
+  overflow:hidden;
+  text-decoration:none;
+  text-align:center;
+  cursor:pointer;
+  white-space:nowrap;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+.frontpage-button:disabled{cursor:not-allowed;opacity:0.3}
+
+.frontpage-bar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.frontpage-bar-heading {
+  cursor:pointer;
+  font-size:130%;
+  color:◊|tab-heading-text-color|;
+  text-align:center;
+}
+
+.frontpage-bar-heading:hover {
+  color: ◊|tab-heading-text-hover-color|;
+}
+.frontpage-bar-item {
+    font-family: "cooper-hewitt";
+    font-size: 100%;
+    text-align: center;
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
+    flex: auto;
 }
 
 .expander {
@@ -71,10 +151,9 @@ top-section {
 }
 
 .lang {
-    ~height: 5.5rem;
-    height: 10rem;
+    ~height: 11.5rem;
+    height: 21rem;
 }
-
 
 .expander > div {
     width: 100%;
@@ -116,6 +195,11 @@ top-section {
   font-size: 80%;
   margin-left: 1rem;
 }
+
+.mitem {
+  font-size: 50%;
+}
+
 
 .lang:hover .click-here {
   opacity: 0.8;
@@ -175,37 +259,43 @@ ul.doclinks li {
 
 
 div#f1 {
-    background: white url("../img/illos/batteries.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f2 {
-    background: white url("../img/illos/oss.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f3 {
-    background: white url("../img/illos/drracket.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f4 {
-    background: white url("../img/illos/scheme.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f5 {
-    background: white url("../img/illos/lang.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f6 {
-    background: white url("../img/illos/platform.svg");
+    height: 14rem;
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -234,7 +324,7 @@ a.top-button {
 
 .top-button#download{
   background: ◊|link-color|;
-  color: #fafaff;  
+  color: ◊|download-button-text-color|;  
 }
 
 section#samples {
@@ -274,7 +364,7 @@ section#book {
 
 section {
   padding-top: 0.5rem;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid ◊|tab-heading-color|;
 }
 
 section-title, section-content {
@@ -300,7 +390,7 @@ section-content {
  justify-content: space-between;
  flex-wrap: wrap;
  width: 100%;
-  color:gray;
+  color:◊|plain-text-color|;
   font-size: 90%;
 }
 
@@ -353,6 +443,10 @@ pre {
   margin-bottom: 1em;
   font-size: 85%;
   line-height: 1.65;
+}
+
+.narrow {
+  width: 400px;
 }
 
 pre a {
@@ -412,6 +506,19 @@ a, a:hover {
 }
 
 
+.langwww {
+    ~height: 11.5rem;
+    height: 12rem;
+    padding: 0.5rem;
+    padding-top: 0;
+    padding-bottom: 0.25rem;
+    opacity: .5;
+}
+
+.block-with-1em-margin {
+    margin: 1em;
+}
+
 @media all and (max-width:650px) {
 @media all and (max-width:650px){html {font-size: 16px;}}
 @media all and (max-width:590.0px){html {font-size: 15px;}}
@@ -427,6 +534,10 @@ a, a:hover {
   .lang.active_expander .click-here { opacity: 0;}
 }
 
+.contributormap {
+  justify-content: space-around; align-items: center;
+}
+
 /* smartphones only */
 @media all and (max-width:460px) { 
 /* set max size for feature box to keep them all the same size */
@@ -438,5 +549,83 @@ a, a:hover {
   .active_expander > .inner {opacity: 1;}
   .expander, .expander:hover, .active_expander:hover {border-color: none;}
   .active_expander {border-color: gray;}
+  .selected-block { display: block; }
+  .unselected-block { display: block; }
+  .center-if-smartphone{ text-align:center; }
+  .disappear-if-smartphone { display:none; }
+  .scale-if-smartphone { width: 100% }
+  .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: column; }
+  .smartphone-subheading { font-size: 125%; font-weight: bolder; }
+  .top-section { flex-direction: column; }
+  .contributormap {
+     margin: 0 auto;
+     width:300px;
+     height:320px;
+    }
+  img.lop-image-rc8 {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height:auto;
+  }
+  img.lop-image {
+    max-width: 100%;
+    height:auto;
+  }
+  .margin-above-if-smartphone {
+    margin: 6px 0 0 0;
+  }
+  .top-button {
+    font-size: 60%;
+  }
+  .translations-code-example-container { display:block; align-items: center; }
+  .big-logo {
+    margin-left: auto; margin-right: auto;
+    margin-top: 20px; margin-bottom: 30px;
+    width: 275px; height: 275px;
+  }
+}
+
+/* non smartphones */
+@media not all and (max-width:460px) {
+  /* this causes the non-initial menu content to be hidden
+     in regular mode, visible in smartphone mode */
+  .full-mode-menu-content { display: none; }
+  .selected-block { display: block; }
+  .unselected-block { display: none; }
+  .frontpage-bar-nowrap-unless-smartphone {
+     white-space:nowrap;
+  }
+  .smartphone-subheading { display:none; }
+  .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: row; }
+  .contributormap {
+    margin: 0 auto;
+    width:640px;
+    height:480px;
+  }
+  img.lop-image-rc8 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px;
+    height: 318px;
+  }
+  .translations-code-example-container {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: row;
+  }
+  .big-logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 50px; margin-top: 20px; width: 275px; height: 275px;
+  }
+  .code-to-right-of-big-logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
 
 }
