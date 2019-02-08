@@ -197,6 +197,11 @@ a:hover span.title {
   font-size: 1rem;
 }
 
+con + con:before {
+  content: "·";
+  padding: 0.5rem;
+}
+
 
 .opacity-control {
   padding: 0.5rem;

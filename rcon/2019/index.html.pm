@@ -70,3 +70,20 @@ Eventbrite fees are added during checkout.
 ◊h3{◊xtarget["speakers"]{◊string->svg[#:width heading-width]{>(speakers)}}}
 
 To be announced soon!
+
+◊gap[1]
+
+◊h3{◊xtarget["speakers"]{◊string->svg[#:width (* heading-width 1.5)]{>(previous RacketCons)}}}
+
+◊(define (conlink year) 
+  (link (format "con.racket-lang.org/~a" year) year))
+
+◊inline-list['con]{
+◊conlink{2018}
+◊conlink{2017}
+◊conlink{2016}
+◊conlink{2015}
+◊conlink{2014}
+◊conlink{2013}
+◊conlink{2012}
+◊conlink{2011}}
