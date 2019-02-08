@@ -42,6 +42,6 @@ function toggle_div(id) {
 <body onLoad="">
 <div id="top-images"></div>
 ◊(->html ◊h1{Racket School 2019})
-◊(->html ◊h1{8–12 July · Salt Lake City})
+◊(->html ◊h1{8–12 July · Salt Lake City})
 ◊(->html #:tag 'div #:attrs '((id "doc")) doc)
 </body>
