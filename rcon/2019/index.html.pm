@@ -76,7 +76,7 @@ To be announced soon!
 ◊h3{◊xtarget["speakers"]{◊string->svg[#:width (* heading-width 1.5)]{>(previous RacketCons)}}}
 
 ◊(define (conlink year) 
-  (link (format "con.racket-lang.org/~a" year) year))
+  (link (format "https://con.racket-lang.org/~a" year) year))
 
 ◊inline-list['div]{
 ◊conlink{2018}
