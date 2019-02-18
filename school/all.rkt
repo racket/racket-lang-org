@@ -26,7 +26,7 @@
 ;; (these refer to remote paths)
 (void
  (symlink #:site school-site
-          "index.html"
+          "../index.html"
           "2019/index.html"))
 
 (define-runtime-path current-school-index "2019/index.html")

@@ -46,7 +46,7 @@
 ;; (these refer to remote paths)
 (void
  (symlink #:site con-site
-          "index.html"
+          "../index.html"
           "2019/index.html"))
 
 (define-runtime-path current-con-index "2019/index.html")
