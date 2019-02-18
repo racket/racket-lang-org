@@ -60,7 +60,7 @@ $249 academic}}
 
 ◊strong{Patron} tickets cover our full cost of offering these events, plus a little extra to help support Racket development at large. Racket is part of the ◊link["https://sfconservancy.org/"]{Software Freedom Conservancy}.
 
-◊strong{Academic} tickets are available to participants from academic institutions that need a subsidy.
+◊strong{Academic} tickets are available to participants from academic institutions that need a subsidy. If this subsidized rate is still not low enough, we are offering a limited number of scholarships. Please ◊link["https://goo.gl/forms/SIxIJADVZVxzq1nf2"]{apply here}.
 
 Eventbrite fees are added during checkout.
 
