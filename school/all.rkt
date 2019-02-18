@@ -22,12 +22,12 @@
 (pollen-rebuild! 2019-dir)
 (copy-school-site! 2019-dir 2019 #:current #t)
 
-;; Redirect root index.html to 2019/index.html
-;; (used only when placeholder page exists)
-#;(void
+;; On web server, redirect 2019/index.html to root index.html
+;; (these refer to remote paths)
+(void
  (symlink #:site school-site
-          "2019/index.html"
-          "index.html"))
+          "index.html"
+          "2019/index.html"))
 
 (define-runtime-path current-school-index "2019/index.html")
 (provide index)

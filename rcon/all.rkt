@@ -42,6 +42,13 @@
 (pollen-rebuild! 2019-dir)
 (copy-con-site! 2019-dir 2019 #:current #t)
 
+;; On web server, redirect 2019/index.html to root index.html
+;; (these refer to remote paths)
+(void
+ (symlink #:site con-site
+          "index.html"
+          "2019/index.html"))
+
 (define-runtime-path current-con-index "2019/index.html")
 (define index
   (page* #:site con-site
