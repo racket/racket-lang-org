@@ -47,6 +47,8 @@
   (dynamic-require 'racket-lang-org/all #f)
   (dynamic-require '(submod racket-lang-org/all main) #f))
 
+(printf "Files so far written to ~a\n" tmp-dir)
+
 (define (upload dir site
                 #:shallow? [shallow? #f]
                 #:link-mode [link-mode 'redirect])
