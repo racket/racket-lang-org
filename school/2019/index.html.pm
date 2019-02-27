@@ -163,11 +163,11 @@ See the ◊link["https://school.racket-lang.org/2019/plan/"]{detailed schedule h
 ◊schedule[
 ◊row{◊at{◊xlink["brw"]{Beautiful Racket workshop} + ◊link["https://con.racket-lang.org"]{RacketCon}} ◊desc{$299 base 
 $499 patron
-$149 academic}}
+$149 academic (students can ◊link["https://goo.gl/forms/xgOx51hXvVYYIYXf2"]{apply for financial aid})}}
 
 ◊row{◊at{◊xlink["htdl"]{How to Design Languages} + ◊link["https://con.racket-lang.org"]{RacketCon}} ◊desc{$499 base
 $699 patron
-$249 academic}}
+$249 academic (students can ◊link["https://goo.gl/forms/xgOx51hXvVYYIYXf2"]{apply for financial aid})}}
 
 ]
 
