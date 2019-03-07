@@ -48,7 +48,7 @@ To upload:
 
 * You'll need the "s3-sync" Racket package installed.
 
-* Run the "sync.rkt" script: racket -l racket-lang-org/sync
+* Run the "sync.rkt" script: racket -l- racket-lang-org/sync
 
 * To build without uploading, use `--save-temps --dry-run`. If you
   don't have AWS credentials, the pages will still build, and look for
