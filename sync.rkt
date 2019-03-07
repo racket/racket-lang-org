@@ -7,6 +7,10 @@
 (require "download/data.rkt"
          version/utils)
 
+
+(displayln "hello world")
+
+(define render-locally? #false)
 (define dry-run? #f)
 (define check-metadata? #f)
 (define save-temps? #f)
@@ -14,18 +18,29 @@
 
 (command-line
  #:once-each
- [("--dry-run") "Don't actually upload"
-  (printf "Dry-run mode enabled\n")
-  (set! dry-run? #t)]
- [("--check-metadata") "Check metadata of otherwise unmodified files"
+ [("--check-metadata")
+  "Check metadata of otherwise unmodified files"
   (set! check-metadata? #t)]
- [("-j" "--jobs") n "Download/upload with <n> parallel jobs"
+ [("-j" "--jobs")
+  n
+  "Download/upload with <n> parallel jobs"
   (set! jobs (string->number n))
   (unless (exact-positive-integer? jobs)
     (raise-user-error 's3-sync "bad number for --jobs: ~s" n))]
- [("--save-temps") "Preserve generated files"
+ [("--save-temps")
+  "Preserve generated files"
   (printf "Saving generated files\n")
-  (set! save-temps? #t)])
+  (set! save-temps? #t)]
+ #:once-any
+ [("--dry-run")
+  "Don't actually upload"
+  (printf "Dry-run mode enabled\n")
+  (set! dry-run? #t)]
+ [("--render-locally") new-dir
+  "Render but don't dry-run the uploads"
+  (printf "Render-locally mode enabled, move files to ~a\n" new-dir)
+  (set! render-locally? new-dir)
+  (set! dry-run? #true)])
 
 (define (step . s)
   (displayln (make-string 72 #\=))
@@ -63,14 +78,16 @@
                #:check-metadata? check-metadata?
                #:jobs jobs
                #:log displayln))
-(upload "www" "racket-lang.org")
-(upload "www" "www.racket-lang.org")
-(upload "pre" "pre.racket-lang.org")
-(upload "con" "con.racket-lang.org" #:link-mode 'redirects)
-(upload "school" "school.racket-lang.org" #:link-mode 'redirects)
-(upload "blog" "blog.racket-lang.org")
-(upload "drracket" "www.drracket.org")
-(upload "download" "download.racket-lang.org" #:shallow? #t)
+
+(unless render-locally?
+  (upload "www" "racket-lang.org")
+  (upload "www" "www.racket-lang.org")
+  (upload "pre" "pre.racket-lang.org")
+  (upload "con" "con.racket-lang.org" #:link-mode 'redirects)
+  (upload "school" "school.racket-lang.org" #:link-mode 'redirects)
+  (upload "blog" "blog.racket-lang.org")
+  (upload "drracket" "www.drracket.org")
+  (upload "download" "download.racket-lang.org" #:shallow? #t))
 
 ;; ----------------------------------------
 
@@ -80,13 +97,14 @@
   (string->url (mirror-url (car mirrors))))
 
 (define download-mirror-host (url-host download-mirror-url))
-(define download-mirror-path (let ([l (reverse 
-                                       ;; Strip "installers/" from path:
-                                       (cddr (reverse (url-path download-mirror-url))))])
-                               (if (null? l)
-                                   ""
-                                   (string-append (url->string (url #f #f #f #f #f l null #f))
-                                                  "/"))))
+(define download-mirror-path
+  (let ([l (reverse 
+            ;; Strip "installers/" from path:
+            (cddr (reverse (url-path download-mirror-url))))])
+    (if (null? l)
+        ""
+        (string-append (url->string (url #f #f #f #f #f l null #f))
+                       "/"))))
 
 (define routing-rules
   (cons
@@ -113,7 +131,12 @@
 (current-directory orig-dir)
 
 (if save-temps?
-    (printf "Files saved in ~a\n" tmp-dir)
+    (if render-locally?
+        (begin
+          (when (directory-exists? render-locally?)
+            (delete-directory/files render-locally?))
+          (rename-file-or-directory (build-path tmp-dir "generated") render-locally? #t))
+        (printf "Files saved in ~a\n" tmp-dir))
     (delete-directory/files tmp-dir))
 
 (printf "\n\nIf you updated any CSS file, please purge it from the Cloudflare cache.\n\n")

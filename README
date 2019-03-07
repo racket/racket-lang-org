@@ -50,7 +50,7 @@ To upload:
 
 * Run the "sync.rkt" script: racket -l- racket-lang-org/sync
 
-* To build without uploading, use `--save-temps --dry-run`. If you
+* To build without uploading, use `--save-temps --render-locally <directory-name>`. If you
   don't have AWS credentials, the pages will still build, and look for
   "Files so far written to" for the temporary directory that contains
   the rendered pages.
