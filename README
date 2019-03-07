@@ -23,7 +23,7 @@ To build:
 
  [See "upload" and `--dry-run` for an alternative]
 
-* Run "./all.rkt -o <dir>" to build all pages to subdirectories of
+* Run "racket all.rkt -o <dir>" to build all pages to subdirectories of
   <dir>. As a safety measure, the target directory must not overlap
   with any installed directory. (Use `-f' in scripts to avoid
   answering the question about deleting existing files.)
