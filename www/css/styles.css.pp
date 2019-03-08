@@ -72,7 +72,7 @@ top-section {
 
 .lang {
     ~height: 5.5rem;
-    height: 10rem;
+    height: 15rem;
 }
 
 

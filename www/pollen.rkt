@@ -13,7 +13,10 @@
 (define-tag-function (feature attrs elems)
   (match-define (cons name xs) elems)
   (define expand-attr (and (assq 'expand attrs) "active_expander"))
-  (define new-attrs (list* `(class ,(format "expander feature ~a" (or expand-attr ""))) `(onClick ,(format "handle_expander_click('~a')" (cadr (assq 'id attrs)))) attrs))
+  (define new-attrs 
+    (list* `(class ,(format "expander lang ~a" (or expand-attr "")))
+           `(onClick ,(format "handle_expander_click('~a')" (cadr (assq 'id attrs))))
+           attrs))
   `(div ,new-attrs (div ((class "name")) ,name) (div ((class "inner")) ,@xs)))
 
 (define-tag-function (lang attrs elems)
