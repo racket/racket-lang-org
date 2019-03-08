@@ -7,9 +7,6 @@
 (require "download/data.rkt"
          version/utils)
 
-
-(displayln "hello world")
-
 (define render-locally? #false)
 (define dry-run? #f)
 (define check-metadata? #f)
