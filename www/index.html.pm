@@ -15,11 +15,14 @@
 }
 
 
-◊special-section[#:class "one-column-body-text" #:style "background:lightgray;padding:0.5rem" #:id "pull-quote"]{
-Racket is the ◊link["http://felleisen.org/matthias/manifesto/"]{world's first ecosystem for language-oriented programming}.
-Got a problem? ◊link["https://docs.racket-lang.org/guide/languages.html"]{Make a language} to solve it. 
-Got many problems? Make ◊link["languages.html"]{many languages} and link them together. 
-Got a problem making languages? Use ◊link["https://racket-lang.org"]{Racket}.}
+◊special-section[#:class "one-column-body-text" #:style "background:lightgray;padding:0.4rem" #:id "pull-quote"]{◊div[#:style "font-size:1.0rem"]{Racket is a general-purpose programming language. Got a programming problem? Use Racket. 
+
+More importantly, Racket is a ◊link["http://felleisen.org/matthias/manifesto/"]{programming language for language-oriented programming}.
+Got a real problem? ◊link["https://docs.racket-lang.org/guide/languages.html"]{Make a language} to solve it. 
+Got many real problems? Make ◊link["languages.html"]{many languages} and link them together. 
+Got a problem making languages? Use ◊link["https://racket-lang.org"]{Racket}.
+
+Take a quick look at some ◊link["sample-languages.html"]{sample languages} first.}}
 
 ◊special-section{
 
