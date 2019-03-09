@@ -22,8 +22,8 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 
 ◊(define heading-width 16)
 
-◊;string->svg{keynote speaker}
-◊;string->svg{Niko Matsakis}
+◊string->svg[#:width heading-width]{>(keynote)}
+◊string->svg{Aaron Turon}
 
 ◊gap[2]
 
