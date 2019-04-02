@@ -57,7 +57,6 @@ a:hover {
 
 p, li{
   margin-bottom: 1rem;
-  mix-blend-mode: darken;
 }
 
 li {
