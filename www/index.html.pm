@@ -203,7 +203,7 @@ News
 
 ◊link["https://blog.racket-lang.org/2019/01/racket-v7-2.html"]{Racket version 7.2} is available.
 
-◊link["https://racketfest.com"]{Racketfest}, a new Racket event, is happening in Berlin, 23 March 2019.
+◊link["https://racketfest.com"]{Racketfest}, a new Racket event, took place in Berlin, 23 March 2019.
 
 ◊link["https://school.racket-lang.org"]{Racket School 2019} and ◊link["https://con.racket-lang.org"]{ninth RacketCon} will happen in Salt Lake City in July 2019.
 
@@ -262,10 +262,10 @@ A principled approach to programming.
 
 
 ◊link["http://programbydesign.org/"]{Program by Design}
-A workshop to train teachers using ◊link["http://htdp.org/" #:style "color:gray"]{How to Design Programs} in the classroom
+A workshop to train teachers using ◊link["http://htdp.org/" #:style "color:gray"]{How to Design Programs} in the classroom.
 
 ◊link["http://www.bootstrapworld.org/"]{Bootstrap}
-A curriculum for middle-school students
+A curriculum for middle-school students.
 
 }
 
