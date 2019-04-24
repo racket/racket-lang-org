@@ -57,7 +57,7 @@ font-family:plex-mono;
 cursor:pointer;
 }
 
-a, .buy-button {
+a, .buy-button, .speaker .title {
   font-family: plex-mono;
   font-style: italic;
    font-feature-settings: "ss01", "ss02"; /* two-story a, g */
@@ -101,7 +101,7 @@ strong {
 .logo {
     text-align: center;
     margin: 2rem;
-}s
+}
 
 div.svg {
   margin-top: 2rem;
@@ -173,14 +173,6 @@ h2 + p {
   line-height: 1.4;
 }
 
-span.title {
-  border-bottom: 0.08rem solid magenta;
-}
-
-a:hover span.title {
-    border-bottom-color: cyan;
-   transition: border-bottom-color 0.15s;
-}
 
 .keynote-speaker .speaker-name {
   font-size: 2.5rem;
@@ -195,6 +187,10 @@ a:hover span.title {
   line-height: 1.2;
 }
 
+.bio {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
 
 .time {
   display: none;
@@ -229,14 +225,14 @@ a:hover span.title {
 
 
 
-schedule {
+grid {
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
   -webkit-flex-direction: column;
 }
 
-schedule > row {
+grid > row {
   display: flex;
   display: -webkit-flex;
   flex-direction: row;
@@ -245,13 +241,33 @@ schedule > row {
   padding-bottom: 0.4rem;
 }
 
-schedule > row > at,
-schedule > row > at + desc {
+grid#register > row > at {
   width: 50%;
 }
 
-schedule > row + row {
+grid#schedule > row > at {
+  width: 30%;
+}
+
+grid#schedule > row > at + desc {
+  width: 65%;
+}
+
+grid > row + row {
   border-top: 1px solid #ccc;
+}
+
+.foldable {
+  cursor: pointer;
+}
+
+.speaker-desc {
+  margin-bottom: 1rem;
+}
+
+.speaker .speaker-name,
+.speaker .title {
+  display: block;
 }
 
 .two-col {

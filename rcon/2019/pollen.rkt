@@ -144,8 +144,8 @@
   `(,subhead-tag ((class ,subhead-class)) ,@xs))
 
 
-(define (foldable-subhead . xs)
-  `(,subhead-tag ((class ,(string-join (list subhead-class foldable-class)))) ,@xs))
+(define (foldable-subhead div-name . xs)
+  `(,subhead-tag ((class ,(string-join (list subhead-class foldable-class)))(onClick ,(format "javascript:toggle_div('~a')" div-name))) ,@xs))
 
 
 (define payload-tag 'div)
@@ -154,15 +154,15 @@
 (define (folded title #:open [open #f] . xs)
   (define openness (if open "block" "none"))
   (define div-name (symbol->string (gensym)))
-  `(@
-    ,(foldable-subhead `(a ((href ,(format "javascript:toggle_div('~a')" div-name))) ,title))
+  `(div ((class "speaker-desc"))
+    ,(foldable-subhead div-name title)
     (,payload-tag ((style ,(format "display:~a;" openness))(id ,div-name) (class ,payload-class)) ,@(detect-paragraphs xs #:force? #t))))
 
 (define (folded-open title . xs)
   (apply folded title #:open #t xs))
 
 (define (bio . xs)
-  `(div ((class "bio")) ,@xs))
+  `(div ((class "bio")) ,@(detect-paragraphs xs #:force? #t)))
 
 (define (gap [size 1.5])
   `(div ((style ,(format "height: ~arem" size)))))
