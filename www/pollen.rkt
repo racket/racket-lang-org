@@ -19,6 +19,20 @@
            attrs))
   `(div ,new-attrs (div ((class "name")) ,name) (div ((class "inner")) ,@xs)))
 
+#;(
+◊lang["#lang racket" #:id "lang1"]{
+◊pre{(◊docs{require} ◊link["https://docs.racket-lang.org/teachpack/2htdpimage.html?q=2htdp%2Fimage"]{2htdp/image}) ; draw a picture
+(◊docs{let} sierpinski ([n 8])
+  (◊docs{cond}
+    [(◊docs{zero?} n) (◊docs{triangle} 2 'solid 'red)]
+    [else (◊docs{define} t (sierpinski (- n 1)))
+          (◊docs{freeze} (◊docs{above} t (◊docs{beside} t t)))]))}
+
+The ◊code{2htdp/image} library provides easy-to-use functions for making images.
+
+◊doclink["quick"]{Racket tutorial ◊(begin 'rarr)}}
+)
+
 (define-tag-function (lang attrs elems)
   (define activate #f) ; make #f for real site
   (match-define (cons name xs) elems)

@@ -28,10 +28,10 @@ DISAGREE, WILLING TO DISCUSS
      be -- maybe a new box that's a "quick start" box?
 
    - I don't think the text in the new top box is very helpful. What is a
-   "real problem"? And hopefully, for most people their problems are
-   well-solved in an _existing_ Racket language -- writing a new language
-   is not a first-day Racket program.  The "Got ..." phrasing feels off
-   to me as well.  The slogan on the current home page is more compelling
+     "real problem"? And hopefully, for most people their problems are
+     well-solved in an _existing_ Racket language -- writing a new language
+     is not a first-day Racket program.  The "Got ..." phrasing feels off
+     to me as well.  The slogan on the current home page is more compelling
 
 
 DON'T KNOW HOW TO DO
@@ -42,6 +42,8 @@ DON'T KNOW HOW TO DO
 DON'T UNDERSTAND 
 
    - The new boxes on the front page don't all seem to line up.
+I think I fixed this. 
+
    - I like moving to having the text on the page initially.
    - If we aren't showing them in detail, I don't know that the fractals
      make things better. It mostly seems to make things harder to read
@@ -49,9 +51,8 @@ DON'T UNDERSTAND
 
 DONE, I THINK 
 
-   - If there's now a Donate button on the top line, should that be in
-   the other places on the web page where those three boxes appeared
-   before?
+   - If there's now a Donate button on the top line, should that be in the
+     other places on the web page where those three boxes appeared before?
 
 - Pollen doesn't seem to allow abstraction, so I made these pages look
   alike manually. All of them list four buttons now at the top: 
@@ -64,7 +65,6 @@ DONE, I THINK
   page styles. 
 
 DONE, SOMEWHAT 
-
 
    - I think the claims made for Typed Racket are too strong. My
      suggestion would be to combine the Contracts and Types boxes into one,
