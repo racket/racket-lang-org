@@ -11,8 +11,8 @@
 
 ◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
 
-◊link[#:class "top-button disappearing-late" #:id "download" "sfc.html"]{donate}}
-}
+◊link[#:class "top-button disappearing-late" #:id "download" "sfc.html"]{donate}
+}}
 
 
 ◊special-section[#:class "one-column-body-text" #:style "background:lightgray;padding:0.4rem" #:id "pull-quote"]{◊div[#:style "font-size:1.0rem"]{Racket is a general-purpose programming language. Got a programming problem? Use Racket. 
@@ -20,7 +20,7 @@
 More importantly, Racket is a ◊link["http://felleisen.org/matthias/manifesto/"]{programming language for language-oriented programming}.
 Got a real problem? ◊link["https://docs.racket-lang.org/guide/languages.html"]{Make a language} to solve it. 
 Got many real problems? Make ◊link["languages.html"]{many languages} and link them together. 
-Got a problem making languages? Use ◊link["https://racket-lang.org"]{Racket}.
+Got a problem making languages? Use ◊link["index.html"]{Racket}.
 
 Take a quick look at some ◊link["sample-languages.html"]{sample languages} first.}}
 
@@ -57,12 +57,12 @@ Racket includes with a rich set of libraries, covering the full range from web s
 ◊doclink["math"]{Math & statistics}
 ◊link["https://docs.racket-lang.org"]{full list ◊begin['rarr]}
 }
-} 
+}
 
 ◊feature["Gradual Typing, With Safety" #:id "f4"]{Racket is the first language to offer a safe gradual typing system. Programmers may add types to any of their modules, and their code will continue to work---mostly as is. The runtime will catch all conflicts between typed and untyped modules.
 
 ◊doclinks{
-◊link["https://docs.racket-lang.org/ts-guide/index.html?q=typed%20racket"]{The Typed Racket Guide}
+◊link["https://docs.racket-lang.org/ts-guide/index.html"]{The Typed Racket Guide}
 ◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{Migratory Typing}
 }
 }
@@ -78,11 +78,11 @@ Racket comes with its own innovative and extensible interactive development envi
 }
 }
 
-◊feature["Software Contracts, Beyond Types" #:id "f2"]{
+◊feature["Software Contracts, Beyond Types" #:id "f5"]{
 Racket supports the first higher-order software contract system. Programmers may describe the services of their modules up to any desired precision. If a module fails to live up to those contracts, the runtime pinpoints the exact problem.                                         
 
 ◊doclinks{
-◊link["https://docs.racket-lang.org/guide/contracts.html?q=contract"]{Software Contracts}
+◊link["https://docs.racket-lang.org/guide/contracts.html"]{Software Contracts}
 }
 }
 }
