@@ -59,7 +59,7 @@ Racket includes with a rich set of libraries, covering the full range from web s
 }
 } 
 
-◊feature["Gradual Typing, Done Right" #:id "f4"]{Racket is the only language to offer a safe gradual typing system. Programmers may convert any of their modules to Typed Racket, and their software will continue to work---as is. The runtime will catch all conflicts between types and untyped code.
+◊feature["Gradual Typing, With Safety" #:id "f4"]{Racket is the first language to offer a safe gradual typing system. Programmers may add types to any of their modules, and their code will continue to work---mostly as is. The runtime will catch all conflicts between typed and untyped modules.
 
 ◊doclinks{
 ◊link["https://docs.racket-lang.org/ts-guide/index.html?q=typed%20racket"]{The Typed Racket Guide}
@@ -79,7 +79,7 @@ Racket comes with its own innovative and extensible interactive development envi
 }
 
 ◊feature["Software Contracts, Beyond Types" #:id "f2"]{
-Racket supports a higher-order software contract system. Programmers may describe the promised services of their modules up to any desired precision. If a module fails to live up to those, the contract system pinpoints the exact problem.                                         
+Racket supports the first higher-order software contract system. Programmers may describe the services of their modules up to any desired precision. If a module fails to live up to those contracts, the runtime pinpoints the exact problem.                                         
 
 ◊doclinks{
 ◊link["https://docs.racket-lang.org/guide/contracts.html?q=contract"]{Software Contracts}
