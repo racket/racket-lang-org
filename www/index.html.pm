@@ -122,8 +122,6 @@ News
 
 ◊link["https://blog.racket-lang.org/2019/01/racket-v7-2.html"]{Racket version 7.2} is available.
 
-◊link["https://racketfest.com"]{Racketfest}, a new Racket event, is happening in Berlin, 23 March 2019.
-
 ◊link["https://school.racket-lang.org"]{Racket School 2019} and ◊link["https://con.racket-lang.org"]{ninth RacketCon} will happen in Salt Lake City in July 2019.
 
 ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
@@ -144,10 +142,10 @@ Community
 ◊link["https://twitter.com/racketlang"]{@racketlang} on Twitter
 
 ◊link["team.html"]{Team}
+Racket's development benefits from a large distributed pool of
+contributors. 
 
 ◊link["sfc.html"]{Software Freedom Conservancy}
-
-◊link["sfc.html"]{Donate to Racket} 
 Make a tax-deductible contribution to support our work.
 
 }
