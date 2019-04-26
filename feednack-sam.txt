@@ -1,9 +1,7 @@
 
 DISAGREE, NOT WILLING TO DISCUSS 
 
-  - I prefer the line-separator style to the gray/white background style
-    for the lower boxes.
-
+  - I prefer the line-separator style to the gray/white background style for the lower boxes.
   - would moving [the slogan] to the top be better?
 
 DISAGREE, WILLING TO DISCUSS 
@@ -22,27 +20,26 @@ I am willing to brainstorm.
      guide, for example. I'm not sure what the best place to put them would
      be -- maybe a new box that's a "quick start" box?
 
-- It is really hard to bring across that our documentation is special and
-  how special Scribble is in the chosen format. I am okay with the format
-  mostly. Is the Style guide special?  The repo has a button at the top. 
+ It is really hard to bring across that our documentation is special and
+ how special Scribble is in the chosen format. I am okay with the format
+ mostly. Is the Style guide special?  The repo has a button at the top.
 
-  I could add a pair of boxes? 
+ I could add a pair of boxes? 
 
   - I miss the examples of languages. A language home page without any
     programs seems like a mistake to me, and our programs should show off
     the language-oriented nature of Racket.
 
-- The Julia language page comes w/o sample programs on the home page. 
-  I think that's fine. But I am willing to listen to counter-arguments.
+The Julia language page comes w/o sample programs on the home page. 
+I think that's fine. But I am willing to listen to counter-arguments.
 
 DON'T KNOW HOW TO DO
 
-   - If the text is now there the whole time, I think the links should be
-     clickable all the time.
+  - If the text is now there the whole time, I think the links should be
+    clickable all the time.
 
-Content issues:
-- I think the IDE box now says too little about docs and too much
-  about details (like the Vim mode).
+  - I think the IDE box now says too little about docs and too much
+    about details (like the Vim mode).
 
   - Many of the languages listed on the "Languages" page (in the intro
     paragraphs) could be hyperlinks, as could the link to the
@@ -52,20 +49,20 @@ Content issues:
     some of these boxes next to each other horizontally (as on the home
     page)? 
 
-- The new Languages page isn't mine. Someone contributed it as a PR, and I
-  pulled it in. But yes, I think we can modify it anyway but for now I'll
-  leave it alone. I'd like to discuss it first.
+The new Languages page isn't mine. Someone contributed it as a PR, and I
+pulled it in. But yes, I think we can modify it anyway but for now I'll
+leave it alone. I'd like to discuss it first.
 
 DON'T UNDERSTAND 
 
    - The new boxes on the front page don't all seem to line up.
-- I think I fixed this. 
+I think I fixed this. 
 
-   - I like moving to having the text on the page initially.
-   - If we aren't showing them in detail, I don't know that the fractals
-     make things better. It mostly seems to make things harder to read
-     right now.
-- I know how to remove the links, but I kind of like the background. 
+  - I like moving to having the text on the page initially.
+  - If we aren't showing them in detail, I don't know that the fractals
+    make things better. It mostly seems to make things harder to read
+    right now.
+I know how to remove the links, but I kind of like the background. 
 
 DONE, I THINK 
 
@@ -75,18 +72,18 @@ DONE, I THINK
 
 Done. 
 
-   - If there's now a Donate button on the top line, should that be in the
-     other places on the web page where those three boxes appeared before?
+  - If there's now a Donate button on the top line, should that be in the
+    other places on the web page where those three boxes appeared before?
 
-- Pollen doesn't seem to allow abstraction, so I made these pages look
-  alike manually. All of them list four buttons now at the top: 
-  download, docs, packages, donate. I think I got them all. 
+Pollen doesn't seem to allow abstraction, so I made these pages look
+alike manually. All of them list four buttons now at the top: 
+download, docs, packages, donate. 
 
-- I could not figure out how to add these buttons to download and
-  snapshots. Sadly, they are written in Racket, so I should have been able
-  to figure out something :) ~~~ But having said this, I am not sure that
-  these pages should look like the front page. ~~~ We already have many
-  page styles. 
+I could not figure out how to add these buttons to blog, download, and
+snapshots. Sadly, they are written in Racket, so I should have been able to
+figure out something :) ~~~ But having said this, I am not sure that these
+pages should look like the front page. ~~~ We already have many page
+styles.
 
 DONE, SOMEWHAT 
 
@@ -94,14 +91,11 @@ DONE, SOMEWHAT
      suggestion would be to combine the Contracts and Types boxes into one,
      and not say things like "done right".
 
-- You're right. The "done right" was over the top. But at the same time, we
-  are the only ones who support full-fledged soundness in the old sense and
-  "soundness and completeness" in the new one. 
+You're right. The "done right" was over the top. But at the same time, we
+are the only ones who support full-fledged soundness in the old sense and
+"soundness and completeness" in the new one.
 
-  So I compromised a bit and changed the title for "Typed" and some of the
-  prose in both. I also disagree with the idea of combining the two. They
-  are separate ideas, and Racket supports each in the cleanest way of any
-  language around. We should proudly advertise both. 
-
-NOT DONE:  
-
+So I compromised a bit and changed the title for "Typed" and some of the
+prose in both. I also disagree with the idea of combining the two. They are
+separate ideas, and Racket supports each in the cleanest way of any
+language around. We should proudly advertise both.

@@ -36,7 +36,10 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
 (define-tag-function (lang attrs elems)
   (define activate #f) ; make #f for real site
   (match-define (cons name xs) elems)
-  (define new-attrs (list* `(class ,(format "expander lang ~a" (if activate " active_expander" ""))) `(onClick ,(format "handle_expander_click('~a')" (cadr (assq 'id attrs)))) attrs))
+  (define new-attrs 
+    (list* `(class ,(format "expander lang ~a" (if activate " active_expander" "")))
+           `(onClick ,(format "handle_expander_click('~a')" (cadr (assq 'id attrs))))
+	   attrs))
   `(div ,new-attrs (div ((class "name")) ,name (span ((class "click-here")) "[click for more]")) (div ((class "inner")) ,@xs)))
 
 (define (root . elems)
@@ -78,7 +81,7 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
 
 (define-tag-function (link attrs url+elems)
   (match-define (cons url elems) url+elems)
-  `(a ,(append `((href ,url)(onclick "javascript:cancel_bubble(event)")) attrs) ,@elems))
+  `(a ,(append `((href ,url) (onclick "javascript:cancel_bubble(event)")) attrs) ,@elems))
 
 (define-tag-function (doclink attrs pkg+elems)
   (match-define (cons pkg elems) pkg+elems)
