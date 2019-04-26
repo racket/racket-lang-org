@@ -1,16 +1,3 @@
-Three categories of feedback, including things I like as well as parts I don't:
-
-Bugs:
-- The new "sample languages" page has some visual issues -- text is
-  cut off below the language snippets.
-
-Content issues:
-- I think the IDE box now says too little about docs and too much
-  about details (like the Vim mode).
-
-Visual design:
-
------------------------------------------------------------------------------
 
 DISAGREE, NOT WILLING TO DISCUSS 
 
@@ -21,35 +8,72 @@ DISAGREE, NOT WILLING TO DISCUSS
 
 DISAGREE, WILLING TO DISCUSS 
 
+  - I don't think the text in the new top box is very helpful. What is a
+    "real problem"? And hopefully, for most people their problems are
+    well-solved in an _existing_ Racket language -- writing a new language
+    is not a first-day Racket program.  The "Got ..." phrasing feels off to
+    me as well.  The slogan on the current home page is more compelling
+
+I am willing to brainstorm. 
+
    - I like combining boxes as you did, and getting rid of the
      Scheme/Lisp one. However, I think some of the links that went away
      would be good to keep: the documentation, the repository, the style
      guide, for example. I'm not sure what the best place to put them would
      be -- maybe a new box that's a "quick start" box?
 
-   - I don't think the text in the new top box is very helpful. What is a
-     "real problem"? And hopefully, for most people their problems are
-     well-solved in an _existing_ Racket language -- writing a new language
-     is not a first-day Racket program.  The "Got ..." phrasing feels off
-     to me as well.  The slogan on the current home page is more compelling
+- It is really hard to bring across that our documentation is special and
+  how special Scribble is in the chosen format. I am okay with the format
+  mostly. Is the Style guide special?  The repo has a button at the top. 
 
+  I could add a pair of boxes? 
+
+  - I miss the examples of languages. A language home page without any
+    programs seems like a mistake to me, and our programs should show off
+    the language-oriented nature of Racket.
+
+- The Julia language page comes w/o sample programs on the home page. 
+  I think that's fine. But I am willing to listen to counter-arguments.
 
 DON'T KNOW HOW TO DO
 
    - If the text is now there the whole time, I think the links should be
      clickable all the time.
 
+Content issues:
+- I think the IDE box now says too little about docs and too much
+  about details (like the Vim mode).
+
+  - Many of the languages listed on the "Languages" page (in the intro
+    paragraphs) could be hyperlinks, as could the link to the
+    documentation.
+
+  - I think the new "Languages" page is too single-column. Could we put
+    some of these boxes next to each other horizontally (as on the home
+    page)? 
+
+- The new Languages page isn't mine. Someone contributed it as a PR, and I
+  pulled it in. But yes, I think we can modify it anyway but for now I'll
+  leave it alone. I'd like to discuss it first.
+
 DON'T UNDERSTAND 
 
    - The new boxes on the front page don't all seem to line up.
-I think I fixed this. 
+- I think I fixed this. 
 
    - I like moving to having the text on the page initially.
    - If we aren't showing them in detail, I don't know that the fractals
      make things better. It mostly seems to make things harder to read
      right now.
+- I know how to remove the links, but I kind of like the background. 
 
 DONE, I THINK 
+
+
+  - The new "sample languages" page has some visual issues -- text is
+    cut off below the language snippets.
+
+Done. 
 
    - If there's now a Donate button on the top line, should that be in the
      other places on the web page where those three boxes appeared before?
@@ -81,21 +105,3 @@ DONE, SOMEWHAT
 
 NOT DONE:  
 
-- The Julia language page comes w/o sample programs on the home page. 
-  I think that's fine. 
-  
-  - I miss the examples of languages. A language home page without any
-    programs seems like a mistake to me, and our programs should show off
-    the language-oriented nature of Racket.
-
-- The new Languages page isn't mine. Someone contributed it as a PR, and I
-  pulled it in. But yes, I think we can modify it anyway but for now I'll
-  leave it alone. I'd like to discuss it first.
-
-  - Many of the languages listed on the "Languages" page (in the intro
-    paragraphs) could be hyperlinks, as could the link to the
-    documentation.
-
-  - I think the new "Languages" page is too single-column. Could we put
-    some of these boxes next to each other horizontally (as on the home
-    page)? 
