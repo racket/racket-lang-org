@@ -2,90 +2,99 @@
 
 
 ◊top-section{
-◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
+◊span[#:id "logo" #:style
+"font-size:2.3rem;white-space:nowrap;"]{
+  ◊img[#:src "img/racket-logo.svg" #:class "logo"]
+   Racket 
+  ◊span[#:id "tagline" #:class "disappearing" #:style
+"font-size:40%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{the language-oriented programming language}}
 
 ◊div{
-◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
-
+◊link[#:class "top-button disappearing-late" #:id "packages" "sfc.html"]{donate}
 ◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
-
 ◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
-
-◊link[#:class "top-button disappearing-late" #:id "download" "sfc.html"]{donate}
+◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
 }}
-
-
-◊special-section[#:class "one-column-body-text" #:style "background:lightgray;padding:0.4rem" #:id "pull-quote"]{◊div[#:style "font-size:1.0rem"]{Racket is a general-purpose programming language. Got a programming problem? Use Racket. 
-
-More importantly, Racket is a ◊link["http://felleisen.org/matthias/manifesto/"]{programming language for language-oriented programming}.
-Got a real problem? ◊link["https://docs.racket-lang.org/guide/languages.html"]{Make a language} to solve it. 
-Got many real problems? Make ◊link["languages.html"]{many languages} and link them together. 
-Got a problem making languages? Use ◊link["index.html"]{Racket}.
-
-Take a quick look at some ◊link["sample-languages.html"]{sample languages} first.}}
 
 ◊special-section{
 
 ◊feature["Powerful Macros, Rich DSLs" #:id "f6"]{
-Racket is the first general-purpose programming language that empowers programmers to make and use domain-specific languages as if they were plain code. No external tools, no make files required.
+Racket is the first general-purpose programming language that empowers programmers to make domain-specific languages as if they were plain libraries. No external tools, no make files required.
 
 ◊doclinks{
-◊link["https://docs.racket-lang.org/guide/macros.html"]{Intro to macros}
-◊link["https://docs.racket-lang.org/reference/Macros.html"]{Macros in depth}
-◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{Making new languages}
-◊link["languages.html"]{A list of sample #langs}
+◊link["https://docs.racket-lang.org/guide/macros.html"]{intro to macros}
+◊link["https://docs.racket-lang.org/reference/Macros.html"]{macros in depth}
+◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{making new languages}
+◊link["languages.html"]{sample #langs}
+}
+}
+
+◊feature["Software Contracts, Gradual Typing" #:id "f4"]{Racket is the first language to support higher-order software contracts and safe gradual typing. Programmers can easily deploy these tools to harden their software. 
+
+◊doclinks{
+◊link["https://docs.racket-lang.org/guide/contracts.html"]{software contracts}
+◊link["https://docs.racket-lang.org/ts-guide/index.html"]{the Typed Racket guide}
+◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{gradual typing}
 }
 }
 
 ◊feature["Mature, Stable, Cross-Platform" #:id "f2"]{
-Racket was designed from the beginning to be a cross-platform language (Windows, macOS, Linux). Over the past two decades it has matured into a stable product.
+Racket is a mature and stable product. From the beginning, it has  supported cross-platform graphical programming (Windows, macOS, Linux). 
  
 ◊doclinks{
-◊link["https://docs.racket-lang.org/pkg/index.html"]{Package system}
+◊link["https://docs.racket-lang.org/pkg/index.html"]{package system}
 ◊link["https://docs.racket-lang.org/framework/index.html"]{GUI framework}
-◊link["https://docs.racket-lang.org/raco/exe.html"]{Standalone binaries}
-◊link["https://docs.racket-lang.org/foreign/index.html"]{Foreign interface}
+◊link["https://docs.racket-lang.org/raco/exe.html"]{standalone binaries}
+◊link["https://docs.racket-lang.org/foreign/index.html"]{foreign interface}
 }
 }
 
 ◊feature["Batteries Included" #:id "f1"]{
-Racket includes with a rich set of libraries, covering the full range from web server apps to mathematics and science software. 
+Racket includes a rich set of libraries, covering the full range from web server apps to mathematics and scientific simulation software. 
 
 ◊doclinks{
-◊doclink["web-server"]{Web applications}
-◊doclink["db"]{Database}
-◊doclink["math"]{Math & statistics}
+◊doclink["web-server"]{web applications}
+◊doclink["db"]{database}
+◊doclink["math"]{math & statistics}
 ◊link["https://docs.racket-lang.org"]{full list ◊begin['rarr]}
 }
 }
 
-◊feature["Gradual Typing, With Safety" #:id "f4"]{Racket is the first language to offer a safe gradual typing system. Programmers may add types to any of their modules, and their code will continue to work---mostly as is. The runtime will catch all conflicts between typed and untyped modules.
-
-◊doclinks{
-◊link["https://docs.racket-lang.org/ts-guide/index.html"]{The Typed Racket Guide}
-◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{Migratory Typing}
-}
-}
-
 ◊feature["IDE Support, Integrated Documentation" #:id "f3"]{
-Racket comes with its own innovative and extensible interactive development environment. It has inspired an Emacs mode and a Vim plug-in. 
+Racket comes with support for major editors. The main bundle includes an innovative and extensible interactive development environment that has inspired other IDE projects.
                                                             
 ◊doclinks{
 ◊doclink["drracket"]{DrRacket guide}
 ◊doclink["drracket-tools"]{DrRacket tools}
-◊link["https://docs.racket-lang.org/guide/Vim.html"]{Vim}
-◊link["https://docs.racket-lang.org/guide/Emacs.html"]{Emacs}
+◊link["https://docs.racket-lang.org/guide/Vim.html"]{vim}
+◊link["https://docs.racket-lang.org/guide/Emacs.html"]{emacs}
 }
 }
 
-◊feature["Software Contracts, Beyond Types" #:id "f5"]{
-Racket supports the first higher-order software contract system. Programmers may describe the services of their modules up to any desired precision. If a module fails to live up to those contracts, the runtime pinpoints the exact problem.                                         
+◊feature["Vibrant, Open-Source Community" #:id "f5"]{
+Newcomers describe the on-line Racket community as extremely friendly and helpful. Everyone is welcome to ask any question and everybody is welcome to contribute to the code base. 
 
 ◊doclinks{
-◊link["https://docs.racket-lang.org/guide/contracts.html"]{Software Contracts}
+◊link["https://lists.racket-lang.org/"]{mailing list} 
+◊link["https://blog.racket-lang.org/2017/09/tutorial-contributing-to-racket.html"]{contributing} 
+◊link["https://twitter.com/racketlang"]{twitter}
+◊link["https://github.com/racket/racket/"]{github}
 }
 }
 }
+
+◊special-section[#:class "one-column-body-text" #:style "background:white;padding:0.4rem" #:id "pull-quote"]{
+ ◊div[#:style "font-size:1.0rem"]{
+  Racket is a general-purpose programming language as well as a programming-language programming language.
+
+-- little macros 
+-- general purpose 
+-- #lang ~~ ◊link["sample-languages.html"]{sample languages}
+-- LOP ~~ ◊link["languages.html"]{many languages}
+-- IDE for #langs 
+-- ugly syntax 
+
+}}
 
 ◊section[#:style "background:lightgray;padding:0.5rem"]{
 Software

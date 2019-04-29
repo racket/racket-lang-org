@@ -176,42 +176,42 @@ ul.doclinks li {
 
 div#f1 {
     height: 14rem;
-    background: white url("../img/illos/batteries.svg");
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f2 {
     height: 14rem;
-    background: white url("../img/illos/oss.svg");
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f3 {
     height: 14rem;
-    background: white url("../img/illos/drracket.svg");
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f4 {
     height: 14rem;
-    background: white url("../img/illos/scheme.svg");
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f5 {
     height: 14rem;
-    background: white url("../img/illos/lang.svg");
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f6 {
     height: 14rem;
-    background: white url("../img/illos/platform.svg");
+    background: white
     background-size: 100%;
     background-repeat: no-repeat;
 }
