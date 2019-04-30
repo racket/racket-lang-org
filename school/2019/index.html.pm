@@ -19,6 +19,7 @@
 ◊h2{◊xlink{Schedule}}
 ◊h2{◊xlink{Accommodation}}
 ◊h2{◊xlink{Tickets}}
+◊h2{◊xlink{Housing}}
 ◊h2{◊xlink["previous"]{Previous Racket Schools}}
 
 ◊h3{◊xtarget["overview"]{Domain-Specific Languages from Racket}}
@@ -195,6 +196,11 @@ border-radius: 0.5rem;
 ◊strong{Academic} tickets are available to participants from academic institutions that need a subsidy. Tuition and travel reimbursement available for qualifying students. ◊link["https://goo.gl/forms/xgOx51hXvVYYIYXf2"]{Click here to apply}.
 
 Eventbrite fees are added during checkout.
+
+◊h3{◊xtarget{Housing}}
+
+Subsidized housing is available in the University of Utah campus dorms. The cost is $40/night. ◊link["https://forms.gle/spaMYg1LL4CK3J8p9"]{Register here.}
+
 
 
 ◊h3{◊xtarget["previous"]{Previous Racket Schools}}
