@@ -106,6 +106,35 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 	   #:aria-controls "general-purpose-content-panel"
            #:style "font-weight:normal"]{General Purpose}
 	  }
+
+◊div[#:id "little-macros-content-panel" #:role "tabpanel" #:aria-labelledby "little-macros-tab" #:style "display: none;"]{
+ ◊h3[#:class "tab-title"]{Plain Macros}
+ ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊div[#:class "container-fluid"]{
+ ◊h4{Plain Macros}
+ ◊p{
+ foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+ }}}
+
+◊div[#:id "general-purpose-content-panel" #:role "tabpanel" #:aria-labelledby "general-purpose-tab" #:style "display: none;"]{
+ ◊h3[#:class "tab-title"]{Plain Macros}
+ ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊div[#:class "container-fluid"]{
+ ◊h4{General Purpose}
+ ◊p{
+ foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+ }}}
+
 }}}}}}
 
 ◊section[#:style "background:lightgray;padding:0.5rem"]{
