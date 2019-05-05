@@ -10,6 +10,8 @@ Therefore, append a timestamp string to these requests,
 to ensure that after an S3 sync, the most recent version is served.}
 <link rel="stylesheet" href="css/styles.css?hash=◊|(file-hash styles.css.pp)|" media="screen"/>
 <link rel="stylesheet" href="css/fonts/fonts.css?hash=◊|(file-hash fonts.css.pp)|" media="screen"/>
+<link rel="stylesheet" href="css/app.css?hash=◊|(file-hash app.css)|" media="screen"/>
+<link rel="stylesheet" href="css/bootstrap.min.css?hash=◊|(file-hash bootstrap.min.css)|" media="screen"/>
 <script type="text/javascript" src="js/functions.js?hash=◊|(file-hash functions.js.pp)|"></script>
 </head>
 <body>

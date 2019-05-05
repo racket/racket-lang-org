@@ -127,6 +127,8 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
     [else `(@ ,@linkname)]))
 
 
+(define-runtime-path app.css "./css/app.css")
+(define-runtime-path bootstrap.min.css "./css/bootstrap.min.css")
 (define-runtime-path styles.css.pp "./css/styles.css.pp")
 (define-runtime-path fonts.css.pp "./css/fonts/fonts.css.pp")
 (define-runtime-path functions.js.pp "./js/functions.js.pp")

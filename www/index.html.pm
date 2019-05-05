@@ -1,6 +1,5 @@
 #lang pollen
 
-
 ◊top-section{
 ◊span[#:id "logo" #:style
 "font-size:2.3rem;white-space:nowrap;"]{
@@ -85,16 +84,29 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊special-section[#:class "one-column-body-text" #:style "background:white;padding:0.4rem" #:id "pull-quote"]{
  ◊div[#:style "font-size:1.0rem"]{
-  Racket is a general-purpose programming language as well as a programming-language programming language.
-
--- little macros 
--- general purpose 
--- #lang ~~ ◊link["sample-languages.html"]{sample languages}
--- LOP ~~ ◊link["languages.html"]{many languages}
--- IDE for #langs 
--- ugly syntax 
-
-}}
+◊div[#:class "container"]{
+ ◊div[#:class "row"]{
+  ◊div[#:id "tabbed-interface"]{
+    ◊ul[#:role "tablist" #:class "nav nav-tabs nav-justified" #:aria-orientation "horizontal"]{
+      ◊li[#:class "nav-item"]{
+	◊a[#:data-toggle "tab"
+           #:role "tab" 
+           #:class "nav-link"
+           #:aria-selected "false" 
+           #:id "little-macros-tab"
+	   #:aria-controls "little-macros-content-panel"
+           #:style "font-weight:normal"]{Macros}
+	  }
+      ◊li[#:class "nav-item"]{
+	◊a[#:data-toggle "tab"
+           #:role "tab" 
+           #:class "nav-link"
+           #:aria-selected "false" 
+           #:id "general-purpose-tab"
+	   #:aria-controls "general-purpose-content-panel"
+           #:style "font-weight:normal"]{General Purpose}
+	  }
+}}}}}}
 
 ◊section[#:style "background:lightgray;padding:0.5rem"]{
 Software
