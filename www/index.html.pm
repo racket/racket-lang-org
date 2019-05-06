@@ -82,7 +82,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 }
 }
 
-◊special-section[#:class "one-column-body-text" #:style "background:white;padding:0.4rem" #:id "pull-quote"]{
+◊special-section[#:class "one-column-body-text" #:style "background:white;padding:0.8rem" #:id "pull-quote"]{
  ◊div[#:style "font-size:1.0rem"]{
 ◊div[#:class "container"]{
  ◊div[#:class "row"]{
@@ -95,7 +95,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
            #:aria-selected "false" 
            #:id "little-macros-tab"
 	   #:aria-controls "little-macros-content-panel"
-           #:style "font-weight:normal"]{Macros}
+           #:style "font-weight:normal"]{Plain Macros}
 	  }
       ◊li[#:class "nav-item"]{
 	◊a[#:data-toggle "tab"
@@ -106,6 +106,44 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 	   #:aria-controls "general-purpose-content-panel"
            #:style "font-weight:normal"]{General Purpose}
 	  }
+      ◊li[#:class "nav-item"]{
+	◊a[#:data-toggle "tab"
+           #:role "tab" 
+           #:class "nav-link"
+           #:aria-selected "false" 
+           #:id "big-macros-tab"
+	   #:aria-controls "big-macros-content-panel"
+           #:style "font-weight:normal"]{Powerful Macros}
+	  }
+      ◊li[#:class "nav-item"]{
+	◊a[#:data-toggle "tab"
+           #:role "tab" 
+           #:class "nav-link"
+           #:aria-selected "false" 
+           #:id "hash-lang-tab"
+	   #:aria-controls "hash-lang-content-panel"
+           #:style "font-weight:normal"]{Languages from Macros}
+	  }
+      ◊li[#:class "nav-item"]{
+	◊a[#:data-toggle "tab"
+           #:role "tab" 
+           #:class "nav-link"
+           #:aria-selected "false" 
+           #:id "ide-tab"
+	   #:aria-controls "ide-content-panel"
+           #:style "font-weight:normal"]{IDE Support}
+	 } 
+      ◊li[#:class "nav-item"]{
+	◊a[#:data-toggle "tab"
+           #:role "tab" 
+           #:class "nav-link"
+           #:aria-selected "false" 
+           #:id "ugly-syntax-tab"
+	   #:aria-controls "ugly-syntax-content-panel"
+           #:style "font-weight:normal"]{"Ugly" Syntax}
+	  }
+}
+
 
 ◊div[#:id "little-macros-content-panel" #:role "tabpanel" #:aria-labelledby "little-macros-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{Plain Macros}
@@ -135,7 +173,64 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 	 foo bar moo foo bar moo foo bar moo foo bar moo 
  }}}
 
-}}}}}}
+◊div[#:id "big-macros-content-panel" #:role "tabpanel" #:aria-labelledby "big-macros-tab" #:style "display: none;"]{
+ ◊h3[#:class "tab-title"]{Big Macros}
+ ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊div[#:class "container-fluid"]{
+ ◊h4{Macros That Work Together}
+ ◊p{
+ foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+ }}}
+
+◊div[#:id "hash-lang-content-panel" #:role "tabpanel" #:aria-labelledby "hash-lang-tab" #:style "display: none;"]{
+ ◊h3[#:class "tab-title"]{Hash Lang}
+ ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊div[#:class "container-fluid"]{
+ ◊h4{Languages from Macros}
+ ◊p{
+ foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+ }}}
+
+◊div[#:id "ide-content-panel" #:role "tabpanel" #:aria-labelledby "ide-tab" #:style "display: none;"]{
+ ◊h3[#:class "tab-title"]{IDE Support}
+ ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊div[#:class "container-fluid"]{
+ ◊h4{IDE Support}
+ ◊p{
+ foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+ }}}
+
+◊div[#:id "ugly-syntax-content-panel" #:role "tabpanel" #:aria-labelledby "ugly-syntax-tab" #:style "display: none;"]{
+ ◊h3[#:class "tab-title"]{"Ugly" Syntax}
+ ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊div[#:class "container-fluid"]{
+ ◊h4{"Ugly" Syntax}
+ ◊p{
+ foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+	 foo bar moo foo bar moo foo bar moo foo bar moo 
+ }}}
+
+
+}}}}}
 
 ◊section[#:style "background:lightgray;padding:0.5rem"]{
 Software
@@ -246,9 +341,10 @@ To ◊link["http://www.nsf.gov/"]{the NSF}, ◊link["http://www.darpa.mil/"]{DAR
 ◊script[#:src "js/jquery.min.js"]{}
 
 ◊script{
-var tabs = document.querySelectorAll('[role=tab]'); //get all role=tab elements as a variable
-
-for (i = 0; i < tabs.length; i++) { tabs[i].addEventListener("click", showTabPanel); } //add click event to each tab to run the showTabPanel function 
+var tabs = document.querySelectorAll('[role=tab]');
+for (i = 0; i < tabs.length; i++) { 
+ tabs[i].addEventListener("click", showTabPanel); 
+}
 
 //runs when tab is clicked
 function showTabPanel(el) { 
@@ -261,15 +357,14 @@ function showTabPanel(el) {
 }
 
 function showTabPanelAux(elt) {
- elt.setAttribute('aria-selected', 'true'); //set aria-selected=true for clicked tab
- elt.setAttribute('style', 'font-weight:bold'); //make clicked tab have bold font
+ elt.setAttribute('aria-selected', 'true'); 
+ elt.setAttribute('style', 'font-weight:bold'); 
 
- var tabPanelToOpen = elt.getAttribute('aria-controls'); //get the aria-controls value of the tab that was clicked
- var tabPanels = document.querySelectorAll('[role=tabpanel]'); //get all tabpanels as a variable
+ var tabPanelToOpen = elt.getAttribute('aria-controls'); 
+ var tabPanels = document.querySelectorAll('[role=tabpanel]'); 
 
- //hide all tabpanels
+ //hide all tabpanels, except for the clicked one
  for (i = 0; i < tabPanels.length; i++) { tabPanels[i].style.display = "none"; } 
- // show tabpanel who's tab was clicked
  document.getElementById(tabPanelToOpen).style.display = "block"; 
 }
 

@@ -1,7 +1,7 @@
 #lang pollen
 ◊(require css-tools)
 ◊(define debug-width 0)
-◊(define max-width 1000)
+◊(define max-width 1050)
 ◊(define link-color "rgb(6, 121, 167)")
 
 ◊(make-media-query 16 8 max-width 60 .5)   
