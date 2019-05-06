@@ -243,45 +243,56 @@ Thank you
 
 To ◊link["http://www.nsf.gov/"]{the NSF}, ◊link["http://www.darpa.mil/"]{DARPA}, the ◊link["http://www.ed.gov/FIPSE/"]{Fund for the Improvement of Postsecondary Education (FIPSE)} at the ◊link["http://www.ed.gov/"]{US Department of Education}, the ◊link["http://www.exxonmobil.com/Corporate/community_foundation.aspx"]{Exxon Foundation}, CORD, partners of the Academy of Information Technology, ◊link["http://microsoft.com/"]{Microsoft}, ◊link["http://mozilla.org/"]{Mozilla}, and ◊link["http://google.com/"]{Google} for their generous support over the years.}
 
+◊script[#:src "js/jquery.min.js"]{}
+
 ◊script{
 var tabs = document.querySelectorAll('[role=tab]'); //get all role=tab elements as a variable
-for (i = 0; i < tabs.length; i++) { tabs[i].addEventListener("click", showTabPanel); } //add click event to each tab to run the showTabPanel function 
-function showTabPanel(el) { //runs when tab is clicked
-	var tabs2 = document.querySelectorAll('[role=tab]'); //get tabs again as a different variable 
-	for (i = 0; i < tabs2.length; i++) {tabs2[i].setAttribute('aria-selected','false');tabs2[i].setAttribute('style','font-weight:normal');} //reset all tabs to aria-selected=false and normal font weight
-	el.target.setAttribute('aria-selected', 'true'); //set aria-selected=true for clicked tab
-	el.target.setAttribute('style', 'font-weight:bold'); //make clicked tab have bold font
-	var tabPanelToOpen = el.target.getAttribute('aria-controls'); //get the aria-controls value of the tab that was clicked
-	var tabPanels = document.querySelectorAll('[role=tabpanel]'); //get all tabpanels as a variable
-	for (i = 0; i < tabPanels.length; i++) { tabPanels[i].style.display = "none"; } //hide all tabpanels
-	document.getElementById(tabPanelToOpen).style.display = "block"; //show tabpanel who's tab was clicked
-}
-$('[role=tablist]').keydown(function(e) {
-if (e.keyCode==37) {
-$("[aria-selected=true]").prev().click().focus();
-	 	e.preventDefault(); 
-}
-if (e.keyCode==38) {
-$("[aria-selected=true]").prev().click().focus();
-	 	e.preventDefault();
-}
-if (e.keyCode==39) {
-$("[aria-selected=true]").next().click().focus();
-	 	e.preventDefault();
-}
-if (e.keyCode==40) {
-$("[aria-selected=true]").next().click().focus();
-	 	e.preventDefault();
-}
-});
-}
-◊script{hljs.initHighlightingOnLoad();}
-◊script{
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-58407306-1', 'auto');
-ga('send', 'pageview');
+for (i = 0; i < tabs.length; i++) { tabs[i].addEventListener("click", showTabPanel); } //add click event to each tab to run the showTabPanel function 
+
+//runs when tab is clicked
+function showTabPanel(el) { 
+ var tabs2 = document.querySelectorAll('[role=tab]'); 
+ for (i = 0; i < tabs2.length; i++) {
+   tabs2[i].setAttribute('aria-selected','false');
+   tabs2[i].setAttribute('style','font-weight:normal');}
+  
+ showTabPanelAux(el.target);
 }
+
+function showTabPanelAux(elt) {
+ elt.setAttribute('aria-selected', 'true'); //set aria-selected=true for clicked tab
+ elt.setAttribute('style', 'font-weight:bold'); //make clicked tab have bold font
+
+ var tabPanelToOpen = elt.getAttribute('aria-controls'); //get the aria-controls value of the tab that was clicked
+ var tabPanels = document.querySelectorAll('[role=tabpanel]'); //get all tabpanels as a variable
+
+ //hide all tabpanels
+ for (i = 0; i < tabPanels.length; i++) { tabPanels[i].style.display = "none"; } 
+ // show tabpanel who's tab was clicked
+ document.getElementById(tabPanelToOpen).style.display = "block"; 
+}
+
+showTabPanelAux(tabs[0]);
+
+$('[role=tablist]').keydown(function(e) {
+  if (e.keyCode==37) {
+    $("[aria-selected=true]").prev().click().focus();
+		    e.preventDefault(); 
+  }
+  if (e.keyCode==38) {
+    $("[aria-selected=true]").prev().click().focus();
+		    e.preventDefault();
+  }
+  if (e.keyCode==39) {
+    $("[aria-selected=true]").next().click().focus();
+		    e.preventDefault();
+  }
+  if (e.keyCode==40) {
+    $("[aria-selected=true]").next().click().focus();
+		    e.preventDefault();
+  }
+  });
+}
+
+
