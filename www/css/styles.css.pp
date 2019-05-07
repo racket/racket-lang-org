@@ -361,6 +361,10 @@ pre {
   line-height: 1.65;
 }
 
+.narrow {
+  width: 400px;
+}
+
 pre a {
   font-weight: bolder;
 }

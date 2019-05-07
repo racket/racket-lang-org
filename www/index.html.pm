@@ -87,7 +87,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 ◊div[#:class "container"]{
  ◊div[#:class "row"]{
   ◊div[#:id "tabbed-interface"]{
-    ◊ul[#:role "tablist" #:class "nav nav-tabs nav-justified" #:aria-orientation "horizontal"]{
+    ◊ul[#:role "tablist" #:class "nav nav-tabs nav-justified"]{
       ◊li[#:class "nav-item"]{
 	◊a[#:data-toggle "tab"
            #:role "tab" 
@@ -143,51 +143,66 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
            #:style "font-weight:normal"]{"Ugly" Syntax}
 	  }
 }
+}
 
-
-◊div[#:id "little-macros-content-panel" #:role "tabpanel" #:aria-labelledby "little-macros-tab" #:style "display: none;"]{
+◊special-section[#:class "one-column-body-text" #:id "little-macros-content-panel" #:role "tabpanel" #:aria-labelledby "little-macros-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{Plain Macros}
- ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊img[#:src "img/little-macros.png" #:class "pb-2 ecosystem-image" #:style "width:250px"]{}
  ◊div[#:class "container-fluid"]{
  ◊h4{Plain Macros}
- ◊p{
- foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
- }}}
+ ◊p{Everybody should be afraid of C macros, and nobody should
+  be afraid of Racket macros. Since the Racket world deals
+  with concrete syntax trees, macros are tree-rewriting
+  rules, which avoids many of the syntactic problems of
+  text-based macros in ordinary programming languages.}
 
-◊div[#:id "general-purpose-content-panel" #:role "tabpanel" #:aria-labelledby "general-purpose-tab" #:style "display: none;"]{
- ◊h3[#:class "tab-title"]{Plain Macros}
- ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊p{Plain macros allow programmers to abstract over patterns
+  when functions and procedures don't. For example, no
+  programmer should be forced to write ◊docs{lambda} to
+  introduce a new binding form; and in some situations, say,
+  ◊docs{match} patterns, doing so is nearly impossible.}
+}}
+
+◊special-section[#:class "one-column-body-text" #:id "general-purpose-content-panel" #:role "tabpanel" #:aria-labelledby "general-purpose-tab" #:style "display: none;"]{
+ ◊h3[#:class "tab-title"]{General Purpose}
+ ◊img[#:src "img/general-purpose.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:470px"]{}
  ◊div[#:class "container-fluid"]{
  ◊h4{General Purpose}
- ◊p{
- foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
- }}}
+ ◊p{Racket is a general-purpose programming language. 
+ It comes with a range of built-in libraries, including 
+ a comprehensive GUI toolbox. The GUI programs are highly 
+ portable among the major platforms.}
 
-◊div[#:id "big-macros-content-panel" #:role "tabpanel" #:aria-labelledby "big-macros-tab" #:style "display: none;"]{
+ ◊p{When the built-in libraries don't get the job done, 
+ look through the on-line catalog of user-contributed 
+ packages. In all likelihood someone has already created 
+ a library for scientific simulations or video scripting 
+ or something else you might need. If all else fails, 
+ Racket's FFI makes it easy to program in Racket as if it 
+ were C---and, that's how you link in foreign libraries.}
+}}
+
+◊special-section[#:class "one-column-body-text" #:id "big-macros-content-panel" #:role "tabpanel" #:aria-labelledby "big-macros-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{Big Macros}
- ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊img[#:src "img/big-macros.png" #:class "pb-2 ecosystem-image" #:style "width:600px; height:480px"]{}
  ◊div[#:class "container-fluid"]{
- ◊h4{Macros That Work Together}
- ◊p{
- foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
-	 foo bar moo foo bar moo foo bar moo foo bar moo 
- }}}
+ ◊h4{Macros Work Together}
+ ◊p{Racket's macro are more powerful than Scheme's or Lisp's. 
+  If you know the latter, learning how ◊a[#:href "#little-macros"]{Plain Macros} 
+  work in Racket will feel familiar. Getting to know the rest 
+  of Racket's macro system will feel liberating, empowering, 
+  dazzling---in short, it will provide a whole new level of 
+  enlightenment for the discerning programmer.}
 
-◊div[#:id "hash-lang-content-panel" #:role "tabpanel" #:aria-labelledby "hash-lang-tab" #:style "display: none;"]{
+ ◊p{Like in Scheme, a module can export a macro. Another module 
+  can import this macro. A Racket struct can act as a macro. Macros
+  can define macros. Several macros can conspire to achieve a 
+  common goal to which end they convey extra information 
+  via structs. And these are only the beginnings of how 
+  Racket macros differ from those in other languages.}
+ }}
+
+◊special-section[#:class "one-column-body-text" #:id "hash-lang-content-panel" #:role "tabpanel" #:aria-labelledby "hash-lang-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{Hash Lang}
  ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
  ◊div[#:class "container-fluid"]{
@@ -201,7 +216,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 	 foo bar moo foo bar moo foo bar moo foo bar moo 
  }}}
 
-◊div[#:id "ide-content-panel" #:role "tabpanel" #:aria-labelledby "ide-tab" #:style "display: none;"]{
+◊special-section[#:class "one-column-body-text" #:id "ide-content-panel" #:role "tabpanel" #:aria-labelledby "ide-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{IDE Support}
  ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
  ◊div[#:class "container-fluid"]{
@@ -215,7 +230,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 	 foo bar moo foo bar moo foo bar moo foo bar moo 
  }}}
 
-◊div[#:id "ugly-syntax-content-panel" #:role "tabpanel" #:aria-labelledby "ugly-syntax-tab" #:style "display: none;"]{
+◊special-section[#:class "one-column-body-text" #:id "ugly-syntax-content-panel" #:role "tabpanel" #:aria-labelledby "ugly-syntax-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{"Ugly" Syntax}
  ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
  ◊div[#:class "container-fluid"]{
@@ -230,7 +245,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  }}}
 
 
-}}}}}
+}}}}
 
 ◊section[#:style "background:lightgray;padding:0.5rem"]{
 Software
