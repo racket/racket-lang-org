@@ -82,6 +82,10 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 }
 }
 
+◊special-section[#:class "one-column-body-text lop-system" #:style ";align:center" #:id "pull-quote"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:purple;white-space:nowrap;text-align:center;"]{
+  Racket, the Language-Oriented Programming Language}}
+
 ◊special-section[#:class "one-column-body-text" #:style "background:white;padding:0.8rem" #:id "pull-quote"]{
  ◊div[#:style "font-size:1.0rem"]{
 ◊div[#:class "container"]{
@@ -147,7 +151,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊special-section[#:class "one-column-body-text" #:id "little-macros-content-panel" #:role "tabpanel" #:aria-labelledby "little-macros-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{Plain Macros}
- ◊img[#:src "img/little-macros.png" #:class "pb-2 ecosystem-image" #:style "width:250px"]{}
+ ◊img[#:src "img/little-macros.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
  ◊h4{Plain Macros}
  ◊p{Everybody should be afraid of C macros, and nobody should
@@ -165,7 +169,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊special-section[#:class "one-column-body-text" #:id "general-purpose-content-panel" #:role "tabpanel" #:aria-labelledby "general-purpose-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{General Purpose}
- ◊img[#:src "img/general-purpose.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:470px"]{}
+ ◊img[#:src "img/general-purpose.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
  ◊h4{General Purpose}
  ◊p{Racket is a general-purpose programming language. 
@@ -184,7 +188,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊special-section[#:class "one-column-body-text" #:id "big-macros-content-panel" #:role "tabpanel" #:aria-labelledby "big-macros-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{Big Macros}
- ◊img[#:src "img/big-macros.png" #:class "pb-2 ecosystem-image" #:style "width:600px; height:480px"]{}
+ ◊img[#:src "img/big-macros.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
  ◊h4{Macros Work Together}
  ◊p{Racket's macro are more powerful than Scheme's or Lisp's. 
@@ -204,7 +208,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊special-section[#:class "one-column-body-text" #:id "hash-lang-content-panel" #:role "tabpanel" #:aria-labelledby "hash-lang-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{Hash Lang}
- ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊img[#:src "abstract.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
  ◊h4{Languages from Macros}
  ◊p{
@@ -218,7 +222,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊special-section[#:class "one-column-body-text" #:id "ide-content-panel" #:role "tabpanel" #:aria-labelledby "ide-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{IDE Support}
- ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊img[#:src "abstract.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
  ◊h4{IDE Support}
  ◊p{
@@ -232,7 +236,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊special-section[#:class "one-column-body-text" #:id "ugly-syntax-content-panel" #:role "tabpanel" #:aria-labelledby "ugly-syntax-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{"Ugly" Syntax}
- ◊img[#:src "abstract.png" #:class "pb-2 ecosystem-image" #:style "width:400px; height:280px"]{}
+ ◊img[#:src "abstract.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
  ◊h4{"Ugly" Syntax}
  ◊p{
