@@ -28,13 +28,13 @@
   (match-define (list* (list* x-lab col-labs) color* dts) cr-as-list)
   (define pt
     (for/list ([col-lab (in-list col-labs)] [c color*][i (in-naturals)])
-      (points #:label col-lab #:color c #;"red" #:sym i
+      (points #:label col-lab #:color i #;c #:sym i
               (for/list ([row (in-list dts)])
                 (match-define (cons x cols) row)
                 (map string->number (list x (list-ref cols i)))))))
   (define y-lab (match col-labs [(list y) y] [_ #f]))
   (plot-pict pt
-             #:title (path->string p) #:y-max 100
+             #:title (path->string p)
              #:width SIZE    #:height SIZE
              #:x-label x-lab #:y-label y-lab))
 

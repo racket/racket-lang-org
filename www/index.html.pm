@@ -171,7 +171,15 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊special-section[#:class "one-column-body-text" #:id "general-purpose-content-panel" #:role "tabpanel" #:aria-labelledby "general-purpose-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{General Purpose}
- ◊img[#:src "img/general-purpose.png" #:class "lop-image"]{}
+
+◊table[]{
+ ◊tr{
+  ◊td{
+◊div[#:class "spcontainer"]{◊img[#:src "img/general-purpose-2-plot.png" #:alt "Avatar" #:class "image"]{}◊div[#:class "container-fluid overlay"]{◊img[#:src "img/general-purpose-2-code.png" #:class "lop-image"]}}}
+
+◊td{ }
+
+◊td{
  ◊div[#:class "container-fluid"]{
  ◊h4{General Purpose}
  ◊p{Racket is a general-purpose programming language. 
@@ -187,7 +195,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  If all else fails, Racket's FFI makes it easy to program as
  if Racket were a parenthesized C---so linking in foreign 
  libraries is as easy as PI.}
-}}
+}}}}}
 
 ◊special-section[#:class "one-column-body-text" #:id "big-macros-content-panel" #:role "tabpanel" #:aria-labelledby "big-macros-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{Big Macros}
