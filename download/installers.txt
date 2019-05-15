@@ -813,12 +813,12 @@
 115283688	7.3/racket-7.3-x86_64-macosx.dmg
 80749872	7.3/racket-7.3-x86_64-win32.exe
 11087267	7.3/racket-minimal-7.3-i386-linux.sh
-8920688         7.3/racket-minimal-7.3-i386-macosx.dmg
-7753276         7.3/racket-minimal-7.3-i386-win32.exe
+8920688	7.3/racket-minimal-7.3-i386-macosx.dmg
+7753276	7.3/racket-minimal-7.3-i386-win32.exe
 15549791	7.3/racket-minimal-7.3-src-builtpkgs.tgz
 10411431	7.3/racket-minimal-7.3-src.tgz
 11387056	7.3/racket-minimal-7.3-x86_64-linux.sh
-9166277         7.3/racket-minimal-7.3-x86_64-macosx.dmg
-7980617         7.3/racket-minimal-7.3-x86_64-win32.exe
+9166277	7.3/racket-minimal-7.3-x86_64-macosx.dmg
+7980617	7.3/racket-minimal-7.3-x86_64-win32.exe
 10409540	7.3/racket-minimal-src.tgz
 26473882	7.3/racket-src.tgz
