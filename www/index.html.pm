@@ -276,7 +276,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 ◊section[#:style "background:lightgray;padding:0.5rem"]{
 Software
 
-◊link["https://download.racket-lang.org/"]{Download Racket v7.2}
+◊link["https://download.racket-lang.org/"]{Download Racket v7.3}
 
 ◊link["https://github.com/racket/racket/"]{Source code}
 
@@ -305,6 +305,8 @@ Documentation & tutorials
 
 ◊section[#:style "background:lightgray;padding:0.5rem"]{
 News
+
+◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.
 
 ◊link["https://blog.racket-lang.org/2019/01/racket-v7-2.html"]{Racket version 7.2} is available.
 
