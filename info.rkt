@@ -2,8 +2,7 @@
 
 (define collection "racket-lang-org")
 
-(define deps '("slideshow-lib"
-	       "graph"
+(define deps '("graph"
                "gui-lib"
                "base"
                ("plt-web-lib" #:version "1.3")

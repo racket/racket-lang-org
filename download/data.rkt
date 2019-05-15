@@ -60,14 +60,14 @@
      main
      "Matthew Flatt"
      "mflatt@cs.utah.edu"]
-    ["USA, Massachusetts (Northeastern University)"
-     "https://mirror.racket-lang.org/installers/"
-     "Eli Barzilay"
-     "eli@barzilay.org"]
     ["USA, Utah (University of Utah)"
      "https://www.cs.utah.edu/plt/installers/"
      "Matthew Flatt"
      "mflatt@cs.utah.edu"]
+    ["USA, Massachusetts (Northeastern University)"
+     "https://mirror.racket-lang.org/installers/"
+     "Eli Barzilay"
+     "eli@barzilay.org"]
     ["USA, Illinois (Northwestern University)"
      "https://plt.eecs.northwestern.edu/racket-mirror/"
      "Robby Findler"

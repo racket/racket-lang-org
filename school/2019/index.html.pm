@@ -58,11 +58,11 @@ This track will be taught by ◊link["https://www.ccs.neu.edu/home/matthias/"]{M
 
 ◊ul[
 
-◊li{academic researchers who wish to understand LOP research,}
+◊li{academic researchers at all levels who wish to understand LOP research,}
 
 ◊li{professionals who wish to learn in depth how to rapidly build DSLs,} 
 
-◊li{students who wish to explore a potential area of research for a PhD,}
+◊li{students who wish to explore a potential area of research for a PhD, and}
 
 ◊li{faculty at all levels who wish to explore an approach to teaching LOP.}
 

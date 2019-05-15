@@ -13,33 +13,13 @@
 (define-tag-function (feature attrs elems)
   (match-define (cons name xs) elems)
   (define expand-attr (and (assq 'expand attrs) "active_expander"))
-  (define new-attrs 
-    (list* `(class ,(format "expander lang ~a" (or expand-attr "")))
-           `(onClick ,(format "handle_expander_click('~a')" (cadr (assq 'id attrs))))
-           attrs))
+  (define new-attrs (list* `(class ,(format "expander feature ~a" (or expand-attr ""))) `(onClick ,(format "handle_expander_click('~a')" (cadr (assq 'id attrs)))) attrs))
   `(div ,new-attrs (div ((class "name")) ,name) (div ((class "inner")) ,@xs)))
-
-#;(
-◊lang["#lang racket" #:id "lang1"]{
-◊pre{(◊docs{require} ◊link["https://docs.racket-lang.org/teachpack/2htdpimage.html?q=2htdp%2Fimage"]{2htdp/image}) ; draw a picture
-(◊docs{let} sierpinski ([n 8])
-  (◊docs{cond}
-    [(◊docs{zero?} n) (◊docs{triangle} 2 'solid 'red)]
-    [else (◊docs{define} t (sierpinski (- n 1)))
-          (◊docs{freeze} (◊docs{above} t (◊docs{beside} t t)))]))}
-
-The ◊code{2htdp/image} library provides easy-to-use functions for making images.
-
-◊doclink["quick"]{Racket tutorial ◊(begin 'rarr)}}
-)
 
 (define-tag-function (lang attrs elems)
   (define activate #f) ; make #f for real site
   (match-define (cons name xs) elems)
-  (define new-attrs 
-    (list* `(class ,(format "expander lang ~a" (if activate " active_expander" "")))
-           `(onClick ,(format "handle_expander_click('~a')" (cadr (assq 'id attrs))))
-	   attrs))
+  (define new-attrs (list* `(class ,(format "expander lang ~a" (if activate " active_expander" ""))) `(onClick ,(format "handle_expander_click('~a')" (cadr (assq 'id attrs)))) attrs))
   `(div ,new-attrs (div ((class "name")) ,name (span ((class "click-here")) "[click for more]")) (div ((class "inner")) ,@xs)))
 
 (define (root . elems)
@@ -81,7 +61,7 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
 
 (define-tag-function (link attrs url+elems)
   (match-define (cons url elems) url+elems)
-  `(a ,(append `((href ,url) (onclick "javascript:cancel_bubble(event)")) attrs) ,@elems))
+  `(a ,(append `((href ,url)(onclick "javascript:cancel_bubble(event)")) attrs) ,@elems))
 
 (define-tag-function (doclink attrs pkg+elems)
   (match-define (cons pkg elems) pkg+elems)
@@ -127,8 +107,6 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
     [else `(@ ,@linkname)]))
 
 
-(define-runtime-path app.css "./css/app.css")
-(define-runtime-path bootstrap.min.css "./css/bootstrap.min.css")
 (define-runtime-path styles.css.pp "./css/styles.css.pp")
 (define-runtime-path fonts.css.pp "./css/fonts/fonts.css.pp")
 (define-runtime-path functions.js.pp "./js/functions.js.pp")

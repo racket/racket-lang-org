@@ -1,7 +1,7 @@
 #lang pollen
 ◊(require css-tools)
 ◊(define debug-width 0)
-◊(define max-width 1050)
+◊(define max-width 1000)
 ◊(define link-color "rgb(6, 121, 167)")
 
 ◊(make-media-query 16 8 max-width 60 .5)   
@@ -71,8 +71,8 @@ top-section {
 }
 
 .lang {
-    ~height: 11.5rem;
-    height: 21rem;
+    ~height: 5.5rem;
+    height: 10rem;
 }
 
 
@@ -175,43 +175,37 @@ ul.doclinks li {
 
 
 div#f1 {
-    height: 14rem;
-    background: white
+    background: white url("../img/illos/batteries.svg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f2 {
-    height: 14rem;
-    background: white
+    background: white url("../img/illos/oss.svg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f3 {
-    height: 14rem;
-    background: white
+    background: white url("../img/illos/drracket.svg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f4 {
-    height: 14rem;
-    background: white
+    background: white url("../img/illos/scheme.svg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f5 {
-    height: 14rem;
-    background: white
+    background: white url("../img/illos/lang.svg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 
 div#f6 {
-    height: 14rem;
-    background: white
+    background: white url("../img/illos/platform.svg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -359,10 +353,6 @@ pre {
   margin-bottom: 1em;
   font-size: 85%;
   line-height: 1.65;
-}
-
-.narrow {
-  width: 400px;
 }
 
 pre a {
