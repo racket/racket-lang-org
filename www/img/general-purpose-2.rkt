@@ -25,17 +25,18 @@
 (define (file->plot p)
   (define cr (make-csv-reader (open-input-file p)))
   (define cr-as-list (csv->list cr))
-  (match-define (cons (list* x-lab col-labs) dts) cr-as-list)
+  (match-define (list* (list* x-lab col-labs) color* dts) cr-as-list)
   (define pt
-    (for/list ([col-lab (in-list col-labs)] [i (in-naturals)])
-      (points #:label col-lab #:color "red" #:sym i
+    (for/list ([col-lab (in-list col-labs)] [c color*][i (in-naturals)])
+      (points #:label col-lab #:color c #;"red" #:sym i
               (for/list ([row (in-list dts)])
                 (match-define (cons x cols) row)
                 (map string->number (list x (list-ref cols i)))))))
   (define y-lab (match col-labs [(list y) y] [_ #f]))
   (plot-pict pt
-             #:title (path->string p)
+             #:title (path->string p) #:y-max 100
              #:width SIZE    #:height SIZE
              #:x-label x-lab #:y-label y-lab))
 
+(send canvas update (file->plot (build-path "general-purpose-2a.csv")))
 (send frame show #t)
