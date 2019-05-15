@@ -15,6 +15,10 @@
 ◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
 }}
 
+◊special-section[#:class "one-column-body-text lop-system" #:style ";align:center" #:id "pull-quote"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:purple;white-space:nowrap;text-align:center;"]{
+  Racket, the Programming Language}}
+
 ◊special-section{
 
 ◊feature["Powerful Macros, Rich DSLs" #:id "f6"]{
