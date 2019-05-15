@@ -1,0 +1,43 @@
+1557891944
+Racket v7.3
+
+Racket version 7.3 is now available from
+
+   https://racket-lang.org/
+
+Racket-on-Chez continues to improve. Snapshot builds are currently
+available at pre.racket-lang.org, and we expect that Racket-on-Chez
+will be included as a download option in the next release.
+
+In addition, the Racket 7.3 release includes the following improvements:
+
+- There is a new set of teaching languages for the upcoming
+  German-language textbook "Schreibe Dein Programm!"
+  (https://www.deinprogramm.de/).
+
+- Racket's IO system has been refactored to improve performance
+ and simplify internal design.
+
+- Racket's JSON reader is dramatically faster.
+
+- The `plot` library includes color map support for renderers.
+
+- The Racket web library has improved support for 307 redirects.
+
+- The Racket web server provides better response messages by default
+ for common status codes.
+
+- The `pict` library includes a `shear` function.
+
+The following people contributed to this release: Alex Harsányi,
+Alexander McLin, Alexander Shopov, Alexis King, Alex Knauth, Andrew
+Kent, Bert De Ketelaere, Ben Greenman, Fred Fu, Georges Dupéron, Greg
+Hendershott, Gustavo Massaccesi, Jay McCarthy, Jesse Alama John
+Clements, Jordan Johnson, Kimball Germane, Lassi Kortela, Leif Andersen
+Leo Uino, Marc Kaufmann, Matthew Butterick, Matthew Flatt, Matthias
+Felleisen Michael MacLeod, Mike Sperber, Paulo Matos, Philip McGrath
+Philippe Meunier, Pierre-Evariste Dagand, Robby Findler, Ron Garcia,
+Ryan Culpepper, Ryan Kramer Sam Tobin-Hochstadt, Shu-Hung You, Sorawee
+Porncharoenwase, Spencer Florence Spencer Mitchell, Stephen De
+Gabrielle, Vincent St-Amour, Vladilen Kozin, Winston Weinert, yjqww6,
+Wayo Cavazos
