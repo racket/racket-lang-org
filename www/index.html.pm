@@ -15,8 +15,8 @@
 ◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
 }}
 
-◊special-section[#:class "one-column-body-text lop-system" #:style ";align:center" #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:purple;white-space:nowrap;text-align:center;"]{
+◊special-section[#:class "one-column-body-text lop-system" #:style "background:purple;padding:0.5rem;align:center" #:id "pull-quote"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Programming Language}}
 
 ◊special-section{
@@ -86,8 +86,8 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 }
 }
 
-◊special-section[#:class "one-column-body-text lop-system" #:style ";align:center" #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:purple;white-space:nowrap;text-align:center;"]{
+◊special-section[#:class "one-column-body-text lop-system" #:style "background:purple;padding:0.5rem;align:center" #:id "pull-quote"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Language-Oriented Programming Language}}
 
 ◊special-section[#:class "one-column-body-text" #:style "background:white;padding:0.8rem" #:id "pull-quote"]{
@@ -285,7 +285,11 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 }}}
 
-◊section[#:style "background:lightgray;padding:0.5rem"]{
+◊special-section[#:class "one-column-body-text lop-system" #:style "background:purple;padding:0.5rem;align:center" #:id "pull-quote"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:lightgray;white-space:nowrap;text-align:center;"]{
+  Racket, the Ecosystem}}
+
+◊section{
 Software
 
 ◊link["https://download.racket-lang.org/"]{Download Racket v7.3}
@@ -299,7 +303,7 @@ Software
 ◊link["https://pkgs.racket-lang.org/"]{Packages}
 }
 
-◊section{
+◊section[#:style "background:lightgray;padding:0.5rem"]{
 Documentation & tutorials
 
 ◊link["https://docs.racket-lang.org/quick/"]{Quick introduction}
@@ -315,7 +319,7 @@ Documentation & tutorials
 ◊link["https://docs.racket-lang.org"]{All documentation}
 }
 
-◊section[#:style "background:lightgray;padding:0.5rem"]{
+◊section{
 News
 
 ◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.
@@ -330,7 +334,7 @@ News
 
 }
 
-◊section{
+◊section[#:style "background:lightgray;padding:0.5rem"]{
 Community
 
 ◊link["https://lists.racket-lang.org/"]{Mailing list} and ◊link["https://blog.racket-lang.org/"]{blog}
@@ -351,7 +355,7 @@ Make a tax-deductible contribution to support our work.
 }
 
 
-◊section[#:style "background:lightgray;padding:0.5rem"]{
+◊section{
 Books
 
 
@@ -371,7 +375,7 @@ Develop a web application with Racket.
 }
 
 
-◊section{
+◊section[#:style "background:lightgray;padding:0.5rem"]{
 Education
 
 ◊link["https://www.htdp.org/"]{How to Design Programs}
@@ -388,7 +392,7 @@ A curriculum for middle-school students
 
 
 
-◊section[#:id "bottom" #:class "one-column-body-text" #:style "background:lightgray;padding:0.5rem"]{
+◊section[#:id "bottom" #:class "one-column-body-text" #:style "background:white;padding:0.5rem"]{
 Thank you
 
 To ◊link["http://www.nsf.gov/"]{the NSF}, ◊link["http://www.darpa.mil/"]{DARPA}, the ◊link["http://www.ed.gov/FIPSE/"]{Fund for the Improvement of Postsecondary Education (FIPSE)} at the ◊link["http://www.ed.gov/"]{US Department of Education}, the ◊link["http://www.exxonmobil.com/Corporate/community_foundation.aspx"]{Exxon Foundation}, CORD, partners of the Academy of Information Technology, ◊link["http://microsoft.com/"]{Microsoft}, ◊link["http://mozilla.org/"]{Mozilla}, and ◊link["http://google.com/"]{Google} for their generous support over the years.}
