@@ -32,7 +32,7 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 
 Two firsts this year: 
 
-1) RacketCon is located in Salt Lake City, Utah. We'll be at the Tessman Auditorium at ◊link["https://www.slcpl.org/"]{The City Library}. 
+1) RacketCon is located in Salt Lake City, Utah. We'll be at the Tessman Auditorium at ◊link["https://www.slcpl.org/"]{The City Library} main branch at 210 East 400 South.
 
 2) RacketCon happens right after Racket School. All Racket School tickets also include admission to RacketCon. For more info, visit the ◊link["https://school.racket-lang.org/"]{Racket School web page}.
 
