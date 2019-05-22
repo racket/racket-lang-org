@@ -1,46 +1,72 @@
 #lang racket
 
-(require "racket-lang-picture.rkt")
+;; Create players that use the same strategy as player but fail after a certain number of rounds 
 
-(define req
-  (code
-   (require (for-syntax syntax/parse))))
+(module+ test
+  (require rackunit))
 
-(define bfs
-  (code
-   (begin-for-syntax
-     (define (#%app-relation self . **)
-       (define stxes (car **))
-       (define leest (syntax->list stxes))
-       (define count (length (cdr leest)))
-       (unless (= (relation-n self) count)
-         (raise-syntax-error #f "..." stxes))
-       #`(#,(relation-r self) . #,(cdr leest)))
+;; ---------------------------------------------------------------------------------------------------
+;; make-failing-players:
 
-     (struct relation (n r)
-       #:property prop:procedure #%app-relation))))
+#; (->i ((n (listof steps))
+        (#:player-failure    (-> placements/c place/c)
+         #:take-turn-failure (-> board? action?))
+        ;; exactly one of them is not specified! 
+        ;; yields a class that satisfies the player contract:
+        player%/c))
 
-(define dcr
-  (code
-   (define-syntax (define-checked-relation stx)
-     (syntax-parse stx
-       [(_ (r:id a:id ...) x:id)
-        (define arity (length (syntax->list #'(a ...))))
-        (define R (relation arity #'x))
-        #`(define-syntax r #,R)]))))
+;; given a series of steps and functions to simulate methods,
+;; create a player class that fails in the player or take-turn
+;; part of its games, after 'yeah many' steps 
 
-(define checked
-  (code
-   (define-checked-relation (>checked a b) >)))
+(define (make-failing-player%
+         n*
+         #:player-failure    (pf #f)
+         #:take-turn-failure (tff #f))
+  
+  (define n0 (if (number? n*) n* (first n*)))
+  (define k0 (if (number? n*) 0  (rest n*)))
+  
+  (class super%
+    (super-new (other "aaaaaxxxx"))
 
-(define go
-  (code 
-   (>checked 0 1)
-   (>checked 1 0)))
+    (inherit-field name strategy)
 
-(racket-lang-picture "big-macros.png"
-                     req
-                     bfs
-                     dcr
-                     checked
-                     go)
+    (define games-in-series# n0)
+    (define steps-in-game# k0)
+    (define/augment (other-name oname)
+      (set! games-in-series# (- games-in-series# 1))
+      (set! strategy (new strategy% [player name][other oname])))
+
+    (define-syntax-rule
+      (define/failure (method arg) fail smethod)
+      (define/override (method arg)
+        (set! steps-in-game# (- steps-in-game# 1))
+        (if (and (<= games-in-series# 0) (<= steps-in-game# 0) fail)
+            (fail arg)
+            (super method arg))))
+
+    (define/failure (placement list-of-places) pf initialization)
+
+    (define/failure (take-turn board) tff take-turn)))
+
+(define-syntax-rule (failing-module n kw f)
+  (begin
+    (require "../Common/player-interface.rkt")
+
+    (provide
+     (contract-out
+      (rename
+       failing-after-3-for-take-turn%
+       player%
+       player%/c)))
+
+    ;; -----------------------------------------------------------------------------------------------
+    (require "failing.rkt")
+
+    (define failing-after-3-for-take-turn%
+      (make-failing-player% n kw f))))
+
+(define strategy% 0)
+(define super% 1)
+(define cboard 2)

@@ -103,7 +103,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
            #:aria-selected "false" 
            #:id "little-macros-tab"
 	   #:aria-controls "little-macros-content-panel"
-           #:style "font-weight:normal"]{Simple Macros}
+           #:style "font-weight:normal"]{Little Macros}
 	  }
       ◊li[#:class "nav-item"]{
 	◊a[#:data-toggle "tab"
@@ -121,7 +121,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
            #:aria-selected "false" 
            #:id "big-macros-tab"
 	   #:aria-controls "big-macros-content-panel"
-           #:style "font-weight:normal"]{Powerful Macros}
+           #:style "font-weight:normal"]{Big Macros}
 	  }
       ◊li[#:class "nav-item"]{
 	◊a[#:data-toggle "tab"
@@ -148,16 +148,16 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
            #:aria-selected "false" 
            #:id "ugly-syntax-tab"
 	   #:aria-controls "ugly-syntax-content-panel"
-           #:style "font-weight:normal"]{"Ugly" Syntax}
+           #:style "font-weight:normal"]{Any Syntax}
 	  }
 }
-}
+}}
 
 ◊special-section[#:class "one-column-body-text" #:id "little-macros-content-panel" #:role "tabpanel" #:aria-labelledby "little-macros-tab" #:style "display: none;"]{
- ◊h3[#:class "tab-title"]{Simple Macros}
+ ◊h3[#:class "tab-title"]{Little Macros}
  ◊img[#:src "img/little-macros.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
- ◊h4{Simple Macros}
+ ◊h4{Little Macros}
  ◊p{Everybody should be afraid of C macros, and nobody should
   fear Racket macros. Since the Racket world deals
   with concrete syntax trees, macros are tree-rewriting
@@ -165,12 +165,12 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
   text-based macros in ordinary programming languages.}
 
  ◊p{Simple macros allow programmers to abstract over patterns
-  when functions and procedures don't. No programmer should
-  be forced to write ◊docs{lambda} next to some constructor 
-  all the time; that's a pattern, and good software is free 
-  of those. Likewise, nobody should have to work hard to 
-  abstract over the patterns that unit testing frameworks 
-  often impose. Macros free you from all of this.}
+  when functions and procedures can't. No programmer should
+  be forced to repeatedly write let(λx -> ...) to add a binding
+  (◊docs{let}) to a functional programming language; 
+  that's a pattern, and good software is free of those. 
+  Likewise, nobody should have to work hard to abstract 
+  over patterns in unit tests. Macros free you from all of this.}
 }}
 
 ◊special-section[#:class "one-column-body-text" #:id "general-purpose-content-panel" #:role "tabpanel" #:aria-labelledby "general-purpose-tab" #:style "display: none;"]{
@@ -205,20 +205,21 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  ◊h3[#:class "tab-title"]{Big Macros}
  ◊img[#:src "img/big-macros.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
- ◊h4{Macros Work Together}
- ◊p{Racket's macro are far more powerful than Scheme's. Like 
-    with the latter, modules can export and import macros. 
-    Macros correctly refer to locally defined identifiers,
-    while references in macro arguments function as expected.}
+ ◊h4{Big Macros}
+ ◊p{Getting to know the full Racket macro system will feel
+    liberating, empowering, dazzling---like a whole new level 
+    of enlightenment. It is far more powerful than Clojure's, Lisp's, 
+    or Scheme's. In Racket, modules can export and import 
+    macros. Developers can easily turn a collection of co-
+    operating macros that equip Racket with facilities that 
+    other languages have in their core.}
 
-  Getting to know the real Racket macro system will feel
-  liberating, empowering, dazzling---like a whole new level 
-  of enlightenment. Macros can conspire to achieve a common 
-  goal. Structs can play the role of macros and simultaneously 
-  track context-sensitive static information. And these are 
-  only the beginnings of how Racket macros differ from those 
-  in other languages. If push comes to shove, Racket 
-  programmers can even write their own macro expander.}
+  ◊p{While Racket is a functional language, it has offered a
+    sub-language of classes and objects from the beginning. 
+    A Racket programmer can thus easily combine functional
+    with object-oriented components. To mimic Java's class 
+    system, 6,000 lines of macros suffice. And in this setting,
+    ◊link["http://www.cs.utah.edu/plt/publications/aplas06-fff.pdf"]{mixins and traits} are free.}
  }}
 
 ◊special-section[#:class "one-column-body-text" #:id "hash-lang-content-panel" #:role "tabpanel" #:aria-labelledby "hash-lang-tab" #:style "display: none;"]{
@@ -228,18 +229,18 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  ◊h4{Languages. Just make them.}
  ◊p{Languages convey ideas, and some languages convey 
   ideas more easily than others. Programming languages 
-  convey solutions, and some do it better than others.}
+  convey solutions, and some do it better than others.
+  Racket isn't just a language, it's a whole bundle of
+  them. And so, a Racket programmer writes every module 
+  in the best possible language.}
 
-  ◊p{Racket isn't just a language, it's a whole bundle of
-  them.  So, a Racket programmer can write every module in
-  the best possible language. If there is no such language,
-  s/he makes it---on the fly. How? Just open a second IDE
-  window; create a language right there, with just a few
-  keystrokes; and now run the module in the other window in
-  this new language.  Making new languages really requires
-  no setup, no project files, no external tools. 
-  no nothing.}  
-}}
+  ◊p{Often ◊link["https://lang.video"]{an application domain} comes with several
+  languages.  When you need a new language, you make it---
+  on the fly. Open an IDE window; create a language right
+  there, with just a few keystrokes; and run a module in 
+  this new language in a second IDE window.  Making new 
+  languages really requires no setup, no project files, 
+  no external tools, no nothing.}  }}
 
 ◊special-section[#:class "one-column-body-text" #:id "ide-content-panel" #:role "tabpanel" #:aria-labelledby "ide-tab" #:style "display: none;"]{
  ◊h3[#:class "tab-title"]{IDE Support}
@@ -247,8 +248,8 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  ◊div[#:class "container-fluid"]{
  ◊h4{IDE Support for Languages}
 
- ◊p{Racket comes with its own IDE, DrRacket. It comes with
-  some unique features. For example, when a programmer 
+ ◊p{Racket comes with its own IDE, DrRacket, and it sports
+  some unique features . For example, when a programmer 
   mouses over an identifier, the IDE draws an arrow back 
   to where it was defined.}
 
@@ -264,24 +265,23 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 }}
 
 ◊special-section[#:class "one-column-body-text" #:id "ugly-syntax-content-panel" #:role "tabpanel" #:aria-labelledby "ugly-syntax-tab" #:style "display: none;"]{
- ◊h3[#:class "tab-title"]{"Ugly" Syntax}
+ ◊h3[#:class "tab-title"]{Any Syntax}
  ◊img[#:src "img/ugly-syntax.png" #:class "lop-image"]{}
  ◊div[#:class "container-fluid"]{
- ◊h4{"Ugly" Syntax}
- ◊p{Real Racket programmers love parentheses. But they do 
-  have empathy for those who cannot appreciate the beauty 
-  and elegance of nicely curved parens. So, Racket languages 
-  may come with an "ugly" surface syntax.}
+ ◊h4{Any Syntax}
 
- ◊p{Building languages with conventional surface syntax 
- is almost as easy as building beautiful languages. Racket's 
- ecosystem comes with several parsing packages that allow 
- developers to easily map conventional syntax to the elements 
- of any parenthesized language, which is then compiled to 
- ordinary Racket with the help of Racket's macro system. 
- With a bit of extra help, this pipeline also connects to 
- Racket's IDE like any other user-built language.}
-}}
+ ◊p{Real Racket programmers love parentheses, but they
+  have empathy for those few who need commas and braces.
+  Hence, building languages with conventional surface
+  syntax is almost as easy as building beautiful languages.}
+
+ ◊p{Racket's ecosystem comes with parsing packages that
+ allow developers to easily map any syntax to a
+ parenthesized language, which is then compiled to
+ ordinary Racket with the help of Racket's macro system.
+ Such a language can also exploit the hooks of the IDE
+ framework, so that its programmers may take advantage
+ of Racket's IDE.}  }}
 
 }}}
 

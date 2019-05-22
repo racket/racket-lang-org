@@ -13,3 +13,4 @@
   fprime)
 
 ((d/dx sin) (/ pi 2))
+((d/dx cos) (/ pi 2))
