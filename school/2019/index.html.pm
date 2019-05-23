@@ -73,7 +73,7 @@ This track will be taught by ◊link["https://www.ccs.neu.edu/home/matthias/"]{M
 
 ◊ul[
 
-◊li{Course-based or self-directed Racket programming experience beyond ◊link["https://htpd.org/"]{How to Design Programs} and ◊link["https://realmofracket.com"]{Realm of Racket} is needed.} 
+◊li{Course-based or self-directed Racket programming experience beyond ◊link["https://htdp.org/"]{How to Design Programs} and ◊link["https://realmofracket.com"]{Realm of Racket} is needed.} 
 
 ]
 
