@@ -1,20 +1,9 @@
 #lang pollen
 
 ◊top-section{
-◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{solve problems · make languages}}
-
-◊div{
-
-◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
-
-◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
-
-◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
-}}
-
-◊top-section{
-◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
-  ◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
+ ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
+  ◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket 
+  ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
 
 ◊div{
 
@@ -104,7 +93,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 }
 
 ◊special-section[#:class "one-column-body-text lop-system" #:style "background:purple;padding:0.5rem;align:center" #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
+ ◊span[#:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Language-Oriented Programming Language}}
 
 ◊special-section[#:class "one-column-body-text" #:style "background:white;padding:0.8rem" #:id "pull-quote"]{
