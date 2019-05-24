@@ -1,19 +1,36 @@
 #lang pollen
 
 ◊top-section{
-◊span[#:id "logo" #:style
-"font-size:2.3rem;white-space:nowrap;"]{
-  ◊img[#:src "img/racket-logo.svg" #:class "logo"]
-   Racket 
-  ◊span[#:id "tagline" #:class "disappearing" #:style
-"font-size:40%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{the language-oriented programming language}}
+◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{solve problems · make languages}}
 
 ◊div{
-◊link[#:class "top-button disappearing-late" #:id "packages" "sfc.html"]{donate}
+
 ◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
+
 ◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
+
 ◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
 }}
+
+◊top-section{
+◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
+  ◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
+
+◊div{
+
+◊link[#:class "top-button disappearing-late" #:id "packages" "sfc.html"]{donate}
+
+◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
+
+◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
+
+◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
+}
+
+}
+
+◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{Learn how to make programming languages at ◊link["https://school.racket-lang.org"]{Racket School 2019}, July 8–12 in Salt Lake City. Members of the ◊link["team.html"]{Racket team} will teach two multi-day workshops. Financial aid available for qualifying students. Followed by ◊link["https://con.racket-lang.org/"]{ninth RacketCon}. Join us!
+}
 
 ◊special-section[#:class "one-column-body-text lop-system" #:style "background:purple;padding:0.5rem;align:center" #:id "pull-quote"]{
  ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
