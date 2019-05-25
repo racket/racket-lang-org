@@ -314,7 +314,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/racket-lang.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:src "img/il-grande-racket.png" #:class "lop-image"]{} }}}}}}
 
 ◊div[#:id "tutorials" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -394,7 +394,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/il-grande-racket.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:src "img/redex-summer-school.jpg" #:class "lop-image"]{} }}}}}}
 
 
 ◊div[#:id "books" #:class "eco" #:style "display:none"]{
@@ -445,7 +445,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/redex-summer-school.jpg" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:src "img/four.png" #:class "lop-image"]{} }}}}}}
 
 ◊div[#:id "us" #:class "eco" #:style "display:block"]{
  ◊special-section[#:class "one-column-body-text"]{
