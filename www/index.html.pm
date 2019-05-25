@@ -17,11 +17,15 @@
 }}
 
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
-News
 
-◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.
+  ◊h4{News}
 
-Learn how to make programming languages at ◊link["https://school.racket-lang.org"]{Racket School 2019}, July 8–12 in Salt Lake City. Members of the ◊link["team.html"]{Racket team} will teach two multi-day workshops. Financial aid available for qualifying students. Followed by ◊link["https://con.racket-lang.org/"]{ninth RacketCon}. Join us!}
+◊table[#:id "use ul style instead?"]{
+ ◊tr{ ◊td{◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.} }
+
+ ◊tr{ ◊td{Learn how to make programming languages at ◊link["https://school.racket-lang.org"]{Racket School 2019}, July 8–12
+ in Salt Lake City. Members of the ◊link["team.html"]{Racket team} will teach two multi-day workshops. Financial aid
+ available for qualifying students. Followed by ◊link["https://con.racket-lang.org/"]{ninth RacketCon}. Join us!}}}}
 
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
  ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
