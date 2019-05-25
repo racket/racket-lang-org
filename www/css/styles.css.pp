@@ -117,6 +117,11 @@ top-section {
   margin-left: 1rem;
 }
 
+.mitem {
+  font-size: 50%;
+}
+
+
 .lang:hover .click-here {
   opacity: 0.8;
 }
