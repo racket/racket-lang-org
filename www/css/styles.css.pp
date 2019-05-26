@@ -75,7 +75,6 @@ top-section {
     height: 21rem;
 }
 
-
 .expander > div {
     width: 100%;
 }
@@ -427,6 +426,15 @@ a, a:hover {
 }
 
 
+.langwww {
+    ~height: 11.5rem;
+    height: 12rem;
+    padding: 0.5rem;
+    padding-top: 0;
+    padding-bottom: 0.25rem;
+    opacity: .5;
+}
+
 @media all and (max-width:650px) {
 @media all and (max-width:650px){html {font-size: 16px;}}
 @media all and (max-width:590.0px){html {font-size: 15px;}}
@@ -453,5 +461,7 @@ a, a:hover {
   .active_expander > .inner {opacity: 1;}
   .expander, .expander:hover, .active_expander:hover {border-color: none;}
   .active_expander {border-color: gray;}
+
+}
 
 }

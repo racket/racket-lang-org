@@ -20,12 +20,15 @@
 
   ◊h4{News}
 
-◊table[#:id "use ul style instead?"]{
- ◊tr{ ◊td{◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.} }
+◊ul[#:class "doclinks"]{
+ ◊li{◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.}
 
- ◊tr{ ◊td{Learn how to make programming languages at ◊link["https://school.racket-lang.org"]{Racket School 2019}, July 8–12
- in Salt Lake City. Members of the ◊link["team.html"]{Racket team} will teach two multi-day workshops. Financial aid
- available for qualifying students. Followed by ◊link["https://con.racket-lang.org/"]{ninth RacketCon}. Join us!}}}}
+ ◊li{◊link["https://school.racket-lang.org"]{Racket School 2019}---Learn how to make programming languages, July 8–-12 in Salt Lake City. Students, ask about Financial aid.} 
+
+ ◊li{◊link["https://con.racket-lang.org/"]{ninth RacketCon} immediately follows the Racket School.}
+
+ ◊li{Join us for both events in Salt Lake City!}}}
+
 
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
  ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
@@ -131,7 +134,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
    ◊table{
     ◊tr{
     ◊td{ }    ◊td{ }    ◊td{ }
-    ◊td{ ◊img[#:src "img/a-racket-logo.jpg" #:class "lop-image"]{}}}}
+    ◊td{ ◊img[#:src "http://users.cs.northwestern.edu/~robby/logos/racket-logo.svg" #:class "lop-image"]{}}}}
   }
 }}
 
@@ -274,11 +277,37 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
    ◊table{
-    ◊tr{
-    ◊td{ }    ◊td{ }    ◊td{ }
-    ◊td{ ◊img[#:src "http://users.cs.northwestern.edu/~robby/logos/racket-logo.svg" #:class "lop-image"]{}}}}
-  }
-}}
+    ◊tr[#:valign "top"]{
+    ◊td{ 
+◊langwww["#lang typed/racket" #:id "lang3"]{
+◊pre{;; Using higher-order occurrence typing
+(◊docs{define-type} SrN (◊docs{U} ◊docs{String} ◊docs{Number}))
+(◊docs{:} tog ((◊docs{Listof} SrN) -> ◊docs{String})
+(◊docs{define} (tog l)
+  (◊docs{apply} ◊docs{string-append} (◊docs{filter} ◊docs{string?} l)))
+(tog (◊docs{list} 5 "hello " 1/2 "world" (◊docs{sqrt} -1)))}}}
+
+    ◊td{ 
+◊langwww["#lang scribble/base" #:id "lang2"]{
+◊pre{@; Generate a PDF or HTML document
+@(◊docs{require} (◊docs{only-in} racket ~a))
+@(◊docs{define} N 99)
+@◊docs{title}{Bottles: @◊docs{italic}{Abridged}}
+@(◊docs{apply} 
+  ◊docs{itemlist}
+  (◊docs{for/list} ([n (◊docs{in-range} N 0 -1)])
+    @◊docs{item}{@(◊docs{~a} n) bottles.}))}}}
+
+    ◊td{ 
+◊langwww["#lang datalog" #:id "lang4"]{
+◊pre{ancestor(A, B) :- parent(A, B).
+ancestor(A, B) :-
+  parent(A, C), ancestor(C, B).
+parent(john, douglas).
+parent(bob, john).
+ancestor(A, B)?}}}
+
+}}}}}
 
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
  ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
@@ -390,15 +419,14 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
       ◊link["https://twitter.com/racketlang"]{@racketlang} on Twitter
 
       ◊link["team.html"]{Team}
-      Racket's development benefits from a large distributed pool of
-      contributors. 
+      Racket's development benefits from a large distributed pool of contributors. 
 
       ◊link["sfc.html"]{Software Freedom Conservancy}
       Make a tax-deductible contribution to support our work.}}
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/redex-summer-school.jpg" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:src "img/racket-con-2018.png" #:class "lop-image"]{} }}}}}}
 
 
 ◊div[#:id "books" #:class "eco" #:style "display:none"]{
@@ -457,7 +485,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
    ◊table{
     ◊tr{
     ◊td{ }    ◊td{ }    ◊td{ }
-    ◊td{ ◊img[#:src "http://users.cs.northwestern.edu/~robby/logos/rice-quad-lambda.gif" #:class "lop-image"]{}}}}}
+    ◊td{ ◊img[#:src "img/racket-school-2018.png" #:class "lop-image-rs"]{}}}}}
 }}
 
 ◊section[#:id "bottom" #:class "one-column-body-text" #:style "background:white;padding:0.5rem"]{
