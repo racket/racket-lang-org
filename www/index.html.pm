@@ -2,7 +2,7 @@
 
 ◊top-section{
  ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
-  ◊img[#:src "img/racket-logo.svg" #:class "logo"] Racket 
+  ◊img[#:alt "small logo" #:src "img/racket-logo.svg" #:class "logo"] Racket 
   ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
 
 ◊div{
@@ -36,7 +36,7 @@
 
 ◊div[#:class "w3-bar w3-card"]{
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'mature')"]{◊div[#:style "mitem"]{Mature}}
-  ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'batteries')"]{◊div[#:style "mitem"]{With Batteries}}
+  ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'batteries')"]{◊div[#:style "mitem"]{Batteries Included}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'extensible')"]{◊div[#:style "mitem"]{Extensible}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'strong')"]{◊div[#:style "mitem"]{Strong}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'drracket')"]{◊div[#:style "mitem"]{Polished}}
@@ -134,7 +134,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
    ◊table{
     ◊tr{
     ◊td{ }    ◊td{ }    ◊td{ }
-    ◊td{ ◊img[#:src "http://users.cs.northwestern.edu/~robby/logos/racket-logo.svg" #:class "lop-image"]{}}}}
+    ◊td{ ◊img[#:alt "large logo" #:src "http://users.cs.northwestern.edu/~robby/logos/racket-logo.svg" #:class "lop-image"]{}}}}
   }
 }}
 
@@ -347,7 +347,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/il-grande-racket.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:alt "Il Grande Racket" #:src "img/il-grande-racket.png" #:class "lop-image"]{} }}}}}}
 
 ◊div[#:id "tutorials" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -378,7 +378,7 @@ ancestor(A, B)?}}}
     ◊td{ }
     ◊td{ }
 
-    ◊td{◊img[#:src "img/racket-guide.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:alt "The Guide" #:src "img/racket-guide.png" #:class "lop-image-rs"]{} }}}}}}
 
 ◊div[#:id "stuff" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -397,7 +397,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/gear-and-stuff.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:alt "gear" #:src "img/gear-and-stuff.png" #:class "lop-image"]{} }}}}}}
 
 ◊div[#:id "community" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -426,7 +426,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/racket-con-2018.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:alt "Racket School 2018" #:src "img/racket-school-2018.png" #:class "lop-image-rs"]{} }}}}}}
 
 
 ◊div[#:id "books" #:class "eco" #:style "display:none"]{
@@ -453,7 +453,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/beautiful-racket-cover.svg" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:alt "Beautiful Racket" #:src "img/beautiful-racket-cover.svg" #:class "lop-image"]{} }}}}}}
 
 ◊div[#:id "education" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -477,7 +477,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:src "img/four.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img[#:alt "The Four Amigos" #:src "img/four.png" #:class "lop-image-rs"]{} }}}}}}
 
 ◊div[#:id "us" #:class "eco" #:style "display:block"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -485,7 +485,7 @@ ancestor(A, B)?}}}
    ◊table{
     ◊tr{
     ◊td{ }    ◊td{ }    ◊td{ }
-    ◊td{ ◊img[#:src "img/racket-school-2018.png" #:class "lop-image-rs"]{}}}}}
+    ◊td{ ◊img[#:alt "eighth RackeCon, 2018" #:src "img/racket-con-2018.png" #:class "lop-image-rs"]{}}}}}
 }}
 
 ◊section[#:id "bottom" #:class "one-column-body-text" #:style "background:white;padding:0.5rem"]{
