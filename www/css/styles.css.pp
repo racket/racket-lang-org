@@ -338,7 +338,7 @@ img.logo {
   border: 0px solid green;
   display: inline-block;
   width: 1.15em;
-  transform: translate(0,0.15em);
+  transform: translate(0,-0.15em);
   margin-right: 0.25rem;
 }
 
