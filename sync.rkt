@@ -127,13 +127,23 @@
 
 (current-directory orig-dir)
 
-(if save-temps?
-    (if render-locally?
-        (begin
-          (when (directory-exists? render-locally?)
-            (delete-directory/files render-locally?))
-          (rename-file-or-directory (build-path tmp-dir "generated") render-locally? #t))
-        (printf "Files saved in ~a\n" tmp-dir))
-    (delete-directory/files tmp-dir))
+(cond
+  [(not save-temps?) (delete-directory/files tmp-dir)]
+  [(not render-locally?) (printf "Files saved in ~a\n" tmp-dir)]
+  [else 
+    ;; move rendered pages into place 
+    (when (directory-exists? render-locally?)
+      (delete-directory/files render-locally?))
+    (define tmp-src (build-path tmp-dir "generated"))
+    (define local-dest render-locally?)
+    (rename-file-or-directory tmp-src local-dest #t)
+
+    ;; generate and move code into place 
+    (parameterize ((current-directory "www/img/"))
+      (system "./general-purpose-x"))
+    (define gp "general-purpose/")
+    (define gp-src (string-append "www/img/" gp))
+    (define dest (string-append render-locally? "/www/" gp))
+    (rename-file-or-directory gp-src dest #t)])
 
 (printf "\n\nIf you updated any CSS file, please purge it from the Cloudflare cache.\n\n")
