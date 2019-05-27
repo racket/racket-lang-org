@@ -131,12 +131,22 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 ◊div[#:id "it" #:class "the-language" #:style "display:block"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-   ◊table{
+   ◊table[#:valign "top"]{
     ◊tr{
-    ◊td{ }    ◊td{ }    ◊td{ }
-    ◊td{ ◊img[#:alt "large logo" #:src "http://users.cs.northwestern.edu/~robby/logos/racket-logo.svg" #:class "lop-image"]{}}}}
-  }
-}}
+    ◊td{ ◊img[#:alt "large logo" #:src "http://users.cs.northwestern.edu/~robby/logos/racket-logo.svg" #:class "lop-image"]{}}
+    ◊td{ 
+◊langwww["#lang racket/gui"]{
+◊pre{;; let's play a guessing game 
+
+(◊docs{define} frame (◊docs{new} frame% [label "Guess"]))
+(◊docs{define} n (◊docs{random} 5)) 
+(◊docs{define} ((check i) btn evt)
+  (◊docs{message-box} "?" (◊docs{if} (◊docs{=} i n) "Yes" "No")))
+(◊docs{for} ([i (◊docs{in-range} 5)]) 
+  (◊docs{make-object} ◊docs{button%} (◊docs{~a} i) frame (check i)))
+(◊docs{send} frame show #t)}}}
+}
+}}}}
 
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
  ◊span[#:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
@@ -155,42 +165,92 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 ◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊h4{Little Macros}
-  ◊img[#:src "img/little-macros.png" #:class "lop-image"]{}
   ◊div[#:class "container-fluid" #:style "font-size:77%"]{
-  ◊p{Everybody should be afraid of C macros, and nobody should
-   fear Racket macros. Since the Racket world deals
-   with concrete syntax trees, macros are tree-rewriting
-   rules, which avoids many of the syntactic problems of
-   text-based macros in ordinary programming languages.}
 
-  ◊p{Simple macros allow programmers to abstract over patterns
-   when functions and procedures can't. No programmer should
-   be forced to repeatedly write to add a binding
-   to a functional programming language; 
-   that's a pattern, and good software is free of those. 
-   Likewise, nobody should have to work hard to abstract 
-   over patterns in unit tests. Macros free you from all of this.}}
-}}
+   ◊table{
+    ◊tr[#:valign "top"]{
+
+    ◊td{ 
+
+     ◊p{Racket allows programmers to add new syntactic constructs
+     in the same way that other languages permit the formulation
+     of procedures, methods, or classes.  All you need to do is
+     formulate a simple rule that rewrites a custom syntax to a
+     Racket expression or definition.}
+
+     ◊p{Little macros can particularly help programmers with
+     DRY (Don't Repeat Yourself) where other features can't.
+     Programmers abstract over repeated patters to save
+     themselves future work. Functions and procedures are
+     examples of such abstractions.  They abstract over
+     expressions and statements, respectively, that differ in
+     simple ways. On many occasions, however, developers stare
+     at syntactic patterns that can't be avoided with ordinary
+     means. This is where ``little macros'' come in. Try it for
+     yourself.}
+
+     ◊p{Of course, syntactic language extensions are most
+     useful if the underlying programming language itself is
+     already a rich and powerful general-purpose language. And
+     Racket is.}}
+
+    ◊td{ 
+◊langwww["#lang racket" ]{
+◊pre{;; Defining and using simple syntactic extensions 
+(◊docs{require} racket/splicing)
+
+;; define it ...
+(◊docs{define-syntax-rule}
+  (where definition 
+         ((define (locally-defined-id x ...) body-id)
+           ...))
+  (◊docs{splicing-letrec} 
+         ((locally-defined-id (lambda (x ...) body-id)) 
+           ...)
+         definition))
+
+;; ... and use it immediately in the same module 
+(where (define is-5-odd (odd? 5))
+       {(define (odd? n) (if (= n 1) #t (even? (- n 1))))
+        (define (even? n) (if (= n 0) #t (even? (- n 1))))})
+  ;; { ... } are equivalent to ( ... )
+
+
+(if is-5-odd "five is odd" "five is not odd")}}
+}}}}}}
 
 ◊div[#:id "general-purpose" #:class "lop"  #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
    ◊h4{General Purpose}
-   ◊img[#:src "img/general-purpose-2-plot.png" #:class "lop-image"]{}
-    ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-    ◊p{Racket is a general-purpose programming language. 
-    It comes with a range of built-in libraries, including 
-    a comprehensive GUI toolbox. The GUI programs are highly 
-    portable among the major platforms.}
 
-    ◊p{When the built-in libraries don't get the job done, 
-    look through the vast on-line catalog of user-contributed 
-    packages. It comes with libraries for scientific simulations,
-    video scripting, and web APIs. In all likelihood, you will 
-    find something that gets you started on your project. 
-    If all else fails, Racket's FFI makes it easy to program as
-    if Racket were a parenthesized C---so linking in foreign 
-    libraries is as easy as PI.}}
-}}
+   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+     ◊table{
+      ◊tr[#:valign "top"]{
+
+    ◊td{ 
+
+   ◊a[#:href "general-purpose/general-purpose-2.html"]{
+     ◊img[#:src "img/general-purpose-2-plot.png" #:class "lop-image"]{}}}
+
+    ◊td{ 
+
+    ◊p{Racket comes with a comprehensive suite of libraries,
+    including a cross-platform GUI toolbox, a built-in web
+    server, command-line parsing, data visualization, and
+    more. When built-in libraries don't get the job done,
+    thousands of packages are a single command away.  Racket's
+    package ecosystem includes libraries for everything from
+    scientific simulation to video editing; API testing to 3D
+    graphics.  Racket's FFI makes it easy to connect to
+    existing C libraries when needed.
+
+    ◊p{With a few lines of code you can write a program that
+    renders turns an CSV file into a scatter plot. Using the
+    ◊tt{racket/gui} language, you ◊docs{require} three
+    modules: ◊tt{csv-reading}, ◊tt{plot}, and ◊tt{pict}.
+    Then you add a frame, a canvas, and a menu bar, and
+    voilà, you're done.}}}
+}}}}}
 
 ◊div[#:id "big-macros" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
