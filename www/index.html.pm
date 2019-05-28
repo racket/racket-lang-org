@@ -159,7 +159,6 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'hash-langs')"]{◊div[#:style "mitem"]{Hash Langs}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'ide-support')"]{◊div[#:style "mitem"]{IDE Support}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'any-syntax')"]{◊div[#:style "mitem"]{Any Syntax}}
-  ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'more-it')"]{◊div[#:style "mitem"]{}}
 }}
 
 ◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
@@ -406,7 +405,6 @@ ancestor(A, B)?}}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'books')"]{◊div[#:style "mitem"]{Books}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'education')"]{◊div[#:style "mitem"]{Education}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'stuff')"]{◊div[#:style "mitem"]{Gear & Stuff}}
-  ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'us')"]{◊div[#:style "mitem"]{}}
 }}
 
 ◊div[#:id "software" #:class "eco" #:style "display:none"]{
