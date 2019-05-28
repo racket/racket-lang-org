@@ -138,12 +138,14 @@
     (define local-dest render-locally?)
     (rename-file-or-directory tmp-src local-dest #t)
 
-    ;; generate and move code into place 
+    ;; generate and move code into place
+    #;
+    (begin
     (parameterize ((current-directory "www/img/"))
       (system "./general-purpose-x"))
     (define gp "general-purpose/")
     (define gp-src (string-append "www/img/" gp))
     (define dest (string-append render-locally? "/www/" gp))
-    (rename-file-or-directory gp-src dest #t)])
+    (rename-file-or-directory gp-src dest #t))])
 
 (printf "\n\nIf you updated any CSS file, please purge it from the Cloudflare cache.\n\n")
