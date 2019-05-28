@@ -30,11 +30,11 @@
  ◊li{Join us for both events in Salt Lake City!}}}
 
 
+◊div[#:class "w3-card"]{
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
  ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Programming Language}}
-
-◊div[#:class "w3-bar w3-card"]{
+◊div[#:class "w3-bar"]{
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'mature')"]{◊div[#:style "mitem"]{Mature}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'batteries')"]{◊div[#:style "mitem"]{Batteries Included}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'extensible')"]{◊div[#:style "mitem"]{Extensible}}
@@ -42,7 +42,7 @@
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'drracket')"]{◊div[#:style "mitem"]{Polished}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'open')"]{◊div[#:style "mitem"]{With a Vibrant Community}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('the-language',event,'it')"]{◊div[#:style "mitem"]{}}
-}
+}}
 
 ◊div[#:id "extensible" #:class "the-language" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -148,11 +148,11 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 }
 }}}}
 
+◊div[#:class "w3-card"]{
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
  ◊span[#:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Language-Oriented Programming Language}}
-
-◊div[#:class "w3-bar w3-card"]{
+◊div[#:class "w3-bar"]{
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'little-macros')"]{◊div[#:style "mitem"]{Little Macros}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'general-purpose')"]{◊div[#:style "mitem"]{General Purpose}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'big-macros')"]{◊div[#:style "mitem"]{Big Macros}}
@@ -160,7 +160,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'ide-support')"]{◊div[#:style "mitem"]{IDE Support}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'any-syntax')"]{◊div[#:style "mitem"]{Any Syntax}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('lop',event,'more-it')"]{◊div[#:style "mitem"]{}}
-}
+}}
 
 ◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -395,11 +395,11 @@ ancestor(A, B)?}}}
 
 }}}}}
 
+◊div[#:class "w3-card"]{
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
  ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Ecosystem}}
-
-◊div[#:class "w3-bar w3-card"]{
+◊div[#:class "w3-bar"]{
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'software')"]{◊div[#:style "mitem"]{Software}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'tutorials')"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'community')"]{◊div[#:style "mitem"]{Community}}
@@ -407,7 +407,7 @@ ancestor(A, B)?}}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'education')"]{◊div[#:style "mitem"]{Education}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'stuff')"]{◊div[#:style "mitem"]{Gear & Stuff}}
   ◊button[#:class "w3-bar-item w3-button tablink" #:onclick "openTab('eco',event,'us')"]{◊div[#:style "mitem"]{}}
-}
+}}
 
 ◊div[#:id "software" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
