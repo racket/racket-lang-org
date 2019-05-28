@@ -31,7 +31,7 @@
 
 
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Programming Language}}
 
 ◊div[#:class "w3-bar w3-card"]{
@@ -149,7 +149,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 }}}}
 
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
- ◊span[#:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
+ ◊span[#:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Language-Oriented Programming Language}}
 
 ◊div[#:class "w3-bar w3-card"]{
@@ -396,7 +396,7 @@ ancestor(A, B)?}}}
 }}}}}
 
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:110%;color:white;white-space:nowrap;text-align:center;"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
   Racket, the Ecosystem}}
 
 ◊div[#:class "w3-bar w3-card"]{
