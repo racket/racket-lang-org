@@ -84,11 +84,15 @@ For those also attending ◊link["https://school.racket-lang.org"]{Racket School
 ◊folded{
 ◊speaker["" "Phil Hagelberg"]{In Production: creating physical objects with Racket}
 
-◊bio{◊strong{Phil Hagelberg} (aka technomancy) has been using Lisp dialects since he first discovered Emacs in school. He writes Clojure at work, uses Racket for producing DIY keyboards, and is a lead developer on the Fennel compiler.}
+As the maker movement has taken off, fabrication procedures have become more and more approachable to the enterprising hacker. We will cover how Racket was used in the creation of the Atreus DIY ergonomic keyboard kit in two of the key design elements: the circuit board and the laser-cut enclosure, as well as details about how these techniques can be applied to other projects.
+
+◊bio{◊strong{Phil Hagelberg} (aka ◊link["https://github.com/technomancy"]{technomancy}) has been using Lisp dialects since he first discovered Emacs in school. He writes Clojure at work, uses Racket for producing DIY keyboards, and is a lead developer on the Fennel compiler.}
 }
 
 ◊folded{
 ◊speaker["" "Gershon Mathew Wolfe"]{A Mental Model for Algorithmic Music Composition}
+
+I have put together a melody-generating system in Racket called arsNova and arsMosis. My workflow is based on the theory that the human brain enjoys listening to mid-complex melodies, as opposed to very simple or overly complex patterns. My system uses a combination of cellular automata, entropy, musical set theory, and interval class vectors to deduce the most appealing melodies.
 
 ◊bio{◊strong{Gershon Mathew Wolfe} has a background in statistical physics and has been developing and prototyping software algorithms for the past 29 years in the fields of bioinformatics, machine learning in medical diagnostics, decision making processes in defense, and algorithmic music composition.  Worked at Nalorac, Incyte Pharmaceuticals, Large Scale Biology, Advanced Ideas in Medicine, contract positions, SoSACorp, and currently at Algorhythms LLC.  Gershon has a B.S. in chemistry from UCLA, a Ph.D. in chemical physics from the University of Washington, and a postdoctoral fellowship  from UCSF.}
 }
@@ -100,7 +104,11 @@ For those also attending ◊link["https://school.racket-lang.org"]{Racket School
 }
 
 ◊folded{
-◊speaker["" "Greg Hendershott"]{Racket and Emacs: Fight! (in which we spend 5 more years herding cats)}
+◊speaker["" "Greg Hendershott"]{◊span{Racket and Emacs: Fight! 
+(in which we spend 5 more years herding cats)}}
+
+Racket Mode started in 2012 as some awkward Emacs Lisp to send XREPL commands to command-line Racket running in an M-x shell buffer. The official repo's initial commit 804b3c6 was in January 2013. After nearly six years and 900 commits (37,612 insertions and 19,661 deletions) it has evolved. The presentation includes live demonstration, discussion of design considerations including interprocess communication and security, and possible future directions. A user's guide and reference ◊link["https://racket-mode.com"]{is available here}.
+
 
 ◊bio{Regardless of how they may feel about each other, ◊strong{Greg Hendershott} loves both Racket and Emacs. He first showed racket-mode at RacketCon 2014. He founded Cakewalk, Inc. and Extramaze LLC. Through the latter he is sometimes available to consult on Racket projects.}
 }
@@ -109,17 +117,23 @@ For those also attending ◊link["https://school.racket-lang.org"]{Racket School
 ◊folded{
 ◊speaker["" "Eric Griffis"]{Algebraic Racket in Action}
 
+Algebraic Racket is a fresh take on functional meta-programming with Racket. Its transparent data structures and pattern-based de-structuring syntax makes a broad range of functional programming idioms easier to read and write. Come see how I use Algebraic Racket to get in the zone faster, ride that flow longer, and exploit Racket's proclivity for language-oriented programming to get more done with less effort.
+
 ◊bio{◊strong{Eric Griffis} is an intuitive meta-programmer with an eye for composition, recursion, and self-similarity. A consummate bottom-up thinker, he enjoys playing with tools and techniques for developing software that creates and interacts with other software-producing software.}
 }
 
 ◊folded{
 ◊speaker["" "Vlad Kozin"]{#lang wishful thinking (will! it be so)}
 
+What might solving a real production problem in a language specifically designed for building languages look like? Let's get a glimpse by implementing FastCGI in Racket — a simple protocol that'll take us all the way from bit twiddling to Web frameworks. We won't tie ourselves to the defaults that Racket designers blessed us with, but boldly employ wishful thinking, borrow readily from other languages. You want prototypes with Lua-style metatables? Concise syntax? Single and multiple inheritance with generic dispatch? How generic is generic? Multimethods? Full Metaobject Protocol? Beyond Metaobject Protocol? A language of bit patterns? The one true Web framework? Build yourself a better language. Dare say: I wish I could — then make it so.
+
 ◊bio{◊strong{Vlad Kozin} is a dilettante programmer from London who taught himself programming through HtDP and PLAI, did some paid Javascript, which he does not recommend, then paid Clojure, which he does. He has now gone back to the roots. Former @yandex and @droitfintech. Fall'13 @recursecenter aka @hackerschool alum.}
 }
 
 ◊folded{
 ◊speaker["" "Andrew Blinn"]{Fructure: A Structured Editing Engine in Racket}
+
+Fructure is a prototype for an extensible structured editing engine. In structured editing, core edit actions reflect the extended selves of the objects you're bringing to life (grammatical programs with semantic properties), as opposed to the shape of their serialization (text files). Editing abstractions like cursors and code-folding are reimagined as syntactic scaffolding in a meta-grammar of syntactic affordances. Fructure lets language providers specify syntactic forms and semantic refactorings as production and transformation rules in a tiny term-rewriting DSL. Lessening reliance on after-the-fact correction or ad-hoc autocompletion, program creation consists rather of a guided search in the space of valid programs. Over the hood, my emphasis is on visual and kinetic appeal; creating a fun, fluid editing process with an eye to discoverability. 
 
 ◊bio{◊strong{Andrew Blinn} bounced off programming early in life, finding it unbearably fiddly in some ways and not fiddly enough in others. Two years ago and mostly through a BSc in math, he accidentally took a Racket-based PL course and immediately pivoted to CS. At the moment he is defrosting a dormant interest in visual design and interaction, hoping to further tweak programming's fiddliness attribute.}
 }
@@ -133,7 +147,7 @@ For those also attending ◊link["https://school.racket-lang.org"]{Racket School
 
 ◊gap[1]
 
-◊h3{◊xtarget["schedule"]{◊string->svg[#:width heading-width]{>(schedule)}}}
+◊h3{◊xtarget["schedule"]{◊string->svg[#:width (* heading-width 1.4)]{>(schedule 'saturday)}}}
 
 ◊grid[#:id "schedule"
 ◊row{◊at{09:00–09:25} ◊desc{◊em{breakfast & registration}}}
@@ -158,6 +172,36 @@ John Clements
 }}
 ]
 
+◊h3{◊string->svg[#:width (* heading-width 1.4)]{>(schedule 'sunday)}}
+
+◊grid[#:id "schedule"
+◊row{◊at{09:00–09:25} ◊desc{◊em{breakfast}}}
+◊row{◊at{09:25–09:30} ◊desc{Welcome}}
+◊row{◊at{09:30–10:30} ◊desc{Matthew Flatt: ◊em{State of Racket}}}
+◊row{◊at{10:30–10:50} ◊desc{◊em{break}}}
+◊row{◊at{10:50–11:05} ◊desc{Interlude}}
+◊row{◊at{11:05–11:50} ◊desc{
+Tutorials (multiple tracks)
+◊strong{GameJam with Jay McCarthy}: Explore the libraries that are available for building games and graphics with Racket.
+}}
+◊row{◊at{11:50–13:20} ◊desc{◊em{lunch (provided)}}}
+◊row{◊at{13:20–16:00} ◊desc{
+Hackathon (multiple tracks)
+◊strong{LangJam}: Make an experimental language.
+◊strong{GameJam}: Build a simple game.
+◊strong{Data science}: Improve the data-science libraries.
+}}
+◊row{◊at{16:00–16:20} ◊desc{LangJam demos}}
+◊row{◊at{16:20–16:40} ◊desc{GameJam demos}}
+◊row{◊at{16:40–17:00} ◊desc{Data science demos}}
+]
+
+
+◊h3{◊xtarget["sponsors"]{◊string->svg[#:width (* heading-width 1.5)]{>(sponsors)}}}
+
+◊inline-list['div]{
+◊link["//lisp.sh"]{Jesse Alama}
+}
 
 ◊gap[1]
 

@@ -188,7 +188,6 @@ h2 + p {
 }
 
 .bio {
-  margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
 
@@ -259,6 +258,10 @@ grid > row + row {
 
 .foldable {
   cursor: pointer;
+}
+
+.payload {
+  padding-top: 1rem;
 }
 
 .speaker-desc {
