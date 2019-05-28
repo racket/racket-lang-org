@@ -49,8 +49,7 @@
 
   ◊h4{Powerful Macros, Rich Tools for Building DSLs }
 
-Racket is the first general-purpose programming language that empowers programmers to make domain-specific languages as if
-they were plain libraries. No external tools, no make files required. 
+Racket is the first general-purpose programming language that empowers programmers to make domain-specific languages as if they were plain libraries. No external tools, no make files required. 
 
 ◊doclinks{
 ◊link["https://docs.racket-lang.org/guide/macros.html"]{intro to macros}
@@ -166,37 +165,30 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 ◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊h4{Little Macros}
-  ◊div[#:class "container-fluid" #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"]{
 
    ◊table{
     ◊tr[#:valign "top"]{
 
     ◊td{ 
 
-     ◊p{Racket allows programmers to add new syntactic constructs
-     in the same way that other languages permit the formulation
-     of procedures, methods, or classes.  All you need to do is
-     formulate a simple rule that rewrites a custom syntax to a
-     Racket expression or definition.}
-
-     ◊p{Little macros can particularly help programmers with
-     DRY (Don't Repeat Yourself) where other features can't.
-     Programmers abstract over repeated patters to save
-     themselves future work. Functions and procedures are
-     examples of such abstractions.  They abstract over
-     expressions and statements, respectively, that differ in
-     simple ways. On many occasions, however, developers stare
-     at syntactic patterns that can't be avoided with ordinary
-     means. This is where ``little macros'' come in. Try it for
-     yourself.}
-
-     ◊p{Of course, syntactic language extensions are most
-     useful if the underlying programming language itself is
-     already a rich and powerful general-purpose language. And
-     Racket is.}}
+     ◊p{Racket allows programmers to add new
+     syntactic constructs in the same way
+     that other languages permit the
+     formulation of procedures, methods, or
+     classes.  All you need to do is
+     formulate a simple rule that rewrites a
+     custom syntax to a Racket expression or
+     definition. Little macros can
+     particularly help programmers with DRY
+     (Don't Repeat Yourself) where other
+     features can't. The example on the
+     right shows how to add a ◊tt{where}
+     construct for definitions with a few
+     lines of code.}}
 
     ◊td{ 
-◊langwww["#lang racket" ]{
+◊langwww["#lang racket" #:style "font-size:66%"]{
 ◊pre{;; Defining and using simple syntactic extensions 
 (◊docs{require} racket/splicing)
 
@@ -217,47 +209,80 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
   ;; { ... } are equivalent to ( ... )
 
 
-(if is-5-odd "five is odd" "five is not odd")}}
-}}}}}}
+(if is-5-odd "five is odd" "five is not odd")}}}
+
+   } } }}}
 
 ◊div[#:id "general-purpose" #:class "lop"  #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
    ◊h4{General Purpose}
 
-   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+   ◊div[#:class "container-fluid"]{
      ◊table{
       ◊tr[#:valign "top"]{
 
     ◊td{ 
 
-   ◊a[#:href "general-purpose/general-purpose-2.html"]{
-     ◊img[#:src "img/general-purpose-2-plot.png" #:class "lop-image"]{}}}
+◊langwww["#lang racket/gui" #:style "font-size:66%"]{
+◊pre{;;a bi-dorectional temperature converter (Fahrenheit vs Celsius)
 
+(◊docs{define} *C 0)
+(◊docs{define} *F 0)
+
+(◊docs{define-syntax-rule}
+  (def-callback (name field *from convert *to))
+  (◊docs{define} (name . x)
+    (◊docs{define} field:val (◊docs{if} (◊docs{empty?} x) "0" (◊docs{send} (car x)get-value)))
+    (◊docs{define} field:num (◊docs{string-number} field:val))
+    (◊docs{when} field:num 
+      (◊docs{set!-values} (*from *to) (◊docs{values} field:num (convert field:num)))
+      (◊docs{send} C-field set-value (~a *C))
+      (◊docs{send} F-field set-value (~a *F)))))
+
+(◊docs{define} (field lbl cb)
+  (◊docs{new} text-field% [parent pane] [label lbl] [init-value ""] [callback cb]))
+
+(def-callback (C-2-F C-field *C (λ (c) (+ (* c 9/5) 32)) *F))
+(def-callback (F-2-C F-field *F (λ (f) (* (- f 32) 5/9)) *C))
+
+(◊docs{define} frame   (new frame% [label "temperature converter"]))
+(◊docs{define} pane    (new horizontal-pane% [parent frame]))
+(◊docs{define} C-field (field "celsius:"       C-2-F))
+(◊docs{define} F-field (field " = fahrenheit:" F-2-C))
+
+(C-2-F)
+(◊docs{send} frame show #t)
+}}}
+  
     ◊td{ 
 
-    ◊p{Racket comes with a comprehensive suite of libraries,
-    including a cross-platform GUI toolbox, a built-in web
-    server, command-line parsing, data visualization, and
-    more. When built-in libraries don't get the job done,
-    thousands of packages are a single command away.  Racket's
-    package ecosystem includes libraries for everything from
-    scientific simulation to video editing; API testing to 3D
-    graphics.  Racket's FFI makes it easy to connect to
-    existing C libraries when needed.
+    ◊p{Racket comes with a comprehensive
+    suite of libraries, including a
+    cross-platform GUI toolbox, a
+    built-in web server, command-line
+    parsing, data visualization, and
+    more. Thousands of other packages
+    are a single command away, libraries
+    for everything from scientific
+    simulation to video editing; API
+    testing to 3D graphics.  Racket's
+    FFI makes it also easy to connect to
+    existing C libraries when needed.}
 
-    ◊p{With a few lines of code you can write a program that
-    renders turns an CSV file into a scatter plot. Using the
-    ◊tt{racket/gui} language, you ◊docs{require} three
-    modules: ◊tt{csv-reading}, ◊tt{plot}, and ◊tt{pict}.
-    Then you add a frame, a canvas, and a menu bar, and
-    voilà, you're done.}}}
+    ◊p{Naturally macros work in synergy
+    with all of these tool boxes. The
+    example on the left shows how to use
+    a little macro to define a macro for
+    defining GUI callbacks, abstracting
+    where a function or method couldn't. }}
+
 }}}}}
-
+    
 ◊div[#:id "big-macros" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
    ◊h4{Big Macros}
    ◊img[#:src "img/big-macros.png" #:class "lop-image"]{}
-   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊p{Getting to know the full Racket macro system will feel
       liberating, empowering, dazzling---like a whole new level 
       of enlightenment. It is far more powerful than Clojure's, Lisp's, 
@@ -278,7 +303,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  ◊special-section[#:class "one-column-body-text"]{
   ◊h4{Languages. Just make them.}
   ◊img[#:src "img/lazy-racket.png" #:class "lop-image"]{}
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
   ◊p{Languages convey ideas, and some languages convey 
    ideas more easily than others. Programming languages 
    convey solutions, and some do it better than others.
@@ -299,7 +324,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  ◊special-section[#:class "one-column-body-text"]{
   ◊h4{IDE Support for Languages}
   ◊img[#:src "img/ide-support.png" #:class "lop-image"]{}
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
   ◊p{Racket comes with its own IDE, DrRacket, and it sports
    some unique features . For example, when a programmer 
    mouses over an identifier, the IDE draws an arrow back 
@@ -319,7 +344,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
  ◊special-section[#:class "one-column-body-text"]{
   ◊h4{Any Syntax}
   ◊img[#:src "img/ugly-syntax.png" #:class "lop-image"]{}
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
   ◊p{Real Racket programmers love parentheses, but they
    have empathy for those few who need commas and braces.
    Hence, building languages with conventional surface
@@ -386,7 +411,7 @@ ancestor(A, B)?}}}
 
 ◊div[#:id "software" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
   ◊h4{Software}
 
@@ -412,7 +437,7 @@ ancestor(A, B)?}}}
 
 ◊div[#:id "tutorials" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
   ◊h4{Documentation and Tutorials}
 
@@ -443,7 +468,7 @@ ancestor(A, B)?}}}
 
 ◊div[#:id "stuff" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
   ◊h4{Gear and Stuff}
 
@@ -462,7 +487,7 @@ ancestor(A, B)?}}}
 
 ◊div[#:id "community" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
   ◊h4{Community}
 
@@ -492,7 +517,7 @@ ancestor(A, B)?}}}
 
 ◊div[#:id "books" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
   ◊h4{Books}
 
@@ -518,7 +543,7 @@ ancestor(A, B)?}}}
 
 ◊div[#:id "education" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
   ◊h4{Education}
 
@@ -542,7 +567,7 @@ ancestor(A, B)?}}}
 
 ◊div[#:id "us" #:class "eco" #:style "display:block"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊table{
     ◊tr{
     ◊td{ }    ◊td{ }    ◊td{ }
