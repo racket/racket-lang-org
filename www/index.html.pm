@@ -67,9 +67,10 @@ they were plain libraries. No external tools, no make files required.
 Racket is the first language to support higher-order software contracts and safe gradual typing. Programmers can easily deploy these tools to harden their software. 
 
 ◊doclinks{
-◊link["https://docs.racket-lang.org/guide/contracts.html"]{software contracts}
-◊link["https://docs.racket-lang.org/ts-guide/index.html"]{the Typed Racket guide}
-◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{gradual typing}}
+◊link["https://docs.racket-lang.org/guide/contracts.html"]{The Contract Guide}
+◊link["https://www2.ccs.neu.edu/racket/pubs/icfp2002-ff.pdf"]{High-Order Contracts}
+◊link["https://docs.racket-lang.org/ts-guide/index.html"]{The Typed Racket Guide}
+◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{Gradual Typing}}
 }}
 
 ◊div[#:id "mature" #:class "the-language" #:style "display:none"]{
