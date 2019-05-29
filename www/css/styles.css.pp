@@ -57,6 +57,33 @@ top-section {
   margin-bottom: 0.5rem;
 }
 
+
+.frontpage-bar {
+    display: flex;
+    justify-content: space-between;
+}
+.frontpage-bar-item {
+    text-align: center;
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 0
+}
+.frontpage-bar-flex2 {
+    flex: 2;
+}
+.frontpage-bar-flex3 {
+    flex: 3;
+}
+.frontpage-bar-flex4 {
+    flex: 4;
+}
+.frontpage-bar-flex5 {
+    flex: 5;
+}
+.frontpage-bar-flex6 {
+    flex: 6;
+}
+
 .expander {
     display:flex;
     flex-direction: column;
