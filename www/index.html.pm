@@ -155,14 +155,14 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'little-macros')"]{◊div[#:style "mitem"]{Little Macros}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 w3-button tablink" #:onclick "openTab('lop',event,'general-purpose')"]{◊div[#:style "mitem"]{General Purpose}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'big-macros')"]{◊div[#:style "mitem"]{Big Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'hash-langs')"]{◊div[#:style "mitem"]{Hash Langs}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'hash-langs')"]{◊div[#:style "mitem"]{Easy DSLs}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'ide-support')"]{◊div[#:style "mitem"]{IDE Support}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'any-syntax')"]{◊div[#:style "mitem"]{Any Syntax}}
 }}
 
 ◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊h4{Little Macros}
+
   ◊div[#:class "container-fluid"]{
 
    ◊table{
@@ -213,7 +213,6 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊div[#:id "general-purpose" #:class "lop"  #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-   ◊h4{General Purpose}
 
    ◊div[#:class "container-fluid"]{
      ◊table{
@@ -278,30 +277,45 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
     
 ◊div[#:id "big-macros" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-   ◊h4{Big Macros}
-   ◊img[#:src "img/big-macros.png" #:class "lop-image"]{}
    ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-   ◊p{Getting to know the full Racket macro system will feel
-      liberating, empowering, dazzling---like a whole new level 
-      of enlightenment. It is far more powerful than Clojure's, Lisp's, 
-      or Scheme's. In Racket, modules can export and import 
-      macros. Developers can easily turn a collection of co-
-      operating macros that equip Racket with facilities that 
-      other languages have in their core.}
 
-    ◊p{While Racket is a functional language, it has offered a
-      sub-language of classes and objects from the beginning. 
-      A Racket programmer can thus easily combine functional
-      with object-oriented components. To mimic Java's class 
-      system, 6,000 lines of macros suffice. And in this setting,
-      ◊link["http://www.cs.utah.edu/plt/publications/aplas06-fff.pdf"]{mixins and traits} are free.}}
-}}
+   ◊table{
+    ◊tr[#:valign "top"]{
+
+    ◊td{ ◊img[#:src "img/big-macros.png" #:class "lop-image"]{} }
+
+    ◊td{ 
+
+    ◊p{Getting to know the full Racket macro system will
+       feel liberating, empowering, dazzling---like a whole
+       new level of enlightenment. Modules can export and
+       import macros. Developers can thus easily turn a
+       collection of co-operating macros into libraries that
+       implements algebraic pattern matching, event-handling
+       system, or an embedded logic-constraint language.
+
+    ◊p{While Racket is a functional language, it has offered
+      a sub-language of classes and objects from the
+      beginning.  A Racket programmer can therefore combine
+      functional with object-oriented components as
+      needed. To mimic Java's class system, 6,000 lines of
+      macros suffice. And in this setting,
+      ◊link["http://www.cs.utah.edu/plt/publications/aplas06-fff.pdf"]{mixins and traits} are free.}}  }}}}}}
 
 ◊div[#:id "hash-langs" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊h4{Languages. Just make them.}
-  ◊img[#:src "img/lazy-racket.png" #:class "lop-image"]{}
+
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
+
+   ◊table{
+    ◊tr[#:valign "top"]{
+
+    ◊td{ 
+
+  ◊img[#:src "img/lazy-racket.png" #:class "lop-image"]{}}
+
+    ◊td{ 
+
   ◊p{Languages convey ideas, and some languages convey 
    ideas more easily than others. Programming languages 
    convey solutions, and some do it better than others.
@@ -316,37 +330,48 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
    this new language in a second IDE window.  Making new 
    languages really requires no setup, no project files, 
    no external tools, no nothing.}  }
-}}
+}}}}}
 
 ◊div[#:id "ide-support" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊h4{IDE Support for Languages}
-  ◊img[#:src "img/ide-support.png" #:class "lop-image"]{}
+
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
+   ◊table{
+    ◊tr[#:valign "top"]{
+
+    ◊td{  ◊img[#:src "img/ide-support.png" #:class "lop-image"]{} }
+
+    ◊td{
   ◊p{Racket comes with its own IDE, DrRacket, and it sports
    some unique features . For example, when a programmer 
    mouses over an identifier, the IDE draws an arrow back 
    to where it was defined.}
 
    ◊p{A programmer immediately benefits from DrRacket while
-    using an alternative language, say Typed Racket.  Macros
-    realize the syntactic aspects and ordinary function,
-    classes, etc. implement the run-time system. Racket
+    using an alternative language, say Typed Racket. Racket
     macros, even complex ones and those used to make new
     languages, record and propagate a sufficient amount of
     source information for DrRacket to act as if it understood
     the features of the new language.  }}
-}}
+}}}}}
 
 ◊div[#:id "any-syntax" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊h4{Any Syntax}
-  ◊img[#:src "img/ugly-syntax.png" #:class "lop-image"]{}
+
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-  ◊p{Real Racket programmers love parentheses, but they
-   have empathy for those few who need commas and braces.
-   Hence, building languages with conventional surface
-   syntax is almost as easy as building beautiful languages.}
+   ◊table{
+    ◊tr[#:valign "top"]{
+
+    ◊td{ ◊img[#:src "img/ugly-syntax.png" #:class "lop-image"]{}}
+
+    ◊td{
+
+
+   ◊p{Real Racket programmers love parentheses, but they
+      have empathy for those few who need commas and
+      braces.  Hence, building languages with
+      conventional surface syntax is almost as easy as
+      building beautiful languages.}
 
   ◊p{Racket's ecosystem comes with parsing packages that
   allow developers to easily map any syntax to a
@@ -355,7 +380,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
   Such a language can also exploit the hooks of the IDE
   framework, so that its programmers may take advantage
   of Racket's IDE.}}
-}}
+}}}}}
 
 ◊div[#:id "more-it" #:class "lop" #:style "display:block"]{
  ◊special-section[#:class "one-column-body-text"]{
