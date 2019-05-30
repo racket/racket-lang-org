@@ -24,6 +24,9 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 
 ◊string->svg[#:width heading-width]{>(keynote)}
 ◊string->svg{Aaron Turon}
+◊string->svg{Governing Rust}
+
+◊link["http://aturon.github.io/"]{Aaron Turon} is a Research Engineer on the Rust team at Mozilla. He received his PhD from Northeastern University, where he studied programming-language design, program verification, and low-level concurrency. His dissertation was awarded the SIGPLAN John C. Reynolds Doctoral Dissertation Award in 2014. After his PhD studies, he continued his research in concurrency verification and programming techniques as a postdoc at MPI-SWS.
 
 ◊gap[1]
 
