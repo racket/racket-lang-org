@@ -173,7 +173,10 @@ Vlad Kozin}}
 Andrew Blinn
 John Clements
 }}
+◊row{◊at{18:00–22:00} ◊desc{◊em{food & drink at ◊link["https://squatters.com"]{Squatters} 
+147 W Broadway (300 S)}}}
 ]
+
 
 ◊h3{◊string->svg[#:width (* heading-width 1.4)]{>(schedule 'sunday)}}
 
