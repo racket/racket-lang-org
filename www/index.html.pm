@@ -23,6 +23,8 @@
 ◊ul[#:class "doclinks"]{
  ◊li{◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.}
 
+  ◊li{◊link["https://thestrangeloop.com/2019/number-lang-wishful-thinking.html"]{Vlad Kozin will speak at Strange Loop} on language-oriented programming in Racket}
+
  ◊li{◊link["https://school.racket-lang.org"]{Racket School 2019}---Learn how to make programming languages, July 8–-12 in Salt Lake City. Students, ask about Financial aid.} 
 
  ◊li{◊link["https://con.racket-lang.org/"]{ninth RacketCon} immediately follows the Racket School.}
