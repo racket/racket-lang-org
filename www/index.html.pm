@@ -160,24 +160,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊tr[#:valign "top"]{
 
     ◊td{ 
-
-     ◊p{Racket allows programmers to add new
-     syntactic constructs in the same way
-     that other languages permit the
-     formulation of procedures, methods, or
-     classes.  All you need to do is
-     formulate a simple rule that rewrites a
-     custom syntax to a Racket expression or
-     definition. Little macros can
-     particularly help programmers with DRY
-     (Don't Repeat Yourself) where other
-     features can't. The example on the
-     right shows how to add a ◊tt{where}
-     construct for definitions with a few
-     lines of code.}}
-
-    ◊td{ 
-◊langwww["#lang racket" #:style "font-size:66%"]{
+◊langwww["#lang racket" #:style "font-size:46%"]{
 ◊pre{;; Defining and using simple syntactic extensions 
 (◊docs{require} racket/splicing)
 
@@ -193,12 +176,32 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
 ;; ... and use it immediately in the same module 
 (where (define is-5-odd (odd? 5))
-       {(define (odd? n) (if (= n 1) #t (even? (- n 1))))
-        (define (even? n) (if (= n 0) #t (even? (- n 1))))})
+       {(define (odd? n)
+           (if (= n 1) #t (even? (- n 1))))
+        (define (even? n)
+            (if (= n 0) #t (even? (- n 1))))})
   ;; { ... } are equivalent to ( ... )
 
 
+;; then use the newly defined identifier
 (if is-5-odd "five is odd" "five is not odd")}}}
+
+    ◊td{ }
+
+    ◊td{ 
+
+     ◊p{Racket allows programmers to add new syntactic constructs
+     in the same way that other languages permit the formulation
+     of procedures, methods, or classes.  All you need to do is
+     formulate a simple rule that rewrites a custom syntax to a
+     Racket expression or definition.}
+
+     ◊p{ Little macros can particularly help programmers
+     with DRY (Don't Repeat Yourself) where other
+     features can't. The example on the left shows how to
+     define a ◊tt{where} construct for definitions with a
+     few lines of code and how to use it immediately, in
+     the same module.}}
 
    } } }}}
 
@@ -211,7 +214,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
     ◊td{ 
 
-◊langwww["#lang racket/gui" #:style "font-size:66%"]{
+◊langwww["#lang racket/gui" #:style "font-size:46%"]{
 ◊pre{;;a bi-dorectional temperature converter (Fahrenheit vs Celsius)
 
 (◊docs{define} *C 0)
@@ -244,54 +247,46 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
   
     ◊td{ 
 
-    ◊p{Racket comes with a comprehensive
-    suite of libraries, including a
-    cross-platform GUI toolbox, a
-    built-in web server, command-line
-    parsing, data visualization, and
-    more. Thousands of other packages
-    are a single command away, libraries
-    for everything from scientific
-    simulation to video editing; API
-    testing to 3D graphics.  Racket's
-    FFI makes it also easy to connect to
-    existing C libraries when needed.}
+    ◊p{Racket comes with a comprehensive suite of
+    libraries: a cross-platform GUI toolbox, a
+    web server, data visualization, and more.
+    Thousands of additional packages are a single
+    command away: from video editing to scientific 
+    simulations, from web testing to 3D graphics.}
 
-    ◊p{Naturally macros work in synergy
-    with all of these tool boxes. The
-    example on the left shows how to use
-    a little macro to define a macro for
-    defining GUI callbacks, abstracting
-    where a function or method couldn't. }}
+    ◊p{Macros work with these tools. The example
+    on the left shows how to use a little macro
+    to define a macro for defining GUI callbacks,
+    abstracting where a function or method
+    couldn't. }}
 
 }}}}}
-    
+
+
 ◊div[#:id "big-macros" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
-   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
+
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
    ◊table{
     ◊tr[#:valign "top"]{
 
     ◊td{ ◊img[#:src "img/big-macros.png" #:class "lop-image"]{} }
 
-    ◊td{ 
-
-    ◊p{Getting to know the full Racket macro system will
+    ◊td{ ◊p{Getting to know the full Racket macro system will
        feel liberating, empowering, dazzling---like a whole
-       new level of enlightenment. Modules can export and
-       import macros. Developers can thus easily turn a
-       collection of co-operating macros into libraries that
-       implements algebraic pattern matching, event-handling
-       system, or an embedded logic-constraint language.
+       new level of enlightenment. Developers can easily
+       create a collection of co-operating macros to
+       implement algebraic pattern matching, event-handling,
+       or a logic-constraint solver.}
 
     ◊p{While Racket is a functional language, it has offered
-      a sub-language of classes and objects from the
-      beginning.  A Racket programmer can therefore combine
-      functional with object-oriented components as
-      needed. To mimic Java's class system, 6,000 lines of
-      macros suffice. And in this setting,
-      ◊link["http://www.cs.utah.edu/plt/publications/aplas06-fff.pdf"]{mixins and traits} are free.}}  }}}}}}
+      a sub-language of ◊link["http://www.cs.utah.edu/plt/publications/aplas06-fff.pdf"]{classes and objects, mixins 
+      and traits}, from the beginning.  A Racket programmer
+      can therefore combine functional with object-oriented
+      components as needed. To mimic Java's class system,
+      6,000-line macro library suffices. }}
+}}}}}
 
 ◊div[#:id "hash-langs" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -301,18 +296,13 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    ◊table{
     ◊tr[#:valign "top"]{
 
-    ◊td{ 
+    ◊td{ ◊img[#:src "img/lazy-racket.png" #:class "lop-image"]{} }
 
-  ◊img[#:src "img/lazy-racket.png" #:class "lop-image"]{}}
-
-    ◊td{ 
-
-  ◊p{Languages convey ideas, and some languages convey 
-   ideas more easily than others. Programming languages 
-   convey solutions, and some do it better than others.
-   Racket isn't just a language, it's a whole bundle of
-   them. And so, a Racket programmer writes every module 
-   in the best possible language.}
+    ◊td{ ◊p{Some languages convey ideas more easily
+   than others. And some programming languages convey
+   solutions better than others.  Therefore Racket is a
+   language for making languages, so that a programmer
+   can write every module in a well-suited languages.}
 
    ◊p{Often ◊link["https://lang.video"]{an application domain} comes with several
    languages.  When you need a new language, you make it---
@@ -356,7 +346,6 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊td{ ◊img[#:src "img/ugly-syntax.png" #:class "lop-image"]{}}
 
     ◊td{
-
 
    ◊p{Real Racket programmers love parentheses, but they
       have empathy for those few who need commas and
