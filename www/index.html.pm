@@ -34,15 +34,16 @@
 
 ◊div[#:class "w3-card"]{
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
+       #:onclick "openTab('the-language',event,'it',false)"]{
   Racket, the Programming Language}}
 ◊div[#:class "frontpage-bar"]{
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('the-language',event,'mature')"]{◊div[#:style "mitem"]{Mature}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 w3-button tablink" #:onclick "openTab('the-language',event,'batteries')"]{◊div[#:style "mitem"]{Batteries Included}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('the-language',event,'extensible')"]{◊div[#:style "mitem"]{Extensible}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('the-language',event,'strong')"]{◊div[#:style "mitem"]{Strong}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('the-language',event,'drracket')"]{◊div[#:style "mitem"]{Polished}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex5 w3-button tablink" #:onclick "openTab('the-language',event,'open')"]{◊div[#:style "mitem"]{With a Vibrant Community}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('the-language',event,'mature',true)"]{◊div[#:style "mitem"]{Mature}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 w3-button tablink" #:onclick "openTab('the-language',event,'batteries',true)"]{◊div[#:style "mitem"]{Batteries Included}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('the-language',event,'extensible',true)"]{◊div[#:style "mitem"]{Extensible}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('the-language',event,'strong',true)"]{◊div[#:style "mitem"]{Strong}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('the-language',event,'drracket',true)"]{◊div[#:style "mitem"]{Polished}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex5 w3-button tablink" #:onclick "openTab('the-language',event,'open',true)"]{◊div[#:style "mitem"]{With a Vibrant Community}}
 }}
 
 ◊div[#:id "extensible" #:class "the-language" #:style "display:none"]{
@@ -151,15 +152,16 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
 
 ◊div[#:class "w3-card"]{
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
- ◊span[#:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
+ ◊span[#:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
+       #:onclick "openTab('lop',event,'more-it',false)"]{
   Racket, the Language-Oriented Programming Language}}
 ◊div[#:class "frontpage-bar"]{
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'little-macros')"]{◊div[#:style "mitem"]{Little Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 w3-button tablink" #:onclick "openTab('lop',event,'general-purpose')"]{◊div[#:style "mitem"]{General Purpose}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'big-macros')"]{◊div[#:style "mitem"]{Big Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'hash-langs')"]{◊div[#:style "mitem"]{Easy DSLs}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'ide-support')"]{◊div[#:style "mitem"]{IDE Support}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'any-syntax')"]{◊div[#:style "mitem"]{Any Syntax}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'little-macros',true)"]{◊div[#:style "mitem"]{Little Macros}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 w3-button tablink" #:onclick "openTab('lop',event,'general-purpose'),true"]{◊div[#:style "mitem"]{General Purpose}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'big-macros'),true"]{◊div[#:style "mitem"]{Big Macros}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'hash-langs'),true"]{◊div[#:style "mitem"]{Easy DSLs}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'ide-support'),true"]{◊div[#:style "mitem"]{IDE Support}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'any-syntax'),true"]{◊div[#:style "mitem"]{Any Syntax}}
 }}
 
 ◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
@@ -422,15 +424,16 @@ ancestor(A, B)?}}}
 
 ◊div[#:class "w3-card"]{
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "font-size:130%;color:white;white-space:nowrap;text-align:center;"]{
+ ◊span[#:id "lop-line" #:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
+       #:onclick "openTab('eco',event,'us',false)"]{
   Racket, the Ecosystem}}
 ◊div[#:class "frontpage-bar"]{
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'software')"]{◊div[#:style "mitem"]{Software}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex6 w3-button tablink" #:onclick "openTab('eco',event,'tutorials')"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'community')"]{◊div[#:style "mitem"]{Community}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('eco',event,'books')"]{◊div[#:style "mitem"]{Books}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'education')"]{◊div[#:style "mitem"]{Education}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'stuff')"]{◊div[#:style "mitem"]{Gear & Stuff}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'software',true)"]{◊div[#:style "mitem"]{Software}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex6 w3-button tablink" #:onclick "openTab('eco',event,'tutorials',true)"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'community',true)"]{◊div[#:style "mitem"]{Community}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('eco',event,'books',true)"]{◊div[#:style "mitem"]{Books}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'education',true)"]{◊div[#:style "mitem"]{Education}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'stuff',true)"]{◊div[#:style "mitem"]{Gear & Stuff}}
 }}
 
 ◊div[#:id "software" #:class "eco" #:style "display:none"]{
@@ -606,7 +609,7 @@ To ◊link["http://www.nsf.gov/"]{the NSF}, ◊link["http://www.darpa.mil/"]{DAR
 ◊script[#:src "js/jquery.min.js"]{}
 
 ◊script{
-function openTab(classname, evt, elementname) {
+function openTab(classname, evt, elementname, turnredp) {
   var i;
  
   // mark last selected link in red, globally 
@@ -615,7 +618,7 @@ function openTab(classname, evt, elementname) {
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
   }
-  evt.currentTarget.className += " w3-red";
+  if (turnredp) { evt.currentTarget.className += " w3-red"; }
 
   // show selected block, on a per section basis 
   var classes; 
