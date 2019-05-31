@@ -27,6 +27,7 @@
      "frog"
      "rackunit-lib"
      "pict-lib"
+     "ppict"
      "draw-lib"
      ("s3-sync" #:version "1.10")))
 
