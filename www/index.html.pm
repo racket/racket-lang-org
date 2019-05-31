@@ -594,11 +594,10 @@ ancestor(A, B)?}}}
 
 ◊div[#:id "us" #:class "eco" #:style "display:block"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-   ◊table{
-    ◊tr{
-    ◊td{ }    ◊td{ }    ◊td{ }
-    ◊td{ ◊img[#:alt "eighth RackeCon, 2018" #:src "img/racket-con-2018.png" #:class "lop-image-rs"]{}}}}}
+  ◊div[#:class "container-fluid"]{
+   ◊img[#:style "margin-left:auto;margin-right:auto;display:block;text-align:center"
+        #:alt "eighth RacketCon, 2018"
+        #:src "img/racket-con-2018.png" #:class "lop-image-rs"]{}}
 }}
 
 ◊section[#:id "bottom" #:class "one-column-body-text" #:style "background:white;padding:0.5rem"]{
