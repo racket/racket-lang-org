@@ -468,10 +468,6 @@ ancestor(A, B)?}}}
       ◊link["https://docs.racket-lang.org"]{All Documentation}}}
 
     ◊td{ }
-    ◊td{ }
-    ◊td{ }
-    ◊td{ }
-    ◊td{ }
 
     ◊td{◊img[#:alt "The Guide" #:src "img/racket-guide.png" #:class "lop-image-rs"]{} }}}}}}
 
@@ -501,7 +497,7 @@ ancestor(A, B)?}}}
 
     ◊td{ ◊p{
 
-      ◊link["https://lists.racket-lang.org/"]{Mailing list} and ◊link["https://blog.racket-lang.org/"]{Blog}
+      ◊link["https://lists.racket-lang.org/"]{Mailing List} and ◊link["https://blog.racket-lang.org/"]{Blog}
 
       ◊link["https://botbot.me/freenode/racket/"]{#racket IRC} on freenode.net
 
