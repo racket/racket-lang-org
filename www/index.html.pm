@@ -18,8 +18,6 @@
 
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 
-  ◊h4{News}
-
 ◊ul[#:class "doclinks"]{
  ◊li{◊link["https://blog.racket-lang.org/2019/05/racket-v7-3.html"]{Racket version 7.3} is available.}
 
@@ -49,23 +47,19 @@
 ◊div[#:id "extensible" #:class "the-language" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊h4{Powerful Macros, Rich Tools for Building DSLs }
-
-Racket is the first general-purpose programming language that empowers programmers to make domain-specific languages as if they were plain libraries. No external tools, no make files required. 
+Racket is the first general-purpose programming language that empowers programmers to make ◊strong{domain-specific languages}  as libraries from ◊strong{powerful macros}. No external tools, no make files required. 
 
 ◊doclinks{
-◊link["https://docs.racket-lang.org/guide/macros.html"]{intro to macros}
-◊link["https://docs.racket-lang.org/reference/Macros.html"]{macros in depth}
-◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{making new languages}
-◊link["languages.html"]{sample #langs}}
+◊link["https://docs.racket-lang.org/guide/macros.html"]{Intro To Macros}
+◊link["https://docs.racket-lang.org/reference/Macros.html"]{Macros In Depth}
+◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{Making New Languages}
+◊link["languages.html"]{Sample #Langs}}
 }}
 
 ◊div[#:id "strong" #:class "the-language" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊h4{Gradually Typed, Powerful Software Contracts}
-
-Racket is the first language to support higher-order software contracts and safe gradual typing. Programmers can easily deploy these tools to harden their software. 
+Racket is the first language to support ◊strong{higher-order software contracts} and ◊strong{safe gradual typing}. Programmers can easily deploy these tools to harden their software. 
 
 ◊doclinks{
 ◊link["https://docs.racket-lang.org/guide/contracts.html"]{The Contract Guide}
@@ -77,57 +71,50 @@ Racket is the first language to support higher-order software contracts and safe
 ◊div[#:id "mature" #:class "the-language" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊h4{Mature, Stable, Cross-Platform}
-
 Racket is a mature and stable product. From the beginning, it has  supported cross-platform graphical programming (Windows, macOS, Linux). 
  
 ◊doclinks{
-◊link["https://docs.racket-lang.org/pkg/index.html"]{package system}
-◊link["https://docs.racket-lang.org/framework/index.html"]{GUI framework}
-◊link["https://docs.racket-lang.org/raco/exe.html"]{standalone binaries}
-◊link["https://docs.racket-lang.org/foreign/index.html"]{foreign interface}}
+◊link["https://docs.racket-lang.org/pkg/index.html"]{Package System}
+◊link["https://docs.racket-lang.org/framework/index.html"]{GUI Framework}
+◊link["https://docs.racket-lang.org/raco/exe.html"]{Standalone Binaries}
+◊link["https://docs.racket-lang.org/foreign/index.html"]{Foreign Interface}}
 }}
 
 ◊div[#:id "batteries" #:class "the-language" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊h4{Batteries Included}
-
 Racket includes a rich set of libraries, covering the full range from web server apps to mathematics and scientific simulation software. 
 
 ◊doclinks{
-◊doclink["web-server"]{web applications}
-◊doclink["db"]{database}
-◊doclink["math"]{math & statistics}
-◊link["https://docs.racket-lang.org"]{full list ◊begin['rarr]}}
+◊doclink["web-server"]{Web Applications}
+◊doclink["db"]{Database}
+◊doclink["math"]{Math & Statistics}
+◊link["https://docs.racket-lang.org"]{Full List ◊begin['rarr]}}
 }}
 
 ◊div[#:id "drracket" #:class "the-language" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊h4{Editor Included, Emacs and VI Support, Extensive Documentation}
-
 Racket comes with support for major editors. The main bundle includes an innovative and extensible interactive development environment that has inspired other IDE projects.
                                                             
 ◊doclinks{
-◊doclink["drracket"]{DrRacket guide}
-◊doclink["drracket-tools"]{DrRacket tools}
-◊link["https://docs.racket-lang.org/guide/Vim.html"]{vim}
-◊link["https://docs.racket-lang.org/guide/Emacs.html"]{emacs}}
+◊doclink["drracket"]{DrRacket Guide}
+◊doclink["drracket-tools"]{DrRacket Tools}
+◊link["https://docs.racket-lang.org/guide/Emacs.html"]{Emacs Integration}
+◊link["https://docs.racket-lang.org/guide/Vim.html"]{VIM Integration}
+}
 }}
 
 ◊div[#:id "open" #:class "the-language" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊h4{Vibrant Community, Open-Source All The Way}
-
-Newcomers describe the on-line Racket community as extremely friendly and helpful. Everyone is welcome to ask any question and everybody is welcome to contribute to the code base. 
+Newcomers describe the on-line Racket community as extremely ◊strong{friendly and helpful}. Everyone is welcome to ask any question and everybody is welcome to contribute to the ◊strong{open-source} code base.
 
 ◊doclinks{
-◊link["https://lists.racket-lang.org/"]{mailing list} 
-◊link["https://blog.racket-lang.org/2017/09/tutorial-contributing-to-racket.html"]{contributing} 
-◊link["https://twitter.com/racketlang"]{twitter}
-◊link["https://github.com/racket/racket/"]{github}}
+◊link["https://lists.racket-lang.org/"]{Mailing List} 
+◊link["https://blog.racket-lang.org/2017/09/tutorial-contributing-to-racket.html"]{Contributing} 
+◊link["https://twitter.com/racketlang"]{Twitter}
+◊link["https://github.com/racket/racket/"]{Github}}
 }}
 
 ◊div[#:id "it" #:class "the-language" #:style "display:block"]{
@@ -440,9 +427,6 @@ ancestor(A, B)?}}}
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
-  ◊h4{Software}
-
-
   ◊table{
     ◊tr{
 
@@ -450,11 +434,11 @@ ancestor(A, B)?}}}
 
       ◊link["https://download.racket-lang.org/"]{Download Racket v7.3}
 
-      ◊link["https://github.com/racket/racket/"]{Source code}
+      ◊link["https://github.com/racket/racket/"]{Source Code}
 
-      ◊link["https://github.com/racket/racket/issues"]{Bug reports}
+      ◊link["https://github.com/racket/racket/issues"]{Bug Reports}
 
-      ◊link["https://pre.racket-lang.org/installers/"]{Nightly snapshot builds}
+      ◊link["https://pre.racket-lang.org/installers/"]{Nightly Snapshot Builds}
 
       ◊link["https://pkgs.racket-lang.org/"]{Packages}}}
 
@@ -466,24 +450,22 @@ ancestor(A, B)?}}}
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
-  ◊h4{Documentation and Tutorials}
-
   ◊table{
     ◊tr{
 
     ◊td{ ◊p{
 
-      ◊link["https://docs.racket-lang.org/quick/"]{Quick introduction}
+      ◊link["https://docs.racket-lang.org/quick/"]{Quick Introduction}
 
-      ◊link["https://docs.racket-lang.org/more/"]{Systems programming}
+      ◊link["https://docs.racket-lang.org/more/"]{Systems Programming}
 
-      ◊link["https://docs.racket-lang.org/guide/"]{The Racket guide}
+      ◊link["https://docs.racket-lang.org/guide/"]{The Racket Guide}
 
-      ◊link["https://docs.racket-lang.org/reference/"]{The Racket reference}
+      ◊link["https://docs.racket-lang.org/reference/"]{The Racket Reference}
 
-      ◊link["https://docs.racket-lang.org/continue/"]{Web applications}
+      ◊link["https://docs.racket-lang.org/continue/"]{Web Applications}
 
-      ◊link["https://docs.racket-lang.org"]{All documentation}}}
+      ◊link["https://docs.racket-lang.org"]{All Documentation}}}
 
     ◊td{ }
     ◊td{ }
@@ -497,16 +479,14 @@ ancestor(A, B)?}}}
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
-  ◊h4{Gear and Stuff}
-
    ◊table{
     ◊tr{
 
     ◊td{ ◊p{
 
-      ◊link["https://devswag.com/products/racket-t-shirt"]{Racket t-shirts} — the perfect way to meet friends, influence people, and stay warm.
+      ◊link["https://devswag.com/products/racket-t-shirt"]{Racket T-Shirts} — the perfect way to meet friends, influence people, and stay warm.
 
-      ◊link["https://devswag.com/products/racket"]{Racket stickers} — the indispensable accessory for laptops and textbooks.}}
+      ◊link["https://devswag.com/products/racket"]{Racket Stickers} — the indispensable accessory for laptops and textbooks.}}
 
     ◊td{ }
 
@@ -516,18 +496,16 @@ ancestor(A, B)?}}}
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
-  ◊h4{Community}
-
    ◊table{
     ◊tr{
 
     ◊td{ ◊p{
 
-      ◊link["https://lists.racket-lang.org/"]{Mailing list} and ◊link["https://blog.racket-lang.org/"]{blog}
+      ◊link["https://lists.racket-lang.org/"]{Mailing list} and ◊link["https://blog.racket-lang.org/"]{Blog}
 
       ◊link["https://botbot.me/freenode/racket/"]{#racket IRC} on freenode.net
 
-      ◊link["https://racket.slack.com/"]{Slack channel} (visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
+      ◊link["https://racket.slack.com/"]{Slack channel} (Visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
 
       ◊link["https://twitter.com/racketlang"]{@racketlang} on Twitter
 
@@ -546,8 +524,6 @@ ancestor(A, B)?}}}
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
-  ◊h4{Books}
-
    ◊table{
     ◊tr{
 
@@ -562,7 +538,7 @@ ancestor(A, B)?}}}
       ◊link["http://serverracket.com"]{Server: Racket}
       Develop a web application with Racket.
 
-      ◊link["books.html"]{All Racket books}}}
+      ◊link["books.html"]{All Racket Books}}}
 
     ◊td{ }
 
@@ -571,8 +547,6 @@ ancestor(A, B)?}}}
 ◊div[#:id "education" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-
-  ◊h4{Education}
 
    ◊table{
     ◊tr{
