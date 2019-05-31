@@ -45,11 +45,19 @@ img.lop-image {
 }
 
 img.lop-image-rs {
+  float: left;
+  margin-right: 80px;
+  width: 450px; 
+  height: 322px;
+}
+
+img.lop-image-rc8 {
   margin-left: auto;
   margin-right: auto;
   width: 550px;
   height: 318px;
 }
+
 
 .nav-tabs {
     display:none;

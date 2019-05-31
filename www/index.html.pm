@@ -597,7 +597,7 @@ ancestor(A, B)?}}}
   ◊div[#:class "container-fluid"]{
    ◊img[#:style "margin-left:auto;margin-right:auto;display:block;text-align:center"
         #:alt "eighth RacketCon, 2018"
-        #:src "img/racket-con-2018.png" #:class "lop-image-rs"]{}}
+        #:src "img/racket-con-2018.png" #:class "lop-image-rc8"]{}}
 }}
 
 ◊section[#:id "bottom" #:class "one-column-body-text" #:style "background:white;padding:0.5rem"]{
