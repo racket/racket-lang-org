@@ -135,7 +135,7 @@ Newcomers describe the on-line Racket community as extremely friendly and helpfu
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
    ◊table[#:valign "top"]{
     ◊tr{
-    ◊td{ ◊img[#:alt "large logo" #:src "http://users.cs.northwestern.edu/~robby/logos/racket-logo.svg" #:class "lop-image"]{}}
+    ◊td{ ◊img[#:alt "large logo" #:src "img/racket-logo.svg" #:class "lop-image"]{}}
     ◊td{ 
 ◊langwww["#lang racket/gui"]{
 ◊pre{;; let's play a guessing game 
