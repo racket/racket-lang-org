@@ -1,4 +1,5 @@
 #lang pollen
+◊(require racket-lang-org/util)
 
 ◊top-section{
  ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
@@ -273,7 +274,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    ◊table{
     ◊tr[#:valign "top"]{
 
-    ◊td{ ◊img[#:src "img/big-macros.png" #:class "lop-image"]{} }
+    ◊td{ ◊img/size["big-macros.png" #:scale 1/3]{} }
 
     ◊td{ ◊p{Getting to know the full Racket macro system will
        feel liberating, empowering, dazzling---like a whole
@@ -298,7 +299,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    ◊table{
     ◊tr[#:valign "top"]{
 
-    ◊td{ ◊img[#:src "img/lazy-racket.png" #:class "lop-image"]{} }
+    ◊td{ ◊img/size["lang-video.png" #:scale 2/3]{} }
 
     ◊td{ ◊p{Some languages convey ideas more easily
    than others. And some programming languages convey
