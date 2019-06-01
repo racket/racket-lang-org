@@ -147,11 +147,11 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
   Racket, the Language-Oriented Programming Language}}
 ◊div[#:class "frontpage-bar"]{
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'little-macros',true)"]{◊div[#:style "mitem"]{Little Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 w3-button tablink" #:onclick "openTab('lop',event,'general-purpose'),true"]{◊div[#:style "mitem"]{General Purpose}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'big-macros'),true"]{◊div[#:style "mitem"]{Big Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'hash-langs'),true"]{◊div[#:style "mitem"]{Easy DSLs}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'ide-support'),true"]{◊div[#:style "mitem"]{IDE Support}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'any-syntax'),true"]{◊div[#:style "mitem"]{Any Syntax}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 w3-button tablink" #:onclick "openTab('lop',event,'general-purpose',true)"]{◊div[#:style "mitem"]{General Purpose}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'big-macros',true)"]{◊div[#:style "mitem"]{Big Macros}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'hash-langs',true)"]{◊div[#:style "mitem"]{Easy DSLs}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'ide-support',true)"]{◊div[#:style "mitem"]{IDE Support}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('lop',event,'any-syntax',true)"]{◊div[#:style "mitem"]{Any Syntax}}
 }}
 
 ◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
@@ -577,9 +577,9 @@ function openTab(classname, evt, elementname, turnredp) {
   var tablinks;
   tablinks = document.getElementsByClassName("tablink");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+    tablinks[i].className = tablinks[i].className.replace(" w3-purple", "");
   }
-  if (turnredp) { evt.currentTarget.className += " w3-red"; }
+  if (turnredp) { evt.currentTarget.className += " w3-purple"; }
 
   // show selected block, on a per section basis 
   var classes; 
