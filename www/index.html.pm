@@ -120,22 +120,24 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 ◊div[#:id "it" #:class "the-language" #:style "display:block"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-   ◊table[#:valign "top"]{
-    ◊tr{
-    ◊td{ ◊img[#:alt "large logo" #:src "img/racket-logo.svg" #:class "lop-image"]{}}
-    ◊td{ 
-◊langwww["#lang racket/gui"]{
-◊pre{;; let's play a guessing game 
+   ◊div[#:style "display:flex; justify-content: space-around; align-items: center;"]{
+    ◊div{}
+    ◊div[#:style "display:flex"]{
+      ◊img[#:alt "large logo"
+           #:src "img/racket-logo.svg"
+           #:style "margin-right: 40px; width: 200px;height: 200px;"]{}
 
+      ◊div{◊langwww["#lang racket/gui"]{
+◊pre{;; let's play a guessing game
 (◊docs{define} frame (◊docs{new} frame% [label "Guess"]))
 (◊docs{define} n (◊docs{random} 5)) 
 (◊docs{define} ((check i) btn evt)
   (◊docs{message-box} "?" (◊docs{if} (◊docs{=} i n) "Yes" "No")))
 (◊docs{for} ([i (◊docs{in-range} 5)]) 
   (◊docs{make-object} ◊docs{button%} (◊docs{~a} i) frame (check i)))
-(◊docs{send} frame show #t)}}}
-}
-}}}}
+(◊docs{send} frame show #t)}}}}
+
+    ◊div{}}}}}
 
 ◊div[#:class "w3-card"]{
 ◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
