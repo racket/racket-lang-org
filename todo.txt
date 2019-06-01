@@ -1,0 +1,7 @@
+- the spacing at the top of the tabs is inconsistent
+
+- figure out some better colorschemes
+
+- fix images
+  - various ones are stretched incorrectly
+  - screenshots of windows weren't taken properly
