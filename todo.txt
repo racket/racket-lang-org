@@ -4,4 +4,6 @@
 
 - fix images
   - various ones are stretched incorrectly
-  - screenshots of windows weren't taken properly
+  - in the lop tab set, the images (last four tabs)
+    need to shrink when the window size gets
+    small (the same way the text shrinks in that case)
