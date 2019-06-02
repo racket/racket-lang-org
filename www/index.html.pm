@@ -1,21 +1,28 @@
 #lang pollen
+
 ◊(require racket-lang-org/util)
 
-◊top-section{
- ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
-  ◊img[#:alt "small logo" #:src "img/racket-logo.svg" #:class "logo"] Racket 
-  ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
+◊provide[top]
 
-◊div{
 
-◊link[#:class "top-button disappearing-late" #:id "packages" "sfc.html"]{donate}
+◊(define (top)
+  ◊top-section{
+   ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
+    ◊img[#:alt "small logo" #:src "img/racket-logo.svg" #:class "logo"] Racket 
+    ◊span[#:id "tagline" #:class "disappearing" #:style "font-size:70%;color:gray;white-space:nowrap;margin-left:0.2rem;"]{}}
 
-◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
+  ◊div{
 
-◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
+  ◊link[#:class "top-button disappearing-late" #:id "packages" "sfc.html"]{donate}
 
-◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
-}}
+  ◊link[#:class "top-button disappearing-late" #:id "docs" "https://docs.racket-lang.org/"]{docs}
+
+  ◊link[#:class "top-button disappearing-late" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
+
+  ◊link[#:class "top-button disappearing-late" #:id "download" "https://download.racket-lang.org/"]{download}
+}})
+
+◊(top)
 
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 
