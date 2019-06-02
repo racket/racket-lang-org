@@ -37,20 +37,6 @@ td {
   color: purple;
 }
 
-img.lop-image {
-  float: left;
-  margin-right: 80px;
-  width: 350px; 
-  height: 350px;
-}
-
-img.lop-image-rs {
-  float: left;
-  margin-right: 80px;
-  width: 450px; 
-  height: 322px;
-}
-
 img.lop-image-rc8 {
   margin-left: auto;
   margin-right: auto;

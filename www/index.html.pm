@@ -274,7 +274,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    ◊table{
     ◊tr[#:valign "top"]{
 
-    ◊td{ ◊img/size["big-macros.png" #:scale 1/3]{} }
+    ◊td{ ◊img/size["big-macros.png" #:alt "Big Macros" #:size (cons 350 350)]{} }
 
     ◊td{ ◊p{Getting to know the full Racket macro system will
        feel liberating, empowering, dazzling---like a whole
@@ -299,7 +299,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    ◊table{
     ◊tr[#:valign "top"]{
 
-    ◊td{ ◊img/size["lang-video.png" #:scale 2/3]{} }
+    ◊td{ ◊img/size["lang-video.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350)]{}}
 
     ◊td{ ◊p{Some languages convey ideas more easily
    than others. And some programming languages convey
@@ -323,7 +323,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    ◊table{
     ◊tr[#:valign "top"]{
 
-    ◊td{  ◊img[#:src "img/ide-support.png" #:class "lop-image"]{} }
+    ◊td{  ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 350 350)]{} }
 
     ◊td{
   ◊p{Racket comes with its own IDE, DrRacket, and it sports
@@ -346,7 +346,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    ◊table{
     ◊tr[#:valign "top"]{
 
-    ◊td{ ◊img[#:src "img/ugly-syntax.png" #:class "lop-image"]{}}
+    ◊td{ ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 350)]{}}
 
     ◊td{
 
@@ -436,7 +436,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:alt "Il Grande Racket" #:src "img/il-grande-racket.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img/size["il-grande-racket.png" #:size (cons 350 350) #:alt "Il Grande Racket"]{}}}}}}}
 
 ◊div[#:id "tutorials" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -461,7 +461,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:alt "The Guide" #:src "img/racket-guide.png" #:class "lop-image-rs"]{} }}}}}}
+    ◊td{◊img/size["racket-guide.png" #:alt "The Guide"  #:size (cons 450 320)]{} }}}}}}
 
 ◊div[#:id "stuff" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -478,7 +478,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:alt "gear" #:src "img/gear-and-stuff.png" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img/size["gear-and-stuff.png" #:alt "gear" #:size (cons 350 350)]{} }}}}}}
 
 ◊div[#:id "community" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -505,7 +505,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:alt "Racket School 2018" #:src "img/racket-school-2018.png" #:class "lop-image-rs"]{} }}}}}}
+    ◊td{◊img/size["racket-school-2018.png" #:alt "Racket School 2018" #:size (cons 450 322)]{}}}}}}}
 
 
 ◊div[#:id "books" #:class "eco" #:style "display:none"]{
@@ -530,7 +530,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:alt "Beautiful Racket" #:src "img/beautiful-racket-cover.svg" #:class "lop-image"]{} }}}}}}
+    ◊td{◊img/size["beautiful-racket-cover.svg" #:alt "Beautiful Racket" #:size (cons 350 350)]{} }}}}}}
 
 ◊div[#:id "education" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -552,7 +552,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img[#:alt "The Four Amigos" #:src "img/four.png" #:class "lop-image-rs"]{} }}}}}}
+    ◊td{◊img/size["four.png" #:alt "The Four Amigos" #:size (cons 450 322)]{} }}}}}}
 
 ◊div[#:id "us" #:class "eco" #:style "display:block"]{
  ◊special-section[#:class "one-column-body-text"]{
