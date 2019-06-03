@@ -249,23 +249,21 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 (◊docs{define} *F 0)
 
 (◊docs{define-syntax-rule}
-  (def-callback (name field *from convert *to))
-  (◊docs{define} (name tf evt)
-    (◊docs{define} field:val (◊docs{send} tf get-value))
-    (◊docs{define} field:num (◊docs{string->number} field:val))
-    (◊docs{when} field:num 
-      (◊docs{set!-values} (*from *to) (◊docs{values} field:num (convert field:num)))
-      (update-gui))))
+  (flow *from convert *to) 
+  (λ (x) (set!-values (*from *to) (values x (convert x)))))
 
-(◊docs{define} (update-gui)
-  (◊docs{send} C-field set-value (◊docs{~r} *C #:precision 2))
-  (◊docs{send} F-field set-value (◊docs{~r} *F #:precision 2)))
+(◊docs{define} ((callback setter) . self+evt)
+  (◊docs{define} field:num (if (◊docs{empty?} self+evt) 0 (◊docs{string-number} (◊docs{send} (◊docs{first} self+evt) get-value))))
+  (◊docs{when} field:num
+    (setter field:num)
+    (◊docs{send} C-field set-value (~r *C #:precision 4))
+    (◊docs{send} F-field set-value (~r *F #:precision 4))))
 
 (◊docs{define} (field lbl cb)
   (◊docs{new} ◊docs{text-field%} [parent pane] [label lbl] [init-value ""] [callback cb]))
 
-(def-callback (C-2-F C-field *C (λ (c) (+ (* c 9/5) 32)) *F))
-(def-callback (F-2-C F-field *F (λ (f) (* (- f 32) 5/9)) *C))
+(◊docs{define} celsius->fahrenheit (callback (flow *C (λ (c) (+ (* c 9/5) 32)) *F)))
+(◊docs{define} fahrenheit->celsius (callback (flow *F (λ (f) (* (- f 32) 5/9)) *C)))
 
 (◊docs{define} frame   (new frame% [label "temperature converter"]))
 (◊docs{define} pane    (new horizontal-pane% [parent frame]))
