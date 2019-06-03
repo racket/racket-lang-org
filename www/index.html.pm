@@ -327,6 +327,8 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    no external tools, no nothing.}  }
 }}}}}
 
+◊[define "https://www2.ccs.neu.edu/racket/pubs/jfp01-fcffksf.pdf"]
+
 ◊div[#:id "ide-support" #:class "lop" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
 
@@ -336,7 +338,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
     ◊td{  ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 350 350)]{} }
 
-    ◊td{ ◊p{Racket comes with its own IDE, ◊link["https://www2.ccs.neu.edu/racket/pubs/jfp01-fcffksf.pdf"]{DrRacket}, neé DrScheme,
+    ◊td{ ◊p{Racket comes with its own IDE, ◊link[drracket]{DrRacket}, neé DrScheme,
   and it sports some unique features . For example, when
   a programmer mouses over an identifier, the IDE draws
   an arrow back to where it was defined.}
