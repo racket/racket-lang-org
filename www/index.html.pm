@@ -226,22 +226,26 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
 ◊langwww["#lang racket/gui" #:style "font-size:46%"]{
 ◊pre{;;a bi-directional temperature converter (Fahrenheit vs Celsius)
+(◊docs{require} syntax/parse/define)
 
 (◊docs{define} *C 0)
 (◊docs{define} *F 0)
 
 (◊docs{define-syntax-rule}
   (def-callback (name field *from convert *to))
-  (◊docs{define} (name . x)
-    (◊docs{define} field:val (◊docs{if} (◊docs{empty?} x) "0" (◊docs{send} (car x) get-value)))
+  (◊docs{define} (name tf evt)
+    (◊docs{define} field:val (◊docs{send} tf get-value))
     (◊docs{define} field:num (◊docs{string->number} field:val))
     (◊docs{when} field:num 
       (◊docs{set!-values} (*from *to) (◊docs{values} field:num (convert field:num)))
-      (◊docs{send} C-field set-value (~a *C))
-      (◊docs{send} F-field set-value (~a *F)))))
+      (update-gui))))
+
+(◊docs{define} (update-gui)
+  (◊docs{send} C-field set-value (◊docs{~r} *C #:precision 2))
+  (◊docs{send} F-field set-value (◊docs{~r} *F #:precision 2)))
 
 (◊docs{define} (field lbl cb)
-  (◊docs{new} text-field% [parent pane] [label lbl] [init-value ""] [callback cb]))
+  (◊docs{new} ◊docs{text-field%} [parent pane] [label lbl] [init-value ""] [callback cb]))
 
 (def-callback (C-2-F C-field *C (λ (c) (+ (* c 9/5) 32)) *F))
 (def-callback (F-2-C F-field *F (λ (f) (* (- f 32) 5/9)) *C))
@@ -251,7 +255,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 (◊docs{define} C-field (field "celsius:"       C-2-F))
 (◊docs{define} F-field (field " = fahrenheit:" F-2-C))
 
-(C-2-F)
+(update-gui)
 (◊docs{send} frame show #t)
 }}}
   
