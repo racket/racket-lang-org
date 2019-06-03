@@ -200,13 +200,13 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
     ◊td{ 
 
-     ◊p{Racket allows programmers to add new syntactic constructs
+     ◊p{Racket allows programmers to ◊link["https://docs.racket-lang.org/guide/pattern-macros.html"]{add new syntactic constructs}
      in the same way that other languages permit the formulation
      of procedures, methods, or classes.  All you need to do is
      formulate a simple rule that rewrites a custom syntax to a
      Racket expression or definition.}
 
-     ◊p{ Little macros can particularly help programmers
+     ◊p{Little macros can particularly help programmers
      with DRY (Don't Repeat Yourself) where other
      features can't. The example on the left shows how to
      define a ◊tt{where} construct for definitions with a
@@ -262,10 +262,10 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊td{ 
 
     ◊p{Racket comes with a comprehensive suite of
-    libraries: a cross-platform GUI toolbox, a
-    web server, data visualization, and more.
-    Thousands of additional packages are a single
-    command away: from video editing to scientific 
+    libraries: ◊link["https://docs.racket-lang.org/gui/"]{a cross-platform GUI toolbox}, a
+    ◊link["https://docs.racket-lang.org/web-server/index.html?q=%23lang%20web"]{web server}, and more. ◊link["https://pkgs.racket-lang.org"]{Thousands of}
+    ◊link["https://pkgs.racket-lang.org"]{additional packages} are a ◊link["https://docs.racket-lang.org/pkg/getting-started.html?q=raco%20pkg#%28part._installing-packages%29"]{single command}
+    away: from video editing to scientific 
     simulations, from web testing to 3D graphics.}
 
     ◊p{Macros work with these tools. The example
@@ -291,8 +291,8 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
        feel liberating, empowering, dazzling---like a whole
        new level of enlightenment. Developers can easily
        create a collection of co-operating macros to
-       implement algebraic pattern matching, event-handling,
-       or a logic-constraint solver.}
+       implement ◊link["https://docs.racket-lang.org/reference/match.html"]{algebraic pattern matching}, simple 
+       ◊link["https://docs.racket-lang.org/teachpack/2htdpuniverse.html?q=big-bang#%28part._world._interactive%29"]{event-handling}, or a ◊link["https://pkgs.racket-lang.org/package/faster-minikanren"]{logic-constraint solver}.}
 
     ◊p{While Racket is a functional language, it has offered
       a sub-language of ◊link["http://www.cs.utah.edu/plt/publications/aplas06-fff.pdf"]{classes and objects, mixins 
@@ -315,7 +315,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊td{ ◊p{Some languages convey ideas more easily
    than others. And some programming languages convey
    solutions better than others.  Therefore Racket is a
-   language for making languages, so that a programmer
+   language for ◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{making languages}, so that a programmer
    can write every module in a well-suited languages.}
 
    ◊p{Often ◊link["https://lang.video"]{an application domain} comes with several
@@ -336,14 +336,13 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
     ◊td{  ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 350 350)]{} }
 
-    ◊td{
-  ◊p{Racket comes with its own IDE, DrRacket, and it sports
-   some unique features . For example, when a programmer 
-   mouses over an identifier, the IDE draws an arrow back 
-   to where it was defined.}
+    ◊td{ ◊p{Racket comes with its own IDE, ◊link["https://www2.ccs.neu.edu/racket/pubs/jfp01-fcffksf.pdf"]{DrRacket}, neé DrScheme,
+  and it sports some unique features . For example, when
+  a programmer mouses over an identifier, the IDE draws
+  an arrow back to where it was defined.}
 
    ◊p{A programmer immediately benefits from DrRacket while
-    using an alternative language, say Typed Racket. Racket
+    using an alternative language, say ◊link["https://docs.racket-lang.org/ts-guide/index.html"]{Typed Racket}. Racket
     macros, even complex ones and those used to make new
     languages, record and propagate a sufficient amount of
     source information for DrRacket to act as if it understood
@@ -364,10 +363,10 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    ◊p{Real Racket programmers love parentheses, but they
       have empathy for those few who need commas and
       braces.  Hence, building languages with
-      conventional surface syntax is almost as easy as
-      building beautiful languages.}
+      conventional surface syntax, like that of ◊link["https://docs.racket-lang.org/datalog/datalog.html?q=datalog"]{datalog}, 
+      is almost as easy as building beautiful languages.}
 
-  ◊p{Racket's ecosystem comes with parsing packages that
+  ◊p{Racket's ecosystem comes with ◊link["https://docs.racket-lang.org/br-parser-tools/index.html?q=parsing"]{parsing packages} that
   allow developers to easily map any syntax to a
   parenthesized language, which is then compiled to
   ordinary Racket with the help of Racket's macro system.
