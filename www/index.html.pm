@@ -1,6 +1,6 @@
 #lang pollen
 
-◊(require racket-lang-org/util)
+◊(require racket-lang-org/www/util)
 
 ◊provide[top]
 

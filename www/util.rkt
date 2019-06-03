@@ -1,6 +1,6 @@
 #lang racket
 (require racket/runtime-path racket/draw)
-(define-runtime-path img/ "www/img")
+(define-runtime-path img/ "img")
 (provide
  (contract-out
   [img/size
