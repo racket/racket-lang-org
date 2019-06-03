@@ -233,8 +233,8 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 (◊docs{define-syntax-rule}
   (def-callback (name field *from convert *to))
   (◊docs{define} (name . x)
-    (◊docs{define} field:val (◊docs{if} (◊docs{empty?} x) "0" (◊docs{send} (car x)get-value)))
-    (◊docs{define} field:num (◊docs{string-number} field:val))
+    (◊docs{define} field:val (◊docs{if} (◊docs{empty?} x) "0" (◊docs{send} (car x) get-value)))
+    (◊docs{define} field:num (◊docs{string->number} field:val))
     (◊docs{when} field:num 
       (◊docs{set!-values} (*from *to) (◊docs{values} field:num (convert field:num)))
       (◊docs{send} C-field set-value (~a *C))
