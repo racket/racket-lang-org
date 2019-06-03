@@ -1,6 +1,7 @@
 #lang pollen
 
-◊(require racket-lang-org/www/util)
+◊(require racket-lang-org/www/util racket-lang-org/www/color
+racket/format)
 
 ◊provide[top]
 
@@ -56,7 +57,9 @@
 
 
 ◊div[#:class "w3-card"]{
-◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
+◊special-section[#:class "one-column-body-text lop-system"
+                 #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
+                 #:id "pull-quote"]{
  ◊span[#:id "lop-line" #:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
        #:onclick "openTab('the-language',event,'it',false)"]{
   Racket, the Programming Language}}
@@ -165,7 +168,9 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊div{}}}}}
 
 ◊div[#:class "w3-card"]{
-◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
+◊special-section[#:class "one-column-body-text lop-system"
+                 #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
+                 #:id "pull-quote"]{
  ◊span[#:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
        #:onclick "openTab('lop',event,'more-it',false)"]{
   Racket, the Language-Oriented Programming Language}}
@@ -427,17 +432,19 @@ ancestor(A, B)?}}}
 }}}}}
 
 ◊div[#:class "w3-card"]{
-◊special-section[#:class "one-column-body-text w3-purple lop-system" #:style "padding:0.5rem;align:center" #:id "pull-quote"]{
+◊special-section[#:class "one-column-body-text lop-system"
+                 #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
+                 #:id "pull-quote"]{
  ◊span[#:id "lop-line" #:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
        #:onclick "openTab('eco',event,'us',false)"]{
   Racket, the Ecosystem}}
 ◊div[#:class "frontpage-bar"]{
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'software',true)"]{◊div[#:style "mitem"]{Software}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex6 w3-button tablink" #:onclick "openTab('eco',event,'tutorials',true)"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'community',true)"]{◊div[#:style "mitem"]{Community}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 w3-button tablink" #:onclick "openTab('eco',event,'books',true)"]{◊div[#:style "mitem"]{Books}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'education',true)"]{◊div[#:style "mitem"]{Education}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 w3-button tablink" #:onclick "openTab('eco',event,'stuff',true)"]{◊div[#:style "mitem"]{Gear & Stuff}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button tablink" #:onclick "openTab('eco',event,'software',true)"]{◊div[#:style "mitem"]{Software}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex6 unselected-tab frontpage-button tablink" #:onclick "openTab('eco',event,'tutorials',true)"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button tablink" #:onclick "openTab('eco',event,'community',true)"]{◊div[#:style "mitem"]{Community}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 unselected-tab frontpage-button tablink" #:onclick "openTab('eco',event,'books',true)"]{◊div[#:style "mitem"]{Books}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button tablink" #:onclick "openTab('eco',event,'education',true)"]{◊div[#:style "mitem"]{Education}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button tablink" #:onclick "openTab('eco',event,'stuff',true)"]{◊div[#:style "mitem"]{Gear & Stuff}}
 }}
 
 ◊div[#:id "software" #:class "eco" #:style "display:none"]{
@@ -598,13 +605,18 @@ To ◊link["http://www.nsf.gov/"]{the NSF}, ◊link["http://www.darpa.mil/"]{DAR
 function openTab(classname, evt, elementname, turnredp) {
   var i;
  
-  // mark last selected link in red, globally 
   var tablinks;
   tablinks = document.getElementsByClassName("tablink");
   for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-purple", "");
+    tablinks[i].className = tablinks[i].className
+      .replace(" selected-tab", "")
+      .replace(" unselected-tab","")
+      + " unselected-tab";
   }
-  if (turnredp) { evt.currentTarget.className += " w3-purple"; }
+  if (turnredp) {
+    evt.currentTarget.className = evt.currentTarget.className
+      .replace(" unselected-tab", "") + " selected-tab";
+  }
 
   // show selected block, on a per section basis 
   var classes; 

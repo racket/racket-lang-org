@@ -1,8 +1,7 @@
 #lang pollen
-◊(require css-tools)
+◊(require css-tools racket-lang-org/www/color)
 ◊(define debug-width 0)
 ◊(define max-width 1050)
-◊(define link-color "rgb(6, 121, 167)")
 
 ◊(make-media-query 16 8 max-width 60 .5)   
 
@@ -57,6 +56,36 @@ top-section {
   margin-bottom: 0.5rem;
 }
 
+.selected-tab {
+  background-color: ◊|selected-tab-color|;
+  color: ◊|selected-tab-text-color|;
+}
+.unselected-tab {
+  background-color:  ◊|unselected-tab-color|;
+  color: ◊|unselected-tab-text-color|;
+}
+
+.frontpage-button {
+  border:none;
+  display:inline-block;
+  padding:8px 16px;
+  vertical-align:middle;
+  overflow:hidden;
+  text-decoration:none;
+  text-align:center;
+  cursor:pointer;
+  white-space:nowrap;
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+.frontpage-button:disabled{cursor:not-allowed;opacity:0.3}
+
+.frontpage-button:hover{color:#000!important;background-color:#ccc!important}
 
 .frontpage-bar {
     display: flex;
@@ -271,7 +300,7 @@ a.top-button {
 
 .top-button#download{
   background: ◊|link-color|;
-  color: #fafaff;  
+  color: ◊|download-button-text-color|;  
 }
 
 section#samples {
@@ -337,7 +366,7 @@ section-content {
  justify-content: space-between;
  flex-wrap: wrap;
  width: 100%;
-  color:gray;
+  color:◊|plain-text-color|;
   font-size: 90%;
 }
 
