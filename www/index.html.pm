@@ -225,7 +225,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊td{ 
 
 ◊langwww["#lang racket/gui" #:style "font-size:46%"]{
-◊pre{;;a bi-dorectional temperature converter (Fahrenheit vs Celsius)
+◊pre{;;a bi-directional temperature converter (Fahrenheit vs Celsius)
 
 (◊docs{define} *C 0)
 (◊docs{define} *F 0)
