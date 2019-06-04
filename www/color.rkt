@@ -14,7 +14,8 @@
  unselected-tab-color
  unselected-tab-text-color
  plain-text-color
- download-button-text-color)
+ download-button-text-color
+ site-background-color)
 
 (define css-color/c
   (and/c string?
@@ -37,3 +38,4 @@
 (define link-color "rgb(6, 121, 167)")
 (define download-button-text-color "#fafaff")
 (define plain-text-color "gray")
+(define site-background-color "white")

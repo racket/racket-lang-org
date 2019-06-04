@@ -23,6 +23,7 @@ body {
   padding-top: 1rem;
   max-width: ◊|max-width|px;
   margin: auto;
+  background-color: ◊|site-background-color|;
 }
 
 p {
