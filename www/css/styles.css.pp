@@ -58,20 +58,16 @@ top-section {
 }
 
 .selected-tab {
-  background-color: ◊|selected-tab-color|;
-  color: ◊|selected-tab-text-color|;
+  ◊|selected-tab-css|
 }
 .selected-tab:hover {
-  background-color: ◊|selected-tab-hover-color|;
-  color: ◊|selected-tab-hover-text-color|;
+  ◊|selected-tab-hover-css|
 }
 .unselected-tab {
-  background-color:  ◊|unselected-tab-color|;
-  color: ◊|unselected-tab-text-color|;
+  ◊|unselected-tab-css|
 }
 .unselected-tab:hover {
-  background-color: ◊|unselected-tab-hover-color|;
-  color: ◊|unselected-tab-hover-text-color|;
+  ◊|unselected-tab-hover-css|
 }
 
 .frontpage-card {
