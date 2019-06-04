@@ -61,9 +61,21 @@ top-section {
   background-color: ◊|selected-tab-color|;
   color: ◊|selected-tab-text-color|;
 }
+.selected-tab:hover {
+  background-color: ◊|selected-tab-hover-color|;
+  color: ◊|selected-tab-hover-text-color|;
+}
 .unselected-tab {
   background-color:  ◊|unselected-tab-color|;
   color: ◊|unselected-tab-text-color|;
+}
+.unselected-tab:hover {
+  background-color: ◊|unselected-tab-hover-color|;
+  color: ◊|unselected-tab-hover-text-color|;
+}
+
+.frontpage-card {
+  box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)
 }
 
 .frontpage-button {
@@ -83,20 +95,20 @@ top-section {
   -ms-user-select:none;
   user-select:none;
 }
-
 .frontpage-button:disabled{cursor:not-allowed;opacity:0.3}
-
-.frontpage-button:hover{color:#000!important;background-color:#ccc!important}
 
 .frontpage-bar {
     display: flex;
     justify-content: space-between;
 }
+
 .frontpage-bar-item {
+    font-family: "cooper-hewitt";
+    font-size: 100%;
     text-align: center;
     overflow: hidden;
     padding-left: 0;
-    padding-right: 0
+    padding-right: 0;
 }
 .frontpage-bar-flex2 {
     flex: 2;

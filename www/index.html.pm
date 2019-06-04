@@ -56,7 +56,7 @@ racket/format)
  ◊li{Join us for both events in Salt Lake City!}}}
 
 
-◊div[#:class "w3-card"]{
+◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
@@ -64,13 +64,14 @@ racket/format)
        #:onclick "openTab('the-language',event,'it',false)"]{
   Racket, the Programming Language}}
 ◊div[#:class "frontpage-bar"]{
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 unselected-tab w3-button tablink" #:onclick "openTab('the-language',event,'mature',true)"]{◊div[#:style "mitem"]{Mature}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 unselected-tab w3-button tablink" #:onclick "openTab('the-language',event,'batteries',true)"]{◊div[#:style "mitem"]{Batteries Included}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab w3-button tablink" #:onclick "openTab('the-language',event,'extensible',true)"]{◊div[#:style "mitem"]{Extensible}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 unselected-tab w3-button tablink" #:onclick "openTab('the-language',event,'strong',true)"]{◊div[#:style "mitem"]{Strong}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 unselected-tab w3-button tablink" #:onclick "openTab('the-language',event,'drracket',true)"]{◊div[#:style "mitem"]{Polished}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex5 unselected-tab w3-button tablink" #:onclick "openTab('the-language',event,'open',true)"]{◊div[#:style "mitem"]{With a Vibrant Community}}
+  ◊button[#:class"frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab tablink" #:onclick "openTab('the-language',event,'mature',true)"]{◊div[#:style "mitem"]{Mature}}
+  ◊button[#:class "frontpage-bar-item frontpage-button  frontpage-bar-flex4 unselected-tab tablink" #:onclick "openTab('the-language',event,'batteries',true)"]{◊div[#:style "mitem"]{Batteries Included}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab tablink" #:onclick "openTab('the-language',event,'extensible',true)"]{◊div[#:style "mitem"]{Extensible}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab tablink" #:onclick "openTab('the-language',event,'strong',true)"]{◊div[#:style "mitem"]{Strong}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab tablink" #:onclick "openTab('the-language',event,'drracket',true)"]{◊div[#:style "mitem"]{Polished}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex5 unselected-tab tablink" #:onclick "openTab('the-language',event,'open',true)"]{◊div[#:style "mitem"]{With a Vibrant Community}}
 }}
+
 
 ◊div[#:id "extensible" #:class "the-language" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -167,7 +168,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
     ◊div{}}}}}
 
-◊div[#:class "w3-card"]{
+◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
@@ -175,12 +176,12 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
        #:onclick "openTab('lop',event,'more-it',false)"]{
   Racket, the Language-Oriented Programming Language}}
 ◊div[#:class "frontpage-bar"]{
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab w3-button tablink" #:onclick "openTab('lop',event,'little-macros',true)"]{◊div[#:style "mitem"]{Little Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex4 unselected-tab w3-button tablink" #:onclick "openTab('lop',event,'general-purpose',true)"]{◊div[#:style "mitem"]{General Purpose}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab w3-button tablink" #:onclick "openTab('lop',event,'big-macros',true)"]{◊div[#:style "mitem"]{Big Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab w3-button tablink" #:onclick "openTab('lop',event,'hash-langs',true)"]{◊div[#:style "mitem"]{Easy DSLs}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab w3-button tablink" #:onclick "openTab('lop',event,'ide-support',true)"]{◊div[#:style "mitem"]{IDE Support}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab w3-button tablink" #:onclick "openTab('lop',event,'any-syntax',true)"]{◊div[#:style "mitem"]{Any Syntax}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab tablink" #:onclick "openTab('lop',event,'little-macros',true)"]{◊div[#:style "mitem"]{Little Macros}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex4 unselected-tab tablink" #:onclick "openTab('lop',event,'general-purpose',true)"]{◊div[#:style "mitem"]{General Purpose}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab tablink" #:onclick "openTab('lop',event,'big-macros',true)"]{◊div[#:style "mitem"]{Big Macros}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab tablink" #:onclick "openTab('lop',event,'hash-langs',true)"]{◊div[#:style "mitem"]{Easy DSLs}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab tablink" #:onclick "openTab('lop',event,'ide-support',true)"]{◊div[#:style "mitem"]{IDE Support}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab tablink" #:onclick "openTab('lop',event,'any-syntax',true)"]{◊div[#:style "mitem"]{Any Syntax}}
 }}
 
 ◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
@@ -431,7 +432,7 @@ ancestor(A, B)?}}}
 
 }}}}}
 
-◊div[#:class "w3-card"]{
+◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
