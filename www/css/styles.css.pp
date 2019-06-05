@@ -98,6 +98,17 @@ top-section {
     justify-content: space-between;
 }
 
+.frontpage-bar-heading {
+  cursor:pointer;
+  font-size:130%;
+  color:◊|tab-heading-text-color|;
+  white-space:nowrap;
+  text-align:center;
+}
+
+.frontpage-bar-heading:hover {
+  color: ◊|tab-heading-text-hover-color|;
+}
 .frontpage-bar-item {
     font-family: "cooper-hewitt";
     font-size: 100%;
@@ -349,7 +360,7 @@ section#book {
 
 section {
   padding-top: 0.5rem;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid ◊|tab-heading-color|;
 }
 
 section-title, section-content {

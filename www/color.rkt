@@ -8,6 +8,8 @@
 
 (provide-colors
  tab-heading-color
+ tab-heading-text-color
+ tab-heading-text-hover-color
  link-color
  plain-text-color
  download-button-text-color
@@ -38,6 +40,8 @@
 ;; Matthias's colors
 (begin
   (define tab-heading-color "#9c27b0")
+  (define tab-heading-text-color "white")
+  (define tab-heading-text-hover-color tab-heading-text-color)
 
   (define selected-tab-color "#9c27b0")
   (define selected-tab-text-color "white")
@@ -64,7 +68,7 @@
   (define plain-text-color "gray")
   (define site-background-color "white"))
 
-;; the original MB colors (but perhaps applied in a different way than others might?)
+;; the original MB colors (but perhaps with more blue than he would have used)
 #;
 (begin
 
@@ -73,6 +77,8 @@
   (define plain-text-color "gray")
 
   (define tab-heading-color link-color)
+  (define tab-heading-text-color "white")
+  (define tab-heading-text-hover-color tab-heading-text-color)
 
   (define unselected-tab-css (~a "background-color: white; color: " link-color "; weight: bold;"))
   (define unselected-tab-hover-css "opacity: 0.6;")

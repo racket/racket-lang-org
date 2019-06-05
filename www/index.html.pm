@@ -58,9 +58,10 @@ racket/format)
 
 ◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
-                 #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
+                 #:style (~a "padding:0.5rem;align:center;"
+                             "background-color: " tab-heading-color ";")
                  #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
+ ◊span[#:id "lop-line" #:class "disappearing frontpage-bar-heading"
        #:onclick "openTab('the-language',event,'it',false)"]{
   Racket, the Programming Language}}
 ◊div[#:class "frontpage-bar"]{
@@ -172,7 +173,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
- ◊span[#:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
+ ◊span[#:class "disappearing frontpage-bar-heading"
        #:onclick "openTab('lop',event,'more-it',false)"]{
   Racket, the Language-Oriented Programming Language}}
 ◊div[#:class "frontpage-bar"]{
@@ -436,7 +437,7 @@ ancestor(A, B)?}}}
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing" #:style "cursor:pointer;font-size:130%;color:white;white-space:nowrap;text-align:center;"
+ ◊span[#:id "lop-line" #:class "disappearing frontpage-bar-heading"
        #:onclick "openTab('eco',event,'us',false)"]{
   Racket, the Ecosystem}}
 ◊div[#:class "frontpage-bar"]{
@@ -595,7 +596,7 @@ ancestor(A, B)?}}}
         #:src "img/racket-con-2018.png" #:class "lop-image-rc8"]{}}
 }}
 
-◊section[#:id "bottom" #:class "one-column-body-text" #:style "background:white;padding:0.5rem"]{
+◊section[#:id "bottom" #:class "one-column-body-text" #:style "padding:0.5rem"]{
 Thank you
 
 To ◊link["http://www.nsf.gov/"]{the NSF}, ◊link["http://www.darpa.mil/"]{DARPA}, the ◊link["http://www.ed.gov/FIPSE/"]{Fund for the Improvement of Postsecondary Education (FIPSE)} at the ◊link["http://www.ed.gov/"]{US Department of Education}, the ◊link["http://www.exxonmobil.com/Corporate/community_foundation.aspx"]{Exxon Foundation}, CORD, partners of the Academy of Information Technology, ◊link["http://microsoft.com/"]{Microsoft}, ◊link["http://mozilla.org/"]{Mozilla}, and ◊link["http://google.com/"]{Google} for their generous support over the years.}
