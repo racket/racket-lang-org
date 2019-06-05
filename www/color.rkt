@@ -87,3 +87,63 @@
   (define selected-tab-hover-css "opacity: 0.6;")
 
   (define site-background-color "white"))
+
+#|
+from https://hookagency.com/website-color-schemes/
+|#
+
+#;
+(begin
+  ;; 2. Extra Snug
+  (define French-Laundry-Blue "#3a4660")
+  (define Comfortably-Tan "#c9af98")
+  (define Peachy-Kreme "#ed8a63")
+  (define Brown-Bonnet "#845007")
+
+  (define site-background-color Comfortably-Tan)
+  (define tab-heading-color French-Laundry-Blue)
+  (define tab-heading-text-color Comfortably-Tan)
+  (define tab-heading-text-hover-color Peachy-Kreme)
+  (define unselected-tab-color Comfortably-Tan)
+  (define unselected-tab-text-color French-Laundry-Blue)
+  (define unselected-tab-hover-color Comfortably-Tan)
+  (define unselected-tab-hover-text-color "black")
+  (define selected-tab-color French-Laundry-Blue)
+  (define selected-tab-text-color Comfortably-Tan)
+  (define selected-tab-hover-color French-Laundry-Blue)
+  (define selected-tab-hover-text-color Peachy-Kreme)
+  (define link-color French-Laundry-Blue)
+  (define download-button-text-color French-Laundry-Blue)
+  (define plain-text-color Brown-Bonnet)
+
+  (define selected-tab-css
+    (~a "background-color: " selected-tab-color "; color: " selected-tab-text-color ";"))
+  (define selected-tab-hover-css
+    (~a "background-color: " selected-tab-hover-color "; color: " selected-tab-hover-text-color ";"))
+  (define unselected-tab-css
+    (~a "background-color: " unselected-tab-color
+        "; color: " unselected-tab-text-color ";"))
+  (define unselected-tab-hover-css
+    (~a "background-color: " unselected-tab-hover-color
+        "; color: " unselected-tab-hover-text-color ";")))
+
+#|
+3. dark horse
+Are ya yellow?!: #feda6a
+Silver Fox: #d4d4dc
+Deep Matte Grey: #393f4d
+Dark Slate: #1d1e22
+
+9. sunny and calm
+Morning Sky: #CAE4DB – Never underestimate a color palette created by a photograph to set the tone of your design
+Honey: #DCAE1D – In this case the palette is set with the photo and then echoed in the subtitle.
+Cerulean: #00303F – Cerulean is incredibly classy as a black or dark grey alternative if used consistently throughout
+Mist: #7A9D96 – This clean, natural color is established in the photo but could be used on a lower full-width block or buttons as well.
+
+14. goldifox
+
+Golden wheat: #a39274
+Soft Wheat: #dfd8c8
+Deep gray: #252523
+
+|#
