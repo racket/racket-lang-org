@@ -16,7 +16,7 @@
     (if w/h
         (values (car w/h) (cdr w/h))
         (values (->i (send bmp get-width))
-                (->i (send bmp get-width)))))
+                (->i (send bmp get-height)))))
   `(img ((src ,(~a "img/" which))
          (alt ,alt)
          (width ,(~a w))

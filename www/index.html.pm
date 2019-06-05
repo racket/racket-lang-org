@@ -512,7 +512,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img/size["gear-and-stuff.png" #:alt "gear" #:scale .4]{} }}}}}}
+    ◊td{◊img/size["gear-and-stuff.jpg" #:alt "gear" #:scale .4]{} }}}}}}
 
 ◊div[#:id "community" #:class "eco" #:style "display:none"]{
  ◊special-section[#:class "one-column-body-text"]{
