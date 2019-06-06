@@ -38,6 +38,7 @@
 
 
 ;; Matthias's colors
+#;
 (begin
   (define tab-heading-color "#9c27b0")
   (define tab-heading-text-color "white")
@@ -69,7 +70,6 @@
   (define site-background-color "white"))
 
 ;; the original MB colors (but perhaps with more blue than he would have used)
-#;
 (begin
 
   (define link-color "rgb(6, 121, 167)")

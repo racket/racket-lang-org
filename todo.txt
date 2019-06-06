@@ -1,9 +1,8 @@
 - the spacing at the top of the tabs is inconsistent
 
-- figure out some better colorschemes
+- thing look bad on mobile phones
 
-- fix images
-  - various ones are stretched incorrectly
-  - in the lop tab set, the images (last four tabs)
-    need to shrink when the window size gets
-    small (the same way the text shrinks in that case)
+- when the webpage gets smaller, the images in the lop tabs don't
+  shrink but the program text does
+
+- figure out some better colorschemes?
