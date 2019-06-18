@@ -142,7 +142,13 @@ Fructure is a prototype for an extensible structured editing engine. In structur
 }
 
 ◊folded{
-◊speaker["" "John Clements"]{… many small steps backward for mankind.}
+◊speaker["" "John Clements"]{Computational models and one big problem with the stepper}
+
+DrRacket's stepper shows the evaluation of a beginning student language (BSL) program as a sequence of steps in an algebraic reduction semantics.  But ... should it?  
+
+We propose a simple change to the stepper's interface which weakens its connection to the standard-format small-step formal semantics it has historically sought to adhere to, but which strengthens its connection to the notion of semantics that I believe that most working programmers actually use.  
+
+It would be awesome to actually try to validate this change. Um, maybe next year.
 
 ◊bio{◊strong{John Clements} is Arrogant, Self-Centered, and Lazy. Also Intelligent, Honest, and Caring. Also, he’s a Professor at Cal Poly State University, and the author of DrRacket’s Stepper and many other things that can be entertainingly completed in a weekend, including this bio. Ask him about Bread,  Knitting, Speedcubing, or Bicycling. Or the difficulty of wedging models of computation into CS 1.}
 }
