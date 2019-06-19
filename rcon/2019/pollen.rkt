@@ -25,12 +25,12 @@
 (define (make-matrix str)
   (append*
    (for/list ([str (in-list (string-split str "\n"))])
-             (define cps (map char->integer (string->list str)))
-             (define letter-array (apply map list (for/list ([cp (in-list cps)])
-                                                            (vector-ref cells (if (= cp 32) 0 cp)))))
-             (for/list ([rows (in-list letter-array)])
-                       (for/list ([val (append* (add-between (map int->pixel-row (map smear rows)) '(0 0)))])
-                                 val)))))
+     (define cps (map char->integer (string->list str)))
+     (define letter-array (apply map list (for/list ([cp (in-list cps)])
+                                            (vector-ref cells (if (= cp 32) 0 cp)))))
+     (for/list ([rows (in-list letter-array)])
+       (for/list ([val (append* (add-between (map int->pixel-row (map smear rows)) '(0 0)))])
+         val)))))
 
 (define (make-jsexpr str)
   (jsexpr->string (make-matrix str)))
@@ -44,13 +44,13 @@
   `(g
     ,@(for/list ([delta (in-range 0 1 0.25)]
                  [count (in-naturals)])
-                `(rect ((x ,(format "~a" (* xunit (- x delta))))
-                        (y ,(format "~a" (* yunit (- y 0.5 delta))))
-                        (width ,(format "~a" (* xunit (+ width hstretch))))
-                        (height ,(format "~a" yunit))
-                        (class ,(format "lower-shape layer-~a" count))
-                        (rx ,(format "~a" (/ yunit 2)))
-                        (ry ,(format "~a" (/ yunit 2))))))
+        `(rect ((x ,(format "~a" (* xunit (- x delta))))
+                (y ,(format "~a" (* yunit (- y 0.5 delta))))
+                (width ,(format "~a" (* xunit (+ width hstretch))))
+                (height ,(format "~a" yunit))
+                (class ,(format "lower-shape layer-~a" count))
+                (rx ,(format "~a" (/ yunit 2)))
+                (ry ,(format "~a" (/ yunit 2))))))
     (rect ((x ,(format "~a" (* xunit (sub1 x))))
            (y ,(format "~a" (* yunit (- (sub1 y) 0.5))))
            (width ,(format "~a" (* xunit (+ width hstretch))))
@@ -61,33 +61,34 @@
 
 (define (make-dasharray)
   (string-join (map ~a (flatten (for/list ([i 20])
-                                          (list 1 3)))) " "))
+                                  (list 1 3)))) " "))
 
 (define (make-svgs matrix [cell-proc default-cell-proc])
   (append
    (append*
     (for/list ([(row y) (in-indexed matrix)])
-              (let loop ([x 0][cols row][gs null])
-                (match cols
-                  [(== empty) (reverse gs)]
-                  [(list (and zeroes 0) ..1  rest ...)
-                   (loop (+ x (length zeroes)) rest gs)]
-                  [(list (and ones 1) ..1 rest ...)
-                   (define new-g `(g ((class "pixel-on"))
-                                     ,(cell-proc x y (length ones))))
-                   (loop (+ x (length ones)) rest (cons new-g gs))]))))))
+      (let loop ([x 0][cols row][gs null])
+        (match cols
+          [(== empty) (reverse gs)]
+          [(list (and zeroes 0) ..1  rest ...)
+           (loop (+ x (length zeroes)) rest gs)]
+          [(list (and ones 1) ..1 rest ...)
+           (define new-g `(g ((class "pixel-on"))
+                             ,(cell-proc x y (length ones))))
+           (loop (+ x (length ones)) rest (cons new-g gs))]))))))
 
 
 (require pollen/unstable/convert)
-(define (string->svg #:width [width #f] . strs)
+(define (string->svg #:width [width #f]
+                     #:format [format 'html] . strs)
   (define str (apply string-append strs))
   (define max-line-chars (or width (apply max (map string-length strs))))
   (define line-count (length (string-split str "\n")))
-  (html->xexpr
-   ◊string-append{
- <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-15 -20 ◊(number->string (+ 50 (* 100 max-line-chars))) ◊(number->string (+ 20 (* 10 yunit line-count)))" >
- ◊(string-join (map xexpr->html (make-svgs (make-matrix str))) "")
- </svg></div>}))
+  (define svg `(g ,@(make-svgs (make-matrix str))))
+  (match format
+    ['html 
+     (html->xexpr ◊string-append{<div class="svg"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-15 -20 ◊(number->string (+ 50 (* 100 max-line-chars))) ◊(number->string (+ 20 (* 10 yunit line-count)))">◊(xexpr->html svg)</svg></div>})]
+    ['svg svg]))
 
 
 (define (image src)
@@ -155,8 +156,8 @@
   (define openness (if open "block" "none"))
   (define div-name (symbol->string (gensym)))
   `(div ((class "speaker-desc"))
-    ,(foldable-subhead div-name title)
-    (,payload-tag ((style ,(format "display:~a;" openness))(id ,div-name) (class ,payload-class)) ,@(detect-paragraphs xs #:force? #t))))
+        ,(foldable-subhead div-name title)
+        (,payload-tag ((style ,(format "display:~a;" openness))(id ,div-name) (class ,payload-class)) ,@(detect-paragraphs xs #:force? #t))))
 
 (define (folded-open title . xs)
   (apply folded title #:open #t xs))
@@ -170,9 +171,9 @@
 (define (head which . xs)
   `(div ((class "head") (id ,(format "~a" which)))
         ,@(for/list ([c (in-string "cmyw")])
-                    (define the-div
-                      `(div ((class ,(format "movable ~a" c))
-                             (style ,(format "transform: translate3d(~arem,~arem,0)" (- (random 2) 2) (- (random 2) 2)))
-                             (id ,(symbol->string (gensym)))) ,@xs))
-                    ;; use aria-hidden = "true" attribute to hide duplicates from screen readers
-                    (if (not (char=? c #\w)) (attr-set the-div 'aria-hidden "true") the-div))))
+            (define the-div
+              `(div ((class ,(format "movable ~a" c))
+                     (style ,(format "transform: translate3d(~arem,~arem,0)" (- (random 2) 2) (- (random 2) 2)))
+                     (id ,(symbol->string (gensym)))) ,@xs))
+            ;; use aria-hidden = "true" attribute to hide duplicates from screen readers
+            (if (not (char=? c #\w)) (attr-set the-div 'aria-hidden "true") the-div))))
