@@ -24,7 +24,7 @@
 
 ◊h3{◊xtarget["overview"]{Domain-Specific Languages from Racket}}
 
-◊link["https://racket-lang.org/" ◊img[#:style "float:left;width:5rem;padding-right:0.5rem" #:src "https://racket-lang.org/img/racket-logo.svg"]] The ◊link["https://racket-lang.org/"]{Racket} team has spent over thirty years developing and refining for creating domain-specific languages (DSLs). Racket School will introduce you to these tools and the underlying philosophy on language-oriented programming (LOP), ◊link[cacm]{an approach to software development through the lenses of DSLs} (CACM, Feb 2018).
+◊link["https://racket-lang.org/" ◊img[#:style "float:left;width:5rem;padding-right:0.5rem" #:src "https://racket-lang.org/img/racket-logo.svg"]] The ◊link["https://racket-lang.org/"]{Racket} team has spent over thirty years developing and refining a coherent intellectual tradition for creating domain-specific languages (DSLs). Racket School will introduce you to these tools and the underlying philosophy on language-oriented programming (LOP), ◊link[cacm]{an approach to software development through the lenses of DSLs} (CACM, Feb 2018).
 
 This year, Racket School is divided into two tracks, using two different pedagogical approaches. 
 
