@@ -93,11 +93,12 @@ As the maker movement has taken off, fabrication procedures have become more and
 }
 
 ◊folded{
-◊speaker["" "Gershon Mathew Wolfe"]{A Mental Model for Algorithmic Music Composition}
+◊speaker["" "Conor Finegan"]{ADQC: From Normalcy to Adequacy}
 
-I have put together a melody-generating system in Racket called arsNova and arsMosis. My workflow is based on the theory that the human brain enjoys listening to mid-complex melodies, as opposed to very simple or overly complex patterns. My system uses a combination of cellular automata, entropy, musical set theory, and interval class vectors to deduce the most appealing melodies.
+ADQC is a version of C with verification and resource bounds. A statically-typed language which aims to integrate easily into existing projects, it uses Racket's rich facilities for language building to make it easier to read and write safe, optimized C code. Let's explore how eschewing Turing completeness in favor of statically-verifiable termination and Racket-style macros gives birth to a new style of systems programming.
 
-◊bio{◊strong{Gershon Mathew Wolfe} has a background in statistical physics and has been developing and prototyping software algorithms for the past 29 years in the fields of bioinformatics, machine learning in medical diagnostics, decision making processes in defense, and algorithmic music composition.  Worked at Nalorac, Incyte Pharmaceuticals, Large Scale Biology, Advanced Ideas in Medicine, contract positions, SoSACorp, and currently at Algorhythms LLC.  Gershon has a B.S. in chemistry from UCLA, a Ph.D. in chemical physics from the University of Washington, and a postdoctoral fellowship  from UCSF.}
+◊bio{◊strong{Conor Finegan} is a graduate student at the University of Massachusetts Lowell with a passion for games and systems programming. Perpetually dissatisfied with the state of these arts, he is interested in finding the best way to use Racket
+to generate highly-optimized native code.}
 }
 
 ◊folded{
