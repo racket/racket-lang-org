@@ -36,7 +36,7 @@ For the first time, Racket School will be immediately followed by ◊link["https
 
 A five-day class that will run July 8–12 (Monday–Friday). 
 
-This track will be taught by ◊link["https://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}, ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}, ◊link["https://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}, and ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}.
+This track will be taught by ◊link["https://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}, ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}, ◊link["https://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}, ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}, and ◊link["http://users.cs.northwestern.edu/~jesse/"]{Jesse Tov}.
 
 ◊em{This track will cover:}
 
