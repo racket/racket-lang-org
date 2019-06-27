@@ -166,7 +166,7 @@ It would be awesome to actually try to validate this change. Um, maybe next year
 ◊row{◊at{10:30–10:50} ◊desc{◊em{break}}}
 ◊row{◊at{10:50–11:50} ◊desc{
 Phil Hagelberg
-Gershon Mathew Wolfe}}
+Conor Finegan}}
 ◊row{◊at{11:50–14:00} ◊desc{◊em{lunch (provided)}}}
 ◊row{◊at{14:00–15:00} ◊desc{
 Bradley M. Kuhn
