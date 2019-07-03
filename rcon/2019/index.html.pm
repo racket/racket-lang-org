@@ -26,6 +26,8 @@ RacketCon is for developers, contributors, programmers, educators, and bystander
 ◊string->svg{Aaron Turon}
 ◊string->svg{Governing Rust}
 
+Rust is a language whose design, and even core values, radically shifted over time thanks in large part to its very active open source community. As the language matured, stabilized, and grew in scale, so did its governance. It has been a hard balancing act between the need to ship, the desire to include a wide range of stakeholders (paid and volunteer), and the drive for technical excellence. We made a lot of mistakes and encountered unexpected tradeoffs. This talk will recount some of Rust's governance history through personal stories, and talk about what it has taken for Rust to avoid becoming a victim of its own success.
+
 ◊link["http://aturon.github.io/"]{Aaron Turon} is a Research Engineer on the Rust team at Mozilla. He received his PhD from Northeastern University, where he studied programming-language design, program verification, and low-level concurrency. His dissertation was awarded the SIGPLAN John C. Reynolds Doctoral Dissertation Award in 2014. After his PhD studies, he continued his research in concurrency verification and programming techniques as a postdoc at MPI-SWS.
 
 ◊gap[1]
@@ -93,6 +95,10 @@ to generate highly-optimized native code.}
 
 ◊folded{
 ◊speaker["" "Bradley M. Kuhn"]{Conservancy and Racket: What We Can Do Together!}
+
+Racket recently became one of the many illustrious member projects of the Software Freedom Conservancy. This talk will discuss the amazing potential and future for collaboration between the Racket community and Software Freedom Conservancy. The talk will cover the basics of what it means for a project to exist as Conservancy member, what Conservancy can do for Racket, and how we can work together into a new era of charitable work to advance software freedom. 
+
+Specifically, Conservancy is unique among organizational homes for projects because we are committed to improving software freedom for the general public. Conservancy staff is particularly excited about Racket, with its focus on education and lifelong learning for developers about programming langauges. Because of that, Racket's mission as a project fits well with that of Conservancy. We at Conservancy believe there are great opportunties for collaboration between Conservancy's charitable work and advancement of the Racket project and community. In addition to presenting some ideas of what we could do together, this talk will encourage audience questions and inquiry about how Conservancy works and what else might be possible to advance the mission of software freedom and the Racket project together.
 
 ◊bio{◊strong{Bradley M. Kuhn} is the Distinguished Technologist at Software Freedom Conservancy, and editor-in-chief of copyleft.org.  Kuhn began his work in the software freedom movement as a volunteer in 1992, as an early adopter of GNU/Linux, and contributor to various Free Software projects.  Kuhn's non-profit career began in 2000 at FSF. As FSF's Executive Director from 2001-2005, Kuhn led FSF's GPL enforcement, launched its Associate Member program, and invented the Affero GPL. Kuhn was appointed President of Conservancy in April 2006, was Conservancy's primary volunteer from 2006-2010, and has been a full-time staffer since early 2011. Kuhn holds a summa cum laude B.S. in Computer Science from Loyola University in Maryland, and an M.S. in Computer Science from the University of Cincinnati. Kuhn received an O'Reilly Open Source Award, in recognition for his lifelong policy work on copyleft licensing.}
 }
