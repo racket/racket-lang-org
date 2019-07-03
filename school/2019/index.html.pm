@@ -152,9 +152,11 @@ See the ◊link["https://school.racket-lang.org/2019/plan/"]{detailed schedule h
 
 ◊h3{◊xtarget["accommodation"]{Accommodation}}
 
+We arranged for subsidized lodging in dorms at the University of Utah, but the deadline for reserving dorm lodging has now passed.
+
 ◊;{Option 1: Racket School attendees can take advantage of our fantastic ◊link["https://gc.synxis.com/rez.aspx?Hotel=76675&Chain=10069&arrive=10/6/2017&depart=10/8/2017&adult=1&child=0&group=4AM98Y"]{group rate} at the beautiful & convenient ◊link["https://www.hoteldeca.com/"]{Hotel TBD}.}
 
-◊;{Option 2: }We've arranged for subsidized lodging in dorms at the University of Utah. If you're staying for ◊link["https://con.racket-lang.org"]{RacketCon}, the dorms are available through the weekend. RacketCon will be held downtown, a short ride from the dorms on ◊link["https://www.rideuta.com/Services/TRAX"]{TRAX}.
+◊;{Option 2: We've arranged for subsidized lodging in dorms at the University of Utah. If you're staying for ◊link["https://con.racket-lang.org"]{RacketCon}, the dorms are available through the weekend. RacketCon will be held downtown, a short ride from the dorms on ◊link["https://www.rideuta.com/Services/TRAX"]{TRAX}.}
 
 
 

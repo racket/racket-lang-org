@@ -69,6 +69,11 @@ $249 academic}}
 
 Eventbrite fees are added during checkout.
 
+◊gap[1]
+
+◊h3{◊xtarget["register"]{◊string->svg[#:width heading-width]{>(housing)}}}
+
+◊;{For those attending RacketCon only, }A limited block of ◊link["https://reservations.travelclick.com/4650?groupID=2537449#/guestsandrooms"]{discounted rooms} is available from the ◊link["https://saltlake.littleamerica.com/"]{Little America} hotel. ◊link["https://reservations.travelclick.com/4650?groupID=2537449#/guestsandrooms"]{Click here to reserve.}
 
 ◊gap[1]
 
