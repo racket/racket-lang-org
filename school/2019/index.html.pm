@@ -33,7 +33,7 @@ For the first time, Racket School will be immediately followed by ◊link["https
 
 ◊h3{◊xtarget["htdl"]{Track 1: How to Design Languages}}
 
-A five-day class that will run July 8–12 (Monday–Friday). 
+A five-day class that will run July 8–12 (Monday–Friday).
 
 This track will be taught by ◊link["https://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}, ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}, ◊link["https://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}, ◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}, and ◊link["http://users.cs.northwestern.edu/~jesse/"]{Jesse Tov}.
 
@@ -138,7 +138,7 @@ The summer school will be held at the ◊link["https://goo.gl/maps/bpWGz93472s"]
 
 Each teaching day will run roughly ◊strong{9am to 5pm},  divided into four sections of about 75 min each. Some sections will be organized as traditional ◊strong{lectures}. In ◊strong{lab sessions}, the summer school participants will practice the lecture material with hands-on exercises; teaching assistants will be on hand to assist. Participants will also have time to consult with the faculty and teaching assistants on their own language projects. 
 
-See the ◊link["https://school.racket-lang.org/2019/plan/"]{detailed schedule here}.
+See the ◊link["https://school.racket-lang.org/2019/plan/"]{detailed HtDL schedule here}.
 
 ◊;{
 
