@@ -20,6 +20,8 @@ RacketCon}
 
 RacketCon is for developers, contributors, programmers, educators, and bystanders. It's an opportunity for all of us to share plans, ideas, and enthusiasm, and help shape the future of Racket.
 
+◊link["https://youtu.be/xSjk2PdQm5k"]{Live stream}
+
 ◊(define heading-width 16)
 
 ◊string->svg[#:width heading-width]{>(keynote)}
