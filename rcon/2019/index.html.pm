@@ -5,6 +5,8 @@ RacketCon}
 
 ◊(define this-rc-date "13–14 July 2019")
 
+◊(define live-stream-link ◊span{◊link["https://youtu.be/xSjk2PdQm5k"]{Watch the live stream}: starts at 9:30am MDT on Sat July 13})
+
 ◊div[#:class "menu-container"]{
 ◊h2{◊xlink["register"]{◊this-rc-date}}
 ◊h2{◊xlink{Venue}}
@@ -20,7 +22,7 @@ RacketCon}
 
 RacketCon is for developers, contributors, programmers, educators, and bystanders. It's an opportunity for all of us to share plans, ideas, and enthusiasm, and help shape the future of Racket.
 
-◊link["https://youtu.be/xSjk2PdQm5k"]{Live stream}
+◊live-stream-link
 
 ◊(define heading-width 16)
 
@@ -157,6 +159,12 @@ It would be awesome to actually try to validate this change. Um, maybe next year
 ◊bio{◊strong{John Clements} is Arrogant, Self-Centered, and Lazy. Also Intelligent, Honest, and Caring. Also, he’s a Professor at Cal Poly State University, and the author of DrRacket’s Stepper and many other things that can be entertainingly completed in a weekend, including this bio. Ask him about Bread,  Knitting, Speedcubing, or Bicycling. Or the difficulty of wedging models of computation into CS 1.}
 }
 }
+
+◊gap[1]
+
+◊h3{◊xtarget["schedule"]{◊string->svg[#:width (* heading-width 1.4)]{>(live-stream)}}}
+
+◊live-stream-link
 
 ◊gap[1]
 
