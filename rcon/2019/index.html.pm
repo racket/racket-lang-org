@@ -41,7 +41,9 @@ Rust is a language whose design, and even core values, radically shifted over ti
 
 Two firsts this year: 
 
-1) RacketCon is located in Salt Lake City, Utah. We'll be at the Tessman Auditorium at ◊link["https://www.slcpl.org/"]{The City Library} main branch at 210 East 400 South.
+1) RacketCon is located in Salt Lake City, Utah. On Saturday, we'll be at the Tessman Auditorium at ◊link["https://www.slcpl.org/"]{The City Library} main branch at 210 East 400 South.
+
+On Sunday, we'll be on the ◊link["https://www.cs.utah.edu/"]{University of Utah} campus at the ◊link["https://goo.gl/maps/bpWGz93472s"]{Warnock Engineering Building}.
 
 2) RacketCon happens right after Racket School. All Racket School tickets also include admission to RacketCon. For more info, visit the ◊link["https://school.racket-lang.org/"]{Racket School web page}.
 
