@@ -95,6 +95,18 @@
 ◊link["http://www.ccs.neu.edu/home/asumu/"]{Asumu Takikawa}
 
 ◊link["http://beautifulracket.com"]{Matthew Butterick}
+
+◊link["https://github.com/gus-massa/"]{Gustavo Massaccesi}
+
+◊link["http://users.eecs.northwestern.edu/~clk800/"]{Casey Klein}
+
+◊link["https://lexi-lambda.github.io/"]{Alexis King}
+
+◊link["https://github.com/jackfirth"]{Jack Firth}
+
+◊link["https://leastfixedpoint.com/tonyg/"]{Tony Garnock-Jones}
+
+◊link["http://www.ccs.neu.edu/home/pauls/"]{Paul Stansifer}
 }
 
 
