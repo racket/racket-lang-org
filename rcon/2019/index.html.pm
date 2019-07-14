@@ -5,7 +5,7 @@ RacketCon}
 
 ◊(define this-rc-date "13–14 July 2019")
 
-◊(define live-stream-link ◊span{◊link["https://youtu.be/xSjk2PdQm5k"]{Watch the live stream}: starts at 9:30am MDT on Sat July 13})
+◊(define live-stream-link ◊span{◊link["https://www.youtube.com/watch?v=dnz6y5U0tFs"]{Watch the live stream}: resumes at 9:30am MDT on Sun July 14. Day 1 Live Stream is ◊link["https://youtu.be/xSjk2PdQm5k"]{still available}.})
 
 ◊div[#:class "menu-container"]{
 ◊h2{◊xlink["register"]{◊this-rc-date}}
