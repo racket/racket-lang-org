@@ -49,7 +49,7 @@ racket/format)
 
   ◊li{◊link["https://thestrangeloop.com/2019/number-lang-wishful-thinking.html"]{Vlad Kozin will speak at Strange Loop} on language-oriented programming in Racket}
 
- ◊li{◊link["https://school.racket-lang.org"]{Racket School 2019}---Learn how to make programming languages, July 8–-12 in Salt Lake City. Students, ask about Financial aid.} 
+ ◊li{◊link["https://school.racket-lang.org"]{Racket School 2019}—Learn how to make programming languages, July 8–-12 in Salt Lake City. Students, ask about Financial aid.} 
 
  ◊li{◊link["https://con.racket-lang.org/"]{ninth RacketCon} immediately follows the Racket School.}
 
@@ -310,7 +310,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
     ◊td{ ◊img/size["big-macros.png" #:alt "Big Macros" #:size (cons 350 350)]{} }
 
     ◊td{ ◊p{Getting to know the full Racket macro system will
-       feel liberating, empowering, dazzling---like a whole
+       feel liberating, empowering, dazzling—like a whole
        new level of enlightenment. Developers can easily
        create a collection of co-operating macros to
        implement ◊link[racket/match]{algebraic pattern matching}, simple 
@@ -341,7 +341,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
    can write every module in a well-suited languages.}
 
    ◊p{Often ◊link[lang-video]{an application domain} comes with several
-   languages.  When you need a new language, you make it---
+   languages.  When you need a new language, you make it—
    on the fly. Open an IDE window; create a language right
    there, with just a few keystrokes; and run a module in 
    this new language in a second IDE window.  Making new 

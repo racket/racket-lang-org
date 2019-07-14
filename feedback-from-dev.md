@@ -1,7 +1,4 @@
-
 ## Arrangement/Content 
-
-- There should probably be a description of what language oriented programming is.
 
 - "With a Vibrant Community" could be just "Vibrant Community".
 
@@ -9,28 +6,74 @@
   features. Why not "safe"? I don't like that either, but I think it's
   better.
 
-- "little macros" and "big macros" should be adjacent.
-- "general purpose" and "DSLs" should be adjacent. 
-
-- The code snippets, e.g. under "little macros", are in too small of a font to
-  read. Reminds me of talks where they just display tons of code to bamboozle
-  the audience, which always annoys me.
+  Use  "Robust" 
 
 - If I could change one thing, I would edit the first paragraph of the “Any
   Syntax” section.  Instead of “Real Racket programmers love parentheses”,
+
+Real 
+
   maybe something like “Racket programmers usually love parentheses”, and
   instead of “is almost as easy as building beautiful languages”, perhaps
   “is almost as easy as building parenthesized languages”.
+
+?? 
 
 - ? For "Little Macros", can we have a different example? It takes me more
   than a minute to figure out what's going on in that example, even though
   I think I know macros and Racket syntax at some level. People who are new
   to Racket are going to just skip that example with confusion. 
 
+```
+#lang racket
+
+(require syntax/parse/define)
+
+(define-simple-macro (where* ((~literal define) h b) clauses)
+  (define h (let () (begin . clauses) b)))
+
+(where* (define is-5-odd (odd? 5))
+        [(define (odd? n) (if (= n 1) #t (even? (- n 1))))
+         (define (even? n) (if (= n 0) #t (odd? (- n 1))))])
+
+(if is-5-odd "five is odd" "five is not odd")
+```
+
+## Mechanics 
+
+- add tabs to browser HISTORY  (pushState)
+
+## Code Examples 
+
+- in initial web page, message-box
+
+- Gettybsburg's address with @As-scores[87]
+
+## Looks 
+
+- screen size problems (MF yes someone should figure this out) 
+
+  fixed by Robby and Jesse 
+
+- Can we make the headers ("Racket, the Language-Oriented Programming
+  Language", "Racket, the Ecosystem") change color on hovering to indicate
+  that it can be clicked? 
+
+- Robby: "Sierpinski" plus 2htdp/image code 
+
+- Robby: It would be easier on the eyes if the text color was slightly darker blue
+
+## Probably Useless 
+
+
+## No 
+
+- There should probably be a description of what language oriented programming is.
+- "little macros" and "big macros" should be adjacent.
+- "general purpose" and "DSLs" should be adjacent. 
 - ? It would be cool if the typed Racket example contains a type error, and
   we show how typed Racket catches the error. 
 
-## Mechanics 
 
 - When trying to get the #lang examples to display again after clicking a tab
   under "the language-oriented programming language" section, my instinct was to
@@ -45,8 +88,6 @@
 - ... trying to get all 3 ideas into view without scrolling (MF: remove news
   and get there?) 
 
-## Code Examples 
-
 - What's the difference between `new frame%`, `message-box`, and
   `make-object button%`.   ("Why aren't they `frame`, `message-box`, and
   `button`?"). 
@@ -56,16 +97,7 @@
   users could (for example) assume that this is yet another Racket program
   will a nice string literal syntax.
 
-
 - Maybe leave out the comments in the code samples ... try to read the code and guess what it does
-
-## Looks 
-
-- screen size problems (MF yes someone should figure this out) 
-
-- Can we make the headers ("Racket, the Language-Oriented Programming
-  Language", "Racket, the Ecosystem") change color on hovering to indicate
-  that it can be clicked? 
 
 - don't use JS for tabs (MF: I don't even know what this means)
 
@@ -73,15 +105,7 @@
 
 - The giant racket logo next to the code looks misplaced, the racket logo is already in the top left.
 
-- It would be easier on the eyes if the text color was slightly darker blue
-
-- Uses of three hyphens ("---") are not being converted to em-dashes ("—") 
-
-## Questions 
-
 - why isn't there a publications page? 
-
-## Probably Useless 
 
 - show output of programs? -- For "General Purpose", again, users want to
   see an output. A GUI window (like the "Big Macros" example) would
@@ -97,8 +121,6 @@
   to click on those tabs to explore. Instead it should be presented
   statically, maybe as grid of little boxes. Web pages are much more
   pleasant when I could just scroll through it.
-
-
 
 ### Greg's Response 
 
@@ -126,3 +148,10 @@ faster, probably get higher search rank, etc.)
 
 TL;DR: The current tabby thing is not helping on small screens; on large
 screens it is (in my opinion) a frustrating Advent calendar. 
+
+## Future Work 
+
+- The code snippets, e.g. under "little macros", are in too small of a font to
+  read. Reminds me of talks where they just display tons of code to bamboozle
+  the audience, which always annoys me.
+
