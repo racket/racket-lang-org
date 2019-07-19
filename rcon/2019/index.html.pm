@@ -5,8 +5,6 @@ RacketCon}
 
 ◊(define this-rc-date "13–14 July 2019")
 
-◊(define live-stream-link ◊span{◊link["https://www.youtube.com/watch?v=dnz6y5U0tFs"]{Watch the live stream}: resumes at 9:30am MDT on Sun July 14. Day 1 Live Stream is ◊link["https://youtu.be/xSjk2PdQm5k"]{still available}.})
-
 ◊div[#:class "menu-container"]{
 ◊h2{◊xlink["register"]{◊this-rc-date}}
 ◊h2{◊xlink{Venue}}
@@ -22,13 +20,13 @@ RacketCon}
 
 RacketCon is for developers, contributors, programmers, educators, and bystanders. It's an opportunity for all of us to share plans, ideas, and enthusiasm, and help shape the future of Racket.
 
-◊live-stream-link
-
 ◊(define heading-width 16)
 
 ◊string->svg[#:width heading-width]{>(keynote)}
 ◊string->svg{Aaron Turon}
 ◊string->svg{Governing Rust}
+
+◊link["https://youtu.be/T1t4zGJYUuY"]{Video}
 
 Rust is a language whose design, and even core values, radically shifted over time thanks in large part to its very active open source community. As the language matured, stabilized, and grew in scale, so did its governance. It has been a hard balancing act between the need to ship, the desire to include a wide range of stakeholders (paid and volunteer), and the drive for technical excellence. We made a lot of mistakes and encountered unexpected tradeoffs. This talk will recount some of Rust's governance history through personal stories, and talk about what it has taken for Rust to avoid becoming a victim of its own success.
 
@@ -89,6 +87,7 @@ Eventbrite fees are added during checkout.
 
 ◊folded{
 ◊speaker["" "Phil Hagelberg"]{In Production: creating physical objects with Racket}
+◊link["https://youtu.be/Mfyggktkox4"]{Video}
 
 As the maker movement has taken off, fabrication procedures have become more and more approachable to the enterprising hacker. We will cover how Racket was used in the creation of the Atreus DIY ergonomic keyboard kit in two of the key design elements: the circuit board and the laser-cut enclosure, as well as details about how these techniques can be applied to other projects.
 
@@ -97,6 +96,7 @@ As the maker movement has taken off, fabrication procedures have become more and
 
 ◊folded{
 ◊speaker["" "Conor Finegan"]{ADQC: From Normalcy to Adequacy}
+◊link["https://youtu.be/UFMb0KWKk6g"]{Video}
 
 ADQC is a version of C with verification and resource bounds. A statically-typed language which aims to integrate easily into existing projects, it uses Racket's rich facilities for language building to make it easier to read and write safe, optimized C code. Let's explore how eschewing Turing completeness in favor of statically-verifiable termination and Racket-style macros gives birth to a new style of systems programming.
 
@@ -106,6 +106,7 @@ to generate highly-optimized native code.}
 
 ◊folded{
 ◊speaker["" "Bradley M. Kuhn"]{Conservancy and Racket: What We Can Do Together!}
+◊link["https://youtu.be/q3Yv1FT9i-c"]{Video}
 
 Racket recently became one of the many illustrious member projects of the Software Freedom Conservancy. This talk will discuss the amazing potential and future for collaboration between the Racket community and Software Freedom Conservancy. The talk will cover the basics of what it means for a project to exist as Conservancy member, what Conservancy can do for Racket, and how we can work together into a new era of charitable work to advance software freedom. 
 
@@ -117,6 +118,7 @@ Specifically, Conservancy is unique among organizational homes for projects beca
 ◊folded{
 ◊speaker["" "Greg Hendershott"]{◊span{Racket and Emacs: Fight! 
 (in which we spend 5 more years herding cats)}}
+◊link["https://youtu.be/NDHi6aWyI0Y"]{Video}
 
 Racket Mode started in 2012 as some awkward Emacs Lisp to send XREPL commands to command-line Racket running in an M-x shell buffer. The official repo's initial commit 804b3c6 was in January 2013. After nearly six years and 900 commits (37,612 insertions and 19,661 deletions) it has evolved. The presentation includes live demonstration, discussion of design considerations including interprocess communication and security, and possible future directions. A user's guide and reference ◊link["https://racket-mode.com"]{is available here}.
 
@@ -127,6 +129,7 @@ Racket Mode started in 2012 as some awkward Emacs Lisp to send XREPL commands to
 
 ◊folded{
 ◊speaker["" "Eric Griffis"]{Algebraic Racket in Action}
+◊link["https://youtu.be/yHXBYoMqebQ"]{Video}
 
 Algebraic Racket is a fresh take on functional meta-programming with Racket. Its transparent data structures and pattern-based de-structuring syntax makes a broad range of functional programming idioms easier to read and write. Come see how I use Algebraic Racket to get in the zone faster, ride that flow longer, and exploit Racket's proclivity for language-oriented programming to get more done with less effort.
 
@@ -135,6 +138,7 @@ Algebraic Racket is a fresh take on functional meta-programming with Racket. Its
 
 ◊folded{
 ◊speaker["" "Vlad Kozin"]{#lang wishful thinking (will! it be so)}
+◊link["https://youtu.be/sy2TzZO70E4"]{Video}
 
 What might solving a real production problem in a language specifically designed for building languages look like? Let's get a glimpse by implementing FastCGI in Racket — a simple protocol that'll take us all the way from bit twiddling to Web frameworks. We won't tie ourselves to the defaults that Racket designers blessed us with, but boldly employ wishful thinking, borrow readily from other languages. You want prototypes with Lua-style metatables? Concise syntax? Single and multiple inheritance with generic dispatch? How generic is generic? Multimethods? Full Metaobject Protocol? Beyond Metaobject Protocol? A language of bit patterns? The one true Web framework? Build yourself a better language. Dare say: I wish I could — then make it so.
 
@@ -143,6 +147,7 @@ What might solving a real production problem in a language specifically designed
 
 ◊folded{
 ◊speaker["" "Andrew Blinn"]{Fructure: A Structured Editing Engine in Racket}
+◊link["https://youtu.be/CnbVCNIh1NA"]{Video}
 
 Fructure is a prototype for an extensible structured editing engine. In structured editing, core edit actions reflect the extended selves of the objects you're bringing to life (grammatical programs with semantic properties), as opposed to the shape of their serialization (text files). Editing abstractions like cursors and code-folding are reimagined as syntactic scaffolding in a meta-grammar of syntactic affordances. Fructure lets language providers specify syntactic forms and semantic refactorings as production and transformation rules in a tiny term-rewriting DSL. Lessening reliance on after-the-fact correction or ad-hoc autocompletion, program creation consists rather of a guided search in the space of valid programs. Over the hood, my emphasis is on visual and kinetic appeal; creating a fun, fluid editing process with an eye to discoverability. 
 
@@ -151,6 +156,7 @@ Fructure is a prototype for an extensible structured editing engine. In structur
 
 ◊folded{
 ◊speaker["" "John Clements"]{Computational models and one big problem with the stepper}
+◊link["https://youtu.be/Ttsj9RXe30A"]{Video}
 
 DrRacket's stepper shows the evaluation of a beginning student language (BSL) program as a sequence of steps in an algebraic reduction semantics.  But ... should it?  
 
@@ -166,7 +172,9 @@ It would be awesome to actually try to validate this change. Um, maybe next year
 
 ◊h3{◊xtarget["schedule"]{◊string->svg[#:width (* heading-width 1.4)]{>(live-stream)}}}
 
-◊live-stream-link
+Recorded live streams: ◊link["https://youtu.be/xSjk2PdQm5k"]{Day 1} ◊link["https://www.youtube.com/watch?v=dnz6y5U0tFs"]{Day 2}
+
+◊link["https://www.youtube.com/playlist?list=PLXr4KViVC0qJp4_2uTTAOjt-4URQBAR4c"]{Videos}
 
 ◊gap[1]
 
