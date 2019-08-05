@@ -15,9 +15,6 @@
 
 }
 
-◊special-section[#:class "one-column-body-text" #:id "pull-quote"]{Learn how to make programming languages at ◊link["https://school.racket-lang.org"]{Racket School 2019}, July 8–12 in Salt Lake City. Members of the ◊link["team.html"]{Racket team} will teach two multi-day workshops. Financial aid available for qualifying students. Followed by ◊link["https://con.racket-lang.org/"]{ninth RacketCon}. Join us!
-}
-
 
 ◊special-section{
 
