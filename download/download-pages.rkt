@@ -3,6 +3,7 @@
 (require "resources.rkt" "data.rkt" "installer-pages.rkt" "symlinks.rkt"
          plt-web/style
          version/utils
+         net/base64
          (prefix-in pre: "../minis/pre.rkt"))
 
 (define docs "docs")
@@ -11,6 +12,9 @@
 (define first-version-with-releases-page "5.92")
 (define first-version-with-generic-linux "6.5")
 (define version-with-touchbar-bug "6.7")
+
+(define (encode s)
+  (bytes->string/utf-8 (base64-encode (string->bytes/utf-8 s) #"")))
 
 (provide render-download-page)
 (define (render-download-page [release current-release] [package 'racket]
@@ -33,6 +37,8 @@
                        " text-align: left;"
                        " line-height: 1.5em; "
                        " background-color: #edd"))
+  (define was-initial-variant? #t)
+  (define initial-platform #f)
   (list
    @columns[10 #:center? #t #:row? #t #:center-text? #t]{
     @h3[style: "text-align: center"]{Version @version (@(release-date-string release))}
@@ -52,11 +58,35 @@
               Platform:
               @select[id: (format "platform_selector_~a" this-package)
                       onchange:   "selection_changed();"
-                      onkeypress: "selection_changed();"]{
+                      onkeypress: "selection_changed();"]{                                                          
                 @(for/list ([i (in-list all-installers)]
                             #:when (and (equal? release (installer-release i))
-                                        (equal? this-package (installer-package i))))
-                   (installer->page i 'render-direct-option))}})}
+                                        (equal? this-package (installer-package i))
+                                        (equal? "Regular" (installer-variant i))))
+                   (installer->page i 'render-direct-option))}
+              @(for/list ([i (in-list all-installers)]
+                          #:when (and (equal? release (installer-release i))
+                                      (equal? this-package (installer-package i))
+                                      (equal? "Regular" (installer-variant i))))
+                 (define initial-variant? was-initial-variant?)
+                 (define variants (for/list ([j (in-list all-installers)]
+                                             #:when (and (equal? release (installer-release j))
+                                                         (equal? this-package (installer-package j))
+                                                         (equal? (installer-platform i) (installer-platform j))))
+                                    j))
+                 (unless initial-platform (set! initial-platform (installer-platform i)))
+                 (set! was-initial-variant? #f)
+                 (cond
+                   [(= 1 (length variants)) ""]
+                   [else
+                    @div[id: (format "variant_selector_panel_~a~a" this-package (encode (platform->name (installer-platform i) package)))
+                         style: (if initial-variant? "display: block;" "display: none;")]{
+                      Variant:
+                      @select[id: (format "variant_selector_~a~a" this-package (encode (platform->name (installer-platform i) package)))
+                              onchange:   "selection_changed();"
+                              onkeypress: "selection_changed();"]{
+                      @(for/list ([i (in-list variants)])
+                         (installer->page i 'render-direct-variant-option))}}]))})}
       @br
       @navigation-button[@(a href: (resource "download/" #f)
                              id: "download_link"
@@ -123,7 +153,7 @@
            from source, install the @tt{racket-lib} package with
            with @div{@nbsp @nbsp @tt{raco pkg install -i racket-lib}}
            before installing other packages.}
-    @downloader-script[package (map car all-packages) version]
+    @downloader-script[package initial-platform (map car all-packages) version]
     @noscript{
       Installers are available for the following platforms:
       @ul{@(for/list ([i (in-list all-installers)]
@@ -265,11 +295,12 @@
        appropriate building block for all kinds of software, and to clarify how
        we view the license of Racket.}}})
 
-(define (downloader-script package packages version)
+(define (downloader-script package initial-platform packages version)
   @script/inline[type: 'text/javascript]{@||
     var do_jump, selection_changed;
     var packages = [@(string-join (map (lambda (s) (format "\"~s\"" s)) packages) ", ")];
     var current_package = "@|package|";
+    var current_platform = "@(or initial-platform "")";
     (function() {
     // show the download panel, since JS is obviously working
     document.getElementById("download_panel").style.display = "block";
@@ -329,6 +360,7 @@
     selection_changed = function() {
       var package_selector = document.getElementById("package_selector");
       var package = packages[package_selector.selectedIndex];
+      var old_package = current_package;
       if (current_package != package) {
          var panel = document.getElementById("platform_selector_panel_" + current_package);
          panel.style.display = "none";
@@ -339,6 +371,16 @@
       }
       var download_link = document.getElementById("download_link");
       var selected = selector[selector.selectedIndex];
+      var old_variant_panel = document.getElementById("variant_selector_panel_" + old_package + btoa(current_platform));
+      if (old_variant_panel)
+         old_variant_panel.style.display = "none";
+      current_platform = selected.textContent;
+      var variant_panel = document.getElementById("variant_selector_panel_" + current_package + btoa(current_platform));
+      if (variant_panel)
+         variant_panel.style.display = "block";
+      var variant_selector = document.getElementById("variant_selector_" + current_package + btoa(current_platform));
+      if (variant_selector)
+         selected = variant_selector[variant_selector.selectedIndex];
       var path = selected.value;
       download_link.href = path;
       download_link.innerHTML = path.replace(/.*\//, "") + " (" + selected.getAttribute("x-installer-size") + ")";

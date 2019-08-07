@@ -13,6 +13,7 @@
   (define size      (installer-size installer))
   (define type      "") ;; (if (installer-binary? installer) "" " source")
   (define platform  (platform->name (installer-platform installer) package))
+  (define variant   (installer-variant installer))
   (define title     @text{Download @package v@|version type| for @platform})
   (define suffix-desc (suffix->name (installer-suffix installer)))
   (define human-size
@@ -35,6 +36,11 @@
                                       x-mirror: @url
                                       x-installer-size: @human-size
                                       platform type)]
+      [(render-direct-variant-option) (option value: (let ([m (first mirrors)])
+                                                       (string-append (mirror-url* m) path))
+                                              x-mirror: @url
+                                              x-installer-size: @human-size
+                                              variant)]
       [(render-package-option) (option value: url package)]
       [(#f) @a[href: url]{@title}]
       [else (error 'installer-page "unknown mode: ~e" mode)]))
@@ -48,6 +54,7 @@
                    @(row "Package"  package)
                    @(row "Version"  @list{@version (@date)})
                    @(row "Platform" (list platform type))
+                   @(row "Variant"  (list variant))
                    @(row "Type"     suffix-desc)
                    @(row "File"     file)
                    @(row "Size"     @span[title: @list{Exact size: @size bytes}]{

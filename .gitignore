@@ -12,6 +12,8 @@ compiled/
 /www/sfc.html
 /www/template.html
 /www/books.html
+/rcon/2019/template.svg
+/rcon/2019/text.svg
 
 # common backups, autosaves, lock files, OS meta-files
 *~

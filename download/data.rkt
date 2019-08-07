@@ -177,6 +177,7 @@
    package  ; package kind symbol 'racket or 'racket-textual
    binary?  ; #t = binary distribution, #f = source distribution
    platform ; platform name string (generic for srcs, cpu-os for bins)
+   variant  ; "regular" or "CS"
    suffix)  ; string
   #:transparent)
 
@@ -205,7 +206,7 @@
 (define (make-installer1 size path version package file type platform suffix)
   (define binary? (equal? "bin" type))
   (installer path file (version->release version) (string->number size)
-             (string->symbol package) binary? platform suffix))
+             (string->symbol package) binary? platform "Regular" suffix))
 
 ;; New-style installer line (since 5.92)
 ;; Differences: no "package" dir, implicit "bin", "src" is platform
@@ -221,16 +222,25 @@
             "/("                    ; file
             "(racket(?:-textual|-minimal)?)" ; package
             "(-\\3)?-"              ; version, maybe
-            "([^.]+)"               ; platform
+            "([^.]+)"               ; platform, may include "-cs"
             "\\."
             "([a-z]+)"              ; suffix
             "))$")))
 
-(define (make-installer2 size path version file package version-again platform suffix)
+(define variant-rx #rx"-cs$")
+
+(define (make-installer2 size path version file package version-again platform+variant suffix)
+  (define-values (platform variant)
+    (cond
+      [(regexp-match-positions variant-rx platform+variant)
+       => (lambda (m)
+            (values (substring platform+variant 0 (caar m)) "CS"))]
+      [else
+       (values platform+variant "Regular")]))
   (define binary? (not (regexp-match #rx"^src" platform)))
   (and version-again ; if no version again, then it's a versionless variant to omit
        (installer path file (version->release version) (string->number size)
-                  (string->symbol package) binary? platform suffix)))
+                  (string->symbol package) binary? platform variant suffix)))
   
 (define (parse-installers in)
   (port-count-lines! in)
