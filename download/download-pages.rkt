@@ -316,7 +316,8 @@
     function getPlatformOrder() {
       var p = navigator.platform;
       var p2 = navigator.appVersion;
-      var l = function(str) { return (p.indexOf(str) != -1) || (p2.indexOf(str) != -1) @";" }
+      var p3 = navigator.userAgent;
+      var l = function(str) { return (p.indexOf(str) != -1) || (p2.indexOf(str) != -1) || (p3.indexOf(str) != -1) @";" }
       var Win      = /Windows/,
           Win64    = /Windows.*64/,
           Win32    = /Windows.*32/,
