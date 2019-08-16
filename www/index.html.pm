@@ -202,7 +202,7 @@ Documentation & tutorials
 ◊section{
 News
 
-◊link["https://blog.racket-lang.org/2019/05/racket-v7-4.html"]{Racket version 7.4} is available.
+◊link["https://blog.racket-lang.org/2019/08/racket-v7-4.html"]{Racket version 7.4} is available.
 
 ◊link["https://racketfest.com"]{Racketfest}, a new Racket event, will be held in Berlin, 17 August 2019.
 
