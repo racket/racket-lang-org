@@ -44,40 +44,5 @@ Thank you for supporting Racket!
 }
 
 
-◊section[#:class "one-column-body-text"]{
-
-◊div{2019 Racket Week housing}
-
-Those attending ◊link["https://school.racket-lang.org/"]{Racket School} qualify for subsidized housing in the University of Utah campus dorms. 
-
-Please register for housing ◊link["https://docs.google.com/forms/d/e/1FAIpQLSeLS_bAY_S16TFBv0CS61tFyDjI-EmJo1YFr_Th3s1g0JKNXg/viewform"]{with this form}, and then use the link below to pay for your stay.
-
-◊html->xexpr{
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" name="housing_form" >
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="Q963289YNE97Q">
-<input type="hidden" name="on0" value="How many nights?">
-
-<div>
-<select name="os0"
-style="font-size:1.5rem">
-    <option value="3 Nights">3 nights $120</option>
-    <option value="4 Nights">4 nights $160</option>
-    <option value="5 Nights">5 nights $200</option>
-    <option value="6 Nights">6 nights $240</option>
-    <option value="7 Nights">7 nights $280</option>
-    <option value="8 Nights">8 nights $320</option>
-</select> 
-</div>
-
-<input type="hidden" name="currency_code" value="USD">
-<a style="cursor:pointer;font-size:110%;display:inline-block;margin:1em 0;" onclick="document.housing_form.submit()" class="top-button" id="download">Click here to pay via PayPal</a>
-</form>
-}
-
-
-}
-
-
 
 
