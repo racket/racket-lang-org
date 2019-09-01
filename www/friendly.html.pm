@@ -59,4 +59,7 @@ These are the policies for upholding our community’s standards of conduct. If 
 
 The enforcement policies listed above apply to all official Racket venues; including the Racket Slack channel;  #racket IRC on freenode.net; GitHub repositories under github.com/racket; and all forums under lists.racket-lang.org including https://groups.google.com/forum/#!forum/racket-users and https://groups.google.com/forum/#!forum/racket-dev . 
 
+
+Derived from RacketCon 2018.
+
 }
