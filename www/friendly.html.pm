@@ -43,7 +43,7 @@ If anynone engages in harassing behavior, the MODERATION TEAM may take any actio
 
 These are the policies for upholding our community’s standards of conduct. If you feel that a thread needs moderation, please contact the Rust moderation team .
 
-1. Remarks that violate the Racket standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. Cursing is allowed, but never targeting another user, and never in a hateful manner.
+1. Remarks that violate the Racket standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed.
 
 2. The moderators reserve the right to amend this policy.
 
