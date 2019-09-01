@@ -39,7 +39,7 @@ Anyone witnessing or subject to unacceptable behavior should ◊link["mailto:mod
 If anynone engages in harassing behavior, the MODERATION TEAM may take any action they deem appropriate, from a warning of the offender to an expulsion.
 } 
 
-◊section{Moderation
+◊section{Moderation Policy
 
 These are the policies for upholding our community’s standards of conduct. If you feel that a thread needs moderation, please contact the Rust moderation team .
 
@@ -59,7 +59,6 @@ These are the policies for upholding our community’s standards of conduct. If 
 
 8. Moderators are held to a higher standard than other community members. If a moderator creates an inappropriate situation, they should expect less leeway than others.
 
-The enforcement policies listed above apply to all official Racket venues; including the Racket Slack channel; 
-#racket IRC on freenode.net; GitHub repositories under github.com/racket; and all forums under lists.racket-lang.org (including https://groups.google.com/forum/#!forum/racket-users and https://groups.google.com/forum/#!forum/racket-dev). 
+The enforcement policies listed above apply to all official Racket venues; including the Racket Slack channel;  #racket IRC on freenode.net; GitHub repositories under github.com/racket; and all forums under lists.racket-lang.org including https://groups.google.com/forum/#!forum/racket-users and https://groups.google.com/forum/#!forum/racket-dev . 
 
 }
