@@ -31,7 +31,7 @@ Friendly Environment Policy
 * Respect that people have differences of opinion and that every design or implementation choice carries a trade-off and numerous costs.
 * Please keep unstructured critique to a minimum. If you have solid ideas you want to experiment with, make a fork and see how it works.
 * We will exclude you from interaction if you insult, demean or harass anyone. That is not welcome behavior. We interpret the term “harassment” as including the definition in the Citizen Code of Conduct; if you have any lack of clarity about what might be included in that concept, please read their definition. In particular, we don’t tolerate behavior that excludes people in socially marginalized groups.
-* Private harassment is also unacceptable. No matter who you are, if you feel you have been or are being harassed or made uncomfortable by a community member, please contact one of the channel ops or any of the Rust moderation team immediately. Whether you’re a regular contributor or a newcomer, we care about making this community a safe place for you and we’ve got your back.
+* Private harassment is also unacceptable. No matter who you are, if you feel you have been or are being harassed or made uncomfortable by a community member, please contact one of the channel ops or any of the moderation team immediately. Whether you’re a regular contributor or a newcomer, we care about making this community a safe place for you and we’ve got your back.
 * Likewise any spamming, trolling, flaming, baiting or other attention-stealing behavior is not welcome.
 
 Anyone witnessing or subject to unacceptable behavior should ◊link["mailto:modration-team@racket-lang.org"]{EMAIL THE MODERATION TEAM}.
@@ -41,7 +41,7 @@ If anynone engages in harassing behavior, the MODERATION TEAM may take any actio
 
 ◊section{Moderation Policy
 
-These are the policies for upholding our community’s standards of conduct. If you feel that a thread needs moderation, please contact the Rust moderation team .
+These are the policies for upholding our community’s standards of conduct. If you feel that a thread needs moderation, please contact the MODERATION TEAM.
 
 1. Remarks that violate the Racket standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed.
 
