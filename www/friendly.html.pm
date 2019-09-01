@@ -45,7 +45,7 @@ These are the policies for upholding our community’s standards of conduct. If 
 
 1. Remarks that violate the Racket standards of conduct, including hateful, hurtful, oppressive, or exclusionary remarks, are not allowed. Cursing is allowed, but never targeting another user, and never in a hateful manner.
 
-2. Remarks that moderators find inappropriate, whether listed in the code of conduct or not, are also not allowed.
+2. The moderators reserve the right to amend this policy.
 
 3. Moderators will first respond to such remarks with a warning.
 
