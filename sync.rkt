@@ -83,6 +83,7 @@
   (upload "www" "racket-lang.org")
   (upload "www" "www.racket-lang.org")
   (upload "pre" "pre.racket-lang.org")
+  (upload "snapshot" "snapshot.racket-lang.org")
   (upload "con" "con.racket-lang.org" #:link-mode 'redirects)
   (upload "school" "school.racket-lang.org" #:link-mode 'redirects)
   (upload "blog" "blog.racket-lang.org")

@@ -6,6 +6,12 @@
 
 (provide installers)
 
+(define snapshot-site (site "snapshot"
+                            #:url (rewrite-for-testing "https://snapshot.racket-lang.org/")
+                            #:page-headers (identity-headers)
+                            #:share-from www-site))
+
+;; Old:
 (define pre-site (site "pre"
                        #:url (rewrite-for-testing "https://pre.racket-lang.org/")
                        #:page-headers (identity-headers)
@@ -13,8 +19,8 @@
 
 (register-identity pre-site)
 
-(define (main path)
-  @page[#:site pre-site
+(define (main path #:site [site pre-site])
+  @page[#:site site
         #:file path
         #:title "Racket Snapshots"
         #:width 'full]{
@@ -26,7 +32,11 @@
           @li{@a[href: "http://plt.eecs.northwestern.edu/snapshots/"]{
                 Northwestern University}}}}})
 
-;; Generate at both "installers/" (traditional path)
-;; and "index.html" (old entry point, now subsumed)
-(define installers (main "installers/index.html"))
+(define installers (main "index.html" #:site snapshot-site))
+
+;; At the old site, generate at both "installers/" (traditional path)
+;; and "index.html" (old entry point, now subsumed). And
+;; "installers.html", too:
+(void (main "installers/index.html"))
+(void (main "installers.html"))
 (void (main "index.html"))
