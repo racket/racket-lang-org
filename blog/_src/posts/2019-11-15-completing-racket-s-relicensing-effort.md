@@ -2,7 +2,9 @@
     Date: 2019-11-15T15:30:43
     Tags: 
 
-*posted by Sam Tobin-Hochstadt, with help from Sage Gerard and Joel Dueck and Matthew Flatt*
+*posted by Sam Tobin-Hochstadt, with help from Sage Gerard and Joel
+Dueck and Matthew Flatt and the Software Freedom Conservancy,
+especially Pamela Chestek*
 
 With the upcoming Racket 7.5 release, almost all of Racket, including
 the core Racket CS binary, the standard library, and the packages
