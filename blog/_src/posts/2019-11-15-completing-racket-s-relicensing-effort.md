@@ -18,9 +18,12 @@ gave permission for the re-licensing. More than 350 contributors to
 Racket responded; many of the responses can be seen in [this GitHub
 issue](https://github.com/racket/racket/issues/1570).
 
+<!-- more -->
+
+
 ## Why relicense?
 
-Racket has long been a a part of the free software community, and we
+Racket has long been a part of the free software community, and we
 value both that community and the ability to build on other free
 software. However, two factors mean have made our previous license,
 the GNU LGPL, less of a good fit going forward. First, it is unclear
@@ -66,7 +69,7 @@ with new licenses in Racket 7.6.
 We've completed the re-licensing for all code that we planned to
 cover. However, some translations (part of the ["string-constants-lib"
 package](https://github.com/racket/string-constants/blob/master/LICENSE))
-have authors that are unknown or have not been responded to us. This
+have authors that are unknown or have not responded to us. This
 does not affect the licensing of any programs using Racket unless they
 depend on or derive from those translations directly.
 
@@ -76,5 +79,4 @@ Two people declined to re-license their contributions to Racket. We
 therefore removed their contributions and, where appropriate, replaced
 them with new code and/or documentation.
 
-<!-- more -->
 
