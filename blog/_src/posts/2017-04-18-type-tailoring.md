@@ -304,7 +304,7 @@ as well as syntax for defining new tailorings.
 For further reading on type tailoring, and a sketch of how to prove the
  soundness of a tailoring, we have a draft paper:
 
-- [`http://www.ccs.neu.edu/home/types/resources/type-tailoring.pdf`][2]
+- <http://hdl.handle.net/2047/D20324606>
 
 The draft also reports on a small evaluation of our tailored
  `regexp-match`[racket] on existing code.
