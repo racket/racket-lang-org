@@ -88,7 +88,7 @@ With this utility defined, the above macro becomes much easier to deal with:
              (body  (cddr exp)))
          `((,(syntax lambda) ,vars ,@body)
            ,@inits)))))
- ```
+```
 
  ...and this is almost identical to the explicit renaming version of the macro; for example, compare it with the sample code in the [MIT-Scheme manual](http://groups.csail.mit.edu/mac/projects/scheme/documentation/scheme_3.html#SEC49).  The only change is that `(rename 'lambda)` is replaced with `(syntax lambda)`.
 
