@@ -231,6 +231,8 @@ Community
 
 ◊link["sfc.html"]{Software Freedom Conservancy}
 
+◊link["friendly.html"]{Friendly Environment policy}
+
 ◊link["sfc.html"]{Donate to Racket}
 Make a tax-deductible contribution to support our work.
 
