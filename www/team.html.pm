@@ -56,7 +56,7 @@
 
 ◊link["http://www.deinprogramm.de/sperber/"]{Michael Sperber}
 
-◊link["http://homes.soic.indiana.edu/samth/"]{Sam Tobin-Hochstadt}
+◊link["https://samth.github.io/"]{Sam Tobin-Hochstadt}
 
 ◊link["http://www.ccs.neu.edu/home/ryanc/"]{Ryan Culpepper}
 
@@ -144,6 +144,20 @@ Bloomington IN
 
 }
 
+◊section{
 
+◊div[#:id "management"]{Project management
+◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
+The Software Freedom Conservancy's Racket Project Leadership Committee manages the Racket project.}}
 
+◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}
 
+◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}
+
+◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}
+
+◊link["https://jeapostrophe.github.io/home/"]{Jay McCarthy}
+
+◊link["https://samth.github.io/"]{Sam Tobin-Hochstadt}
+
+}
