@@ -144,14 +144,14 @@
         @div{@b{About sources for Windows and Mac OS:}} To build from source for
            Windows or Mac OS, download and build a @b{Minimal Racket} distribution
            instead of a @b{Racket} distribution, then (when on Windows) install the @tt{racket-lib} package
-           with @div{@nbsp @nbsp @tt{raco pkg install -i racket-lib}}
+           with @div{@nbsp @nbsp @tt{raco pkg update --auto racket-lib}}
            and then (on both Windows and Mac OS) install packages
            with @div{@nbsp @nbsp @tt{raco pkg install -i main-distribution}}}
       @div[id: "win_source_explain"
            style: note-style]{
         @div{@b{About source builds on Windows:}} After building @b{Minimal Racket}
            from source, install the @tt{racket-lib} package with
-           with @div{@nbsp @nbsp @tt{raco pkg install -i racket-lib}}
+           with @div{@nbsp @nbsp @tt{raco pkg update --auto racket-lib}}
            before installing other packages.}
     @downloader-script[package initial-platform (map car all-packages) version]
     @noscript{
