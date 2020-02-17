@@ -49,7 +49,7 @@
 
 
 
-◊feature["Mature, stable, open source" #:id "f2"]{Racket is a mature LGPL project that's actively developed and maintained.
+◊feature["Mature, stable, open source" #:id "f2"]{Racket is a mature Apache-MIT licensed project that's actively developed and maintained.
 ◊doclinks{
 ◊link["https://github.com/racket"]{Racket repositories}
 ◊link["https://github.com/racket/racket"]{Main repository}
