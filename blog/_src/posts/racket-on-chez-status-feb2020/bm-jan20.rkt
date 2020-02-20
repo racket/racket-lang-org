@@ -38,34 +38,6 @@
 
 (include "bm-x.rktl")
 
-(module+ slide
-  (require "bm.rkt")
-  (provide october-benchmark-slides)
-
-  (define traditional-cs (get-times log-cs-txt))
-  (define traditional-r/cs (get-times log-rcs-txt))
-  (define traditional-r (get-times log-r-txt))
-  (define shootout-r/cs (get-times sho-rcs-txt))
-  (define shootout-r (get-times sho-r-txt))
-
-  (define (october-benchmark-slides)
-    (benchmark-slides #:traditional-cs traditional-cs
-                      #:traditional-r/cs traditional-r/cs
-                      #:traditional-r traditional-r
-                      #:shootout-r/cs shootout-r/cs
-                      #:shootout-r shootout-r
-                      #:racket-cs-label "Racket on Chez Scheme")))
-(module+ main
-  (slide
-   (vl-append
-    (* 2 gap-size)
-    (traditional-benchmarks #:t t #:bt bt #:tt tt #:gap-size gap-size
-                            #:width 500
-                            #:label (t "Traditional Scheme benchmarks")
-                            #:alt-cs? #f)
-    (shootout-benchmarks #:t t #:bt bt #:tt tt #:gap-size gap-size
-                         #:width 500
-                         #:label (t "Shootout Racket benchmarks")))))
 (module+ pict
   (provide traditional-benchmarks-table*
            shootout-benchmarks-table*

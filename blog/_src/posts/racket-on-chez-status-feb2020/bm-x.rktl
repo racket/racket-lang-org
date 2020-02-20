@@ -303,24 +303,3 @@
                800 600)
            0.25)))
 
-(module+ main
-  (require slideshow
-           (submod ".." pict))
-  (slide (scale all-paper-benchmarks 2))
-  (slide
-   (scale (traditional-benchmarks #:t t #:bt bt #:tt tt #:gap-size gap-size #:mean? #f) 0.5))
-  (slide
-   (scale (shootout-benchmarks #:t t #:bt bt #:tt tt #:gap-size gap-size #:mean? #f) 0.5))
-  (slide
-   (scale (traditional-benchmarks #:t t #:bt bt #:tt tt #:gap-size gap-size
-                                  #:width 500
-                                  #:label (t "Scheme benchmarks, geometric mean"))
-          0.5)
-   (scale (traditional-benchmarks #:t t #:bt bt #:tt tt #:gap-size gap-size #:keep? r5rs?
-                                  #:width 500
-                                  #:label (t "Mutable-pair benchmarks, geometric mean"))
-          0.5)
-   (scale (shootout-benchmarks #:t t #:bt bt #:tt tt #:gap-size gap-size
-                               #:width 500
-                               #:label (t "Shootout benchmarks, geometric mean"))
-          0.5)))

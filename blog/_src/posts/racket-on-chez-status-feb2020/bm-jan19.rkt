@@ -450,28 +450,3 @@
                    r-jit-recompile)))
       (* 2 scale-amt))
      (ghost compile-key))))
-
-(module+ main
-  (require slideshow/base
-           "better.rkt")
-
-  (define (fit p)
-    (define w (pict-width p))
-    (define h (pict-height p))
-    (scale p (min 1 (/ (pict-width titleless-page) w) (/ (pict-height titleless-page) h))))
-  
-  (define (benchmark-slides)
-    (slide
-     #:title (title/better "Traditional Scheme Benchmarks" #:shorter-better? #t)
-     #:name "Traditional Scheme Benchmarks"
-     #:layout 'tall
-     (fit
-      (traditional-benchmarks #:t t #:tt tt #:gap-size gap-size)))
-
-    (slide
-     #:title "Shootout Benchmarks"
-     #:layout 'tall
-     (fit
-      (shootout-benchmarks #:t t #:tt tt #:gap-size gap-size))))
-
-  (benchmark-slides))

@@ -234,7 +234,3 @@
                 cc-superimpose cc-superimpose
                 12 12)
          0.6))
-
-(module+ main
-  (require slideshow)
-  (for-each (lambda (p) (slide (scale p 2))) (plots)))
