@@ -7,34 +7,43 @@
 PRE
 - blog/pkg-build/RUN-LOG-7
 - blog/pkg-build/edit-catalog-for-opaque.rkt
-- 
+- https://pkg-build.racket-lang.org/about.html
 
 DIFF
 - bump timeout, retries (checking ready. PR?)
 - remote-shell pull requests
 - can improve "echo hello" timeout for missing auth? forward prompt to user?
 
-ABSTRACT (pkg-build is ...)
 
-pkg-build is a service to run all Racket packages
-
-if you have a change to Racket and want to test against all packages then you
- want to use pkg-build.
-
-This post explains how to ....
+If you want to test a change on all packages in the [main catalog][pkgd],
+ the [pkg-build][pkg-build] package can help --- provided you supply a
+ modified version of Racket and a suitable virtual maching (VM).
+This post explains how to meet these requirements.
 
 <!-- more -->
 
 ## Overview, Motivation
 
-If you have a risky change, one way to assess is to build all packages.
+Backwards compatibility matters.
+New changes to packages in the Racket [main distribution](https://github.com/racket/main-distribution/blob/master/info.rkt)
+ should ideally preserve existing behavior.
 
-Can do this manually. (easy to get a list? pkg-catalog?)
+If there is any question about a breaking change, then one way to assess the
+ effects is to build all packages.
+
+> Not for sure, may be lots of public code (off the pkg server) that breaks.
+> And lots of private code.
+> This is but a test.
+
+Can do this manually.
 But difficult to build.
 - time / resource unbounded
 - a little mischief (the `_` pkg)
 - conflicting dependencies
   + example? (pict3d and ruckus seem compatible)
+
+> See the [`pkg/lib`](https://docs.racket-lang.org/pkg/lib.html) API
+> get-pkg-names-from-catalog ... easy
 
 pkg-build helps to automate
 
@@ -396,4 +405,8 @@ If you can think of improvements, send them these ways
 - racket/pkg-build
 - racket/racket-lang-org
 - racket/racket ???
+
+
+[pkg-build]: https://github.com/racket/pkg-build
+[pkgd]: https://pkgd.racket-lang.org
 
