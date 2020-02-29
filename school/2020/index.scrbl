@@ -43,10 +43,11 @@
 @title[#:style page-style]{@larger{The Racket School of Semantics and Languages}
                            @linebreak[] July 27-31, 2020 @hspace[4] Salt Lake City, Utah, USA}
 
+@;{
 @margin-note{@(tabular
                (list (list @italic{@nonbreaking{Thanks to our generous supporters:}})
                      (list @larger{SIGPLAN})))}
-
+}
 
 @during-school{@bold{New}: Local details for participants highlighted below.}
 
