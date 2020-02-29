@@ -15,37 +15,48 @@ DIFF
 - can improve "echo hello" timeout for missing auth? forward prompt to user?
 
 
-If you want to test a change on all packages in the [main catalog][pkgd],
- the [pkg-build][pkg-build] package can help --- provided you supply a
- modified version of Racket and a suitable virtual maching (VM).
-This post explains how to meet these requirements.
+Suppose you've made a change to Racket and want to test it against all
+ packages in the [main catalog][pkgd].
+The [`pkg-build`][pkg-build] package can help --- provided you supply: (1) a
+ modified version of Racket and (2) a suitable VM.
+This post explains how to meet these two requirements.
 
 <!-- more -->
 
-## Overview, Motivation
+
+## Why `pkg-build`?
 
 Backwards compatibility matters.
 New changes to packages in the Racket [main distribution](https://github.com/racket/main-distribution/blob/master/info.rkt)
- should ideally preserve existing behavior.
+ should not change old programs without a very good reason.
 
-If there is any question about a breaking change, then one way to assess the
- effects is to build all packages.
+<!-- Misses planet, github, .... -->
 
-> Not for sure, may be lots of public code (off the pkg server) that breaks.
-> And lots of private code.
-> This is but a test.
+One way to assess the damages of a possibly-breaking change is to use
+ the [`pkg-build`][pkg-build] package to compile and test every package
+ registered in the [main package catalog][pkgd].
+<!-- no need to explain the benefits, obvious that main catalog has a variety of "good" programs -->
+A build starts with a modified version of Racket
+ and a sandbox virtual machine (VM).
+For every package in the catalog, `pkg-build` installs the package and its
+ dependencies in a new environment on the VM; therefore:
 
-Can do this manually.
-But difficult to build.
-- time / resource unbounded
-- a little mischief (the `_` pkg)
-- conflicting dependencies
-  + example? (pict3d and ruckus seem compatible)
+- packages that have conflicting dependencies get tested without interfering
+  with one another,
+  <!-- example? (pict3d and ruckus seem compatible) -->
+- packages that require a huge amount of time or memory get killed,
+- and re-builds are straightforward.
 
-> See the [`pkg/lib`](https://docs.racket-lang.org/pkg/lib.html) API
-> get-pkg-names-from-catalog ... easy
+And so, running a build is well worth the initial setup cost.
 
-pkg-build helps to automate
+<!-- Manual: see the [`pkg/lib`](https://docs.racket-lang.org/pkg/lib.html) API -->
+<!-- get-pkg-names-from-catalog ... easy -->
+
+
+## Motivating Example
+
+
+
 
 you need to:
 - make a change
