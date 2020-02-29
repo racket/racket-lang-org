@@ -4,15 +4,15 @@
 
 *posted by Fred Fu, Ben Greenman, and Alex Knauth*
 
-PRE
-- blog/pkg-build/RUN-LOG-7
-- blog/pkg-build/edit-catalog-for-opaque.rkt
-- https://pkg-build.racket-lang.org/about.html
-
-DIFF
-- bump timeout, retries (checking ready. PR?)
-- remote-shell pull requests
-- can improve "echo hello" timeout for missing auth? forward prompt to user?
+<!-- PRE -->
+<!-- - blog/pkg-build/RUN-LOG-7 -->
+<!-- - blog/pkg-build/edit-catalog-for-opaque.rkt -->
+<!-- - https://pkg-build.racket-lang.org/about.html -->
+<!--  -->
+<!-- DIFF -->
+<!-- - bump timeout, retries (checking ready. PR?) -->
+<!-- - remote-shell pull requests -->
+<!-- - can improve "echo hello" timeout for missing auth? forward prompt to user? -->
 
 
 Suppose you've made a change to Racket and want to test it against all
@@ -51,45 +51,40 @@ And so, running a build is well worth the initial setup cost.
 
 <!-- Manual: see the [`pkg/lib`](https://docs.racket-lang.org/pkg/lib.html) API -->
 <!-- get-pkg-names-from-catalog ... easy -->
+<!-- 2020-02-25 have 2446 names -->
 
 
-## Motivating Example
+### Motivating Example: Typed Racket
+
+As of February 2020, Typed Racket pull request [882][opaque-pr] weakens
+ the relation between untyped predicates and the type checker.
+This change fixes a soundness bug, but may break programs that rely on the
+ old behavior.
+See the pull request for details.
+
+Since we recently ran `pkg-build` on a modified Typed Racket for that pull
+ request, this post uses Typed Racket as a concrete example.
+If you copy/paste code below, look out for parts that need to be specialized
+ for different modifications.
 
 
+## How to run `pkg-build`
+
+In short, the goal is to:
+ create a modified distribution of Racket,
+ configure a VM,
+ and run the [`run.rkt`](https://github.com/racket/pkg-build/blob/master/README.md#running-a-build)
+ script described by the `pkg-build` README file.
+Creating the modified Racket is the most involved part.
+
+**Note:** for the fastest results, the "host" OS on your computer and
+ the "guest" OS on the VM must be the same (ideally Linux).
+If the host and guest OS are different, then build the modified Racket
+ on the VM and copy it to the host before setting up a web server in
+ step 4 below.
 
 
-you need to:
-- make a change
-- create a "racket install" (whats this called?) ... mimics a release page
-  https://download.racket-lang.org/releases/7.6/
-- create a VM
-- point pkg-build to the VM and the "install"
-
-the automatic part sets up a base racket install and builds every package on it
-
-
-## Example
-
-For motivation we have change to Typed Racket
-
-As of February 2020, changes how opaques typecheck.
-
-<https://github.com/racket/typed-racket/pull/882>
-
-Will say what we did as the running example.
-
-
-## How to Run pkg-build
-
-Keep this first part short, almost a table of contents
-Heavy details below
-
-> _if the pkd-build runs on Ubuntu, then `make installers` and `make
-> site-from-installer` must be run on Ubuntu as well_
-> ASSUME YOU HAVE LINUX EVERYTHING --- thats what I did --- else you can ... Alex? ...
-> build a racket installer on a linux machine (via make installers)
-> without linux, can do 1-3 on the VM, compress build/site & send to host,
->  serve from host
+#### Table of Contents
 
 1. create a base catalog
 2. edit the catalog
@@ -99,8 +94,6 @@ Heavy details below
 6. set up pkg-build
 7. run
 
-Now for the details ...
-
 
 ### Step 1: generate a modern catalog
 
@@ -109,6 +102,13 @@ to copy cataglog:
 
 dont need to download and build probably want snapshot don't need vm
 (may want to use vm anyway but its optional until pkg-build step)
+
+> _if the pkd-build runs on Ubuntu, then `make installers` and `make
+> site-from-installer` must be run on Ubuntu as well_
+> ASSUME YOU HAVE LINUX EVERYTHING --- thats what I did --- else you can ... Alex? ...
+> build a racket installer on a linux machine (via make installers)
+> without linux, can do 1-3 on the VM, compress build/site & send to host,
+>  serve from host
 
 
 ### Step 2: edit the catalog to reflect your changes
@@ -420,4 +420,5 @@ If you can think of improvements, send them these ways
 
 [pkg-build]: https://github.com/racket/pkg-build
 [pkgd]: https://pkgd.racket-lang.org
+[opaque-pr]: https://github.com/racket/typed-racket/pull/882
 
