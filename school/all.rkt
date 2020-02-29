@@ -1,10 +1,12 @@
 #!/usr/bin/env racket
 #lang plt-web
 (require racket/runtime-path
+         racket/file
          "../identity.rkt"
          "../testing.rkt"
          "../www/resources.rkt"
-         "../annual-utils.rkt")
+         "../annual-utils.rkt"
+         "../scribble.rkt")
 
 (define school-site
   (site "school"
@@ -20,20 +22,24 @@
 ;; 2019 
 (define-runtime-path 2019-dir "2019")
 (pollen-rebuild! 2019-dir)
-(copy-school-site! 2019-dir 2019 #:current #t)
+(copy-school-site! 2019-dir 2019 #:current #f)
 
-;; On web server, redirect 2019/index.html to root index.html
+;; 2020
+(define-runtime-path 2020-dir "2020")
+(scribble-page (build-path 2020-dir "index.scrbl") 2020-dir)
+(copy-school-site! 2020-dir 2020 #:current #t)
+
+;; On web server, redirect 2020/index.html to root index.html
 ;; (these refer to remote paths)
 (void
  (symlink #:site school-site
           "../index.html"
-          "2019/index.html"))
+          "2020/index.html"))
 
-(define-runtime-path current-school-index "2019/index.html")
+(define-runtime-path current-school-index "2020/index.html")
 (provide index)
 (define index
   (page* #:site school-site
          #:link-title "Racket School" #:title "Racket School"
          #:id 'school
          @copyfile[#:site school-site current-school-index]))
-
