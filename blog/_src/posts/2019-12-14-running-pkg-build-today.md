@@ -6,7 +6,6 @@
 
 <!-- PRE -->
 <!-- - blog/pkg-build/RUN-LOG-7 -->
-<!-- - blog/pkg-build/edit-catalog-for-opaque.rkt -->
 <!-- - https://pkg-build.racket-lang.org/about.html -->
 <!--  -->
 <!-- DIFF -->
@@ -17,8 +16,9 @@
 
 Suppose you've made a change to Racket and want to test it against all
  packages in the [main catalog][pkgd].
-The [`pkg-build`][pkg-build] package can help --- provided you supply: (1) a
- modified version of Racket and (2) a suitable VM.
+The [`pkg-build`][pkg-build] package can help --- provided you have:
+ (1) a modified version of Racket and
+ (2) a suitable VM.
 This post explains how to meet these two requirements.
 
 <!-- more -->
@@ -48,6 +48,7 @@ For every package in the catalog, `pkg-build` installs the package and its
 - and re-builds are straightforward.
 
 And so, running a build is well worth the initial setup cost.
+<!-- TODO reword -->
 
 <!-- Manual: see the [`pkg/lib`](https://docs.racket-lang.org/pkg/lib.html) API -->
 <!-- get-pkg-names-from-catalog ... easy -->
@@ -55,123 +56,252 @@ And so, running a build is well worth the initial setup cost.
 
 
 ### Motivating Example: Typed Racket
+<!-- TODO reword -->
 
-As of February 2020, Typed Racket pull request [882][opaque-pr] weakens
+As of February 2020, Typed Racket pull request [#882][opaque-pr] weakens
  the relation between untyped predicates and the type checker.
-This change fixes a soundness bug, but may break programs that rely on the
- old behavior.
+This change fixes a soundness bug, but may raise type errors in programs
+ that rely on the old behavior.
 See the pull request for details.
 
 Since we recently ran `pkg-build` on a modified Typed Racket for that pull
  request, this post uses Typed Racket as a concrete example.
-If you copy/paste code below, look out for parts that need to be specialized
- for different modifications.
+If you copy/paste code below, look out for parts that need to be adapted
+ for different changes.
+
+<!-- good example for other packages ... probably bad example for racket/racket ? -->
 
 
 ## How to run `pkg-build`
 
-In short, the goal is to:
+There are three high-level parts to running a build:
  create a modified distribution of Racket,
  configure a VM,
- and run the [`run.rkt`](https://github.com/racket/pkg-build/blob/master/README.md#running-a-build)
- script described by the `pkg-build` README file.
-Creating the modified Racket is the most involved part.
+ and run.
+Your host computer will eventually serve a Racket distribution --- much
+ like [download.racket-lang.org](https://download.racket-lang.org/releases/7.6/) ---
+ for the VM.
 
+The first part is the most involved because it depends on the nature of
+ your changes to Racket.
+For the other parts, the [`pkg-build`][pkg-build] repo comes with more help.
+In total, we break things down into 7 steps below.
+ 
 **Note:** for the fastest results, the "host" OS on your computer and
- the "guest" OS on the VM must be the same (ideally Linux).
-If the host and guest OS are different, then build the modified Racket
- on the VM and copy it to the host before setting up a web server in
- step 4 below.
+ the "guest" OS on the VM must be the same.
+If the host and guest OS are different, then follow steps 1-3 on the VM;
+ after you've built a modified Racket, copy it to the host and follow steps
+ 4, 6, and 7 on the host.
+
+> We have tested on:
+> - host Linux + guest Linux
+> - host macOS + guest Linux
 
 
 #### Table of Contents
+<!-- TODO looks funny with the normal indentation -->
 
-1. create a base catalog
-2. edit the catalog
-3. build racket from the catalog
-4. serve a download site
-5. set up a VM
-6. set up pkg-build
-7. run
-
-
-### Step 1: generate a modern catalog
-
-to copy cataglog:
-`raco pkg catalog-copy --from-config <target-catalog-dir>`
-
-dont need to download and build probably want snapshot don't need vm
-(may want to use vm anyway but its optional until pkg-build step)
-
-> _if the pkd-build runs on Ubuntu, then `make installers` and `make
-> site-from-installer` must be run on Ubuntu as well_
-> ASSUME YOU HAVE LINUX EVERYTHING --- thats what I did --- else you can ... Alex? ...
-> build a racket installer on a linux machine (via make installers)
-> without linux, can do 1-3 on the VM, compress build/site & send to host,
->  serve from host
+1. Create a main distribution catalog
+2. Edit the catalog to point to your changes
+3. Build a Racket from the catalog
+4. Serve the modified Racket
+5. Configure a VM
+6. Set up pkg-build
+7. Run the build
 
 
-### Step 2: edit the catalog to reflect your changes
+### Step 0: Create a new directory
 
-delete <target-catalog-dir/pkgs-all>
+First, make a new directory for the build.
+Use any name that you like.
 
-ignore pkgs file
-
-adjust entries to the typed-racket collections in the <target-catalog-dir/pkg/>
-and point them to the version you want to test, i.e. the git url of your
- on-going typed racket
-
-catalog files meant for Racket not humans,
-may crash editor
-
-- blog/pkg-build/edit-catalog-for-opaque.rkt
-
-beware
- https://.....#commit?path=....
- vs
- https://....?path=....#commit
-
-Q. does Fred have a test to validate the edits?
- "you can verify the changes by running
-  raco pkg install typed-racket --catalog your-local-catalog-directory
-  and see if you get the version you are working on"
-
-Fred example edit: https://gist.github.com/capfredf/f6588f8096ffc6cbbc3a8adb80486b9d
-"In short, I changed source part and the default in versions.  The checksum is
- the commit hash"
+```
+  mkdir ~/my-build
+  cd ~/my-build
+```
 
 
-### Step 3: build Racket from the edited catalog
+### Step 1: Create a main distribution catalog
 
-get a clean Racket repo
- (fails if unclean, if you run make first so be sure its clean SRC_CATALOG=)
- ... 2020-02-24 not exactly sure what SRC_CATALOG should be!
+Find a modern version of Racket.
+The [latest release](https://download.racket-lang.org) or a recent source
+ build work fine.
+A slightly older release should also work.
 
-run `make installers  PKG="typed-racket" SRC_CATALOG= <target-catalog-dir>`
+Choose a name for a new directory,
+ connect to the Internet,
+ and run the following command using "`raco`" from the modern Racket.
+
+```
+  raco pkg catalog-copy --from-config my-catalog
+```
+
+All done.
+
+> The example command above creates a new directory named `my-catalog` that contains:
+> 
+> - a directory `pkg/` with one file inside for each package (over 2000 files),
+> - a file `pkgs` that lists all package names,
+> - and a big file `pkgs-all` with all the data from the `pkg/` directory.
+> 
+> Your directory should have similar contents.
+> 
+> Beware! The generated files, especially `pkgs-all`, have very long lines
+> that may crash your favorite text editor; they overwhelmed gedit on our VM.
+> These files are meant to be read by Racket programs.
 
 
-### Step 4: serve the edited Racket
+### Step 2: Edit the catalog to point to your changes
 
-go to the build/site
-run `make site-from-installers`
+Delete the large file `my-catalog/pkgs-all`.
 
-(site-from-installers what does this do?)
+Ignore the `my-catalog/pkgs` file.
 
-python -m http.server <port>
-   ... must be a racket way
-   python 3 works, maybe earlier
-   default python port 8000 worked for us
-   build/site directory, should contain index = download page, table.rktd
+Figure out which names in the `my-catalog/pkg/` directory relate to your changes.
+If you have a new commit for Typed Racket, then there are six relevant names because one
+ commit to the [Typed Racket repo](https://github.com/racket/typed-racket)
+ affects six packages:
+ `source-syntax`, `typed-racket`, `typed-racket-doc`, `typed-racket-lib`,
+ `typed-racket-more`, and  `typed-racket-test`.
 
-   Alex "no, but there is table.rktd in the separate directory where I'm running run.rkt"
-   Ben "I do have build/site/installers/table.rktd with 1 entry, localhost -> racket-7.5........sh"
+Each name `N` correponds to a file `my-catalog/pkg/N` that contains
+ [metadata](https://docs.racket-lang.org/pkg/Package_Concepts.html#(tech._package._metadata))
+ for a package, represented as a hash.
+Your goal is to update the `'source`, `'checksum`, and `'versions` fields in
+ each hash to point to your changes.
+The new `'source` is the GitHub URL for your changes.
+The new `'checksum` is the matching commit hash.
+The new `'versions` must point to your changes as the default.
+ 
+The script below can make these edits for Typed Racket, given:
 
-Make sure the server is accessible from other vms.
+- `tgt-user` your GitHub username
+- `tgt-branch` the name of the public branch where your changes live
+- `tgt-commit` the commit hash for your changes
 
-@ben if you start a http server with port 8000 in the directory build/site and open
-“http://localhost:8000/” in your browser, you should be able to see something similar to https://www.cs.utah.edu/plt/snapshots/current/installers/ (edited) 
+**edit-catalog.rkt**
 
-### Step 5: set up a VM
+```
+#lang racket/base
+;; Usage:
+;;   racket edit-catalog.rkt my-catalog/
+
+;; ---
+;; TODO edit these variables
+(define pkg*
+  '("source-syntax" "typed-racket" "typed-racket-doc" "typed-racket-lib" "typed-racket-more" "typed-racket-test"))
+
+(define tgt-repo "typed-racket")
+
+(define tgt-branch "<branch-name>")
+(define tgt-user "<username>")
+(define tgt-commit "<commit-hash>")
+;; ---
+
+;; format a GitHub package URL for a branch, see:
+;;  https://docs.racket-lang.org/pkg/getting-started.html#(part._github-deploy)
+(define (make-tgt-url pkg-name)
+  (format "git://github.com/~a/~a.git?path=~a#~a"
+          tgt-user tgt-repo pkg-name tgt-branch))
+
+;; update three fields: '(source checksum versions)
+(define (update-pkg-hash h pkg-name)
+  (define u (make-tgt-url pkg-name))
+  (let* ((h (hash-set h 'source u))
+         (h (hash-set h 'checksum tgt-commit))
+         (h (if (hash-has-key? h 'versions)
+              (hash-update
+                h 'versions
+                (lambda (vh)
+                  (hash-set
+                    vh 'default
+                    (hash 'source u 'checksum tgt-commit 'source-url u))))
+              h)))
+    h))
+
+;; edit one file
+(define (update-pkg-file p pkg-name)
+  (define h (with-input-from-file p read))
+  (define h+ (update-pkg-hash h pkg-name))
+  (with-output-to-file p #:exists 'replace (lambda () (writeln h+))))
+
+(module+ main
+  (require racket/cmdline)
+  (command-line
+    #:args (cat-dir)
+    (for ((pkg-name (in-list pkg*)))
+      (define p (build-path cat-dir "pkg" pkg-name))
+      (update-pkg-file p pkg-name))))
+```
+
+After running the script, you can test your edits by installing the
+ package from this modified catalog directory.
+For a modern "`raco`", assuming you edited Typed Racket:
+
+```
+ raco pkg install typed-racket --catalog my-catalog
+```
+
+If the install succeeds, you'll be able to run tests to validate your changes.
+
+
+### Step 3: Build a Racket from the catalog
+
+Clone a new copy of Racket and build using your modified catalog.
+
+<!-- TODO double-check the command BUILDING NOW -->
+```
+ cd ~/my-build/
+ git clone git://github.com/racket/racket
+ cd racket
+ make installers PKG="typed-racket" SRC_CATALOG=../my-catalog
+```
+
+This will take some time.
+
+Make sure that the build happens on the same kind of system that the VM
+ will eventually use.
+To be safe, you can always start the VM first (step 5) and run this build on it.
+
+> In our experience, the command above often fails on an unclean `racket/`
+> directory. If something goes wrong, make a new clone before retrying.
+
+
+### Step 4: Serve the modified Racket
+<!-- TODO does step3 make build/site ??? -->
+
+Go inside the cloned repo and run the following command to make an install
+ web page:
+
+```
+ cd ~/my-build/racket/build/site
+ make site-from-installers
+```
+
+After, this `site/` directory should contain a file `index.html` that resembles
+ the picture below, along with a few other files.
+In particular, the link _localhost_ on the index page should point to an install script.
+
+<!-- also build/site/installers/table.rktd -->
+
+<img src="/img/build-site-index-example.png"
+     alt="Example index.html"
+     border="1"
+     style="width: 70%" />
+
+The final step is to start a local web server to host the install.
+One way to run a server is with Python:
+
+```
+ cd ~/my-build/racket/build/site
+ python -m http.server 8000
+```
+
+To double-check the server, open <http://localhost:8000> in a web browser.
+
+
+### Step 5: Configure a VM
+<!-- TODO -->
 
 VBoxManage, follow pkg-build instructions, hostname -I,
    ssh test?, host-only network : Tools, add network (not preferences), VM settings, Adaptor 2, host only vboxnet0, ....
@@ -190,7 +320,7 @@ follow pkg-build do vbox stuff
 - hostname -I 192.___
 
 
-### Step 6: set up pkg-build (sync with VM)
+### Step 6: Set up pkg-build
 
    [pkg-build](https://github.com/racket/pkg-build), but you need to point the
    catalog url to the address of the http server.
@@ -208,7 +338,7 @@ Alex:
 note: main.rkt pretty well documented
 
 
-### Step 7: run pkg-build
+### Step 7: Run the build
 
  run outside the VM,
  begin with VM off (update pkg-build to say this!)
@@ -217,6 +347,34 @@ note: main.rkt pretty well documented
 ## Ways to Fail
 
 We failed many times 
+
+
+PROBLEM
+└─(13:02:%)── /Applications/Racket\ v7.6/bin/raco pkg catalog-copy --from-config my-catalog                                                                                      ──(Sun,Mar01)─┘
+osx-ssl-connect: connection failed
+  message: The operation couldn’t be completed. (kCFErrorDomainCFNetwork error 2.)
+  address: download.racket-lang.org
+  port number: 443
+  context...:
+   /Applications/Racket v7.6/collects/net/osx-ssl.rkt:281:0: osx-ssl-connect
+   /Applications/Racket v7.6/collects/net/http-client.rkt:67:0: http-conn-open!
+   /Applications/Racket v7.6/collects/net/http-client.rkt:272:0
+   /Applications/Racket v7.6/collects/racket/contract/private/arrow-val-first.rkt:555:3
+   /Applications/Racket v7.6/collects/net/url.rkt:201:0: http://getpost-impure-port
+   /Applications/Racket v7.6/collects/net/url.rkt:308:2: redirection-loop
+   /Applications/Racket v7.6/collects/racket/contract/private/arrow-val-first.rkt:555:3
+   /Applications/Racket v7.6/collects/pkg/private/network.rkt:59:3
+   /Applications/Racket v7.6/collects/pkg/private/catalog.rkt:218:0: read-from-server
+   /Applications/Racket v7.6/collects/pkg/private/catalog.rkt:299:2: for-loop
+   /Applications/Racket v7.6/collects/pkg/private/catalog-copy.rkt:33:0: pkg-catalog-copy
+   /Applications/Racket v7.6/collects/racket/contract/private/arrow-val-first.rkt:555:3
+   (submod "/Applications/Racket v7.6/collects/pkg/main.rkt" main): [running body]
+   temp35_0
+   for-loop
+   run-module-instance!
+   ...
+SOLUTION
+ connect to net
 
 PROBLEM
  hash-ref: no value found for key
@@ -422,3 +580,4 @@ If you can think of improvements, send them these ways
 [pkgd]: https://pkgd.racket-lang.org
 [opaque-pr]: https://github.com/racket/typed-racket/pull/882
 
+[`run.rkt`](https://github.com/racket/pkg-build/blob/master/README.md#running-a-build)
