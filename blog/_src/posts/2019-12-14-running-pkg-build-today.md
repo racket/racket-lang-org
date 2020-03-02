@@ -2,7 +2,7 @@
     Date: 2019-12-14T17:47:39
     Tags: 
 
-*posted by Fred Fu, Ben Greenman, and Alex Knauth*
+*posted by Ben Greenman, Alex Knauth, and Fred Fu*
 
 <!-- PRE -->
 <!-- - blog/pkg-build/RUN-LOG-7 -->
@@ -19,7 +19,7 @@ Suppose you've made a change to Racket and want to test it against all
 The [`pkg-build`][pkg-build] package can help --- provided you have:
  (1) a modified version of Racket and
  (2) a suitable VM.
-This post explains how to meet these two requirements.
+This post explains how to meet these requirements.
 
 <!-- more -->
 
@@ -89,13 +89,13 @@ In total, we break things down into 7 steps below.
  
 **Note:** for the fastest results, the "host" OS on your computer and
  the "guest" OS on the VM must be the same.
-If the host and guest OS are different, then follow steps 1-3 on the VM;
- after you've built a modified Racket, copy it to the host and follow steps
+If the host and guest OS are different, then follow steps 1-3 on the VM.
+Once you have built a modified Racket, copy it to the host and follow steps
  4, 6, and 7 on the host.
 
-> We have tested on:
-> - host Linux + guest Linux
-> - host macOS + guest Linux
+> We have tested with:
+> host Linux + guest Linux, and
+> host macOS + guest Linux
 
 
 #### Table of Contents
@@ -189,7 +189,8 @@ The script below can make these edits for Typed Racket, given:
 ;; ---
 ;; TODO edit these variables
 (define pkg*
-  '("source-syntax" "typed-racket" "typed-racket-doc" "typed-racket-lib" "typed-racket-more" "typed-racket-test"))
+  '("source-syntax" "typed-racket" "typed-racket-doc"
+    "typed-racket-lib" "typed-racket-more" "typed-racket-test"))
 
 (define tgt-repo "typed-racket")
 
@@ -198,8 +199,8 @@ The script below can make these edits for Typed Racket, given:
 (define tgt-commit "<commit-hash>")
 ;; ---
 
-;; format a GitHub package URL for a branch, see:
-;;  https://docs.racket-lang.org/pkg/getting-started.html#(part._github-deploy)
+; format a GitHub package URL for a branch, see:
+; https://docs.racket-lang.org/pkg/getting-started.html#(part._github-deploy)
 (define (make-tgt-url pkg-name)
   (format "git://github.com/~a/~a.git?path=~a#~a"
           tgt-user tgt-repo pkg-name tgt-branch))
@@ -249,12 +250,11 @@ If the install succeeds, you'll be able to run tests to validate your changes.
 
 Clone a new copy of Racket and build using your modified catalog.
 
-<!-- TODO double-check the command BUILDING NOW -->
 ```
  cd ~/my-build/
  git clone git://github.com/racket/racket
  cd racket
- make installers PKG="typed-racket" SRC_CATALOG=../my-catalog
+ make installers PKG="typed-racket" SRC_CATALOG=~/my-build/my-catalog
 ```
 
 This will take some time.
@@ -268,26 +268,28 @@ To be safe, you can always start the VM first (step 5) and run this build on it.
 
 
 ### Step 4: Serve the modified Racket
-<!-- TODO does step3 make build/site ??? -->
 
 Go inside the cloned repo and run the following command to make an install
  web page:
 
 ```
- cd ~/my-build/racket/build/site
+ cd ~/my-build/racket/
  make site-from-installers
 ```
 
-After, this `site/` directory should contain a file `index.html` that resembles
- the picture below, along with a few other files.
-In particular, the link _localhost_ on the index page should point to an install script.
+This command makes a new directory `~/my-build/racket/build/site/` with a
+ few files, including:
 
-<!-- also build/site/installers/table.rktd -->
+- `build/site/installers/table.rktd` must contain a hash from strings
+  to paths; ours contains `#hash(("localhost" . "racket-7.5.0.11-x86_64-linux.sh"))`
+- `build/site/index.html` should resemble the picture below; for us, the
+  link [localhost]() points to an install script
 
 <img src="/img/build-site-index-example.png"
-     alt="Example index.html"
+     alt="Example"
      border="1"
      style="width: 70%" />
+
 
 The final step is to start a local web server to host the install.
 One way to run a server is with Python:
@@ -301,283 +303,280 @@ To double-check the server, open <http://localhost:8000> in a web browser.
 
 
 ### Step 5: Configure a VM
-<!-- TODO -->
 
-VBoxManage, follow pkg-build instructions, hostname -I,
-   ssh test?, host-only network : Tools, add network (not preferences), VM settings, Adaptor 2, host only vboxnet0, ....
+Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
+Make sure the `VBoxManage` executable is on your path.
 
-FRED
- #:host "192.168.99.100"
- for that part, you need to make sure which networking mode you are using for
-  your virtualbox instance
- Usually, I would use bridge mode and then ssh into the guest os and use
-  ifconfig to get the ip address of the guest os
- (updated: #:host is the ip address of you vm
-  (https://github.com/racket/pkg-build/blob/master/main.rkt#L328) )
+Create a VM, either using [Vagrant](https://www.vagrantup.com) according to
+ the [`pkg-build/example/` README](https://github.com/racket/pkg-build/blob/master/example/README.md)
+ or [manually](https://github.com/racket/pkg-build/blob/master/README.md#local-builds).
+After following those instructions, you should have:
 
-follow pkg-build do vbox stuff
-- host-only network
-- hostname -I 192.___
+- a VM named `pkg-build`,
+- with a user named `racket` that can run `sudo` without a password,
+- with [host-only networking](https://www.virtualbox.org/manual/ch06.html#network_hostonly) enabled,
+- and one snapshot of the VM named `init`.
 
+If you have a Linux VM, run `hostname -I` on the VM to get its IP address.
+Then, with the VM running, try the following command on your host machine to test
+ the network connection --- after replacing the sample address (`192....`)
+ with your VM's address:
+
+```
+ ssh racket@192.168.99.100
+```
+
+Running `ssh` for the first time may raise a yes/no prompt about the login.
+Type "y".
+Future logins must succeed with no prompt.
+ 
 
 ### Step 6: Set up pkg-build
 
-   [pkg-build](https://github.com/racket/pkg-build), but you need to point the
-   catalog url to the address of the http server.
+Clone and install the [`pkg-build`][pkg-build] repo.
 
-Alex:
-- replace the #:name string with the name of the VM as normal
-- replace the #:host IP address string with the hostname -I after running the
-   ... down and ... up commands, as I said about step iv of Prerequisites
-- replace the #:snapshot-url string with the url string returned by the python
-   http server still running on the host, including the port with the colon
-- replace the #:installer-platform-name string with "localhost"
-- before running run.rkt on the host, make sure the VM is shut down and the
-   python http server is still running
+```
+  cd ~/my-build
+  git clone git://github.com/racket/pkg-build
+  raco pkg install ./pkg-build
+```
 
-note: main.rkt pretty well documented
+Create a file named `run.rkt` that starts from the template in the
+ [pkg-build README](https://github.com/racket/pkg-build#running-a-build).
+Edit this file:
+
+- the vbox `#:host` must match your VM's IP address,
+- the `#:snapshot-url` must point to your web server from step 4 (likely <http://localhost:8000>),
+- the `#:installer-platform-name` must match a key in the `table.rktd` file from step 4
+
+Here is one `run.rkt` that we used for a successful build.
+
+```
+#lang racket/base
+
+(require pkg-build)
+
+(build-pkgs
+ #:vms (list (vbox-vm #:name "pkg-build" #:host "192.168.99.100"))
+ #:snapshot-url "http://0.0.0.0:8000"
+ #:timeout 2100
+ #:installer-platform-name "localhost")
+```
 
 
 ### Step 7: Run the build
 
- run outside the VM,
- begin with VM off (update pkg-build to say this!)
+Make sure the VM is off.
+Run the `run.rkt` file above.
+We recommend redirecting the output to a log:
+
+```
+  racket run.rkt > pkg-build.log
+```
+
+This command should run for hours,
+ starting and stopping the VM periodically.
+If all goes well, the final log will contain details on any new package errors.
 
 
-## Ways to Fail
+## Example log output
 
-We failed many times 
+Our log for a modified Typed Racket began with the following lines,
+ and then proceeded to archive every package:
+
+```
+>> Getting installer table
+Installer is racket-7.5.0.11-x86_64-linux.sh
+>> Downloading installer racket-7.5.0.11-x86_64-linux.sh
+>> Archiving packages from
+ http://0.0.0.0:8000/catalog/ https://pkgs.racket-lang.org/
+== Archiving 1d6 ==
+checksum: ae3bf1fc265bd1815dc8f9d6bbb153afdbf3a53d
+Downloading repository https://github.com/jessealama/1d6.git
+....
+```
+
+Some package archives failed, for example:
+
+```
+== Archiving simple-csv ==
+checksum: f71d9b92826203cacf483ab5b2379fd18f8585d3
+Downloading repository git://github.com/pragun/simple-csv
+git-checkout: could not parse ref pkt
+  pkt: "Repository not found.\n"
+SKIPPING simple-csv
+```
+
+But most succeeded, including the Typed Racket packages.
+
+After the archive, the build first tests the connection to the VM:
+
+```
+Creating catalog /home/ben/my-build/server/archive/catalog
+>> Starting server at locahost:18333 for /home/ben/my-build/server/archive
+>> Starting VM pkg-build
+Stopping VirtualBox machine "pkg-build"
+VBoxManage: error: Machine 'pkg-build' is not currently running
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+Restoring snapshot 'init' (52bd14a8-783c-4e06-b60f-14730464f196)
+Starting VirtualBox machine "pkg-build"
+Waiting for VM "pkg-build" to power on...
+VM "pkg-build" has been successfully started.
+/usr/bin/ssh -R 18333:localhost:18333 racket@192.168.99.100
+  '/usr/bin/env' 'PLTUSERHOME=/home/racket/build-pkgs/user'
+  'PLT_PKG_BUILD_SERVICE=1' 'CI=true' 'PLTSTDERR=debug@pkg error'
+  'PLT_INFO_ALLOW_VARS=;PLT_PKG_BUILD_SERVICE' '/bin/sh' '-c' 'echo hello'
+hello
+```
+
+then installs Racket and starts building individual packages.
+
+For each package, the script starts the VM for a setup,
+ restarts to run tests, and finally shuts down the VM:
+
+```
+>> ========================================
+>> Building unstable-contract-lib
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+
+....
+
+Stopping VirtualBox machine "pkg-build"
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+>> ========================================
+>> Testing unstable-contract-lib
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+
+....
+
+Stopping VirtualBox machine "pkg-build"
+0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+```
+
+Our change led to a few "Type Checker" errors during calls to `raco setup`.
+These errors did not stop the build, which went on to render documentation
+ and generate a few HTML pages to summarize the results.
+Here are the final lines of output:
+
+```
+Rendering...
+  pkg-build/robots.txt
+  pkg-build/favicon.ico
+  pkg-build/page-not-found.html
+  pkg-build/.htaccess
+  pkg-build/index.html
+  pkg-build/about.html
+Rendering done.
+```
 
 
-PROBLEM
-└─(13:02:%)── /Applications/Racket\ v7.6/bin/raco pkg catalog-copy --from-config my-catalog                                                                                      ──(Sun,Mar01)─┘
+## Ways to fail
+
+Before the successful run, we hit many problems.
+Here are a few error messages and solutions.
+
+
+#### Step 1: ssl-connect error
+
+```
+$ /Applications/Racket\ v7.6/bin/raco pkg catalog-copy --from-config my-catalog
 osx-ssl-connect: connection failed
-  message: The operation couldn’t be completed. (kCFErrorDomainCFNetwork error 2.)
+  message: The operation couldn’t be completed.
+           (kCFErrorDomainCFNetwork error 2.)
   address: download.racket-lang.org
   port number: 443
-  context...:
-   /Applications/Racket v7.6/collects/net/osx-ssl.rkt:281:0: osx-ssl-connect
-   /Applications/Racket v7.6/collects/net/http-client.rkt:67:0: http-conn-open!
-   /Applications/Racket v7.6/collects/net/http-client.rkt:272:0
-   /Applications/Racket v7.6/collects/racket/contract/private/arrow-val-first.rkt:555:3
-   /Applications/Racket v7.6/collects/net/url.rkt:201:0: http://getpost-impure-port
-   /Applications/Racket v7.6/collects/net/url.rkt:308:2: redirection-loop
-   /Applications/Racket v7.6/collects/racket/contract/private/arrow-val-first.rkt:555:3
-   /Applications/Racket v7.6/collects/pkg/private/network.rkt:59:3
-   /Applications/Racket v7.6/collects/pkg/private/catalog.rkt:218:0: read-from-server
-   /Applications/Racket v7.6/collects/pkg/private/catalog.rkt:299:2: for-loop
-   /Applications/Racket v7.6/collects/pkg/private/catalog-copy.rkt:33:0: pkg-catalog-copy
-   /Applications/Racket v7.6/collects/racket/contract/private/arrow-val-first.rkt:555:3
-   (submod "/Applications/Racket v7.6/collects/pkg/main.rkt" main): [running body]
-   temp35_0
-   for-loop
-   run-module-instance!
-   ...
-SOLUTION
- connect to net
+```
 
-PROBLEM
- hash-ref: no value found for key
-   key: "{1} Racket | {3} Linux | {4} x64_64 (64-bit), natipkg; built on Debian 7 (Wheezy)"
-SOLUTION
- look at ???? edit run.rkt
-
-PROBLEM
- So following the steps in pkg-build running run.rkt, It went for a while, including archiving, downloading, packing, and writing checksums for all the packages from a-to-z, but then failed with this error message:
- Creating catalog /home/racket/racket-pkg-build/server/archive/catalog
- >> Starting server at locahost:18333 for /home/racket/racket-pkg-build/server/archive
- >> Starting VM pkg-build
- Stopping VirtualBox machine "pkg-build"
- system*: contract violation
-   expected: path-string?
-   given: #f
-   context...:
-    /usr/racket-7.5.0.10/collects/racket/system.rkt:181:19
-    /usr/racket-7.5.0.10/collects/racket/system.rkt:174:0: do-system*/exit-code
-    /usr/racket-7.5.0.10/collects/racket/system.rkt:211:0: system*
-    /home/racket/.racket/snapshot/pkgs/remote-shell-lib/vbox.rkt:112:0: stop-vbox-vm
-    /usr/racket-7.5.0.10/collects/racket/contract/private/arrow-val-first.rkt:555:3
-    /home/racket/.racket/snapshot/pkgs/pkg-build/main.rkt:445:2: install
-    /home/racket/.racket/snapshot/pkgs/pkg-build/main.rkt:515:2: check-and-install
-    /home/racket/.racket/snapshot/pkgs/pkg-build/main.rkt:123:0: build-pkgs
-    "/home/racket/racket-pkg-build/run.rkt": [running body]
-    temp35_0
-    for-loop
-    run-module-instance!
-    perform-require!
-SOLUTION
- It appears to be the line (system* VBoxManage "controlvm" vbox what) here: https://github.com/racket/remote-shell/blob/71cb7647c90851fac4629523d34983375fc2caa3/remote-shell-lib/vbox.rkt#L52
- remote-shell-lib/vbox.rkt:52
-   (system* VBoxManage "controlvm" vbox what))
- <https://github.com/racket/remote-shell|racket/remote-shell>racket/remote-shell | Added by GitHub
- Where VMoxManage is defined with (define VBoxManage (find-executable-path "VBoxManage")) here: https://github.com/racket/remote-shell/blob/71cb7647c90851fac4629523d34983375fc2caa3/remote-shell-lib/vbox.rkt#L29
- remote-shell-lib/vbox.rkt:29
- (define VBoxManage (find-executable-path "VBoxManage"))
- <https://github.com/racket/remote-shell|racket/remote-shell>racket/remote-shell | Added by GitHub
- ah ok, the pkg-build instructions did ask for VBoxManage to be on your PATH
- on the HOST not the VM
-TODO
- is this one better now?
- not yet https://github.com/racket/remote-shell/pull/5
-
-PROBLEM
- Okay, same place, different error this time:
- Creating catalog /Users/Alex/racket-pkg-build/server/archive/catalog
- >> Starting server at locahost:18333 for /Users/Alex/racket-pkg-build/server/archive
- >> Starting VM pkg-build
- Stopping VirtualBox machine "pkg-build"
- VBoxManage: error: Could not find a registered machine named 'pkg-build'
- VBoxManage: error: Details: code VBOX_E_OBJECT_NOT_FOUND (0x80bb0001), component VirtualBoxWrap, interface IVirtualBox, callee nsISupports
- VBoxManage: error: Context: "FindMachine(Bstr(a->argv[0]).raw(), machine.asOutParam())" at line 382 of file VBoxManageControlVM.cpp
- VBoxManage: error: Could not find a registered machine named 'pkg-build'
- VBoxManage: error: Details: code VBOX_E_OBJECT_NOT_FOUND (0x80bb0001), component VirtualBoxWrap, interface IVirtualBox, callee nsISupports
- VBoxManage: error: Context: "FindMachine(Bstr(VMNameOrUuid).raw(), machine.asOutParam())" at line 2621 of file VBoxManageInfo.cpp
- vbox-state: could not get virtual machine status: "pkg-build"
-   context...:
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/remote-shell-lib/vbox.rkt:112:0: stop-vbox-vm21
-    /Applications/Racket/2019-10-21/Racket v7.5.0.3/collects/racket/contract/private/arrow-val-first.rkt:555:3
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:445:2: install64
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:515:2: check-and-install70
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:123:0: build-pkgs57
-    "/Users/Alex/racket-pkg-build/run.rkt": [running body]
-    temp37_0
-    for-loop
-    run-module-instance!125
-    perform-require!78
-
- Looks like the error is (error 'vbox-state "could not get virtual machine status: ~s" vbox) from https://github.com/racket/remote-shell/blob/71cb7647c90851fac4629523d34983375fc2caa3/remote-shell-lib/vbox.rkt#L49
- remote-shell-lib/vbox.rkt:49
-      (error 'vbox-state "could not get virtual machine status: ~s" vbox)]))
- <https://github.com/racket/remote-shell|racket/remote-shell>racket/remote-shell | Added by GitHub
-
- Which is triggered by the state not being one of the symbols (|powered off| aborted running saved paused restoring) from the case expression https://github.com/racket/remote-shell/blob/71cb7647c90851fac4629523d34983375fc2caa3/remote-shell-lib/vbox.rkt#L43-L49
- remote-shell-lib/vbox.rkt:43-49
-   (case state
-     [(|powered off| aborted) 'off]
-     [(running saved paused) state]
-     [(restoring) (vbox-state vbox)]
-     [else 
-  Show more
- <https://github.com/racket/remote-shell|racket/remote-shell>racket/remote-shell | Added by GitHub
-
- My probably-wrong-or-incomplete assumption was that the name pkg-build in the
- error message comes from (vbox-vm #:name "pkg-build" #:host "0.0.0.0:8000"),
- where the host 0.0.0.0:8000 comes from the IP address and port that the Python
- web server gave me. So when it says it can't get the state of that machine, is
- it saying it can't get the state from that Python web server?
-
- I'm trying again with a different #:host field value taken from the result of running hostname -I on the VM
-
- Well, even with that, same error:
- Creating catalog /Users/Alex/racket-pkg-build/server/archive/catalog
- >> Starting server at locahost:18333 for /Users/Alex/racket-pkg-build/server/archive
- >> Starting VM pkg-build
- Stopping VirtualBox machine "pkg-build"
- VBoxManage: error: Could not find a registered machine named 'pkg-build'
- VBoxManage: error: Details: code VBOX_E_OBJECT_NOT_FOUND (0x80bb0001), component VirtualBoxWrap, interface IVirtualBox, callee nsISupports
- VBoxManage: error: Context: "FindMachine(Bstr(a->argv[0]).raw(), machine.asOutParam())" at line 382 of file VBoxManageControlVM.cpp
- VBoxManage: error: Could not find a registered machine named 'pkg-build'
- VBoxManage: error: Details: code VBOX_E_OBJECT_NOT_FOUND (0x80bb0001), component VirtualBoxWrap, interface IVirtualBox, callee nsISupports
- VBoxManage: error: Context: "FindMachine(Bstr(VMNameOrUuid).raw(), machine.asOutParam())" at line 2621 of file VBoxManageInfo.cpp
- vbox-state: could not get virtual machine status: "pkg-build"
-   context...:
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/remote-shell-lib/vbox.rkt:112:0: stop-vbox-vm21
-    /Applications/Racket/2019-10-21/Racket v7.5.0.3/collects/racket/contract/private/arrow-val-first.rkt:555:3
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:445:2: install64
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:515:2: check-and-install70
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:123:0: build-pkgs57
-    "/Users/Alex/racket-pkg-build/run.rkt": [running body]
-    temp37_0
-    for-loop
-    run-module-instance!125
-    perform-require!78
-
- I think in (vbox-vm #:name "pkg-build" #:host "192.168.99.100")
- the value for #:name should be the same as the VM’s name (edited) 
-SOLUTION
- ????
-
-PROBLEM
- The #:host "192.168.99.100" is supposed to be the IP address taken from running hostname -I on the VM, right?
- I'm having some problems with that, getting this error where 10.0.2.15 is both hostname -I on the VM and #:host in run.rkt, after archiving, downloading, packing, and writing checksums for all the packages:
- Waiting for VM "racket-pkg-build" to power on...
- VM "racket-pkg-build" has been successfully started.
- /usr/bin/ssh -R 18333:localhost:18333 racket@10.0.2.15 '/usr/bin/env' 'PLTUSERHOME=/home/racket/build-pkgs/user' 'PLT_PKG_BUILD_SERVICE=1' 'CI=true' 'PLTSTDERR=debug@pkg error' 'PLT_INFO_ALLOW_VARS=;PLT_PKG_BUILD_SERVICE' '/bin/sh' '-c' 'echo hello'
- ssh: Could not resolve hostname 10.0.2.15: nodename nor servname provided, or not known
- /usr/bin/ssh -R 18333:localhost:18333 racket@10.0.2.15 '/usr/bin/env' 'PLTUSERHOME=/home/racket/build-pkgs/user' 'PLT_PKG_BUILD_SERVICE=1' 'CI=true' 'PLTSTDERR=debug@pkg error' 'PLT_INFO_ALLOW_VARS=;PLT_PKG_BUILD_SERVICE' '/bin/sh' '-c' 'echo hello'
- ssh: Could not resolve hostname 10.0.2.15: nodename nor servname provided, or not known
- /usr/bin/ssh -R 18333:localhost:18333 racket@10.0.2.15 '/usr/bin/env' 'PLTUSERHOME=/home/racket/build-pkgs/user' 'PLT_PKG_BUILD_SERVICE=1' 'CI=true' 'PLTSTDERR=debug@pkg error' 'PLT_INFO_ALLOW_VARS=;PLT_PKG_BUILD_SERVICE' '/bin/sh' '-c' 'echo hello'
- ssh: Could not resolve hostname 10.0.2.15: nodename nor servname provided, or not known
- /usr/bin/ssh -R 18333:localhost:18333 racket@10.0.2.15 '/usr/bin/env' 'PLTUSERHOME=/home/racket/build-pkgs/user' 'PLT_PKG_BUILD_SERVICE=1' 'CI=true' 'PLTSTDERR=debug@pkg error' 'PLT_INFO_ALLOW_VARS=;PLT_PKG_BUILD_SERVICE' '/bin/sh' '-c' 'echo hello'
- ssh: Could not resolve hostname 10.0.2.15: nodename nor servname provided, or not known
- ssh: failed
-   context...:
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/remote-shell-lib/ssh.rkt:180:2: loop
-    /Applications/Racket/2019-10-21/Racket v7.5.0.3/collects/racket/contract/private/arrow-val-first.rkt:555:3
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:452:5
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:445:2: install64
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:515:2: check-and-install70
-    /Users/Alex/Library/Racket/snapshot-7.5.0.3--2019-10-21/pkgs/pkg-build/main.rkt:123:0: build-pkgs57
-    "/Users/Alex/racket-pkg-build/run.rkt": [running body]
-    temp37_0
-    for-loop
-    run-module-instance!125
-    perform-require!78
- Stopping VirtualBox machine "racket-pkg-build"
-
- Though I suppose it's also possible I did the OpenSSH step wrong
-
- capfredf
- what’s the network mode your VM is using? (edited) 
- I confused  bridge mode for host-only adapter yesterday.
- Sorry about that
- In the setting for network, you can add a new adapter using host-only
- then start your vm again
- run hostname -I in the vm (edited) 
-SOLUTION
- ????
- for step iv I was having trouble, my dad helped me do two commands sudo
-   ifconfig ... down and sudo ifconfig ... up where ... is from the interface
-   name, to refresh something after switching the vm to host-only network
-   settings, before running hostname -I to get the IP address
-
-PROBLEM
- make-sure-remote-is-ready is now timing out for me:
- /usr/bin/ssh -R 18333:localhost:18333 racket@192.168.99.100 '/usr/bin/env' 'PLTUSERHOME=/home/racket/build-pkgs/user' 'PLT_PKG_BUILD_SERVICE=1' 'CI=true' 'PLTSTDERR=debug@pkg error' 'PLT_INFO_ALLOW_VARS=;PLT_PKG_BUILD_SERVICE' '/bin/sh' '-c' 'echo hello'
- hm, maybe ssh was waiting for a "yes/no" to add a known host
- maybe the vm & host need to exchange authorized keys? (I only put the host key
-  in the vm's .ssh/ dir)
- or does the host need to change its .ssh/known_hosts file? (would both work?)
-SOLUTION
- if you can ssh into the vm as the user `racket` (or any other user you specify
- in (vbox-vm …) ) without answering yes or no, then I think there is nothing
- else to be done for the ssh part
-
- Ben did (it's still running). Alex is having very strange issues with the VM host network.
- [[ He adds a vboxnet0, notes the hostname -I , restarts the machine, and now the hostname -I is different ]]
- I'm going to send Alex my output so that he can start fixing any TR-opaque-related errors (edited) 
-
-PROBLEM
- ????
-SOLUTION
- for step v I was also having trouble, so this is where I deleted all previous
-   snapshots called init, before creating the new snapshot called init, otherwise
-   the run.rkt script might use the earlier snapshot not the later one
+Solution: connect to the Internet and try again.
 
 
-## Contributions
+#### Step 7: hash-ref failed
 
-If you can think of improvements, send them these ways
-(maybe delete this section)
+```
+$ racket run.rkt
+hash-ref: no value found for key
+  key: "{1} Racket | {3} Linux | {4} x64_64 (64-bit), natipkg; built on Debian"
+```
 
-- racket/remote-shell
-- racket/pkg-build
-- racket/racket-lang-org
-- racket/racket ???
+Open `racket/build/site/installers/table.rktd`, copy the key from the hashtable
+ inside, and paste it into `run.rkt` for the `#:installer-platform-name` keyword argument.
+
+
+#### Step 7: system* got `#f`
+
+```
+$ racket run.rkt
+Creating catalog /home/racket/racket-pkg-build/server/archive/catalog
+>> Starting server at locahost:18333 for /home/ben/my-build/server/archive
+>> Starting VM pkg-build
+Stopping VirtualBox machine "pkg-build"
+system*: contract violation
+  expected: path-string?
+```
+
+Put the `VBoxManage` executable on your host-machine PATH and try again.
+(This error comes from code in the [`racket/remote-shell`](https://github.com/racket/remote-shell) repo.
+
+
+#### Step 7: could not find a registered machine
+
+
+```
+$ racket run.rkt
+Creating catalog /Users/Alex/racket-pkg-build/server/archive/catalog
+>> Starting server at locahost:18333 for /home/ben/my-build/server/archive
+>> Starting VM pkg-build
+Stopping VirtualBox machine "pkg-build"
+VBoxManage: error: Could not find a registered machine named 'pkg-build'
+VBoxManage: error: Details: code VBOX_E_OBJECT_NOT_FOUND (0x80bb0001),
+            component VirtualBoxWrap, interface IVirtualBox, callee nsISupports
+VBoxManage: error: Context: "FindMachine(Bstr(a->argv[0]).raw(),
+            machine.asOutParam())" at line 382 of file VBoxManageControlVM.cpp
+VBoxManage: error: Could not find a registered machine named 'pkg-build'
+VBoxManage: error: Details: code VBOX_E_OBJECT_NOT_FOUND (0x80bb0001),
+            component VirtualBoxWrap, interface IVirtualBox, callee nsISupports
+VBoxManage: error: Context: "FindMachine(Bstr(VMNameOrUuid).raw(),
+            machine.asOutParam())" at line 2621 of file VBoxManageInfo.cpp
+vbox-state: could not get virtual machine status: "pkg-build"
+```
+
+Here, `pkg-build` is the `#:name` argument in the `run.rkt` script.
+This error can occur when the VM is on when the script runs.
+Shut down the VM and try again.
+
+
+#### Step 7: ssh could not resolve hostname
+
+```
+$ racket run.rkt
+....
+Waiting for VM "racket-pkg-build" to power on...
+VM "racket-pkg-build" has been successfully started.
+/usr/bin/ssh -R 18333:localhost:18333 racket@10.0.2.15
+  '/usr/bin/env' 'PLTUSERHOME=/home/racket/build-pkgs/user'
+  'PLT_PKG_BUILD_SERVICE=1' 'CI=true' 'PLTSTDERR=debug@pkg error'
+  'PLT_INFO_ALLOW_VARS=;PLT_PKG_BUILD_SERVICE' '/bin/sh' '-c' 'echo hello'
+ssh: Could not resolve hostname 10.0.2.15: nodename nor servname provided,
+     or not known
+....
+ssh: failed
+```
+
+Double-check that the VM's IP address --- taken from `hostname -I` or `ifconfig`
+ --- matches the `#:host` argument in the `run.rkt` script.
+
+#### Step 7: ssh timeout
+
+The error message is similar to the previous one, but `ssh` fails with a timeout.
+
+Try turning on the VM and connecting from your host machine --- without running
+ `run.rkt`.
+If `ssh` asks for a yes/no response, then say "y", disconnect, turn off the VM,
+ and try again.
+That was the issue.
+
 
 
 [pkg-build]: https://github.com/racket/pkg-build
 [pkgd]: https://pkgd.racket-lang.org
 [opaque-pr]: https://github.com/racket/typed-racket/pull/882
-
-[`run.rkt`](https://github.com/racket/pkg-build/blob/master/README.md#running-a-build)
