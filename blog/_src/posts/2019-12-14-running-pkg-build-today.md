@@ -263,8 +263,10 @@ Make sure that the build happens on the same kind of system that the VM
  will eventually use.
 To be safe, you can always start the VM first (step 5) and run this build on it.
 
-> In our experience, the command above often fails on an unclean `racket/`
-> directory. If something goes wrong, make a new clone before retrying.
+> `make installers` must start with a clean `racket/` clone.
+> If something goes wrong along the way, make a new clone before retrying.
+> Refer to the [Racket Build Guide](https://docs.racket-lang.org/racket-build-guide/index.html)
+> (aka [build.md](https://github.com/racket/racket/blob/master/build.md)) for more information.
 
 
 ### Step 4: Serve the modified Racket
