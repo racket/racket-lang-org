@@ -124,31 +124,32 @@ Use any name that you like.
 ### Step 1: Create a main distribution catalog
 
 Find a modern version of Racket.
-The [latest release](https://download.racket-lang.org) or a recent source
- build work fine.
-A slightly older release should also work.
+A [nightly snapshot](https://snapshot.racket-lang.org/) or recent source
+ build work best.
+The latest release, or a slightly older build, may work.
 
 Choose a name for a new directory,
  connect to the Internet,
  and run the following command using "`raco`" from the modern Racket.
 
 ```
-  raco pkg catalog-copy --from-config my-catalog
+  raco pkg catalog-copy --from-config my-catalog/
 ```
 
 All done.
 
-> The example command above creates a new directory named `my-catalog` that contains:
-> 
-> - a directory `pkg/` with one file inside for each package (over 2000 files),
-> - a file `pkgs` that lists all package names,
-> - and a big file `pkgs-all` with all the data from the `pkg/` directory.
-> 
-> Your directory should have similar contents.
-> 
-> Beware! The generated files, especially `pkgs-all`, have very long lines
-> that may crash your favorite text editor; they overwhelmed gedit on our VM.
-> These files are meant to be read by Racket programs.
+The example command above creates a new directory named `my-catalog/` that contains:
+
+- a directory `pkg/` with one file inside for each package (over 2000 files),
+- a file `pkgs` that lists all package names,
+- and a big file `pkgs-all` with all the data from the `pkg/` directory.
+
+**Beware!** The generated files, especially `pkgs-all`, have very long lines
+that may crash your favorite text editor.
+They overwhelmed gedit on our VM.
+These files are meant to be read by Racket programs --- via
+ [`read`](https://docs.racket-lang.org/reference/Reading.html#(def._((quote._~23~25kernel)._read)))
+ or [`file->value`](https://docs.racket-lang.org/reference/Filesystem.html#(def._((lib._racket%2Ffile..rkt)._file-~3evalue))).
 
 
 ### Step 2: Edit the catalog to point to your changes
@@ -166,9 +167,9 @@ If you have a new commit for Typed Racket, then there are six relevant names bec
 
 Each name `N` correponds to a file `my-catalog/pkg/N` that contains
  [metadata](https://docs.racket-lang.org/pkg/Package_Concepts.html#(tech._package._metadata))
- for a package, represented as a hash.
+ for a package, represented as a hashtable.
 Your goal is to update the `'source`, `'checksum`, and `'versions` fields in
- each hash to point to your changes.
+ each hashtable to point to your changes.
 The new `'source` is the GitHub URL for your changes.
 The new `'checksum` is the matching commit hash.
 The new `'versions` must point to your changes as the default.
@@ -222,9 +223,9 @@ The script below can make these edits for Typed Racket, given:
 
 ;; edit one file
 (define (update-pkg-file p pkg-name)
-  (define h (with-input-from-file p read))
-  (define h+ (update-pkg-hash h pkg-name))
-  (with-output-to-file p #:exists 'replace (lambda () (writeln h+))))
+  (let* ((h (with-input-from-file p read))
+         (h (update-pkg-hash h pkg-name)))
+    (with-output-to-file p #:exists 'replace (lambda () (writeln h+)))))
 
 (module+ main
   (require racket/cmdline)
@@ -238,6 +239,7 @@ The script below can make these edits for Typed Racket, given:
 After running the script, you can test your edits by installing the
  package from this modified catalog directory.
 For a modern "`raco`", assuming you edited Typed Racket:
+<!-- TODO test with update? -->
 
 ```
  raco pkg install typed-racket --catalog my-catalog
@@ -246,7 +248,7 @@ For a modern "`raco`", assuming you edited Typed Racket:
 If the install succeeds, you'll be able to run tests to validate your changes.
 
 
-### Step 3: Build a Racket from the catalog
+### Step 3: Build a Racket site from the catalog
 
 Clone a new copy of Racket and build using your modified catalog.
 
@@ -254,7 +256,7 @@ Clone a new copy of Racket and build using your modified catalog.
  cd ~/my-build/
  git clone git://github.com/racket/racket
  cd racket
- make installers PKG="typed-racket" SRC_CATALOG=~/my-build/my-catalog
+ make site SRC_CATALOG=~/my-build/my-catalog
 ```
 
 This will take some time.
@@ -263,29 +265,19 @@ Make sure that the build happens on the same kind of system that the VM
  will eventually use.
 To be safe, you can always start the VM first (step 5) and run this build on it.
 
-> `make installers` must start with a clean `racket/` clone.
+> `make site` must start with a clean `racket/` clone.
 > If something goes wrong along the way, make a new clone before retrying.
 > Refer to the [Racket Build Guide](https://docs.racket-lang.org/racket-build-guide/index.html)
 > (aka [build.md](https://github.com/racket/racket/blob/master/build.md)) for more information.
 
-
-### Step 4: Serve the modified Racket
-
-Go inside the cloned repo and run the following command to make an install
- web page:
-
-```
- cd ~/my-build/racket/
- make site-from-installers
-```
-
 This command makes a new directory `~/my-build/racket/build/site/` with a
  few files, including:
 
-- `build/site/installers/table.rktd` must contain a hash from strings
-  to paths; ours contains `#hash(("localhost" . "racket-7.5.0.11-x86_64-linux.sh"))`
+- `build/site/installers/table.rktd` must contain a hashtable from strings
+  to paths; ours contains `#hash(("localhost" . "racket-7.6.0.14-x86_64-linux.sh"))`
 - `build/site/index.html` should resemble the picture below; for us, the
   link [localhost]() points to an install script
+<!-- TODO empty link looks ok? -->
 
 <img src="/img/build-site-index-example.png"
      alt="Example"
@@ -293,7 +285,9 @@ This command makes a new directory `~/my-build/racket/build/site/` with a
      style="width: 70%" />
 
 
-The final step is to start a local web server to host the install.
+### Step 4: Serve the modified Racket
+
+Start a local web server to host the install.
 One way to run a server is with Python:
 
 ```
@@ -301,10 +295,13 @@ One way to run a server is with Python:
  python -m http.server 8000
 ```
 
+> If Python responds with a `PermissionError`, try changing `8000` to a
+> different port number.
+
 To double-check the server, open <http://localhost:8000> in a web browser.
 
 
-### Step 5: Configure a VM
+### Step 5: Configure a VM and `init` snapshot
 
 Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 Make sure the `VBoxManage` executable is on your path.
@@ -319,7 +316,7 @@ After following those instructions, you should have:
 - with [host-only networking](https://www.virtualbox.org/manual/ch06.html#network_hostonly) enabled,
 - and one snapshot of the VM named `init`.
 
-If you have a Linux VM, run `hostname -I` on the VM to get its IP address.
+If you created a Linux VM, run `hostname -I` on the VM to get its IP address.
 Then, with the VM running, try the following command on your host machine to test
  the network connection --- after replacing the sample address (`192....`)
  with your VM's address:
