@@ -4,7 +4,6 @@
 
 *posted by Ben Greenman, Alex Knauth, and Fred Fu*
 
-
 Suppose you've made a change to Racket and want to test it against all
  packages in the [main catalog][pkgd].
 The [`pkg-build`][pkg-build] package can help, provided you have:
@@ -126,8 +125,11 @@ The Racket distribution gets built once from this catalog and re-used on
 A Racket distribution must be built on the same kind of operating system
  that uses the distribution.
 For example, if your host machine is running macOS and you plan to make a Linux
- VM, then skip to [Step 3](#step-3-create-a-sandbox-vm-and-snapshot) and build
- the Racket distribution on the VM.
+ VM, then:
+
+- follow [Step 3](#step-3-create-a-sandbox-vm-and-snapshot) to create a VM;
+- return here, follow the Step 1 instructions on the VM;
+- and follow [Step 2a](#step-2a-optional-transfer-files-from-the-sandbox-vm) below.
 
 
 ### **Step 1b**: Copy a base catalog
@@ -339,6 +341,7 @@ After following those instructions, you should have:
 - with a user named `racket` that can run `sudo` without a password,
 - with [host-only networking](https://www.virtualbox.org/manual/ch06.html#network_hostonly) enabled,
 - and exactly one snapshot of the VM named `init`.
+  (If you made two or more snapshots, delete them to avoid issues.)
 
 Get the IP address of the VM.
 If you created a Linux VM, running `hostname -I` should print this address.
@@ -376,6 +379,7 @@ Create a file named `run.rkt` that starts from the template in the
  [pkg-build README](https://github.com/racket/pkg-build#running-a-build).
 Edit this file:
 
+- the vbox `#:name` must match your VM's name (`"pkg-build"`, if you followed the `pkg-build` README exactly)
 - the vbox `#:host` must match your VM's IP address,
 - the `#:snapshot-url` must point to your web server from [Step 2c](#step-2b-serve-site)
   (likely <http://localhost:8000>),
