@@ -204,7 +204,7 @@ News
 
 ◊link["https://blog.racket-lang.org/2020/02/racket-v7-6.html"]{Racket version 7.6} is available.
 
-◊link["https://racketfest.com"]{Racketfest}, a new Racket event, will be held in Berlin on Thursday, February 27, 2020.
+◊link["https://racketfest.com"]{Racketfest}, a new Racket event, was held in Berlin on Thursday, February 27, 2020.
 
 ◊link["https://school.racket-lang.org"]{Racket School 2019} and ◊link["https://con.racket-lang.org"]{ninth RacketCon} were held in Salt Lake City in July 2019.
 
