@@ -36,12 +36,15 @@
                            .refcolumn { background: none; border: 0; }
                            .duringSchool { color: #B00; }
                            .price { color: #800; }
+                           .cancel { color: red; }
                            a { text-decoration: none; }
                            h1, h2, h3 { font-family: 'Open Sans', sans-serif; }
                            h3 { border-top: 1px solid #888; }"))))
 
-@title[#:style page-style]{@larger{The Racket School of Semantics and Languages}
-                           @linebreak[] July 27-31, 2020 @hspace[4] Salt Lake City, Utah, USA}
+@title[#:style page-style]{@larger{@elem[#:style "cancel"]{CANCELED for 2020}}
+                           @linebreak[] @larger{The Racket School of Semantics and Languages}
+                           @linebreak[] @elem[#:style "cancel"]{not} July 27-31, 2020 
+                                        @hspace[4] @elem[#:style "cancel"]{not} Salt Lake City, Utah, USA}
 
 @;{
 @margin-note{@(tabular
