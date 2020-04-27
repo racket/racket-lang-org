@@ -333,7 +333,7 @@ Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 Make sure the `VBoxManage` executable is on your path.
 
 Create a VM, either using [Vagrant](https://www.vagrantup.com) according to
- the [`pkg-build/example/` README](https://github.com/racket/pkg-build/blob/master/example/README.md)
+ the [`pkg-build/examples/vbox` README](https://github.com/racket/pkg-build/blob/master/examples/vbox/README.md)
  or [manually](https://github.com/racket/pkg-build/blob/master/README.md#local-builds).
 After following those instructions, you should have:
 
