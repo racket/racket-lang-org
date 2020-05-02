@@ -22,7 +22,7 @@ Racket version 7.7 is now available from
 * DrRacket can recover much more quickly from errors involving large
   stack traces.
 
-* DrRacket now supports the use of the keyboard in the macOS Catalina
+* DrRacket now supports the use of the keyboard in the Mac OS Catalina
   "Open File" dialog.
 
 * The net/http-client collection supports the `deflate` content encoding.
