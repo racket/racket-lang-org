@@ -1,0 +1,53 @@
+1588441912
+Racket v7.7
+
+Racket version 7.7 is now available from
+
+    https://racket-lang.org/
+
+* Racket CS remains ready for production use---thanks to those who have
+  been putting it into practice to help iron out the remaining
+  kinks---and it now supports a C API for embedding into other
+  applications. See the "Inside: Racket" documentation for details.
+
+* Racket CS uses a new HAMT implementation, dramatically reducing the memory
+  required for immutable hash tables.
+
+* Optimizations to the Racket CS compiler result in a code size savings
+  of approximately 20%.
+
+* GC callbacks are reliably called on major collections in Racket CS.
+  Also, Garbage collection is 10-20% faster.
+
+* DrRacket can recover much more quickly from errors involving large
+  stack traces.
+
+* DrRacket now supports the use of the keyboard in the macOS Catalina
+  "Open File" dialog.
+
+* The net/http-client collection supports the `deflate` content encoding.
+
+* The `call-in-continuation` function (like Marc Feeley's
+  `continuation-graft`) simplifies certain `call/cc` patterns by
+  calling a thunk in a restored continuation.
+
+* Call-with-current-language allows more reliable tests for language
+  level code.
+
+* Use of the Cairo library can be multi-threaded.
+
+* Improved documentation!
+
+* Many bug fixes!
+
+Contributors: Alexander Shopov, Ben Greenman, Benjamin Yeung, Brian
+Adkins, Brian Wignall, Chongkai Zhu, Craig Ferry, David Florness, Fred
+Fu, Greg Hendershott, Gustavo Massaccesi, Ilnar Salimzianov, Jack Firth,
+James Bornholt, Jay McCarthy, Jens Axel Søgaard, Jesse Alama, John
+Clements, Jon Zeppieri, Kartik Singhal, Laurent Orseau, Leo Shen, Luka
+Hadži-Đokić, Matthew Butterick, Matthew Flatt, Matthias Felleisen, Mike
+Sperber, Noah W M, Paulo Matos, Philip McGrath, Philippe Meunier,
+Ricardo Herdt, Robby Findler, Ryan Culpepper, Sam Tobin-Hochstadt,
+Sorawee Porncharoenwase, Spencer Florence, Stephen Chang,
+Syntacticlosure, Thaddäus Töppen, Tom Gillespie, Xu Chunyang, ZHUO
+Qingliang, kryptine, mehlon, muzimuzhi, redwyn, and Štěpán Němec
