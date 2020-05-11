@@ -134,3 +134,5 @@ was suitably impressed and tried MrEd on
 the four participants, with simple images and all. It didn't go too
 well, but we had the first four innocent users try out our very first
 teaching environment.
+
+And that’s how Racket launched.
