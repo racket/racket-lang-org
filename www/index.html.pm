@@ -249,7 +249,7 @@ Learn to program with Racket, one game at a time.
 ◊link["https://beautifulracket.com/"]{Beautiful Racket}
 Make your own programming languages with Racket.
 
-◊link["http://serverracket.com"]{Server: Racket}
+◊link["https://serverracket.com"]{Server: Racket}
 Develop a web application with Racket.
 
 
