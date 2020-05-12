@@ -64,7 +64,7 @@
 
 ◊link["https://www.cs.umd.edu/~sstrickl/"]{T. Stephen Strickland}
 
-◊link["www.ccs.neu.edu/home/cce/"]{Carl Eastlund}
+◊link["https://www.ccs.neu.edu/home/cce/"]{Carl Eastlund}
 
 ◊link["http://people.seas.harvard.edu/~chrdimo/"]{Christos Dimoulas}
 
