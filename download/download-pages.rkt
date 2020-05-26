@@ -113,6 +113,10 @@
                        all-version-pages
                        @pre:installers{Snapshot Builds}]}))}
   @columns[6 #:center? #t #:center-text? #t #:row? #t]{
+      @div[id: "minimal_racket_explain"
+           style: note-style]{
+        @div{@b{About Minimal Racket:}} Minimal Racket includes just enough of Racket that you can use
+        @div{@nbsp @nbsp @tt{raco pkg}} to install more.}
       @div[id: "linux_explain"
            style: note-style]{
         @div{@b{About the Linux installers:}}
@@ -280,7 +284,8 @@
 
 (define (downloader-script package initial-platform packages version)
   @script/inline[type: 'text/javascript]{@||
-    var do_jump, selection_changed;
+    var selection_changed;
+    var package_selector = document.getElementById("package_selector");
     var packages = [@(string-join (map (lambda (s) (format "\"~s\"" s)) packages) ", ")];
     var current_package = "@|package|";
     var current_platform = "@(or initial-platform "")";
@@ -289,10 +294,6 @@
     document.getElementById("download_panel").style.display = "block";
     //
     var selector = document.getElementById("platform_selector_@|package|");
-    // jump to the selected item
-    do_jump = function() {
-      location.href = selector[selector.selectedIndex].value;
-    }
     // returns an ordering for the platform names, an array of regexps
     // note that the entries are sorted in a good order, so return an order
     // that only brings the locally desired entries to the top
@@ -334,6 +335,7 @@
     linux_ppa_s = document.getElementById("linux_ppa").style;
     source_expl_s = document.getElementById("source_explain").style;
     win_source_expl_s = document.getElementById("win_source_explain").style;
+    minimal_racket_expl_s = document.getElementById("minimal_racket_explain").style;
     builtpkgs_expl_s = document.getElementById("builtpkgs_explain").style;
     @(if (equal? version version-with-touchbar-bug)
          @list{
@@ -342,7 +344,6 @@
          null)
     selection_changed_timer = false;
     selection_changed = function() {
-      var package_selector = document.getElementById("package_selector");
       var package = packages[package_selector.selectedIndex];
       var old_package = current_package;
       if (current_package != package) {
@@ -398,6 +399,10 @@
         (selector[selector.selectedIndex].text.search(/Source/) >= 0
          && !some_selector_matches(/Unix Source/)
          && !some_selector_matches(/Windows Source/))
+        ? "block"
+        : "none";
+      minimal_racket_expl_s.display =
+        (package_selector[package_selector.selectedIndex].text.search(/Minimal/) >= 0)
         ? "block"
         : "none";
       builtpkgs_expl_s.display =
