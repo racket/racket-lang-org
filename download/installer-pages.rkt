@@ -1,6 +1,6 @@
 #lang plt-web
 
-(require "resources.rkt" "data.rkt" "mirror-link.rkt" plt-web/style)
+(require "resources.rkt" "data.rkt" "mirror-link.rkt" "util.rkt" plt-web/style)
 
 (define (render-installer-page installer)
   (define path      (installer-path installer))
@@ -16,12 +16,7 @@
   (define variant   (installer-variant installer))
   (define title     @text{Download @package v@|version type| for @platform})
   (define suffix-desc (suffix->name (installer-suffix installer)))
-  (define human-size
-    (let ([mb (/ size (* 1024 1024))])
-      (if (< mb 10)
-        (let-values ([(q r) (quotient/remainder (round (* mb 10)) 10)])
-          (format "~a.~aM" q r))
-        (format "~aM" (round mb)))))
+  (define human-size (get-human-size size))
   (define (row label text)
     @tr[valign: 'top]{
       @td[align: 'right]{@b{@label}:}
@@ -29,19 +24,8 @@
       @td[align: 'left]{@text}})
   (define (this url [mode #f])
     (case mode
-      [(only-platform) (a href: url platform type)]
-      [(render-option) (option value: url platform type)]
-      [(render-direct-option) (option value: (let ([m (first mirrors)])
-                                               (string-append (mirror-url* m) path))
-                                      x-mirror: @url
-                                      x-installer-size: @human-size
-                                      platform type)]
-      [(render-direct-variant-option) (option value: (let ([m (first mirrors)])
-                                                       (string-append (mirror-url* m) path))
-                                              x-mirror: @url
-                                              x-installer-size: @human-size
-                                              variant)]
-      [(render-package-option) (option value: url package)]
+      [(only-platform) (a href: url platform type)] ; when JS is not available
+      [(get-url) url] ; when JS is available
       [(#f) @a[href: url]{@title}]
       [else (error 'installer-page "unknown mode: ~e" mode)]))
   @page[#:site download-site 
@@ -87,6 +71,7 @@
     @;(bundle-installation-instructions bundle)
     }})
 
+(provide mirror-url*)
 (define (mirror-url* m)
   (define u (mirror-url m))
   (if (eq? u 'main)

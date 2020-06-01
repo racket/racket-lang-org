@@ -1,9 +1,10 @@
 #lang plt-web
 
-(require "resources.rkt" "data.rkt" "installer-pages.rkt" "symlinks.rkt"
+(require "resources.rkt" "data.rkt" "installer-pages.rkt" "util.rkt"
+         racket/dict
          plt-web/style
          version/utils
-         net/base64
+         json
          (prefix-in pre: "../minis/pre.rkt"))
 
 (define docs "docs")
@@ -13,80 +14,34 @@
 (define first-version-with-generic-linux "6.5")
 (define version-with-touchbar-bug "6.7")
 
-(define (encode s)
-  (bytes->string/utf-8 (base64-encode (string->bytes/utf-8 s) #"")))
+;; use a list of cons instead of hash to preserve the order
+(define (group-by/dict f xs)
+  (define all (group-by f xs))
+  (for/list ([group (in-list all)])
+    (cons (f (first group)) group)))
 
 (provide render-download-page)
 (define (render-download-page [release current-release] [package 'racket]
                               #:at-download [at-download list])
   (define version (release-version release))
-  (define all-packages (sort (hash-map (for/hash ([i (in-list all-installers)]
-                                                  #:when (equal? release (installer-release i)))
-                                         (values (installer-package i)
-                                                 (installer->page i 'render-package-option)))
-                                       cons)
-                             (lambda (a b)
-                               (cond
-                                [(equal? (car a) package) #t]
-                                [(equal? (car b) package) #f]
-                                [else (string<? (cdr a) (cdr b))]))))
-  (define (literal-link url) @a[href: url url])
+  (define ok-release-installers
+    (filter (λ (i) (equal? release (installer-release i))) all-installers))
+  (define grouped-by-dist (group-by/dict installer-package ok-release-installers))
+  (define grouped-by-dist+platform
+    (for/list ([(dist group) (in-dict grouped-by-dist)])
+      (cons dist (group-by/dict installer-platform group))))
+
   (define note-style '("font-size: 85%; display: none;"
                        " margin-top: 1ex;"
                        " padding: 1ex 1ex 1ex 1ex;"
                        " text-align: left;"
                        " line-height: 1.5em; "
                        " background-color: #edd"))
-  (define was-initial-variant? #t)
-  (define initial-platform #f)
   (list
    @columns[10 #:center? #t #:row? #t #:center-text? #t]{
     @h3[style: "text-align: center"]{Version @version (@(release-date-string release))}
     @div[id: "download_panel" align: "center" style: "display: none; margin-bottom: 20px;"]{
-      @div[align: "center"]{
-        Distribution:
-        @select[id: "package_selector"
-                onchange:   "selection_changed();"
-                onkeypress: "selection_changed();"]{
-          @(for/list ([i (in-list all-packages)])
-             (cdr i))}
-        @(for/list ([i (in-list all-packages)]
-                    [n (in-naturals)])
-           (define this-package (car i))
-           @div[id: (format "platform_selector_panel_~a" this-package)
-                style: (if (zero? n) "display: block;" "display: none;")]{
-              Platform:
-              @select[id: (format "platform_selector_~a" this-package)
-                      onchange:   "selection_changed();"
-                      onkeypress: "selection_changed();"]{                                                          
-                @(for/list ([i (in-list all-installers)]
-                            #:when (and (equal? release (installer-release i))
-                                        (equal? this-package (installer-package i))
-                                        (equal? "Regular" (installer-variant i))))
-                   (installer->page i 'render-direct-option))}
-              @(for/list ([i (in-list all-installers)]
-                          #:when (and (equal? release (installer-release i))
-                                      (equal? this-package (installer-package i))
-                                      (equal? "Regular" (installer-variant i))))
-                 (define initial-variant? was-initial-variant?)
-                 (define variants (for/list ([j (in-list all-installers)]
-                                             #:when (and (equal? release (installer-release j))
-                                                         (equal? this-package (installer-package j))
-                                                         (equal? (installer-platform i) (installer-platform j))))
-                                    j))
-                 (unless initial-platform (set! initial-platform (installer-platform i)))
-                 (set! was-initial-variant? #f)
-                 (cond
-                   [(= 1 (length variants)) ""]
-                   [else
-                    @div[id: (format "variant_selector_panel_~a~a" this-package (encode (platform->name (installer-platform i) package)))
-                         style: (if initial-variant? "display: block;" "display: none;")]{
-                      Variant:
-                      @select[id: (format "variant_selector_~a~a" this-package (encode (platform->name (installer-platform i) package)))
-                              onchange:   "selection_changed();"
-                              onkeypress: "selection_changed();"]{
-                      @(for/list ([i (in-list variants)])
-                         (installer->page i 'render-direct-variant-option))}}]))})}
+      @div[id: "control"]{}
       @br
       @navigation-button[@(a href: (resource "download/" #f)
                              id: "download_link"
@@ -115,8 +70,7 @@
   @columns[6 #:center? #t #:center-text? #t #:row? #t]{
       @div[id: "minimal_racket_explain"
            style: note-style]{
-        @div{@b{About Minimal Racket:}} Minimal Racket includes just enough of Racket that you can use
-        @div{@nbsp @nbsp @tt{raco pkg}} to install more.}
+        @div{@b{About Minimal Racket:}} Minimal Racket includes just enough of Racket that you can use @tt{raco pkg} to install more.}
       @div[id: "linux_explain"
            style: note-style]{
         @div{@b{About the Linux installers:}}
@@ -157,7 +111,146 @@
            from source, install the @tt{racket-lib} package with
            with @div{@nbsp @nbsp @tt{raco pkg update --auto racket-lib}}
            before installing other packages.}
-    @downloader-script[package initial-platform (map car all-packages) version]
+    @script/inline[type: 'text/javascript]{
+
+// big-bang for HTML
+
+// bigbang :: (HTMLElement, 'state, ('state -> Elem)) -> void
+
+var bigbang = null;
+
+// elem :: (HTMLType, Props, Array of (Elem or Text)) -> Elem
+//
+// type HTMLType = String
+// type Props = Object; entries whose key starts with 'on' are considered handlers
+
+var elem = null;
+
+(function() {
+    function Elem(type, attrs, children) {
+        this.type = type;
+        this.attrs = attrs;
+        this.children = children;
+        this.node = null;
+        this.handlers = {};
+    }
+
+    function Text(s) {
+        this.s = s;
+        this.node = null;
+    }
+
+    var globalState = null;
+    var rerender = null;
+    var currentTree = null;
+
+    function setAttribute(tree) {
+        for (var key in tree.attrs) {
+            var value = tree.attrs[key];
+            if (key.substring(0, 2) === 'on') {
+                key = key.substring(2);
+                var closure = makeClosure(value);
+                tree.handlers[key] = closure;
+                if (tree.node.addEventListener) {
+                    tree.node.addEventListener(key, closure, false);
+                } else {
+                    tree.node.attachEvent(key, closure);
+                }
+            } else {
+                tree.node.setAttribute(key, value);
+            }
+        }
+    }
+
+    function makeClosure(value) {
+        return function (e) {
+            globalState = value(globalState, e);
+            rerender();
+        };
+    }
+
+    function render(tree) {
+        if (tree instanceof Text) {
+            tree.node = document.createTextNode(tree.s);
+            return tree.node;
+        }
+
+        var e = document.createElement(tree.type);
+        tree.node = e;
+        setAttribute(tree);
+        tree.children.forEach(function (child) {
+            e.appendChild(render(child));
+        });
+        return e;
+    }
+
+    // here's a crappy reconciliation algorithm to avoid losing focus
+    // update :: (Elem, Elem) -> void
+    function update(oldTree, newTree) {
+       var i = null;
+       if (oldTree.type === newTree.type) {
+           newTree.node = oldTree.node;
+           for (var key in oldTree.attrs) {
+               var value = oldTree.attrs[key];
+               if (key.substring(0, 2) === 'on') {
+                   key = key.substring(2);
+                   var closure = oldTree.handlers[key];
+                   if (newTree.node.removeEventListener) {
+                       newTree.node.removeEventListener(key, closure, false);
+                   } else {
+                       newTree.node.detachEvent(key, closure);
+                   }
+               } else {
+                   newTree.node.removeAttribute(key);
+               }
+           }
+           setAttribute(newTree);
+           var limit = Math.min(oldTree.children.length, newTree.children.length);
+           for (i = 0; i < limit; i++) {
+               if (oldTree.children[i] instanceof Elem &&
+                   newTree.children[i] instanceof Elem) {
+                   update(oldTree.children[i], newTree.children[i]);
+               } else {
+                   newTree.children[i].node = render(newTree.children[i]);
+                   newTree.node.replaceChild(newTree.children[i].node, oldTree.children[i].node);
+               }
+           }
+           // remove extras
+           for (i = limit; i < oldTree.children.length; i++) {
+               oldTree.children[i].node.parentNode.removeChild(oldTree.children[i].node);
+           }
+           // add extras
+           for (i = limit; i < newTree.children.length; i++) {
+               newTree.children[i].node = render(newTree.children[i]);
+               newTree.node.appendChild(newTree.children[i].node);
+           }
+       } else {
+           newTree.node = render(newTree);
+           oldTree.node.parentNode.replaceChild(newTree.node, oldTree.node);
+       }
+    }
+
+    bigbang = function(elem, initialState, toDraw) {
+        globalState = initialState;
+        currentTree = toDraw(globalState);
+        elem.appendChild(render(currentTree));
+        rerender = function() {
+            var newTree = toDraw(globalState);
+            update(currentTree, newTree);
+            currentTree = newTree;
+        };
+    };
+
+    elem = function (type, attrs, children) {
+        return new Elem(type, attrs, children.map(function (child) {
+            return (typeof child === 'string') ?
+                new Text(child) :
+                child;
+        }));
+    };
+})();
+  }
+    @downloader-script[package version grouped-by-dist+platform]
     @noscript{
       Installers are available for the following platforms:
       @ul{@(for/list ([i (in-list all-installers)]
@@ -282,18 +375,43 @@
     GNU LGPL, version 3.0.
     }}})
 
-(define (downloader-script package initial-platform packages version)
+(define (release-> r)
+  (hash 'version (release-version r)
+        'datestring (release-date-string r)))
+
+(define (downloader-script package version grouped-by-dist+platform)
+  (define all-installers-json
+    (for/list ([(dist grouped-by-platform) (in-dict grouped-by-dist+platform)])
+      (define distname (package->name dist))
+      (hash 'distName distname
+            'dist (symbol->string dist)
+            'installers
+            (for/list ([(platform grouped-by-variants) (in-dict grouped-by-platform)])
+              (define installers
+                (for/list ([i (in-list grouped-by-variants)])
+                  (hash 'path (installer-path i)
+                        'mirrorUrl (installer->page i 'get-url)
+                        'file (installer-file i)
+                        'release (release-> (installer-release i))
+                        'size (installer-size i)
+                        'humanSize (get-human-size (installer-size i))
+                        'package (symbol->string (installer-package i))
+                        'binary (installer-binary? i)
+                        'platform (installer-platform i)
+                        'variant (installer-variant i)
+                        'suffix (installer-suffix i))))
+               (hash 'platform platform
+                      ;; it doesn't make much sense to use the-regular-variant
+                      ;; to represent the whole platform, but this is what
+                      ;; the original code does, so we will live with it for now
+                     'platformName (platform->name platform distname)
+                     'installers installers)))))
+
   @script/inline[type: 'text/javascript]{@||
-    var selection_changed;
-    var package_selector = document.getElementById("package_selector");
-    var packages = [@(string-join (map (lambda (s) (format "\"~s\"" s)) packages) ", ")];
-    var current_package = "@|package|";
-    var current_platform = "@(or initial-platform "")";
-    (function() {
-    // show the download panel, since JS is obviously working
-    document.getElementById("download_panel").style.display = "block";
-    //
-    var selector = document.getElementById("platform_selector_@|package|");
+    var initialDist = @jsexpr->string[(symbol->string package)];
+    var mirrorUrl = @jsexpr->string[(mirror-url* (first mirrors))];
+    var allInstallers = @jsexpr->string[all-installers-json];
+
     // returns an ordering for the platform names, an array of regexps
     // note that the entries are sorted in a good order, so return an order
     // that only brings the locally desired entries to the top
@@ -301,7 +419,9 @@
       var p = navigator.platform;
       var p2 = navigator.appVersion;
       var p3 = navigator.userAgent;
-      var l = function(str) { return (p.indexOf(str) != -1) || (p2.indexOf(str) != -1) || (p3.indexOf(str) != -1) @";" }
+      function l(str) {
+        return (p.indexOf(str) != -1) || (p2.indexOf(str) != -1) || (p3.indexOf(str) != -1);
+      }
       var Win      = /Windows/,
           Win64    = /Windows.*64/,
           Win32    = /Windows.*32/,
@@ -320,146 +440,229 @@
       else if (l("Win64")) return [Win64, Win];
       else if (l("WOW64")) return [Win64, Win];
       else if (l("Win"))   return [Win32, Win];
-      else if (l("Mac"))   return [(l("Intel")?MacIntel64:MacPPC), (l("Intel")?MacIntel32:MacPPC), Mac, Unix];
-      else if (l("Linux")) {
-        // also show the linux explanation if it's a linux
-        document.getElementById("linux_explain").style.display = "block";
-        document.getElementById("linux_ppa").style.display = "block";
-        return [(l("_64")?Linux64:Linux32), Linux, Unix];
-      } else return [];
+      else if (l("Mac"))   return [
+        l("Intel") ? MacIntel64 : MacPPC,
+        l("Intel") ? MacIntel32 : MacPPC,
+        Mac,
+        Unix
+      ];
+      else if (l("Linux")) return [(l("_64") ? Linux64 : Linux32), Linux, Unix];
+      else return [];
     }
-    // show the linux explanation on change too (do it with a timeout so it
-    // changes even when the arrow keys are used to move the selection -- since
-    // then onchange is called only on blur)
-    linux_expl_s = document.getElementById("linux_explain").style;
-    linux_ppa_s = document.getElementById("linux_ppa").style;
-    source_expl_s = document.getElementById("source_explain").style;
-    win_source_expl_s = document.getElementById("win_source_explain").style;
-    minimal_racket_expl_s = document.getElementById("minimal_racket_explain").style;
-    builtpkgs_expl_s = document.getElementById("builtpkgs_explain").style;
-    @(if (equal? version version-with-touchbar-bug)
-         @list{
-            macos_touchbar_expl_s = document.getElementById("macos_touchbar_explain").style;
-         }
-         null)
-    selection_changed_timer = false;
-    selection_changed = function() {
-      var package = packages[package_selector.selectedIndex];
-      var old_package = current_package;
-      if (current_package != package) {
-         var panel = document.getElementById("platform_selector_panel_" + current_package);
-         panel.style.display = "none";
-         current_package = package;
-         panel = document.getElementById("platform_selector_panel_" + package);
-         panel.style.display = "block";
-         selector = document.getElementById("platform_selector_" + package);
-      }
-      var download_link = document.getElementById("download_link");
-      var selected = selector[selector.selectedIndex];
-      var old_variant_panel = document.getElementById("variant_selector_panel_" + old_package + btoa(current_platform));
-      if (old_variant_panel)
-         old_variant_panel.style.display = "none";
-      current_platform = selected.textContent;
-      var variant_panel = document.getElementById("variant_selector_panel_" + current_package + btoa(current_platform));
-      if (variant_panel)
-         variant_panel.style.display = "block";
-      var variant_selector = document.getElementById("variant_selector_" + current_package + btoa(current_platform));
-      if (variant_selector)
-         selected = variant_selector[variant_selector.selectedIndex];
-      var path = selected.value;
-      download_link.href = path;
-      download_link.innerHTML = path.replace(/.*\//, "") + " (" + selected.getAttribute("x-installer-size") + ")";
-      var mirror_link = document.getElementById("mirror_link");
-      mirror_link.href = selected.getAttribute("x-mirror");
-      if (selection_changed_timer) clearTimeout(selection_changed_timer);
-      selection_changed_timer = setTimeout(do_selection_changed, 250);
-    }
-    function some_selector_matches(rx) {
-       for (i = 0@";" i < selector.length@";" i++) {
-         if (selector[i].text.search(rx) >= 0)
-          return true;
-       }
-       return false;
-    }
-    function do_selection_changed() {
-      linux_expl_s.display =
-        (selector[selector.selectedIndex].text.search(/Linux/) >= 0)
-        ? "block"
-        : "none";
-      linux_ppa_s.display =
-        (selector[selector.selectedIndex].text.search(/Linux/) >= 0)
-        ? "block"
-        : "none";
-      source_expl_s.display =
-        (selector[selector.selectedIndex].text.search(/Unix Source/) >= 0
-         && !some_selector_matches(/(Windows|Mac OS) Source/))
-        ? "block"
-        : "none";
-      win_source_expl_s.display =
-        (selector[selector.selectedIndex].text.search(/Source/) >= 0
-         && !some_selector_matches(/Unix Source/)
-         && !some_selector_matches(/Windows Source/))
-        ? "block"
-        : "none";
-      minimal_racket_expl_s.display =
-        (package_selector[package_selector.selectedIndex].text.search(/Minimal/) >= 0)
-        ? "block"
-        : "none";
-      builtpkgs_expl_s.display =
-        (selector[selector.selectedIndex].text.search(/Source/) >= 0
-         && selector[selector.selectedIndex].text.search(/built/) < 0
-         && some_selector_matches(/built/))
-        ? "block"
-        : "none";
-      @(if (equal? version version-with-touchbar-bug)
-           @list{
-             macos_touchbar_expl_s.display =
-              (selector[selector.selectedIndex].text.search(/Mac.*64/) >= 0)
-               ? "block"
-               : "none";
-           }
-           null)
-    }
-    //
-    function initialize_selector(selector) {
-      var opts = selector.options;
-      var len = opts.length;
+
+    function orderPlatform(platforms) {
+      var len = platforms.length;
       // get the order and a make a sorting function
       var order = getPlatformOrder();
       function getOrder(str) {
-        for (var i=0@";" i<order.length@";" i++)
+        for (var i = 0; i < order.length; i++)
           if (str.search(order[i]) >= 0) return i;
         return 999;
       }
-      function isBetter(opt1,opt2) {
+      function isBetter(opt1, opt2) {
         // sort first by the order, then by how they were placed originally
-        var ord1 = getOrder(opt1[0]), ord2 = getOrder(opt2[0]);
-             if (ord1 < ord2)       return -1;
-        else if (ord1 > ord2)       return +1;
-        else if (opt1[4] < opt2[4]) return -1;
-        else if (opt1[4] > opt2[4]) return +1;
-        else                        return  0;
+        var ord1 = getOrder(opt1.name), ord2 = getOrder(opt2.name);
+        if (ord1 < ord2) return -1;
+        else if (ord1 > ord2) return +1;
+        else if (opt1.index < opt2.index) return -1;
+        else if (opt1.index > opt2.index) return +1;
+        else return  0;
       }
       // sort the options, need to use a temporary array
-      var tmps = new Array(len);
-      for (var i=0@";" i<len@";" i++)
-        tmps[i]=[opts[i].text,
-                 opts[i].value,
-                 opts[i].getAttribute("x-installer-size"),
-                 opts[i].getAttribute("x-mirror"),
-                 i];
+      var tmps = platforms.map(function (platform, i) {
+        return {
+          name: platform.platformName,
+          index: i,
+          platform: platform
+        };
+      });
       tmps.sort(isBetter);
-      for (var i=0@";" i<len@";" i++) {
-        opts[i].text  = tmps[i][0];
-        opts[i].value = tmps[i][1];
-        opts[i].setAttribute("x-installer-size", tmps[i][2]);
-        opts[i].setAttribute("x-mirror", tmps[i][3]);
+      tmps.forEach(function (platformData, i) {
+        platforms[i] = platformData.platform;
+      });
+    }
+
+    allInstallers.forEach(function (dist) {
+      orderPlatform(dist.installers);
+    });
+
+    function getAllPlatforms(allInstallers, currentDist) {
+      return allInstallers.filter(function (group) {
+        return group.dist === currentDist;
+      })[0].installers;
+    }
+
+    function getAllVariants(allPlatforms, currentPlatform) {
+      return allPlatforms.filter(function (group) {
+        return group.platform === currentPlatform;
+      })[0].installers;
+    }
+
+    function getPackage(allVariants, currentVariant) {
+      return allVariants.filter(function (group) {
+        return computeVariant(group) === currentVariant;
+      })[0];
+    }
+
+    function computeVariant(package) {
+      return package.variant + '+' + package.suffix;
+    }
+
+    function toDraw(state) {
+      var currentDist = state.dist;
+      var allPlatforms = getAllPlatforms(allInstallers, currentDist);
+      var currentPlatform = state.platform;
+      var allVariants = getAllVariants(allPlatforms, currentPlatform);
+      var currentVariant = state.variant;
+
+      var currentPackage = getPackage(allVariants, currentVariant);
+
+      function handleDistChange(state, e) {
+        var currentDist = e.target.value;
+        var allPlatforms = getAllPlatforms(allInstallers, currentDist);
+        var currentPlatform = allPlatforms[0].platform;
+        var allVariants = getAllVariants(allPlatforms, currentPlatform);
+        var currentVariant = computeVariant(allVariants[0]);
+        return {
+          dist: currentDist,
+          platform: currentPlatform,
+          variant: currentVariant,
+        };
       }
-      opts.selectedIndex = 0;
+
+      function handlePlatformChange(state, e) {
+        var currentDist = state.dist;
+        var allPlatforms = getAllPlatforms(allInstallers, currentDist);
+        var currentPlatform = e.target.value;
+        var allVariants = getAllVariants(allPlatforms, currentPlatform);
+        var currentVariant = computeVariant(allVariants[0]);
+        return {
+          dist: currentDist,
+          platform: currentPlatform,
+          variant: currentVariant,
+        };
+      }
+
+      function handleVariantChange(state, e) {
+        return {
+          dist: state.dist,
+          platform: state.platform,
+          variant: e.target.value,
+        };
+      }
+
+      update(currentPackage);
+
+      var children = [
+        elem('div', {}, [
+          'Distribution: ',
+          elem('select', {onchange: handleDistChange},
+            allInstallers.map(function (group) {
+              return elem('option',
+                group.dist === currentDist ?
+                  {selected: 'selected', value: group.dist} :
+                  {value: group.dist},
+                [group.distName]);
+            }))
+        ]),
+        elem('div', {}, [
+          'Platform: ',
+          elem('select', {onchange: handlePlatformChange},
+            allPlatforms.map(function (group) {
+              return elem('option',
+                group.platform === currentPlatform ?
+                  {selected: 'selected', value: group.platform} :
+                  {value: group.platform},
+                [group.platformName]);
+            }))
+        ]),
+      ];
+
+      if (allVariants.length !== 1) {
+        children.push(
+          elem('div', {}, [
+            'Variant: ',
+            elem('select', {onchange: handleVariantChange},
+              allVariants.map(function (group) {
+                var theVariant = computeVariant(group);
+                return elem('option',
+                  theVariant === currentVariant ?
+                    {selected: 'selected', value: theVariant} :
+                    {value: theVariant},
+                  [group.variant + ' (' + group.suffix + ')']);
+              }))
+          ]));
+      }
+      return elem('div', {}, children);
     }
-    for (var i = 0; i < packages.length; i++) {
-      initialize_selector(document.getElementById("platform_selector_" + packages[i]));
+
+    function init() {
+      var currentDist = initialDist;
+      var allPlatforms = getAllPlatforms(allInstallers, currentDist);
+      var currentPlatform = allPlatforms[0].platform;
+      var allVariants = getAllVariants(allPlatforms, currentPlatform);
+      var currentVariant = computeVariant(allVariants[0]);
+      bigbang(document.getElementById('control'), {
+        dist: currentDist,
+        platform: currentPlatform,
+        variant: currentVariant,
+      }, toDraw);
     }
-    selection_changed();
-    })();
+
+    init();
+
+    function showWhen(e, b) {
+      document.getElementById(e).style.display = b ? 'block' : 'none';
+    }
+
+    function update(package) {
+      var dist = package.package;
+      var platform = package.platform;
+
+      showWhen('minimal_racket_explain', dist === 'racket-minimal');
+
+      showWhen('linux_explain', platform.search(/linux/) >= 0);
+      showWhen('linux_ppa', platform.search(/linux/) >= 0);
+
+      // NOTE: there used to be a condition that there must not be
+      // Windows/Mac source packages in the selector (e.g., no "Windows Source")
+      // to prevent versions prior 5.92 from showing the explanation.
+      // However, this condition is never triggered because it's actually spelled
+      // "Windows source". Nonetheless, it accidentally worked as intended because
+      // the other condition is to match for "Unix Source", but versions prior 5.92
+      // spelled "Unix source". This means the condition only applies to versions
+      // after Racket 5.92 already.
+      showWhen('source_explain',
+               (platform === 'src-builtpkgs' || platform === 'src') &&
+               dist === 'racket');
+
+      showWhen('win_source_explain',
+               (platform === 'src-builtpkgs' || platform === 'src') &&
+               dist === 'racket-minimal');
+
+      // NOTE: there used to be a condition that there must be 'builtpkgs' to show
+      // this explanation. However, this condition is redundant, because 'src'
+      // indicates that it's after 5.92 already (prior 5.92, there would be
+      // 'win', `mac`, and `unix` instead)
+      showWhen('builtpkgs_explain', platform === 'src');
+
+      // NOTE: there used to be a condition that 'x86_64-osx-mac' will also trigger
+      // this explanation, but 'x86_64-osx-mac' only exists before Racket 5.92
+      // which is way before the version with the touchbar bug (6.7)
+      @(if (equal? version version-with-touchbar-bug)
+           @list{
+             showWhen('macos_touchbar_explain', platform === 'x86_64-macosx');
+           }
+           null)
+
+      var download_link = document.getElementById('download_link');
+      var path = mirrorUrl + package.path;
+      download_link.href = path;
+      download_link.innerHTML = path.replace(/.*\//, "") + " (" + package.humanSize + ")";
+      var mirror_link = document.getElementById("mirror_link");
+      mirror_link.href = package.mirrorUrl;
+    }
+
+    // show the download panel, since JS is obviously working
+    showWhen('download_panel', true);
     @||})
