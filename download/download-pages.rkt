@@ -401,9 +401,6 @@ var elem = null;
                         'variant (installer-variant i)
                         'suffix (installer-suffix i))))
                (hash 'platform platform
-                      ;; it doesn't make much sense to use the-regular-variant
-                      ;; to represent the whole platform, but this is what
-                      ;; the original code does, so we will live with it for now
                      'platformName (platform->name platform distname)
                      'installers installers)))))
 
