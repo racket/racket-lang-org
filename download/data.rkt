@@ -24,7 +24,7 @@
                  [(equal? cpu "ppc") "PPC"]
                  [(equal? cpu "i386") "Intel 32-bit"]
                  [(equal? cpu "x86_64") "Intel 64-bit"]
-                 [else (error "unregonized cpu!")])))]
+                 [else (error "unrecognized cpu!")])))]
     ["(ppc|68k)-mac-classic" "Macintosh Classic (\\1)"]
     ["(ppc|i386)-darwin"
      ,(λ (_ cpu)
