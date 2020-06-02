@@ -2,6 +2,7 @@
 
 (require "resources.rkt" "data.rkt" "installer-pages.rkt" "util.rkt"
          racket/dict
+         racket/match
          plt-web/style
          version/utils
          json
@@ -15,10 +16,22 @@
 (define version-with-touchbar-bug "6.7")
 
 ;; use a list of cons instead of hash to preserve the order
-(define (group-by/dict f xs)
-  (define all (group-by f xs))
+(define (group-by/dict grouper xs f)
+  (define all (group-by grouper xs))
   (for/list ([group (in-list all)])
-    (cons (f (first group)) group)))
+    (cons (grouper (first group)) (f group))))
+
+;; finalize-variant :: (listof installer?) -> (listof installer?)
+;; when there are multiple installers, one of them must be exe,
+;; and we prefer it over others.
+(define (finalize-variant group)
+  (define ret
+    (match group
+      [(list _) group]
+      [_ (filter (λ (i) (equal? "exe" (installer-suffix i))) group)]))
+  (unless (= (length ret) 1)
+    (error 'finalize-variant "~a can't be processed" group))
+  ret)
 
 (provide render-download-page)
 (define (render-download-page [release current-release] [package 'racket]
@@ -26,10 +39,15 @@
   (define version (release-version release))
   (define ok-release-installers
     (filter (λ (i) (equal? release (installer-release i))) all-installers))
-  (define grouped-by-dist (group-by/dict installer-package ok-release-installers))
   (define grouped-by-dist+platform
-    (for/list ([(dist group) (in-dict grouped-by-dist)])
-      (cons dist (group-by/dict installer-platform group))))
+    (group-by/dict
+     installer-package ok-release-installers
+     (λ (group)
+       (group-by/dict
+        installer-platform group
+        (λ (group)
+          (append-map cdr
+                      (group-by/dict installer-variant group finalize-variant)))))))
 
   (define note-style '("font-size: 85%; display: none;"
                        " margin-top: 1ex;"
@@ -63,7 +81,7 @@
                    @list{@a[href: @at-download{@docs}]{Documentation}
                          @(if (version<? @|version| first-version-with-releases-page)
                               null
-                              @list{@br @nbsp @a[href: @at-download{@|releases|/@version}]{More Variants and Checksums}})}]}
+                              @list{@br @nbsp @a[href: @at-download{@|releases|/@version}]{More Installers and Checksums}})}]}
           @row{@links[@license{License}
                        all-version-pages
                        @pre:installers{Snapshot Builds}]}))}
@@ -586,7 +604,7 @@ var elem = null;
                   theVariant === currentVariant ?
                     {selected: 'selected', value: theVariant} :
                     {value: theVariant},
-                  [group.variant + ' (' + group.suffix + ')']);
+                  [group.variant]);
               }))
           ]));
       }
