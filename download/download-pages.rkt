@@ -600,7 +600,7 @@ var elem = null;
       var children = [
         elem('div', {}, [
           'Distribution: ',
-          elem('select', {onchange: handleDistChange, onkeypress: handleDistChange},
+          elem('select', {onchange: handleDistChange},
             map(allInstallers, function (group) {
               return elem('option',
                 group.dist === currentDist ?
