@@ -131,6 +131,33 @@
            before installing other packages.}
     @script/inline[type: 'text/javascript]{
 
+// higher-order functions
+
+function map(xs, f) {
+    var result = [];
+    for (var i = 0; i < xs.length; i++) {
+        result.push(f(xs[i], i));
+    }
+    return result;
+}
+
+function forEach(xs, f) {
+    for (var i = 0; i < xs.length; i++) {
+        f(xs[i], i);
+    }
+}
+
+function filter(xs, f) {
+    var result = [];
+    for (var i = 0; i < xs.length; i++) {
+        if (f(xs[i], i)) {
+            result.push(xs[i]);
+        }
+    }
+    return result;
+}
+
+
 // big-bang for HTML
 
 // bigbang :: (HTMLElement, 'state, ('state -> Elem)) -> void
@@ -172,7 +199,7 @@ var elem = null;
                 if (tree.node.addEventListener) {
                     tree.node.addEventListener(key, closure, false);
                 } else {
-                    tree.node.attachEvent(key, closure);
+                    tree.node.attachEvent('on' + key, closure);
                 }
             } else {
                 tree.node.setAttribute(key, value);
@@ -182,6 +209,7 @@ var elem = null;
 
     function makeClosure(value) {
         return function (e) {
+            e.target = e.target || e.srcElement; // IE uses srcElement
             globalState = value(globalState, e);
             rerender();
         };
@@ -196,7 +224,8 @@ var elem = null;
         var e = document.createElement(tree.type);
         tree.node = e;
         setAttribute(tree);
-        tree.children.forEach(function (child) {
+
+        forEach(tree.children, function (child) {
             e.appendChild(render(child));
         });
         return e;
@@ -216,7 +245,7 @@ var elem = null;
                    if (newTree.node.removeEventListener) {
                        newTree.node.removeEventListener(key, closure, false);
                    } else {
-                       newTree.node.detachEvent(key, closure);
+                       newTree.node.detachEvent('on' + key, closure);
                    }
                } else {
                    newTree.node.removeAttribute(key);
@@ -260,7 +289,7 @@ var elem = null;
     };
 
     elem = function (type, attrs, children) {
-        return new Elem(type, attrs, children.map(function (child) {
+        return new Elem(type, attrs, map(children, function (child) {
             return (typeof child === 'string') ?
                 new Text(child) :
                 child;
@@ -484,7 +513,7 @@ var elem = null;
         else return  0;
       }
       // sort the options, need to use a temporary array
-      var tmps = platforms.map(function (platform, i) {
+      var tmps = map(platforms, function (platform, i) {
         return {
           name: platform.platformName,
           index: i,
@@ -492,29 +521,29 @@ var elem = null;
         };
       });
       tmps.sort(isBetter);
-      tmps.forEach(function (platformData, i) {
+      forEach(tmps, function (platformData, i) {
         platforms[i] = platformData.platform;
       });
     }
 
-    allInstallers.forEach(function (dist) {
+    forEach(allInstallers, function (dist) {
       orderPlatform(dist.installers);
     });
 
     function getAllPlatforms(allInstallers, currentDist) {
-      return allInstallers.filter(function (group) {
+      return filter(allInstallers, function (group) {
         return group.dist === currentDist;
       })[0].installers;
     }
 
     function getAllVariants(allPlatforms, currentPlatform) {
-      return allPlatforms.filter(function (group) {
+      return filter(allPlatforms, function (group) {
         return group.platform === currentPlatform;
       })[0].installers;
     }
 
     function getPackage(allVariants, currentVariant) {
-      return allVariants.filter(function (group) {
+      return filter(allVariants, function (group) {
         return computeVariant(group) === currentVariant;
       })[0];
     }
@@ -541,7 +570,7 @@ var elem = null;
         return {
           dist: currentDist,
           platform: currentPlatform,
-          variant: currentVariant,
+          variant: currentVariant
         };
       }
 
@@ -554,7 +583,7 @@ var elem = null;
         return {
           dist: currentDist,
           platform: currentPlatform,
-          variant: currentVariant,
+          variant: currentVariant
         };
       }
 
@@ -562,7 +591,7 @@ var elem = null;
         return {
           dist: state.dist,
           platform: state.platform,
-          variant: e.target.value,
+          variant: e.target.value
         };
       }
 
@@ -571,8 +600,8 @@ var elem = null;
       var children = [
         elem('div', {}, [
           'Distribution: ',
-          elem('select', {onchange: handleDistChange},
-            allInstallers.map(function (group) {
+          elem('select', {onchange: handleDistChange, onkeypress: handleDistChange},
+            map(allInstallers, function (group) {
               return elem('option',
                 group.dist === currentDist ?
                   {selected: 'selected', value: group.dist} :
@@ -583,14 +612,14 @@ var elem = null;
         elem('div', {}, [
           'Platform: ',
           elem('select', {onchange: handlePlatformChange},
-            allPlatforms.map(function (group) {
+            map(allPlatforms, function (group) {
               return elem('option',
                 group.platform === currentPlatform ?
                   {selected: 'selected', value: group.platform} :
                   {value: group.platform},
                 [group.platformName]);
             }))
-        ]),
+        ])
       ];
 
       if (allVariants.length !== 1) {
@@ -598,7 +627,7 @@ var elem = null;
           elem('div', {}, [
             'Variant: ',
             elem('select', {onchange: handleVariantChange},
-              allVariants.map(function (group) {
+              map(allVariants, function (group) {
                 var theVariant = computeVariant(group);
                 return elem('option',
                   theVariant === currentVariant ?
@@ -620,7 +649,7 @@ var elem = null;
       bigbang(document.getElementById('control'), {
         dist: currentDist,
         platform: currentPlatform,
-        variant: currentVariant,
+        variant: currentVariant
       }, toDraw);
     }
 
