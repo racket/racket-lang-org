@@ -49,13 +49,13 @@ The following people contributed to this release:
 Alex Harsányi, Alex Knauth, Alexander Shopov, Alexis King, Andrew Kent,
 Andrew Mauer-Oats, Atharva Raykar, Ben Greenman, Benjamin Yeung, Bert De
 Ketelaere, Bogdan Popa, David Christiansen, David Florness, Diego
-Crespo, Fred Fu, Gary Baumgartner, Georges Dupéron, Gustavo Massaccesi,
-J. Ian Johnson, Jack Firth, Jay McCarthy, Jens Axel Søgaard, Jesse
+Crespo, Dionna Amalie Glaze, Fred Fu, Gary Baumgartner, Georges Dupéron,
+Gustavo Massaccesi, Jack Firth, Jay McCarthy, Jens Axel Søgaard, Jesse
 Alama, John Clements, Laurent Orseau, Leif Andersen, Luka Hadži-Đokić,
 Marc, Matthew Butterick, Matthew Flatt, Matthew Parris, Matthew Turland,
 Matthias Felleisen, Michael Ballantyne, Mike Sperber, Noah W M, Paulo
 Matos, Pavel Panchekha, Philip McGrath, Raphael Das Gupta, Reuben
 Thomas, Ricardo Herdt, Robby Findler, Ryan Culpepper, Sam
 Tobin-Hochstadt, Sancho McCann, Sorawee Porncharoenwase, Spencer
-Florence, Stephen De Gabrielle, Syntacticlosure, frogbird, kryptine,
-rsiddharth, and yurkobb
+Florence, Stephen De Gabrielle, Syntacticlosure, Tim Brown, frogbird,
+kryptine, rsiddharth, yurkobb
