@@ -57,5 +57,5 @@ Matthias Felleisen, Michael Ballantyne, Mike Sperber, Noah W M, Paulo
 Matos, Pavel Panchekha, Philip McGrath, Raphael Das Gupta, Reuben
 Thomas, Ricardo Herdt, Robby Findler, Ryan Culpepper, Sam
 Tobin-Hochstadt, Sancho McCann, Sorawee Porncharoenwase, Spencer
-Florence, Stephen De Gabrielle, Syntacticlosure, Tim Brown, frogbird,
-kryptine, rsiddharth, yurkobb
+Florence, Stephen De Gabrielle, Syntacticlosure, Tim Brown, Yury Bulka,
+frogbird, kryptine, rsiddharth
