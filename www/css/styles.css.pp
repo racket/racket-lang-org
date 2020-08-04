@@ -537,6 +537,8 @@ a, a:hover {
   .active_expander > .inner {opacity: 1;}
   .expander, .expander:hover, .active_expander:hover {border-color: none;}
   .active_expander {border-color: gray;}
+  .selected-block { display: block; }
+  .unselected-block { display: block; }
 
 }
 
@@ -545,6 +547,8 @@ a, a:hover {
   /* this causes the non-initial menu content to be hidden
      in regular mode, visible in smartphone mode */
   .full-mode-menu-content { display: none; }
+  .selected-block { display: block; }
+  .unselected-block { display: none; }
 }
 
 }
