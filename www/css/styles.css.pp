@@ -540,4 +540,11 @@ a, a:hover {
 
 }
 
+/* non smartphones */
+@media not all and (max-width:460px) {
+  /* this causes the non-initial menu content to be hidden
+     in regular mode, visible in smartphone mode */
+  .full-mode-menu-content { display: none; }
+}
+
 }

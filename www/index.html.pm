@@ -1,7 +1,6 @@
 #lang pollen
 
-◊(require racket-lang-org/www/util racket-lang-org/www/color
-racket/format)
+◊(require racket-lang-org/www/util racket-lang-org/www/color racket/format)
 
 ◊provide[top]
 
@@ -50,7 +49,7 @@ racket/format)
  ◊li{◊link["https://con.racket-lang.org/"]{tenth RacketCon} will take place, sometime, somewhere.}}}
 
 
-◊div[#:class "frontpage-card"]{
+◊div[#:class "frontpage-card disappearing-late"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;"
                              "background-color: " tab-heading-color ";")
@@ -67,7 +66,7 @@ racket/format)
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex5 unselected-tab langtablink" #:onclick "openTab('the-language',event,'open','langtablink',true)"]{◊div[#:style "mitem"]{Vibrant Community}}
 }}
 
-◊div[#:id "extensible" #:class "the-language" #:style "display:none"]{
+◊div[#:id "extensible" #:class "the-language full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
 Racket is the first general-purpose programming language that empowers programmers to make ◊strong{domain-specific languages}  as libraries from ◊strong{powerful macros}. No external tools, no make files required. 
@@ -79,7 +78,7 @@ Racket is the first general-purpose programming language that empowers programme
 ◊link["languages.html"]{Sample #Langs}}
 }}
 
-◊div[#:id "strong" #:class "the-language" #:style "display:none"]{
+◊div[#:id "strong" #:class "the-language full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
 Racket is the first language to support ◊strong{higher-order software contracts} and ◊strong{safe gradual typing}. Programmers can easily deploy these tools to harden their software. 
@@ -91,7 +90,7 @@ Racket is the first language to support ◊strong{higher-order software contract
 ◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{Gradual Typing}}
 }}
 
-◊div[#:id "mature" #:class "the-language" #:style "display:none"]{
+◊div[#:id "mature" #:class "the-language full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
 Racket is a mature and stable product. From the beginning, it has  supported cross-platform graphical programming (Windows, macOS, Linux). 
@@ -103,7 +102,7 @@ Racket is a mature and stable product. From the beginning, it has  supported cro
 ◊link["https://docs.racket-lang.org/foreign/index.html"]{Foreign Interface}}
 }}
 
-◊div[#:id "batteries" #:class "the-language" #:style "display:none"]{
+◊div[#:id "batteries" #:class "the-language full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
 Racket includes a rich set of libraries, covering the full range from web server apps to mathematics and scientific simulation software. 
@@ -115,7 +114,7 @@ Racket includes a rich set of libraries, covering the full range from web server
 ◊link["https://docs.racket-lang.org"]{Full List ◊begin['rarr]}}
 }}
 
-◊div[#:id "drracket" #:class "the-language" #:style "display:none"]{
+◊div[#:id "drracket" #:class "the-language full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
 Racket comes with support for major editors. The main bundle includes an innovative and extensible interactive development environment that has inspired other IDE projects.
@@ -128,7 +127,7 @@ Racket comes with support for major editors. The main bundle includes an innovat
 }
 }}
 
-◊div[#:id "open" #:class "the-language" #:style "display:none"]{
+◊div[#:id "open" #:class "the-language full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
 Newcomers describe the on-line Racket community as extremely ◊strong{friendly and helpful}. Everyone is welcome to ask any question and everybody is welcome to contribute to the ◊strong{open-source} code base.
@@ -170,7 +169,7 @@ my-hello-world
 
     ◊div{}}}}}
 
-◊div[#:class "frontpage-card"]{
+◊div[#:class "frontpage-card disappearing-late"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
@@ -186,7 +185,7 @@ my-hello-world
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'any-syntax','loptablink',true)"]{◊div[#:style "mitem"]{Any Syntax}}
 }}
 
-◊div[#:id "little-macros" #:class "lop" #:style "display:none"]{
+◊div[#:id "little-macros" #:class "lop full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"]{
@@ -236,7 +235,7 @@ my-hello-world
 
    } } }}}
 
-◊div[#:id "general-purpose" #:class "lop"  #:style "display:none"]{
+◊div[#:id "general-purpose" #:class "lop full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
    ◊div[#:class "container-fluid"]{
@@ -285,7 +284,7 @@ my-hello-world
 }}}}}
 
 
-◊div[#:id "big-macros" #:class "lop" #:style "display:none"]{
+◊div[#:id "big-macros" #:class "lop full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
@@ -310,7 +309,7 @@ my-hello-world
       6,000-line macro library suffices. }}
 }}}}}
 
-◊div[#:id "hash-langs" #:class "lop" #:style "display:none"]{
+◊div[#:id "hash-langs" #:class "lop full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
@@ -335,7 +334,7 @@ my-hello-world
    no external tools, no nothing.}  }
 }}}}}
 
-◊div[#:id "ide-support" #:class "lop" #:style "display:none"]{
+◊div[#:id "ide-support" #:class "lop full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
@@ -357,7 +356,7 @@ my-hello-world
     the features of the new language.  }}
 }}}}}
 
-◊div[#:id "any-syntax" #:class "lop" #:style "display:none"]{
+◊div[#:id "any-syntax" #:class "lop full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
@@ -419,7 +418,7 @@ ancestor(A, B)?}}}
 
 }}}}}
 
-◊div[#:class "frontpage-card"]{
+◊div[#:class "frontpage-card disappearing-late"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
@@ -435,7 +434,7 @@ ancestor(A, B)?}}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'stuff', 'ecotablink',true)"]{◊div[#:style "mitem"]{Gear & Stuff}}
 }}
 
-◊div[#:id "software" #:class "eco" #:style "display:none"]{
+◊div[#:id "software" #:class "eco full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
@@ -458,7 +457,7 @@ ancestor(A, B)?}}}
 
     ◊td{◊img/size["il-grande-racket.png" #:size (cons 350 350) #:alt "Il Grande Racket"]{}}}}}}}
 
-◊div[#:id "tutorials" #:class "eco" #:style "display:none"]{
+◊div[#:id "tutorials" #:class "eco full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
@@ -483,7 +482,7 @@ ancestor(A, B)?}}}
 
     ◊td{◊img/size["racket-guide.png" #:alt "The Guide"  #:size (cons 450 320)]{} }}}}}}
 
-◊div[#:id "stuff" #:class "eco" #:style "display:none"]{
+◊div[#:id "stuff" #:class "eco full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
@@ -499,7 +498,7 @@ ancestor(A, B)?}}}
     ◊td{ }
     ◊td{◊img/size["gear-and-stuff.jpg" #:alt "gear" #:scale .4]{} }}}}}}
 
-◊div[#:id "community" #:class "eco" #:style "display:none"]{
+◊div[#:id "community" #:class "eco full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
@@ -529,7 +528,7 @@ ancestor(A, B)?}}}
     ◊td{◊img/size["racket-school-2018.png" #:alt "Racket School 2018" #:size (cons 450 322)]{}}}}}}}
 
 
-◊div[#:id "books" #:class "eco" #:style "display:none"]{
+◊div[#:id "books" #:class "eco full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
@@ -553,7 +552,7 @@ ancestor(A, B)?}}}
 
     ◊td{◊img/size["beautiful-racket-cover.svg" #:alt "Beautiful Racket" #:size (cons 350 350)]{} }}}}}}
 
-◊div[#:id "education" #:class "eco" #:style "display:none"]{
+◊div[#:id "education" #:class "eco full-mode-menu-content"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
