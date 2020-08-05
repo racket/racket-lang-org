@@ -66,6 +66,38 @@
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex5 unselected-tab langtablink" #:onclick "openTab('the-language',event,'open','langtablink',true)"]{◊div[#:style "mitem"]{Vibrant Community}}
 }}
 
+◊div[#:id "it" #:class "the-language selected-block"]{
+ ◊special-section[#:class "one-column-body-text"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+   ◊div[#:class "translations-code-example"]{
+    ◊div{}
+    ◊div[#:class "translations-code-example-inner"]{
+      ◊img[#:alt "large logo"
+           #:src "img/racket-logo.svg"
+           #:style "margin-right: 50px; margin-top: 20px; width: 275px;height: 275px;"]{}
+      ◊div{◊langwww["#lang racket/gui"]{
+◊pre{
+(◊docs{define} my-language 'English)
+
+(◊docs{define} translations
+  #hash([English . "Hello world"]
+        [French . "Allô le monde"]
+        [German . "Hallo Welt"]
+        [Greek . "Γειά σου, κόσμε"]
+        [Portuguese . "Olá mundo"]
+        [Spanish . "Hola mundo"]))
+
+(◊docs{define} my-hello-world
+  (hash-ref translations my-language
+            "hello world"))
+
+my-hello-world
+(◊docs{printf} "~a\n" my-hello-world)
+(◊docs{message-box} "" my-hello-world)}
+}}}
+
+    ◊div{}}}}}
+
 ◊div[#:id "extensible" #:class "the-language full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
@@ -138,36 +170,6 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 ◊link["https://twitter.com/racketlang"]{Twitter}
 ◊link["https://github.com/racket/racket/"]{Github}}
 }}
-
-◊div[#:id "it" #:class "the-language selected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-   ◊div[#:style "display:flex; justify-content: space-around; align-items: center;"]{
-    ◊div{}
-    ◊div[#:style "display:flex"]{
-      ◊img[#:alt "large logo"
-           #:src "img/racket-logo.svg"
-           #:style "margin-right: 50px; margin-top: 20px; width: 275px;height: 275px;"]{}
-      ◊div{◊langwww["#lang racket/gui"]{
-◊pre{
-(◊docs{define} my-language 'English)
-
-(◊docs{define} translations
-  #hash([English . "Hello world"]
-        [French . "Allô le monde"]
-        [German . "Hallo Welt"]
-        [Greek . "Γειά σου, κόσμε"]
-        [Portuguese . "Olá mundo"]
-        [Spanish . "Hola mundo"]))
-
-(◊docs{define} my-hello-world (hash-ref translations my-language "hello world"))
-
-my-hello-world
-(printf "~a\n" my-hello-world)
-(message-box "" my-hello-world)}
-}}}
-
-    ◊div{}}}}}
 
 ◊div[#:class "frontpage-card disappearing-late"]{
 ◊special-section[#:class "one-column-body-text lop-system"
