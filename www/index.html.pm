@@ -85,7 +85,8 @@
         [German . "Hallo Welt"]
         [Greek . "Γειά σου, κόσμε"]
         [Portuguese . "Olá mundo"]
-        [Spanish . "Hola mundo"]))
+        [Spanish . "Hola mundo"]
+        [Thai . "สวัสดีชาวโลก"]))
 
 (◊docs{define} my-hello-world
   (hash-ref translations my-language
