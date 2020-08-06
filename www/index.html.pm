@@ -179,7 +179,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
  ◊span[#:class "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
        #:onclick "openTab('lop',event,'more-it','loptablink',false)"]{
   Racket, the Language-Oriented Programming Language}}
-◊div[#:class "frontpage-bar"]{
+◊div[#:class "frontpage-bar disappearing-late"]{
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'little-macros','loptablink',true)"]{◊div[#:style "mitem"]{Little Macros}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex4 unselected-tab loptablink" #:onclick "openTab('lop',event,'general-purpose','loptablink',true)"]{◊div[#:style "mitem"]{General Purpose}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'big-macros','loptablink',true)"]{◊div[#:style "mitem"]{Big Macros}}
@@ -428,7 +428,7 @@ ancestor(A, B)?}}}
  ◊span[#:id "lop-line" #:class "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
        #:onclick "openTab('eco',event,'us','ecotablink',false)"]{
   Racket, the Ecosystem}}
-◊div[#:class "frontpage-bar"]{
+◊div[#:class "frontpage-bar disappearing-late"]{
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'software','ecotablink',true)"]{◊div[#:style "mitem"]{Software}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex6 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'tutorials','ecotablink',true)"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'community','ecotablink',true)"]{◊div[#:style "mitem"]{Community}}
