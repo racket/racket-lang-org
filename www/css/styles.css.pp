@@ -540,6 +540,7 @@ a, a:hover {
   .unselected-block { display: block; }
   .translations-code-example { display:block; align-items: center; }
   .translations-code-example-inner { display:block; align-items: center; }
+  .center-if-smartphone{ text-align:center; }
 }
 
 /* non smartphones */

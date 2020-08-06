@@ -72,9 +72,11 @@
    ◊div[#:class "translations-code-example"]{
     ◊div{}
     ◊div[#:class "translations-code-example-inner"]{
-      ◊img[#:alt "large logo"
-           #:src "img/racket-logo.svg"
-           #:style "margin-right: 50px; margin-top: 20px; width: 275px;height: 275px;"]{}
+      ◊div[#:class "center-if-smartphone"]{
+        ◊img[#:alt "large logo"
+             #:src "img/racket-logo.svg"
+             #:style "margin-right: 50px; margin-top: 20px; width: 275px;height: 275px;"]{}
+       }
       ◊div{◊langwww["#lang racket/gui"]{
 ◊pre{
 (◊docs{define} my-language 'English)
