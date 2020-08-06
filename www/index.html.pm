@@ -190,6 +190,42 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'any-syntax','loptablink',true)"]{◊div[#:style "mitem"]{Any Syntax}}
 }}
 
+◊div[#:id "more-it" #:class "lop selected-block"]{
+ ◊special-section[#:class "one-column-body-text"]{
+  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
+   ◊table{
+    ◊tr[#:valign "top"]{
+    ◊td{ 
+◊langwww["#lang typed/racket" #:id "lang3"]{
+◊pre{;; Using higher-order occurrence typing
+(◊docs{define-type} SrN (◊docs{U} ◊docs{String} ◊docs{Number}))
+(◊docs{:} tog ((◊docs{Listof} SrN) -> ◊docs{String})
+(◊docs{define} (tog l)
+  (◊docs{apply} ◊docs{string-append} (◊docs{filter} ◊docs{string?} l)))
+(tog (◊docs{list} 5 "hello " 1/2 "world" (◊docs{sqrt} -1)))}}}
+
+    ◊td{ 
+◊langwww["#lang scribble/base" #:id "lang2"]{
+◊pre{@; Generate a PDF or HTML document
+@(◊docs{require} (◊docs{only-in} racket ~a))
+@(◊docs{define} N 99)
+@◊docs{title}{Bottles: @◊docs{italic}{Abridged}}
+@(◊docs{apply} 
+  ◊docs{itemlist}
+  (◊docs{for/list} ([n (◊docs{in-range} N 0 -1)])
+    @◊docs{item}{@(◊docs{~a} n) bottles.}))}}}
+
+    ◊td{ 
+◊langwww["#lang datalog" #:id "lang4"]{
+◊pre{ancestor(A, B) :- parent(A, B).
+ancestor(A, B) :-
+  parent(A, C), ancestor(C, B).
+parent(john, douglas).
+parent(bob, john).
+ancestor(A, B)?}}}
+
+}}}}}
+
 ◊div[#:id "little-macros" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
@@ -385,42 +421,6 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
   Such a language can also exploit the hooks of the IDE
   framework, so that its programmers may take advantage
   of Racket's IDE.}}
-}}}}}
-
-◊div[#:id "more-it" #:class "lop selected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-   ◊table{
-    ◊tr[#:valign "top"]{
-    ◊td{ 
-◊langwww["#lang typed/racket" #:id "lang3"]{
-◊pre{;; Using higher-order occurrence typing
-(◊docs{define-type} SrN (◊docs{U} ◊docs{String} ◊docs{Number}))
-(◊docs{:} tog ((◊docs{Listof} SrN) -> ◊docs{String})
-(◊docs{define} (tog l)
-  (◊docs{apply} ◊docs{string-append} (◊docs{filter} ◊docs{string?} l)))
-(tog (◊docs{list} 5 "hello " 1/2 "world" (◊docs{sqrt} -1)))}}}
-
-    ◊td{ 
-◊langwww["#lang scribble/base" #:id "lang2"]{
-◊pre{@; Generate a PDF or HTML document
-@(◊docs{require} (◊docs{only-in} racket ~a))
-@(◊docs{define} N 99)
-@◊docs{title}{Bottles: @◊docs{italic}{Abridged}}
-@(◊docs{apply} 
-  ◊docs{itemlist}
-  (◊docs{for/list} ([n (◊docs{in-range} N 0 -1)])
-    @◊docs{item}{@(◊docs{~a} n) bottles.}))}}}
-
-    ◊td{ 
-◊langwww["#lang datalog" #:id "lang4"]{
-◊pre{ancestor(A, B) :- parent(A, B).
-ancestor(A, B) :-
-  parent(A, C), ancestor(C, B).
-parent(john, douglas).
-parent(bob, john).
-ancestor(A, B)?}}}
-
 }}}}}
 
 ◊div[#:class "frontpage-card"]{
