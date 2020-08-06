@@ -102,7 +102,6 @@ top-section {
   cursor:pointer;
   font-size:130%;
   color:◊|tab-heading-text-color|;
-  white-space:nowrap;
   text-align:center;
 }
 
@@ -541,7 +540,6 @@ a, a:hover {
   .unselected-block { display: block; }
   .translations-code-example { display:block; align-items: center; }
   .translations-code-example-inner { display:block; align-items: center; }
-
 }
 
 /* non smartphones */
@@ -555,6 +553,9 @@ a, a:hover {
     display:flex; justify-content: space-around; align-items: center;
   }
   .translations-code-example-inner { display:flex; }
+  .frontpage-bar-nowrap-unless-smartphone {
+     white-space:nowrap;
+  }
 }
 
 }

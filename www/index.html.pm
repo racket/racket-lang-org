@@ -49,17 +49,17 @@
  ◊li{◊link["https://con.racket-lang.org/"]{tenth RacketCon} will take place, sometime, somewhere.}}}
 
 
-◊div[#:class "frontpage-card disappearing-late"]{
+◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;"
                              "background-color: " tab-heading-color ";")
                  #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing frontpage-bar-heading"
+ ◊span[#:id "lop-line" #:class "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
        #:onclick "openTab('the-language',event,'it','langtablink',false)"]{
   Racket, the Programming Language}}
-◊div[#:class "frontpage-bar"]{
-  ◊button[#:class"frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'mature','langtablink',true)"]{◊div[#:style "mitem"]{Mature}}
-  ◊button[#:class "frontpage-bar-item frontpage-button  frontpage-bar-flex4 unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Jet Fuel}}
+◊div[#:class "frontpage-bar disappearing-late"]{
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'mature','langtablink',true)"]{◊div[#:style "mitem"]{Mature}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex4 unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Jet Fuel}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab langtablink" #:onclick "openTab('the-language',event,'extensible','langtablink',true)"]{◊div[#:style "mitem"]{Extensible}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'strong','langtablink',true)"]{◊div[#:style "mitem"]{Robust}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'drracket','langtablink',true)"]{◊div[#:style "mitem"]{Polished}}
@@ -172,11 +172,11 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 ◊link["https://github.com/racket/racket/"]{Github}}
 }}
 
-◊div[#:class "frontpage-card disappearing-late"]{
+◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
- ◊span[#:class "disappearing frontpage-bar-heading"
+ ◊span[#:class "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
        #:onclick "openTab('lop',event,'more-it','loptablink',false)"]{
   Racket, the Language-Oriented Programming Language}}
 ◊div[#:class "frontpage-bar"]{
@@ -421,11 +421,11 @@ ancestor(A, B)?}}}
 
 }}}}}
 
-◊div[#:class "frontpage-card disappearing-late"]{
+◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
                  #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
                  #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "disappearing frontpage-bar-heading"
+ ◊span[#:id "lop-line" #:class "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
        #:onclick "openTab('eco',event,'us','ecotablink',false)"]{
   Racket, the Ecosystem}}
 ◊div[#:class "frontpage-bar"]{
