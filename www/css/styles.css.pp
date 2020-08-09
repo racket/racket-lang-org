@@ -510,6 +510,10 @@ a, a:hover {
     opacity: .5;
 }
 
+.lop-example-in-overview {
+    margin: 1em;
+}
+
 @media all and (max-width:650px) {
 @media all and (max-width:650px){html {font-size: 16px;}}
 @media all and (max-width:590.0px){html {font-size: 15px;}}
@@ -541,6 +545,8 @@ a, a:hover {
   .translations-code-example { display:block; align-items: center; }
   .translations-code-example-inner { display:block; align-items: center; }
   .center-if-smartphone{ text-align:center; }
+  .lop-overview{ display:flex; flex-direction: column; }
+
 }
 
 /* non smartphones */
@@ -557,6 +563,7 @@ a, a:hover {
   .frontpage-bar-nowrap-unless-smartphone {
      white-space:nowrap;
   }
+  .lop-overview{ display:flex; flex-direction: row; }
 }
 
 }

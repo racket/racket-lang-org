@@ -193,9 +193,8 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 ◊div[#:id "more-it" #:class "lop selected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-   ◊table{
-    ◊tr[#:valign "top"]{
-    ◊td{ 
+   ◊div[#:class "lop-overview"]{
+    ◊div[#:class "lop-example-in-overview"]{
 ◊langwww["#lang typed/racket" #:id "lang3"]{
 ◊pre{;; Using higher-order occurrence typing
 (◊docs{define-type} SrN (◊docs{U} ◊docs{String} ◊docs{Number}))
@@ -204,7 +203,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
   (◊docs{apply} ◊docs{string-append} (◊docs{filter} ◊docs{string?} l)))
 (tog (◊docs{list} 5 "hello " 1/2 "world" (◊docs{sqrt} -1)))}}}
 
-    ◊td{ 
+    ◊div[#:class "lop-example-in-overview"]{ 
 ◊langwww["#lang scribble/base" #:id "lang2"]{
 ◊pre{@; Generate a PDF or HTML document
 @(◊docs{require} (◊docs{only-in} racket ~a))
@@ -215,7 +214,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
   (◊docs{for/list} ([n (◊docs{in-range} N 0 -1)])
     @◊docs{item}{@(◊docs{~a} n) bottles.}))}}}
 
-    ◊td{ 
+    ◊div[#:class "lop-example-in-overview"]{ 
 ◊langwww["#lang datalog" #:id "lang4"]{
 ◊pre{ancestor(A, B) :- parent(A, B).
 ancestor(A, B) :-
@@ -224,7 +223,7 @@ parent(john, douglas).
 parent(bob, john).
 ancestor(A, B)?}}}
 
-}}}}}
+}}}}
 
 ◊div[#:id "little-macros" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
