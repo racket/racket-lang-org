@@ -47,7 +47,7 @@
 ;; 3) remove win/mac/linux tgz builds
 
 (define (win-mac-linux-tgz? l)
-  (regexp-match? #px"(macos|windows|linux).*tgz$" (line-path l)))
+  (regexp-match? #px"(macos|win32|linux).*tgz$" (line-path l)))
 
 ;; 4) put CS builds later
 ;; (This is necessary because the page build scripts currently
