@@ -193,8 +193,8 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 ◊div[#:id "more-it" #:class "lop selected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-   ◊div[#:class "lop-overview"]{
-    ◊div[#:class "lop-example-in-overview"]{
+   ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
+    ◊div[#:class "block-with-1em-margin"]{
 ◊langwww["#lang typed/racket" #:id "lang3"]{
 ◊pre{;; Using higher-order occurrence typing
 (◊docs{define-type} SrN (◊docs{U} ◊docs{String} ◊docs{Number}))
@@ -203,7 +203,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
   (◊docs{apply} ◊docs{string-append} (◊docs{filter} ◊docs{string?} l)))
 (tog (◊docs{list} 5 "hello " 1/2 "world" (◊docs{sqrt} -1)))}}}
 
-    ◊div[#:class "lop-example-in-overview"]{ 
+    ◊div[#:class "block-with-1em-margin"]{ 
 ◊langwww["#lang scribble/base" #:id "lang2"]{
 ◊pre{@; Generate a PDF or HTML document
 @(◊docs{require} (◊docs{only-in} racket ~a))
@@ -214,7 +214,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
   (◊docs{for/list} ([n (◊docs{in-range} N 0 -1)])
     @◊docs{item}{@(◊docs{~a} n) bottles.}))}}}
 
-    ◊div[#:class "lop-example-in-overview"]{ 
+    ◊div[#:class "block-with-1em-margin"]{ 
 ◊langwww["#lang datalog" #:id "lang4"]{
 ◊pre{ancestor(A, B) :- parent(A, B).
 ancestor(A, B) :-
@@ -228,12 +228,8 @@ ancestor(A, B)?}}}
 ◊div[#:id "little-macros" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊div[#:class "container-fluid"]{
-
-   ◊table{
-    ◊tr[#:valign "top"]{
-
-    ◊td{ 
+   ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
+    ◊div{ 
 ◊langwww["#lang racket" #:style "font-size:75%"]{
 ◊pre{
 (◊docs{provide} time-it)
@@ -254,26 +250,18 @@ ancestor(A, B)?}}}
 
 (◊docs{define} cim current-inexact-milliseconds)
 }}}
+    ◊; this needs to all be on one line because of the enclosing use of `special-section`
+    ◊; which (eventually) calls `decode-paragraphs`. Not sure if this a good idea of not
+    ◊; but I'll just go with it.
 
-    ◊td{ }
+    ◊div{
+    ◊div[#:class "block-with-1em-margin"]{
+     Racket allows programmers to ◊link[pattern-macros]{add new syntactic constructs} in the same way that other languages permit the formulation of procedures, methods, or classes.  All you need to do is formulate a simple rule that rewrites a custom syntax to a Racket expression or definition.
+    }
 
-    ◊td{ 
-
-     ◊p{Racket allows programmers to ◊link[pattern-macros]{add new syntactic constructs}
-     in the same way that other languages permit the formulation
-     of procedures, methods, or classes.  All you need to do is
-     formulate a simple rule that rewrites a custom syntax to a
-     Racket expression or definition.}
-
-     ◊p{Little macros can particularly help programmers with DRY 
-     where other features can't. The example on the left shows 
-     how to define a new syntax for measuring the time a task 
-     takes. The syntax avoids the repeated use of lambda. Note 
-     also how the macro is exported from this module as if it 
-     were an ordinary function.
-}}
-
-   } } }}}
+    ◊div[#:class "block-with-1em-margin"]{
+     Little macros can particularly help programmers with DRY where other features can't. The example on the left shows how to define a new syntax for measuring the time a task takes. The syntax avoids the repeated use of lambda. Note also how the macro is exported from this module as if it were an ordinary function.
+}}}}}
 
 ◊div[#:id "general-purpose" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{

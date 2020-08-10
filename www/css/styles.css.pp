@@ -510,7 +510,7 @@ a, a:hover {
     opacity: .5;
 }
 
-.lop-example-in-overview {
+.block-with-1em-margin {
     margin: 1em;
 }
 
@@ -545,7 +545,7 @@ a, a:hover {
   .translations-code-example { display:block; align-items: center; }
   .translations-code-example-inner { display:block; align-items: center; }
   .center-if-smartphone{ text-align:center; }
-  .lop-overview{ display:flex; flex-direction: column; }
+  .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: column; }
 
 }
 
@@ -563,7 +563,7 @@ a, a:hover {
   .frontpage-bar-nowrap-unless-smartphone {
      white-space:nowrap;
   }
-  .lop-overview{ display:flex; flex-direction: row; }
+  .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: row; }
 }
 
 }
