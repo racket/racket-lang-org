@@ -192,16 +192,18 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
 ◊div[#:id "more-it" #:class "lop selected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-   ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
+  ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"
+       #:style "font-size:77%"]{
     ◊div[#:class "block-with-1em-margin"]{
 ◊langwww["#lang typed/racket" #:id "lang3"]{
 ◊pre{;; Using higher-order occurrence typing
 (◊docs{define-type} SrN (◊docs{U} ◊docs{String} ◊docs{Number}))
 (◊docs{:} tog ((◊docs{Listof} SrN) -> ◊docs{String})
 (◊docs{define} (tog l)
-  (◊docs{apply} ◊docs{string-append} (◊docs{filter} ◊docs{string?} l)))
-(tog (◊docs{list} 5 "hello " 1/2 "world" (◊docs{sqrt} -1)))}}}
+  (◊docs{apply} ◊docs{string-append}
+         (◊docs{filter} ◊docs{string?} l)))
+(tog (◊docs{list} 5 "hello "
+           1/2 "world" (◊docs{sqrt} -1)))}}}
 
     ◊div[#:class "block-with-1em-margin"]{ 
 ◊langwww["#lang scribble/base" #:id "lang2"]{
@@ -223,13 +225,13 @@ parent(john, douglas).
 parent(bob, john).
 ancestor(A, B)?}}}
 
-}}}}
+}}}
 
 ◊div[#:id "little-macros" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
    ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
-    ◊div{ 
+    ◊div[#:class "block-with-1em-margin"]{ 
 ◊langwww["#lang racket" #:style "font-size:75%"]{
 ◊pre{
 (◊docs{provide} time-it)
@@ -252,25 +254,21 @@ ancestor(A, B)?}}}
 }}}
     ◊; this needs to all be on one line because of the enclosing use of `special-section`
     ◊; which (eventually) calls `decode-paragraphs`. Not sure if this a good idea of not
-    ◊; but I'll just go with it.
+    ◊; but I'll just go with it. This happens in more than a few places in the file.
 
     ◊div{
-    ◊div[#:class "block-with-1em-margin"]{
+    ◊p[#:class "block-with-1em-margin"]{
      Racket allows programmers to ◊link[pattern-macros]{add new syntactic constructs} in the same way that other languages permit the formulation of procedures, methods, or classes.  All you need to do is formulate a simple rule that rewrites a custom syntax to a Racket expression or definition.
     }
 
-    ◊div[#:class "block-with-1em-margin"]{
+    ◊p[#:class "block-with-1em-margin"]{
      Little macros can particularly help programmers with DRY where other features can't. The example on the left shows how to define a new syntax for measuring the time a task takes. The syntax avoids the repeated use of lambda. Note also how the macro is exported from this module as if it were an ordinary function.
 }}}}}
 
 ◊div[#:id "general-purpose" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
-
-   ◊div[#:class "container-fluid"]{
-     ◊table{
-      ◊tr[#:valign "top"]{
-
-    ◊td{ 
+   ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
+    ◊div[#:class "block-with-1em-margin"]{ 
 
 ◊langwww["#lang racket/gui" #:style "font-size:75%"]{
 ◊pre{;; let's play a guessing game
@@ -292,123 +290,82 @@ ancestor(A, B)?}}}
 
 (◊docs{send} frame show #t)}
 }}
-  
-    ◊td{ 
 
-    ◊p{Racket comes with a comprehensive suite of
-    libraries: ◊link[racket/gui]{a cross-platform GUI toolbox}, a ◊link[web-server]{web server}, 
-    and more. ◊link[packages]{Thousands of} ◊link[packages]{additional packages} are 
-    a ◊link[raco-pkg]{single command} away: 3D graphics, a bluetooth 
-    socket connector, color maps, data structures, educational 
-    software, games, a quantum-random number generator, 
-    scientific simulations, web script testing, and many more.}
+  ◊div{
+    ◊p[#:class "block-with-1em-margin"]{
+       Racket comes with a comprehensive suite of libraries: ◊link[racket/gui]{a cross-platform GUI toolbox}, a ◊link[web-server]{web server}, and more. ◊link[packages]{Thousands of} ◊link[packages]{additional packages} are a ◊link[raco-pkg]{single command} away: 3D graphics, a bluetooth socket connector, color maps, data structures, educational software, games, a quantum-random number generator, scientific simulations, web script testing, and many more.}
 
-    ◊p{Macros work with these tools. The example on the left
-    shows the implementation of a small number-guessing
-    game. It is implemented in the GUI dialect of Racket,
-    and demonstrates a number of language features. 
-}}
+    ◊p[#:class "block-with-1em-margin"]{
+      Macros work with these tools. The example on the left shows the implementation of a small number-guessing game. It is implemented in the GUI dialect of Racket, and demonstrates a number of language features.}}
 
-}}}}}
+}}}
 
 
 ◊div[#:id "big-macros" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
+   ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
+    ◊div[#:class "block-with-1em-margin"]{
+      ◊img/size["big-macros.png" #:alt "Big Macros" #:size (cons 350 350)]{}}
 
-   ◊table{
-    ◊tr[#:valign "top"]{
+    ◊div{
+     ◊p[#:class "block-with-1em-margin"]{
+       Getting to know the full Racket macro system will feel liberating, empowering, dazzling—like a whole new level of enlightenment. Developers can easily create a collection of co-operating macros to implement ◊link[racket/match]{algebraic pattern matching}, simple ◊link[2htdp/big-bang]{event-handling}, or a ◊link[miniKanren]{logic-constraint solver}.}
 
-    ◊td{ ◊img/size["big-macros.png" #:alt "Big Macros" #:size (cons 350 350)]{} }
+     ◊p[#:class "block-with-1em-margin"]{
+        While Racket is a functional language, it has offered a sub-language of ◊link[traits-aplas]{classes and objects, mixins and traits}, from the beginning.  A Racket programmer can therefore combine functional with object-oriented components as needed. To mimic Java's class system, 6,000-line macro library suffices. }}
 
-    ◊td{ ◊p{Getting to know the full Racket macro system will
-       feel liberating, empowering, dazzling—like a whole
-       new level of enlightenment. Developers can easily
-       create a collection of co-operating macros to
-       implement ◊link[racket/match]{algebraic pattern matching}, simple 
-       ◊link[2htdp/big-bang]{event-handling}, or a ◊link[miniKanren]{logic-constraint solver}.}
-
-    ◊p{While Racket is a functional language, it has offered
-      a sub-language of ◊link[traits-aplas]{classes and objects, mixins 
-      and traits}, from the beginning.  A Racket programmer
-      can therefore combine functional with object-oriented
-      components as needed. To mimic Java's class system,
-      6,000-line macro library suffices. }}
-}}}}}
+}}}}
 
 ◊div[#:id "hash-langs" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
-   ◊table{
-    ◊tr[#:valign "top"]{
+   ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
+    ◊div[#:class "block-with-1em-margin"]{
+      ◊img/size["lang-video.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350)]{}}
 
-    ◊td{ ◊img/size["lang-video.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350)]{}}
+    ◊div{
+     ◊p[#:class "block-with-1em-margin"]{
+        Some languages convey ideas more easily than others. And some programming languages convey solutions better than others.  Therefore Racket is a language for ◊link[hash-langs]{making languages}, so that a programmer can write every module in a well-suited languages.}
 
-    ◊td{ ◊p{Some languages convey ideas more easily
-   than others. And some programming languages convey
-   solutions better than others.  Therefore Racket is a
-   language for ◊link[hash-langs]{making languages}, so that a programmer
-   can write every module in a well-suited languages.}
-
-   ◊p{Often ◊link[lang-video]{an application domain} comes with several
-   languages.  When you need a new language, you make it—
-   on the fly. Open an IDE window; create a language right
-   there, with just a few keystrokes; and run a module in 
-   this new language in a second IDE window.  Making new 
-   languages really requires no setup, no project files, 
-   no external tools, no nothing.}  }
+     ◊p[#:class "block-with-1em-margin"]{
+        Often ◊link[lang-video]{an application domain} comes with several languages.  When you need a new language, you make it—on the fly. Open an IDE window; create a language right there, with just a few keystrokes; and run a module in this new language in a second IDE window.  Making new languages really requires no setup, no project files, no external tools, no nothing.}
 }}}}}
 
 ◊div[#:id "ide-support" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-   ◊table{
-    ◊tr[#:valign "top"]{
+   ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
+    ◊div[#:class "block-with-1em-margin"]{
+      ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 350 350)]{}}
 
-    ◊td{  ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 350 350)]{} }
+    ◊div{
+     ◊p[#:class "block-with-1em-margin"]{
+      Racket comes with its own IDE, ◊link[drracket-jfp]{DrRacket}, neé DrScheme, and it sports some unique features . For example, when a programmer mouses over an identifier, the IDE draws an arrow back to where it was defined.}
 
-    ◊td{ ◊p{Racket comes with its own IDE, ◊link[drracket-jfp]{DrRacket}, neé DrScheme,
-      and it sports some unique features . For example, when
-      a programmer mouses over an identifier, the IDE draws
-      an arrow back to where it was defined.}
-
-   ◊p{A programmer immediately benefits from DrRacket while
-    using an alternative language, say ◊link[typed/racket]{Typed Racket}. Racket 
-    macros, even complex ones and those used to make new
-    languages, record and propagate a sufficient amount of
-    source information for DrRacket to act as if it understood
-    the features of the new language.  }}
-}}}}}
+     ◊p[#:class "block-with-1em-margin"]{
+      A programmer immediately benefits from DrRacket while using an alternative language, say ◊link[typed/racket]{Typed Racket}. Racket macros, even complex ones and those used to make new languages, record and propagate a sufficient amount of source information for DrRacket to act as if it understood the features of the new language.}}
+}}}}
 
 ◊div[#:id "any-syntax" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-   ◊table{
-    ◊tr[#:valign "top"]{
+   ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
+    ◊div[#:class "block-with-1em-margin"]{
+      ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 350)]{}}
 
-    ◊td{ ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 350)]{}}
+    ◊div{
+     ◊p[#:class "block-with-1em-margin"]{
+       Racket programmers usually love parentheses, but they have empathy for those few who need commas and braces.  Hence, building languages with conventional surface syntax, like that of ◊link[datalog]{datalog}, is almost as easy as building parenthetical languages.}
 
-    ◊td{
-
-   ◊p{Racket programmers usually love parentheses, but they
-      have empathy for those few who need commas and
-      braces.  Hence, building languages with
-      conventional surface syntax, like that of ◊link[datalog]{datalog}, 
-      is almost as easy as building parenthetical languages.}
-
-  ◊p{Racket's ecosystem comes with ◊link[br-parsing]{parsing packages} that
-  allow developers to easily map any syntax to a
-  parenthesized language, which is then compiled to
-  ordinary Racket with the help of Racket's macro system.
-  Such a language can also exploit the hooks of the IDE
-  framework, so that its programmers may take advantage
-  of Racket's IDE.}}
-}}}}}
+    ◊p[#:class "block-with-1em-margin"]{
+      Racket's ecosystem comes with ◊link[br-parsing]{parsing packages} that allow developers to easily map any syntax to a parenthesized language, which is then compiled to ordinary Racket with the help of Racket's macro system. Such a language can also exploit the hooks of the IDE framework, so that its programmers may take advantage of Racket's IDE.}}
+}}}}
 
 ◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
