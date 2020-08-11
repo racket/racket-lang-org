@@ -55,7 +55,7 @@
   Racket, the Programming Language}}
 ◊div[#:class "frontpage-bar disappearing-late"]{
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'mature','langtablink',true)"]{◊div[#:style "mitem"]{Mature}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex4 unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Jet Fuel}}
+  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex4 unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Jet Fueled}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab langtablink" #:onclick "openTab('the-language',event,'extensible','langtablink',true)"]{◊div[#:style "mitem"]{Extensible}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'strong','langtablink',true)"]{◊div[#:style "mitem"]{Robust}}
   ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'drracket','langtablink',true)"]{◊div[#:style "mitem"]{Polished}}
