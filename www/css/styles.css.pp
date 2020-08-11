@@ -47,7 +47,6 @@ li > p:last-child {
 section, top-section {
   width: 100%;
   display: flex;
-  flex-direction: row;
   flex-wrap: nowrap;
   align-items: baseline;
 }
@@ -56,6 +55,26 @@ top-section {
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
+
+section {
+ flex-direction: column;
+}
+
+/* these two are to get the button layout at
+   the top of the page to look reasonable */
+@media not all and (max-width:460px) {
+ top-section {
+   flex-direction: row;
+ }
+}
+
+@media all and (max-width:460px) {
+ top-section {
+   flex-direction: column;
+ }
+}
+
+
 
 .selected-tab {
   ◊|selected-tab-css|
@@ -549,6 +568,7 @@ a, a:hover {
   .scale-if-smartphone { width: 100% }
   .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: column; }
   .smartphone-subheading { font-size: 125%; font-weight: bolder; }
+  .top-section { flex-direction: column; }
   img.lop-image-rc8 {
     margin-left: auto;
     margin-right: auto;
@@ -558,6 +578,12 @@ a, a:hover {
   img.lop-image {
     max-width: 100%;
     height:auto;
+  }
+  .margin-above-if-smartphone {
+    margin: 6px 0 0 0;
+  }
+  .top-button {
+    font-size: 60%;
   }
 }
 
