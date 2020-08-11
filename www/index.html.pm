@@ -44,7 +44,7 @@
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 
 ◊ul[#:class "doclinks"]{
- ◊li{◊link["https://blog.racket-lang.org/2020/05/racket-v7-7.html"]{Racket version 7.7} is available.}
+ ◊li{◊link["https://blog.racket-lang.org/2020/08/racket-v7-8.html"]{Racket version 7.8} is available.}
 
  ◊li{◊link["https://con.racket-lang.org/"]{tenth RacketCon} will take place, sometime, somewhere.}}}
 
