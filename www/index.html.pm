@@ -342,7 +342,7 @@ ancestor(A, B)?}}}
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 350 350) #:class "lop-image"]{}}
+      ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 349 350) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
@@ -358,7 +358,7 @@ ancestor(A, B)?}}}
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 350) #:class "lop-image"]{}}
+      ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 280) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
