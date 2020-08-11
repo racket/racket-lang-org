@@ -307,7 +307,7 @@ ancestor(A, B)?}}}
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["big-macros.png" #:alt "Big Macros" #:size (cons 350 350)]{}}
+      ◊img/size["big-macros.png" #:alt "Big Macros" #:size (cons 350 350) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
@@ -325,7 +325,7 @@ ancestor(A, B)?}}}
 
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["lang-video.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350)]{}}
+      ◊img/size["lang-video.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
@@ -341,7 +341,7 @@ ancestor(A, B)?}}}
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 350 350)]{}}
+      ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 350 350) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
@@ -357,7 +357,7 @@ ancestor(A, B)?}}}
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 350)]{}}
+      ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 350) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
@@ -380,7 +380,15 @@ ancestor(A, B)?}}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'community','ecotablink',true)"]{◊div[#:style "mitem"]{Community}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'books','ecotablink',true)"]{◊div[#:style "mitem"]{Books}}
   ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'education','ecotablink',true)"]{◊div[#:style "mitem"]{Education}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'stuff', 'ecotablink',true)"]{◊div[#:style "mitem"]{Gear & Stuff}}
+  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'stuff', 'ecotablink',true)"]{◊div[#:style "mitem"]{Swag}}
+}}
+
+◊div[#:id "us" #:class "eco selected-block"]{
+ ◊special-section[#:class "one-column-body-text"]{
+  ◊div[#:class "container-fluid scale-if-smartphone"]{
+   ◊img[#:style "margin-left:auto;margin-right:auto;display:block;text-align:center"
+        #:alt "eighth RacketCon, 2018"
+        #:src "img/racket-con-2018.png" #:class "lop-image-rc8"]{}}
 }}
 
 ◊div[#:id "software" #:class "eco full-mode-menu-content unselected-block"]{
@@ -390,7 +398,7 @@ ancestor(A, B)?}}}
   ◊table{
     ◊tr{
 
-    ◊td{ ◊p{
+    ◊td{ ◊div[#:class "smartphone-subheading"]{Software} ◊p{
 
       ◊link["https://download.racket-lang.org/"]{Download Racket v7.8}
 
@@ -404,7 +412,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img/size["il-grande-racket.png" #:size (cons 350 350) #:alt "Il Grande Racket"]{}}}}}}}
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["il-grande-racket.png" #:size (cons 350 350) #:alt "Il Grande Racket"]{}}}}}}}}
 
 ◊div[#:id "tutorials" #:class "eco full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -413,7 +421,7 @@ ancestor(A, B)?}}}
   ◊table{
     ◊tr{
 
-    ◊td{ ◊p{
+    ◊td{ ◊div[#:class "smartphone-subheading"]{Tutorials & Documentation} ◊p{
 
       ◊link["https://docs.racket-lang.org/quick/"]{Quick Introduction}
 
@@ -429,23 +437,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img/size["racket-guide.png" #:alt "The Guide"  #:size (cons 450 320)]{} }}}}}}
-
-◊div[#:id "stuff" #:class "eco full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-
-   ◊table{
-    ◊tr{
-
-    ◊td{ ◊p{
-
-      ◊link["https://devswag.com/products/racket-t-shirt"]{Racket T-Shirts} — the perfect way to meet friends, influence people, and stay warm.
-
-      ◊link["https://devswag.com/products/racket"]{Racket Stickers} — the indispensable accessory for laptops and textbooks.}}
-
-    ◊td{ }
-    ◊td{◊img/size["gear-and-stuff.jpg" #:alt "gear" #:scale .4]{} }}}}}}
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["racket-guide.png" #:alt "The Guide"  #:size (cons 450 320)]{}}}}}}}}
 
 ◊div[#:id "community" #:class "eco full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -454,7 +446,7 @@ ancestor(A, B)?}}}
    ◊table{
     ◊tr{
 
-    ◊td{ ◊p{
+    ◊td{ ◊div[#:class "smartphone-subheading"]{Community} ◊p{
 
       ◊link["friendly.html"]{Friendly environment policy}
 
@@ -474,7 +466,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img/size["racket-school-2018.png" #:alt "Racket School 2018" #:size (cons 450 322)]{}}}}}}}
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["racket-school-2018.png" #:alt "Racket School 2018" #:size (cons 450 322)]{}}}}}}}}
 
 
 ◊div[#:id "books" #:class "eco full-mode-menu-content unselected-block"]{
@@ -484,7 +476,7 @@ ancestor(A, B)?}}}
    ◊table{
     ◊tr{
 
-    ◊td{ ◊p{
+    ◊td{ ◊div[#:class "smartphone-subheading"]{Books} ◊p{
 
       ◊link["https://www.realmofracket.com/"]{Realm of Racket}
       Learn to program with Racket, one game at a time.
@@ -499,7 +491,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img/size["beautiful-racket-cover.svg" #:alt "Beautiful Racket" #:size (cons 350 350)]{} }}}}}}
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["beautiful-racket-cover.svg" #:alt "Beautiful Racket" #:size (cons 350 350)]{}}}}}}}}
 
 ◊div[#:id "education" #:class "eco full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
@@ -508,7 +500,7 @@ ancestor(A, B)?}}}
    ◊table{
     ◊tr{
 
-    ◊td{ ◊p{
+    ◊td{ ◊div[#:class "smartphone-subheading"]{Education} ◊p{
 
       ◊link["https://school.racket-lang.org"]{The Racket Summer School}
       a summer school for researchers, professionals, and (under)graduate students to the Racket philosophy of programming languages 
@@ -521,15 +513,22 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊img/size["four.png" #:alt "The Four Amigos" #:size (cons 450 322)]{} }}}}}}
+    ◊td{◊div[#:class "disappear-if-smartphone"]{◊img/size["four.png" #:alt "The Four Amigos" #:size (cons 450 322)]{}}}}}}}}
 
-◊div[#:id "us" #:class "eco selected-block"]{
+
+◊div[#:id "stuff" #:class "eco full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
-  ◊div[#:class "container-fluid"]{
-   ◊img[#:style "margin-left:auto;margin-right:auto;display:block;text-align:center"
-        #:alt "eighth RacketCon, 2018"
-        #:src "img/racket-con-2018.png" #:class "lop-image-rc8"]{}}
-}}
+  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
+
+   ◊table{
+    ◊tr{
+
+    ◊td{ ◊div[#:class "smartphone-subheading"]{Swag}◊p{◊link["https://devswag.com/products/racket-t-shirt"]{Racket T-Shirts} — the perfect way to meet friends, influence people, and stay warm.
+
+      ◊link["https://devswag.com/products/racket"]{Racket Stickers} — the indispensable accessory for laptops and textbooks.}}
+
+    ◊td[#:class "disappear-if-smartphone"]{ }
+    ◊td[#:class "disappear-if-smartphone"]{◊div[#:class "disappear-if-smartphone"]{◊img/size["gear-and-stuff.jpg" #:alt "gear" #:scale .4]{}}}}}}}}
 
 ◊section[#:id "bottom" #:class "one-column-body-text" #:style "padding:0.5rem"]{
 ◊div{Thank you}

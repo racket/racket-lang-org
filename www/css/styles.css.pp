@@ -545,8 +545,20 @@ a, a:hover {
   .translations-code-example { display:block; align-items: center; }
   .translations-code-example-inner { display:block; align-items: center; }
   .center-if-smartphone{ text-align:center; }
+  .disappear-if-smartphone { display:none; }
+  .scale-if-smartphone { width: 100% }
   .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: column; }
-
+  .smartphone-subheading { font-size: 125%; font-weight: bolder; }
+  img.lop-image-rc8 {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height:auto;
+  }
+  img.lop-image {
+    max-width: 100%;
+    height:auto;
+  }
 }
 
 /* non smartphones */
@@ -563,7 +575,14 @@ a, a:hover {
   .frontpage-bar-nowrap-unless-smartphone {
      white-space:nowrap;
   }
+  .smartphone-subheading { display:none; }
   .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: row; }
+  img.lop-image-rc8 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 550px;
+    height: 318px;
+  }
 }
 
 }
