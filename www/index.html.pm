@@ -24,6 +24,7 @@
 ◊[define drracket-jfp "https://www2.ccs.neu.edu/racket/pubs/jfp01-fcffksf.pdf"]
 ◊[define pattern-macros "https://docs.racket-lang.org/guide/pattern-macros.html"]
 ◊[define racket/gui "https://docs.racket-lang.org/gui/"]
+◊[define drracket-docs "https://docs.racket-lang.org/drracket/"]
 ◊[define web-server "https://docs.racket-lang.org/web-server/index.html?q=%23lang%20web"]
 ◊[define packages "https://pkgs.racket-lang.org"]
 ◊[define raco-pkg "https://docs.racket-lang.org/pkg/getting-started.html?q=raco%20pkg#%28part._installing-packages%29"]
@@ -293,7 +294,7 @@ ancestor(A, B)?}}}
 
   ◊div{
     ◊p[#:class "block-with-1em-margin"]{
-       Racket comes with a comprehensive suite of libraries: ◊link[racket/gui]{a cross-platform GUI toolbox}, a ◊link[web-server]{web server}, and more. ◊link[packages]{Thousands of} ◊link[packages]{additional packages} are a ◊link[raco-pkg]{single command} away: 3D graphics, a bluetooth socket connector, color maps, data structures, educational software, games, a quantum-random number generator, scientific simulations, web script testing, and many more.}
+       Racket comes with a comprehensive suite of libraries: ◊link[racket/gui]{a cross-platform GUI toolbox}, a ◊link[web-server]{web server}, and more. ◊link[packages]{Thousands of additional packages} are a ◊link[raco-pkg]{single command} away: 3D graphics, a bluetooth socket connector, color maps, data structures, educational software, games, a quantum-random number generator, scientific simulations, web script testing, and many more.}
 
     ◊p[#:class "block-with-1em-margin"]{
       Macros work with these tools. The example on the left shows the implementation of a small number-guessing game. It is implemented in the GUI dialect of Racket, and demonstrates a number of language features.}}
@@ -345,7 +346,7 @@ ancestor(A, B)?}}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
-      Racket comes with its own IDE, ◊link[drracket-jfp]{DrRacket}, neé DrScheme, and it sports some unique features . For example, when a programmer mouses over an identifier, the IDE draws an arrow back to where it was defined.}
+      Racket comes with its own IDE, ◊link[drracket-docs]{DrRacket} (◊link[drracket-jfp]{neé DrScheme}), and it sports some unique features. For example, when a programmer mouses over an identifier, the IDE draws an arrow back to where it was defined.}
 
      ◊p[#:class "block-with-1em-margin"]{
       A programmer immediately benefits from DrRacket while using an alternative language, say ◊link[typed/racket]{Typed Racket}. Racket macros, even complex ones and those used to make new languages, record and propagate a sufficient amount of source information for DrRacket to act as if it understood the features of the new language.}}
@@ -400,7 +401,7 @@ ancestor(A, B)?}}}
 
     ◊td{ ◊div[#:class "smartphone-subheading"]{Software} ◊p{
 
-      ◊link["https://download.racket-lang.org/"]{Download Racket v7.8}
+      ◊link["https://download.racket-lang.org/"]{Download Racket}
 
       ◊link["https://github.com/racket/racket/"]{Source Code}
 
