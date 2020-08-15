@@ -7,7 +7,7 @@
 ◊section{
 ◊div{Racket World Map}
 
-◊iframe[#:src "https://www.google.com/maps/d/u/0/embed?mid=1i3zN11e_6te5ytduAiv1cidrIi4" #:width "640" #:height "480" #:align "top"]
+◊iframe[#:class "contributormap" #:src "https://www.google.com/maps/d/u/0/embed?mid=1i3zN11e_6te5ytduAiv1cidrIi4" #:align "top"]{}
 }
 
 
@@ -19,7 +19,7 @@
 
 ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}
 
-◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}
+◊link["https://www.cs.northwestern.edu/~robby/"]{Robby Findler}
 
 ◊link["http://www.cs.utah.edu/~mflatt/"]{Matthew Flatt}
 

@@ -300,7 +300,6 @@ ancestor(A, B)?}}}
 ◊div[#:id "big-macros" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
       ◊img/size["big-macros-class.png" #:alt "Big Macros" #:size (cons 350 350) #:class "lop-image"]{}}
@@ -312,12 +311,10 @@ ancestor(A, B)?}}}
      ◊p[#:class "block-with-1em-margin"]{
         While Racket is a functional language, it has offered a sub-language of ◊link[traits-aplas]{classes and objects, mixins and traits}, from the beginning. The macro-based implementation of a Java-like class system lives in a library and does not need any support from the core language. A Racket programmer can thus combine functional with object-oriented components as needed. }}
 
-}}}}
+}}}
 
 ◊div[#:id "hash-langs" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
-
-  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
 
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
@@ -329,12 +326,11 @@ ancestor(A, B)?}}}
 
      ◊p[#:class "block-with-1em-margin"]{
         Often ◊link[lang-video]{an application domain} comes with several languages.  When you need a new language, you make it—on the fly. Open an IDE window; create a language right there, with just a few keystrokes; and run a module in this new language in a second IDE window.  Making new languages really requires no setup, no project files, no external tools, no nothing.}
-}}}}}
+}}}}
 
 ◊div[#:id "ide-support" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
       ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 349 350) #:class "lop-image"]{}}
@@ -345,12 +341,11 @@ ancestor(A, B)?}}}
 
      ◊p[#:class "block-with-1em-margin"]{
       A programmer immediately benefits from DrRacket while using an alternative language, say ◊link[typed/racket]{Typed Racket}. Racket macros, even complex ones and those used to make new languages, record and propagate a sufficient amount of source information for DrRacket to act as if it understood the features of the new language.}}
-}}}}
+}}}
 
 ◊div[#:id "any-syntax" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-  ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
       ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 280) #:class "lop-image"]{}}
@@ -361,7 +356,7 @@ ancestor(A, B)?}}}
 
     ◊p[#:class "block-with-1em-margin"]{
       Racket's ecosystem comes with ◊link[br-parsing]{parsing packages} that allow developers to easily map any syntax to a parenthesized language, which is then compiled to ordinary Racket with the help of Racket's macro system. Such a language can also exploit the hooks of the IDE framework, so that its programmers may take advantage of Racket's IDE.}}
-}}}}
+}}}
 
 ◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"

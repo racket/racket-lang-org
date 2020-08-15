@@ -548,6 +548,10 @@ a, a:hover {
   .lang.active_expander .click-here { opacity: 0;}
 }
 
+.contributormap {
+  justify-content: space-around; align-items: center;
+}
+
 /* smartphones only */
 @media all and (max-width:460px) { 
 /* set max size for feature box to keep them all the same size */
@@ -569,6 +573,11 @@ a, a:hover {
   .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: column; }
   .smartphone-subheading { font-size: 125%; font-weight: bolder; }
   .top-section { flex-direction: column; }
+  .contributormap {
+     margin: 0 auto;
+     width:300px;
+     height:320px;
+    }
   img.lop-image-rc8 {
     margin-left: auto;
     margin-right: auto;
@@ -603,6 +612,11 @@ a, a:hover {
   }
   .smartphone-subheading { display:none; }
   .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: row; }
+  .contributormap {
+    margin: 0 auto;
+    width:640px;
+    height:480px;
+  }
   img.lop-image-rc8 {
     margin-left: auto;
     margin-right: auto;
