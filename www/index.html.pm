@@ -303,7 +303,7 @@ ancestor(A, B)?}}}
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["big-macros.png" #:alt "Big Macros" #:size (cons 350 350) #:class "lop-image"]{}}
+      ◊img/size["big-macros-class.png" #:alt "Big Macros" #:size (cons 350 350) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
