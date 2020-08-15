@@ -54,12 +54,12 @@
        #:onclick "openTab('the-language',event,'it','langtablink',false)"]{
   Racket, the Programming Language}}
 ◊div[#:class "frontpage-bar disappearing-late"]{
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'mature','langtablink',true)"]{◊div[#:style "mitem"]{Mature}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex4 unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Jet Fueled}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab langtablink" #:onclick "openTab('the-language',event,'extensible','langtablink',true)"]{◊div[#:style "mitem"]{Extensible}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'strong','langtablink',true)"]{◊div[#:style "mitem"]{Robust}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex2 unselected-tab langtablink" #:onclick "openTab('the-language',event,'drracket','langtablink',true)"]{◊div[#:style "mitem"]{Polished}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex5 unselected-tab langtablink" #:onclick "openTab('the-language',event,'open','langtablink',true)"]{◊div[#:style "mitem"]{Vibrant Community}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'mature','langtablink',true)"]{◊div[#:style "mitem"]{Mature}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Jet Fueled}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'extensible','langtablink',true)"]{◊div[#:style "mitem"]{Extensible}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'strong','langtablink',true)"]{◊div[#:style "mitem"]{Robust}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'drracket','langtablink',true)"]{◊div[#:style "mitem"]{Polished}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'open','langtablink',true)"]{◊div[#:style "mitem"]{Vibrant Community}}
 }}
 
 ◊div[#:id "it" #:class "the-language selected-block"]{
@@ -178,12 +178,12 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
        #:onclick "openTab('lop',event,'more-it','loptablink',false)"]{
   Racket, the Language-Oriented Programming Language}}
 ◊div[#:class "frontpage-bar disappearing-late"]{
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'little-macros','loptablink',true)"]{◊div[#:style "mitem"]{Little Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex4 unselected-tab loptablink" #:onclick "openTab('lop',event,'general-purpose','loptablink',true)"]{◊div[#:style "mitem"]{General Purpose}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'big-macros','loptablink',true)"]{◊div[#:style "mitem"]{Big Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'hash-langs','loptablink',true)"]{◊div[#:style "mitem"]{Easy DSLs}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'ide-support','loptablink',true)"]{◊div[#:style "mitem"]{IDE Support}}
-  ◊button[#:class "frontpage-bar-item frontpage-button frontpage-bar-flex3 unselected-tab loptablink" #:onclick "openTab('lop',event,'any-syntax','loptablink',true)"]{◊div[#:style "mitem"]{Any Syntax}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'little-macros','loptablink',true)"]{◊div[#:style "mitem"]{Little Macros}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'general-purpose','loptablink',true)"]{◊div[#:style "mitem"]{General Purpose}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'big-macros','loptablink',true)"]{◊div[#:style "mitem"]{Big Macros}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'hash-langs','loptablink',true)"]{◊div[#:style "mitem"]{Easy DSLs}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'ide-support','loptablink',true)"]{◊div[#:style "mitem"]{IDE Support}}
+  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'any-syntax','loptablink',true)"]{◊div[#:style "mitem"]{Any Syntax}}
 }}
 
 ◊div[#:id "more-it" #:class "lop selected-block"]{
@@ -366,12 +366,12 @@ ancestor(A, B)?}}}
        #:onclick "openTab('eco',event,'us','ecotablink',false)"]{
   Racket, the Ecosystem}}
 ◊div[#:class "frontpage-bar disappearing-late"]{
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'software','ecotablink',true)"]{◊div[#:style "mitem"]{Software}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex6 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'tutorials','ecotablink',true)"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'community','ecotablink',true)"]{◊div[#:style "mitem"]{Community}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex2 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'books','ecotablink',true)"]{◊div[#:style "mitem"]{Books}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'education','ecotablink',true)"]{◊div[#:style "mitem"]{Education}}
-  ◊button[#:class "frontpage-bar-item frontpage-bar-flex3 unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'stuff', 'ecotablink',true)"]{◊div[#:style "mitem"]{Swag}}
+  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'software','ecotablink',true)"]{◊div[#:style "mitem"]{Software}}
+  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'tutorials','ecotablink',true)"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
+  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'community','ecotablink',true)"]{◊div[#:style "mitem"]{Community}}
+  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'books','ecotablink',true)"]{◊div[#:style "mitem"]{Books}}
+  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'education','ecotablink',true)"]{◊div[#:style "mitem"]{Education}}
+  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'stuff', 'ecotablink',true)"]{◊div[#:style "mitem"]{Swag}}
 }}
 
 ◊div[#:id "us" #:class "eco selected-block"]{

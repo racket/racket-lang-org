@@ -134,21 +134,7 @@ section {
     overflow: hidden;
     padding-left: 0;
     padding-right: 0;
-}
-.frontpage-bar-flex2 {
-    flex: 2;
-}
-.frontpage-bar-flex3 {
-    flex: 3;
-}
-.frontpage-bar-flex4 {
-    flex: 4;
-}
-.frontpage-bar-flex5 {
-    flex: 5;
-}
-.frontpage-bar-flex6 {
-    flex: 6;
+    flex: auto;
 }
 
 .expander {
