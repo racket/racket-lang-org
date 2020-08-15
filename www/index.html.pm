@@ -310,7 +310,7 @@ ancestor(A, B)?}}}
        Getting to know the full Racket macro system will feel liberating, empowering, dazzling—like a whole new level of enlightenment. Developers can easily create a collection of co-operating macros to implement ◊link[racket/match]{algebraic pattern matching}, simple ◊link[2htdp/big-bang]{event-handling}, or a ◊link[miniKanren]{logic-constraint solver}.}
 
      ◊p[#:class "block-with-1em-margin"]{
-        While Racket is a functional language, it has offered a sub-language of ◊link[traits-aplas]{classes and objects, mixins and traits}, from the beginning.  A Racket programmer can therefore combine functional with object-oriented components as needed. To mimic Java's class system, 6,000-line macro library suffices. }}
+        While Racket is a functional language, it has offered a sub-language of ◊link[traits-aplas]{classes and objects, mixins and traits}, from the beginning. The macro-based implementation of a Java-like class system lives in a library and does not need any support from the core language. A Racket programmer can thus combine functional with object-oriented components as needed. }}
 
 }}}}
 
