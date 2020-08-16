@@ -65,15 +65,13 @@
 ◊div[#:id "it" #:class "the-language selected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
-   ◊div[#:class "translations-code-example"]{
-    ◊div{}
-    ◊div[#:class "translations-code-example-inner"]{
-      ◊div[#:class "center-if-smartphone"]{
+   ◊div[#:class "translations-code-example-container"]{
+    ◊div[#:class "center-if-smartphone"]{
         ◊img[#:alt "large logo"
              #:src "img/racket-logo.svg"
              #:class "big-logo"]{}
        }
-      ◊div{◊langwww["#lang racket/gui"]{
+      ◊div[#:class "code-to-right-of-big-logo"]{◊langwww["#lang racket/gui"]{
 ◊pre{
 (◊docs{define} my-language 'English)
 
@@ -93,9 +91,7 @@
 my-hello-world
 (◊docs{printf} "~a\n" my-hello-world)
 (◊docs{message-box} "" my-hello-world)}
-}}}
-
-    ◊div{}}}}}
+}}}}}}
 
 ◊div[#:id "extensible" #:class "the-language full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{

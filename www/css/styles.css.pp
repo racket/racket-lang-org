@@ -551,8 +551,6 @@ a, a:hover {
   .active_expander {border-color: gray;}
   .selected-block { display: block; }
   .unselected-block { display: block; }
-  .translations-code-example { display:block; align-items: center; }
-  .translations-code-example-inner { display:block; align-items: center; }
   .center-if-smartphone{ text-align:center; }
   .disappear-if-smartphone { display:none; }
   .scale-if-smartphone { width: 100% }
@@ -580,12 +578,12 @@ a, a:hover {
   .top-button {
     font-size: 60%;
   }
+  .translations-code-example-container { display:block; align-items: center; }
   .big-logo {
     margin-left: auto; margin-right: auto;
     margin-top: 20px; margin-bottom: 30px;
     width: 275px; height: 275px;
   }
-
 }
 
 /* non smartphones */
@@ -595,10 +593,6 @@ a, a:hover {
   .full-mode-menu-content { display: none; }
   .selected-block { display: block; }
   .unselected-block { display: none; }
-  .translations-code-example {
-    display:flex; justify-content: space-around; align-items: center;
-  }
-  .translations-code-example-inner { display:flex; }
   .frontpage-bar-nowrap-unless-smartphone {
      white-space:nowrap;
   }
@@ -615,8 +609,22 @@ a, a:hover {
     width: 550px;
     height: 318px;
   }
+  .translations-code-example-container {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: row;
+  }
   .big-logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     margin-right: 50px; margin-top: 20px; width: 275px; height: 275px;
+  }
+  .code-to-right-of-big-logo {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 }
 
