@@ -71,7 +71,7 @@
       ◊div[#:class "center-if-smartphone"]{
         ◊img[#:alt "large logo"
              #:src "img/racket-logo.svg"
-             #:style "margin-right: 50px; margin-top: 20px; width: 275px;height: 275px;"]{}
+             #:class "big-logo"]{}
        }
       ◊div{◊langwww["#lang racket/gui"]{
 ◊pre{

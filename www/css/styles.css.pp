@@ -580,6 +580,12 @@ a, a:hover {
   .top-button {
     font-size: 60%;
   }
+  .big-logo {
+    margin-left: auto; margin-right: auto;
+    margin-top: 20px; margin-bottom: 30px;
+    width: 275px; height: 275px;
+  }
+
 }
 
 /* non smartphones */
@@ -608,6 +614,9 @@ a, a:hover {
     margin-right: auto;
     width: 550px;
     height: 318px;
+  }
+  .big-logo {
+    margin-right: 50px; margin-top: 20px; width: 275px; height: 275px;
   }
 }
 
