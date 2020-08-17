@@ -110,7 +110,7 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
   (let ([tag-cache (make-hash)])
     (λ (name)
       (define xref (load-collections-xref))
-      (define docs-to-search (list 'racket/base 'web-server/http/xexpr '2htdp/image 'scribble/base 'typed/racket 'racket/gui))
+      (define docs-to-search (list 'racket/base 'web-server/http/xexpr '2htdp/image 'scribble/base 'typed/racket 'racket/gui 'syntax/parse))
       (hash-ref! tag-cache name (λ _
                                   (for/or ([module-path (in-list docs-to-search)])
                                           (xref-binding->definition-tag xref (list module-path (->symbol name)) #f)))))))
