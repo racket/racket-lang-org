@@ -50,7 +50,7 @@ The Lindenmayer language provides a language for running and interpreting Linden
 Parenlog in an implementation of a language very similar to pure Prolog, except with parenthetical notation.
 
 
- ◊link["https://docs.racket-lang.org/pie/"]{Parenlog}
+ ◊link["https://docs.racket-lang.org/pie/"]{Pie}
 
 Pie is a little language with dependent types that accompanies The Little Typer.
 

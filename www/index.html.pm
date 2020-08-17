@@ -85,7 +85,7 @@
         [Thai . "สวัสดีชาวโลก"]))
 
 (◊docs{define} my-hello-world
-  (hash-ref translations my-language
+  (◊docs{hash-ref} translations my-language
             "hello world"))
 
 my-hello-world
@@ -228,7 +228,7 @@ ancestor(A, B)?}}}
 ◊pre{
 (◊docs{provide} time-it)
 
-(◊docs{require} (for-syntax syntax/parse))
+(◊docs{require} (◊docs{for-syntax} syntax/parse))
 
 (◊docs{define-syntax} (time-it stx)
   (◊docs{syntax-parse} stx 
@@ -265,7 +265,7 @@ ancestor(A, B)?}}}
 ◊langwww["#lang racket/gui" #:style "font-size:75%"]{
 ◊pre{;; let's play a guessing game
 
-(◊docs{define} frame (◊docs{new} frame% [label "Guess"]))
+(◊docs{define} frame (◊docs{new} ◊docs{frame%} [label "Guess"]))
 
 (◊docs{define} secret (◊docs{random} 5)) 
 (◊docs{define} ((check i) btn evt)
@@ -275,7 +275,7 @@ ancestor(A, B)?}}}
     (◊docs{send} frame show #false)))
 
 (◊docs{for} ([i (◊docs{in-range} 5)]) 
-   (◊docs{new} button%
+   (◊docs{new} ◊docs{button%}
 	[label (~a i)]
 	[parent frame]
 	[callback (check i)]))
