@@ -190,7 +190,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 ◊langwww["#lang typed/racket" #:id "lang3"]{
 ◊pre{;; Using higher-order occurrence typing
 (◊docs{define-type} SrN (◊docs{U} ◊docs{String} ◊docs{Number}))
-(◊docs{:} tog ((◊docs{Listof} SrN) -> ◊docs{String})
+(◊docs{:} tog ((◊docs{Listof} SrN) -> ◊docs{String}))
 (◊docs{define} (tog l)
   (◊docs{apply} ◊docs{string-append}
          (◊docs{filter} ◊docs{string?} l)))
