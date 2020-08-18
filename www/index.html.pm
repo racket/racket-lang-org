@@ -77,7 +77,7 @@
 
 (◊docs{define} translations
   #hash([English . "Hello world"]
-        [French . "Allô le monde"]
+        [French . "Bonjour le monde"]
         [German . "Hallo Welt"]
         [Greek . "Γειά σου, κόσμε"]
         [Portuguese . "Olá mundo"]
@@ -333,7 +333,7 @@ ancestor(A, B)?}}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
-      Racket comes with its own IDE, ◊link[drracket-docs]{DrRacket} (◊link[drracket-jfp]{neé DrScheme}), and it sports some unique features. For example, when a programmer mouses over an identifier, the IDE draws an arrow back to where it was defined.}
+      Racket comes with its own IDE, ◊link[drracket-docs]{DrRacket} (◊link[drracket-jfp]{née DrScheme}), and it sports some unique features. For example, when a programmer mouses over an identifier, the IDE draws an arrow back to where it was defined.}
 
      ◊p[#:class "block-with-1em-margin"]{
       A programmer immediately benefits from DrRacket while using an alternative language, say ◊link[typed/racket]{Typed Racket}. Racket macros, even complex ones and those used to make new languages, record and propagate a sufficient amount of source information for DrRacket to act as if it understood the features of the new language.}}
