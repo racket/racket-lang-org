@@ -129,7 +129,6 @@
 (current-directory orig-dir)
 
 (cond
-  [(not save-temps?) (delete-directory/files tmp-dir)]
   [(not render-locally?) (printf "Files saved in ~a\n" tmp-dir)]
   [else 
     ;; move rendered pages into place 
@@ -138,6 +137,7 @@
     (define tmp-src (build-path tmp-dir "generated"))
     (define local-dest render-locally?)
     (copy-directory/files tmp-src local-dest #:preserve-links? #t)
+    (when (not save-temps?) (delete-directory/files tmp-dir))
 
     ;; generate and move code into place
     #;
