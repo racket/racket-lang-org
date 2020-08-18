@@ -29,6 +29,8 @@ To build:
 
 * The simplest way to build the whole site is with 
 
+  [the below command requires you to first install the racket-lang-org directory as a package]
+
   racket -l- racket-lang-org/sync --save-temps --render-locally Web ; open Web/www/index.html
 
   This renders the site in some temp directory and then moves the directory
