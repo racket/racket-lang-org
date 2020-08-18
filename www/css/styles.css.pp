@@ -506,7 +506,7 @@ a, a:hover {
 }
 
 .langwww{
-  color: rgb(115,115,115);
+  color: rgb(100,100,100);
 }
 
 .block-with-1em-margin {
