@@ -505,6 +505,10 @@ a, a:hover {
   transition: color 0.2s;
 }
 
+langwww {
+  color: rgb(115,115,115);
+  font-weight: bold;
+}
 
 .langwww {
     ~height: 11.5rem;
