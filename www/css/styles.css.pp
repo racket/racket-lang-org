@@ -505,14 +505,8 @@ a, a:hover {
   transition: color 0.2s;
 }
 
-
-.langwww {
-    ~height: 11.5rem;
-    height: 12rem;
-    padding: 0.5rem;
-    padding-top: 0;
-    padding-bottom: 0.25rem;
-    opacity: .5;
+.langwww{
+  color: rgb(115,115,115);
 }
 
 .block-with-1em-margin {

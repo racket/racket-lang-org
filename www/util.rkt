@@ -1,7 +1,8 @@
 #lang racket
-(require racket/runtime-path racket/draw)
+(require racket/runtime-path racket/draw pollen/tag)
 (define-runtime-path img/ "img")
 (provide
+ langwww
  (contract-out
   [img/size
    (->* (string? #:alt string?)
@@ -25,3 +26,5 @@
          ,@(if img-class
                (list `(class ,img-class))
                (list)))))
+
+(define langwww (default-tag-function 'div #:class "langwww"))
