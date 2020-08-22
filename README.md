@@ -27,13 +27,20 @@ To build:
 
  [See "upload" and `--dry-run` for an alternative]
 
-* The simplest way to build the whole site is with 
+* The simplest way to build the whole site is to
 
+  1. install this directory as a package with `raco pkg install`
+  2. run the command below:
+
+```
   racket -l- racket-lang-org/sync --save-temps --render-locally Web ; open Web/www/index.html
+```
 
-  This renders the site in some temp directory and then moves the directory
+* This renders the site in some temp directory and then moves the directory
   to 'Web` here. It will also open the front-page index file in your
   default browser on the Mac.
+
+You may encounter some problems. Check below first:
 
 * `pollen` problems 
 
