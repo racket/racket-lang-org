@@ -250,9 +250,9 @@ ancestor(A, B)?}}}
     ◊p[#:class "block-with-1em-margin"]{
      Racket allows programmers to ◊link[pattern-macros]{add new syntactic constructs} in the same way that other languages permit the formulation of procedures, methods, or classes.  All you need to do is formulate a simple rule that rewrites a custom syntax to a Racket expression or definition.
     }
-
+◊;{the `abc` tag is a random one; I'm not sure what is the right thing to put there but `div` doesn't work.}
     ◊p[#:class "block-with-1em-margin"]{
-     Little macros can particularly help programmers with DRY where other features can't. The example on the left shows how to define a new syntax for measuring the time a task takes. The syntax avoids the repeated use of lambda. Note also how the macro is exported from this module as if it were an ordinary function.
+     Little macros can particularly help programmers with DRY where other features can't. The example ◊abc[#:class "disappear-if-smartphone"]{on the left} ◊abc[#:class "smartphone-only"]{above} shows how to define a new syntax for measuring the time a task takes. The syntax avoids the repeated use of lambda. Note also how the macro is exported from this module as if it were an ordinary function.
 }}}}}
 
 ◊div[#:id "general-purpose" #:class "lop full-mode-menu-content unselected-block"]{
@@ -383,7 +383,7 @@ ancestor(A, B)?}}}
   ◊table{
     ◊tr{
 
-    ◊td{ ◊div[#:class "smartphone-subheading"]{Software} ◊p{
+    ◊td{ ◊div[#:class "smartphone-only"]{Software} ◊p{
 
       ◊link["https://download.racket-lang.org/"]{Download Racket}
 
@@ -406,7 +406,7 @@ ancestor(A, B)?}}}
   ◊table{
     ◊tr{
 
-    ◊td{ ◊div[#:class "smartphone-subheading"]{Tutorials & Documentation} ◊p{
+    ◊td{ ◊div[#:class "smartphone-only"]{Tutorials & Documentation} ◊p{
 
       ◊link["https://docs.racket-lang.org/quick/"]{Quick Introduction}
 
@@ -431,7 +431,7 @@ ancestor(A, B)?}}}
    ◊table{
     ◊tr{
 
-    ◊td{ ◊div[#:class "smartphone-subheading"]{Community} ◊p{
+    ◊td{ ◊div[#:class "smartphone-only"]{Community} ◊p{
 
       ◊link["friendly.html"]{Friendly environment policy}
 
@@ -463,7 +463,7 @@ ancestor(A, B)?}}}
    ◊table{
     ◊tr{
 
-    ◊td{ ◊div[#:class "smartphone-subheading"]{Books} ◊p{
+    ◊td{ ◊div[#:class "smartphone-only"]{Books} ◊p{
 
       ◊link["https://www.realmofracket.com/"]{Realm of Racket}
       Learn to program with Racket, one game at a time.
@@ -487,7 +487,7 @@ ancestor(A, B)?}}}
    ◊table{
     ◊tr{
 
-    ◊td{ ◊div[#:class "smartphone-subheading"]{Education} ◊p{
+    ◊td{ ◊div[#:class "smartphone-only"]{Education} ◊p{
 
       ◊link["https://school.racket-lang.org"]{The Racket Summer School}
       a summer school for researchers, professionals, and (under)graduate students to the Racket philosophy of programming languages 
@@ -510,7 +510,7 @@ ancestor(A, B)?}}}
    ◊table{
     ◊tr{
 
-    ◊td{ ◊div[#:class "smartphone-subheading"]{Swag}◊p{◊link["https://devswag.com/products/racket-t-shirt"]{Racket T-Shirts} — the perfect way to meet friends, influence people, and stay warm.
+    ◊td{ ◊div[#:class "smartphone-only"]{Swag}◊p{◊link["https://devswag.com/products/racket-t-shirt"]{Racket T-Shirts} — the perfect way to meet friends, influence people, and stay warm.
 
       ◊link["https://devswag.com/products/racket"]{Racket Stickers} — the indispensable accessory for laptops and textbooks.}}
 

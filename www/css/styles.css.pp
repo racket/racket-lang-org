@@ -590,7 +590,7 @@ a, a:hover {
   .frontpage-bar-nowrap-unless-smartphone {
      white-space:nowrap;
   }
-  .smartphone-subheading { display:none; }
+  .smartphone-only { display: none; }
   .vertical-in-smartphones-horizontal-otherwise{ display:flex; flex-direction: row; }
   .contributormap {
     margin: 0 auto;
