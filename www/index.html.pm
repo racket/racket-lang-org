@@ -445,6 +445,8 @@ ancestor(A, B)?}}}
 
       ◊link["https://twitter.com/racketlang"]{@racketlang} on Twitter
 
+      ◊link["https://www.youtube.com/c/racketlang/playlists"]{Racket channel} on YouTube
+
       ◊link["team.html"]{Team}
       Racket's development benefits from a large distributed pool of contributors. 
 
