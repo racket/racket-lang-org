@@ -286,7 +286,7 @@ ancestor(A, B)?}}}
        Racket comes with a comprehensive suite of libraries: ◊link[racket/gui]{a cross-platform GUI toolbox}, a ◊link[web-server]{web server}, and more. ◊link[packages]{Thousands of additional packages} are a ◊link[raco-pkg]{single command} away: 3D graphics, a bluetooth socket connector, color maps, data structures, educational software, games, a quantum-random number generator, scientific simulations, web script testing, and many more.}
 
     ◊p[#:class "block-with-1em-margin"]{
-      Macros work with these tools. The example on the left shows the implementation of a small number-guessing game. It is implemented in the GUI dialect of Racket, and demonstrates a number of language features.}}
+      Macros work with these tools. The example ◊abc[#:class "disappear-if-smartphone"]{on the left} ◊abc[#:class "smartphone-only"]{above} shows the implementation of a small number-guessing game. It is implemented in the GUI dialect of Racket, and demonstrates a number of language features.}}
 
 }}}
 
