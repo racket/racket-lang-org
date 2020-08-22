@@ -91,30 +91,6 @@
 (◊docs{message-box} "" my-hello-world)}
 }}}}}}
 
-◊div[#:id "extensible" #:class "the-language full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
-In Racket, programmers define their own loops with ◊strong{powerful macros}. Indeed, these macros are so powerful that programmers make entire ◊strong{domain-specific languages} as libraries. No tools, no Makefiles required. 
-
-◊doclinks{
-◊link["https://docs.racket-lang.org/guide/macros.html"]{Intro To Macros}
-◊link["https://docs.racket-lang.org/reference/Macros.html"]{Macros In Depth}
-◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{Making New Languages}
-◊link["languages.html"]{Sample #Langs}}
-}}
-
-◊div[#:id "strong" #:class "the-language full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
-Racket is the first language to support ◊strong{higher-order software contracts} and ◊strong{safe gradual typing}. Programmers can easily deploy these tools to harden their software. 
-
-◊doclinks{
-◊link["https://docs.racket-lang.org/guide/contracts.html"]{The Contract Guide}
-◊link["https://www2.ccs.neu.edu/racket/pubs/icfp2002-ff.pdf"]{High-Order Contracts}
-◊link["https://docs.racket-lang.org/ts-guide/index.html"]{The Typed Racket Guide}
-◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{Gradual Typing}}
-}}
-
 ◊div[#:id "mature" #:class "the-language full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
@@ -137,6 +113,30 @@ Racket includes a rich set of libraries, covering the full range from web server
 ◊doclink["db"]{Database}
 ◊doclink["math"]{Math & Statistics}
 ◊link["https://docs.racket-lang.org"]{Full List ◊begin['rarr]}}
+}}
+
+◊div[#:id "extensible" #:class "the-language full-mode-menu-content unselected-block"]{
+ ◊special-section[#:class "one-column-body-text"]{
+
+In Racket, programmers define their own loops with ◊strong{powerful macros}. Indeed, these macros are so powerful that programmers make entire ◊strong{domain-specific languages} as libraries. No tools, no Makefiles required. 
+
+◊doclinks{
+◊link["https://docs.racket-lang.org/guide/macros.html"]{Intro To Macros}
+◊link["https://docs.racket-lang.org/reference/Macros.html"]{Macros In Depth}
+◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{Making New Languages}
+◊link["languages.html"]{Sample #Langs}}
+}}
+
+◊div[#:id "strong" #:class "the-language full-mode-menu-content unselected-block"]{
+ ◊special-section[#:class "one-column-body-text"]{
+
+Racket is the first language to support ◊strong{higher-order software contracts} and ◊strong{safe gradual typing}. Programmers can easily deploy these tools to harden their software. 
+
+◊doclinks{
+◊link["https://docs.racket-lang.org/guide/contracts.html"]{The Contract Guide}
+◊link["https://www2.ccs.neu.edu/racket/pubs/icfp2002-ff.pdf"]{High-Order Contracts}
+◊link["https://docs.racket-lang.org/ts-guide/index.html"]{The Typed Racket Guide}
+◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{Gradual Typing}}
 }}
 
 ◊div[#:id "drracket" #:class "the-language full-mode-menu-content unselected-block"]{
