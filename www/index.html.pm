@@ -161,7 +161,7 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
 ◊doclinks{
 ◊link["https://lists.racket-lang.org/"]{Mailing List} 
-◊link["https://blog.racket-lang.org/2017/09/tutorial-contributing-to-racket.html"]{Contributing} 
+◊link["https://docs.racket-lang.org/racket-build-guide/contribute.html"]{Contributing} 
 ◊link["https://twitter.com/racketlang"]{Twitter}
 ◊link["https://github.com/racket/racket/"]{Github}}
 }}
