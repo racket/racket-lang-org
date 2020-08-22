@@ -88,15 +88,13 @@
   (◊docs{hash-ref} translations my-language
             "hello world"))
 
-my-hello-world
-(◊docs{printf} "~a\n" my-hello-world)
 (◊docs{message-box} "" my-hello-world)}
 }}}}}}
 
 ◊div[#:id "extensible" #:class "the-language full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-Racket is the first general-purpose programming language that empowers programmers to make ◊strong{domain-specific languages}  as libraries from ◊strong{powerful macros}. No external tools, no make files required. 
+In Racket, programmers define their own loops with ◊strong{powerful macros}. Indeed, these macros are so powerful that programmers make entire ◊strong{domain-specific languages} as libraries. No tools, no Makefiles required. 
 
 ◊doclinks{
 ◊link["https://docs.racket-lang.org/guide/macros.html"]{Intro To Macros}
@@ -210,8 +208,8 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 
     ◊div[#:class "block-with-1em-margin"]{ 
 ◊langwww["#lang datalog" #:id "lang4"]{
-◊pre{ancestor(A, B) :- parent(A, B).
-ancestor(A, B) :-
+◊pre{ancestor(A, B) ◊link["https://docs.racket-lang.org/datalog/interop.html?q=%3A-#%28form._%28%28lib._datalog%2Fmain..rkt%29._~3a-%29%29"]{:-} parent(A, B).
+ancestor(A, B) ◊link["https://docs.racket-lang.org/datalog/interop.html?q=%3A-#%28form._%28%28lib._datalog%2Fmain..rkt%29._~3a-%29%29"]{:-}
   parent(A, C), ancestor(C, B).
 parent(john, douglas).
 parent(bob, john).
@@ -348,7 +346,7 @@ ancestor(A, B)?}}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
-       Racket programmers usually love parentheses, but they have empathy for those few who need commas and braces.  Hence, building languages with conventional surface syntax, like that of ◊link[datalog]{datalog}, is almost as easy as building parenthetical languages.}
+       Racket programmers usually love parentheses, but they have empathy for those who need commas and braces.  Hence, building languages with conventional surface syntax, like that of ◊link[datalog]{datalog}, is almost as easy as building parenthetical languages.}
 
     ◊p[#:class "block-with-1em-margin"]{
       Racket's ecosystem comes with ◊link[br-parsing]{parsing packages} that allow developers to easily map any syntax to a parenthesized language, which is then compiled to ordinary Racket with the help of Racket's macro system. Such a language can also exploit the hooks of the IDE framework, so that its programmers may take advantage of Racket's IDE.}}
