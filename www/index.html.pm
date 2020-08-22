@@ -269,12 +269,12 @@ ancestor(A, B)?}}}
 (◊docs{define} ((check i) btn evt)
   (◊docs{define} found? (◊docs{if} (◊docs{=} i secret) "Yes" "No"))
   (◊docs{message-box} "?" found?)
-  (◊docs{when} (= i secret) 
+  (◊docs{when} (◊docs{=} i secret)
     (◊docs{send} frame show #false)))
 
 (◊docs{for} ([i (◊docs{in-range} 5)]) 
    (◊docs{new} ◊docs{button%}
-	[label (~a i)]
+	[label (◊docs{~a} i)]
 	[parent frame]
 	[callback (check i)]))
 
