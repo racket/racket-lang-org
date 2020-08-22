@@ -519,7 +519,17 @@ ancestor(A, B)?}}}
 
 ◊section[#:id "bottom" #:class "one-column-body-text" #:style "padding:0.5rem"]{
 ◊div{Thank you}
-◊div{To ◊link["http://www.nsf.gov/"]{the NSF}, ◊link["http://www.darpa.mil/"]{DARPA}, the ◊link["http://www.ed.gov/FIPSE/"]{Fund for the Improvement of Postsecondary Education (FIPSE)} at the ◊link["http://www.ed.gov/"]{US Department of Education}, the ◊link["http://www.exxonmobil.com/Corporate/community_foundation.aspx"]{Exxon Foundation}, CORD, partners of the Academy of Information Technology, ◊link["http://microsoft.com/"]{Microsoft}, ◊link["http://mozilla.org/"]{Mozilla}, and ◊link["http://google.com/"]{Google} for their generous support over the years.}}
+◊div{To ◊link["http://www.nsf.gov/"]{the NSF},
+◊link["http://www.darpa.mil/"]{DARPA}, the
+◊link["http://www.ed.gov/FIPSE/"]{Fund for the Improvement of
+Postsecondary Education (FIPSE)} at the ◊link["http://www.ed.gov/"]{US
+Department of Education}, the
+◊link["http://www.exxonmobil.com/Corporate/community_foundation.aspx"]{Exxon
+Foundation}, CORD, partners of the Academy of Information Technology,
+◊link["http://microsoft.com/"]{Microsoft},
+◊link["http://mozilla.org/"]{Mozilla},
+◊link["http://google.com/"]{Google}, and many ◊link["individuals.html"]{individuals} 
+for their generous support over the years.}}
 
 ◊script[#:src "js/jquery.min.js"]{}
 
