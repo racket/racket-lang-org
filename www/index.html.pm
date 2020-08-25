@@ -6,8 +6,9 @@
 
 ◊(define (top)
   ◊top-section{
-   ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
-    ◊img[#:alt "small logo" #:src "img/racket-logo.svg" #:class "logo"] Racket}
+   ◊a[#:href "/" #:class "logo-anchor"]{
+    ◊span[#:id "logo" #:style "font-size:2.3rem;white-space:nowrap;"]{
+     ◊img[#:alt "small logo" #:src "img/racket-logo.svg" #:class "logo"] Racket}}
 
   ◊div[#:class "margin-above-if-smartphone"]{
    ◊link[#:class "top-button" #:id "packages" "sfc.html"]{donate}

@@ -74,7 +74,14 @@ section {
  }
 }
 
-
+.logo-anchor {
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+}
+.logo-anchor:hover {
+  opacity: 1;
+}
 
 .selected-tab {
   ◊|selected-tab-css|
