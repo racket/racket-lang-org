@@ -83,7 +83,8 @@
         [Greek . "Γειά σου, κόσμε"]
         [Portuguese . "Olá mundo"]
         [Spanish . "Hola mundo"]
-        [Thai . "สวัสดีชาวโลก"]))
+        [Thai . "สวัสดีชาวโลก"]
+	[Turkish . "Merhaba Dünya"]))
 
 (◊docs{define} my-hello-world
   (◊docs{hash-ref} translations my-language
