@@ -84,7 +84,7 @@
         [Portuguese . "Olá mundo"]
         [Spanish . "Hola mundo"]
         [Thai . "สวัสดีชาวโลก"]
-	[Turkish . "Merhaba Dünya"]))
+        [Turkish . "Merhaba Dünya"]))
 
 (◊docs{define} my-hello-world
   (◊docs{hash-ref} translations my-language
