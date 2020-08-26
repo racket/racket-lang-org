@@ -297,7 +297,7 @@ ancestor(A, B)?}}}
 
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["big-macros-class.png" #:alt "Big Macros" #:size (cons 350 350) #:class "lop-image"]{}}
+      ◊img/size["big-macros-class.png" #:alt "Big Macros" #:size (cons 350 262) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
@@ -328,7 +328,7 @@ ancestor(A, B)?}}}
 
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["ide-support.png" #:alt "IDE Support" #:size (cons 349 350) #:class "lop-image"]{}}
+      ◊img/size["ide-support.png" #:alt "IDE Support" #:scale .3 #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
