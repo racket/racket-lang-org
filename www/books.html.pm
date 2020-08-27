@@ -22,7 +22,7 @@ An introduction to computer science using Scheme.
 ◊link["https://beautifulracket.com/"]{Beautiful Racket}
 Make your own programming languages with Racket.
 
-◊link["http://serverracket.com"]{Server: Racket}
+◊link["https://serverracket.com"]{Server: Racket}
 Develop a web application with Racket.
 
 ◊link["https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/"]{Programming Languages: 
