@@ -521,9 +521,7 @@ a, a:hover {
 }
 
 @media all and (max-width:650px) {
-@media all and (max-width:650px){html {font-size: 16px;}}
-@media all and (max-width:590.0px){html {font-size: 15px;}}
-@media all and (max-width:530.0px){html {font-size: 14px;}}
+  html {font-size: 16px;}
   body {padding: 1rem;}
   section {flex-direction: column;}
   section-title {width: 100%; margin-bottom: 1rem;}
@@ -540,7 +538,7 @@ a, a:hover {
 }
 
 /* smartphones only */
-@media all and (max-width:550px) {
+@media all and (max-width:650px) {
 /* set max size for feature box to keep them all the same size */
   .feature { height : 8.5rem; }
   .feature > .inner {display: none;} /* prevents passthrough clicks */
@@ -588,7 +586,7 @@ a, a:hover {
 }
 
 /* non smartphones */
-@media not all and (max-width:550px) {
+@media not all and (max-width:650px) {
   /* this causes the non-initial menu content to be hidden
      in regular mode, visible in smartphone mode */
   .full-mode-menu-content { display: none; }
