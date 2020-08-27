@@ -7,6 +7,8 @@
 ◊section{
 Individual Supporters 
 
+Aaron Ang
+Byron Davies
 Alex Knauth
 Geoffrey Knauth
 Laurent Orseau
