@@ -1,6 +1,6 @@
 #lang plt-web
 
-(require plt-web/style "resources.rkt" "community.rkt")
+(require plt-web/style "resources.rkt")
 
 (provide help)
 (define help
@@ -33,7 +33,6 @@
    @parlist[@strong{The Mailing List}
             @text{The @tt|{users@racket-lang.org}| mailing list is a great
                   source for answers to questions when the above resources
-                  don't pan out@";" sign up for it in the @community area of
-                  the website.}]
+                  don't pan out@";" sign up .}]
    @br
    @text{Thanks for using Racket!}}})
