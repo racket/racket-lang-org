@@ -7,7 +7,6 @@
 ◊section{
 Individual Supporters 
 
-37 anonymous supporters
 Aaron Ang
 Byron Davies
 Alex Knauth
@@ -15,6 +14,7 @@ Geoffrey Knauth
 Laurent Orseau
 Winston Weinert
 Huma Zafar
+and 37 anonymous individuals
 
 Brian Adkins
 David Alkire
