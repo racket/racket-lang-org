@@ -625,6 +625,17 @@ a, a:hover {
     justify-content: center;
     flex-direction: column;
   }
+  .individuals-outer-div {
+     display: flex;
+     flex-direction: horizontal;
+     width:200%
+  }
+  .individuals-right-div {
+     padding: 0px 0px 0px 40px;
+  }
+  .individuals-left-div {
+     padding: 0px 40px 0px 0px;
+  }
 }
 
 }
