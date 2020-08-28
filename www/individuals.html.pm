@@ -7,6 +7,7 @@
 ◊section{
 Individual Supporters 
 
+37 anonymous supporters
 Aaron Ang
 Byron Davies
 Alex Knauth
