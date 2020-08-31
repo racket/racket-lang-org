@@ -3,7 +3,7 @@
 ◊(define debug-width 0)
 ◊(define max-width 1050)
 
-◊(make-media-query 16 8 max-width 60 .5)   
+◊(make-media-query 16 6 max-width 60 .5)
 
 * {
   margin: 0;
@@ -575,7 +575,8 @@ a, a:hover {
     margin: 6px 0 0 0;
   }
   .top-button {
-    font-size: 60%;
+    font-size: 50%;
+    margin: -4px;
   }
   .translations-code-example-container { display:block; align-items: center; }
   .big-logo {
