@@ -1,5 +1,6 @@
 #lang at-exp racket/base
-(require xml
+(require racket/match
+         xml
          "lib.rkt")
 
 (define-div column
@@ -71,7 +72,7 @@
 (define-span faded
   [color "gray"])
 
-(define-div talk-time
+(define-div talk-time-div
   [font-weight bold]
   [position absolute]
   [color "gray"])
@@ -106,6 +107,20 @@
 (define (bio . contents)
  (apply bio-div @bold{Bio: } contents))
 
+(define slot-number 0)
+(define (talk-time dtime)
+ (set! slot-number (add1 slot-number))
+ (local-require racket/string gregor)
+ (match-define (list day times) (string-split dtime ","))
+ (define d (match day
+             ["Friday"   (date 2020 10 16)]
+             ["Saturday" (date 2020 10 17)]
+             ["Sunday"   (date 2020 10 18)]))
+ (define t (parse-time times " h:mmaa"))
+ (define tf (~t (on-date t d) "YYYYMMdd'T'HHmm"))
+ (define tl (a #:href (format "https://24timezones.com/event?st=~a&l=c143&txt=RacketCon 2020 Slot ~a" tf slot-number) "🕘"))
+ @talk-time-div{@|tl| @|dtime|})
+
 ;; ------------------------------------------------------------
 
 (define page
@@ -133,7 +148,7 @@
 
   @lecture[
 #:when
-@talk-time{Friday, 2pm}
+@talk-time{Friday, 2:00pm}
 #:who
 @speaker{@bold{Virtual Biergarten}}
 ]
@@ -414,7 +429,7 @@ Typed Racket adds a new dimension to Racket; any module in a program can be stre
 #:more
 @abstract{
 
-Please come with your big questions to ask our CPS.
+Please come with your big questions to ask Racket's CPS.
 
 }]
 
