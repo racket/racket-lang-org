@@ -43,7 +43,7 @@
 ◊ul[#:class "doclinks"]{
  ◊li{◊link["https://blog.racket-lang.org/2020/08/racket-v7-8.html"]{Racket version 7.8} is available.}
 
- ◊li{◊link["https://con.racket-lang.org/"]{tenth RacketCon} will be held online in October.}}}
+ ◊li{◊link["https://con.racket-lang.org/"]{tenth RacketCon, Oct 16-18, online}}}}
 
 
 ◊div[#:class "frontpage-card"]{
