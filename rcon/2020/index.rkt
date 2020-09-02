@@ -83,11 +83,14 @@
   [top 0])
 
 (define-div speech
-  [margin-top "1em"]
+  [margin-top "2em"]
   [position relative])
 
 (define-div bio-div
   [margin-top "0.5em"])
+
+(define (script . contents)
+ `(script ,@(map (λ (x) (cdata #f #f x)) contents)))
 
 ;; ------------------------------------------------------------
 
@@ -117,9 +120,11 @@
              ["Saturday" (date 2020 10 17)]
              ["Sunday"   (date 2020 10 18)]))
  (define t (parse-time times " h:mmaa"))
- (define tf (~t (on-date t d) "YYYYMMdd'T'HHmm"))
- (define tl (a #:href (format "https://24timezones.com/event?st=~a&l=c143&txt=RacketCon 2020 Slot ~a" tf slot-number) "🕘"))
- @talk-time-div{@|tl| @|dtime|})
+ (define tz (with-timezone (on-date t d) "America/New_York"))
+ (define m (adjust-timezone tz "Etc/UTC"))
+ (talk-time-div
+  `(span ([data-slot-time ,(moment->iso8601 m)])
+    ,(~t tz "EEEE, h:mma zz"))))
 
 ;; ------------------------------------------------------------
 
@@ -130,7 +135,17 @@
           #:rel "stylesheet")
     (style (cdata #f #f (classes->string)))
     (style (cdata #f #f "a { text-decoration: none; } "))
+    `(script ([src      "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"]) "")
+    `(script ([src "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"]) "")
+    `(script ([src "https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data-10-year-range.js"]) "")
     @title{(chaperone (tenth RacketCon))}
+    @script{
+$(document).ready(function () {
+ var zone = moment.tz.guess();
+ $("[data-slot-time]").each(function() {
+  var date = new Date($(this).data("slot-time"));
+  var localTime = moment.tz(date, zone).format("dddd, h:mma zz")
+  $(this).html(localTime); }); }); }
     (body
      #:class "main"
      (banner
