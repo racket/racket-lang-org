@@ -358,7 +358,19 @@ Please come with your big questions and discussion topics.
 #:more
 @abstract{
 
-If you’re into testing, you might like the challenge of doing system (or integration) tests for a menageries of JSON-speaking HTTP APIs, organized as distinct microservices. Sure, you can write those tests using whatever language was used to make the microservices. But what if those tests start to look awkward and ugly? Would you make a #lang? With Racket, you certainly can, and I did! In Riposte I made a DSL that tries to compactly express the some of the domain of a JSON-based HTTP APIs. In this domain, URI Template, JSON Schema, a handful of rough-and-ready languages for specifying HTTP requests, and (of course) JSON are just some commonly occurring languages used to express concepts in this domain. In Riposte, they are available as-is (not in an encoded form). Come find out how I made this with Racket!
+If you’re into testing, you might like the challenge of doing system
+(or integration) tests for a menagerie of JSON-speaking HTTP APIs,
+organized as distinct microservices. Sure, you can write those system
+tests using whatever language you want (for example, the language in
+which the microservices were written). But what if those tests start
+to look awkward and ugly? Would you make a #lang? With Racket, you
+certainly can, and I did! Riposte is my DSL that tries to compactly
+express (some of) the domain of JSON-based HTTP APIs. Here, URI
+Template, JSON Schema, a rough-and-ready language for specifying HTTP
+requests, and (of course) JSON are just some commonly occurring
+languages used to express concepts in this domain. In Riposte, they
+are available as-is (not in an encoded form, and without using
+S-expressions). Come find out how I made this with Racket!
 
 @bio{Jesse Alama is a theorem prover who works at a PHP shop in Germany as a full-stack developer.}
 
