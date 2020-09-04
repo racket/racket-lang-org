@@ -5,16 +5,20 @@
 
 (define fonts-url "https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro&display=swap")
 
-(define-syntax-rule (define-tag name)
+(define-syntax-rule (define-tag* tag name extra ...)
   (define name
     (make-keyword-procedure
      (lambda (kws kw-args . content)
        (define attribs
-         (for/list ([kw (in-list kws)]
-                    [kw-arg (in-list kw-args)])
-           `[,(string->symbol (keyword->string kw))
-             ,kw-arg]))
-       `(name ,attribs . ,(decode content))))))
+         (append
+          `(extra ...)
+          (for/list ([kw (in-list kws)]
+                     [kw-arg (in-list kw-args)])
+            `[,(string->symbol (keyword->string kw))
+              ,kw-arg])))
+       `(tag ,attribs . ,(decode content))))))
+(define-syntax-rule (define-tag name)
+  (define-tag* name name))
 
 (define-tag html)
 (define-tag head)
@@ -69,16 +73,18 @@
 
 (define-syntax-rule (define-styled tag name desc ...)
   (begin
-    (define (div-function . content)
-      `(tag ((class ,(symbol->string 'name))) . ,(decode content)))
-    (define div-class
-      `(name desc ...))
+    (define-tag* tag div-function
+      [class ,(symbol->string 'name)])
+    (define div-class `(name desc ...))
     (set-box! classes-b (cons div-class (unbox classes-b)))
     (define-syntax name (div (quote-syntax div-function)
                              (quote-syntax div-class)))))
 
 (define-syntax-rule (define-div name desc ...)
   (define-styled div name desc ...))
+
+(define-syntax-rule (define-a name desc ...)
+  (define-styled a name desc ...))
 
 (define-syntax-rule (define-span name desc ...)
   (define-styled span name desc ...))

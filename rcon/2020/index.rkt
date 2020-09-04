@@ -39,7 +39,7 @@
   [margin-bottom "1em"]
   ,@header-font)
 
-(define-div speaker
+(define-a speaker-a
   [font-size 24]
   [color "firebrick"])
 (define-div talk
@@ -93,6 +93,12 @@
  `(script ,@(map (λ (x) (cdata #f #f x)) contents)))
 
 ;; ------------------------------------------------------------
+
+(define which 0)
+(define (speaker . x)
+  (set! which (add1 which))
+  (define label (format "slot~a" which))
+  (apply speaker-a #:id label #:href (format "#~a" label) x))
 
 (define (lecture #:when when
                  #:who who
