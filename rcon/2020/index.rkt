@@ -276,7 +276,7 @@ co-winner of the ACM Scholastic Programming Competition.
 #:more
 @abstract{
 
-This talk covers a functional package manager for Racket. The package manager has no side-effects on a Racket installation, meaning packages define no collections. The talk includes discussion of the goals behind this approach, and a short demonstration.
+This talk covers a functional dependency manager for Racket. The dependency manager has no side-effect on a Racket installation, which means it defines no collections. The talk includes discussion of the goals behind this approach, and a short demonstration.
 
 @bio{Sage is a prematurely-bald technophile who dreams to live off the land.  His Vulkan bindings generator won "Best Package" for the 2019 Racket Game Jam, and he played a part in Racket's relicensing effort. Academically, Sage graduated summa cum laude from Kennesaw State University, competed as a NASA Aerospace Scholar, and served as an officer of Phi Theta Kappa. Commercially, he built software for Google, AirBnB, and Carvana, among others.  Besides writing code to relax, Sage enjoys reading, petting his rabbits, reintroducing himself to sunlight, arguing loudly with invisible critics in the shower, and "researching" creatures in Monster Hunter World.}
 
