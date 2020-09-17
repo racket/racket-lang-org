@@ -195,6 +195,19 @@ As the advocates for R, Python, and Scratch sharpen their arguments, functional 
 Data science could be playing into their hands, if they get their pitch right.
 Join in as an important strategic discussion gets underway in the higher-order headquarters ...
 
+@bio{Kathi Fisler is a Professor (Research) of Computer Science at Brown
+University and co-director of Bootstrap (a national K-12 outreach
+program for integrating computing into existing K-12 courses). She is broadly
+interested in various facets of how people learn and use formal
+systems. Her current focus is computing education, with an emphasis on
+how programming languages impact learning and pedagogy in computing
+for each of college students, K-12 students, and K-12
+teachers. She was present for the birth of How to Design Programs, and 
+has just graduated a PhD student (Francis Castro, WPI) whose work explored 
+how students work with the Design Recipe.  Outside of
+CS, she likes a good jigsaw puzzle, a bad pun, and the best that pizza
+has to offer.}
+
 }]
 
   @hallway[@talk-time{Saturday, 11:15am}]
