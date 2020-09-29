@@ -15,11 +15,11 @@
             @text{A discussion list for all things related to Racket.
                   Ask your questions here!}
             #f)
-        (ML "announce" "announce" #f
+        (ML "announce" "announce" "racket-announcements"
             @text{A low-volume, moderated list for announcements, only.
                   @small{(These are posted on the @TT{users} list too, no need
                          to subscribe to both.)}}
-            #t)
+            #f)
         (ML "dev" "devel" "racket-dev"
             @text{A mailing list for Racket development.
                   @small{(For people who want to see how the sausages are made

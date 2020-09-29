@@ -85,7 +85,8 @@
   (upload "school" "school.racket-lang.org" #:link-mode 'redirects)
   (upload "blog" "blog.racket-lang.org")
   (upload "drracket" "www.drracket.org")
-  (upload "download" "download.racket-lang.org" #:shallow? #t))
+  (upload "download" "download.racket-lang.org" #:shallow? #t)
+  (upload "lists" "lists.racket-lang.org" #:shallow? #t))
 
 ;; ----------------------------------------
 
