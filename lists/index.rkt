@@ -59,8 +59,6 @@
       @tr{@(list-cells 'main-page-cell)}
       @sec{Subscribe to a mailing list}
       @tr{@(list-cells 'subscribe-cell)}
-      @sec{Gmane Mirror}
-      @tr{@(list-cells 'gmane-cell)}
       @sec{Archive at mail-archive.com}
       @tr{@(list-cells 'mail-archive-cell)}
       @sec{Google group mirror}
@@ -154,7 +152,8 @@
          @br
          @span[style: "white-space: nowrap;"]{
            Search: @input[type: 'text name: 'q value: "" size: 20].}}]
-      [(gmane-cell)
+      ;; looks like gmane is pretty much gone...
+      #;[(gmane-cell)
        @form-cell["http://search.gmane.org/"]{
          @input[type: 'hidden name: 'group value: gmane]
          @gmane-link["dir"]{@TT{@gmane}}
