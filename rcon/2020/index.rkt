@@ -165,6 +165,17 @@ $(document).ready(function () {
 (column
 
  (section
+  @sectionHeader{Attending}
+
+  @paragraph{@tt{1}. Watch the live stream on @a[#:href "http://www.youtube.com/c/racketlang"]{YouTube}.}
+
+  @paragraph{@tt{2}. Join the @a[#:href "https://racket.slack.com/archives/CAFRY117G"]{@tt{#rcon}} channel and ask questions. (Sign up for @a[#:href "https://racket-slack.herokuapp.com/"]{Slack} first.)}
+
+  @paragraph{@tt{3}. Join the @a[#:href "https://gather.town/app/POxm4HbriLKltrzP/racketlang"]{Gather space} for the "hallway" track.}
+
+  )
+
+ (section
   @sectionHeader{Friday, October 16th}
 
   @lecture[
@@ -482,11 +493,6 @@ Please come with your big questions to ask Racket's CPS.
   @hallway[@talk-time{Sunday, 5:30pm}]
 
        )
-
- (section
-  @sectionHeader{How do I attend?}
-  ;; XXX
-  @paragraph{Details forthcoming...})
 
  (section
   @sectionHeader{Previous RacketCons}
