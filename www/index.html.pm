@@ -153,7 +153,7 @@ Racket comes with support for major editors. The main bundle includes an innovat
 ◊doclink["drracket-tools"]{DrRacket Tools}
 ◊link["https://marketplace.visualstudio.com/items?itemName=evzen-wybitul.magic-racket"]{VS Code/Magic Racket}
 ◊link["https://docs.racket-lang.org/guide/Emacs.html"]{Emacs Integration}
-◊link["https://docs.racket-lang.org/guide/Vim.html"]{VIM Integration}
+◊link["https://docs.racket-lang.org/guide/Vim.html"]{Vim Integration}
 }
 }}
 
