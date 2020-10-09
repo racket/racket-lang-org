@@ -167,11 +167,7 @@ $(document).ready(function () {
  (section
   @sectionHeader{Attending}
 
-  @paragraph{@tt{1}. Watch the live stream on @a[#:href "http://www.youtube.com/c/racketlang"]{YouTube}.}
-
-  @paragraph{@tt{2}. Join the @a[#:href "https://racket.slack.com/archives/CAFRY117G"]{@tt{#rcon}} channel and ask questions. (Sign up for @a[#:href "https://racket-slack.herokuapp.com/"]{Slack} first.)}
-
-  @paragraph{@tt{3}. Join the @a[#:href "https://gather.town/app/POxm4HbriLKltrzP/racketlang"]{Gather space} for the "hallway" track.}
+  @paragraph{Join the @a[#:href "https://gather.town/app/POxm4HbriLKltrzP/racketlang"]{Gather space}; everything is there!}
 
   )
 
