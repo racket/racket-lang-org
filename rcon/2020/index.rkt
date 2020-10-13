@@ -169,7 +169,13 @@ $(document).ready(function () {
 
   @paragraph{Join the @a[#:href "https://gather.town/app/POxm4HbriLKltrzP/racketlang"]{Gather space}; everything is there!}
 
-  @paragraph{You don't need to register. Really, everything you need to do is in the Gather. Join it and you'll see people and links and the talks and everything you need.}
+  @paragraph{@br{}}
+
+  @paragraph{You don't need to register.}
+
+  @paragraph{Really, everything you need to do is in the Gather.}
+
+  @paragraph{Trust me, join it and you'll see people and the talks and everything you need.}
 
   )
 
