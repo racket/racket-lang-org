@@ -14,7 +14,7 @@
 "Laurent Orseau"
 "Winston Weinert"
 "Huma Zafar"
-
+"Jesse Alama"
 "David Alkire"
 "Andrew Blinn"
 "Bogdan Popa"
