@@ -102,11 +102,14 @@
 
 (define (lecture #:when when
                  #:who who
+                 #:link [l #f]
                  #:what [what ""]
                  #:more [more ""])
   (speech when
           who
-          (live-link "" #;(a #:href "tbd" "talk link"))
+          (if l
+           (live-link "" (a #:href l "talk link"))
+           "")
           what
           more))
 
@@ -164,7 +167,7 @@ $(document).ready(function () {
       @subtitle[@faded{Online}])
 (column
 
- (section
+ #;(section
   @sectionHeader{Attending}
 
   @paragraph{Join the @a[#:href "https://gather.town/app/POxm4HbriLKltrzP/racketlang"]{Gather space}; everything is there!}
@@ -199,6 +202,8 @@ $(document).ready(function () {
 @talk-time{Saturday, 10:00am}
 #:who
 @speaker{@bold{Keynote:} Kathi Fisler}
+#:link
+"https://youtu.be/MnrRUdbOW1M?t=794"
 #:what
 @talk{Data-Centric Computing: The Educational Horizon Expands}
 #:more
@@ -232,6 +237,8 @@ has to offer.}
 @talk-time{Saturday, 12:30pm}
 #:who
 @speaker{Christopher Lemmer Webber}
+#:link
+"https://youtu.be/YbznItQpALo?t=307"
 #:what
 @talk{Distributed secure programming with Spritely Goblins}
 #:more
@@ -248,6 +255,8 @@ Learn how Spritely Goblins uses Racket, object capabilities, and the classic act
 @talk-time{Saturday, 1:00pm}
 #:who
 @speaker{Konrad Hinsen}
+#:link
+"https://youtu.be/YbznItQpALo?t=2104"
 #:what
 @talk{Liberating computational science from software complexity}
 #:more
@@ -256,6 +265,12 @@ Learn how Spritely Goblins uses Racket, object capabilities, and the classic act
 Whereas computers have undoubtedly empowered scientific research in many ways, they have also wrapped scientific models and methods in an opaque layer of software, making them invisible and incomprehensible to the majority of scientists. The increasing use of black-box methods is a major contributor to the much-discussed reproducibility crisis. My attempt to liberate science from software is the introduction of specification languages for scientific models and methods, which I call Digital Scientific Notations. They are meant to be used in user interfaces of scientific software as well as in technical documentation and research papers. I will illustrate this idea with Leibniz, an in-progress notation for physics and chemistry implemented in Racket as an extension to Scribble.
 
 @bio{I am a computational physicist, working mainly on protein structure and dynamics and on the methodology of biomolecular simulation. Unhappy with how the complexity of scientific software increasingly became an obstacle to productive and reliable research, I co-founded the scientific Python ecosystem in order to do science at a higher level than Fortran and C permitted. Now I am tackling the essential complexity in computational science, playing with ideas for specification languages for scientific models.}
+
+@ul{
+  @li{@a[#:href "https://github.com/khinsen/leibniz"]{Leibniz on GitHub}}
+  @li{@a[#:href "https://arxiv.org/abs/1605.02960"]{An article introducing Digital Scientific Notations}}
+  @li{@a[#:href "https://peerj.com/articles/cs-158/"]{A first report on my experience with Leibniz}}
+}
 
 }]
 
@@ -266,6 +281,8 @@ Whereas computers have undoubtedly empowered scientific research in many ways, t
 @talk-time{Saturday, 2:30pm}
 #:who
 @speaker{Brian Adkins}
+#:link
+"https://youtu.be/bIi-tUzOwdw?t=479"
 #:what
 @talk{The Joy of Web Development in Racket}
 #:more
@@ -299,6 +316,8 @@ co-winner of the ACM Scholastic Programming Competition.
 @talk-time{Saturday, 3:00pm}
 #:who
 @speaker{Sage Gerard}
+#:link
+"https://youtu.be/bIi-tUzOwdw?t=2331"
 #:what
 @talk{Zero-Collection Package Management}
 #:more
@@ -317,6 +336,8 @@ This talk covers a functional dependency manager for Racket. The dependency mana
 @talk-time{Saturday, 4:30pm}
 #:who
 @speaker{Pierce Darragh}
+#:link
+"https://youtu.be/mWnlXVEXnPc?t=701"
 #:what
 @talk{Clotho: A Racket Library for Parametric Randomness}
 #:more
@@ -335,6 +356,8 @@ Many programming languages, including Racket, provide only simple randomness pri
 @talk-time{Saturday, 5:00pm}
 #:who
 @speaker{Gustavo Massaccesi}
+#:link
+"https://youtu.be/mWnlXVEXnPc?t=2619"
 #:what
 @talk{A Type Recovery Pass for Chez Scheme}
 #:more
@@ -350,7 +373,7 @@ We added a pass to the version of Chez Scheme used in Racket CS that does a cont
   @hallway[@talk-time{Saturday, 5:30pm}]
 
 )
-      
+
  (section
   @sectionHeader{Sunday, October 18th}
 
@@ -359,6 +382,8 @@ We added a pass to the version of Chez Scheme used in Racket CS that does a cont
 @talk-time{Sunday, 10:00am}
 #:who
 @speaker{Sam Tobin-Hochstadt}
+#:link
+"https://youtu.be/VgMwkxz0aBw?t=671"
 #:what
 @talk{The State of Racket}
 #:more
@@ -371,6 +396,8 @@ We added a pass to the version of Chez Scheme used in Racket CS that does a cont
 @talk-time{Sunday, 10:30am}
 #:who
 @speaker{Racket Management}
+#:link
+"https://youtu.be/VgMwkxz0aBw?t=2577"
 #:what
 @talk{Racket Town Hall}
 #:more
@@ -387,6 +414,8 @@ Please come with your big questions and discussion topics.
 @talk-time{Sunday, 12:30pm}
 #:who
 @speaker{Jesse Alama}
+#:link
+"https://youtu.be/QtaqPEvaMyg?t=271"
 #:what
 @talk{Black-box HTTP API testing with @tt{#lang riposte}}
 #:more
@@ -415,6 +444,8 @@ S-expressions). Come find out how I made this with Racket!
 @talk-time{Sunday, 1:00pm}
 #:who
 @speaker{Peter Zhong}
+#:link
+"https://youtu.be/QtaqPEvaMyg?t=2089"
 #:what
 @talk{Breaking Down Your Defense: Building Up Contracts from Defensive Programming}
 #:more
@@ -435,6 +466,8 @@ Code written defensively remains prevalent, however, and its manual conversion t
 @talk-time{Sunday, 2:30pm}
 #:who
 @speaker{Panicz Godek}
+#:link
+"https://youtu.be/2tCY72t1nL0?t=400"
 #:what
 @talk{Deconstructing Textuality of Programs}
 #:more
@@ -451,6 +484,8 @@ In the recent years, there've been several interesting attempts in the area of n
 @talk-time{Sunday, 3:00pm}
 #:who
 @speaker{Stephen De Gabrielle}
+#:link
+"https://youtu.be/2tCY72t1nL0?t=1974"
 #:what
 @talk{Fun and Games}
 #:more
@@ -469,6 +504,8 @@ Stephen will talk briefly about having fun with Racket, aided by a showcase of c
 @talk-time{Sunday, 4:30pm}
 #:who
 @speaker{Ben Greenman}
+#:link
+"https://youtu.be/A4AA8nweYAg?t=391"
 #:what
 @talk{Shallow Typed Racket}
 #:more
@@ -485,6 +522,8 @@ Typed Racket adds a new dimension to Racket; any module in a program can be stre
 @talk-time{Sunday, 5:00pm}
 #:who
 @speaker{Matthias Felleisen}
+#:link
+"https://youtu.be/A4AA8nweYAg?t=1854"
 #:what
 @talk{Ask Me Anything}
 #:more
