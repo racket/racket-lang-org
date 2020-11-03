@@ -27,6 +27,14 @@ Racket v7.9
 * Improvements to the plot library from Alex Harsányi and Bert De
   Ketelaere.
 
+* The `datum` form from `syntax/datum` works with syntax pattern
+  variables and `syntax-parse` attributes.
+
+* Unicode input works with recent versions of libedit in addition
+  to libreadline. On Mac OS, a compatible version of libedit is
+  included with Racket.
+
+
 The following people contributed to this release:
 
 5pyd3r, A. Green, Adam Michael, Alex Bartholomew, Alex Harsányi, Alex
