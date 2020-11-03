@@ -1,6 +1,7 @@
 #lang plt-web
 
 (require "resources.rkt" "data.rkt" "installer-pages.rkt" "util.rkt"
+         "symlinks.rkt" ; has side effect of registering some links
          racket/dict
          racket/match
          plt-web/style
