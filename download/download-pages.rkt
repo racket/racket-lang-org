@@ -15,6 +15,7 @@
 (define first-version-with-releases-page "5.92")
 (define first-version-with-generic-linux "6.5")
 (define version-with-touchbar-bug "6.7")
+(define version-before-m1-support "7.9")
 
 ;; use a list of cons instead of hash to preserve the order
 (define (group-by/dict grouper xs f)
@@ -107,6 +108,12 @@
                 @list{To avoid a bug in this version that prevents programs from working
                       with the Touch Bar, use the 32-bit version or try a
                       @pre:installers{snapshot build}.}}
+           null)
+      @(if (equal? version version-before-m1-support)
+           @div[id: "m1_mac_explain"
+                style: note-style]{
+                @div{@b{M1 Mac users:}}
+                @list{Try a 64-bit ARM build from one of the @pre:installers{snapshot sites}.}}
            null)
       @div[id: "builtpkgs_explain"
            style: note-style]{
@@ -697,6 +704,12 @@ var elem = null;
       @(if (equal? version version-with-touchbar-bug)
            @list{
              showWhen('macos_touchbar_explain', platform === 'x86_64-macosx');
+           }
+           null)
+
+      @(if (equal? version version-before-m1-support)
+           @list{
+                 showWhen('m1_mac_explain', platform === 'x86_64-macosx');
            }
            null)
 
