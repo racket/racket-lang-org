@@ -17,13 +17,14 @@
     ;; binary platforms
     ["i386-win32" "Windows (x86, 32-bit)"]
     ["x86_64-win32" "Windows (x64, 64-bit)"]
-    ["(ppc|i386|x86_64)-(?:osx-mac|macosx)"
+    ["(ppc|i386|x86_64|aarch64)-(?:osx-mac|macosx)"
      ,(λ (_ cpu)
         (format "Mac OS (~a)"
                 (cond
                  [(equal? cpu "ppc") "PPC"]
                  [(equal? cpu "i386") "Intel 32-bit"]
                  [(equal? cpu "x86_64") "Intel 64-bit"]
+                 [(equal? cpu "aarch64") "Apple Silicon 64-bit"]
                  [else (error "unrecognized cpu!")])))]
     ["(ppc|68k)-mac-classic" "Macintosh Classic (\\1)"]
     ["(ppc|i386)-darwin"
@@ -177,7 +178,7 @@
    package  ; package kind symbol 'racket or 'racket-textual
    binary?  ; #t = binary distribution, #f = source distribution
    platform ; platform name string (generic for srcs, cpu-os for bins)
-   variant  ; "regular" or "CS"
+   variant  ; "Regular", "CS", or "BC"
    suffix)  ; string
   #:transparent)
 
@@ -222,19 +223,23 @@
             "/("                    ; file
             "(racket(?:-textual|-minimal)?)" ; package
             "(-\\3)?-"              ; version, maybe
-            "([^.]+)"               ; platform, may include "-cs"
+            "([^.]+)"               ; platform, may include "-cs" or "-bc"
             "\\."
             "([a-z]+)"              ; suffix
             "))$")))
 
-(define variant-rx #rx"-cs$")
+(define variant-rx #rx"-(cs|bc)$")
 
 (define (make-installer2 size path version file package version-again platform+variant suffix)
   (define-values (platform variant)
     (cond
       [(regexp-match-positions variant-rx platform+variant)
        => (lambda (m)
-            (values (substring platform+variant 0 (caar m)) "CS"))]
+            (values (substring platform+variant 0 (caar m))
+                    (case (substring platform+variant (caadr m) (cdadr m))
+                      [("cs") "CS"]
+                      [("bc") "BC"]
+                      [else (error "unknown variant" platform+variant)])))]
       [else
        (values platform+variant "Regular")]))
   (define binary? (not (regexp-match #rx"^src" platform)))

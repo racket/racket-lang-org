@@ -57,10 +57,13 @@
                        " text-align: left;"
                        " line-height: 1.5em; "
                        " background-color: #edd"))
-  (list
+  (define (more-installers)
+    @a[href: @at-download{@|releases|/@version}]{More Installers and Checksums})
+  (append
+   (list
    @columns[10 #:center? #t #:row? #t #:center-text? #t]{
     @h3[style: "text-align: center"]{Version @version (@(release-date-string release))}
-    @div[id: "download_panel" align: "center" style: "display: none; margin-bottom: 20px;"]{
+    @div[id: "download_panel" align: "center" style: "display: none; margin-bottom: 10px;"]{
       @div[id: "control"]{}
       @br
       @navigation-button[@(a href: (resource "download/" #f)
@@ -71,22 +74,13 @@
       @span[id: "linux_ppa"]{
         or
         @a[href: "https://launchpad.net/~plt/+archive/ubuntu/racket"]{Ubuntu PPA}}
-     }}
-  @columns[8 #:center? #t #:center-text? #t #:row? #t]{
-      @(let* ([sep   @list{@nbsp @bull @nbsp}]
-              [links (λ links @(div style: "margin: 1ex 4ex;" (add-between links sep)))]
-              [docs  (html-docs-link version)])
-         (list
-          @row{
-            @links[@list{Release: @nbsp @(release-page release){Announcement}}
-                   @a[href: @at-download{@|docs|/release/}]{Notes}
-                   @list{@a[href: @at-download{@docs}]{Documentation}
-                         @(if (version<? @|version| first-version-with-releases-page)
-                              null
-                              @list{@br @nbsp @a[href: @at-download{@|releases|/@version}]{More Installers and Checksums}})}]}
-          @row{@links[@license{License}
-                       all-version-pages
-                       @pre:installers{Snapshot Builds}]}))}
+     }})
+ (if (version<? @|version| first-version-with-releases-page)
+     null
+     (list
+      @columns[8 #:center? #t #:center-text? #t #:row? #t]{
+        @row[style: "margin: 1ex;"]{@more-installers[]}}))
+ (list
   @columns[6 #:center? #t #:center-text? #t #:row? #t]{
       @div[id: "minimal_racket_explain"
            style: note-style]{
@@ -109,12 +103,18 @@
                       with the Touch Bar, use the 32-bit version or try a
                       @pre:installers{snapshot build}.}}
            null)
-      @(if (equal? version version-before-m1-support)
-           @div[id: "m1_mac_explain"
-                style: note-style]{
-                @div{@b{M1 Mac users:}}
-                @list{Try a 64-bit ARM build from one of the @pre:installers{snapshot sites}.}}
-           null)
+      @(cond
+         [(equal? version version-before-m1-support)
+          @div[id: "m1_mac_explain"
+               style: note-style]{
+               @div{@b{M1 Mac users:}}
+               @list{Try a 64-bit ARM build from one of the @pre:installers{snapshot sites}.}}]
+         [(version<? version-before-m1-support version)
+          @div[id: "m1_mac_explain"
+               style: note-style]{
+               @div{@b{M1 Mac users:}}
+               @list{Select the @b{Apple Silicon} option in @b{Platform}.}}]
+         [else null])
       @div[id: "builtpkgs_explain"
            style: note-style]{
         @div{@b{About source distributions:}} The @b{Source + built packages}
@@ -127,6 +127,11 @@
            style: note-style]{
         @div{@b{About sources for Windows and Mac OS:}} To build from source for
            Windows or Mac OS, download and build a @b{Minimal Racket} distribution
+           @(if (not (for/or ([i (in-list all-installers)])
+                       (and (equal? release (installer-release i))
+                            (equal? 'racket-minimal (installer-package i)))))
+                @span{ (see @more-installers[])}
+                "")
            instead of a @b{Racket} distribution, then (when on Windows) install the @tt{racket-lib} package
            with @div{@nbsp @nbsp @tt{raco pkg update --auto racket-lib}}
            and then (on both Windows and Mac OS) install packages
@@ -323,7 +328,16 @@ var property = null;
       @ul{@(for/list ([i (in-list all-installers)]
                       #:when (and (equal? release (installer-release i))
                                   (equal? package (installer-package i))))
-             @li{@(installer->page i 'only-platform)})}}}))
+             @li{@(installer->page i 'only-platform)})}}}
+  @columns[8 #:center? #t #:center-text? #t #:row? #t]{
+      @(let* ([sep   @list{@nbsp @bull @nbsp}]
+              [links (λ links @(div style: "margin: 4ex 4ex;" (add-between links sep)))]
+              [docs  (html-docs-link version)])
+          (list
+           @row{@links[@license{License}
+                       @span{@all-version-pages
+                             @span[style: "font-size: 80%"]{with notes and documentation}}
+                       @pre:installers{Snapshot Builds}]}))})))
 
 (define (release-page* rel)
   (define ver (release-version rel))
@@ -426,20 +440,19 @@ var property = null;
          Apache License, version 2.0} and the
        @a[href: "https://github.com/racket/racket/blob/master/racket/src/LICENSE-MIT.txt"]{
          MIT License}, at your option.
-       Some components of the Racket distribution, including the
-       compiled @tt{racket} executable for the "Regular" variant of
-       Racket and packages that distribute
+    @~ Some components of some Racket distributions, including the
+       compiled @tt{racket} executable for the BC variant of
+       Racket (@|ldquo|Regular@|rdquo| before version 8.0) and packages that distribute
        third-party libraries, are distributed under the
        @a[href: "http://www.gnu.org/licenses/lgpl-3.0.html"]{
-         GNU Lesser General Public License (LGPL) version 3.0}.
+                                                             GNU Lesser General Public License (LGPL) version 3.0}.
+       Any program written in Racket that does not distribute the
+       BC variant @tt{racket} binary itself is not affected by the
+       license of that binary.
+    @~ Versions of Racket prior to version 7.5 are distributed under the
+       GNU LGPL, version 3.0.
     @~ See the @a[href: "https://github.com/racket/racket/blob/master/LICENSE"]{
        @tt{LICENSE}} file in the source code for more information.
-                                                                                    @~ Any program written in Racket that does not distribute the
-    "Regular" variant @tt{racket} binary itself is not affected by the
-    license of that binary.
-
-    Versions of Racket prior to version 7.5 are distributed under the
-    GNU LGPL, version 3.0.
     }}})
 
 (define (release-> r)
@@ -492,6 +505,7 @@ var property = null;
           Mac      = /Mac/,
           MacIntel = /Mac.*Intel/,
           MacIntel64 = /Mac.*Intel.*64/,
+          MacARM64 = /Mac.*Apple Silicon.*64/,
           MacIntel32 = /Mac.*Intel.*32/,
           MacPPC   = /Mac.*PPC/,
           Linux    = /Linux/,
@@ -506,6 +520,7 @@ var property = null;
       else if (l("Win"))   return [Win32, Win];
       else if (l("Mac"))   return [
         l("Intel") ? MacIntel64 : MacPPC,
+        l("Intel") ? MacARM64 : MacPPC,
         l("Intel") ? MacIntel32 : MacPPC,
         Mac,
         Unix
@@ -617,7 +632,10 @@ var property = null;
 
       update(currentPackage);
 
-      var children = [
+      var children = [];
+
+      if (allInstallers.length !== 1) {
+        children.push(
         elem('div', {}, [
           'Distribution: ',
           elem('select', {onchange: handleDistChange},
@@ -628,7 +646,10 @@ var property = null;
                   {value: group.dist},
                 [group.distName]);
             }))
-        ]),
+          ]));
+        }
+
+      children.push(
         elem('div', {}, [
           'Platform: ',
           elem('select', {onchange: handlePlatformChange},
@@ -640,7 +661,7 @@ var property = null;
                 [group.platformName]);
             }))
         ])
-      ];
+      );
 
       if (allVariants.length !== 1) {
         children.push(
@@ -719,7 +740,7 @@ var property = null;
            }
            null)
 
-      @(if (equal? version version-before-m1-support)
+      @(if (version<=? version-before-m1-support version)
            @list{
                  showWhen('m1_mac_explain', platform === 'x86_64-macosx');
            }
