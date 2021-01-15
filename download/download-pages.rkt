@@ -179,6 +179,8 @@ var bigbang = null;
 
 var elem = null;
 
+var property = null;
+
 (function() {
     function Elem(type, attrs, children) {
         this.type = type;
@@ -191,6 +193,10 @@ var elem = null;
     function Text(s) {
         this.s = s;
         this.node = null;
+    }
+
+    function Property(value) {
+        this.value = value;
     }
 
     var globalState = null;
@@ -209,6 +215,8 @@ var elem = null;
                 } else {
                     tree.node.attachEvent('on' + key, closure);
                 }
+            } else if (value instanceof Property) {
+                tree.node[key] = value.value;
             } else {
                 tree.node.setAttribute(key, value);
             }
@@ -255,7 +263,7 @@ var elem = null;
                    } else {
                        newTree.node.detachEvent('on' + key, closure);
                    }
-               } else {
+               } else if (newTree.node.hasAttribute(key)) {
                    newTree.node.removeAttribute(key);
                }
            }
@@ -302,6 +310,10 @@ var elem = null;
                 new Text(child) :
                 child;
         }));
+    };
+
+    property = function(value) {
+        return new Property(value);
     };
 })();
   }
@@ -612,7 +624,7 @@ var elem = null;
             map(allInstallers, function (group) {
               return elem('option',
                 group.dist === currentDist ?
-                  {selected: 'selected', value: group.dist} :
+                  {selected: property('selected'), value: group.dist} :
                   {value: group.dist},
                 [group.distName]);
             }))
@@ -623,7 +635,7 @@ var elem = null;
             map(allPlatforms, function (group) {
               return elem('option',
                 group.platform === currentPlatform ?
-                  {selected: 'selected', value: group.platform} :
+                  {selected: property('selected'), value: group.platform} :
                   {value: group.platform},
                 [group.platformName]);
             }))
@@ -639,7 +651,7 @@ var elem = null;
                 var theVariant = computeVariant(group);
                 return elem('option',
                   theVariant === currentVariant ?
-                    {selected: 'selected', value: theVariant} :
+                    {selected: property('selected'), value: theVariant} :
                     {value: theVariant},
                   [group.variant]);
               }))
