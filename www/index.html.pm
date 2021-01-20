@@ -43,8 +43,10 @@
 ◊ul[#:class "doclinks"]{
  ◊li{◊link["https://blog.racket-lang.org/2020/11/racket-v7-9.html"]{Racket version 7.9} is available.}
 
- ◊li{◊link["https://con.racket-lang.org/"]{tenth RacketCon, Oct 16-18, online}}}}
-
+ ◊li{◊link["books.html"]{We welcome two new Racket books:} 
+                         (1) Racket Programming the Fun Way
+                         (2) Don't Teach Coding: Until You Read this Book 
+}}}
 
 ◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
