@@ -39,14 +39,15 @@
 ◊(top)
 
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
-
-◊ul[#:class "doclinks"]{
- ◊li{◊link["https://blog.racket-lang.org/2020/11/racket-v7-9.html"]{Racket version 7.9} is available.}
-
- ◊li{◊link["books.html"]{We welcome two new Racket books:} 
+◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
+ ◊div[#:style "margin-left: 1em"]{
+   ◊link["https://blog.racket-lang.org/2020/11/racket-v7-9.html"]{Racket version 7.9} is available.}
+ ◊div[#:style "flex-grow:1"]{}
+  ◊div[#:style "margin-right: 1em"]{◊link["books.html"]{We welcome two new Racket books:}
                          (1) Racket Programming the Fun Way
-                         (2) Don't Teach Coding: Until You Read this Book 
-}}}
+                         (2) Don't Teach Coding: Until You Read this Book
+}
+}}
 
 ◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
