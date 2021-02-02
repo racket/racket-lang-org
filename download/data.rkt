@@ -69,7 +69,7 @@
      "Matthew Flatt"
      "mflatt@cs.utah.edu"]
     ["USA, Illinois (Northwestern University)"
-     "https://plt.eecs.northwestern.edu/racket-mirror/"
+     "https://plt.cs.northwestern.edu/racket-mirror/"
      "Robby Findler"
      "robby@eecs.northwestern.edu"]
     ["Canada, Ontario (University of Waterloo)"

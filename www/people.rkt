@@ -24,7 +24,7 @@
    (place ; -------------------------------------------------------------------
     'nwu "Northwestern University"
     #:location "Evanston, IL"
-    #:url "http://plt.eecs.northwestern.edu/"
+    #:url "http://plt.cs.northwestern.edu/"
     #:pubs "http://www.eecs.northwestern.edu/~robby/pubs/"
     (person 'robby "Robby Findler"
             #:bibname "Robert Bruce Findler"
