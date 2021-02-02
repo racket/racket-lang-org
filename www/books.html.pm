@@ -32,7 +32,8 @@ Principles of programming languages for undergraduates, graduate students, and e
 ◊link["https://redex.racket-lang.org/"]{Semantics Engineering with PLT Redex}
 Semantics for language engineers: graduate students and practitioners alike. 
 
-◊link["http://www.springer.com/de/book/9783835101555"]{Die Macht der Abstraktion}
+       
+◊link["https://link.springer.com/book/10.1007/978-3-8351-9079-5"]{Die Macht der Abstraktion}
 Einführung in die Programmierung.
 
 ◊link["http://www.springer.com/us/book/9783658141332"]{Programmierparadigmen (2. Auflage)}
