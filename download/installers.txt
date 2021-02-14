@@ -966,3 +966,12 @@
 40149497	7.9/racket-minimal-7.9-x86_64-macosx-cs.dmg
 27613432	7.9/racket-minimal-7.9-x86_64-win32-cs.exe
 36171957	7.9/racket-minimal-7.9-x86_64-win32-cs.tgz
+270999883	8.0/racket-8.0-aarch64-macosx-cs.dmg
+241462045	8.0/racket-8.0-x86_64-linux-cs.sh
+268552374	8.0/racket-8.0-x86_64-macosx-cs.dmg
+181647576	8.0/racket-8.0-x86_64-win32-cs.exe
+123485558	8.0/racket-8.0-i386-macosx-bc.dmg
+84034800	8.0/racket-8.0-i386-win32-bc.exe
+153847792	8.0/racket-8.0-src-builtpkgs.tgz
+34674291	8.0/racket-8.0-src.tgz
+34667686	8.0/racket-src.tgz
