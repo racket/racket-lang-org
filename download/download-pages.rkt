@@ -87,14 +87,22 @@
         @div{@b{About Minimal Racket:}} Minimal Racket includes just enough of Racket that you can use @tt{raco pkg} to install more.}
       @div[id: "linux_explain"
            style: note-style]{
-        @div{@b{About the Linux installers:}}
+        @div{@b{About the Linux installer:}}
         @(if (version<? @|version| first-version-with-generic-linux)
              @list{If you don't see an option for
                    your particular platform, try other Linux installers, starting from
                    similar ones.  Very often, a build on one Linux variant will work on
                    others too.}
              @list{The Linux build is generic enough that it should work on most
-                   distributions, including relatively old distributions.})}
+                   distributions, including relatively old distributions. Racket
+                   may also be available through your distribution's package manager,
+                   although it may be older than the latest Racket version.})}
+      @div[id: "linux_install_explain"
+           style: note-style]{
+             @div{@b{Running the Linux installer:}}
+             @list{After downloading the installer file, run it with
+                         @div{@nbsp @nbsp @tt{sh @tt[id: "installer_name"]{racket.sh}}}
+                         to install.}}
       @(if (equal? version version-with-touchbar-bug)
            @div[id: "macos_touchbar_explain"
                 style: note-style]{
@@ -707,6 +715,7 @@ var property = null;
       showWhen('minimal_racket_explain', dist === 'racket-minimal');
 
       showWhen('linux_explain', platform.search(/linux/) >= 0);
+      showWhen('linux_install_explain', platform.search(/linux/) >= 0);
       showWhen('linux_ppa', platform.search(/linux/) >= 0);
 
       // NOTE: there used to be a condition that there must not be
@@ -748,10 +757,12 @@ var property = null;
 
       var download_link = document.getElementById('download_link');
       var path = mirrorUrl + package.path;
+      var package_file_name = path.replace(/.*\//, "");
       download_link.href = path;
-      download_link.innerHTML = path.replace(/.*\//, "") + " (" + package.humanSize + ")";
+      download_link.innerHTML = package_file_name + " (" + package.humanSize + ")";
       var mirror_link = document.getElementById("mirror_link");
       mirror_link.href = package.mirrorUrl;
+      document.getElementById("installer_name").innerHTML = package_file_name;
     }
 
     // show the download panel, since JS is obviously working
