@@ -74,7 +74,7 @@
      "Robby Findler"
      "robby@eecs.northwestern.edu"]
     ["Canada, Ontario (University of Waterloo)"
-     "http://mirror.csclub.uwaterloo.ca/racket/racket-installers/"
+     "https://mirror.csclub.uwaterloo.ca/racket/racket-installers/"
      "Systems Committee"
      "syscom@csclub.uwaterloo.ca"]
     ["Germany (Universität Tübingen)"
