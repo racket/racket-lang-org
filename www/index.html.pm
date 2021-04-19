@@ -442,6 +442,8 @@ ancestor(A, B)?}}}
 
       ◊link["https://lists.racket-lang.org/"]{Mailing lists} and ◊link["https://blog.racket-lang.org/"]{Blog}
 
+      ◊link["https://discord.gg/6Zq8sH5"]{Racket Discord}
+
       ◊link["https://webchat.freenode.net/#racket"]{#racket IRC} on freenode.net
 
       ◊link["https://racket.slack.com/"]{Slack channel} (Visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
