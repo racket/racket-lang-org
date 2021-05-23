@@ -14,6 +14,7 @@
 (define releases "releases")
 (define first-version-with-releases-page "5.92")
 (define first-version-with-generic-linux "6.5")
+(define first-version-without-alternative-page "8.0")
 (define version-with-touchbar-bug "6.7")
 (define version-before-m1-support "7.9")
 
@@ -423,11 +424,13 @@ var property = null;
                            (cell r main-package)
                            @td[])
                       @td[align: 'center]{
-                        @(add-between
-                          (for/list ([p (in-list alt-packages)]
-                                     #:when (member p (hash-ref release=>packages r)))
-                            ((make-page r p) (package->name p)))
-                          " ")}
+                        @(if (version<? ver first-version-without-alternative-page)
+                             (add-between
+                              (for/list ([p (in-list alt-packages)]
+                                         #:when (member p (hash-ref release=>packages r)))
+                                ((make-page r p) (package->name p)))
+                              " ")
+                             @a[href: @list{@|releases|/@|ver|/}]{All Installers})}
                       @td{@a[href: @html-docs-link[ver]]{[HTML]} @;
                           @nbsp @;
                           @a[href: @pdf-docs-link[ver]]{[PDF]}}}
