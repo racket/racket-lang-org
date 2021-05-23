@@ -114,11 +114,13 @@
                       @pre:installers{snapshot build}.}}
            null)
       @(cond
-         [(equal? version version-before-m1-support)
+         [(version<=? version version-before-m1-support)
           @div[id: "m1_mac_explain"
                style: note-style]{
                @div{@b{M1 Mac users:}}
-               @list{Try a 64-bit ARM build from one of the @pre:installers{snapshot sites}.}}]
+               @list{The latest version of Racket supports Apple Silicon directly.
+
+               For version @version, the Mac OS (Intel 64-bit) variant requires macOS Big Sur 11.1 or above.}}]
          [(version<? version-before-m1-support version)
           @div[id: "m1_mac_explain"
                style: note-style]{
