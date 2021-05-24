@@ -444,7 +444,7 @@ ancestor(A, B)?}}}
 
       ◊link["https://discord.gg/6Zq8sH5"]{Racket Discord}
 
-      ◊link["https://webchat.freenode.net/#racket"]{#racket IRC} on freenode.net
+      ◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{#racket IRC} on libera.chat
 
       ◊link["https://racket.slack.com/"]{Slack channel} (Visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
 
