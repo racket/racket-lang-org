@@ -35,7 +35,7 @@ To help streamline the process for potential contributors,
 
 If you have any trouble following along, ask for help via
  [email](https://groups.google.com/forum/#!forum/racket-users),
- [IRC](https://botbot.me/freenode/racket/),
+ [IRC](https://racket-lang.org/community.html),
  and/or [Slack](http://racket-slack.herokuapp.com/).
 
 > For a Git crash course, see: <http://rogerdudler.github.io/git-guide/>

@@ -6,7 +6,7 @@
          irc-quick)
 
 (define webchat-link
-  "https://webchat.freenode.net?channels=racket&uio=OT10cnVlJjExPTIzNg6b")
+  "https://kiwiirc.com/nextclient/irc.libera.chat/#racket")
 
 (define irc-chat
   @page[#:site www-site #:title "IRC" #:part-of 'community]{
@@ -15,9 +15,8 @@
 
 (define irc-content
   @list{Chat in the @tt[style: "background-color: #d8d8e8;"]{@big{@strong{#racket}}} channel on
-@a[href: "https://freenode.net"]{@tt{freenode.net}}, an informal
-discussion channel for all things related to Racket, or
-@a[href: "https://botbot.me/freenode/racket/"]{browse the logs}.})
+@a[href: "https://libera.chat"]{@tt{libera.chat}}, an informal
+discussion channel for all things related to Racket.})
 
 (define irc-quick
   @text{@parlist[@strong{IRC}
