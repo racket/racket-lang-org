@@ -42,3 +42,7 @@
                    (excluded-path? path)))
   (define relpath (find-relative-path (simplify-path www-dir) (simplify-path path)))
   (copyfile #:site www-2016-site path (path->string relpath)))
+
+;; make some old pages redirect to the main page
+(void (symlink #:site www-2016-site "index.html" "community.html"))
+(void (symlink #:site www-2016-site "index.html" "irc-chat.html"))
