@@ -39,12 +39,15 @@
 ◊(top)
 
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
-
-◊ul[#:class "doclinks"]{
- ◊li{◊link["https://blog.racket-lang.org/2020/08/racket-v7-8.html"]{Racket version 7.8} is available.}
-
- ◊li{◊link["https://con.racket-lang.org/"]{tenth RacketCon, Oct 16-18, online}}}}
-
+◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
+ ◊div[#:style "margin-left: 1em"]{
+   ◊link["https://blog.racket-lang.org/2021/05/racket-v8-1.html"]{Racket version 8.1} is available.}
+ ◊div[#:style "flex-grow:1"]{}
+  ◊div[#:style "margin-right: 1em"]{◊link["books.html"]{We welcome two new Racket books:}
+                         (1) Racket Programming the Fun Way
+                         (2) Don't Teach Coding: Until You Read this Book
+}
+}}
 
 ◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
@@ -148,6 +151,7 @@ Racket comes with support for major editors. The main bundle includes an innovat
 ◊doclinks{
 ◊doclink["drracket"]{DrRacket Guide}
 ◊doclink["drracket-tools"]{DrRacket Tools}
+◊link["https://marketplace.visualstudio.com/items?itemName=evzen-wybitul.magic-racket"]{VS Code/Magic Racket}
 ◊link["https://docs.racket-lang.org/guide/Emacs.html"]{Emacs Integration}
 ◊link["https://docs.racket-lang.org/guide/Vim.html"]{VIM Integration}
 }
@@ -438,7 +442,9 @@ ancestor(A, B)?}}}
 
       ◊link["https://lists.racket-lang.org/"]{Mailing lists} and ◊link["https://blog.racket-lang.org/"]{Blog}
 
-      ◊link["https://botbot.me/freenode/racket/"]{#racket IRC} on freenode.net
+      ◊link["https://discord.gg/6Zq8sH5"]{Racket Discord}
+
+      ◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{#racket IRC} on libera.chat
 
       ◊link["https://racket.slack.com/"]{Slack channel} (Visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
 

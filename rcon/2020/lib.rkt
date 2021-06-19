@@ -28,6 +28,9 @@
 (define-tag body)
 (define-tag img)
 (define-tag a)
+(define-tag ul)
+(define-tag li)
+(define-tag br)
 
 (define (decode l)
   (let loop ([l l])

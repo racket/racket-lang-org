@@ -1,0 +1,46 @@
+1620177910
+Racket v8.1
+
+
+- DrRacket tabs can be dragged, and have new close buttons.
+
+- Racket CS supports cross-compilation using `raco exe`.
+
+- Racket CS supports Android on 32-bit and 64-bit ARM processors.
+
+- The database library supports running queries in OS threads.
+
+- Check-Syntax arrows correctly identify the definition site of
+  identifiers with contracts.
+
+- Racket CS performance has improved for structure predicates and
+  accessors
+
+- Racket CS is faster at multiplying extremely large numbers and
+  dividing large integers.
+
+- Racket CS allows callbacks to raise exceptions if they are annotated
+  with `#:callback-exns?`.
+
+- New ephemeron hash tables simplify the implementation of tables where
+  keys can refer to values.
+
+- Typed Racket supports for/foldr.
+
+- The stepper works for #lang htdp/*sl.
+
+- Struct signatures work for the ASL teaching language.
+
+The following people contributed to this release:
+
+Alex Harsányi, Alex Knauth, Alexander Shopov, Alexis King, Andrew
+Mauer-Oats, Anish Athalye, Ben Greenman, Bert De Ketelaere, Bob Burger,
+Bogdan Popa, Brian Adkins, Cameron Moy, David Van Horn, Dexter Lagan,
+Dominik Pantůček, Fred Fu, Greg Hendershott, Gustavo Massaccesi, Hazel
+Levine, Ismael Luceno, Jack Firth, Jarhmander, John Clements, Jörgen
+Brandt, Laurent Orseau, Lazerbeak12345, Matthew Flatt, Matthias
+Felleisen, Micah Cantor, Mike Sperber, Noah Ma, Patrick McCarty, Paulo
+Matos, Pavel Panchekha, Philip McGrath, Philippe Meunier, R. Kent
+Dybvig, Robby Findler, Ryan Culpepper, Ryan Kramer, Sam Tobin-Hochstadt,
+Sergiu Ivanov, Shu-Hung You, Sorawee Porncharoenwase, Stephen De
+Gabrielle, William J. Bowman, bmitc, xxyzz, yjqww6, and ymdarake

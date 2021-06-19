@@ -80,7 +80,7 @@
     (let* ([path (if (pair? base) (list "/" (cdr base) "/") "/")]
            [base (if (pair? base) (car base) base)]
            [pfx (if (regexp-match? #rx"://" base) base (list "http://" base))])
-      @a[href: (list pfx ".gmane.org" path gmane)]{@body}))
+      @a[href: (list pfx ".gmane.io" path gmane)]{@body}))
   (define (mail-archive-link suffix . body)
     @a[href: (list "https://www.mail-archive.com/" email "/" suffix)]{@body})
   (define google-groups-url
@@ -90,7 +90,9 @@
     (and google-groups-url
          (append google-groups-url (list "join"))))
   (define google-groups-join-text
-    (string-append "Join the "name" mailing list"))
+    (string-append "Join the "name" mailing list with a Google account"))
+  (define google-groups-join-no-account-text
+    @span{Join without a Google account by sending email to @tt[name "+subscribe@googlegroups.com"]})
   (define ((mk-form make) url #:method [method 'get] . body)
     (make @form[action: url method: method
                 style: "display: inline; clear: none;"]{
@@ -105,7 +107,8 @@
                                     title: @list{Enter your email to subscribe
                                                  to the "@name" mailing list.}]}]
       [else ;; it must be a google group
-       @td{@a[href: google-groups-join-url]{@google-groups-join-text}}]))
+       @td{@div{@a[href: google-groups-join-url]{@google-groups-join-text}}
+           @div[style: "font-size: small; font-weight: normal" google-groups-join-no-account-text]}]))
   (define form-cell (mk-form td))
   (λ (what)
     (case what
@@ -153,7 +156,8 @@
          @span[style: "white-space: nowrap;"]{
            Search: @input[type: 'text name: 'q value: "" size: 20].}}]
       ;; looks like gmane is pretty much gone...
-      #;[(gmane-cell)
+      #;
+      [(gmane-cell)
        @form-cell["http://search.gmane.org/"]{
          @input[type: 'hidden name: 'group value: gmane]
          @gmane-link["dir"]{@TT{@gmane}}

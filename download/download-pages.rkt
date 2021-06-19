@@ -1,6 +1,7 @@
 #lang plt-web
 
 (require "resources.rkt" "data.rkt" "installer-pages.rkt" "util.rkt"
+         "symlinks.rkt" ; has side effect of registering some links
          racket/dict
          racket/match
          plt-web/style
@@ -13,7 +14,9 @@
 (define releases "releases")
 (define first-version-with-releases-page "5.92")
 (define first-version-with-generic-linux "6.5")
+(define first-version-without-alternative-page "8.0")
 (define version-with-touchbar-bug "6.7")
+(define version-before-m1-support "7.9")
 
 ;; use a list of cons instead of hash to preserve the order
 (define (group-by/dict grouper xs f)
@@ -55,10 +58,13 @@
                        " text-align: left;"
                        " line-height: 1.5em; "
                        " background-color: #edd"))
-  (list
+  (define (more-installers)
+    @a[href: @at-download{@|releases|/@version}]{More Installers and Checksums})
+  (append
+   (list
    @columns[10 #:center? #t #:row? #t #:center-text? #t]{
     @h3[style: "text-align: center"]{Version @version (@(release-date-string release))}
-    @div[id: "download_panel" align: "center" style: "display: none; margin-bottom: 20px;"]{
+    @div[id: "download_panel" align: "center" style: "display: none; margin-bottom: 10px;"]{
       @div[id: "control"]{}
       @br
       @navigation-button[@(a href: (resource "download/" #f)
@@ -69,36 +75,36 @@
       @span[id: "linux_ppa"]{
         or
         @a[href: "https://launchpad.net/~plt/+archive/ubuntu/racket"]{Ubuntu PPA}}
-     }}
-  @columns[8 #:center? #t #:center-text? #t #:row? #t]{
-      @(let* ([sep   @list{@nbsp @bull @nbsp}]
-              [links (λ links @(div style: "margin: 1ex 4ex;" (add-between links sep)))]
-              [docs  (html-docs-link version)])
-         (list
-          @row{
-            @links[@list{Release: @nbsp @(release-page release){Announcement}}
-                   @a[href: @at-download{@|docs|/release/}]{Notes}
-                   @list{@a[href: @at-download{@docs}]{Documentation}
-                         @(if (version<? @|version| first-version-with-releases-page)
-                              null
-                              @list{@br @nbsp @a[href: @at-download{@|releases|/@version}]{More Installers and Checksums}})}]}
-          @row{@links[@license{License}
-                       all-version-pages
-                       @pre:installers{Snapshot Builds}]}))}
+     }})
+ (if (version<? @|version| first-version-with-releases-page)
+     null
+     (list
+      @columns[8 #:center? #t #:center-text? #t #:row? #t]{
+        @row[style: "margin: 1ex;"]{@more-installers[]}}))
+ (list
   @columns[6 #:center? #t #:center-text? #t #:row? #t]{
       @div[id: "minimal_racket_explain"
            style: note-style]{
         @div{@b{About Minimal Racket:}} Minimal Racket includes just enough of Racket that you can use @tt{raco pkg} to install more.}
       @div[id: "linux_explain"
            style: note-style]{
-        @div{@b{About the Linux installers:}}
+        @div{@b{About the Linux installer:}}
         @(if (version<? @|version| first-version-with-generic-linux)
              @list{If you don't see an option for
                    your particular platform, try other Linux installers, starting from
                    similar ones.  Very often, a build on one Linux variant will work on
                    others too.}
              @list{The Linux build is generic enough that it should work on most
-                   distributions, including relatively old distributions.})}
+                   distributions, including relatively old distributions. Racket
+                   may also be available through your distribution's package manager,
+                   although it may be older than the latest Racket version.})}
+      @div[id: "linux_install_explain"
+           style: note-style]{
+             @div{@b{Running the Linux installer:}}
+             @list{After downloading the installer file, run it with
+                         @div{@nbsp @nbsp @tt{sh @tt[id: "installer_name"]{racket.sh}}}
+                         to install, possibly adding @tt{sudo} to the start of the command
+                         to install to a location that requires adminstrator access.}}
       @(if (equal? version version-with-touchbar-bug)
            @div[id: "macos_touchbar_explain"
                 style: note-style]{
@@ -107,6 +113,20 @@
                       with the Touch Bar, use the 32-bit version or try a
                       @pre:installers{snapshot build}.}}
            null)
+      @(cond
+         [(version<=? version version-before-m1-support)
+          @div[id: "m1_mac_explain"
+               style: note-style]{
+               @div{@b{M1 Mac users:}}
+               @list{The latest version of Racket supports Apple Silicon directly.
+
+               For version @version, the Mac OS (Intel 64-bit) variant requires macOS Big Sur 11.1 or above.}}]
+         [(version<? version-before-m1-support version)
+          @div[id: "m1_mac_explain"
+               style: note-style]{
+               @div{@b{M1 Mac users:}}
+               @list{Select the @b{Apple Silicon} option in @b{Platform}.}}]
+         [else null])
       @div[id: "builtpkgs_explain"
            style: note-style]{
         @div{@b{About source distributions:}} The @b{Source + built packages}
@@ -119,6 +139,11 @@
            style: note-style]{
         @div{@b{About sources for Windows and Mac OS:}} To build from source for
            Windows or Mac OS, download and build a @b{Minimal Racket} distribution
+           @(if (not (for/or ([i (in-list all-installers)])
+                       (and (equal? release (installer-release i))
+                            (equal? 'racket-minimal (installer-package i)))))
+                @span{ (see @more-installers[])}
+                "")
            instead of a @b{Racket} distribution, then (when on Windows) install the @tt{racket-lib} package
            with @div{@nbsp @nbsp @tt{raco pkg update --auto racket-lib}}
            and then (on both Windows and Mac OS) install packages
@@ -171,6 +196,8 @@ var bigbang = null;
 
 var elem = null;
 
+var property = null;
+
 (function() {
     function Elem(type, attrs, children) {
         this.type = type;
@@ -183,6 +210,10 @@ var elem = null;
     function Text(s) {
         this.s = s;
         this.node = null;
+    }
+
+    function Property(value) {
+        this.value = value;
     }
 
     var globalState = null;
@@ -201,6 +232,8 @@ var elem = null;
                 } else {
                     tree.node.attachEvent('on' + key, closure);
                 }
+            } else if (value instanceof Property) {
+                tree.node[key] = value.value;
             } else {
                 tree.node.setAttribute(key, value);
             }
@@ -247,7 +280,7 @@ var elem = null;
                    } else {
                        newTree.node.detachEvent('on' + key, closure);
                    }
-               } else {
+               } else if (newTree.node.hasAttribute(key)) {
                    newTree.node.removeAttribute(key);
                }
            }
@@ -295,6 +328,10 @@ var elem = null;
                 child;
         }));
     };
+
+    property = function(value) {
+        return new Property(value);
+    };
 })();
   }
     @downloader-script[package version grouped-by-dist+platform]
@@ -303,7 +340,16 @@ var elem = null;
       @ul{@(for/list ([i (in-list all-installers)]
                       #:when (and (equal? release (installer-release i))
                                   (equal? package (installer-package i))))
-             @li{@(installer->page i 'only-platform)})}}}))
+             @li{@(installer->page i 'only-platform)})}}}
+  @columns[8 #:center? #t #:center-text? #t #:row? #t]{
+      @(let* ([sep   @list{@nbsp @bull @nbsp}]
+              [links (λ links @(div style: "margin: 4ex 4ex;" (add-between links sep)))]
+              [docs  (html-docs-link version)])
+          (list
+           @row{@links[@license{License}
+                       @span{@all-version-pages
+                             @span[style: "font-size: 80%"]{with notes and documentation}}
+                       @pre:installers{Snapshot Builds}]}))})))
 
 (define (release-page* rel)
   (define ver (release-version rel))
@@ -380,11 +426,13 @@ var elem = null;
                            (cell r main-package)
                            @td[])
                       @td[align: 'center]{
-                        @(add-between
-                          (for/list ([p (in-list alt-packages)]
-                                     #:when (member p (hash-ref release=>packages r)))
-                            ((make-page r p) (package->name p)))
-                          " ")}
+                        @(if (version<? ver first-version-without-alternative-page)
+                             (add-between
+                              (for/list ([p (in-list alt-packages)]
+                                         #:when (member p (hash-ref release=>packages r)))
+                                ((make-page r p) (package->name p)))
+                              " ")
+                             @a[href: @list{@|releases|/@|ver|/}]{All Installers})}
                       @td{@a[href: @html-docs-link[ver]]{[HTML]} @;
                           @nbsp @;
                           @a[href: @pdf-docs-link[ver]]{[PDF]}}}
@@ -406,20 +454,19 @@ var elem = null;
          Apache License, version 2.0} and the
        @a[href: "https://github.com/racket/racket/blob/master/racket/src/LICENSE-MIT.txt"]{
          MIT License}, at your option.
-       Some components of the Racket distribution, including the
-       compiled @tt{racket} executable for the "Regular" variant of
-       Racket and packages that distribute
+    @~ Some components of some Racket distributions, including the
+       compiled @tt{racket} executable for the BC variant of
+       Racket (@|ldquo|Regular@|rdquo| before version 8.0) and packages that distribute
        third-party libraries, are distributed under the
        @a[href: "http://www.gnu.org/licenses/lgpl-3.0.html"]{
-         GNU Lesser General Public License (LGPL) version 3.0}.
+                                                             GNU Lesser General Public License (LGPL) version 3.0}.
+       Any program written in Racket that does not distribute the
+       BC variant @tt{racket} binary itself is not affected by the
+       license of that binary.
+    @~ Versions of Racket prior to version 7.5 are distributed under the
+       GNU LGPL, version 3.0.
     @~ See the @a[href: "https://github.com/racket/racket/blob/master/LICENSE"]{
        @tt{LICENSE}} file in the source code for more information.
-                                                                                    @~ Any program written in Racket that does not distribute the
-    "Regular" variant @tt{racket} binary itself is not affected by the
-    license of that binary.
-
-    Versions of Racket prior to version 7.5 are distributed under the
-    GNU LGPL, version 3.0.
     }}})
 
 (define (release-> r)
@@ -472,6 +519,7 @@ var elem = null;
           Mac      = /Mac/,
           MacIntel = /Mac.*Intel/,
           MacIntel64 = /Mac.*Intel.*64/,
+          MacARM64 = /Mac.*Apple Silicon.*64/,
           MacIntel32 = /Mac.*Intel.*32/,
           MacPPC   = /Mac.*PPC/,
           Linux    = /Linux/,
@@ -486,6 +534,7 @@ var elem = null;
       else if (l("Win"))   return [Win32, Win];
       else if (l("Mac"))   return [
         l("Intel") ? MacIntel64 : MacPPC,
+        l("Intel") ? MacARM64 : MacPPC,
         l("Intel") ? MacIntel32 : MacPPC,
         Mac,
         Unix
@@ -597,30 +646,36 @@ var elem = null;
 
       update(currentPackage);
 
-      var children = [
+      var children = [];
+
+      if (allInstallers.length !== 1) {
+        children.push(
         elem('div', {}, [
           'Distribution: ',
           elem('select', {onchange: handleDistChange},
             map(allInstallers, function (group) {
               return elem('option',
                 group.dist === currentDist ?
-                  {selected: 'selected', value: group.dist} :
+                  {selected: property('selected'), value: group.dist} :
                   {value: group.dist},
                 [group.distName]);
             }))
-        ]),
+          ]));
+        }
+
+      children.push(
         elem('div', {}, [
           'Platform: ',
           elem('select', {onchange: handlePlatformChange},
             map(allPlatforms, function (group) {
               return elem('option',
                 group.platform === currentPlatform ?
-                  {selected: 'selected', value: group.platform} :
+                  {selected: property('selected'), value: group.platform} :
                   {value: group.platform},
                 [group.platformName]);
             }))
         ])
-      ];
+      );
 
       if (allVariants.length !== 1) {
         children.push(
@@ -631,7 +686,7 @@ var elem = null;
                 var theVariant = computeVariant(group);
                 return elem('option',
                   theVariant === currentVariant ?
-                    {selected: 'selected', value: theVariant} :
+                    {selected: property('selected'), value: theVariant} :
                     {value: theVariant},
                   [group.variant]);
               }))
@@ -666,6 +721,7 @@ var elem = null;
       showWhen('minimal_racket_explain', dist === 'racket-minimal');
 
       showWhen('linux_explain', platform.search(/linux/) >= 0);
+      showWhen('linux_install_explain', platform.search(/linux/) >= 0);
       showWhen('linux_ppa', platform.search(/linux/) >= 0);
 
       // NOTE: there used to be a condition that there must not be
@@ -699,12 +755,20 @@ var elem = null;
            }
            null)
 
+      @(if (version<=? version-before-m1-support version)
+           @list{
+                 showWhen('m1_mac_explain', platform === 'x86_64-macosx');
+           }
+           null)
+
       var download_link = document.getElementById('download_link');
       var path = mirrorUrl + package.path;
+      var package_file_name = path.replace(/.*\//, "");
       download_link.href = path;
-      download_link.innerHTML = path.replace(/.*\//, "") + " (" + package.humanSize + ")";
+      download_link.innerHTML = package_file_name + " (" + package.humanSize + ")";
       var mirror_link = document.getElementById("mirror_link");
       mirror_link.href = package.mirrorUrl;
+      document.getElementById("installer_name").innerHTML = package_file_name;
     }
 
     // show the download panel, since JS is obviously working

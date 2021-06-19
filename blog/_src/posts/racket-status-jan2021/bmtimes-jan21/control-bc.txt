@@ -1,0 +1,592 @@
+'----------------------------------------
+'none-loop
+cpu time: 9191 real time: 9185 gc time: 0
+cpu time: 9158 real time: 9154 gc time: 0
+cpu time: 9202 real time: 9198 gc time: 0
+#f
+'some-loop
+cpu time: 9164 real time: 9159 gc time: 0
+cpu time: 9194 real time: 9191 gc time: 0
+cpu time: 9166 real time: 9161 gc time: 0
+'val
+'----------------------------------------
+#<continuation-mark-set>
+'first-none-loop
+cpu time: 2559 real time: 2559 gc time: 0
+cpu time: 2596 real time: 2594 gc time: 0
+cpu time: 2578 real time: 2578 gc time: 0
+#f
+'first-some-loop
+cpu time: 810 real time: 809 gc time: 0
+cpu time: 809 real time: 809 gc time: 0
+cpu time: 809 real time: 809 gc time: 0
+'val
+'first-some/prompt-loop
+cpu time: 986 real time: 986 gc time: 0
+cpu time: 992 real time: 991 gc time: 0
+cpu time: 969 real time: 968 gc time: 0
+'val
+'first-some/deep-loop
+cpu time: 813 real time: 813 gc time: 0
+cpu time: 810 real time: 810 gc time: 0
+cpu time: 815 real time: 815 gc time: 0
+'val
+'first-some/deep/push-loop
+cpu time: 9083 real time: 9078 gc time: 0
+cpu time: 9119 real time: 9113 gc time: 0
+cpu time: 9141 real time: 9138 gc time: 0
+'val
+'first-none/deep/push-loop
+cpu time: 9471 real time: 9466 gc time: 0
+cpu time: 9396 real time: 9391 gc time: 0
+cpu time: 9326 real time: 9322 gc time: 0
+#f
+'first-some/deep/prompt/push-loop
+cpu time: 827 real time: 827 gc time: 0
+cpu time: 826 real time: 826 gc time: 0
+cpu time: 826 real time: 825 gc time: 0
+'val
+'first-some/deep/stop-prompt/push-loop
+cpu time: 3696 real time: 3695 gc time: 0
+cpu time: 3711 real time: 3709 gc time: 0
+cpu time: 3704 real time: 3702 gc time: 0
+#f
+'----------------------------------------
+'get-paramz
+cpu time: 3545 real time: 3544 gc time: 0
+cpu time: 3588 real time: 3586 gc time: 0
+cpu time: 3575 real time: 3574 gc time: 0
+#<parameterization>
+'current-paramz
+cpu time: 4050 real time: 4047 gc time: 0
+cpu time: 4131 real time: 4130 gc time: 0
+cpu time: 4092 real time: 4090 gc time: 0
+#<parameterization>
+'current-paramz/local
+cpu time: 1415 real time: 1414 gc time: 0
+cpu time: 1410 real time: 1410 gc time: 0
+cpu time: 1411 real time: 1410 gc time: 0
+#<parameterization>
+'param-ref
+cpu time: 4097 real time: 4095 gc time: 0
+cpu time: 4090 real time: 4088 gc time: 0
+cpu time: 4122 real time: 4120 gc time: 0
+#f
+'param-ref/local
+cpu time: 4647 real time: 4645 gc time: 0
+cpu time: 4536 real time: 4534 gc time: 0
+cpu time: 4417 real time: 4414 gc time: 0
+10
+'param-set!
+cpu time: 10654 real time: 10648 gc time: 69
+cpu time: 10496 real time: 10490 gc time: 70
+cpu time: 10544 real time: 10538 gc time: 98
+1
+'param-ref-after-set
+cpu time: 6918 real time: 6913 gc time: 0
+cpu time: 6833 real time: 6830 gc time: 0
+cpu time: 6954 real time: 6951 gc time: 0
+1
+'param-bind-loop
+cpu time: 1247 real time: 1246 gc time: 11
+cpu time: 1238 real time: 1238 gc time: 10
+cpu time: 1246 real time: 1246 gc time: 11
+1
+'param-bind-prim-loop
+cpu time: 1325 real time: 1325 gc time: 8
+cpu time: 1331 real time: 1329 gc time: 9
+cpu time: 1340 real time: 1340 gc time: 23
+1
+'param-bind-nontail
+cpu time: 38351 real time: 38311 gc time: 13064
+cpu time: 39685 real time: 39644 gc time: 13776
+cpu time: 38581 real time: 38540 gc time: 13840
+10000001
+'barrier
+cpu time: 1150 real time: 1149 gc time: 10
+cpu time: 1147 real time: 1145 gc time: 7
+cpu time: 1136 real time: 1136 gc time: 12
+'thunk+barrier
+cpu time: 1401 real time: 1400 gc time: 10
+cpu time: 1338 real time: 1337 gc time: 6
+cpu time: 1385 real time: 1385 gc time: 11
+'----------------------------------------
+'loop
+cpu time: 2257 real time: 2256 gc time: 0
+cpu time: 2259 real time: 2258 gc time: 0
+cpu time: 2388 real time: 2388 gc time: 0
+0
+'pair-loop
+cpu time: 3245 real time: 3244 gc time: 171
+cpu time: 3246 real time: 3245 gc time: 195
+cpu time: 3251 real time: 3249 gc time: 191
+'(1 . 1)
+'nontail
+cpu time: 382 real time: 381 gc time: 160
+cpu time: 389 real time: 390 gc time: 195
+cpu time: 596 real time: 596 gc time: 196
+10000000
+'pairs-nontail
+cpu time: 2551 real time: 2550 gc time: 2014
+cpu time: 2079 real time: 2077 gc time: 1563
+cpu time: 2223 real time: 2221 gc time: 1327
+10000001
+'indirect-nontail-argument-loop
+cpu time: 7974 real time: 7966 gc time: 0
+cpu time: 7983 real time: 7976 gc time: 0
+cpu time: 7983 real time: 7975 gc time: 0
+0
+'----------------------------------------
+'compose-baseline
+cpu time: 3508 real time: 3504 gc time: 191
+cpu time: 3371 real time: 3368 gc time: 168
+cpu time: 3302 real time: 3298 gc time: 170
+100
+'compose-deep-marks
+cpu time: 4716 real time: 4712 gc time: 190
+cpu time: 4472 real time: 4469 gc time: 190
+cpu time: 4453 real time: 4449 gc time: 176
+100
+'compose-deep/prompt-marks
+cpu time: 31882 real time: 31852 gc time: 569
+cpu time: 31185 real time: 31153 gc time: 430
+cpu time: 31402 real time: 31370 gc time: 481
+100
+'compose-deep/prompt/nosplice-marks
+cpu time: 32078 real time: 32048 gc time: 492
+cpu time: 31682 real time: 31652 gc time: 423
+cpu time: 31488 real time: 31458 gc time: 503
+101
+'----------------------------------------
+'mark-set-loop
+cpu time: 5707 real time: 5705 gc time: 0
+cpu time: 5710 real time: 5707 gc time: 0
+cpu time: 6107 real time: 6105 gc time: 0
+1
+'mark-set-nontail-easy
+cpu time: 31205 real time: 31161 gc time: 8263
+cpu time: 29814 real time: 29779 gc time: 8210
+cpu time: 32897 real time: 32861 gc time: 8638
+20000001
+'mark-set-nontail-outside
+cpu time: 29726 real time: 29691 gc time: 7907
+cpu time: 29757 real time: 29722 gc time: 8360
+cpu time: 30310 real time: 30272 gc time: 8120
+10000001
+'mark-set-nontail-inside
+cpu time: 29096 real time: 29057 gc time: 7831
+cpu time: 29097 real time: 29061 gc time: 7895
+cpu time: 31176 real time: 31136 gc time: 8015
+10000001
+'mark-nontail-argument-loop
+cpu time: 12196 real time: 12185 gc time: 0
+cpu time: 12208 real time: 12196 gc time: 0
+cpu time: 12605 real time: 12593 gc time: 0
+0
+'mark-nontail-argument-loop-easy
+cpu time: 9156 real time: 9147 gc time: 0
+cpu time: 9140 real time: 9131 gc time: 0
+cpu time: 9081 real time: 9073 gc time: 0
+0
+'----------------------------------------
+'hasheq-add-remove
+cpu time: 9187 real time: 9183 gc time: 33
+cpu time: 9184 real time: 9179 gc time: 40
+cpu time: 9272 real time: 9268 gc time: 24
+'hasheq-adds
+cpu time: 17093 real time: 17084 gc time: 397
+cpu time: 17084 real time: 17075 gc time: 406
+cpu time: 17079 real time: 17070 gc time: 424
+'hasheq-adds/#t
+cpu time: 15274 real time: 15267 gc time: 261
+cpu time: 15267 real time: 15260 gc time: 276
+cpu time: 15349 real time: 15340 gc time: 232
+'hasheq-addsame
+cpu time: 3275 real time: 3274 gc time: 1
+cpu time: 3265 real time: 3263 gc time: 0
+cpu time: 3273 real time: 3272 gc time: 0
+'hasheq-removes
+cpu time: 18527 real time: 18517 gc time: 354
+cpu time: 18542 real time: 18532 gc time: 352
+cpu time: 18559 real time: 18549 gc time: 358
+'hasheq-ref
+cpu time: 4807 real time: 4805 gc time: 0
+cpu time: 4811 real time: 4809 gc time: 0
+cpu time: 4809 real time: 4807 gc time: 0
+'hasheq-reffail
+cpu time: 1743 real time: 1742 gc time: 0
+cpu time: 1744 real time: 1743 gc time: 0
+cpu time: 1736 real time: 1736 gc time: 0
+'----------------------------------------
+'spin-ping-pong
+cpu time: 2155 real time: 2154 gc time: 3
+cpu time: 2122 real time: 2121 gc time: 0
+cpu time: 2119 real time: 2118 gc time: 0
+'channel-ping-pong
+cpu time: 2590 real time: 2588 gc time: 4
+cpu time: 2532 real time: 2532 gc time: 12
+cpu time: 2571 real time: 2569 gc time: 7
+'sema-ping-pong
+cpu time: 563 real time: 562 gc time: 2
+cpu time: 533 real time: 532 gc time: 1
+cpu time: 531 real time: 531 gc time: 1
+'sema-ping-pong/prompts
+cpu time: 14142 real time: 14136 gc time: 3
+cpu time: 13952 real time: 13945 gc time: 2
+cpu time: 14083 real time: 14077 gc time: 1
+'sema-ping-pong/marks
+cpu time: 536 real time: 535 gc time: 0
+cpu time: 528 real time: 528 gc time: 0
+cpu time: 529 real time: 528 gc time: 1
+'----------------------------------------
+'cell-ref
+cpu time: 886 real time: 885 gc time: 0
+cpu time: 885 real time: 886 gc time: 0
+cpu time: 885 real time: 885 gc time: 0
+#f
+'cell-set!
+cpu time: 5126 real time: 5123 gc time: 78
+cpu time: 5091 real time: 5090 gc time: 68
+cpu time: 5322 real time: 5319 gc time: 90
+1
+'cell-ref-after-set
+cpu time: 3695 real time: 3694 gc time: 0
+cpu time: 3688 real time: 3687 gc time: 0
+cpu time: 3236 real time: 3235 gc time: 0
+1
+'----------------------------------------
+'exn
+cpu time: 792 real time: 793 gc time: 8
+'caught
+'exn-deep
+cpu time: 870 real time: 870 gc time: 5
+'caught
+'exn-chain
+cpu time: 5445 real time: 5441 gc time: 85
+'done
+'capture
+cpu time: 6377 real time: 6373 gc time: 380
+cpu time: 6246 real time: 6241 gc time: 395
+cpu time: 6039 real time: 6036 gc time: 343
+'compose
+cpu time: 22137 real time: 22114 gc time: 1788
+cpu time: 22913 real time: 22888 gc time: 1839
+cpu time: 21226 real time: 21205 gc time: 1622
+'----------------------------------------
+'semaphore-wait
+cpu time: 326 real time: 326 gc time: 0
+cpu time: 339 real time: 338 gc time: 0
+cpu time: 327 real time: 326 gc time: 0
+'semaphore-post+wait
+cpu time: 412 real time: 413 gc time: 0
+cpu time: 414 real time: 413 gc time: 0
+cpu time: 412 real time: 412 gc time: 0
+'semaphore-peek-evt
+cpu time: 2207 real time: 2205 gc time: 34
+cpu time: 2065 real time: 2065 gc time: 26
+cpu time: 2242 real time: 2241 gc time: 26
+'sync-guard
+cpu time: 3377 real time: 3375 gc time: 17
+cpu time: 3382 real time: 3380 gc time: 27
+cpu time: 3394 real time: 3392 gc time: 39
+'sync-semaphore+never
+cpu time: 2737 real time: 2735 gc time: 22
+cpu time: 2781 real time: 2779 gc time: 39
+cpu time: 2771 real time: 2770 gc time: 17
+'sync-semaphore+semaphore
+cpu time: 2109 real time: 2108 gc time: 11
+cpu time: 2106 real time: 2105 gc time: 9
+cpu time: 2114 real time: 2113 gc time: 11
+'sync-semaphore+semaphore/timeout
+cpu time: 3330 real time: 3329 gc time: 31
+cpu time: 3321 real time: 3318 gc time: 16
+cpu time: 3346 real time: 3345 gc time: 19
+'sync-semaphore+semaphore/timeout-callback
+cpu time: 4391 real time: 4390 gc time: 23
+cpu time: 4366 real time: 4363 gc time: 9
+cpu time: 4387 real time: 4386 gc time: 20
+'sync-guard+guard
+cpu time: 4643 real time: 4641 gc time: 47
+cpu time: 4658 real time: 4655 gc time: 33
+cpu time: 4693 real time: 4691 gc time: 39
+'sync-three-semaphores
+cpu time: 2199 real time: 2197 gc time: 19
+cpu time: 2201 real time: 2200 gc time: 13
+cpu time: 2205 real time: 2204 gc time: 13
+'set-in-empty:eq#t
+cpu time: 322 real time: 322 gc time: 0
+cpu time: 322 real time: 322 gc time: 0
+cpu time: 325 real time: 325 gc time: 0
+'set-many-in-order:eq#t
+cpu time: 1512 real time: 1513 gc time: 23
+cpu time: 1517 real time: 1516 gc time: 22
+cpu time: 1515 real time: 1515 gc time: 24
+'set-many:eq#t
+cpu time: 1563 real time: 1562 gc time: 29
+cpu time: 1546 real time: 1545 gc time: 22
+cpu time: 1543 real time: 1542 gc time: 18
+'set-same:eq#t
+cpu time: 334 real time: 334 gc time: 1
+cpu time: 331 real time: 331 gc time: 0
+cpu time: 331 real time: 331 gc time: 0
+'set-in-empty:eq
+cpu time: 319 real time: 319 gc time: 0
+cpu time: 323 real time: 323 gc time: 0
+cpu time: 323 real time: 323 gc time: 0
+'set-many-in-order:eq
+cpu time: 1730 real time: 1729 gc time: 57
+cpu time: 1700 real time: 1699 gc time: 32
+cpu time: 1698 real time: 1697 gc time: 50
+'set-many:eq
+cpu time: 1714 real time: 1713 gc time: 27
+cpu time: 1698 real time: 1697 gc time: 45
+cpu time: 1699 real time: 1699 gc time: 35
+'set-same:eq
+cpu time: 339 real time: 339 gc time: 0
+cpu time: 331 real time: 330 gc time: 0
+cpu time: 329 real time: 329 gc time: 0
+'set-in-empty:eqv
+cpu time: 309 real time: 309 gc time: 0
+cpu time: 309 real time: 309 gc time: 0
+cpu time: 316 real time: 316 gc time: 0
+'set-many-in-order:eqv
+cpu time: 1820 real time: 1818 gc time: 62
+cpu time: 1804 real time: 1803 gc time: 60
+cpu time: 1793 real time: 1792 gc time: 47
+'set-many:eqv
+cpu time: 1824 real time: 1823 gc time: 57
+cpu time: 1795 real time: 1793 gc time: 45
+cpu time: 1813 real time: 1812 gc time: 66
+'set-same:eqv
+cpu time: 333 real time: 332 gc time: 0
+cpu time: 333 real time: 332 gc time: 1
+cpu time: 334 real time: 334 gc time: 0
+'set-in-empty:equal
+cpu time: 777 real time: 777 gc time: 0
+cpu time: 774 real time: 774 gc time: 0
+cpu time: 775 real time: 774 gc time: 0
+'set-many-in-order:equal
+cpu time: 2141 real time: 2140 gc time: 60
+cpu time: 2116 real time: 2114 gc time: 43
+cpu time: 2132 real time: 2131 gc time: 51
+'set-many:equal
+cpu time: 1905 real time: 1904 gc time: 48
+cpu time: 1859 real time: 1858 gc time: 54
+cpu time: 1880 real time: 1879 gc time: 57
+'set-same:equal
+cpu time: 1453 real time: 1452 gc time: 12
+cpu time: 1456 real time: 1455 gc time: 7
+cpu time: 1456 real time: 1456 gc time: 7
+'ref:eq#t
+cpu time: 483 real time: 482 gc time: 0
+cpu time: 479 real time: 479 gc time: 0
+cpu time: 479 real time: 479 gc time: 0
+'ref-fail:eq#t
+cpu time: 173 real time: 174 gc time: 0
+cpu time: 173 real time: 172 gc time: 0
+cpu time: 173 real time: 173 gc time: 0
+'ref:eq
+cpu time: 482 real time: 482 gc time: 0
+cpu time: 482 real time: 481 gc time: 0
+cpu time: 487 real time: 486 gc time: 0
+'ref-fail:eq
+cpu time: 173 real time: 173 gc time: 0
+cpu time: 173 real time: 174 gc time: 0
+cpu time: 173 real time: 173 gc time: 0
+'ref:eqv
+cpu time: 599 real time: 598 gc time: 0
+cpu time: 598 real time: 597 gc time: 0
+cpu time: 598 real time: 597 gc time: 0
+'ref-fail:eqv
+cpu time: 680 real time: 679 gc time: 0
+cpu time: 680 real time: 680 gc time: 0
+cpu time: 686 real time: 685 gc time: 0
+'ref:equal
+cpu time: 1292 real time: 1291 gc time: 4
+cpu time: 1295 real time: 1295 gc time: 4
+cpu time: 1295 real time: 1295 gc time: 3
+'ref-large:equal
+cpu time: 1771 real time: 1770 gc time: 0
+cpu time: 1772 real time: 1771 gc time: 0
+cpu time: 1773 real time: 1772 gc time: 1
+'ref-fail:equal
+cpu time: 632 real time: 631 gc time: 0
+cpu time: 637 real time: 638 gc time: 0
+cpu time: 639 real time: 639 gc time: 0
+'ref-large-fail:equal
+cpu time: 814 real time: 815 gc time: 0
+cpu time: 813 real time: 812 gc time: 0
+cpu time: 808 real time: 808 gc time: 0
+'removes:eq#t
+cpu time: 1713 real time: 1712 gc time: 32
+cpu time: 1699 real time: 1698 gc time: 18
+cpu time: 1699 real time: 1698 gc time: 18
+'add+remove:eq#t
+cpu time: 921 real time: 920 gc time: 3
+cpu time: 918 real time: 919 gc time: 3
+cpu time: 927 real time: 927 gc time: 14
+'removes:eq
+cpu time: 1852 real time: 1851 gc time: 24
+cpu time: 1847 real time: 1845 gc time: 35
+cpu time: 1856 real time: 1855 gc time: 39
+'add+remove:eq
+cpu time: 933 real time: 933 gc time: 4
+cpu time: 938 real time: 938 gc time: 2
+cpu time: 938 real time: 938 gc time: 6
+'removes:eqv
+cpu time: 1997 real time: 1997 gc time: 45
+cpu time: 1976 real time: 1975 gc time: 41
+cpu time: 1989 real time: 1987 gc time: 56
+'add+remove:eqv
+cpu time: 981 real time: 981 gc time: 5
+cpu time: 985 real time: 984 gc time: 4
+cpu time: 974 real time: 973 gc time: 3
+'removes:equal
+cpu time: 2858 real time: 2857 gc time: 59
+cpu time: 2845 real time: 2844 gc time: 52
+cpu time: 2834 real time: 2832 gc time: 43
+'add+remove:equal
+cpu time: 2299 real time: 2297 gc time: 3
+cpu time: 2266 real time: 2265 gc time: 6
+cpu time: 2270 real time: 2269 gc time: 3
+'iterate-keys:eq
+cpu time: 521 real time: 521 gc time: 0
+cpu time: 520 real time: 520 gc time: 0
+cpu time: 518 real time: 518 gc time: 0
+'iterate-vals:eq#t
+cpu time: 516 real time: 516 gc time: 0
+cpu time: 514 real time: 514 gc time: 0
+cpu time: 515 real time: 514 gc time: 0
+'iterate-vals:eq
+cpu time: 533 real time: 533 gc time: 0
+cpu time: 533 real time: 533 gc time: 0
+cpu time: 529 real time: 529 gc time: 0
+'iterate-unsafe-keys:eq
+cpu time: 2163 real time: 2163 gc time: 0
+cpu time: 2146 real time: 2145 gc time: 0
+cpu time: 2142 real time: 2141 gc time: 0
+'iterate-unsafe-vals:eq#t
+cpu time: 1128 real time: 1127 gc time: 0
+cpu time: 1122 real time: 1121 gc time: 0
+cpu time: 1126 real time: 1126 gc time: 0
+'iterate-unsafe-vals:eq
+cpu time: 1159 real time: 1158 gc time: 0
+cpu time: 1142 real time: 1142 gc time: 0
+cpu time: 1139 real time: 1138 gc time: 0
+'for-each:eq
+cpu time: 2840 real time: 2839 gc time: 0
+cpu time: 2861 real time: 2860 gc time: 0
+cpu time: 2858 real time: 2856 gc time: 0
+'subset-lil-shared:eq
+cpu time: 1179 real time: 1178 gc time: 0
+cpu time: 989 real time: 989 gc time: 0
+cpu time: 990 real time: 990 gc time: 0
+'subset-lil-unshared:eq
+cpu time: 700 real time: 699 gc time: 0
+cpu time: 713 real time: 713 gc time: 0
+cpu time: 713 real time: 712 gc time: 0
+'subset-lil-not:eq
+cpu time: 1112 real time: 1111 gc time: 0
+cpu time: 1112 real time: 1111 gc time: 0
+cpu time: 1112 real time: 1112 gc time: 0
+'subset-med+lil-shared:eq
+cpu time: 498 real time: 498 gc time: 0
+cpu time: 499 real time: 498 gc time: 0
+cpu time: 499 real time: 499 gc time: 0
+'subset-med+med-shared:eq
+cpu time: 1281 real time: 1281 gc time: 0
+cpu time: 1307 real time: 1307 gc time: 0
+cpu time: 1310 real time: 1309 gc time: 0
+'subset-big-same:eq
+cpu time: 5599 real time: 5597 gc time: 0
+cpu time: 5632 real time: 5629 gc time: 0
+cpu time: 5598 real time: 5596 gc time: 0
+'subset-big+lil-shared:eq
+cpu time: 3027 real time: 3026 gc time: 0
+cpu time: 3012 real time: 3011 gc time: 0
+cpu time: 3017 real time: 3015 gc time: 0
+'subset-big+med-shared:eq
+cpu time: 582 real time: 581 gc time: 0
+cpu time: 582 real time: 582 gc time: 0
+cpu time: 580 real time: 580 gc time: 0
+'subset-big-unshared:eq
+cpu time: 1622 real time: 1622 gc time: 0
+cpu time: 1633 real time: 1631 gc time: 0
+cpu time: 1626 real time: 1626 gc time: 0
+'----------------------------------------
+'chaperone
+cpu time: 882 real time: 881 gc time: 12
+cpu time: 870 real time: 869 gc time: 8
+cpu time: 869 real time: 869 gc time: 12
+'chaperone-more
+cpu time: 890 real time: 890 gc time: 0
+cpu time: 885 real time: 884 gc time: 12
+cpu time: 889 real time: 889 gc time: 21
+'chaperone-prop
+cpu time: 1397 real time: 1397 gc time: 20
+cpu time: 1400 real time: 1399 gc time: 18
+cpu time: 1414 real time: 1414 gc time: 37
+'baseline-ref
+cpu time: 39 real time: 39 gc time: 0
+cpu time: 38 real time: 38 gc time: 0
+cpu time: 38 real time: 38 gc time: 0
+'baseline-set!
+cpu time: 46 real time: 46 gc time: 0
+cpu time: 45 real time: 45 gc time: 0
+cpu time: 46 real time: 46 gc time: 0
+'baseline-sub-ref
+cpu time: 40 real time: 39 gc time: 0
+cpu time: 39 real time: 40 gc time: 0
+cpu time: 40 real time: 40 gc time: 0
+'baseline-sub-set!
+cpu time: 49 real time: 49 gc time: 0
+cpu time: 49 real time: 49 gc time: 0
+cpu time: 49 real time: 49 gc time: 0
+'baseline-prop-ref
+cpu time: 65 real time: 64 gc time: 0
+cpu time: 64 real time: 65 gc time: 0
+cpu time: 65 real time: 64 gc time: 0
+'undefined-ref
+cpu time: 225 real time: 226 gc time: 0
+cpu time: 226 real time: 226 gc time: 0
+cpu time: 225 real time: 225 gc time: 0
+'undefined-set!
+cpu time: 266 real time: 266 gc time: 0
+cpu time: 267 real time: 266 gc time: 0
+cpu time: 264 real time: 264 gc time: 0
+'undefined-prop-ref
+cpu time: 300 real time: 300 gc time: 0
+cpu time: 618 real time: 618 gc time: 0
+cpu time: 300 real time: 300 gc time: 0
+'chaperoned-ref
+cpu time: 415 real time: 415 gc time: 0
+cpu time: 383 real time: 383 gc time: 0
+cpu time: 418 real time: 418 gc time: 0
+'chaperoned-set!
+cpu time: 422 real time: 421 gc time: 0
+cpu time: 419 real time: 419 gc time: 0
+cpu time: 377 real time: 378 gc time: 0
+'chaperoned-sub-ref
+cpu time: 409 real time: 408 gc time: 0
+cpu time: 394 real time: 394 gc time: 0
+cpu time: 411 real time: 412 gc time: 0
+'chaperoned-sub-set!
+cpu time: 399 real time: 398 gc time: 0
+cpu time: 400 real time: 400 gc time: 0
+cpu time: 384 real time: 384 gc time: 0
+'chaperoned-prop-ref
+cpu time: 964 real time: 964 gc time: 0
+cpu time: 964 real time: 964 gc time: 0
+cpu time: 965 real time: 965 gc time: 0
+'chaperoned-undefined-ref
+cpu time: 429 real time: 428 gc time: 0
+cpu time: 428 real time: 428 gc time: 0
+cpu time: 431 real time: 431 gc time: 0
+'chaperoned-undefined-set!
+cpu time: 418 real time: 417 gc time: 0
+cpu time: 420 real time: 420 gc time: 0
+cpu time: 409 real time: 410 gc time: 0
+'chaperoned-undefined-prop-ref
+cpu time: 1029 real time: 1028 gc time: 0
+cpu time: 1028 real time: 1028 gc time: 0
+cpu time: 1030 real time: 1030 gc time: 0

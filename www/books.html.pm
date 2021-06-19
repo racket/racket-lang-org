@@ -32,7 +32,8 @@ Principles of programming languages for undergraduates, graduate students, and e
 ◊link["https://redex.racket-lang.org/"]{Semantics Engineering with PLT Redex}
 Semantics for language engineers: graduate students and practitioners alike. 
 
-◊link["http://www.springer.com/de/book/9783835101555"]{Die Macht der Abstraktion}
+       
+◊link["https://link.springer.com/book/10.1007/978-3-8351-9079-5"]{Die Macht der Abstraktion}
 Einführung in die Programmierung.
 
 ◊link["http://www.springer.com/us/book/9783658141332"]{Programmierparadigmen (2. Auflage)}
@@ -41,7 +42,7 @@ Eine Einführung auf der Grundlage von Racket.
 ◊link["http://www.editions-ellipses.fr/product_info.php?products_id=7515"]{Premiers Cours de Programmation avec Scheme}
 Du fonctionnel pur aux objets avec DrRacket.
 
-◊link["https://www.penguinrandomhouse.com/books/645955/racket-programming-the-fun-way-by-james-w-stelly/"]{Racket Programming the Fun Way}
+◊link["https://nostarch.com/racket-programming-fun-way"]{Racket Programming the Fun Way}
 An introduction to the Racket functional programming language and DrRacket development environment to explore topics in mathematics (mostly recreational) and computer science. 
 
 ◊link["https://www.wiley.com/en-us/Don%27t+Teach+Coding%3A+Until+You+Read+This+Book-p-9781119602637"]{Don't Teach Coding: Until You Read This Book}

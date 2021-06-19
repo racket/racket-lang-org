@@ -68,7 +68,7 @@ There are many trade-offs between memoization and DP that should drive the choic
 In direct contrast, **DP**:
 
 
-* forces change in desription of the algorithm, which may introduce errors and certainly introduces some maintenance overhead
+* forces change in description of the algorithm, which may introduce errors and certainly introduces some maintenance overhead
 
 * cannot avoid unnecessary sub-computations (and may waste the space associated with storing those results)
 

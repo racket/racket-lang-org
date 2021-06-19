@@ -1,0 +1,44 @@
+1613265709
+Racket v8.0
+
+*** Racket 8.0 is here! ***
+
+Racket 8.0 marks the first release where Racket CS is the default
+implementation. Creating, polishing, and adopting Racket CS has been a
+4-year effort involving the entire Racket community. At this point,
+Racket CS is faster, easier to maintain and develop, and compatible
+with existing Racket programs. Racket CS will continue to improve, but
+at this point it is ready to be the primary variant of Racket for all
+Racketeers. More details about the current state of Racket CS are
+available in the recent blog post (https://blog.racket-lang.org/).
+
+Other notable changes:
+
+* Racket CS has better parallel garbage collection, a 10%-30% reduction
+  in the size of generated code, and various targeted optimizations.
+
+* A rewrite of the test-engine package allows the `#lang` versions of
+  teaching languages to produce linked test-failure messages.
+
+* The release comes with a new mark-up DSL for composing text to
+  appear in the REPL (simple-tree-text-markup).
+
+* Redex has an added `define-overriding-judgment` form  and improved
+  error source location reporting.
+
+* Windows scrolling speed reflects the system preference.
+
+* The db package uses the utf8mb4 charset for MySQL connections.
+
+The following people contributed to this release:
+
+Alex Harsányi, Alex Knauth, Alexander Shopov, Alexis King, Bert De
+Ketelaere, Bogdan Popa, Cameron Moy, David Van Horn, Davis Silverman,
+Dominik Pantůček, Florian Weimer, Fred Fu, Gustavo Massaccesi, Jack
+Firth, James Wilcox, Joel Dueck, John Clements, Jonathan Chan, Lîm
+Tsú-thuàn, Mark, Matthew Flatt, Matthias Felleisen, Michael Ballantyne,
+Mike Sperber, Paulo Matos, Pavel Panchekha, Peter Zhong, Phil Nguyen,
+Philip McGrath, Robby Findler, Ryan Culpepper, Sam Tobin-Hochstadt,
+Sergiu Ivanov, Shu-Hung You, Sorawee Porncharoenwase, Stefan Schwarzer,
+Stephen Chang, Stephen De Gabrielle, Walter H. Yang, WarGrey Gyoudmon
+Ju, kurinoku, xxyzz, and yjqww6

@@ -29,7 +29,7 @@
   @columns[8 #:center? #t #:row? #t #:center-text? #f]{
       @ul{@li{@a[href: "https://www.cs.utah.edu/plt/snapshots/"]{
                 University of Utah}}
-          @li{@a[href: "http://plt.eecs.northwestern.edu/snapshots/"]{
+          @li{@a[href: "http://plt.cs.northwestern.edu/snapshots/"]{
                 Northwestern University}}}}})
 
 (define installers (main "index.html" #:site snapshot-site))
