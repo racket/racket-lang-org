@@ -78,9 +78,10 @@
       @a[href: (list pfx ".gmane.io" path gmane)]{@body}))
   (define (mail-archive-link suffix . body)
     @a[href: (list "https://www.mail-archive.com/" email "/" suffix)]{@body})
+  (define google-groups-name
+    (ML-google-name ml))
   (define google-groups-url
-    (let ([g (ML-google-name ml)])
-      (and g (list "https://groups.google.com/forum/#!forum/" g "/"))))
+    (and google-groups-name (list "https://groups.google.com/forum/#!forum/" google-groups-name "/")))
   (define google-groups-join-url
     (and google-groups-url
          (append google-groups-url (list "join"))))
@@ -89,7 +90,8 @@
   (define google-groups-join-link-text
     (string-append "join the "name" mailing list"))
   (define google-groups-join-no-account-text
-    @span{@span[style: "font-style: italic"]{Without Google account: }send email to @tt[name "+subscribe@googlegroups.com"]})
+    (and google-groups-name
+         @span{@span[style: "font-style: italic"]{Without Google account: }send email to @tt[google-groups-name "+subscribe@googlegroups.com"]}))
   (define ((mk-form make) url #:method [method 'get] . body)
     (make @form[action: url method: method
                 style: "display: inline; clear: none;"]{
