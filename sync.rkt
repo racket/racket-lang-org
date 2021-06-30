@@ -110,7 +110,8 @@
    (redirect-prefix-routing-rule #:old-prefix "installers"
                                  #:new-prefix (format "~ainstallers" download-mirror-path)
                                  #:new-host download-mirror-host
-                                 #:redirect-code "302")
+                                 #:redirect-code "302"
+                                 #:new-protocol 'https)
    (for/list ([r (in-list all-releases)]
               #:when (version<=? "5.92" (release-version r)))
      (redirect-prefix-routing-rule #:old-prefix (format "releases/~a/installers" (release-version r))
@@ -118,7 +119,8 @@
                                                         download-mirror-path
                                                         (release-version r))
                                    #:new-host download-mirror-host
-                                   #:redirect-code "302"))))
+                                   #:redirect-code "302"
+                                   #:new-protocol 'https))))
 
 (unless dry-run?
   (add-routing-rules "download.racket-lang.org"
