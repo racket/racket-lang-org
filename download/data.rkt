@@ -55,13 +55,11 @@
     ["plt" "Racket Package"]
     ["sit" "StuffIt Archive"]))
 
+;; The first mirror in this list is the target for a redirection
+;; from download.racket-lang.org. The redirection is implemented
+;; by an S3 routing rule.
 (define -mirrors-
-  '(#;
-    ["USA, East"
-     main
-     "Matthew Flatt"
-     "mflatt@cs.utah.edu"]
-    ["USA, Massachusetts (Northeastern University)"
+  '(["USA, Massachusetts (Northeastern University)"
      "https://mirror.racket-lang.org/installers/"
      "Eli Barzilay"
      "eli@barzilay.org"]

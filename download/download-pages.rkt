@@ -500,7 +500,7 @@ var property = null;
 
   @script/inline[type: 'text/javascript]{@||
     var initialDist = @jsexpr->string[(symbol->string package)];
-    var mirrorUrl = @jsexpr->string[(mirror-url* (first mirrors))];
+    var mirrorUrl = @jsexpr->string[(mirror-url* 'main #;(first mirrors))];
     var allInstallers = @jsexpr->string[all-installers-json];
 
     // returns an ordering for the platform names, an array of regexps

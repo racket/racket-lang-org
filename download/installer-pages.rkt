@@ -73,8 +73,9 @@
 
 (provide mirror-url*)
 (define (mirror-url* m)
-  (define u (mirror-url m))
+  (define u (if (eq? m 'main) m (mirror-url m)))
   (if (eq? u 'main)
+      ;; redirects via S3 routing rules to the first mirror:
       ((resource "download/installers/" #f))
       u))
 
