@@ -46,16 +46,22 @@
 (require (prefix-in 2020: "2020/index.rkt"))
 (define-runtime-path 2020-dir "2020")
 (2020:make 2020-dir)
-(copy-con-site! 2020-dir 2020 #:current #t)
+(copy-con-site! 2020-dir 2020)
 
-;; On web server, redirect 2019/index.html to root index.html
+;; 2020
+(require (prefix-in 2021: "2021/index.rkt"))
+(define-runtime-path 2021-dir "2021")
+(2021:make 2021-dir)
+(copy-con-site! 2021-dir 2021 #:current #t)
+
+;; On web server, redirect 2021/index.html to root index.html
 ;; (these refer to remote paths)
 (void
  (symlink #:site con-site
           "../index.html"
-          "2020/index.html"))
+          "2021/index.html"))
 
-(define-runtime-path current-con-index "2020/index.html")
+(define-runtime-path current-con-index "2021/index.html")
 (define index
   (page* #:site con-site
          #:link-title "RacketCon" #:title "RacketCon"
