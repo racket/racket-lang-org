@@ -127,6 +127,15 @@
                      routing-rules
                      #:log-info displayln))
 
+(unless dry-run?
+  ;; Redirect current year's "index.html" to the root "index.html":
+  (add-routing-rules "con.racket-lang.org"
+                     (list
+                      (redirect-prefix-routing-rule #:old-prefix "2021/index.html"
+                                                    #:new-prefix "index.html"
+                                                    #:redirect-code "302"))
+                     #:log-info displayln))
+
 ;; ----------------------------------------
 
 (current-directory orig-dir)
