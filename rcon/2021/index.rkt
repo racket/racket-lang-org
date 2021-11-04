@@ -361,17 +361,21 @@ GNU Mes helps one reproduce an exact operating system in terms of auditable bina
 #:when
 @talk-time{Saturday, 5:00pm}
 #:who
-@speaker{Jack Firth}
+@speaker{Ben Greenman}
 #:link
 #f
 #:what
-@talk{Resyntax: A Macro-Powered Refactoring Tool}
+@talk{Fun and Games 2}
 #:more
 @abstract{
 
-Resyntax is a tool that wields the power of Racket’s macro expander to analyze Racket code and suggest improvements. It uses a domain-specific language to specify refactoring rules in terms of syntax-parse macros. Rules explain why they’re improvements, allowing Resyntax to teach users how to make their code more straightforward, more readable, and more efficient. This talk covers how Resyntax works, why it’s different from tools like code formatters and linters, and what it means for the future of Racket’s static analysis ecosystem.
+Last summer was a excellent season for fun, games, and macros in
+Racket. Ben will tell us all about the recent Syntax Parse Bee and
+present a showcase of contributed macros.
 
-@bio{Jack Firth (they/them) is a software engineer at Google working on continuous integration systems, Java libraries, and static analysis tools. Special interests include asynchronous programming, large-scale distributed computing, martial arts, pretty diagrams, and dyeing their hair pink.}
+@bio{Ben is a postdoc at Brown University and a fan of the 2019 Standard
+Fish competition. He is seeking ideas for a summer 2022 community
+event.}
 
 }]
 
@@ -384,7 +388,7 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 
   @lecture[
 #:when
-@talk-time{Sunday, 10:00am}
+@talk-time{Sunday, 12:30pm}
 #:who
 @speaker{Sam Tobin-Hochstadt}
 #:link
@@ -398,7 +402,7 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 
   @lecture[
 #:when
-@talk-time{Sunday, 10:30am}
+@talk-time{Sunday, 1:00pm}
 #:who
 @speaker{Racket Management}
 #:link
@@ -412,11 +416,11 @@ Please come with your big questions and discussion topics.
 
 }]
 
-  @hallway[@talk-time{Sunday, 11:00am}]
+  @hallway[@talk-time{Sunday, 1:30pm}]
 
   @lecture[
 #:when
-@talk-time{Sunday, 12:30pm}
+@talk-time{Sunday, 2:30pm}
 #:who
 @speaker{Jay McCarthy}
 #:link
@@ -439,7 +443,7 @@ L-expressions have the same goal, but try to follow the model of Python & Haskel
 }]
   @lecture[
 #:when
-@talk-time{Sunday, 1:00pm}
+@talk-time{Sunday, 3:00pm}
 #:who
 @speaker{Matthew Flatt}
 #:link
@@ -462,11 +466,11 @@ system, run-time system, and compiler.}
 
 }]
 
-  @hallway[@talk-time{Sunday, 1:30pm}]
+  @hallway[@talk-time{Sunday, 3:30pm}]
 
   @lecture[
 #:when
-@talk-time{Sunday, 2:30pm}
+@talk-time{Sunday, 4:30pm}
 #:who
 @speaker{Matthew Flatt}
 #:link
@@ -492,7 +496,7 @@ system, run-time system, and compiler.}
 }]
   @lecture[
 #:when
-@talk-time{Sunday, 3:00pm}
+@talk-time{Sunday, 5:00pm}
 #:who
 @speaker{Community}
 #:link
@@ -503,47 +507,6 @@ system, run-time system, and compiler.}
 @abstract{
 
 We will have a jam session about Rhombus.
-
-}]
-
-  @hallway[@talk-time{Sunday, 3:30pm}]
-  
-  @lecture[
-#:when
-@talk-time{Sunday, 4:30pm}
-#:who
-@speaker{Jack Firth}
-#:link
-#f
-#:what
-@talk{Collections for Rhombus}
-#:more
-@abstract{
-
-Rhombus is a new language based on Racket, exploring one possible future of macro-extensible programming. This talk covers one part of the Rhombus project: a modern generic collections framework. Rhombus’s approach to collections is influenced by Java’s stream API and interface-based collection views, Clojure’s persistent collections and transducers, and many other Racketeers’ prior work in the field. With lists, sets, multisets, maps, and multimaps galore, come learn a hundred and one different ways to slice a red-black tree.
-
-@bio{Jack Firth (they/them) is a software engineer at Google working on continuous integration systems, Java libraries, and static analysis tools. Special interests include asynchronous programming, large-scale distributed computing, martial arts, pretty diagrams, and dyeing their hair pink.}
-
-}]
-  @lecture[
-#:when
-@talk-time{Sunday, 5:00pm}
-#:who
-@speaker{Ben Greenman}
-#:link
-#f
-#:what
-@talk{Fun and Games 2}
-#:more
-@abstract{
-
-Last summer was a excellent season for fun, games, and macros in
-Racket. Ben will tell us all about the recent Syntax Parse Bee and
-present a showcase of contributed macros.
-
-@bio{Ben is a postdoc at Brown University and a fan of the 2019 Standard
-Fish competition. He is seeking ideas for a summer 2022 community
-event.}
 
 }]
 
