@@ -165,8 +165,14 @@ Newcomers describe the on-line Racket community as extremely ◊strong{friendly 
 ◊doclinks{
 ◊link["https://lists.racket-lang.org/"]{Mailing List} 
 ◊link["https://docs.racket-lang.org/racket-build-guide/contribute.html"]{Contributing} 
-◊link["https://twitter.com/racketlang"]{Twitter}
-◊link["https://github.com/racket/racket/"]{Github}}
+◊link["https://blog.racket-lang.org"]{Racket Blog}
+◊link["https://racket-news.com"]{Racket News}
+◊link["https://github.com/racket/racket/"]{Github}
+◊link["https://racket.discourse.group"]{Discourse}
+◊link["https://discord.gg/6Zq8sH5"]{Discord}
+◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{#racket IRC}
+◊link["http://racket-slack.herokuapp.com/"]{Slack}
+◊link["https://twitter.com/racketlang"]{Twitter}}
 }}
 
 ◊div[#:class "frontpage-card"]{
@@ -441,6 +447,8 @@ ancestor(A, B)?}}}
       ◊link["friendly.html"]{Friendly environment policy}
 
       ◊link["https://lists.racket-lang.org/"]{Mailing lists} and ◊link["https://blog.racket-lang.org/"]{Blog}
+      
+      ◊link["https://racket.discourse.group/"]{Racket Discourse}
 
       ◊link["https://discord.gg/6Zq8sH5"]{Racket Discord}
 
