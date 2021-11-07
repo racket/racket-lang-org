@@ -442,6 +442,8 @@ ancestor(A, B)?}}}
 
       ◊link["https://lists.racket-lang.org/"]{Mailing lists} and ◊link["https://blog.racket-lang.org/"]{Blog}
 
+      ◊link["https://racket.discourse.group/"]{Racket Discourse}
+      
       ◊link["https://discord.gg/6Zq8sH5"]{Racket Discord}
 
       ◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{#racket IRC} on libera.chat
