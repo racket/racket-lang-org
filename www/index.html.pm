@@ -440,6 +440,8 @@ ancestor(A, B)?}}}
 
       ◊link["friendly.html"]{Friendly environment policy}
 
+      ◊link["https://racket.discourse.group"]{Discourse Group (New! Exciting!)}
+
       ◊link["https://lists.racket-lang.org/"]{Mailing lists} and ◊link["https://blog.racket-lang.org/"]{Blog}
 
       ◊link["https://discord.gg/6Zq8sH5"]{Racket Discord}
