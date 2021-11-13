@@ -204,7 +204,7 @@ $(document).ready(function () {
 #:who
 @speaker{Stephen R. Foster, PhD &@br{} Lindsey D. Handley, PhD}
 #:link
-#f
+"https://www.youtube.com/watch?v=5VvlVa7rDKs&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=2"
 #:what
 @talk{Racket + React + Unreal = CodeSpells}
 #:more
@@ -252,7 +252,7 @@ book that uses Racket to illustrate their language-oriented educational philosop
 #:who
 @speaker{Hazel Levine}
 #:link
-#f
+"https://www.youtube.com/watch?v=IFkNdY832W0&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=2"
 #:what
 @talk{Slicing Tabular Data with Sawzall}
 #:more
@@ -274,7 +274,7 @@ We present a new Racket library, Sawzall, inspired heavily by dplyr and the rela
 #:who
 @speaker{Sid Kasivajhula}
 #:link
-#f
+"https://www.youtube.com/watch?v=AoIIAdMwayc&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=3"
 #:what
 @talk{Qi: A Functional, Flow-Oriented DSL}
 #:more
@@ -296,7 +296,7 @@ Another way of thinking about a function is as a flow of energy, more like an el
 #:who
 @speaker{Bogdan Popa}
 #:link
-#f
+"https://www.youtube.com/watch?v=LSzZHtEhWGk&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=4"
 #:what
 @talk{Declarative GUIs}
 #:more
@@ -322,7 +322,7 @@ business built on top of Racket.}
 #:who
 @speaker{Ryan Culpepper}
 #:link
-#f
+"https://www.youtube.com/watch?v=SlLS4F2ZRvM&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=5"
 #:what
 @talk{Implementing HTTP/2 with Events, Objects, and Ports}
 #:more
