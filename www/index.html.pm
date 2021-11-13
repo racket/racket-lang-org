@@ -163,11 +163,19 @@ Racket comes with support for major editors. The main bundle includes an innovat
 Newcomers describe the on-line Racket community as extremely ◊strong{friendly and helpful}. Everyone is welcome to ask any question and everybody is welcome to contribute to the ◊strong{open-source} code base.
 
 ◊doclinks{
-◊link["https://lists.racket-lang.org/"]{Mailing List} 
 ◊link["https://docs.racket-lang.org/racket-build-guide/contribute.html"]{Contributing} 
-◊link["https://twitter.com/racketlang"]{Twitter}
-◊link["https://github.com/racket/racket/"]{Github}}
+◊link["https://blog.racket-lang.org"]{Racket Blog}
+◊link["https://racket-news.com"]{Racket News}
+◊link["https://github.com/racket/racket/"]{Github}
+◊link["https://racket.discourse.group"]{Discourse}
+◊link["https://discord.gg/6Zq8sH5"]{Discord}
+◊link["http://racket-slack.herokuapp.com/"]{Slack}
+◊link["https://lists.racket-lang.org/"]{Mailing List} 
+◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{#racket IRC}
+◊link["https://www.youtube.com/c/racketlang/playlists"]{YouTube}
+◊link["https://twitter.com/racketlang"]{Twitter}}
 }}
+
 
 ◊div[#:class "frontpage-card"]{
 ◊special-section[#:class "one-column-body-text lop-system"
