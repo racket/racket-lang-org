@@ -168,7 +168,7 @@ $(document).ready(function () {
       @subtitle[@faded{Online}])
 (column
 
- (section
+ #;(section
   @sectionHeader{Attending}
 
   @paragraph{Join the @a[#:href "https://gather.town/app/POxm4HbriLKltrzP/racketlang"]{Gather space}; everything is there!}
@@ -204,7 +204,7 @@ $(document).ready(function () {
 #:who
 @speaker{Stephen R. Foster, PhD &@br{} Lindsey D. Handley, PhD}
 #:link
-"https://www.youtube.com/watch?v=5VvlVa7rDKs&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=2"
+"https://youtu.be/MEhAVz-Kpj0"
 #:what
 @talk{Racket + React + Unreal = CodeSpells}
 #:more
@@ -218,6 +218,8 @@ Why? We'll demonstrate through visually compelling examples how we are using Cod
 create educational technologies, novel programming interfaces, and immersive 3D games. We
 hope that you'll leave this talk knowing how you too can benefit from our open-source tools and
 examples.
+
+@(a #:href "https://codespells-org.s3.amazonaws.com/Nexus/Versions/RacketConPresentation.7z" "slides (7z)")
 
 @bio{
 Dr. Stephen R. Foster is a researcher, author, and co-founder of multiple social
@@ -252,7 +254,7 @@ book that uses Racket to illustrate their language-oriented educational philosop
 #:who
 @speaker{Hazel Levine}
 #:link
-"https://www.youtube.com/watch?v=IFkNdY832W0&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=2"
+"https://youtu.be/zza0fb36c-U"
 #:what
 @talk{Slicing Tabular Data with Sawzall}
 #:more
@@ -274,7 +276,7 @@ We present a new Racket library, Sawzall, inspired heavily by dplyr and the rela
 #:who
 @speaker{Sid Kasivajhula}
 #:link
-"https://www.youtube.com/watch?v=AoIIAdMwayc&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=3"
+"https://youtu.be/XkIoGmWkEpM"
 #:what
 @talk{Qi: A Functional, Flow-Oriented DSL}
 #:more
@@ -296,7 +298,7 @@ Another way of thinking about a function is as a flow of energy, more like an el
 #:who
 @speaker{Bogdan Popa}
 #:link
-"https://www.youtube.com/watch?v=LSzZHtEhWGk&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=4"
+"https://youtu.be/7uGJJmjcxzY"
 #:what
 @talk{Declarative GUIs}
 #:more
@@ -310,6 +312,8 @@ library, built atop racket/gui, for creating GUI applications in a
 declarative style.  I will review its advantages and disadvantages
 compared to racket/gui and demo building a small UI with it.
 
+@(a #:href "https://github.com/Bogdanp/racketcon2021-talk" "slides (github)")
+
 @bio{Bogdan is a software developer based in Cluj-Napoca, Romania.  He
 is the author of several Racket libraries, and he runs an e-commerce
 business built on top of Racket.}
@@ -322,7 +326,7 @@ business built on top of Racket.}
 #:who
 @speaker{Ryan Culpepper}
 #:link
-"https://www.youtube.com/watch?v=SlLS4F2ZRvM&list=PLvzxKSai7fpX4vupmUatNV0lnYgVqeNj2&index=5"
+"https://youtu.be/oOeEJPGQHjs"
 #:what
 @talk{Implementing HTTP/2 with Events, Objects, and Ports}
 #:more
@@ -346,7 +350,7 @@ ports to propagate error information to users.
 #:who
 @speaker{Sage Lennon Gerard}
 #:link
-#f
+"https://youtu.be/g9EK9SHrnpE"
 #:what
 @talk{On Integrating Racket with GNU Mes}
 #:more
@@ -363,7 +367,7 @@ GNU Mes helps one reproduce an exact operating system in terms of auditable bina
 #:who
 @speaker{Ben Greenman}
 #:link
-#f
+"https://youtu.be/QP4TzLl1J10"
 #:what
 @talk{Fun and Games 2}
 #:more
@@ -392,11 +396,13 @@ event.}
 #:who
 @speaker{Sam Tobin-Hochstadt}
 #:link
-#f
+"https://youtu.be/XPpU698MTVk"
 #:what
 @talk{The State of Racket}
 #:more
 @abstract{
+
+@(a #:href "./samth.pdf" "slides (pdf)")
 
 }]
 
@@ -406,7 +412,7 @@ event.}
 #:who
 @speaker{Racket Management}
 #:link
-#f
+"https://youtu.be/oGm4y82oypM"
 #:what
 @talk{Racket Town Hall}
 #:more
@@ -424,7 +430,7 @@ Please come with your big questions and discussion topics.
 #:who
 @speaker{Jay McCarthy}
 #:link
-#f
+"https://youtu.be/pJr_4h3Yi3o"
 #:what
 @talk{C-exprs and L-exprs, oh my!}
 #:more
@@ -447,7 +453,7 @@ L-expressions have the same goal, but try to follow the model of Python & Haskel
 #:who
 @speaker{Matthew Flatt}
 #:link
-#f
+"https://youtu.be/UUWYTW3Xck8"
 #:what
 @talk{Shrubbery Notation}
 #:more
@@ -474,7 +480,7 @@ system, run-time system, and compiler.}
 #:who
 @speaker{Matthew Flatt}
 #:link
-#f
+"https://youtu.be/9vFIXjMkwR4"
 #:what
 @talk{A Shrubbery-Flavored Rhombus Experiment}
 #:more
