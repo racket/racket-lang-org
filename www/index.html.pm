@@ -456,6 +456,8 @@ ancestor(A, B)?}}}
 
       ◊link["https://www.youtube.com/c/racketlang/playlists"]{Racket channel} on YouTube
 
+      aHR0cHM6Ly9yYWNrZXQuZGlzY291cnNlLmdyb3VwL3RhZy9jcmVhdGl2ZS1yYWNrZXQ=
+
       ◊link["team.html"]{Team}
       Racket's development benefits from a large distributed pool of contributors. 
 
