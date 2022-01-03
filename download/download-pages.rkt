@@ -465,7 +465,7 @@ var property = null;
        license of that binary.
     @~ Versions of Racket prior to version 7.5 are distributed under the
        GNU LGPL, version 3.0.
-    @~ See the @a[href: "https://github.com/racket/racket/blob/master/LICENSE"]{
+    @~ See the @a[href: "https://github.com/racket/racket/blob/master/LICENSE.txt"]{
        @tt{LICENSE}} file in the source code for more information.
     }}})
 
