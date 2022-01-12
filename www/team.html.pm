@@ -138,6 +138,8 @@ Bloomington IN
 ◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
 The Software Freedom Conservancy's Racket Project Leadership Committee manages the Racket project.}}
 
+◊link["https://www.brinckerhoff.org/"]{John Clements}
+
 ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}
 
 ◊link["https://www.eecs.northwestern.edu/~robby/"]{Robby Findler}
