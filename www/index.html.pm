@@ -63,7 +63,6 @@
   ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'extensible','langtablink',true)"]{◊div[#:style "mitem"]{Extensible}}
   ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'strong','langtablink',true)"]{◊div[#:style "mitem"]{Robust}}
   ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'drracket','langtablink',true)"]{◊div[#:style "mitem"]{Polished}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'open','langtablink',true)"]{◊div[#:style "mitem"]{Vibrant Community}}
 }}
 
 ◊div[#:id "it" #:class "the-language selected-block"]{
@@ -154,18 +153,6 @@ Racket comes with support for major editors. The main bundle includes an innovat
 ◊link["https://docs.racket-lang.org/guide/Emacs.html"]{Emacs Integration}
 ◊link["https://docs.racket-lang.org/guide/Vim.html"]{Vim Integration}
 }
-}}
-
-◊div[#:id "open" #:class "the-language full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
-Newcomers describe the on-line Racket community as extremely ◊strong{friendly and helpful}. Everyone is welcome to ask any question and everybody is welcome to contribute to the ◊strong{open-source} code base.
-
-◊doclinks{
-◊link["https://lists.racket-lang.org/"]{Mailing List} 
-◊link["https://docs.racket-lang.org/racket-build-guide/contribute.html"]{Contributing} 
-◊link["https://twitter.com/racketlang"]{Twitter}
-◊link["https://github.com/racket/racket/"]{Github}}
 }}
 
 ◊div[#:class "frontpage-card"]{
@@ -437,26 +424,23 @@ ancestor(A, B)?}}}
 
     ◊td{ ◊div[#:class "smartphone-only"]{Community} ◊p{
 
-      ◊link["friendly.html"]{Friendly environment policy}
+      ◊link["https://racket.discourse.group"]{Discourse} and ◊link["https://discord.gg/6Zq8sH5"]{Discord}
+      These are the most active places for Racketeers.
 
-      ◊link["https://racket.discourse.group"]{Discourse Group (New! Exciting!)}
+      ◊link["https://racket.slack.com/"]{Slack} (◊link["http://racket-slack.herokuapp.com/"]{sign up}), ◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{IRC}, and ◊link["https://lists.racket-lang.org/"]{Mailing lists}
+      Racketeers are here, too!
 
-      ◊link["https://lists.racket-lang.org/"]{Mailing lists} and ◊link["https://blog.racket-lang.org/"]{Blog}
+      ◊link["https://twitter.com/racketlang"]{Twitter} and ◊link["https://blog.racket-lang.org/"]{Blog}
+      Keep in touch.
 
-      ◊link["https://github.com/racket/racket/wiki"]{Racket Wiki}
+      ◊link["https://github.com/racket/racket/wiki"]{Wiki} and ◊link["https://www.youtube.com/c/racketlang/playlists"]{YouTube}
+      Learn more from articles and talks.
 
-      ◊link["https://discord.gg/6Zq8sH5"]{Racket Discord}
-
-      ◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{#racket IRC} on libera.chat
-
-      ◊link["https://racket.slack.com/"]{Slack channel} (Visit ◊link["http://racket-slack.herokuapp.com/"]{this link} to sign up)
-
-      ◊link["https://twitter.com/racketlang"]{@racketlang} on Twitter
-
-      ◊link["https://www.youtube.com/c/racketlang/playlists"]{Racket channel} on YouTube
-
-      ◊link["team.html"]{Team}
+      ◊link["team.html"]{Team} and ◊link["https://docs.racket-lang.org/racket-build-guide/contribute.html"]{Contributing}
       Racket's development benefits from a large distributed pool of contributors. 
+
+      ◊link["friendly.html"]{Friendly Environment Policy}
+      Applies to all Racket venues.
 
       ◊link["sfc.html"]{Software Freedom Conservancy}
       Make a tax-deductible contribution to support our work.}}
