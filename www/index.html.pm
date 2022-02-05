@@ -76,7 +76,7 @@
        }
       ◊div[#:class "code-to-right-of-big-logo"]{◊langwww["#lang racket/gui"]{
 ◊pre{
-(◊docs{define} my-language 'English)
+(◊docs{define} my-language "English")
 
 (◊docs{define} translations
   #hash([English . "Hello world"]
