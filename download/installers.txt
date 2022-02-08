@@ -1002,3 +1002,12 @@
 150608486	8.3/racket-8.3-src-builtpkgs.tgz
 31778705	8.3/racket-8.3-src.tgz
 31780291	8.3/racket-src.tgz
+257676582	8.4/racket-8.4-aarch64-macosx-cs.dmg
+244112338	8.4/racket-8.4-x86_64-linux-cs.sh
+270035549	8.4/racket-8.4-x86_64-macosx-cs.dmg
+172259200	8.4/racket-8.4-x86_64-win32-cs.exe
+123891458	8.4/racket-8.4-i386-macosx-bc.dmg
+84917600	8.4/racket-8.4-i386-win32-bc.exe
+151809822	8.4/racket-8.4-src-builtpkgs.tgz
+31908085	8.4/racket-8.4-src.tgz
+31901373	8.4/racket-src.tgz
