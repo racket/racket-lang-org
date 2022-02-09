@@ -41,7 +41,7 @@
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
  ◊div[#:style "margin-left: 1em"]{
-   ◊link["https://blog.racket-lang.org/2021/11/racket-v8-3.html"]{Racket version 8.3} is available.}
+   ◊link["https://blog.racket-lang.org/2022/02/racket-v8-4.html"]{Racket version 8.4} is available.}
  ◊div[#:style "flex-grow:1"]{}
   ◊div[#:style "margin-right: 1em"]{◊link["books.html"]{We welcome two new Racket books:}
                          (1) Racket Programming the Fun Way
