@@ -1,0 +1,108 @@
+1644432066
+Racket v8.4
+
+Racket version 8.4 is now available from
+
+    https://racket-lang.org/
+
+
+* Command-line Racket provides a new expression editor by default for
+  its read-eval-print loop (REPL). The new REPL is based on the Chez
+  Scheme expression editor, but extended to use the same
+  language-sensitive syntax coloring and indentation tools as DrRacket.
+
+* Typed Racket adds a kind system, preventing programmers from
+  writing nonsensical type expressions. It checks whether type
+  constructors are correctly applied to arguments, and separates
+  type constructors from polymorphic types. The `:kind` form enables
+  checking the kind of a type expression at the REPL. The new system
+  also correctly rejects some ill-formed recursive types.
+
+* Racket has a `file-or-directory-stat` for unified information about
+  file-system objects.
+
+* DrRacket shows the region affected by an `#;` S-expression comment
+  by fading the commented-out region.
+
+* Racket on Chez has faster multiplication and division for some
+  numbers.
+
+* Web server: The files dispatcher supports all standard caching-related
+  HTTP response headers (e.g., Cache-Control).
+
+* Web server: A new dispatcher captures the common pattern of processing
+  HTTP requests and responses in a layered fashion.
+
+* The Web Server supports use of the Cache-Control header, and includes
+  a new wrapping dispatcher.
+
+* Expander: add "portal" syntax to support new forms of syntax object
+  binding.
+
+* Documentation search is improved.
+
+* Some hash operations support an optional `try-order?` argument.
+
+* The plot-metrics interface has documentation.
+
+* Fonts support OpenType feature settings.
+
+* The Gui library has improved support for Wayland.
+
+* The computation of quadratic roots is further improved.
+
+* The `set/c` contract adds support for random generation.
+
+* DrRacket's interactions window supports #lang-specific coloring
+  and indentation.
+
+* DrRacket's parenthesis-based keyboard shortcuts change based on
+  the parentheses that each different #lang uses.
+
+* The release includes many other bug repairs and other improvements!
+
+Transition/Update notes:
+
+* To turn off expeditor and make Racket's REPL go back to the old
+  editline/readline-based editor, use the command
+
+    ,input readline
+
+  and then restart Racket. Get back to the new expression editor with
+
+    ,input expeditor
+
+  To toggle color mode for the new expression editor, use one of the
+  following, which does not require restarting Racket:
+
+    ,color #false
+    ,color #true
+
+* Support for comment fading in DrRacket requires an increment to
+  the "WXME" format version so files with non-text content written
+  by DrRacket v8.4 will open only in v8.4 and later. This does not
+  affect files that consist only of unicode text.
+
+* The addition of the kind system to Typed Racket means that certain
+  mild abuses of the type system no longer type check, most notably
+  the 'application` of a polymorphic type.
+
+
+The following people contributed to this release:
+
+Alex Harsányi, Alex Knauth, Alexander Shopov, Alexis King, Andrew
+Mauer-Oats, Andy Keep, Ayman Osman, Ben Greenman, Bob Burger, Bogdan
+Popa, Cameron Moy, D. Ben Knoble, Fred Fu, Greg Hendershott, Gustavo
+Massaccesi, Jamie Taylor, Jarhmander, Jesse Alama, Joel Dueck, John
+Clements, Jordan Johnson, Laurent Orseau, Leif Andersen, Marc Burns,
+Matthew Flatt, Matthias Felleisen, Mike Engelhart, Mike Sperber, Noah
+Ma, Oscar Waddell, Pavel Panchekha, Philip McGrath, rgkirch, Robby
+Findler, Sam Tobin-Hochstadt, Sergiu Ivanov, Sorawee Porncharoenwase,
+Stefan Schwarzer, Stephen De Gabrielle, Tony Garnock-Jones, Viko Riféo,
+and Zachary Mao
+
+
+
+Link to package regressions issue for the 8.4 release:
+  https://github.com/racket/racket/issues/4125
+
