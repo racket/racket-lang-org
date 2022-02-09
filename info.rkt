@@ -29,7 +29,7 @@
      "pict-lib"
      "ppict"
      "draw-lib"
-     ("s3-sync" #:version "1.11")))
+     ("s3-sync" #:version "1.13")))
 
 (define pkg-desc "Sources for http://racket-lang.org")
 
