@@ -13,6 +13,11 @@ This post explains how to meet these requirements.
 
 <!-- more -->
 
+> 2022-03-31: There's now a package to help run `pkg-build` via Docker:
+> [`bc-checker`](https://pkgs.racket-lang.org/package/Package-Backward-Compatibility-Checker).
+> The [README](https://github.com/capfredf/pkg-backward-comp-check#readme) has step-by-step instructions.
+> Check it out!
+
 
 ## Why `pkg-build`?
 
