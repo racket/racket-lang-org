@@ -1,47 +1,232 @@
 #lang scribble/manual
 
-Title: shallow-typed-racket
+Title: Shallow Typed Racket and Optional Typed Racket
 Date: 2022-06-21T23:43:38
-Tags: DRAFT
+Tags: DRAFT, Typed Racket
 
 @; helper = _src/posts/2021-01-24-racket-status.scrbl
+
+@; TODO
+@; - how to render at all
+@; - how to render blog-style
 
 @; ;; TODO
 @(require
    (for-label typed/racket/base))
 
+As of the the Racket 8.7 release, Typed Racket (TR) includes two additional
+languages: Shallow TR and Optional TR.
+These languages use the same type checker as normal Typed Racket,
+but weaken the run-time behavior of types to lower the performance cost
+of interactions with untyped code.
 
-_Replace this with your post text. Add one or more comma-separated
-Tags above. The special tag `DRAFT` will prevent the post from being
-published._
+Shallow types enforce only local invariants in typed code.
+By contrast, normal @emph{Deep} types enforce guarantees that any module
+can depend on.
 
-TR 8.7
-Shallow Typed Racket
-Optional Typed Racket
-two new languages, same static semantics, change dynamic semantics
-in particular weaken the run time checks
-may improve the performance of apps
-
-
-stay excited, remember the mentors like the plid talk
+Optional types enforce nothing at run-time.
+They drive static type checks and then disappear.
 
 
-@; key elements:
-@; 
-@; - semantics of types = runtime errors
-@;   = bad performance in some cases
-@; 
-@; - two new semantics for TR
-@; 
-@; - easy to switch
-@; 
-@; - recommendations
-@; 
-@; - more in docs & papers
-
-
-@section{Typed Untyped Interaction and Type Soundness}
+@section{Background: Typed Untyped Interaction}
 @; Background. From TS Guide.
+
+@; @title[#:tag "typed-untyped-interaction"]{Typed-Untyped Interaction}
+@; 
+@; In the previous sections, all of the examples have consisted of programs
+@; that are entirely typed. One of the key features of Typed Racket is that
+@; it allows the combination of both typed and untyped code in a single
+@; program.
+@; 
+@; From a static typing perspective, combining typed and untyped code is
+@; straightforward.
+@; Typed code must declare types for its untyped imports to let the type checker
+@; validate their use (@secref{untyped-in-typed}).
+@; Untyped code can freely import bindings from typed code (@secref{typed-in-untyped}).
+@; 
+@; At run-time, combining typed and untyped code is complicated because there is a
+@; tradeoff between strong type guarantees and the performance cost of checking
+@; that untyped code matches the types.
+@; Typed Racket provides strong @emph{Deep} type guarantees by default, but offers two
+@; weaker options as well: Shallow and Optional types
+@; (@secref{protecting-interaction}).
+
+@; @section[#:tag "protecting-interaction"]{Protecting Typed-Untyped Interaction}
+@; 
+@; One might wonder if the interactions described in the first two
+@; subsections are actually safe. After all, untyped code might be able to
+@; ignore the errors that Typed Racket's type system will catch at
+@; compile-time.
+@; 
+@; For example, suppose
+@; that we write an untyped module that implements an @racket[_increment]
+@; function:
+@; 
+@; @examples[#:eval shallow-eval #:hidden (module increment racket (provide increment) (code:contract increment : exact-integer? -> exact-integer?) (define (increment x) "this is broken"))]
+@; @examples[#:eval optional-eval #:hidden (module increment racket (provide increment) (code:contract increment : exact-integer? -> exact-integer?) (define (increment x) "this is broken"))]
+@; @examples[#:eval the-eval
+@; (module increment racket
+@;   (provide increment)
+@; 
+@;   (code:contract increment : exact-integer? -> exact-integer?)
+@;   (define (increment x) "this is broken"))]
+@; 
+@; and a typed module that uses it:
+@; 
+@; @examples[#:label #f #:eval the-eval
+@; (module client typed/racket
+@; 
+@;   (require/typed 'increment [increment (-> Integer Integer)])
+@; 
+@;   (increment 5))
+@; ]
+@; 
+@; This combined program has a problem. All uses of @racket[_increment]
+@; in Typed Racket are correct under the assumption that the
+@; @racket[_increment] function upholds the @racket[(-> Integer Integer)]
+@; type. Unfortunately, our @racket[_increment] implementation does not
+@; actually uphold this assumption, because the function actually produces
+@; strings.
+@; 
+@; By default, Typed Racket establishes contracts wherever typed and untyped code
+@; interact to ensure strong types.
+@; These contracts can, however, have a non-trivial performance impact.
+@; For programs in which these costs are problematic, Typed Racket provides
+@; two alternatives. All together, the three options are Deep, Shallow, and Optional types.
+@; 
+@; @itemlist[#:style 'ordered
+@;   @item{
+@;     @emph{Deep} types get enforced with comprehensive contract checks.
+@;   }
+@;   @item{
+@;     @emph{Shallow} types get checked in typed code with lightweight assertions
+@;     called @emph{shape checks}.
+@;   }
+@;   @item{
+@;     @emph{Optional} types do not get enforced in any way. They do not ensure
+@;     safe typed-untyped interactions.
+@;   }
+@; ]
+@; 
+@; @margin-note{See also: @secref["behavior-of-types" #:doc '(lib
+@; "typed-racket/scribblings/ts-reference.scrbl")] in the Typed Racket Reference.}
+@; The next subsections give examples of Deep, Shallow, and Optional behaviors.
+@; 
+@; 
+@; @subsection{Deep Types: Completely Reliable}
+@; 
+@; When the @racket[_client] program above is run, standard Typed
+@; Racket (aka. Deep Typed Racket) enforces the @racket[require/typed]
+@; interface with a contract.
+@; This contract detects a failed type assumption when the @racket[_client]
+@; calls the untyped @racket[_increment] function:
+@; 
+@; @examples[#:label #f #:eval the-eval (eval:error (require 'client))]
+@; 
+@; Because the implementation in the untyped module broke the contract
+@; by returning a string instead of an integer, the error message
+@; @emph{blames} it.
+@; 
+@; @margin-note{For general information on Racket's contract system,
+@; see @secref[#:doc '(lib "scribblings/guide/guide.scrbl")]{contracts}.}
+@; In general, Deep Typed Racket checks all functions and other values
+@; that pass from a typed module to untyped module or vice versa with
+@; contracts. This means that, for example, Typed Racket can safely optimize
+@; programs (see @secref["optimization"]) with the assurance that the program
+@; will not segfault due to an unchecked assumption.
+@; 
+@; @bold{Important caveat}: contracts such as the @racket[Integer] check from
+@; above are performant. However, contracts in general can
+@; have a non-trivial performance impact, especially with the use of first-class
+@; functions or other higher-order data such as vectors.
+@; 
+@; Note that no contract overhead is ever incurred for uses of typed
+@; values from another Deep-typed module.
+@; 
+@; 
+@; @subsection{Shallow Types: Sound Types, Low-Cost Interactions}
+@; 
+@; Changing the module language of the @racket[_client] program
+@; from @racketmodname[typed/racket] to @racketmodname[typed/racket/shallow]
+@; changes the way in which typed-untyped interactions are protected.
+@; Instead of contracts, Typed Racket uses shape checks to enforce
+@; these Shallow types.
+@; 
+@; With Shallow types, the @racket[_client] program from above still detects an
+@; error when an untyped function returns a string instead of an integer:
+@; 
+@; @examples[#:label #f #:eval shallow-eval
+@; (module client typed/racket/shallow
+@; 
+@;   (require/typed 'increment [increment (-> Integer Integer)])
+@; 
+@;   (increment 5))
+@; 
+@; (eval:error (require 'client))
+@; ]
+@; 
+@; The compiled @racket[_client] module has two shape checks in total:
+@; 
+@; @itemlist[#:style 'ordered
+@;   @item{
+@;     A shape check at the @racket[require/typed] boundary confirms that
+@;     @racket[increment] is a function that expects one argument.
+@;   }
+@; 
+@;   @item{
+@;     A shape check after the call @racket[(increment 5)] looks for an integer.
+@;     This check fails.
+@;   }
+@; ]
+@; 
+@; Such checks work together within one typed module to enforce the assumptions that
+@; it makes about untyped code.
+@; 
+@; In general, a shape check ensures that a value matches the top-level constructor
+@; of a type.
+@; Shape checks are always yes-or-no predicates (unlike contracts, which may wrap a
+@; value) and typically run in constant time.
+@; Because they ensure the validity of type constructors, shape checks allow Typed
+@; Racket to safely optimize some programs---though not to the same extent as Deep
+@; types.
+@; 
+@; @bold{Important caveats}: (1) The number of shape checks in a module grows in
+@; proportion to its size. For example, every function call in Shallow-typed code
+@; gets checked---unless Typed Racket is certain that it can trust the function.
+@; Shallow types are therefore a poor choice for large, computationally-heavy
+@; modules.
+@; (2) Shallow types are only enforced in their immediate, local context.
+@; For example, if typed code were to cast @racket[increment] to expect a string,
+@; then the function could be called without an error.
+@; 
+@; 
+@; @subsection{Optional Types: It's Just Racket}
+@; 
+@; A third option for the @racket[_client] program is to use Optional types, which
+@; are provided by the language @racketmodname[typed/racket/optional]:
+@; 
+@; @examples[#:label #f #:eval optional-eval
+@; (module client typed/racket/optional
+@; 
+@;   (require/typed 'increment [increment (-> Integer Integer)])
+@; 
+@;   (increment 5))
+@; ]
+@; 
+@; Optional types do not ensure safe typed-untyped interactions.
+@; In fact, they do nothing to check types at run-time.
+@; A call to the increment function does not raise an error:
+@; 
+@; @examples[#:label #f #:eval the-eval (require 'client)]
+@; 
+@; Optional types cannot detect incorrect type assumptions
+@; and therefore enable zero type-driven optimizations.
+@; But, they also add no costs to slow a program down.
+@; In general, the behavior of an Optionally-typed program is the same as that of
+@; a Racket program that completely ignores type annotations.
+
+
+
 
 
 @; @subsection{Why Shallow? Why Optional?}
@@ -50,9 +235,15 @@ stay excited, remember the mentors like the plid talk
 
 @section{How to Use}
 
+FILL change the #lang that's all
+
+FILL ... well except for the 3way apis. Don't mention that, right?
+
 
 
 @section{Why does it matter. Practical examples.}
+
+@; ... these are all expressiveness. Why not performance too? benchmarks are good. Abstract yes, but good.
 
 Example 1: procedure cast
 
@@ -62,16 +253,15 @@ Example 3: index of
 
 
 
-@section{Recommendations. When to use?}
+@section{General Comments on Deep, Shallow, and Optional}
 
-The TS Reference has more to say.
-Future let's go exploring.
-... need for S O unpredictable, quite a surprise, so who knows keep programming
-and keep thinking
-
-General tips (from the guide):
+Deep types, Shallow types, and Optional types have complementary strengths.
+This raises an obvious question: when and where does each one work best?
+Here are a few suggestions
+from the Typed Racket Guide
 @secref["When_to_Use_Deep__Shallow__or_Optional_"
         #:doc '(lib "typed-racket/scribblings/ts-guide.scrbl")]
+:
 
 @itemlist[
   @item{
@@ -97,5 +287,12 @@ General tips (from the guide):
     you do not want types enforced at run-time.
   }
 ]
+
+
+TODO further reading
+
+- ts-guide ts-reference
+- papers, greenman, vitousek?
+- gotta mention vitousek somewhere!
 
 
