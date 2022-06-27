@@ -1,0 +1,98 @@
+<html><head><link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400&amp;family=Source+Code+Pro&amp;display=swap" rel="stylesheet"/><style>.bio-div {
+margin-top: 0.5em;
+}
+.speech {
+margin-top: 2em;
+position: relative;
+}
+.live-link {
+position: absolute;
+right: 0;
+top: 0;
+}
+.talk-time-div {
+font-weight: bold;
+position: absolute;
+color: gray;
+}
+.faded {
+color: gray;
+}
+.tt {
+font-family: 'Source Code Pro', monospace;
+}
+.emph {
+font-style: italic;
+}
+.bold {
+font-weight: bold;
+}
+.larger {
+font-size: 24;
+}
+.plain {
+}
+.paragraph {
+}
+.abstract {
+text-align: left;
+margin-left: 5em;
+margin-right: 5em;
+}
+.talk {
+font-style: italic;
+font-size: 24;
+margin-top: 0.25em;
+margin-bottom: 1em;
+}
+.speaker-a {
+font-size: 24;
+color: firebrick;
+}
+.sectionHeader {
+font-size: 24;
+margin-bottom: 1em;
+font-weight: bold;
+}
+.section {
+margin-top: 3em;
+}
+.subtitle {
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+font-size: 40;
+font-weight: bold;
+}
+.main {
+font-family: 'Raleway', sans-serif;
+}
+.pagetitle {
+font-size: 64;
+font-family: 'Source Code Pro', monospace;
+}
+.title-append {
+display: inline-block;
+margin-left: auto;
+margin-right: auto;
+text-align: left;
+margin-bottom: 1em;
+}
+.banner {
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+}
+.column {
+text-align: center;
+margin-left: auto;
+margin-right: auto;
+width: 45em;
+}
+</style><style>a { text-decoration: none; } </style><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data-10-year-range.js"></script><title>(twelfth RacketCon)</title><script>$(document).ready(function () {
+ $("[data-slot-time]").each(function() {
+  var date = new Date($(this).data("slot-time"));
+  var localTime = moment.tz(date, "America/New_York").format("dddd, h:mma zz")
+  $(this).html(localTime); }); }); </script><body class="main"><div class="banner"><div class="title-append"><div class="pagetitle"><img src="https://racket-lang.org/img/racket-logo.svg" style="width:80px; float: right"/></div><div class="pagetitle">&nbsp;(twelfth RacketCon)</div></div><div class="subtitle">October 28-30, 2022</div><div class="subtitle">Department of Computer Science, Brown University, Providence, Rhode Island, USA</div></div><div class="column"><div class="section"><div class="sectionHeader">Friday, October 28th</div><div class="paragraph">Friday afternoon is for hackathons! More details to follow.</div><div class="paragraph">This a tentative list. If you would like to suggest another one, please complete the <a href="https://form.typeform.com/to/oNbZByZQ">pre-registration form</a>.</div><div class="speech"><div class="talk-time-div"><span data-slot-time="2022-10-28T18:00:00Z">Friday, 2:00PM EDT</span></div><a class="speaker-a" href="#slot1" id="slot1">Internals Nerds Unite</a><div class="talk">Hacking Racket Internals</div><div class="abstract">Your chance to dig in to Racket internals and help contribute to Racket development! As the Racket community grows, there’s an increasing interest in not just making cool Racket programs, but getting into the guts of Racket itself. If that sounds interesting to you, this is your hackathon! Sam Tobin-Hochstadt will offer a brief kick-off crash course and stick around for answering questions.</div></div></div><div class="section"><div class="sectionHeader">Saturday, October 29th</div><div class="paragraph">The following speaker list incomplete! Come back later. If you would like to be a speaker, or nominate a speaker, please complete the <a href="https://form.typeform.com/to/oNbZByZQ">pre-registration form</a>.</div></div><div class="section"><div class="sectionHeader">Sunday, October 30th</div><div class="paragraph">The following list is incomplete and will be updated. If you would like to be a speaker, or nominate a speaker, please complete the <a href="https://form.typeform.com/to/oNbZByZQ">pre-registration form</a>.</div><div class="speech"><div class="talk-time-div"><span data-slot-time="2022-10-30T14:00:00Z">Sunday, 10:00AM EDT</span></div><a class="speaker-a" href="#slot2" id="slot2">Sam Tobin-Hochstadt</a><div class="talk">The State of Racket</div></div><div class="speech"><div class="talk-time-div"><span data-slot-time="2022-10-30T14:30:00Z">Sunday, 10:30AM EDT</span></div><a class="speaker-a" href="#slot3" id="slot3">Racket Management</a><div class="talk">Racket Town Hall</div><div class="abstract">
+Please come with your big questions and discussion topics.
+</div></div></div><div class="section"><div class="sectionHeader">Registration</div><div class="paragraph">To help gauge interest in the event, please complete the <a href="https://form.typeform.com/to/oNbZByZQ">pre-registration form</a> if you would like to attend. Once we’ve gathered data on how many people we expect to attend, you will find a proper registration form here.</div></div><div class="section"><div class="sectionHeader">Getting There</div><div class="paragraph">The Brown Computer Science Department has put together <a href="http://cs.brown.edu/about/directions/">a great page</a> with instructions for how to reach the department by plain, train, car, or foot. Once you’re at the right building, RacketCon signs will guide you to the RacketCon place.</div></div><div class="section"><div class="sectionHeader">Lodging</div><div class="paragraph">Stay wherever you want! That said, we have confirmed that <a href="https://www.hilton.com/en/hotels/pvdwyhx-hampton-suites-providence-downtown/">Hampton Inn</a> and <a href="https://www.hilton.com/en/hotels/pvdexhw-homewood-suites-providence-downtown/">Homewood Suites</a>, both very close to the department, will have a few dozen rooms available for us.</div></div><div class="section"><div class="sectionHeader">Previous RacketCons</div><div class="larger"><a href="https://con.racket-lang.org/2021/">2021</a> ∙ <a href="https://con.racket-lang.org/2020/">2020</a> ∙ <a href="https://con.racket-lang.org/2019/">2019</a> ∙ <a href="https://con.racket-lang.org/2018/">2018</a> ∙ <a href="https://con.racket-lang.org/2017/">2017</a> ∙ <a href="https://con.racket-lang.org/2016/">2016</a> ∙ <a href="https://con.racket-lang.org/2015/">2015</a> ∙ <a href="https://con.racket-lang.org/2014/">2014</a> ∙ <a href="https://con.racket-lang.org/2013/">2013</a> ∙ <a href="https://con.racket-lang.org/2012/">2012</a> ∙ <a href="https://con.racket-lang.org/2011/">2011</a></div></div></div></body></head></html>

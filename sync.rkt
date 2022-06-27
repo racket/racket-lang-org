@@ -97,7 +97,7 @@
 
 (define download-mirror-host (url-host download-mirror-url))
 (define download-mirror-path
-  (let ([l (reverse 
+  (let ([l (reverse
             ;; Strip "installers/" from path:
             (cddr (reverse (url-path download-mirror-url))))])
     (if (null? l)
@@ -115,7 +115,7 @@
    (for/list ([r (in-list all-releases)]
               #:when (version<=? "5.92" (release-version r)))
      (redirect-prefix-routing-rule #:old-prefix (format "releases/~a/installers" (release-version r))
-                                   #:new-prefix (format "~ainstallers/~a" 
+                                   #:new-prefix (format "~ainstallers/~a"
                                                         download-mirror-path
                                                         (release-version r))
                                    #:new-host download-mirror-host
@@ -131,7 +131,7 @@
   ;; Redirect current year's "index.html" to the root "index.html":
   (add-routing-rules "con.racket-lang.org"
                      (list
-                      (redirect-prefix-routing-rule #:old-prefix "2021/index.html"
+                      (redirect-prefix-routing-rule #:old-prefix "2022/index.html"
                                                     #:new-prefix "index.html"
                                                     #:redirect-code "302"))
                      #:log-info displayln))
@@ -142,7 +142,7 @@
 
 (cond
   [render-locally?
-    ;; move rendered pages into place 
+    ;; move rendered pages into place
     (when (directory-exists? render-locally?)
       (delete-directory/files render-locally?))
     (define tmp-src (build-path tmp-dir "generated"))
@@ -151,8 +151,7 @@
   [else
     (printf "Files saved in ~a\n" tmp-dir)])
 
-(unless save-temps? 
+(unless save-temps?
   (delete-directory/files tmp-dir))
 
 (printf "\n\nIf you updated any CSS file, please purge it from the Cloudflare cache.\n\n")
-
