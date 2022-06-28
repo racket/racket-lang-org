@@ -32,6 +32,11 @@
   [font-size 40]
   ,@header-font)
 
+(define-div subsubtitle
+  ,@centered
+  [font-size 20]
+  ,@header-font)
+
 (define-div section
   [margin-top "3em"])
 (define-div sectionHeader
@@ -163,9 +168,10 @@ $(document).ready(function () {
       (title-append
        @pagetitle[(img #:style "width:80px; float: right"
                        #:src "https://racket-lang.org/img/racket-logo.svg")]
-       @pagetitle[@'nbsp "(twelfth RacketCon)"])
+       @pagetitle["(twelfth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp])
       @subtitle{October 28-30, 2022}
-      @subtitle{Department of Computer Science, Brown University, Providence, Rhode Island, USA})
+      @subtitle{Brown University}
+      @subsubtitle{Providence, Rhode Island, USA})
 
 (column
 
