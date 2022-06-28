@@ -98,7 +98,7 @@
 (define (script . contents)
  `(script ,@(map (λ (x) (cdata #f #f x)) contents)))
 
-(define pre-reg-form-url "https://form.typeform.com/to/oNbZByZQ")
+(define reg-form-url "https://form.typeform.com/to/oNbZByZQ")
 
 ;; ------------------------------------------------------------
 
@@ -180,7 +180,7 @@ $(document).ready(function () {
 
   @paragraph{Friday afternoon is for hackathons! More details to follow.}
 
-  @paragraph{This a tentative list. If you would like to suggest another one, please complete the @(a #:href pre-reg-form-url "pre-registration form").}
+  @paragraph{This a tentative list. If you would like to suggest another one, please complete the @(a #:href reg-form-url "registration form").}
 
   @lecture[
 #:when
@@ -196,14 +196,14 @@ $(document).ready(function () {
  (section
   @sectionHeader{Saturday, October 29th}
 
-  @paragraph{The following speaker list incomplete! Come back later. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href pre-reg-form-url "pre-registration form").}
+  @paragraph{The following speaker list incomplete! Come back later. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href reg-form-url "registration form").}
 
 )
 
  (section
   @sectionHeader{Sunday, October 30th}
 
-  @paragraph{The following list is incomplete and will be updated. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href pre-reg-form-url "pre-registration form").}
+  @paragraph{The following list is incomplete and will be updated. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href reg-form-url "registration form").}
 
   @lecture[
 #:when
@@ -231,17 +231,17 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Registration}
-   @paragraph{To help gauge interest in the event, please complete the @(a #:href pre-reg-form-url "pre-registration form") if you would like to attend. Once we’ve gathered data on how many people we expect to attend, you will find a proper registration form here.}
+   @paragraph{To help gauge interest in the event, please complete the @(a #:href reg-form-url "registration form") if you would like to attend.}
   )
 
  (section
    @sectionHeader{Getting There}
-   @paragraph{The Brown Computer Science Department has put together @(a #:href "http://cs.brown.edu/about/directions/" "a great page") with instructions for how to reach the department by plain, train, or car. Once you’re at the right building, RacketCon signs will guide you to the RacketCon place.}
+   @paragraph{The Brown Computer Science Department has put together @(a #:href "https://cs.brown.edu/about/directions/" "a great page") with instructions for how to reach the department by plain, train, or car. Once you’re at the right building, RacketCon signs will guide you to the RacketCon place.}
  )
 
  (section
-  @sectionHeader{Lodging}
-  @paragraph{Stay wherever you want! That said, we have confirmed that @(a #:href "https://www.hilton.com/en/hotels/pvdwyhx-hampton-suites-providence-downtown/" "Hampton Inn") and @(a #:href "https://www.hilton.com/en/hotels/pvdexhw-homewood-suites-providence-downtown/" "Homewood Suites"), both very close to the department, will have a few dozen rooms available for us.}
+  @sectionHeader{Accommodation}
+  @paragraph{Stay wherever you want! That said, we are working on getting block rates @(a #:href "https://www.hilton.com/en/hotels/pvdwyhx-hampton-suites-providence-downtown/" "Hampton Inn") and @(a #:href "https://www.hilton.com/en/hotels/pvdexhw-homewood-suites-providence-downtown/" "Homewood Suites"), both very close to the department, will have a few dozen rooms available for us. If you want to get in on the block rate, please say so on the @(a #:href reg-form-url "registration form").}
  )
 
  (section
