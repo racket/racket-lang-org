@@ -10,7 +10,6 @@ Tags: DRAFT, Typed Racket
 @; - how to render at all
 @; - how to render blog-style
 
-@; ;; TODO
 @(require
    (for-label typed/racket/base))
 
@@ -19,17 +18,57 @@ languages: Shallow TR and Optional TR.
 These languages use the same type checker as normal Typed Racket,
 but weaken the run-time behavior of types to lower the performance cost
 of interactions with untyped code.
-
-Shallow types enforce only local invariants in typed code.
-By contrast, normal @emph{Deep} types enforce guarantees that any module
-can depend on.
-
-Optional types enforce nothing at run-time.
-They drive static type checks and then disappear.
+Whereas normal TR types (@emph{Deep} types) enforce guarantees that any module
+can depend on,
+Shallow types enforce only local invariants in typed code,
+and Optional types enforce nothing.
 
 
 @section{Background: Typed Untyped Interaction}
 @; Background. From TS Guide.
+
+One of the key features of Typed Racket is that it allows the combination
+of both typed and untyped code in a single program.
+An untyped module can import from a typed one with a normal @racket[require] form,
+and a typed module can import from an untyped one by using a @racket[require/typed]
+annotation to specify types for the untyped code.
+
+For example, the following untyped module exports a struct @racket[_pt]
+and a distance function to compare two points:
+
+@racketmod[#:file "distance.rkt"
+racket
+
+(provide (struct-out pt)
+         distance)
+
+(struct pt (x y))
+
+(code:contract distance : pt pt -> real)
+(define (distance p1 p2)
+  (sqrt (+ (sqr (- (pt-x p2) (pt-x p1)))
+           (sqr (- (pt-y p2) (pt-y p1))))))
+]
+
+A typed module can import the struct and function by declaring types:
+
+@racketmod[#:file "client.rkt"
+typed/racket
+
+(require/typed "distance.rkt"
+               [#:struct pt ([x : Real] [y : Real])]
+               [distance (-> pt pt Real)])
+
+(distance (pt 3 5) (pt 7 0))
+]
+
+So far so good.
+But what if the types are wrong?
+What if the @racket[require/typed] annotation 
+
+TODO incorrect description
+TODO what kind of comparison do we want?
+
 
 @; @title[#:tag "typed-untyped-interaction"]{Typed-Untyped Interaction}
 @; 
