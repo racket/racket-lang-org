@@ -25,7 +25,7 @@ and Optional types enforce nothing.
 
 
 @section{Background: Typed Untyped Interaction}
-@; Background. From TS Guide.
+@; Background. Adapted from TS Guide.
 
 One of the key features of Typed Racket is that it allows the combination
 of both typed and untyped code in a single program.
@@ -50,7 +50,8 @@ racket
            (sqr (- (pt-y p2) (pt-y p1))))))
 ]
 
-A typed module can import the struct and function by declaring types:
+The following typed module uses @racket[require/typed] to import
+the struct and function, and then uses them both:
 
 @racketmod[#:file "client.rkt"
 typed/racket
@@ -62,77 +63,62 @@ typed/racket
 (distance (pt 3 5) (pt 7 0))
 ]
 
-So far so good.
-But what if the types are wrong?
-What if the @racket[require/typed] annotation 
+So far so good, but what if the declared types were wrong?
 
-TODO incorrect description
-TODO what kind of comparison do we want?
+For example, typed code might (mistakenly) expect the distance function
+to return integers instead of real numbers:
+
+@racketmod[#:file "int-client.rkt"
+typed/racket
+
+(require/typed "distance.rkt"
+               [#:struct pt ([x : Real] [y : Real])]
+               [distance (-> pt pt Integer)])
+
+(distance (pt 3 5) (pt 7 0))
+]
+
+The static type checker does not find a problem with this module.
+It assumes the @racket[require/typed] declarations are correct and typechecks
+the rest accordingly.
+But if we were to run this program, the call to @racket[distance] would
+return a float instead of an integer --- contradicting the static type.
+That would be unsound!
+
+The issue is that static types are making a claim about the behavior of untyped
+code.
+In particular, the types in the @racket[require/typed] boundary make a claim
+about an untyped module.
+Typed Racket does not check this claim statically.
+So if we care about the integrity of types, Typed Racket needs to enforce them
+dynamically whenever typed and untyped code interact.
 
 
-@; @title[#:tag "typed-untyped-interaction"]{Typed-Untyped Interaction}
-@; 
-@; In the previous sections, all of the examples have consisted of programs
-@; that are entirely typed. One of the key features of Typed Racket is that
-@; it allows the combination of both typed and untyped code in a single
-@; program.
-@; 
-@; From a static typing perspective, combining typed and untyped code is
-@; straightforward.
-@; Typed code must declare types for its untyped imports to let the type checker
-@; validate their use (@secref{untyped-in-typed}).
-@; Untyped code can freely import bindings from typed code (@secref{typed-in-untyped}).
-@; 
-@; At run-time, combining typed and untyped code is complicated because there is a
-@; tradeoff between strong type guarantees and the performance cost of checking
-@; that untyped code matches the types.
-@; Typed Racket provides strong @emph{Deep} type guarantees by default, but offers two
-@; weaker options as well: Shallow and Optional types
-@; (@secref{protecting-interaction}).
+@section{Enforcing Type Boundaries}
 
-@; @section[#:tag "protecting-interaction"]{Protecting Typed-Untyped Interaction}
-@; 
-@; One might wonder if the interactions described in the first two
-@; subsections are actually safe. After all, untyped code might be able to
-@; ignore the errors that Typed Racket's type system will catch at
-@; compile-time.
-@; 
-@; For example, suppose
-@; that we write an untyped module that implements an @racket[_increment]
-@; function:
-@; 
-@; @examples[#:eval shallow-eval #:hidden (module increment racket (provide increment) (code:contract increment : exact-integer? -> exact-integer?) (define (increment x) "this is broken"))]
-@; @examples[#:eval optional-eval #:hidden (module increment racket (provide increment) (code:contract increment : exact-integer? -> exact-integer?) (define (increment x) "this is broken"))]
-@; @examples[#:eval the-eval
-@; (module increment racket
-@;   (provide increment)
-@; 
-@;   (code:contract increment : exact-integer? -> exact-integer?)
-@;   (define (increment x) "this is broken"))]
-@; 
-@; and a typed module that uses it:
-@; 
-@; @examples[#:label #f #:eval the-eval
-@; (module client typed/racket
-@; 
-@;   (require/typed 'increment [increment (-> Integer Integer)])
-@; 
-@;   (increment 5))
-@; ]
-@; 
-@; This combined program has a problem. All uses of @racket[_increment]
-@; in Typed Racket are correct under the assumption that the
-@; @racket[_increment] function upholds the @racket[(-> Integer Integer)]
-@; type. Unfortunately, our @racket[_increment] implementation does not
-@; actually uphold this assumption, because the function actually produces
-@; strings.
-@; 
-@; By default, Typed Racket establishes contracts wherever typed and untyped code
-@; interact to ensure strong types.
+By default, Typed Racket uses contracts wherever typed and untyped code
+interact to ensure strong types.
+For the example above, the function type @racket[(-> pt pt Integer)] compiles
+to a higher-order contract to ensure that every result computed by the function
+is an integer.
+When the call @racket[(distance (pt 3 5) (pt 7 0))] returns a float, the contract
+stops the program at the boundary, before typed code gets access to a value that
+contradicts its assumptions.
+
+Contracts are strong,
+good blame,
+but they can get expensive.
+Examples.
+Hence alternatives.
 @; These contracts can, however, have a non-trivial performance impact.
 @; For programs in which these costs are problematic, Typed Racket provides
 @; two alternatives. All together, the three options are Deep, Shallow, and Optional types.
-@; 
+
+@; - normal deep
+@; - shallow
+@; - optional
+
+
 @; @itemlist[#:style 'ordered
 @;   @item{
 @;     @emph{Deep} types get enforced with comprehensive contract checks.
