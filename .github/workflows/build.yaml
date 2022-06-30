@@ -22,7 +22,7 @@ jobs:
           version: '8.5'
 
       - name: Install package
-        - run: raco pkg install -n racket-lang-org `pwd`
+        run: raco pkg install -n racket-lang-org `pwd`
 
       - name: Build everything
-        - run: racket -l- racket-lang-org/sync --save-temps --render-locally Web
+        run: racket -l- racket-lang-org/sync --save-temps --render-locally Web
