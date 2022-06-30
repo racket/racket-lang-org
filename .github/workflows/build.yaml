@@ -1,0 +1,28 @@
+name: build
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  coverage:
+    if: github.ref == 'refs/heads/main'
+    name: Check whether we can build every site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Racket
+        uses: Bogdanp/setup-racket@v1.8.1
+        with:
+          architecture: 'x64'  # or: 'x64', 'x86', 'arm32', 'arm64'
+          distribution: 'full' # or: 'minimal'
+          variant: 'CS'        # or: 'BC' for Racket Before Chez
+          version: '8.5'
+
+      - name: Install package
+        - run: raco pkg install -n racket-lang-org `pwd`
+
+      - name: Build everything
+        - run: racket -l- racket-lang-org/sync --save-temps --render-locally Web
