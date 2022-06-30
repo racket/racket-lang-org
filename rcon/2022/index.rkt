@@ -196,7 +196,23 @@ $(document).ready(function () {
  (section
   @sectionHeader{Saturday, October 29th}
 
-  @paragraph{The following speaker list incomplete! Come back later. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href reg-form-url "registration form").}
+  @paragraph{The following speaker list incomplete! And for the talks that are listed, the talk times are just stub values. Come back later. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href reg-form-url "registration form").}
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
+@speaker{Sebastian Ullrich}
+#:what
+@talk{TBA}]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
+@speaker{Jack Firth}
+#:what
+@talk{TBA}]
 
 )
 
@@ -236,7 +252,7 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Getting There}
-   @paragraph{The Brown Computer Science Department has put together @(a #:href "https://cs.brown.edu/about/directions/" "a great page") with instructions for how to reach the department by plain, train, or car. Once you’re at the right building, RacketCon signs will guide you to the RacketCon place.}
+   @paragraph{The Brown Computer Science Department has put together @(a #:href "https://cs.brown.edu/about/directions/" "a great page") with instructions for how to reach the department by plane, train, or car. Once you’re at the right building, RacketCon signs will guide you to the RacketCon place.}
  )
 
  (section
