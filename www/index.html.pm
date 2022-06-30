@@ -79,7 +79,8 @@
 (◊docs{define} my-language 'English)
 
 (◊docs{define} translations
-  #hash([English . "Hello world"]
+  #hash([Chinese . "你好 世界"]
+        [English . "Hello world"]
         [French . "Bonjour le monde"]
         [German . "Hallo Welt"]
         [Greek . "Γειά σου, κόσμε"]
