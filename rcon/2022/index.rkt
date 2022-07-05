@@ -212,7 +212,7 @@ $(document).ready(function () {
 #:who
 @speaker{Jack Firth}
 #:what
-@talk{TBA}]
+@talk{Resyntax}]
 
 )
 
