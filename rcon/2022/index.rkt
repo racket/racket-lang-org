@@ -204,7 +204,18 @@ $(document).ready(function () {
 #:who
 @speaker{Sebastian Ullrich}
 #:what
-@talk{TBA}]
+@talk{Metaprograms and Proofs: Macros in Lean 4}
+#:more
+@abstract{
+
+A core feature of the Lean 4 programming language and theorem prover is
+an expressive macro system, taking heavy inspiration from Racket. In
+this talk, we give an overview of macros in Lean and discuss the ideas
+we took from Racket as well as the problems we decided to solve in a
+different way. In particular, we talk about recent work on "typed
+macros" that prevent many common mistakes by Lean macro authors.
+}
+]
 
   @lecture[
 #:when
