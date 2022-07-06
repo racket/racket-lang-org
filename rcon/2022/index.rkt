@@ -204,7 +204,18 @@ $(document).ready(function () {
 #:who
 @speaker{Sebastian Ullrich}
 #:what
-@talk{TBA}]
+@talk{Metaprograms and Proofs: Macros in Lean 4}
+#:more
+@abstract{
+
+A core feature of the Lean 4 programming language and theorem prover is
+an expressive macro system, taking heavy inspiration from Racket. In
+this talk, we give an overview of macros in Lean and discuss the ideas
+we took from Racket as well as the problems we decided to solve in a
+different way. In particular, we talk about recent work on "typed
+macros" that prevent many common mistakes by Lean macro authors.
+}
+]
 
   @lecture[
 #:when
@@ -212,7 +223,7 @@ $(document).ready(function () {
 #:who
 @speaker{Jack Firth}
 #:what
-@talk{TBA}]
+@talk{Resyntax}]
 
 )
 
@@ -257,7 +268,16 @@ Please come with your big questions and discussion topics.
 
  (section
   @sectionHeader{Accommodation}
-  @paragraph{Stay wherever you want! That said, we are working on getting block rates @(a #:href "https://www.hilton.com/en/hotels/pvdwyhx-hampton-suites-providence-downtown/" "Hampton Inn") and @(a #:href "https://www.hilton.com/en/hotels/pvdexhw-homewood-suites-providence-downtown/" "Homewood Suites"), both very close to the department, will have a few dozen rooms available for us. If you want to get in on the block rate, please say so on the @(a #:href reg-form-url "registration form").}
+  @paragraph{Stay wherever you want! There are plenty of hotels in the area.}
+
+  @paragraph{That said, we have reserved blocks at two local hotels. In no particular order:}
+
+  @ul{
+    @li{@bold{Hampton Inn  & Suites} by Hilton Providence Downtown: 30 rooms for Friday, October 28, 2022-Monday, October 31, 2022. $149.00, per room, per night, plus 13% tax. Room options: 2 queen beds, or 1 king bed with sofabed. @bold{Deadline:} September 28, 2022. Amenities: Complimentary full hot breakfast, Wi-Fi, business center and fitness center. Valet parking $30.00 a day. @(a #:href "https://www.hilton.com/en/attend-my-event/pvdwyhx-bcr-103bbe07-4367-4aef-8cd5-0a6f6c5f418c/" "Booking Link")}
+    @li{@bold{Homewood Suites} by Hilton Providence Downtown: 35 King Studio suites, or Friday, October 28, 2022-Monday, October 31, 2022. $189.00 per room per night plus 13% tax. King suites come with a king size bed, full size pull out sofa bed and full size kitchen. The Homewood requires a two night minimum on the Saturday, guests requested to either stay Friday & Saturday, or Saturday & Sunday. @bold{Deadline:} September 28, 2022. Amenities: Complimentary full hot breakfast, Wi-Fi, business center and fitness center. Valet parking is $30.00 a day. @(a #:href "www.my-event.hilton.com/pvdexhw-brg-9e543c15-7dce-4fb0-aaa5-1d1c1f4020ec/" "Booking Link")}
+  }
+
+  @paragraph{Guests are not required to book their room for all 3 nights. However, please note the 2-night requirement for Saturday October 29 at Homewood.}
  )
 
  (section
