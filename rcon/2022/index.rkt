@@ -283,6 +283,11 @@ Please come with your big questions and discussion topics.
   )
 
  (section
+   @sectionHeader{Friendly Policy}
+   @paragraph{The proceedings of RacketCon are expected to take place under the Racket @(a #:href "https://racket-lang.org/friendly.html" "Friendly Environment Policy").}
+  )
+
+ (section
    @sectionHeader{Getting There}
    @paragraph{The Brown Computer Science Department has put together @(a #:href "https://cs.brown.edu/about/directions/" "a great page") with instructions for how to reach the department by plane, train, or car. Once you’re at the right building, RacketCon signs will guide you to the RacketCon place.}
  )
