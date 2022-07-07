@@ -131,7 +131,7 @@
  (apply bio-div @bold{Bio: } contents))
 
 (define (q content)
-  `(q '() ,content))
+  `(q () ,content))
 
 (define slot-number 0)
 (define (talk-time dtime)
