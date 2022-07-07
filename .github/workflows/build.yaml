@@ -5,7 +5,6 @@ on: push
 
 jobs:
   coverage:
-    if: github.ref == 'refs/heads/main'
     name: Check whether we can build every site
     runs-on: ubuntu-latest
 
