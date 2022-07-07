@@ -98,6 +98,9 @@
 (define (script . contents)
  `(script ,@(map (λ (x) (cdata #f #f x)) contents)))
 
+(define (code content)
+ `(code () ,content))
+
 (define reg-form-url "https://form.typeform.com/to/oNbZByZQ")
 
 ;; ------------------------------------------------------------
@@ -224,6 +227,15 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
+@speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman")}
+#:what
+@talk{TBA}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
 @speaker{@(a #:href "https://www.igalia.com/team/pmatos" "Paulo Matos")}
 #:what
 @talk{TBA}
@@ -257,9 +269,19 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Sunday, 10:00am}
 #:who
+@speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman")}
+#:what
+@talk{Summary of the Summer of @code{#lang}}
+]
+
+  @lecture[
+#:when
+@talk-time{Sunday, 10:00am}
+#:who
 @speaker{Sam Tobin-Hochstadt}
 #:what
-@talk{The State of Racket}]
+@talk{The State of Racket}
+]
 
   @lecture[
 #:when
