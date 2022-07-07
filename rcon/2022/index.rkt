@@ -206,6 +206,15 @@ $(document).ready(function () {
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
+@speaker{@(a #:href "https://github.com/titzer" "Ben L. Titzer") (CMU)}
+#:what
+@talk{TBA}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
 @speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich") (KIT)}
 #:what
 @talk{Metaprograms and Proofs: Macros in Lean 4}
