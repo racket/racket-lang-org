@@ -18,7 +18,7 @@
   [margin-bottom "1em"])
 
 (define-div pagetitle
-  [font-size 64]
+  [font-size "64pt"]
   [font-family "'Source Code Pro', monospace"])
 
 (define-div main
@@ -29,27 +29,27 @@
 
 (define-div subtitle
   ,@centered
-  [font-size 40]
+  [font-size "40pt"]
   ,@header-font)
 
 (define-div subsubtitle
   ,@centered
-  [font-size 20]
+  [font-size "20pt"]
   ,@header-font)
 
 (define-div section
   [margin-top "3em"])
 (define-div sectionHeader
-  [font-size 24]
+  [font-size "24pt"]
   [margin-bottom "1em"]
   ,@header-font)
 
 (define-a speaker-a
-  [font-size 24]
+  [font-size "24pt"]
   [color "firebrick"])
 (define-div talk
   [font-style "italic"]
-  [font-size 24]
+  [font-size "24pt"]
   [margin-top "0.25em"]
   [margin-bottom "1em"])
 
@@ -64,7 +64,7 @@
 (define-div plain)
 
 (define-div larger
-  [font-size 24])
+  [font-size "24pt"])
 
 (define-span bold
   [font-weight bold])
@@ -105,11 +105,8 @@
 
 ;; ------------------------------------------------------------
 
-(define which 0)
 (define (speaker . x)
-  (set! which (add1 which))
-  (define label (format "slot~a" which))
-  (apply speaker-a #:id label #:href (format "#~a" label) x))
+  `(span ((class "speaker")) ,@x))
 
 (define (lecture #:when when
                  #:who who
@@ -131,7 +128,7 @@
  (apply bio-div @bold{Bio: } contents))
 
 (define (q content)
-  `(q '() ,content))
+  `(q () ,content))
 
 (define slot-number 0)
 (define (talk-time dtime)
@@ -152,7 +149,7 @@
 ;; ------------------------------------------------------------
 
 (define page
-  (html
+  (html #:lang "en"
    (head
     (link #:href fonts-url
           #:rel "stylesheet")
@@ -167,13 +164,14 @@ $(document).ready(function () {
  $("[data-slot-time]").each(function() {
   var date = new Date($(this).data("slot-time"));
   var localTime = moment.tz(date, "America/New_York").format("dddd, h:mma zz")
-  $(this).html(localTime); }); }); }
+  $(this).html(localTime); }); }); })
     (body
      #:class "main"
      (banner
       (title-append
        @pagetitle[(img #:style "width:80px; float: right"
-                       #:src "https://racket-lang.org/img/racket-logo.svg")]
+                       #:src "https://racket-lang.org/img/racket-logo.svg"
+                       #:alt "The Racket logo")]
        @pagetitle["(twelfth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp])
       @subtitle{October 28-30, 2022}
       @subtitle{Brown University}
@@ -208,7 +206,7 @@ $(document).ready(function () {
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich")}
+@speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich") (KIT)}
 #:what
 @talk{Metaprograms and Proofs: Macros in Lean 4}
 #:more
@@ -227,7 +225,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman")}
+@speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman") (Brown))}
 #:what
 @talk{TBA}
 ]
@@ -236,7 +234,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "https://www.igalia.com/team/pmatos" "Paulo Matos")}
+@speaker{@(a #:href "https://www.igalia.com/team/pmatos" "Paulo Matos") (Igalia)}
 #:what
 @talk{TBA}
 ]
@@ -245,7 +243,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán")}
+@speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán") (Seton Hall)}
 #:what
 @talk{TBA}
 ]
@@ -278,7 +276,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Sunday, 10:00am}
 #:who
-@speaker{Sam Tobin-Hochstadt}
+@speaker{@(a #:href "https://samth.github.io" "Sam Tobin-Hochstadt") (Indiana)}
 #:what
 @talk{The State of Racket}
 ]
@@ -337,7 +335,7 @@ Please come with your big questions and discussion topics.
                  (for/list ([year '(2021 2020 2019 2018 2017 2016 2015 2014 2013 2012 2011)])
                    (list " ∙ "
                          (a #:href (format "https://con.racket-lang.org/~a/" year)
-                            (format "~a" year)))))))))))))
+                            (format "~a" year))))))))))))
 
 ;; ------------------------------------------------------------
 
@@ -347,6 +345,7 @@ Please come with your big questions and discussion topics.
     (build-path p "index.html")
     #:exists 'replace
     (λ ()
+      (displayln "<!doctype html>")
       (write-xexpr page))))
 
 (module+ main
