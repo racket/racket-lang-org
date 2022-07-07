@@ -105,11 +105,8 @@
 
 ;; ------------------------------------------------------------
 
-(define which 0)
 (define (speaker . x)
-  (set! which (add1 which))
-  (define label (format "slot~a" which))
-  (apply speaker-a #:id label #:href (format "#~a" label) x))
+  `(span ((class "speaker")) ,@x))
 
 (define (lecture #:when when
                  #:who who
