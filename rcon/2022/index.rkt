@@ -127,6 +127,9 @@
 (define (bio . contents)
  (apply bio-div @bold{Bio: } contents))
 
+(define (q content)
+  `(q '() ,content))
+
 (define slot-number 0)
 (define (talk-time dtime)
  (set! slot-number (add1 slot-number))
@@ -202,18 +205,18 @@ $(document).ready(function () {
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{Sebastian Ullrich}
+@speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich")}
 #:what
 @talk{Metaprograms and Proofs: Macros in Lean 4}
 #:more
 @abstract{
 
-A core feature of the Lean 4 programming language and theorem prover is
+A core feature of the @(a #:href "https://leanprover.github.io" "Lean 4 programming language") and theorem prover is
 an expressive macro system, taking heavy inspiration from Racket. In
 this talk, we give an overview of macros in Lean and discuss the ideas
 we took from Racket as well as the problems we decided to solve in a
-different way. In particular, we talk about recent work on "typed
-macros" that prevent many common mistakes by Lean macro authors.
+different way. In particular, we talk about recent work on @(q "typed macros")
+that prevent many common mistakes by Lean macro authors.
 }
 ]
 
@@ -221,7 +224,25 @@ macros" that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{Jack Firth}
+@speaker{@(a #:href "https://www.igalia.com/team/pmatos" "Paulo Matos")}
+#:what
+@talk{TBA}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
+@speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán")}
+#:what
+@talk{TBA}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
+@speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
 #:what
 @talk{Resyntax}]
 
