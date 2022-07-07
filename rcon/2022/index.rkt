@@ -164,13 +164,14 @@ $(document).ready(function () {
  $("[data-slot-time]").each(function() {
   var date = new Date($(this).data("slot-time"));
   var localTime = moment.tz(date, "America/New_York").format("dddd, h:mma zz")
-  $(this).html(localTime); }); }); }
+  $(this).html(localTime); }); }); })
     (body
      #:class "main"
      (banner
       (title-append
        @pagetitle[(img #:style "width:80px; float: right"
-                       #:src "https://racket-lang.org/img/racket-logo.svg")]
+                       #:src "https://racket-lang.org/img/racket-logo.svg"
+                       #:alt "The Racket logo")]
        @pagetitle["(twelfth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp])
       @subtitle{October 28-30, 2022}
       @subtitle{Brown University}
@@ -334,7 +335,7 @@ Please come with your big questions and discussion topics.
                  (for/list ([year '(2021 2020 2019 2018 2017 2016 2015 2014 2013 2012 2011)])
                    (list " ∙ "
                          (a #:href (format "https://con.racket-lang.org/~a/" year)
-                            (format "~a" year)))))))))))))
+                            (format "~a" year))))))))))))
 
 ;; ------------------------------------------------------------
 
