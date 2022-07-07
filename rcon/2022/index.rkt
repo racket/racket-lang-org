@@ -18,7 +18,7 @@
   [margin-bottom "1em"])
 
 (define-div pagetitle
-  [font-size 64]
+  [font-size "64pt"]
   [font-family "'Source Code Pro', monospace"])
 
 (define-div main
@@ -29,27 +29,27 @@
 
 (define-div subtitle
   ,@centered
-  [font-size 40]
+  [font-size "40pt"]
   ,@header-font)
 
 (define-div subsubtitle
   ,@centered
-  [font-size 20]
+  [font-size "20pt"]
   ,@header-font)
 
 (define-div section
   [margin-top "3em"])
 (define-div sectionHeader
-  [font-size 24]
+  [font-size "24pt"]
   [margin-bottom "1em"]
   ,@header-font)
 
 (define-a speaker-a
-  [font-size 24]
+  [font-size "24pt"]
   [color "firebrick"])
 (define-div talk
   [font-style "italic"]
-  [font-size 24]
+  [font-size "24pt"]
   [margin-top "0.25em"]
   [margin-bottom "1em"])
 
@@ -64,7 +64,7 @@
 (define-div plain)
 
 (define-div larger
-  [font-size 24])
+  [font-size "24pt"])
 
 (define-span bold
   [font-weight bold])
