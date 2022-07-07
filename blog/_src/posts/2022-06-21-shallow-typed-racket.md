@@ -158,7 +158,7 @@ Deep types offer sound interactions with untyped code that any client can depend
 Shallow types are sound 
 
 
-@;  ... CM, sound, NB-sound?? (maybe drop column 3)
+@;  ... CM, sound, NB-sound?? (maybe drop column 3, unclear what the title is)
 @; Deep     | X | X | X
 @; Shallow  |   | X | X
 @; Optional |   |   | X
@@ -203,16 +203,33 @@ Shallow types are sound
 
 
 
-@; @subsection{Why Shallow? Why Optional?}
-
-
-
 @section{How to Use}
 
-FILL change the #lang that's all
+The @hash-lang[] of a Typed Racket module decides how its types
+behave at run-time.
+The standard languages @racketmodname[typed/racket] and @racketmodname[typed/racket/base]
+use Deep types.
+The other options are:
 
-FILL ... well except for the 3way apis. Don't mention that, right?
+@itemlist[
+  @item{
+    @racketmodname[typed/racket/deep] and @racketmodname[typed/racket/base/deep] for Deep types
+  }
+  @item{
+    @racketmodname[typed/racket/shallow] and @racketmodname[typed/racket/base/shallow] for Shallow types
+  }
+  @item{
+    @racketmodname[typed/racket/optional] and @racketmodname[typed/racket/base/optional] for Optional types
+  }
+]
 
+@; Switching languages affects only the run-time behavior of types.
+@; Works "flawlessly" for modules that don't use the boundary APIs.
+@; May have trouble for define-typed/untyped-id and require/untyped-contract.
+
+For a list of forms that change when the @hash-lang[] changes:
+@secref["Forms_that_Depend_on_the_Behavior_of_Types"
+         #:doc '(lib "typed-racket/scribblings/ts-reference.scrbl")]
 
 
 @section{Why does it matter. Practical examples.}
@@ -222,12 +239,14 @@ FILL ... well except for the 3way apis. Don't mention that, right?
 @; TODO fill in examples!
 
 
-Example 1: procedure cast
+Example 1: list check
+- reason 1 = performance
+- dissertation for details, order of mag speedup
+- small example = list check
 
-Example 2: list check
-
-Example 3: index of
-
+Example 2: procedure cast
+- reason 2 = expressiveness
+- procedure cast is obvious, can't forget
 
 
 @section{General Comments on Deep, Shallow, and Optional}
@@ -268,13 +287,27 @@ from the Typed Racket Guide
 
 @section{Further Reading}
 
-- ts-guide ts-reference
-- papers, greenman, vitousek?
-- gotta mention vitousek somewhere!
+@itemlist[
+  @item{
+     @secref["typed-untyped-interaction"
+         #:doc '(lib "typed-racket/scribblings/ts-guide.scrbl")]
+  }
+  @item{
+    @secref["behavior-of-types"
+         #:doc '(lib "typed-racket/scribblings/ts-reference.scrbl")]
+  }
+  @item{
+    Michael M. Vitousek.
+    @emph{Gradual Typing for Python, Unguarded}.
+    PhD thesis, Indiana University, 2019.
+    @url{https://hdl.handle.net/2022/23172}
+  }
+  @item{
+    Ben Greenman.
+    @emph{Deep and Shallow Types}.
+    PhD thesis, Northeastern University, 2020.
+    @url{http://hdl.handle.net/2047/D20398329}
+  }
+]
 
-@; @secref["When_to_Use_Deep__Shallow__or_Optional_"
-@;         #:doc '(lib "typed-racket/scribblings/ts-guide.scrbl")]
-
-@; @margin-note{See also: @secref["behavior-of-types" #:doc '(lib
-@; "typed-racket/scribblings/ts-reference.scrbl")] in the Typed Racket Reference.}
 
