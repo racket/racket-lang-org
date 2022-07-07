@@ -347,6 +347,7 @@ Please come with your big questions and discussion topics.
     (build-path p "index.html")
     #:exists 'replace
     (λ ()
+      (displayln "<!doctype html>")
       (write-xexpr page))))
 
 (module+ main
