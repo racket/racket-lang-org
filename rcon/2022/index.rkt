@@ -149,7 +149,7 @@
 ;; ------------------------------------------------------------
 
 (define page
-  (html
+  (html #:lang "en"
    (head
     (link #:href fonts-url
           #:rel "stylesheet")
