@@ -208,7 +208,7 @@ $(document).ready(function () {
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich")}
+@speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich") (KIT)}
 #:what
 @talk{Metaprograms and Proofs: Macros in Lean 4}
 #:more
@@ -227,7 +227,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman")}
+@speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman") (Brown))}
 #:what
 @talk{TBA}
 ]
@@ -236,7 +236,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "https://www.igalia.com/team/pmatos" "Paulo Matos")}
+@speaker{@(a #:href "https://www.igalia.com/team/pmatos" "Paulo Matos") (Igalia)}
 #:what
 @talk{TBA}
 ]
@@ -245,7 +245,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán")}
+@speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán") (Seton Hall)}
 #:what
 @talk{TBA}
 ]
@@ -278,7 +278,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Sunday, 10:00am}
 #:who
-@speaker{Sam Tobin-Hochstadt}
+@speaker{@(a #:href "https://samth.github.io" "Sam Tobin-Hochstadt") (Indiana)}
 #:what
 @talk{The State of Racket}
 ]
