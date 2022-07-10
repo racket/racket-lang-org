@@ -4,12 +4,6 @@ Title: Shallow and Optional Typed Racket
 Date: 2022-06-21T23:43:38
 Tags: Typed Racket
 
-@; - how to render at all
-@;   = raco scribble --html --dest out-dir FILE.scrbl
-@; - how to render blog-style
-@;   = raco frog -bp ; raco frog -bs
-@; - example post = _src/posts/2021-01-24-racket-status.scrbl
-
 @(require
    scribble/example
    (only-in scribble/eval interaction-eval interaction/no-prompt)
@@ -40,11 +34,8 @@ Code often runs faster and simpler than with Deep types.
 Shallow TR and Optional TR use the same static types and typechecker as
 normal Typed Racket.
 
-@; TODO quick intro for D S U + how to use?
-
 
 @section{Background: Typed--Untyped Interaction}
-@; Background. Adapted from TS Guide.
 
 A key feature of Typed Racket is that it allows typed code to interact with
 untyped code.
