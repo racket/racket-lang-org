@@ -13,6 +13,16 @@ Tags: DRAFT, Typed Racket
 @(require
    (for-label typed/racket/base))
 
+@(define (tech/reference . text)
+   (keyword-apply tech '(#:doc) '((lib "scribblings/reference/reference.scrbl")) text))
+
+@(define-syntax-rule (module-example #:eval ev #:label lbl lang-datum mod-code ... ex-code)
+   (list
+     (if lbl (list lbl) '())
+     (racketmod lang-datum mod-code ...)
+     (interaction-eval #:eval ev mod-code ...)
+     (interaction/no-prompt #:eval ev ex-code)))
+
 As of the the Racket 8.7 release, Typed Racket (TR) includes two additional
 languages: Shallow TR and Optional TR.
 These languages use the same type checker as normal Typed Racket,
@@ -234,19 +244,103 @@ For a list of forms that change when the @hash-lang[] changes:
 
 @section{Why does it matter. Practical examples.}
 
-@; ... these are all expressiveness. Why not performance too? benchmarks are good. Abstract yes, but good.
-
-@; TODO fill in examples!
+Lets see a few examples where Shallow and Optional pay off.
 
 
-Example 1: list check
-- reason 1 = performance
-- dissertation for details, order of mag speedup
-- small example = list check
+@subsection{Fewer Run-time Checks = Faster Performance}
 
-Example 2: procedure cast
-- reason 2 = expressiveness
-- procedure cast is obvious, can't forget
+The following two functions access part of a data structure:
+@racket[list-first] returns the first element of a list
+and @racket[vec-length] counts the number of elements in a vector.
+
+@racketblock[
+(: list-first (-> (Listof Real) Real))
+(define (list-first l)
+  (car l))
+
+(: vec-length (-> (Vectorof Real) Index))
+(define (vec-length v)
+  (vector-length v))
+]
+
+Suppose these functions get called by untyped code.
+In terms of run-time costs, they have very different behavior:
+@itemlist[
+  @item{
+    Deep types check incoming data structures exhaustively.
+    For lists, this entails a full traversal.
+    For vectors, this entails the allocation of a @tech/reference{chaperone}
+    and a layer of indirection on subsequent operations.
+  }
+  @item{
+    Shallow types check only the shape of incoming data structures.
+    The first function checks for a list (@racket[list?]) and the second
+    checks for a vector (@racket[vector?]).
+    Elements are checked only if they are used by typed code.
+  }
+  @item{
+    Optional types check nothing. Simple!
+  }
+]
+
+For programs that frequently send data structures across boundaries, the costs of Deep run-time checks
+can add up to a huge total.
+This is especially true when the data structures are large or mutable.
+
+@secref{sec:further-reading} has links to more details regarding performance.
+In particular, Greenman's dissertation compares Deep TR and Shallow TR
+on the @other-doc['(lib "gtp-benchmarks/scribblings/gtp-benchmarks.scrbl")].
+
+
+@subsection{Weaker Types = Simpler Behavior}
+
+Shallow and Optional types also raise fewer run-time errors than Deep types do.
+In many cases, the lack of an error means that a bug goes undetected.
+Deep finds the bug and the other two miss it.
+But in some programs, the Deep types are too cautious and end up rejecting a
+program that could run safely.
+
+One restrictive type in the Deep world is @racket[Procedure], the type that
+describes any function.
+Because this type says nothing about the arguments and return type of the function,
+Deep TR never allows calls to a procedure, even after a cast:
+
+@module-example[#:exal deep-eval #:label #f
+typed/racket (code:comment "or #lang typed/racket/deep")
+
+(: call-proc (-> Procedure Symbol))
+(define (call-proc f)
+  ((cast f (-> Symbol Symbol)) 'hello))
+
+(call-proc identity)
+]
+
+
+Shallow types do allow calls to a @racket[Procedure], after a cast:
+
+@module-example[#:eval shallow-eval #:label #f
+typed/racket/shallow
+
+(: call-proc (-> Procedure Symbol))
+(define (call-proc f)
+  ((cast f (-> Symbol Symbol)) 'hello))
+
+(call-proc identity)
+]
+
+
+Optional types also allow calls to a @racket[Procedure]:
+
+@module-example[#:eval shallow-eval #:label #f
+typed/racket/optional
+
+(: call-proc (-> Procedure Symbol))
+(define (call-proc f)
+  ((cast f (-> Symbol Symbol)) 'hello))
+
+(call-proc identity)
+]
+
 
 
 @section{General Comments on Deep, Shallow, and Optional}
@@ -285,7 +379,7 @@ from the Typed Racket Guide
 ]
 
 
-@section{Further Reading}
+@section[#:tag "sec:further-reading"]{Further Reading}
 
 @itemlist[
   @item{
