@@ -1,17 +1,23 @@
 #lang scribble/manual
 
-Title: Shallow Typed Racket and Optional Typed Racket
+Title: Shallow and Optional Typed Racket
 Date: 2022-06-21T23:43:38
-Tags: DRAFT, Typed Racket
+Tags: Typed Racket
 
-@; helper = _src/posts/2021-01-24-racket-status.scrbl
-
-@; TODO
 @; - how to render at all
+@;   = raco scribble --html --dest out-dir FILE.scrbl
 @; - how to render blog-style
+@;   = raco frog -bp ; raco frog -bs
+@; - example post = _src/posts/2021-01-24-racket-status.scrbl
 
 @(require
+   scribble/example
+   (only-in scribble/eval interaction-eval interaction/no-prompt)
    (for-label typed/racket/base))
+
+@(define deep-eval (make-base-eval #:lang 'typed/racket))
+@(define shallow-eval (make-base-eval #:lang 'typed/racket/shallow))
+@(define optional-eval (make-base-eval #:lang 'typed/racket/optional))
 
 @(define (tech/reference . text)
    (keyword-apply tech '(#:doc) '((lib "scribblings/reference/reference.scrbl")) text))
@@ -23,73 +29,68 @@ Tags: DRAFT, Typed Racket
      (interaction-eval #:eval ev mod-code ...)
      (interaction/no-prompt #:eval ev ex-code)))
 
-As of the the Racket 8.7 release, Typed Racket (TR) includes two additional
-languages: Shallow TR and Optional TR.
-These languages use the same type checker as normal Typed Racket,
-but weaken the run-time behavior of types to lower the performance cost
-of interactions with untyped code.
+With the Racket 8.7 release, Typed Racket (TR) includes two languages that
+weaken the run-time behavior of types: Shallow TR and Optional TR.
 Whereas normal TR types (@emph{Deep} types) enforce guarantees that any module
-can depend on,
-Shallow types enforce only local invariants in typed code,
-and Optional types enforce nothing.
+can depend on, Shallow types enforce only local invariants in typed code, and
+Optional types enforce nothing.
+In return, Shallow and Optional types add less overhead.
+Code often runs faster and simpler than with Deep types.
 
+Both Shallow TR and Optional TR use the same static types and typechecker as
+normal Typed Racket.
 
 @; TODO quick intro for D S U + how to use?
 
 
-@section{Background: Typed Untyped Interaction}
+@section{Background: Typed--Untyped Interaction}
 @; Background. Adapted from TS Guide.
 
-One of the key features of Typed Racket is that it allows the combination
-of both typed and untyped code in a single program.
+A key feature of Typed Racket is that it allows typed code to interact with
+untyped code.
 An untyped module can import from a typed one with a normal @racket[require] form,
 and a typed module can import from an untyped one by using a @racket[require/typed]
 annotation to specify types for the untyped code.
 
-For example, the following untyped module exports a struct @racket[_pt]
-and a distance function to compare two points:
+For example, if an untyped module provides a struct and a function,
+then a typed module can import and use the untyped bindings.
+(Below, the untyped code is a submodule of a typed module.)
 
-@racketmod[#:file "distance.rkt"
-racket
-
-(provide (struct-out pt)
-         distance)
-
-(struct pt (x y))
-
-(code:contract distance : pt pt -> real)
-(define (distance p1 p2)
-  (sqrt (+ (sqr (- (pt-x p2) (pt-x p1)))
-           (sqr (- (pt-y p2) (pt-y p1))))))
-]
-
-The following typed module uses @racket[require/typed] to import
-the struct and function, and then uses them both:
-
-@racketmod[#:file "client.rkt"
+@module-example[#:eval deep-eval #:label #f
 typed/racket
 
-(require/typed "distance.rkt"
-               [#:struct pt ([x : Real] [y : Real])]
-               [distance (-> pt pt Real)])
+(module distance racket
+
+  (struct pt (x y))
+
+  (code:contract distance : pt pt -> real)
+  (define (distance p1 p2)
+    (sqrt (+ (sqr (- (pt-x p2) (pt-x p1)))
+             (sqr (- (pt-y p2) (pt-y p1)))))))
+
+(require/typed 'distance
+  [#:struct pt ([x : Real] [y : Real])]
+  [distance (-> pt pt Real)])
 
 (distance (pt 3 5) (pt 7 0))
 ]
 
-So far so good, but what if the declared types were wrong?
+So far so good.
+
+What if the declared types were wrong?
 
 For example, typed code might (mistakenly) expect the distance function
 to return integers instead of real numbers:
 
-@racketmod[#:file "int-client.rkt"
-typed/racket
-
-(require/typed "distance.rkt"
-               [#:struct pt ([x : Real] [y : Real])]
-               [distance (-> pt pt Integer)])
-
-(distance (pt 3 5) (pt 7 0))
-]
+@;@racketmod[#:file "int-client.rkt"
+@;typed/racket
+@;
+@;(require/typed "distance.rkt"
+@;               [#:struct pt ([x : Real] [y : Real])]
+@;               [distance (-> pt pt Integer)])
+@;
+@;(distance (pt 3 5) (pt 7 0))
+@;]
 
 The static type checker does not find a problem with this module.
 It assumes the @racket[require/typed] declarations are correct and typechecks
@@ -152,7 +153,8 @@ All together the three alternatives are:
 
 @itemlist[#:style 'ordered
   @item{
-    @emph{Deep} types (normal @racket[#lang typed/racket]) get rigorously enforced with contract checks.
+    @emph{Deep} types (normal @hash-lang[] @racketmodname[typed/racket]) get
+    rigorously enforced with contract checks.
   }
   @item{
     @emph{Shallow} types get checked in typed code with lightweight assertions,
@@ -305,7 +307,7 @@ describes any function.
 Because this type says nothing about the arguments and return type of the function,
 Deep TR never allows calls to a procedure, even after a cast:
 
-@module-example[#:exal deep-eval #:label #f
+@module-example[#:eval deep-eval #:label #f
 typed/racket (code:comment "or #lang typed/racket/deep")
 
 (: call-proc (-> Procedure Symbol))
@@ -378,6 +380,8 @@ from the Typed Racket Guide
   }
 ]
 
+We are very excited to be releasing DSO.
+
 
 @section[#:tag "sec:further-reading"]{Further Reading}
 
@@ -385,10 +389,12 @@ from the Typed Racket Guide
   @item{
      @secref["typed-untyped-interaction"
          #:doc '(lib "typed-racket/scribblings/ts-guide.scrbl")]
+     in the Typed Racket Guide
   }
   @item{
     @secref["behavior-of-types"
          #:doc '(lib "typed-racket/scribblings/ts-reference.scrbl")]
+    in the Typed Racket Reference
   }
   @item{
     Michael M. Vitousek.
@@ -403,5 +409,9 @@ from the Typed Racket Guide
     @url{http://hdl.handle.net/2047/D20398329}
   }
 ]
+
+@close-eval[deep-eval]
+@close-eval[shallow-eval]
+@close-eval[optional-eval]
 
 
