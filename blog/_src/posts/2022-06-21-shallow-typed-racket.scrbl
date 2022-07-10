@@ -37,7 +37,7 @@ Optional types enforce nothing.
 In return, Shallow and Optional types add less overhead.
 Code often runs faster and simpler than with Deep types.
 
-Both Shallow TR and Optional TR use the same static types and typechecker as
+Shallow TR and Optional TR use the same static types and typechecker as
 normal Typed Racket.
 
 @; TODO quick intro for D S U + how to use?
@@ -52,23 +52,30 @@ An untyped module can import from a typed one with a normal @racket[require] for
 and a typed module can import from an untyped one by using a @racket[require/typed]
 annotation to specify types for the untyped code.
 
-For example, if an untyped module provides a struct and a function,
-then a typed module can import and use the untyped bindings.
-(Below, the untyped code is a submodule of a typed module.)
+For example, if an untyped module provides a struct and a function:
 
-@module-example[#:eval deep-eval #:label #f
+@racketmod[
+racket
+(code:comment "distance.rkt")
+
+(provide (struct-out pt)
+         distance)
+
+(struct pt (x y))
+
+(code:contract distance : pt pt -> real)
+(define (distance p1 p2)
+  (sqrt (+ (sqr (- (pt-x p2) (pt-x p1)))
+           (sqr (- (pt-y p2) (pt-y p1))))))
+]
+
+
+then a typed module can import and use the untyped bindings:
+
+@racketmod[
 typed/racket
 
-(module distance racket
-
-  (struct pt (x y))
-
-  (code:contract distance : pt pt -> real)
-  (define (distance p1 p2)
-    (sqrt (+ (sqr (- (pt-x p2) (pt-x p1)))
-             (sqr (- (pt-y p2) (pt-y p1)))))))
-
-(require/typed 'distance
+(require/typed "distance.rkt"
   [#:struct pt ([x : Real] [y : Real])]
   [distance (-> pt pt Real)])
 
@@ -76,182 +83,93 @@ typed/racket
 ]
 
 So far so good.
+One program combines untyped and typed code.
 
-What if the declared types were wrong?
+Now, what if the declared types were wrong?
 
-For example, typed code might (mistakenly) expect the distance function
-to return integers instead of real numbers:
+The module below, for example, gives a wrong type to the distance function.
+This type expects an integer result instead of a real number:
 
-@;@racketmod[#:file "int-client.rkt"
-@;typed/racket
-@;
-@;(require/typed "distance.rkt"
-@;               [#:struct pt ([x : Real] [y : Real])]
-@;               [distance (-> pt pt Integer)])
-@;
-@;(distance (pt 3 5) (pt 7 0))
-@;]
+@racketmod[
+typed/racket
 
-The static type checker does not find a problem with this module.
-It assumes the @racket[require/typed] declarations are correct and typechecks
-the rest accordingly.
-But if we were to run this program, the call to @racket[distance] would
-return a float instead of an integer --- contradicting the static type.
-That would be unsound!
+(require/typed "distance.rkt"
+  [#:struct pt ([x : Real] [y : Real])]
+  [distance (-> pt pt Integer)])
 
-The issue is that static types are making a claim about the behavior of untyped
-code.
-In particular, the types in the @racket[require/typed] boundary make a claim
-about an untyped module.
-Typed Racket does not check this claim statically.
-So if we care about the integrity of types, Typed Racket needs to enforce them
-dynamically whenever typed and untyped code interact.
+(distance (pt 3 5) (pt 7 0))
+]
+
+Even with the wrong type, the program still typechecks (!)
+because the static type checker does not analyze untyped code.
+It assumes the @racket[require/typed] types are correct and moves on.
+
+But this program does have a type error.
+At run-time, the call to distance returns a float instead of an integer,
+contradicting the static type.
+
+If we want to catch the error, then TR needs to enforce types at run-time
+when typed and untyped code interact.
 
 
 @section{Enforcing Type Boundaries}
 
-@; These contracts can, however, have a non-trivial performance impact.
-@; For programs in which these costs are problematic, Typed Racket provides
-@; two alternatives. All together, the three options are Deep, Shallow, and Optional types.
+By default, Typed Racket compiles types to higher-order contracts.
+The function type @racket[(-> pt pt Integer)], for example, compiles to a function
+contract that will raise an exception if a non-integer result appears.
 
-By default, Typed Racket uses contracts wherever typed and untyped code
-interact to ensure strong types.
-For the example above, the function type @racket[(-> pt pt Integer)] compiles
-to a function contract that checks every result computed by the function.
-When the call @racket[(distance (pt 3 5) (pt 7 0))] returns a float, the contract
-stops the program at the boundary, before typed code gets access to a value that
-contradicts its assumptions.
+Contracts enforce types with strong guarantees and offer useful debugging
+information if an error occurs.
+But they can also be expensive, especially when large, mutable, or higher-order
+values frequently cross boundaries.
+These high costs have inspired a search for cheaper ways to enforce types
+than the standard @emph{Deep} strategy.
 
-Contracts turn types into reliable predictions about the behavior of programs
-that mix typed and untyped code.
-They are also helpful for debugging.
-If a type-based contract detects an error, it can point to a source code boundary
-that needs to change: either the type at the boundary is inaccurate, or the untyped
-component that it describes has a bug.
+Two promising alternatives are @emph{Shallow} and @emph{Optional} types,
+neither of which use higher-order contracts.
 
-However, contracts can be expensive.
-When large values frequently cross boundaries, contracts perform lots of run-time checks.
-For higher-order values (functions, mutable data structures), there are additional costs
-to allocate a higher-order contract and redirect future operations through it.
-These costs are too high in some programs [CITE], which motivates a search for
-other enforcement strategies.
+Shallow types use lightweight assertions called @emph{shape checks} to provide
+a basic soundness guarantee.
+Instead of putting heavy contracts at module boundaries, Shallow TR rewrites
+typed code to incrementally check the shape of values.
 
-@; @bold{Important caveat}: contracts such as the @racket[Integer] check from
-@; above are performant. However, contracts in general can
-@; have a non-trivial performance impact, especially with the use of first-class
-@; functions or other higher-order data such as vectors.
-@; 
-@; Note that no contract overhead is ever incurred for uses of typed
-@; values from another Deep-typed module.
-
-Two promising alternatives are what we call Shallow and Optional types.
-Both of these forgo contracts entirely; they allow gradual typing without
-a huge overhead from contracts.
-Consequently, they are much weaker than normal Typed Racket types.
-
-All together the three alternatives are:
-
-@itemlist[#:style 'ordered
-  @item{
-    @emph{Deep} types (normal @hash-lang[] @racketmodname[typed/racket]) get
-    rigorously enforced with contract checks.
-  }
-  @item{
-    @emph{Shallow} types get checked in typed code with lightweight assertions,
-    or shape checks.
-  }
-  @item{
-    @emph{Optional} types do not get enforced in any way.
-  }
-]
-
-In terms of formal properties,
-Deep types offer sound interactions with untyped code that any client can depend on (complete monitoring).
-Shallow types are sound 
+Optional types use no checks.
+They are completely unreliable for reasoning about typed-untyped interactions.
+But, they also have zero cost.
 
 
-@;  ... CM, sound, NB-sound?? (maybe drop column 3, unclear what the title is)
-@; Deep     | X | X | X
-@; Shallow  |   | X | X
-@; Optional |   |   | X
-
-
-@; ... details?
-
-@; Shallow checks work together within one typed module to enforce the assumptions that
-@; it makes about untyped code.
-@; 
-@; In general, a shape check ensures that a value matches the top-level constructor
-@; of a type.
-@; Shape checks are always yes-or-no predicates (unlike contracts, which may wrap a
-@; value) and typically run in constant time.
-@; Because they ensure the validity of type constructors, shape checks allow Typed
-@; Racket to safely optimize some programs---though not to the same extent as Deep
-@; types.
-@; 
-@; @bold{Important caveats}: (1) The number of shape checks in a module grows in
-@; proportion to its size. For example, every function call in Shallow-typed code
-@; gets checked---unless Typed Racket is certain that it can trust the function.
-@; Shallow types are therefore a poor choice for large, computationally-heavy
-@; modules.
-@; (2) Shallow types are only enforced in their immediate, local context.
-@; For example, if typed code were to cast @racket[increment] to expect a string,
-@; then the function could be called without an error.
-
-
-@; @subsection{Optional Types: It's Just Racket}
-@; 
-@; Optional types do not ensure safe typed-untyped interactions.
-@; In fact, they do nothing to check types at run-time.
-@; A call to the increment function does not raise an error:
-@; 
-@; @examples[#:label #f #:eval the-eval (require 'client)]
-@; 
-@; Optional types cannot detect incorrect type assumptions
-@; and therefore enable zero type-driven optimizations.
-@; But, they also add no costs to slow a program down.
-@; In general, the behavior of an Optionally-typed program is the same as that of
-@; a Racket program that completely ignores type annotations.
-
-
-
-@section{How to Use}
+@section{How to Select an Enforcement Strategy}
 
 The @hash-lang[] of a Typed Racket module decides how its types
 behave at run-time.
-The standard languages @racketmodname[typed/racket] and @racketmodname[typed/racket/base]
-use Deep types.
-The other options are:
+To change strategies, change the language.
 
 @itemlist[
   @item{
-    @racketmodname[typed/racket/deep] and @racketmodname[typed/racket/base/deep] for Deep types
+    Deep types:
+    @racketmodname[typed/racket], @racketmodname[typed/racket/base],
+    @racketmodname[typed/racket/deep], or @racketmodname[typed/racket/base/deep].
   }
   @item{
-    @racketmodname[typed/racket/shallow] and @racketmodname[typed/racket/base/shallow] for Shallow types
+    Shallow types:
+    @racketmodname[typed/racket/shallow] or @racketmodname[typed/racket/base/shallow].
   }
   @item{
-    @racketmodname[typed/racket/optional] and @racketmodname[typed/racket/base/optional] for Optional types
+    Optional types:
+    @racketmodname[typed/racket/optional] or @racketmodname[typed/racket/base/optional].
   }
 ]
 
-@; Switching languages affects only the run-time behavior of types.
-@; Works "flawlessly" for modules that don't use the boundary APIs.
-@; May have trouble for define-typed/untyped-id and require/untyped-contract.
-
-For a list of forms that change when the @hash-lang[] changes:
+For a complete list of forms that change depending on the @hash-lang[], see
 @secref["Forms_that_Depend_on_the_Behavior_of_Types"
          #:doc '(lib "typed-racket/scribblings/ts-reference.scrbl")]
+in the Typed Racket Reference.
 
 
-@section{Why does it matter. Practical examples.}
+@section{Example: Fewer Run-time Checks}
 
-Lets see a few examples where Shallow and Optional pay off.
-
-
-@subsection{Fewer Run-time Checks = Faster Performance}
-
-The following two functions access part of a data structure:
+Deep types can be significantly more expensive than Shallow and Optional.
+For example, the two functions below expect a data structure and access part of the data:
 @racket[list-first] returns the first element of a list
 and @racket[vec-length] counts the number of elements in a vector.
 
@@ -265,46 +183,41 @@ and @racket[vec-length] counts the number of elements in a vector.
   (vector-length v))
 ]
 
-Suppose these functions get called by untyped code.
-In terms of run-time costs, they have very different behavior:
+When these functions get called from untyped code, they have very different
+costs depending on the behavior of types:
+
 @itemlist[
   @item{
-    Deep types check incoming data structures exhaustively.
-    For lists, this entails a full traversal.
-    For vectors, this entails the allocation of a @tech/reference{chaperone}
-    and a layer of indirection on subsequent operations.
+    Deep types check all incoming data structures exhaustively.
+    Lists undergo a full traversal that validates every list element, including unused ones.
+    Vectors get wrapped in a @tech/reference{chaperone} to guard against future writes.
   }
   @item{
-    Shallow types check only the shape of incoming data structures.
-    The first function checks for a list (@racket[list?]) and the second
-    checks for a vector (@racket[vector?]).
-    Elements are checked only if they are used by typed code.
+    Shallow types check only the shape of the incoming data structures using
+    @racket[list?] and @racket[vector?].
+    Elements of these structures get checked only when they are used by typed code.
   }
   @item{
-    Optional types check nothing. Simple!
+    Optional types check nothing at all.
   }
 ]
 
-For programs that frequently send data structures across boundaries, the costs of Deep run-time checks
-can add up to a huge total.
-This is especially true when the data structures are large or mutable.
-
-@secref{sec:further-reading} has links to more details regarding performance.
-In particular, Greenman's dissertation compares Deep TR and Shallow TR
-on the @other-doc['(lib "gtp-benchmarks/scribblings/gtp-benchmarks.scrbl")].
+@secref{sec:further-reading} has links to larger examples where the costs of Deep types
+are huge compared to Shallow and Optional.
 
 
-@subsection{Weaker Types = Simpler Behavior}
+@section{Example: Weaker Types, Simpler Behavior}
 
-Shallow and Optional types also raise fewer run-time errors than Deep types do.
+Shallow and Optional types raise fewer run-time errors than Deep.
 In many cases, the lack of an error means that a bug goes undetected.
-Deep finds the bug and the other two miss it.
-But in some programs, the Deep types are too cautious and end up rejecting a
-program that could run safely.
+Deep finds the bug and the other two miss it because they skipped a run-time check.
+
+But for some programs, the Deep types are too cautious.
+They reject a program that could run safely.
 
 One restrictive type in the Deep world is @racket[Procedure], the type that
 describes any function.
-Because this type says nothing about the arguments and return type of the function,
+Because this type says nothing about argument and return types,
 Deep TR never allows calls to a procedure, even after a cast:
 
 @module-example[#:eval deep-eval #:label #f
@@ -345,64 +258,79 @@ typed/racket/optional
 
 
 
-@section{General Comments on Deep, Shallow, and Optional}
+@section{Reflections on Deep, Shallow, and Optional}
 
 Deep types, Shallow types, and Optional types have complementary strengths.
-This raises an obvious question: when and where does each one work best?
-Here are a few suggestions
-from the Typed Racket Guide
+When and where does each one work best?
+Here are a few suggestions, based on
 @secref["When_to_Use_Deep__Shallow__or_Optional_"
         #:doc '(lib "typed-racket/scribblings/ts-guide.scrbl")]
-:
+from the Typed Racket Guide:
 
 @itemlist[
   @item{
-    Deep types maximize the benefits of static checking
-    and type-driven optimizations.
-    Use them for tightly-connected groups of typed models.
-    Avoid them when untyped, higher-order values frequently
-    cross boundaries into typed code. Expensive boundary types
-    include @racket[Vectorof], @racket[->], and @racket[Object].
+    Deep types make the most of static checking and optimizations.
+    Use them for self-sufficient groups of typed modules.
+    Avoid them at high-traffic boundaries to untyped or non-Deep code.
   }
   @item{
-    Shallow types are best for small typed modules that frequently
-    interact with untyped code.
-    This is because Shallow shape checks run quickly: constant-time for
-    most types, and linear time (in the size of the type, not the value)
-    for a few exceptions such as @racket[U] and @racket[case->].
-    Avoid Shallow types in large typed modules that frequently call functions
-    or access data structures because these operations may incur shape checks
-    and their net cost may be significant.
+    Shallow types provide a weak but useful soundness guarantee at low cost.
+    Use them in typed modules that frequently communicate with the untyped world.
+    Avoid them, however, in large typed modules because every expression in typed
+    code potentially needs a Shallow shape check.
   }
   @item{
-    Optional types enable the typechecker and nothing else. Use them when
-    you do not want types enforced at run-time.
+    Optional types use types for static analysis and nothing more.
+    Use them when you do not want types enforced at run-time.
   }
 ]
 
-We are very excited to be releasing DSO.
+Overall, we are very excited to be adding these languages to the
+Typed Racket family.
+Learning more about where they fit well in practical applications
+and about how developers tend to use them is part of the adventure.
 
 
 @section[#:tag "sec:further-reading"]{Further Reading}
 
 @itemlist[
   @item{
+     For the TR basics:
      @secref["typed-untyped-interaction"
          #:doc '(lib "typed-racket/scribblings/ts-guide.scrbl")]
      in the Typed Racket Guide
   }
   @item{
+    For more TR details:
     @secref["behavior-of-types"
          #:doc '(lib "typed-racket/scribblings/ts-reference.scrbl")]
     in the Typed Racket Reference
   }
   @item{
+    For the theoretical and practical motivation:
+    @linebreak[]
+    Ben Greenman.
+    @italic{Deep and Shallow Types for Gradual Languages}.
+    PLDI 2022.
+    @linebreak[]
+    Paper at @url{https://www2.ccs.neu.edu/racket/pubs/g-pldi-2022.pdf}
+    @linebreak[]
+    Slides at @url{https://cs.brown.edu/people/bgreenma/publications/apples-to-apples/g-pldi-2022-slides.pdf}
+  }
+  @item{
+    Shallow TR is based on the Transient semantics of Reticulated Python,
+    which was developed by Mike Vitousek in his Ph.D. work:
+    @linebreak[]
     Michael M. Vitousek.
     @emph{Gradual Typing for Python, Unguarded}.
     PhD thesis, Indiana University, 2019.
     @url{https://hdl.handle.net/2022/23172}
   }
   @item{
+    Ben's dissertation explains the challenges involved with combining Deep and
+    Shallow types in one language. It also presents lots of benchmark results
+    for Typed Racket:
+    @linebreak[]
     Ben Greenman.
     @emph{Deep and Shallow Types}.
     PhD thesis, Northeastern University, 2020.
@@ -413,5 +341,4 @@ We are very excited to be releasing DSO.
 @close-eval[deep-eval]
 @close-eval[shallow-eval]
 @close-eval[optional-eval]
-
 
