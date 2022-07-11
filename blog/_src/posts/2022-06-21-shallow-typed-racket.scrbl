@@ -341,8 +341,17 @@ and about how developers tend to use them is part of the adventure.
     Slides at @url{https://cs.brown.edu/people/bgreenma/publications/apples-to-apples/g-pldi-2022-slides.pdf}
   }
   @item{
-    Shallow TR is based on the Transient semantics of Reticulated Python,
-    which was developed by Mike Vitousek in his Ph.D. work:
+    Shallow TR is based on the Transient semantics from Reticulated Python:
+    @linebreak[]
+    Michael M. Vitousek, Cameron Swords, and Jeremy G. Siek.
+    @italic{Big Types in Little Runtime: Open-World Soundness and Collaborative Blame for Gradual Type Systems}.
+    POPL 2017.
+    @linebreak[]
+    Paper at @url{https://dl.acm.org/doi/10.1145/3009837.3009849}
+  }
+  @item{
+    Vitousek's dissertation has much more to say about Reticulated and
+    Transient:
     @linebreak[]
     Michael M. Vitousek.
     @italic{Gradual Typing for Python, Unguarded}.
@@ -350,9 +359,8 @@ and about how developers tend to use them is part of the adventure.
     @url{https://hdl.handle.net/2022/23172}
   }
   @item{
-    Ben's dissertation explains the challenges involved with combining Deep and
-    Shallow types in one language. It also presents lots of benchmark results
-    for Typed Racket:
+    Greenman's dissertation says more about combining Deep and Shallow in
+    Typed Racket:
     @linebreak[]
     Ben Greenman.
     @italic{Deep and Shallow Types}.
