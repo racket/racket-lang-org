@@ -248,6 +248,38 @@ typed/racket/optional
 ]
 
 
+@section{Four-Way Interactions}
+
+Typed--untyped interactions are much more exciting now that ``typed code'' can
+be Deep, Shallow, or Optional.
+These three styles of typed code can all interact with untyped code (of course),
+and they can also interact with one another.
+
+Types in this four-way world need to be enforced at run-time depending on how
+they were defined:
+
+@itemlist[
+  @item{
+    Deep types get enforced with contracts at all boundaries to non-Deep code.
+    This means that Deep--Shallow and Deep--Optional interactions can be expensive.
+  }
+  @item{
+    Shallow types guard the boundaries to Optional and Untyped code with shape checks.
+  }
+  @item{
+    Optional types never enforce themselves.
+    But a Deep-typed or Shallow-typed client of Optional code will insert
+    run-time checks, as a consequence of their strategies.
+  }
+]
+
+These checks may come as a surprise, especially because all typed code gets validated
+by the same static type checker.
+The trouble is that run-time interactions can mix untyped values into
+some of these typed modules.
+If an Optional module were to import an untyped function and send it to Deep-typed code
+without a contract wrapper, it could break the Deep type invariants.
+
 
 @section{Reflections on Deep, Shallow, and Optional}
 
