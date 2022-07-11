@@ -25,10 +25,10 @@ Tags: Typed Racket
 
 With the Racket 8.7 release, Typed Racket (TR) includes two languages that
 weaken the run-time behavior of types: Shallow TR and Optional TR.
-Whereas normal TR types (@emph{Deep} types) enforce guarantees that any module
+Whereas normal TR types (@italic{Deep} types) enforce guarantees that any module
 can depend on, Shallow types enforce only local invariants in typed code, and
 Optional types enforce nothing.
-In return, Shallow and Optional types add less overhead.
+In return, Shallow and Optional types add less overhead to gradual interactions.
 Code often runs faster and simpler than with Deep types.
 
 Shallow TR and Optional TR use the same static types and typechecker as
@@ -114,12 +114,12 @@ information if an error occurs.
 But they can also be expensive, especially when large, mutable, or higher-order
 values frequently cross boundaries.
 These high costs have inspired a search for cheaper ways to enforce types
-than the standard @emph{Deep} strategy.
+than the standard @italic{Deep} strategy.
 
-Two promising alternatives are @emph{Shallow} and @emph{Optional} types,
+Two promising alternatives are @italic{Shallow} and @italic{Optional} types,
 neither of which use higher-order contracts.
 
-Shallow types use lightweight assertions called @emph{shape checks} to provide
+Shallow types use lightweight assertions called @italic{shape checks} to provide
 a basic soundness guarantee.
 Instead of putting heavy contracts at module boundaries, Shallow TR rewrites
 typed code to incrementally check the shape of values.
@@ -313,7 +313,7 @@ and about how developers tend to use them is part of the adventure.
     which was developed by Mike Vitousek in his Ph.D. work:
     @linebreak[]
     Michael M. Vitousek.
-    @emph{Gradual Typing for Python, Unguarded}.
+    @italic{Gradual Typing for Python, Unguarded}.
     PhD thesis, Indiana University, 2019.
     @url{https://hdl.handle.net/2022/23172}
   }
@@ -323,7 +323,7 @@ and about how developers tend to use them is part of the adventure.
     for Typed Racket:
     @linebreak[]
     Ben Greenman.
-    @emph{Deep and Shallow Types}.
+    @italic{Deep and Shallow Types}.
     PhD thesis, Northeastern University, 2020.
     @url{http://hdl.handle.net/2047/D20398329}
   }
