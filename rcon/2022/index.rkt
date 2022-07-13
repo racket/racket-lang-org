@@ -243,6 +243,15 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
+@speaker{@(a #:href "http://camoy.name" "Cameron Moy")}
+#:what
+@talk{TBA}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
 @speaker{@(a #:href "https://www.igalia.com/team/pmatos" "Paulo Matos") (Igalia)}
 #:what
 @talk{TBA}
