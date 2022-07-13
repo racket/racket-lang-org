@@ -21,7 +21,7 @@ jobs:
           version: '8.5'
 
       - name: Install package
-        run: raco pkg install --auto -n racket-lang-org `pwd`
+        run: raco pkg install --auto --no-docs -n racket-lang-org `pwd`
 
       - name: Build everything (headless display via xvfb)
         run: xvfb-run racket -l- racket-lang-org/sync --save-temps --render-locally Web
