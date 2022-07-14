@@ -243,7 +243,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "http://camoy.name" "Cameron Moy")}
+@speaker{@(a #:href "http://camoy.name" "Cameron Moy") (Northeastern)}
 #:what
 @talk{TBA}
 ]
@@ -272,7 +272,17 @@ that prevent many common mistakes by Lean macro authors.
 #:who
 @speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
 #:what
-@talk{Resyntax}]
+@talk{Resyntax}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
+@speaker{@(a #:href "https://mballantyne.net" "Michael Ballantyne")}
+#:what
+@talk{TBA}
+]
 
 )
 
