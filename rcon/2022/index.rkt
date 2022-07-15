@@ -137,7 +137,7 @@
  (match-define (list day times) (string-split dtime ","))
  (define d (match day
              ["Friday"   (date 2022 10 28)]
-             ["Saturday" (date 2022 10 28)]
+             ["Saturday" (date 2022 10 29)]
              ["Sunday"   (date 2022 10 30)]))
  (define t (parse-time times " h:mmaa"))
  (define tz (with-timezone (on-date t d) "America/New_York"))
@@ -270,6 +270,15 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
+@speaker{@(a #:href "http://leifandersen.net" "Leif Andersen") (Northeastern)}
+#:what
+@talk{TBA}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
 @speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
 #:what
 @talk{Resyntax}
@@ -279,7 +288,7 @@ that prevent many common mistakes by Lean macro authors.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
-@speaker{@(a #:href "https://mballantyne.net" "Michael Ballantyne")}
+@speaker{@(a #:href "https://mballantyne.net" "Michael Ballantyne") (Northeastern)}
 #:what
 @talk{TBA}
 ]
