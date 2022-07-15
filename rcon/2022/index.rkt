@@ -137,7 +137,7 @@
  (match-define (list day times) (string-split dtime ","))
  (define d (match day
              ["Friday"   (date 2022 10 28)]
-             ["Saturday" (date 2022 10 28)]
+             ["Saturday" (date 2022 10 29)]
              ["Sunday"   (date 2022 10 30)]))
  (define t (parse-time times " h:mmaa"))
  (define tz (with-timezone (on-date t d) "America/New_York"))
