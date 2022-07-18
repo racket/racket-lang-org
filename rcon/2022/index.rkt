@@ -272,7 +272,7 @@ that prevent many common mistakes by Lean macro authors.
 #:who
 @speaker{@(a #:href "http://leifandersen.net" "Leif Andersen") (Northeastern)}
 #:what
-@talk{TBA}
+@talk{VISr: Visual and Interactive Syntax}
 ]
 
   @lecture[
