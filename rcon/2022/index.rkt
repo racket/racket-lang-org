@@ -1,6 +1,9 @@
 #lang at-exp racket/base
 (require racket/match
+         racket/string
          xml
+         txexpr
+         (prefix-in gregor: gregor)
          "lib.rkt")
 
 (define-div column
@@ -130,15 +133,27 @@
 (define (q content)
   `(q () ,content))
 
+(define friday  (gregor:date 2022 10 28))
+(define saturday (gregor:date 2022 10 29))
+(define sunday (gregor:date 2022 10 30))
+(define location "Providence, RI, USA")
+
+(define (meta #:itemprop [itemprop #f]
+              content)
+  (define elem (txexpr* 'meta (list (list 'content content))))
+  (cond [(non-empty-string? itemprop)
+         (attr-set elem 'itemprop itemprop)]
+        [else elem]))
+
 (define slot-number 0)
 (define (talk-time dtime)
  (set! slot-number (add1 slot-number))
  (local-require racket/string gregor)
  (match-define (list day times) (string-split dtime ","))
  (define d (match day
-             ["Friday"   (date 2022 10 28)]
-             ["Saturday" (date 2022 10 29)]
-             ["Sunday"   (date 2022 10 30)]))
+             ["Friday"   friday]
+             ["Saturday" saturday]
+             ["Sunday"   sunday]))
  (define t (parse-time times " h:mmaa"))
  (define tz (with-timezone (on-date t d) "America/New_York"))
  (define m (adjust-timezone tz "Etc/UTC"))
@@ -167,6 +182,11 @@ $(document).ready(function () {
   $(this).html(localTime); }); }); })
     (body
      #:class "main"
+     #:itemscope ""
+     #:itemtype "https://schema.org/Event"
+     (meta #:itemprop "startDate" (gregor:~t friday "y-MM-d"))
+     (meta #:itemprop "endDate" (gregor:~t sunday "y-MM-d"))
+     (meta #:itemprop "location" location)
      (banner
       (title-append
        @pagetitle[(img #:style "width:80px; float: right"
@@ -175,7 +195,7 @@ $(document).ready(function () {
        @pagetitle["(twelfth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp])
       @subtitle{October 28-30, 2022}
       @subtitle{Brown University}
-      @subsubtitle{Providence, Rhode Island, USA})
+      @subsubtitle{location})
 
 (column
 
@@ -263,7 +283,17 @@ that prevent many common mistakes by Lean macro authors.
 #:who
 @speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán") (Seton Hall)}
 #:what
-@talk{TBA}
+@talk{What Can Beginners Learn from Video Games?}
+#:more
+@abstract{
+Beginners need to learn important Computer Science concepts revolving around problem solving,
+program design, modularity, documentation, testing, efficiency, running time, and program
+refinement. This presents unique challenges given students that are enthusiastic but have little
+experience quickly lose interest. Instructors must capture their imagination to channel their
+enthusiasm into learning the important lessons. An effective medium to do so is the development
+of video games. This talk outlines a design-based curriculum for beginners that is based on video
+game development.
+}
 ]
 
   @lecture[
