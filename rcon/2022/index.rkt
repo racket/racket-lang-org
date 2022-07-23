@@ -263,7 +263,17 @@ that prevent many common mistakes by Lean macro authors.
 #:who
 @speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán") (Seton Hall)}
 #:what
-@talk{TBA}
+@talk{What Can Beginners Learn from Video Games?}
+#:more
+@abstract{
+Beginners need to learn important Computer Science concepts revolving around problem solving,
+program design, modularity, documentation, testing, efficiency, running time, and program
+refinement. This presents unique challenges given students that are enthusiastic but have little
+experience quickly lose interest. Instructors must capture their imagination to channel their
+enthusiasm into learning the important lessons. An effective medium to do so is the development
+of video games. This talk outlines a design-based curriculum for beginners that is based on video
+game development.
+}
 ]
 
   @lecture[
