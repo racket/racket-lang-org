@@ -300,6 +300,15 @@ game development.
 #:when
 @talk-time{Saturday, 10:00am}
 #:who
+@speaker{@(a #:href "https://bicompact.space" "Hazel Levine") (Indiana)}
+#:what
+@talk{Bingus}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
 @speaker{@(a #:href "http://leifandersen.net" "Leif Andersen") (Northeastern)}
 #:what
 @talk{VISr: Visual and Interactive Syntax}
