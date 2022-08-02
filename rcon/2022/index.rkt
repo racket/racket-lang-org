@@ -339,6 +339,10 @@ game development.
 @speaker{@(a #:href "https://github.com/sorawee" "Sorawee Porncharoenwase") (Washington)}
 #:what
 @talk{fmt: A Racket code formatter}
+#:more
+@abstract{
+fmt is a code formatter for Racket. Its applications range from teaching beginners the Racket coding conventions to allowing frictionless collaborative projects. As Racket allows user-defined macros and has a relatively non-traditional code style, fmt faces unique challenges: it must be extensible yet expressive enough to capture the style. This talk will cover the design of fmt, how it overcomes these challenges, and how to use our code formatting DSL to extend fmt.
+}
 ]
 
 )
