@@ -309,7 +309,7 @@ ancestor(A, B)?}}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
-        Some languages convey ideas more easily than others. And some programming languages convey solutions better than others.  Therefore Racket is a language for ◊link[hash-langs]{making languages}, so that a programmer can write every module in a well-suited languages.}
+        Some languages convey ideas more easily than others. And some programming languages convey solutions better than others.  Therefore Racket is a language for ◊link[hash-langs]{making languages}, so that a programmer can write every module in a well-suited language.}
 
      ◊p[#:class "block-with-1em-margin"]{
         Often ◊link[lang-video]{an application domain} comes with several languages.  When you need a new language, you make it—on the fly. Open an IDE window; create a language right there, with just a few keystrokes; and run a module in this new language in a second IDE window.  Making new languages really requires no setup, no project files, no external tools, no nothing.}
