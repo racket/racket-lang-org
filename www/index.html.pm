@@ -42,8 +42,14 @@
 ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
  ◊div[#:style "margin-left: 1em"]{
    ◊link["https://blog.racket-lang.org/2022/08/racket-v8-6.html"]{Racket version 8.6} is available.}
+
  ◊div[#:style "flex-grow:1"]{}
-  ◊div[#:style "margin-right: 1em"]{◊link["books.html"]{We welcome two new Racket books:}
+
+ ◊link["https://con.racket-lang.org/"]{twelfth RacketCon, Oct 28-30, in person!}
+
+ ◊div[#:style "flex-grow:1"]{}
+
+ ◊div[#:style "margin-right: 1em"]{◊link["books.html"]{We welcome two new Racket books:}
                          (1) Racket Programming the Fun Way
                          (2) Don't Teach Coding: Until You Read this Book
 }
