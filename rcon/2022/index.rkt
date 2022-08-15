@@ -305,7 +305,11 @@ Beginners need to learn important Computer Science concepts revolving around pro
 #:who
 @speaker{@(a #:href "https://mballantyne.net" "Michael Ballantyne") (Northeastern)}
 #:what
-@talk{TBA}
+@talk{A language workbench in Racket}
+#:more
+@abstract{
+Racket's macro system gives programmers immense power to create domain specific languages, but little help in structuring their implementation. Building a sophisticated DSL requires following a bevy of design patterns for structuring a parser, checking scoping and binding rules, and conveying static information between language elements. This talk presents a new meta-DSL that instead supports declarative specification of grammar, binding rules, and interface points.
+}
 ]
 
   @lecture[
