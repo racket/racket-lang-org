@@ -228,7 +228,11 @@ $(document).ready(function () {
 #:who
 @speaker{@(a #:href "https://github.com/titzer" "Ben L. Titzer") (CMU)}
 #:what
-@talk{TBA}
+@talk{The final tier is Shed: Inside the Wizard Engine's fast in-place interpreter for WebAssembly}
+#:more
+@abstract{
+@(a #:href "https://webassembly.org" "WebAssembly") is a compact, well-specified bytecode format that offers a portable compilation target with near-native execution speed. The bytecode format was specifically designed to be fast to parse, validate, and compile, positioning itself as a portable alternative to native code. It was pointedly not designed to be @(em "interpreted") directly. Instead, most engines have focused on optimized JIT compilation for maximum performance. Yet compilation time and memory consumption critically impact application startup, leading many Wasm engines to now employ two compilers. But interpreters start up even faster. A typical interpreter being infeasible, some engines resort to compiling Wasm not to machine code, but to a more compact, but easy to interpret format. This still takes time and wastes memory. Instead, we introduce a new design for an in-place interpreter for WebAssembly, where no rewrite and no separate format is necessary. Our measurements show that in-place interpretation of Wasm code is space-efficient and fast, achieving performance on-par with interpreting a custom-designed internal format. This fills a hole in the execution tier space for Wasm, allowing for even faster startup and lower memory footprint than previous engine configurations.
+}
 ]
 
   @lecture[
