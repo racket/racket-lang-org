@@ -31,6 +31,7 @@
 (define-tag ul)
 (define-tag li)
 (define-tag br)
+(define-tag em)
 
 (define (decode l)
   (let loop ([l l])
