@@ -269,7 +269,16 @@ that prevent many common mistakes by Lean macro authors.
 #:who
 @speaker{@(a #:href "http://camoy.name" "Cameron Moy") (Northeastern)}
 #:what
-@talk{TBA}
+@talk{Contracts for protocols}
+#:more
+@abstract{
+Racketeers often use contracts to express the obligations that their libraries
+impose on, or promise to, clients. While Racket's contract system can handle
+many specifications, it cannot naturally express protocols. For example,
+a specification may constrain the permitted call sequence of functions,
+or the context in which functions may be applied. This talk will present
+several extensions to Racket's contract system that attempt to fill this gap.
+}
 ]
 
   @lecture[
