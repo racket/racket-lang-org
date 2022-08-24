@@ -228,7 +228,7 @@ $(document).ready(function () {
 #:who
 @speaker{@(a #:href "https://github.com/titzer" "Ben L. Titzer") (CMU)}
 #:what
-@talk{The final tier is Shed: Inside the Wizard Engine's fast in-place interpreter for WebAssembly}
+@talk{The final tier is Shed: Inside the Wizard Engine’s fast in-place interpreter for WebAssembly}
 #:more
 @abstract{
 @(a #:href "https://webassembly.org" "WebAssembly") is a compact, well-specified bytecode format that offers a portable compilation target with near-native execution speed. The bytecode format was specifically designed to be fast to parse, validate, and compile, positioning itself as a portable alternative to native code. It was pointedly not designed to be @(em "interpreted") directly. Instead, most engines have focused on optimized JIT compilation for maximum performance. Yet compilation time and memory consumption critically impact application startup, leading many Wasm engines to now employ two compilers. But interpreters start up even faster. A typical interpreter being infeasible, some engines resort to compiling Wasm not to machine code, but to a more compact, but easy to interpret format. This still takes time and wastes memory. Instead, we introduce a new design for an in-place interpreter for WebAssembly, where no rewrite and no separate format is necessary. Our measurements show that in-place interpretation of Wasm code is space-efficient and fast, achieving performance on-par with interpreting a custom-designed internal format. This fills a hole in the execution tier space for Wasm, allowing for even faster startup and lower memory footprint than previous engine configurations.
@@ -293,11 +293,11 @@ years studying programming languages.}
 #:more
 @abstract{
 Racketeers often use contracts to express the obligations that their libraries
-impose on, or promise to, clients. While Racket's contract system can handle
+impose on, or promise to, clients. While Racket’s contract system can handle
 many specifications, it cannot naturally express protocols. For example,
 a specification may constrain the permitted call sequence of functions,
 or the context in which functions may be applied. This talk will present
-several extensions to Racket's contract system that attempt to fill this gap.
+several extensions to Racket’s contract system that attempt to fill this gap.
 }
 ]
 
@@ -341,7 +341,7 @@ Beginners need to learn important Computer Science concepts revolving around pro
 @talk{A language workbench in Racket}
 #:more
 @abstract{
-Racket's macro system gives programmers immense power to create domain specific languages, but little help in structuring their implementation. Building a sophisticated DSL requires following a bevy of design patterns for structuring a parser, checking scoping and binding rules, and conveying static information between language elements. This talk presents a new meta-DSL that instead supports declarative specification of grammar, binding rules, and interface points.
+Racket’s macro system gives programmers immense power to create domain specific languages, but little help in structuring their implementation. Building a sophisticated DSL requires following a bevy of design patterns for structuring a parser, checking scoping and binding rules, and conveying static information between language elements. This talk presents a new meta-DSL that instead supports declarative specification of grammar, binding rules, and interface points.
 }
 ]
 
