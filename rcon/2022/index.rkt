@@ -228,7 +228,7 @@ $(document).ready(function () {
 #:who
 @speaker{@(a #:href "https://github.com/titzer" "Ben L. Titzer") (CMU)}
 #:what
-@talk{The final tier is Shed: Inside the Wizard Engine's fast in-place interpreter for WebAssembly}
+@talk{The final tier is Shed: Inside the Wizard Engine’s fast in-place interpreter for WebAssembly}
 #:more
 @abstract{
 @(a #:href "https://webassembly.org" "WebAssembly") is a compact, well-specified bytecode format that offers a portable compilation target with near-native execution speed. The bytecode format was specifically designed to be fast to parse, validate, and compile, positioning itself as a portable alternative to native code. It was pointedly not designed to be @(em "interpreted") directly. Instead, most engines have focused on optimized JIT compilation for maximum performance. Yet compilation time and memory consumption critically impact application startup, leading many Wasm engines to now employ two compilers. But interpreters start up even faster. A typical interpreter being infeasible, some engines resort to compiling Wasm not to machine code, but to a more compact, but easy to interpret format. This still takes time and wastes memory. Instead, we introduce a new design for an in-place interpreter for WebAssembly, where no rewrite and no separate format is necessary. Our measurements show that in-place interpretation of Wasm code is space-efficient and fast, achieving performance on-par with interpreting a custom-designed internal format. This fills a hole in the execution tier space for Wasm, allowing for even faster startup and lower memory footprint than previous engine configurations.
@@ -260,7 +260,27 @@ that prevent many common mistakes by Lean macro authors.
 #:who
 @speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman") (Brown)}
 #:what
-@talk{TBA}
+@talk{Shallow and Optional Types}
+#:more
+@abstract{
+Typed Racket (TR) is powerful—but sometimes too powerful. In addition to a
+type checker and type-driven optimizer, it includes a contract layer that
+dynamically monitors interactions with untyped code. The contracts make TR one
+of the strongest and most flexible type systems in the world…but also one
+of the slowest.
+
+Shallow TR and Optional TR are two alternatives that have (finally!) arrived
+with the Racket 8.7 release. Shallow TR enforces types with local assertions
+rather than compositional contracts, keeping a bit of soundness at low cost.
+Optional TR enforces types with nothing at all. This talk will explain Shallow
+and Optional in depth and show how they can interact with untyped code,
+standard TR, and each another.
+
+@bio{Ben is currently a postdoc at Brown University studying human factors for type
+systems and logics. Next Fall, he will be an assistant professor at the
+University of Utah. Reach out if you would like to live on a mountain for N
+years studying programming languages.}
+}
 ]
 
   @lecture[
@@ -273,11 +293,11 @@ that prevent many common mistakes by Lean macro authors.
 #:more
 @abstract{
 Racketeers often use contracts to express the obligations that their libraries
-impose on, or promise to, clients. While Racket's contract system can handle
+impose on, or promise to, clients. While Racket’s contract system can handle
 many specifications, it cannot naturally express protocols. For example,
 a specification may constrain the permitted call sequence of functions,
 or the context in which functions may be applied. This talk will present
-several extensions to Racket's contract system that attempt to fill this gap.
+several extensions to Racket’s contract system that attempt to fill this gap.
 }
 ]
 
@@ -321,7 +341,7 @@ Beginners need to learn important Computer Science concepts revolving around pro
 @talk{A language workbench in Racket}
 #:more
 @abstract{
-Racket's macro system gives programmers immense power to create domain specific languages, but little help in structuring their implementation. Building a sophisticated DSL requires following a bevy of design patterns for structuring a parser, checking scoping and binding rules, and conveying static information between language elements. This talk presents a new meta-DSL that instead supports declarative specification of grammar, binding rules, and interface points.
+Racket’s macro system gives programmers immense power to create domain specific languages, but little help in structuring their implementation. Building a sophisticated DSL requires following a bevy of design patterns for structuring a parser, checking scoping and binding rules, and conveying static information between language elements. This talk presents a new meta-DSL that instead supports declarative specification of grammar, binding rules, and interface points.
 }
 ]
 
@@ -360,7 +380,16 @@ Racket's macro system gives programmers immense power to create domain specific 
 #:who
 @speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman")}
 #:what
-@talk{Summary of the Summer of @code{#lang}}
+@talk{Summary of the Summer of @code{#lang} (Fun + Games III)}
+#:more
+@abstract{
+Come learn about the @(a #:href "https://github.com/lang-party/Summer2022" "amazing entries") to this summer’s @code{#lang} party!
+Submissions include new languages, improved languages, language ideas, and
+Standard ML.
+
+@bio{Ben is a postdoc at Brown University and a co-organizer of the lang party with
+Stephen DeGabrielle.}
+}
 ]
 
   @lecture[
