@@ -260,7 +260,27 @@ that prevent many common mistakes by Lean macro authors.
 #:who
 @speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman") (Brown)}
 #:what
-@talk{TBA}
+@talk{Shallow and Optional Types}
+#:more
+@abstract{
+Typed Racket (TR) is powerful—but sometimes too powerful. In addition to a
+type checker and type-driven optimizer, it includes a contract layer that
+dynamically monitors interactions with untyped code. The contracts make TR one
+of the strongest and most flexible type systems in the world…but also one
+of the slowest.
+
+Shallow TR and Optional TR are two alternatives that have (finally!) arrived
+with the Racket 8.7 release. Shallow TR enforces types with local assertions
+rather than compositional contracts, keeping a bit of soundness at low cost.
+Optional TR enforces types with nothing at all. This talk will explain Shallow
+and Optional in depth and show how they can interact with untyped code,
+standard TR, and each another.
+
+@bio{Ben is currently a postdoc at Brown University studying human factors for type
+systems and logics. Next Fall, he will be an assistant professor at the
+University of Utah. Reach out if you would like to live on a mountain for N
+years studying programming languages.}
+}
 ]
 
   @lecture[
@@ -360,7 +380,16 @@ Racket's macro system gives programmers immense power to create domain specific 
 #:who
 @speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman")}
 #:what
-@talk{Summary of the Summer of @code{#lang}}
+@talk{Summary of the Summer of @code{#lang} (Fun + Games III)}
+#:more
+@abstract{
+Come learn about the @(a #:href "https://github.com/lang-party/Summer2022" "amazing entries") to this summer’s @code{#lang} party!
+Submissions include new languages, improved languages, language ideas, and
+Standard ML.
+
+@bio{Ben is a postdoc at Brown University and a co-organizer of the lang party with
+Stephen DeGabrielle.}
+}
 ]
 
   @lecture[
