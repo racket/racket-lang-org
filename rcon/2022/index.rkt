@@ -320,7 +320,32 @@ Beginners need to learn important Computer Science concepts revolving around pro
 #:who
 @speaker{@(a #:href "https://bicompact.space" "Hazel Levine") (Indiana)}
 #:what
-@talk{Bingus}
+@talk{Design Recipe Guided Synthesis with Bingus}
+#:more
+@abstract{
+The @emph{How to Design Programs} (@(a #:href "htdp.org" "HtDP")) curriculum,
+utilizing simple subsets of the Racket programming language, teaches
+the fundamentals of data-driven program design using the @q{design recipe}.
+This approach teaches recursion by structural decomposition of
+the input data, enough to express many algorithms on simple recursive
+data structures. Furthermore, this approach is deeply mechanical,
+having students write a @q{template} depending on the input type of the
+function that when filled in produces structurally-recursive programs.
+
+We present a work-in-progress program synthesizer for the HtDP Student
+languages, @(a #:href "https://github.com/ralsei/bingus" "Bingus"), that utilizes the design recipe as its primary means
+of generating programs. By parsing the signature (specification in a
+comment) of a function, the first step of the design recipe, Bingus
+makes guesses depending on the signatures of the function inputs,
+utilizing the check-expects (unit tests) to determine when synthesis is
+complete.
+
+We demonstrate usage of Bingus as a program synthesis tool integrated
+into DrRacket, and discuss ways that we plan to extend this tool for
+pedagogic purposes, such as providing better feedback to students from
+an auto-grader, or determining when student-provided unit tests are
+insufficient.
+}
 ]
 
   @lecture[
