@@ -232,6 +232,8 @@ $(document).ready(function () {
 #:more
 @abstract{
 @(a #:href "https://webassembly.org" "WebAssembly") is a compact, well-specified bytecode format that offers a portable compilation target with near-native execution speed. The bytecode format was specifically designed to be fast to parse, validate, and compile, positioning itself as a portable alternative to native code. It was pointedly not designed to be @(em "interpreted") directly. Instead, most engines have focused on optimized JIT compilation for maximum performance. Yet compilation time and memory consumption critically impact application startup, leading many Wasm engines to now employ two compilers. But interpreters start up even faster. A typical interpreter being infeasible, some engines resort to compiling Wasm not to machine code, but to a more compact, but easy to interpret format. This still takes time and wastes memory. Instead, we introduce a new design for an in-place interpreter for WebAssembly, where no rewrite and no separate format is necessary. Our measurements show that in-place interpretation of Wasm code is space-efficient and fast, achieving performance on-par with interpreting a custom-designed internal format. This fills a hole in the execution tier space for Wasm, allowing for even faster startup and lower memory footprint than previous engine configurations.
+
+@bio{Ben L. Titzer is a Principal Researcher at Carnegie Mellon University. A former member of the V8 team at Google, he co-founded the WebAssembly project, led the team that built the implementation in V8, and led the initial design of V8’s TurboFan optimizing compiler. Prior to that he was a researcher at Sun Labs and contributed to the Maxine Java-in-Java VM. He is the designer and main implementer of the Virgil programming language.}
 }
 ]
 
@@ -298,6 +300,10 @@ many specifications, it cannot naturally express protocols. For example,
 a specification may constrain the permitted call sequence of functions,
 or the context in which functions may be applied. This talk will present
 several extensions to Racket’s contract system that attempt to fill this gap.
+
+@bio{Cameron is a Ph.D. student studying programming languages at Northeastern University.
+He spends most of his time thinking about how to make Racket’s contract system better
+for developers.}
 }
 ]
 
@@ -311,6 +317,8 @@ several extensions to Racket’s contract system that attempt to fill this gap.
 #:more
 @abstract{
 Beginners need to learn important Computer Science concepts revolving around problem solving, program design, modularity, documentation, testing, efficiency, running time, and program refinement. This presents unique challenges given students that are enthusiastic but have little experience quickly lose interest. Instructors must capture their imagination to channel their enthusiasm into learning the important lessons. An effective medium to do so is the development of video games. This talk outlines a design-based curriculum for beginners that is based on video game development.
+
+@bio{Dr. Marco T. Morazán joined Seton Hall in 1999. He did his undergraduate studies at Rutgers University and his graduate work at the City University of New York. At Seton Hall he teaches at all levels of the Computer Science curriculum including his signature courses: @emph{Introduction to Program Design} I and II, @emph{Organization of Programming Languages}, and @emph{Automata Theory and Computability}. His main research foci are the implementation of programming languages and Computer Science Education. As the graduate school advisor, he takes special pride in making sure that his students are prepared to continue studies outside of Seton Hall. Dr. Morazán is a strong proponent of undergraduate research opportunities and routinely has students collaborate with him on projects. Along with his undergraduate research students, he is responsible for an optimal lambda lifting algorithm and an effective mechanism for closure memoization. In Computer Science education, he is especially proud of the effectiveness of the Computer Science curriculum, based on the development of video games, he has developed for beginners.}
 }
 ]
 
