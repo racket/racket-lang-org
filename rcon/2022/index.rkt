@@ -375,6 +375,8 @@ insufficient.
 #:more
 @abstract{
 Racket’s macro system gives programmers immense power to create domain specific languages, but little help in structuring their implementation. Building a sophisticated DSL requires following a bevy of design patterns for structuring a parser, checking scoping and binding rules, and conveying static information between language elements. This talk presents a new meta-DSL that instead supports declarative specification of grammar, binding rules, and interface points.
+
+@bio{Michael is a PhD student at Northeastern University working on making Racket a better host for DSLs.}
 }
 ]
 
