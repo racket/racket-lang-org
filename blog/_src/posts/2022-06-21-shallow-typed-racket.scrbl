@@ -14,7 +14,7 @@ Tags: Typed Racket
 @(define optional-eval (make-base-eval #:lang 'typed/racket/optional))
 
 @(define (tech/reference . text)
-   (keyword-apply tech '(#:doc) '((lib "scribblings/reference/reference.scrbl")) text))
+   (apply tech text #:doc '(lib "scribblings/reference/reference.scrbl")))
 
 @(define-syntax-rule (module-example #:eval ev #:label lbl lang-datum mod-code ... ex-code)
    (list
@@ -41,7 +41,7 @@ A key feature of Typed Racket is that it allows typed code to interact with
 untyped code.
 An untyped module can import from a typed one with a normal @racket[require] form,
 and a typed module can import from an untyped one by using a @racket[require/typed]
-annotation to specify types for the untyped code.
+form:
 
 For example, if an untyped module provides a struct and a function:
 
@@ -61,7 +61,7 @@ racket
 ]
 
 
-then a typed module can import and use the untyped bindings:
+then a typed module can import the untyped bindings:
 
 @racketmod[
 typed/racket
@@ -76,9 +76,9 @@ typed/racket
 So far so good.
 One program combines untyped and typed code.
 
-Now, what if the declared types were wrong?
+Now, what if the declared types are wrong?
 
-The module below, for example, gives a wrong type to the distance function.
+The module below gives a wrong type to the distance function.
 This type expects an integer result instead of a real number:
 
 @racketmod[
@@ -92,7 +92,7 @@ typed/racket
 ]
 
 Even with the wrong type, the program still typechecks (!)
-because the static type checker does not analyze untyped code.
+because Typed Racket does not analyze untyped code.
 It assumes the @racket[require/typed] types are correct and moves on.
 
 But this program does have a type error.
@@ -107,13 +107,14 @@ when typed and untyped code interact.
 
 By default, Typed Racket compiles types to higher-order contracts.
 The function type @racket[(-> pt pt Integer)], for example, compiles to a function
-contract that will raise an exception if a non-integer result appears.
+contract that will raise an exception if gets attached to a function that
+eventually returns a non-integer result.
 
 Contracts enforce types with strong guarantees and offer useful debugging
 information if an error occurs.
 But they can also be expensive, especially when large, mutable, or higher-order
 values frequently cross boundaries.
-These high costs have inspired a search for cheaper ways to enforce types
+These high costs inspired a long search for cheaper ways to enforce types
 than the standard @italic{Deep} strategy.
 
 Two promising alternatives are @italic{Shallow} and @italic{Optional} types,
@@ -184,7 +185,7 @@ costs depending on the behavior of types:
     Vectors get wrapped in a @tech/reference{chaperone} to guard against future writes.
   }
   @item{
-    Shallow types check only the shape of the incoming data structures using
+    Shallow types check the shape of the incoming data structures using
     @racket[list?] and @racket[vector?].
     Elements of these structures get checked only when they are used by typed code.
   }
@@ -264,22 +265,22 @@ they were defined:
     This means that Deep--Shallow and Deep--Optional interactions can be expensive.
   }
   @item{
-    Shallow types guard the boundaries to Optional and Untyped code with shape checks.
+    Shallow types guard the boundaries to Optional and untyped code with shape checks.
   }
   @item{
     Optional types never enforce themselves.
     But a Deep-typed or Shallow-typed client of Optional code will insert
-    run-time checks, as a consequence of their strategies.
+    run-time checks as a consequence of their strategies.
   }
 ]
 
-These checks may come as a surprise, especially because all typed code gets validated
-by the same static type checker.
-The trouble is that run-time interactions can mix untyped values into
-some of these typed modules.
+These checks between Deep, Shallow, and Optional may come as a surprise,
+especially because all typed code gets validated by the same static type
+checker.
+But the checks are necessary because run-time interactions can mix untyped
+values into some of these typed modules.
 If an Optional module were to import an untyped function and send it to Deep-typed code
-without a contract wrapper, it could break the Deep type invariants.
-
+without a contract wrapper, it could break the Deep type guarantees.
 
 @section{Reflections on Deep, Shallow, and Optional}
 
@@ -294,7 +295,7 @@ from the Typed Racket Guide:
   @item{
     Deep types make the most of static checking and optimizations.
     Use them for self-sufficient groups of typed modules.
-    Avoid them at high-traffic boundaries to untyped or non-Deep code.
+    Avoid them at high-traffic boundaries to untyped or to non-Deep code.
   }
   @item{
     Shallow types provide a weak but useful soundness guarantee at low cost.
@@ -308,10 +309,9 @@ from the Typed Racket Guide:
   }
 ]
 
-Overall, we are very excited to be adding these languages to the
-Typed Racket family.
-Learning more about where they fit well in practical applications
-and about how developers tend to use them is part of the adventure.
+We are very excited to have these languages in the Typed Racket family.
+Learning more about where they fit in practical applications and about how
+developers tend to use them will be part of the adventure.
 
 
 @section[#:tag "sec:further-reading"]{Further Reading}
