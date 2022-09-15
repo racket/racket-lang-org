@@ -386,7 +386,12 @@ Racket’s macro system gives programmers immense power to create domain specifi
 #:who
 @speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
 #:what
-@talk{Resyntax}
+@talk{Resyntax: A Macro-Powered Refactoring Tool}
+#:more
+@abstract{
+Resyntax is a tool that wields the power of Racket’s macro expander to analyze Racket code and suggest improvements. It uses a domain-specific language to specify refactoring rules in terms of syntax-parse macros. Rules explain why they’re improvements, allowing Resyntax to teach users how to make their code more straightforward, more readable, and more efficient. This talk covers how Resyntax works, why it’s different from tools like code formatters and linters, and what it means for the future of Racket’s static analysis ecosystem.
+@bio{Jack Firth (they/them or she/her) is a software engineer at Google working on continuous integration systems, Java libraries, and static analysis tools. Special interests include asynchronous programming, large-scale distributed computing, martial arts, pretty diagrams, and dyeing their hair pink.}
+}
 ]
 
   @lecture[
