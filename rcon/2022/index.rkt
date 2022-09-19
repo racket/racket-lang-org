@@ -253,6 +253,11 @@ this talk, we give an overview of macros in Lean and discuss the ideas
 we took from Racket as well as the problems we decided to solve in a
 different way. In particular, we talk about recent work on @(q "typed macros")
 that prevent many common mistakes by Lean macro authors.
+
+@bio{Sebastian is a PhD student at Karlsruhe Institute of Technology,
+Germany, and a Lean core developer. He enjoys both working on the
+user-facing frontend of the system as well as on the code generation
+backend to make users and binaries go fast.}
 }
 ]
 
