@@ -253,6 +253,11 @@ this talk, we give an overview of macros in Lean and discuss the ideas
 we took from Racket as well as the problems we decided to solve in a
 different way. In particular, we talk about recent work on @(q "typed macros")
 that prevent many common mistakes by Lean macro authors.
+
+@bio{Sebastian is a PhD student at Karlsruhe Institute of Technology,
+Germany, and a Lean core developer. He enjoys both working on the
+user-facing frontend of the system as well as on the code generation
+backend to make users and binaries go fast.}
 }
 ]
 
@@ -363,6 +368,12 @@ insufficient.
 @speaker{@(a #:href "http://leifandersen.net" "Leif Andersen") (Northeastern)}
 #:what
 @talk{VISr: Visual and Interactive Syntax}
+#:more
+@abstract{
+While macros continue to take us to the frontiers of what is possible with embedded Domain Specific Languages, they are still limited to textual programming languages. Visual and Interactive Syntax realized (VISr) introduces the world to hybrid textual and visual programming languages. Programmers are no longer forced to choose between readable code and runnable code. VISr gives programmers the power of Language Oriented Programming...now with pictures. This talk teaches programmers how to use VISr for ClojureScript. It also introduces Frankenstein: an early prototype of VISr for Racket.
+
+@bio{Leif Andersen is a postdoctoral Researcher studying programming languages in the University of Massachusetts Boston. She  studies topics in Programming Languages and Human Computer Interaction. Specifically, she works on domain-specific languages for creating hybrid textual-visual programs.}
+}
 ]
 
   @lecture[
