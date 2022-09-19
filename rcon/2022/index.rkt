@@ -368,6 +368,12 @@ insufficient.
 @speaker{@(a #:href "http://leifandersen.net" "Leif Andersen") (Northeastern)}
 #:what
 @talk{VISr: Visual and Interactive Syntax}
+#:more
+@abstract{
+While macros continue to take us to the frontiers of what is possible with embedded Domain Specific Languages, they are still limited to textual programming languages. Visual and Interactive Syntax realized (VISr) introduces the world to hybrid textual and visual programming languages. Programmers are no longer forced to choose between readable code and runnable code. VISr gives programmers the power of Language Oriented Programming...now with pictures. This talk teaches programmers how to use VISr for ClojureScript. It also introduces Frankenstein: an early prototype of VISr for Racket.
+
+@bio{Leif Andersen is a postdoctoral Researcher studying programming languages in the University of Massachusetts Boston. She  studies topics in Programming Languages and Human Computer Interaction. Specifically, she works on domain-specific languages for creating hybrid textual-visual programs.}
+}
 ]
 
   @lecture[
