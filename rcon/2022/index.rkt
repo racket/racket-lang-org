@@ -273,8 +273,8 @@ backend to make users and binaries go fast.}
 Typed Racket (TR) is powerful—but sometimes too powerful. In addition to a
 type checker and type-driven optimizer, it includes a contract layer that
 dynamically monitors interactions with untyped code. The contracts make TR one
-of the strongest and most flexible type systems in the world…but also one
-of the slowest.
+of the strongest and most flexible type systems in the world, but also one
+of the slowest when there are many boundaries to untyped.
 
 Shallow TR and Optional TR are two alternatives that have (finally!) arrived
 with the Racket 8.7 release. Shallow TR enforces types with local assertions
