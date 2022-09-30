@@ -19,6 +19,9 @@ Learn to program with Racket, one game at a time.
 ◊link["https://rd.springer.com/book/10.1007/978-3-030-85091-3"]{Animated Problem Solving}
 Learn to design programs systematically using video games.
 
+◊link["https://link.springer.com/book/10.1007/978-3-031-04317-8"]{Animated Program Design}
+Learn intermediate program design using video games.
+
 ◊link["https://gustavus.edu/mcs/max/concrete-abstractions.html"]{Concrete Abstractions}
 An introduction to computer science using Scheme.
 
