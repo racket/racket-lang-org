@@ -479,7 +479,11 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Registration}
-   @paragraph{To help gauge interest in the event, please complete the @(a #:href reg-form-url "registration form") if you would like to attend.}
+   @paragraph{The registration form is @bold{@(a #:href "https://payment.brown.edu:443/C20460_ustores/web/product_detail.jsp?PRODUCTID=4596&FROMQRCODE=true&SINGLESTORE=true" #:title "Register here for RacketCon 2022" "here")}. A ticket costs $25 and gives you admission to all the talks and coffee breaks and the company of your fellow Racketeers.}
+
+  @paragraph{@bold{Optional Conference Dinner} On Saturday evening you are welcome to join us for the conference dinner at a nearby Indian restaurant. Dinner is optional, and is not included in the base price of $25. If you want to join the dinner, it costs $35 on top of the ticket price. When registering, you can indicate whether you wish to come to dinner, so you will end up paying either $25 or $60.}
+
+  @paragraph{If you intend to come, please register at your earliest convenience!}
   )
 
  (section
