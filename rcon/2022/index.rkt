@@ -1,4 +1,5 @@
 #lang at-exp racket/base
+
 (require racket/match
          racket/string
          xml
@@ -127,6 +128,12 @@
 (define (hallway when)
  (lecture #:when when #:who @speaker{@bold{Hallway}}))
 
+(define (coffee when)
+ (lecture #:when when #:who @speaker{@bold{Coffee}}))
+
+(define (lunch when)
+ (lecture #:when when #:who @speaker{@bold{Lunch}}))
+
 (define (bio . contents)
  (apply bio-div @bold{Bio: } contents))
 
@@ -204,8 +211,6 @@ $(document).ready(function () {
 
   @paragraph{Friday afternoon is for hackathons! More details to follow.}
 
-  @paragraph{This a tentative list. If you would like to suggest another one, please complete the @(a #:href reg-form-url "registration form").}
-
   @lecture[
 #:when
 @talk-time{Friday, 2:00pm}
@@ -222,7 +227,7 @@ $(document).ready(function () {
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 09:30am}
 #:who
 @speaker{@(a #:href "https://github.com/titzer" "Ben L. Titzer") (CMU)}
 #:what
@@ -235,9 +240,11 @@ $(document).ready(function () {
 }
 ]
 
+  @coffee[@talk-time{Saturday, 10:30am}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 11:00am}
 #:who
 @speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich") (KIT)}
 #:what
@@ -261,7 +268,7 @@ backend to make users and binaries go fast.}
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 11:30am}
 #:who
 @speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman") (Brown)}
 #:what
@@ -290,7 +297,7 @@ years studying programming languages.}
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 12:00pm}
 #:who
 @speaker{@(a #:href "http://camoy.name" "Cameron Moy") (Northeastern)}
 #:what
@@ -310,9 +317,11 @@ for developers.}
 }
 ]
 
+  @lunch[@talk-time{Saturday, 12:30pm}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 2:30pm}
 #:who
 @speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán") (Seton Hall)}
 #:what
@@ -327,7 +336,7 @@ Beginners need to learn important Computer Science concepts revolving around pro
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 3:00pm}
 #:who
 @speaker{@(a #:href "https://bicompact.space" "Hazel Levine") (Indiana)}
 #:what
@@ -359,9 +368,11 @@ insufficient.
 }
 ]
 
+  @coffee[@talk-time{Saturday, 3:30pm}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 4:00pm}
 #:who
 @speaker{@(a #:href "http://leifandersen.net" "Leif Andersen") (Northeastern)}
 #:what
@@ -376,7 +387,7 @@ While macros continue to take us to the frontiers of what is possible with embed
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 4:30pm}
 #:who
 @speaker{@(a #:href "https://mballantyne.net" "Michael Ballantyne") (Northeastern)}
 #:what
@@ -389,9 +400,14 @@ Racket’s macro system gives programmers immense power to create domain specifi
 }
 ]
 
+)
+
+ (section
+  @sectionHeader{Sunday, October 30th}
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Sunday, 09:00am}
 #:who
 @speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
 #:what
@@ -405,7 +421,7 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Sunday, 09:30am}
 #:who
 @speaker{@(a #:href "https://github.com/sorawee" "Sorawee Porncharoenwase") (Washington)}
 #:what
@@ -415,13 +431,6 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 @(a #:href "https://pkgs.racket-lang.org/package/fmt" "fmt") is a code formatter for Racket. Its applications range from teaching beginners the Racket coding conventions to allowing frictionless collaborative projects. As Racket allows user-defined macros and has a relatively non-traditional code style, fmt faces unique challenges: it must be extensible yet expressive enough to capture the style. This talk will cover the design of fmt, how it overcomes these challenges, and how to use our code formatting DSL to extend fmt.
 }
 ]
-
-)
-
- (section
-  @sectionHeader{Sunday, October 30th}
-
-  @paragraph{The following list is incomplete and will be updated. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href reg-form-url "registration form").}
 
   @lecture[
 #:when
@@ -441,9 +450,11 @@ Stephen DeGabrielle.}
 }
 ]
 
+  @coffee[@talk-time{Sunday, 10:30am}]
+
   @lecture[
 #:when
-@talk-time{Sunday, 10:00am}
+@talk-time{Sunday, 11:00am}
 #:who
 @speaker{@(a #:href "https://samth.github.io" "Sam Tobin-Hochstadt") (Indiana)}
 #:what
@@ -452,7 +463,7 @@ Stephen DeGabrielle.}
 
   @lecture[
 #:when
-@talk-time{Sunday, 10:30am}
+@talk-time{Sunday, 11:30am}
 #:who
 @speaker{Racket Management}
 #:what
