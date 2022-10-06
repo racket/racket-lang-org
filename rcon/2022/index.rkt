@@ -1,4 +1,5 @@
 #lang at-exp racket/base
+
 (require racket/match
          racket/string
          xml
@@ -127,6 +128,12 @@
 (define (hallway when)
  (lecture #:when when #:who @speaker{@bold{Hallway}}))
 
+(define (coffee when)
+ (lecture #:when when #:who @speaker{@bold{Coffee}}))
+
+(define (lunch when)
+ (lecture #:when when #:who @speaker{@bold{Lunch}}))
+
 (define (bio . contents)
  (apply bio-div @bold{Bio: } contents))
 
@@ -204,8 +211,6 @@ $(document).ready(function () {
 
   @paragraph{Friday afternoon is for hackathons! More details to follow.}
 
-  @paragraph{This a tentative list. If you would like to suggest another one, please complete the @(a #:href reg-form-url "registration form").}
-
   @lecture[
 #:when
 @talk-time{Friday, 2:00pm}
@@ -220,11 +225,9 @@ $(document).ready(function () {
  (section
   @sectionHeader{Saturday, October 29th}
 
-  @paragraph{The following speaker list incomplete! And for the talks that are listed, the talk times are just stub values. Come back later. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href reg-form-url "registration form").}
-
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 09:30am}
 #:who
 @speaker{@(a #:href "https://github.com/titzer" "Ben L. Titzer") (CMU)}
 #:what
@@ -237,9 +240,11 @@ $(document).ready(function () {
 }
 ]
 
+  @coffee[@talk-time{Saturday, 10:30am}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 11:00am}
 #:who
 @speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich") (KIT)}
 #:what
@@ -263,7 +268,7 @@ backend to make users and binaries go fast.}
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 11:30am}
 #:who
 @speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman") (Brown)}
 #:what
@@ -292,7 +297,7 @@ years studying programming languages.}
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 12:00pm}
 #:who
 @speaker{@(a #:href "http://camoy.name" "Cameron Moy") (Northeastern)}
 #:what
@@ -312,9 +317,11 @@ for developers.}
 }
 ]
 
+  @lunch[@talk-time{Saturday, 12:30pm}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 2:30pm}
 #:who
 @speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán") (Seton Hall)}
 #:what
@@ -329,7 +336,7 @@ Beginners need to learn important Computer Science concepts revolving around pro
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 3:00pm}
 #:who
 @speaker{@(a #:href "https://bicompact.space" "Hazel Levine") (Indiana)}
 #:what
@@ -361,9 +368,11 @@ insufficient.
 }
 ]
 
+  @coffee[@talk-time{Saturday, 3:30pm}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 4:00pm}
 #:who
 @speaker{@(a #:href "http://leifandersen.net" "Leif Andersen") (Northeastern)}
 #:what
@@ -378,7 +387,7 @@ While macros continue to take us to the frontiers of what is possible with embed
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 4:30pm}
 #:who
 @speaker{@(a #:href "https://mballantyne.net" "Michael Ballantyne") (Northeastern)}
 #:what
@@ -391,9 +400,14 @@ Racket’s macro system gives programmers immense power to create domain specifi
 }
 ]
 
+)
+
+ (section
+  @sectionHeader{Sunday, October 30th}
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Sunday, 09:00am}
 #:who
 @speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
 #:what
@@ -407,7 +421,7 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Sunday, 09:30am}
 #:who
 @speaker{@(a #:href "https://github.com/sorawee" "Sorawee Porncharoenwase") (Washington)}
 #:what
@@ -417,13 +431,6 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 @(a #:href "https://pkgs.racket-lang.org/package/fmt" "fmt") is a code formatter for Racket. Its applications range from teaching beginners the Racket coding conventions to allowing frictionless collaborative projects. As Racket allows user-defined macros and has a relatively non-traditional code style, fmt faces unique challenges: it must be extensible yet expressive enough to capture the style. This talk will cover the design of fmt, how it overcomes these challenges, and how to use our code formatting DSL to extend fmt.
 }
 ]
-
-)
-
- (section
-  @sectionHeader{Sunday, October 30th}
-
-  @paragraph{The following list is incomplete and will be updated. If you would like to be a speaker, or nominate a speaker, please complete the @(a #:href reg-form-url "registration form").}
 
   @lecture[
 #:when
@@ -443,9 +450,11 @@ Stephen DeGabrielle.}
 }
 ]
 
+  @coffee[@talk-time{Sunday, 10:30am}]
+
   @lecture[
 #:when
-@talk-time{Sunday, 10:00am}
+@talk-time{Sunday, 11:00am}
 #:who
 @speaker{@(a #:href "https://samth.github.io" "Sam Tobin-Hochstadt") (Indiana)}
 #:what
@@ -454,7 +463,7 @@ Stephen DeGabrielle.}
 
   @lecture[
 #:when
-@talk-time{Sunday, 10:30am}
+@talk-time{Sunday, 11:30am}
 #:who
 @speaker{Racket Management}
 #:what
@@ -470,7 +479,11 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Registration}
-   @paragraph{To help gauge interest in the event, please complete the @(a #:href reg-form-url "registration form") if you would like to attend.}
+   @paragraph{The registration form is @bold{@(a #:href "https://payment.brown.edu:443/C20460_ustores/web/product_detail.jsp?PRODUCTID=4596&FROMQRCODE=true&SINGLESTORE=true" #:title "Register here for RacketCon 2022" "here")}. A ticket costs $25 and gives you admission to all the talks and coffee breaks and the company of your fellow Racketeers.}
+
+  @paragraph{@bold{Optional Conference Dinner} On Saturday evening you are welcome to join us for the conference dinner at a nearby Indian restaurant. Dinner is optional, and is not included in the base price of $25. If you want to join the dinner, it costs $35 on top of the ticket price. When registering, you can indicate whether you wish to come to dinner, so you will end up paying either $25 or $60.}
+
+  @paragraph{If you intend to come, please register at your earliest convenience!}
   )
 
  (section
@@ -492,14 +505,12 @@ Please come with your big questions and discussion topics.
   @sectionHeader{Accommodation}
   @paragraph{Stay wherever you want! There are plenty of hotels in the area.}
 
-  @paragraph{That said, we have reserved blocks at two local hotels. In no particular order:}
+  @paragraph{That said, we have reserved blocks at two local hotels. The booking links below may still work even if all rooms in the bloom have been booked and the discount has expired. You may be guided to a generic booking form unconnected to RacketCon. In no particular order:}
 
   @ul{
-    @li{@bold{Hampton Inn  & Suites} by Hilton Providence Downtown: 30 rooms for Friday, October 28, 2022-Monday, October 31, 2022. $149.00, per room, per night, plus 13% tax. Room options: 2 queen beds, or 1 king bed with sofabed. @bold{Deadline:} September 28, 2022. Amenities: Complimentary full hot breakfast, Wi-Fi, business center and fitness center. Valet parking $30.00 a day. @(a #:href "https://www.hilton.com/en/attend-my-event/pvdwyhx-bcr-103bbe07-4367-4aef-8cd5-0a6f6c5f418c/" "Booking Link")}
-    @li{@bold{Homewood Suites} by Hilton Providence Downtown: 35 King Studio suites, or Friday, October 28, 2022-Monday, October 31, 2022. $189.00 per room per night plus 13% tax. King suites come with a king size bed, full size pull out sofa bed and full size kitchen. The Homewood requires a two night minimum on the Saturday, guests requested to either stay Friday & Saturday, or Saturday & Sunday. @bold{Deadline:} September 28, 2022. Amenities: Complimentary full hot breakfast, Wi-Fi, business center and fitness center. Valet parking is $30.00 a day. @(a #:href "https://www.my-event.hilton.com/pvdexhw-brg-9e543c15-7dce-4fb0-aaa5-1d1c1f4020ec/" "Booking Link")}
+    @li{@bold{@(a #:href "https://www.hilton.com/en/attend-my-event/pvdwyhx-bcr-103bbe07-4367-4aef-8cd5-0a6f6c5f418c/" "Hampton Inn & Suites")}}
+    @li{@bold{@(a #:href "https://www.my-event.hilton.com/pvdexhw-brg-9e543c15-7dce-4fb0-aaa5-1d1c1f4020ec/" "Homewood Suites")}}
   }
-
-  @paragraph{Guests are not required to book their room for all 3 nights. However, please note the 2-night requirement for Saturday October 29 at Homewood.}
  )
 
  (section
