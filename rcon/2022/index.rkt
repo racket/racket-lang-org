@@ -299,21 +299,13 @@ years studying programming languages.}
 #:when
 @talk-time{Saturday, 12:00pm}
 #:who
-@speaker{@(a #:href "http://camoy.name" "Cameron Moy") (Northeastern)}
+@speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
 #:what
-@talk{Contracts for protocols}
+@talk{Resyntax: A Macro-Powered Refactoring Tool}
 #:more
 @abstract{
-Racketeers often use contracts to express the obligations that their libraries
-impose on, or promise to, clients. While Racket’s contract system can handle
-many specifications, it cannot naturally express protocols. For example,
-a specification may constrain the permitted call sequence of functions,
-or the context in which functions may be applied. This talk will present
-several extensions to Racket’s contract system that attempt to fill this gap.
-
-@bio{Cameron is a Ph.D. student studying programming languages at Northeastern University.
-He spends most of his time thinking about how to make Racket’s contract system better
-for developers.}
+Resyntax is a tool that wields the power of Racket’s macro expander to analyze Racket code and suggest improvements. It uses a domain-specific language to specify refactoring rules in terms of syntax-parse macros. Rules explain why they’re improvements, allowing Resyntax to teach users how to make their code more straightforward, more readable, and more efficient. This talk covers how Resyntax works, why it’s different from tools like code formatters and linters, and what it means for the future of Racket’s static analysis ecosystem.
+@bio{Jack Firth (they/them or she/her) is a software engineer at Google working on continuous integration systems, Java libraries, and static analysis tools. Special interests include asynchronous programming, large-scale distributed computing, martial arts, pretty diagrams, and dyeing their hair pink.}
 }
 ]
 
@@ -409,13 +401,21 @@ Racket’s macro system gives programmers immense power to create domain specifi
 #:when
 @talk-time{Sunday, 09:00am}
 #:who
-@speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
+@speaker{@(a #:href "http://camoy.name" "Cameron Moy") (Northeastern)}
 #:what
-@talk{Resyntax: A Macro-Powered Refactoring Tool}
+@talk{Contracts for protocols}
 #:more
 @abstract{
-Resyntax is a tool that wields the power of Racket’s macro expander to analyze Racket code and suggest improvements. It uses a domain-specific language to specify refactoring rules in terms of syntax-parse macros. Rules explain why they’re improvements, allowing Resyntax to teach users how to make their code more straightforward, more readable, and more efficient. This talk covers how Resyntax works, why it’s different from tools like code formatters and linters, and what it means for the future of Racket’s static analysis ecosystem.
-@bio{Jack Firth (they/them or she/her) is a software engineer at Google working on continuous integration systems, Java libraries, and static analysis tools. Special interests include asynchronous programming, large-scale distributed computing, martial arts, pretty diagrams, and dyeing their hair pink.}
+Racketeers often use contracts to express the obligations that their libraries
+impose on, or promise to, clients. While Racket’s contract system can handle
+many specifications, it cannot naturally express protocols. For example,
+a specification may constrain the permitted call sequence of functions,
+or the context in which functions may be applied. This talk will present
+several extensions to Racket’s contract system that attempt to fill this gap.
+
+@bio{Cameron is a Ph.D. student studying programming languages at Northeastern University.
+He spends most of his time thinking about how to make Racket’s contract system better
+for developers.}
 }
 ]
 
