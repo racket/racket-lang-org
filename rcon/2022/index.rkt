@@ -105,13 +105,40 @@
 (define (code content)
  `(code () ,content))
 
-(define reg-form-url "https://form.typeform.com/to/oNbZByZQ")
-
 ;; ------------------------------------------------------------
 
-(define (speaker . x)
-  `(span ((class "speaker")) ,@x))
-
+(define (speaker #:person? [person? #t]
+                 #:url [url #f]
+                 #:affiliation [affiliation #f]
+                 . x)
+  (when (and person? (not (non-empty-string? url)))
+    (error "Every person needs a URL"))
+  (define span-kids
+    (cond [(not person?)
+           x]
+          [(not (non-empty-string? url))
+           (error "Every person needs a URL")]
+          [else
+           (define name (apply string-append x))
+           (define attrs
+             (append (list (list 'href url)
+                           (list 'title name))
+                     (cond [(non-empty-string? affiliation)
+                            (list (list 'class "h-card"))]
+                           [else null])))
+           (cond [(non-empty-string? affiliation)
+                  (list (txexpr* 'a attrs
+                                 name
+                                 " ("
+                                 (txexpr* 'span
+                                          (list (list 'class "p-org"))
+                                          affiliation)
+                                 ")"))]
+                 [else
+                  (list (txexpr* 'a attrs name))])]))
+  (txexpr 'span
+          (list (list 'class "speaker"))
+          span-kids))
 (define (lecture #:when when
                  #:who who
                  #:link [l #f]
@@ -126,13 +153,13 @@
           more))
 
 (define (hallway when)
- (lecture #:when when #:who @speaker{@bold{Hallway}}))
+ (lecture #:when when #:who @speaker[#:person? #f]{@bold{Hallway}}))
 
 (define (coffee when)
- (lecture #:when when #:who @speaker{@bold{Coffee}}))
+ (lecture #:when when #:who @speaker[#:person? #f]{@bold{Coffee}}))
 
 (define (lunch when)
- (lecture #:when when #:who @speaker{@bold{Lunch}}))
+ (lecture #:when when #:who @speaker[#:person? #f]{@bold{Lunch}}))
 
 (define (bio . contents)
  (apply bio-div @bold{Bio: } contents))
@@ -214,7 +241,7 @@ $(document).ready(function () {
   @lecture[
 #:when
 @talk-time{Friday, 2:00pm}
-#:who @speaker{Internals Nerds Unite}
+#:who @speaker[#:person? #f]{Internals Nerds Unite}
 #:what @talk{Hacking Racket Internals}
 #:more
 @abstract{Your chance to dig in to Racket internals and help contribute to Racket development! As the Racket community grows, there’s an increasing interest in not just making cool Racket programs, but getting into the guts of Racket itself. If that sounds interesting to you, this is your hackathon! Sam Tobin-Hochstadt will offer a brief kick-off crash course and stick around for answering questions.}
@@ -229,7 +256,7 @@ $(document).ready(function () {
 #:when
 @talk-time{Saturday, 09:30am}
 #:who
-@speaker{@(a #:href "https://github.com/titzer" "Ben L. Titzer") (CMU)}
+@speaker[#:url "https://github.com/titzer" #:affiliation "CMU"]{Ben L. Titzer}
 #:what
 @talk{The final tier is Shed: Inside the Wizard Engine’s fast in-place interpreter for WebAssembly}
 #:more
@@ -246,7 +273,7 @@ $(document).ready(function () {
 #:when
 @talk-time{Saturday, 11:00am}
 #:who
-@speaker{@(a #:href "https://pp.ipd.kit.edu/person.php?id=144" "Sebastian Ullrich") (KIT)}
+@speaker[#:url "https://pp.ipd.kit.edu/person.php?id=144" #:affiliation "KIT"]{Sebastian Ullrich}
 #:what
 @talk{Metaprograms and Proofs: Macros in Lean 4}
 #:more
@@ -270,7 +297,7 @@ backend to make users and binaries go fast.}
 #:when
 @talk-time{Saturday, 11:30am}
 #:who
-@speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman") (Brown)}
+@speaker[#:url "http://cs.brown.edu/people/bgreenma/" #:affiliation "Brown"]{Ben Greenman}
 #:what
 @talk{Shallow and Optional Types}
 #:more
@@ -299,7 +326,7 @@ years studying programming languages.}
 #:when
 @talk-time{Saturday, 12:00pm}
 #:who
-@speaker{@(a #:href "https://github.com/jackfirth" "Jack Firth")}
+@speaker[#:url "https://github.com/jackfirth"]{Jack Firth}
 #:what
 @talk{Resyntax: A Macro-Powered Refactoring Tool}
 #:more
@@ -315,7 +342,7 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 #:when
 @talk-time{Saturday, 2:30pm}
 #:who
-@speaker{@(a #:href "https://www.shu.edu/profiles/marcomorazan.cfm" "Marco Morazán") (Seton Hall)}
+@speaker[#:url "https://www.shu.edu/profiles/marcomorazan.cfm" #:affiliation "Seton Hall"]{Marco Morazán}
 #:what
 @talk{What Can Beginners Learn from Video Games?}
 #:more
@@ -330,7 +357,7 @@ Beginners need to learn important Computer Science concepts revolving around pro
 #:when
 @talk-time{Saturday, 3:00pm}
 #:who
-@speaker{@(a #:href "https://bicompact.space" "Hazel Levine") (Indiana)}
+@speaker[#:url "https://bicompact.space" #:affiliation "Indiana"]{Hazel Levine}
 #:what
 @talk{Design Recipe Guided Synthesis with Bingus}
 #:more
@@ -366,7 +393,7 @@ insufficient.
 #:when
 @talk-time{Saturday, 4:00pm}
 #:who
-@speaker{@(a #:href "http://leifandersen.net" "Leif Andersen") (Northeastern)}
+@speaker[#:url "http://leifandersen.net" #:affiliation "Northeastern"]{Leif Andersen}
 #:what
 @talk{VISr: Visual and Interactive Syntax}
 #:more
@@ -381,7 +408,7 @@ While macros continue to take us to the frontiers of what is possible with embed
 #:when
 @talk-time{Saturday, 4:30pm}
 #:who
-@speaker{@(a #:href "https://mballantyne.net" "Michael Ballantyne") (Northeastern)}
+@speaker[#:url "https://mballantyne.net" #:affiliation "Northeastern"]{Michael Ballantyne}
 #:what
 @talk{A language workbench in Racket}
 #:more
@@ -401,7 +428,7 @@ Racket’s macro system gives programmers immense power to create domain specifi
 #:when
 @talk-time{Sunday, 09:00am}
 #:who
-@speaker{@(a #:href "http://camoy.name" "Cameron Moy") (Northeastern)}
+@speaker[#:url "http://camoy.name" #:affiliation "Northeastern"]{Cameron Moy}
 #:what
 @talk{Contracts for protocols}
 #:more
@@ -423,7 +450,7 @@ for developers.}
 #:when
 @talk-time{Sunday, 09:30am}
 #:who
-@speaker{@(a #:href "https://github.com/sorawee" "Sorawee Porncharoenwase") (Washington)}
+@speaker[#:url "https://github.com/sorawee" #:affiliation "Washington"]{Sorawee Porncharoenwase}
 #:what
 @talk{fmt: A Racket code formatter}
 #:more
@@ -436,7 +463,7 @@ for developers.}
 #:when
 @talk-time{Sunday, 10:00am}
 #:who
-@speaker{@(a #:href "http://cs.brown.edu/people/bgreenma/" "Ben Greenman")}
+@speaker[#:url "http://cs.brown.edu/people/bgreenma/"]{Ben Greenman}
 #:what
 @talk{Summary of the Summer of @code{#lang} (Fun + Games III)}
 #:more
@@ -456,7 +483,7 @@ Stephen DeGabrielle.}
 #:when
 @talk-time{Sunday, 11:00am}
 #:who
-@speaker{@(a #:href "https://samth.github.io" "Sam Tobin-Hochstadt") (Indiana)}
+@speaker[#:url "https://samth.github.io" #:affiliation "Indiana"]{Sam Tobin-Hochstadt}
 #:what
 @talk{The State of Racket}
 ]
@@ -465,7 +492,7 @@ Stephen DeGabrielle.}
 #:when
 @talk-time{Sunday, 11:30am}
 #:who
-@speaker{Racket Management}
+@speaker[#:person? #f]{Racket Management}
 #:what
 @talk{Racket Town Hall}
 #:more
