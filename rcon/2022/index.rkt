@@ -505,7 +505,7 @@ Please come with your big questions and discussion topics.
   @sectionHeader{Accommodation}
   @paragraph{Stay wherever you want! There are plenty of hotels in the area.}
 
-  @paragraph{That said, we have reserved blocks at two local hotels. The booking links below may still work even if all rooms in the bloom have been booked and the discount has expired. You may be guided to a generic booking form unconnected to RacketCon. In no particular order:}
+  @paragraph{That said, we have reserved blocks at two local hotels. The booking links below may still work even if all rooms in the block have been booked and the discount has expired. You may be guided to a generic booking form unconnected to RacketCon. In no particular order:}
 
   @ul{
     @li{@bold{@(a #:href "https://www.hilton.com/en/attend-my-event/pvdwyhx-bcr-103bbe07-4367-4aef-8cd5-0a6f6c5f418c/" "Hampton Inn & Suites")}}
