@@ -31,7 +31,7 @@ Make your own programming languages with Racket.
 ◊link["https://serverracket.com"]{Server: Racket}
 Develop a web application with Racket.
 
-◊link["https://cs.brown.edu/~sk/Publications/Books/ProgLangs/2007-04-26/"]{Programming Languages: 
+◊link["https://www.plai.org/"]{Programming Languages: 
 Application and Interpretation}
 Principles of programming languages for undergraduates, graduate students, and experts.
 
