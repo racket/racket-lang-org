@@ -215,7 +215,7 @@ $(document).ready(function () {
   var localTime = moment.tz(date, "America/New_York").format("dddd, h:mma zz")
   $(this).html(localTime); }); }); })
     (body
-     #:class "main"
+     #:class "main h-event"
      #:itemscope ""
      #:itemtype "https://schema.org/Event"
      (meta #:itemprop "startDate" (gregor:~t friday "y-MM-d"))
@@ -228,8 +228,11 @@ $(document).ready(function () {
                        #:alt "The Racket logo")]
        @pagetitle["(twelfth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp])
       @subtitle{October 28-30, 2022}
-      @subtitle{Brown University}
-      @subsubtitle{location})
+      @subtitle[#:class "p-location"]{Brown University}
+      @subsubtitle[#:class "p-locality"]{@location})
+
+(txexpr* 'data '((class "dt-start")) (gregor:~t friday "y-MM-dd"))
+(txexpr* 'data '((class "dt-end")) (gregor:~t sunday "y-MM-dd"))
 
 (column
 
