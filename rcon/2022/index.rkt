@@ -231,11 +231,11 @@ $(document).ready(function () {
                        #:alt "The Racket logo")]
        @pagetitle["(twelfth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp])
       @subtitle{October 28-30, 2022}
-      @subtitle[#:class "p-location"]{Brown University}
-      @subsubtitle[#:class "p-locality"]{@location})
+      @subtitle{@`(span ((class "p-location")) "Brown University")}
+      @subsubtitle{@`(span ((class "p-locality")) ,location)})
 
-(txexpr* 'time '((class "dt-start") (hidden "")) (gregor:~t friday "y-MM-dd"))
-(txexpr* 'time '((class "dt-end") (hidden "")) (gregor:~t sunday "y-MM-dd"))
+(txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t friday "y-MM-dd"))))
+(txexpr* 'time `((class "dt-end") (hidden "") (datetime ,(gregor:~t sunday "y-MM-dd"))))
 
 (column
 
