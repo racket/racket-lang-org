@@ -239,16 +239,31 @@ $(document).ready(function () {
  (section
   @sectionHeader{Friday, October 28th}
 
-  @paragraph{Friday afternoon is for hackathons! More details to follow.}
-
   @lecture[
 #:when
 @talk-time{Friday, 2:00pm}
-#:who @speaker[#:person? #f]{Internals Nerds Unite}
-#:what @talk{Hacking Racket Internals}
+#:who @speaker[#:person? #f]{All of us}
+#:what @talk{Racket Hackathon/Open Space}
 #:more
-@abstract{Your chance to dig in to Racket internals and help contribute to Racket development! As the Racket community grows, there’s an increasing interest in not just making cool Racket programs, but getting into the guts of Racket itself. If that sounds interesting to you, this is your hackathon! Sam Tobin-Hochstadt will offer a brief kick-off crash course and stick around for answering questions.}
-]
+@abstract{
+
+  @para{This is your chance to raise you hand and suggest a topic that you want to dig in to. We will have a brief discussion to establish topics of interest and then divide into groups to try to make some progress. Got a question? Are you stuck with some Racket feature/package? Are you burning to learn more about something? This is your chance to dig in and get your hands dirty!}
+
+  @para{Here is a non-exhaustive list of topics that the community identified as worthy of discussion:}
+
+  @ul{
+    @li{RacketScript}
+    @li{Graphics and diagramming}
+    @li{Scribble howto/enhancements}
+    @li{Making a @code{#lang}}
+    @li{Web programming}
+    @li{Typed Racket}
+  }
+
+  @para{This is just a list of possible topics; there are no promises that any of these topics will definitely be discussed. What actually gets discussed depends on who shows up and what they want to work on.}
+
+  @para{Racket pros and even some of the core developers will be on hand for the hackathon. This is your chance to take direct action on an issue of interest, so make something of it! You don’t have to be an expert; you just need to be interested and willing to learn. (If you @em{are} an expert, considering lending a helping hand to those in the community who are trying to upgrade their Racket lives.)}
+}]
 
 )
 
