@@ -231,8 +231,8 @@ $(document).ready(function () {
       @subtitle[#:class "p-location"]{Brown University}
       @subsubtitle[#:class "p-locality"]{@location})
 
-(txexpr* 'data '((class "dt-start")) (gregor:~t friday "y-MM-dd"))
-(txexpr* 'data '((class "dt-end")) (gregor:~t sunday "y-MM-dd"))
+(txexpr* 'time '((class "dt-start") (hidden "")) (gregor:~t friday "y-MM-dd"))
+(txexpr* 'time '((class "dt-end") (hidden "")) (gregor:~t sunday "y-MM-dd"))
 
 (column
 
