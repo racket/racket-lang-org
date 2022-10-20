@@ -155,6 +155,9 @@
 (define (hallway when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Hallway}}))
 
+(define (doors-open when)
+ (lecture #:when when #:who @speaker[#:person? #f]{@bold{Doors Open}}))
+
 (define (coffee when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Coffee}}))
 
@@ -228,32 +231,49 @@ $(document).ready(function () {
                        #:alt "The Racket logo")]
        @pagetitle["(twelfth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp])
       @subtitle{October 28-30, 2022}
-      @subtitle[#:class "p-location"]{Brown University}
-      @subsubtitle[#:class "p-locality"]{@location})
+      @subtitle{@`(span ((class "p-location")) "Brown University")}
+      @subsubtitle{@`(span ((class "p-locality")) ,location)})
 
-(txexpr* 'data '((class "dt-start")) (gregor:~t friday "y-MM-dd"))
-(txexpr* 'data '((class "dt-end")) (gregor:~t sunday "y-MM-dd"))
+(txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t friday "y-MM-dd"))))
+(txexpr* 'time `((class "dt-end") (hidden "") (datetime ,(gregor:~t sunday "y-MM-dd"))))
 
 (column
 
  (section
   @sectionHeader{Friday, October 28th}
 
-  @paragraph{Friday afternoon is for hackathons! More details to follow.}
-
   @lecture[
 #:when
 @talk-time{Friday, 2:00pm}
-#:who @speaker[#:person? #f]{Internals Nerds Unite}
-#:what @talk{Hacking Racket Internals}
+#:who @speaker[#:person? #f]{All of us}
+#:what @talk{Racket Hackathon/Open Space}
 #:more
-@abstract{Your chance to dig in to Racket internals and help contribute to Racket development! As the Racket community grows, there’s an increasing interest in not just making cool Racket programs, but getting into the guts of Racket itself. If that sounds interesting to you, this is your hackathon! Sam Tobin-Hochstadt will offer a brief kick-off crash course and stick around for answering questions.}
-]
+@abstract{
+
+  @para{This is your chance to raise you hand and suggest a topic that you want to dig in to. We will have a brief discussion to establish topics of interest and then divide into groups to try to make some progress. Got a question? Are you stuck with some Racket feature/package? Are you burning to learn more about something? This is your chance to dig in and get your hands dirty!}
+
+  @para{Here is a non-exhaustive list of topics that the community identified as worthy of discussion:}
+
+  @ul{
+    @li{RacketScript}
+    @li{Graphics and diagramming}
+    @li{Scribble howto/enhancements}
+    @li{Making a @code{#lang}}
+    @li{Web programming}
+    @li{Typed Racket}
+  }
+
+  @para{This is just a list of possible topics; there are no promises that any of these topics will definitely be discussed. What actually gets discussed depends on who shows up and what they want to work on.}
+
+  @para{Racket pros and even some of the core developers will be on hand for the hackathon. This is your chance to take direct action on an issue of interest, so make something of it! You don’t have to be an expert; you just need to be interested and willing to learn. (If you @em{are} an expert, considering lending a helping hand to those in the community who are trying to upgrade their Racket lives.)}
+}]
 
 )
 
  (section
   @sectionHeader{Saturday, October 29th}
+
+  @doors-open[@talk-time{Saturday, 09:00am}]
 
   @lecture[
 #:when
@@ -343,7 +363,7 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 
   @lecture[
 #:when
-@talk-time{Saturday, 2:30pm}
+@talk-time{Saturday, 2:00pm}
 #:who
 @speaker[#:url "https://www.shu.edu/profiles/marcomorazan.cfm" #:affiliation "Seton Hall"]{Marco Morazán}
 #:what
@@ -358,7 +378,7 @@ Beginners need to learn important Computer Science concepts revolving around pro
 
   @lecture[
 #:when
-@talk-time{Saturday, 3:00pm}
+@talk-time{Saturday, 2:30pm}
 #:who
 @speaker[#:url "https://bicompact.space" #:affiliation "Indiana"]{Hazel Levine}
 #:what
@@ -390,11 +410,11 @@ insufficient.
 }
 ]
 
-  @coffee[@talk-time{Saturday, 3:30pm}]
+  @coffee[@talk-time{Saturday, 3:00pm}]
 
   @lecture[
 #:when
-@talk-time{Saturday, 4:00pm}
+@talk-time{Saturday, 3:30pm}
 #:who
 @speaker[#:url "http://leifandersen.net" #:affiliation "Northeastern"]{Leif Andersen}
 #:what
@@ -409,7 +429,7 @@ While macros continue to take us to the frontiers of what is possible with embed
 
   @lecture[
 #:when
-@talk-time{Saturday, 4:30pm}
+@talk-time{Saturday, 4:00pm}
 #:who
 @speaker[#:url "https://mballantyne.net" #:affiliation "Northeastern"]{Michael Ballantyne}
 #:what
@@ -427,9 +447,11 @@ Racket’s macro system gives programmers immense power to create domain specifi
  (section
   @sectionHeader{Sunday, October 30th}
 
+  @doors-open[@talk-time{Saturday, 09:00am}]
+
   @lecture[
 #:when
-@talk-time{Sunday, 09:00am}
+@talk-time{Sunday, 09:30am}
 #:who
 @speaker[#:url "http://camoy.name" #:affiliation "Northeastern"]{Cameron Moy}
 #:what
@@ -451,7 +473,7 @@ for developers.}
 
   @lecture[
 #:when
-@talk-time{Sunday, 09:30am}
+@talk-time{Sunday, 10:00am}
 #:who
 @speaker[#:url "https://github.com/sorawee" #:affiliation "Washington"]{Sorawee Porncharoenwase}
 #:what
@@ -464,7 +486,7 @@ for developers.}
 
   @lecture[
 #:when
-@talk-time{Sunday, 10:00am}
+@talk-time{Sunday, 10:30am}
 #:who
 @speaker[#:url "http://cs.brown.edu/people/bgreenma/"]{Ben Greenman}
 #:what
@@ -480,11 +502,11 @@ Stephen DeGabrielle.}
 }
 ]
 
-  @coffee[@talk-time{Sunday, 10:30am}]
+  @coffee[@talk-time{Sunday, 11:00am}]
 
   @lecture[
 #:when
-@talk-time{Sunday, 11:00am}
+@talk-time{Sunday, 11:30am}
 #:who
 @speaker[#:url "https://samth.github.io" #:affiliation "Indiana"]{Sam Tobin-Hochstadt}
 #:what
@@ -493,7 +515,7 @@ Stephen DeGabrielle.}
 
   @lecture[
 #:when
-@talk-time{Sunday, 11:30am}
+@talk-time{Sunday, 12:00pm}
 #:who
 @speaker[#:person? #f]{Racket Management}
 #:what
