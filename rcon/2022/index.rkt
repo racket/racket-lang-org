@@ -540,7 +540,7 @@ Please come with your big questions and discussion topics.
 
  (section
     @sectionHeader{COVID-19 Policy}
-    @paragraph{RacketCon 2022 will be governed by @(a #:href "https://healthy.brown.edu/campus-activity-status" #:title "Summary of current COVID-19 health protocols on the Brown University campus" "the COVID-19 policy in place at tbe conference venue") (Brown University). Please familiarize yourself with it before coming. Because the pandemic is not static, the policy may change. Take one last look at Brown’s COVID-19 policy shortly before coming to campus. Once you’re on campus, you are expected to comply with the policy.}
+    @paragraph{RacketCon 2022 will be governed by @(a #:href "https://healthy.brown.edu/campus-activity-status" #:title "Summary of current COVID-19 health protocols on the Brown University campus" "the COVID-19 policy in place at the conference venue") (Brown University). Please familiarize yourself with it before coming. Because the pandemic is not static, the policy may change. Take one last look at Brown’s COVID-19 policy shortly before coming to campus. Once you’re on campus, you are expected to comply with the policy.}
  )
 
  (section
