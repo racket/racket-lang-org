@@ -427,21 +427,6 @@ While macros continue to take us to the frontiers of what is possible with embed
 }
 ]
 
-  @lecture[
-#:when
-@talk-time{Saturday, 4:00pm}
-#:who
-@speaker[#:url "https://mballantyne.net" #:affiliation "Northeastern"]{Michael Ballantyne}
-#:what
-@talk{A language workbench in Racket}
-#:more
-@abstract{
-Racket’s macro system gives programmers immense power to create domain specific languages, but little help in structuring their implementation. Building a sophisticated DSL requires following a bevy of design patterns for structuring a parser, checking scoping and binding rules, and conveying static information between language elements. This talk presents a new meta-DSL that instead supports declarative specification of grammar, binding rules, and interface points.
-
-@bio{Michael is a PhD student at Northeastern University working on making Racket a better host for DSLs.}
-}
-]
-
 )
 
  (section
