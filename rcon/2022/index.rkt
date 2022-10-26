@@ -427,21 +427,6 @@ While macros continue to take us to the frontiers of what is possible with embed
 }
 ]
 
-  @lecture[
-#:when
-@talk-time{Saturday, 4:00pm}
-#:who
-@speaker[#:url "https://mballantyne.net" #:affiliation "Northeastern"]{Michael Ballantyne}
-#:what
-@talk{A language workbench in Racket}
-#:more
-@abstract{
-Racket’s macro system gives programmers immense power to create domain specific languages, but little help in structuring their implementation. Building a sophisticated DSL requires following a bevy of design patterns for structuring a parser, checking scoping and binding rules, and conveying static information between language elements. This talk presents a new meta-DSL that instead supports declarative specification of grammar, binding rules, and interface points.
-
-@bio{Michael is a PhD student at Northeastern University working on making Racket a better host for DSLs.}
-}
-]
-
 )
 
  (section
@@ -533,7 +518,7 @@ Please come with your big questions and discussion topics.
    @sectionHeader{Registration}
    @paragraph{The registration form is @bold{@(a #:href "https://payment.brown.edu:443/C20460_ustores/web/product_detail.jsp?PRODUCTID=4596&FROMQRCODE=true&SINGLESTORE=true" #:title "Register here for RacketCon 2022" "here")}. A ticket costs $25 and gives you admission to all the talks and coffee breaks and the company of your fellow Racketeers.}
 
-  @paragraph{@bold{Optional Conference Dinner} On Saturday evening you are welcome to join us for the conference dinner at a nearby Indian restaurant. Dinner is optional, and is not included in the base price of $25. If you want to join the dinner, it costs $35 on top of the ticket price. When registering, you can indicate whether you wish to come to dinner, so you will end up paying either $25 or $60.}
+  @paragraph{@bold{Optional Conference Dinner} On Saturday evening you are welcome to join us for the conference dinner at @(a #:href "https://www.kabobandcurry.com" #:title "Kebob and Curry" "Kebob and Curry"), a nearby Indian restaurant. Dinner is optional, and is not included in the base price of $25. If you want to join the dinner, it costs $35 on top of the ticket price. When registering, you can indicate whether you wish to come to dinner, so you will end up paying either $25 or $60. The restaurant is at @(a #:href "https://www.google.com/maps/dir/''/kabob+and+curry+tableup/@41.8288963,-71.4706097,12z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x89e44523638d95cb:0xf16a90acc6b80f71!2m2!1d-71.4005698!2d41.8289176" #:title "Directions to Kabob & Curry" "261 Theyer Street"), very close to campus.}
 
   @paragraph{If you intend to come, please register at your earliest convenience!}
   )
