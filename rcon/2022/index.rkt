@@ -427,6 +427,30 @@ While macros continue to take us to the frontiers of what is possible with embed
 }
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 4:00pm}
+#:who
+@speaker[#:url "https://cs.brown.edu/~tbn/" #:affiliation "Brown"]{Tim Nelson}
+#:what
+@talk{Forge}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 4:30pm}
+#:who
+@speaker[#:url "https://lukc1024.github.io" #:affiliation "Brown"]{Kuang-Chen Lu}
+#:what
+@talk{Stacker: A runnable notional machine for an HtDP-like language}
+#:more
+@abstract{
+It is difficult to teach the semantics of a conventional programming language to people with @emph{only} programs and program outputs. There are so many entities behind the scene: the mapping from variables to values, the identities of mutable (and shareable) data structures, the continuation (either represented as evaluation contexts or call stacks), etc. Notional machines, ways to present some aspects of running programs, can facilitate the teaching process by depicting some of these entities and their interaction with the runned programs.
+
+This talk presents a notional machine, the Stacker, and how it is being used at Brown’s programming languages course. The Stacker is implemented as a Racket @code{#lang}. It is similar to the Stepper but supports mutation and depicts the trace of programs in terms of environments, heaps, and call stacks rather than in terms of substitution.
+}
+]
+
 )
 
  (section
