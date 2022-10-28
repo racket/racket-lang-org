@@ -275,6 +275,8 @@ $(document).ready(function () {
 
   @doors-open[@talk-time{Saturday, 09:00am}]
 
+  @para{NB Breakfast won’t be served! Please eat before coming to the event.}
+
   @lecture[
 #:when
 @talk-time{Saturday, 09:30am}
@@ -457,6 +459,8 @@ This talk presents a notional machine, the Stacker, and how it is being used at 
   @sectionHeader{Sunday, October 30th}
 
   @doors-open[@talk-time{Saturday, 09:00am}]
+
+  @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
   @lecture[
 #:when
