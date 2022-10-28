@@ -242,6 +242,8 @@ $(document).ready(function () {
  (section
   @sectionHeader{Friday, October 28th}
 
+  @para{@bold{Room}: CIT 368}
+
   @lecture[
 #:when
 @talk-time{Friday, 2:00pm}
@@ -273,7 +275,11 @@ $(document).ready(function () {
  (section
   @sectionHeader{Saturday, October 29th}
 
+  @para{@bold{Room}: CIT 368}
+
   @doors-open[@talk-time{Saturday, 09:00am}]
+
+  @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
   @lecture[
 #:when
@@ -361,6 +367,8 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 
   @lunch[@talk-time{Saturday, 12:30pm}]
 
+  @para{Lunch will not be served! There are many options on Thayer Street, right off campus. Attendees will be given more information on-site about their lunch options. You are also welcome to bring your own lunch. Microwaves and hot water dispensers will be made available if needed.}
+
   @lecture[
 #:when
 @talk-time{Saturday, 2:00pm}
@@ -433,12 +441,21 @@ While macros continue to take us to the frontiers of what is possible with embed
 #:who
 @speaker[#:url "https://cs.brown.edu/~tbn/" #:affiliation "Brown"]{Tim Nelson}
 #:what
-@talk{Forge}
+@talk{Forge: Building a Pedagogic Solver Tool in Racket}
+#:more
+@abstract{
+Brown's Logic for Systems course teaches modeling and reasoning about
+systems via constraint solving. The specific solver we use must fit
+our teaching needs; we require accessible syntax, the right level of
+automation, the ability to visualize output, and much else. This short
+talk will show how our tools have evolved, how building our own atop
+Racket has been worthwhile, and why it matters.
+}
 ]
 
   @lecture[
 #:when
-@talk-time{Saturday, 4:30pm}
+@talk-time{Saturday, 4:20pm}
 #:who
 @speaker[#:url "https://lukc1024.github.io" #:affiliation "Brown"]{Kuang-Chen Lu}
 #:what
@@ -451,12 +468,29 @@ This talk presents a notional machine, the Stacker, and how it is being used at 
 }
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 4:40pm}
+#:who
+@speaker[#:url "https://www.siddharthaprasad.com" #:affiliation "Brown"]{Siddhartha Prasad}
+#:what
+@talk{Examplar: Making Hay from Wheat}
+#:more
+@abstract{
+Novice programmers often begin coding with a poor understanding of the task at hand and end up solving the wrong problem. To combat this, students are often asked to explain the problem @q{in their own words}. What words can students meaningfully use, how can we provide them automated feedback, and how can we make this feedback maximally useful? This talk presents concrete solutions to all these problems.
+}
+]
+
 )
 
  (section
   @sectionHeader{Sunday, October 30th}
 
+  @para{@bold{Room}: CIT 368}
+
   @doors-open[@talk-time{Saturday, 09:00am}]
+
+  @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
   @lecture[
 #:when
