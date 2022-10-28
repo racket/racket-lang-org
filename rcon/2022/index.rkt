@@ -363,6 +363,8 @@ Resyntax is a tool that wields the power of Racket’s macro expander to analyze
 
   @lunch[@talk-time{Saturday, 12:30pm}]
 
+  @para{Lunch will not be served! There are many options on Thayer Street, right off campus. Attendees will be given more information on-site about their lunch options. You are also welcome to bring your own lunch. Microwaves and hot water dispensers will be made available if needed.}
+
   @lecture[
 #:when
 @talk-time{Saturday, 2:00pm}
