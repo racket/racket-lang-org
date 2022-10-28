@@ -242,6 +242,8 @@ $(document).ready(function () {
  (section
   @sectionHeader{Friday, October 28th}
 
+  @para{@bold{Room}: CIT 368}
+
   @lecture[
 #:when
 @talk-time{Friday, 2:00pm}
@@ -272,6 +274,8 @@ $(document).ready(function () {
 
  (section
   @sectionHeader{Saturday, October 29th}
+
+  @para{@bold{Room}: CIT 368}
 
   @doors-open[@talk-time{Saturday, 09:00am}]
 
@@ -481,6 +485,8 @@ Novice programmers often begin coding with a poor understanding of the task at h
 
  (section
   @sectionHeader{Sunday, October 30th}
+
+  @para{@bold{Room}: CIT 368}
 
   @doors-open[@talk-time{Saturday, 09:00am}]
 
