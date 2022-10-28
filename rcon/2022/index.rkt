@@ -437,12 +437,21 @@ While macros continue to take us to the frontiers of what is possible with embed
 #:who
 @speaker[#:url "https://cs.brown.edu/~tbn/" #:affiliation "Brown"]{Tim Nelson}
 #:what
-@talk{Forge}
+@talk{Forge: Building a Pedagogic Solver Tool in Racket}
+#:more
+@abstract{
+Brown's Logic for Systems course teaches modeling and reasoning about
+systems via constraint solving. The specific solver we use must fit
+our teaching needs; we require accessible syntax, the right level of
+automation, the ability to visualize output, and much else. This short
+talk will show how our tools have evolved, how building our own atop
+Racket has been worthwhile, and why it matters.
+}
 ]
 
   @lecture[
 #:when
-@talk-time{Saturday, 4:30pm}
+@talk-time{Saturday, 4:20pm}
 #:who
 @speaker[#:url "https://lukc1024.github.io" #:affiliation "Brown"]{Kuang-Chen Lu}
 #:what
