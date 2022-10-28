@@ -464,6 +464,19 @@ This talk presents a notional machine, the Stacker, and how it is being used at 
 }
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 4:40pm}
+#:who
+@speaker[#:url "https://www.siddharthaprasad.com" #:affiliation "Brown"]{Siddhartha Prasad}
+#:what
+@talk{Examplar: Making Hay from Wheat}
+#:more
+@abstract{
+Novice programmers often begin coding with a poor understanding of the task at hand and end up solving the wrong problem. To combat this, students are often asked to explain the problem @q{in their own words}. What words can students meaningfully use, how can we provide them automated feedback, and how can we make this feedback maximally useful? This talk presents concrete solutions to all these problems.
+}
+]
+
 )
 
  (section
