@@ -31,7 +31,7 @@ As of this release:
   of output.
 
 * Plot 3D allows negative altitude values (e.g., looking at the plot
-  from "below".)
+  from "below").
   (see https://docs.racket-lang.org/plot/plotting.html#%28def._%28%28lib._plot%2Fmain..rkt%29._plot3d%29%29 )
 
 * The `scriblib/bibtex` and `scriblib/autobib` libraries support DOIs.
