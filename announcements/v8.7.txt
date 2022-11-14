@@ -1,0 +1,56 @@
+1668464829
+Racket v8.7
+
+Racket version 8.7 is now available from
+
+    https://racket-lang.org/
+
+As of this release:
+
+* Typed Racket offers Shallow and Optional modes for its gradual
+  types. These modes lower the cost of interacting with untyped code,
+  but provide less protection against buggy interactions.
+  (see https://docs.racket-lang.org/ts-reference/behavior-of-types.html )
+
+* Racket uses Unicode 14.0 for character and string operations, and
+  includes grapheme operations. DrRacket supports emojis.
+  (see https://docs.racket-lang.org/gui/editor-overview.html#%28part._graphemes%29 )
+
+* Racket supports RV64G (RISC-V).
+
+* Programmers can disable definition shadowing using
+  `(#%declare #:require=define)`.
+  (see https://docs.racket-lang.org/reference/module.html#%28form._%28%28quote._~23~25kernel%29._~23~25declare%29%29 )
+
+* The module dependency graphs available using raco dependencies-graph
+  and DrRacket's Module browser are faster and have new package
+  filtering support.
+  (see https://docs.racket-lang.org/drracket/module-browser.html#%28idx._%28gentag._39._%28lib._scribblings%2Fdrracket%2Fdrracket..scrbl%29%29%29 )
+
+* DrRacket is more responsive when killing programs that produce a lot
+  of output.
+
+* Plot 3D allows negative altitude values (e.g., looking at the plot
+  from "below".)
+  (see https://docs.racket-lang.org/plot/plotting.html#%28def._%28%28lib._plot%2Fmain..rkt%29._plot3d%29%29 )
+
+* The `scriblib/bibtex` and `scriblib/autobib` libraries support DOIs.
+  (see https://docs.racket-lang.org/scriblib/autobib.html#%28def._%28%28lib._scriblib%2Fautobib..rkt%29._make-bib%29%29 )
+
+* There are many other repairs and improvements!
+
+
+The following people contributed to this release:
+
+Adit Cahya Ramadhan, Alex Harsányi, Bart van Strien, Ben Greenman, Bob
+Burger, Bogdan Popa, Cameron Moy, cheeze2000, D. Ben Knoble, Dan
+Anderson, Fred Fu, Geoffrey Knauth, Gustavo Massaccesi, J. Ryan
+Stinnett, Jack Firth, Jason Hemann, Jimmy McNutt, John Clements, Lîm
+Tsú-thuàn, M. Taimoor Zaeem, Mao Yifu, Matthew Flatt, Matthias
+Felleisen, Mike Sperber, Noah Ma, Oliver Flatt, Paulo Matos, Philip
+McGrath, Reuben Thomas, Robby Findler, Ryan Culpepper, Sam Phillips, Sam
+Tobin-Hochstadt, Samuel Bronson, Shu-Hung You, Sorawee Porncharoenwase,
+Sorin Muntean, Stephen Chang, William J. Bowman, and Winston Weinert
+
+Feedback Welcome
+----------------------------------------------------------------------
