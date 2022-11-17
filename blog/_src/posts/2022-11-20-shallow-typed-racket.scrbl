@@ -1,7 +1,7 @@
 #lang scribble/manual
 
 Title: Shallow and Optional Typed Racket
-Date: 2022-06-21T23:43:38
+Date: 2022-11-20T23:43:38
 Tags: Typed Racket
 
 @(require
@@ -23,16 +23,17 @@ Tags: Typed Racket
      (interaction-eval #:eval ev mod-code ...)
      (interaction/no-prompt #:eval ev ex-code)))
 
-With the Racket 8.7 release, Typed Racket (TR) includes two languages that
-weaken the run-time behavior of types: Shallow TR and Optional TR.
-Whereas normal TR types (@italic{Deep} types) enforce guarantees that any module
+With the @hyperlink["https://blog.racket-lang.org/2022/11/racket-v8-7.html"]{Racket 8.7}
+release, Typed Racket includes two languages that
+weaken the run-time behavior of types: Shallow Typed Racket and Optional Typed Racket.
+Whereas normal Typed Racket types (@italic{Deep} types) enforce guarantees that any module
 can depend on, Shallow types enforce only local invariants in typed code, and
 Optional types enforce nothing.
 In return, Shallow and Optional types add less overhead to gradual interactions.
 Code often runs faster and simpler than with Deep types.
 
-Shallow TR and Optional TR use the same static types and typechecker as
-normal Typed Racket.
+Shallow Typed Racket and Optional Typed Racket use the same static types and typechecker as
+normal (Deep) Typed Racket.
 
 
 @section{Background: Typed--Untyped Interaction}
@@ -99,7 +100,7 @@ But this program does have a type error.
 At run-time, the call to distance returns a float instead of an integer,
 contradicting the static type.
 
-If we want to catch the error, then TR needs to enforce types at run-time
+If we want to catch the error, then Typed Racket needs to enforce types at run-time
 when typed and untyped code interact.
 
 
@@ -122,7 +123,7 @@ neither of which use higher-order contracts.
 
 Shallow types use lightweight assertions called @italic{shape checks} to provide
 a basic soundness guarantee.
-Instead of putting heavy contracts at module boundaries, Shallow TR rewrites
+Instead of putting heavy contracts at module boundaries, Shallow Typed Racket rewrites
 typed code to incrementally check the shape of values.
 
 Optional types use no checks.
@@ -210,7 +211,7 @@ They reject a program that could run safely.
 One restrictive type in the Deep world is @racket[Procedure], the type that
 describes any function.
 Because this type says nothing about argument and return types,
-Deep TR never allows calls to a procedure, even after a cast:
+Deep Typed Racket never allows calls to a procedure, even after a cast:
 
 @module-example[#:eval deep-eval #:label #f
 typed/racket (code:comment "or #lang typed/racket/deep")
@@ -318,13 +319,11 @@ developers tend to use them will be part of the adventure.
 
 @itemlist[
   @item{
-     For the TR basics:
      @secref["typed-untyped-interaction"
          #:doc '(lib "typed-racket/scribblings/ts-guide.scrbl")]
      in the Typed Racket Guide
   }
   @item{
-    For more TR details:
     @secref["behavior-of-types"
          #:doc '(lib "typed-racket/scribblings/ts-reference.scrbl")]
     in the Typed Racket Reference
@@ -341,7 +340,7 @@ developers tend to use them will be part of the adventure.
     Slides at @url{https://cs.brown.edu/people/bgreenma/publications/apples-to-apples/g-pldi-2022-slides.pdf}
   }
   @item{
-    Shallow TR is based on the Transient semantics from Reticulated Python:
+    Shallow Typed Racket is based on the Transient semantics from Reticulated Python:
     @linebreak[]
     Michael M. Vitousek, Cameron Swords, and Jeremy G. Siek.
     @italic{Big Types in Little Runtime: Open-World Soundness and Collaborative Blame for Gradual Type Systems}.
