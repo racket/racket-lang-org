@@ -35,4 +35,4 @@
 
 (define pkg-authors '(eli mflatt samth stamourv))
 
-(define test-omit-paths '("sync.rkt"))
+(define test-omit-paths '("sync.rkt" "www/hello-world.rkt"))

@@ -46,3 +46,7 @@
 ;; make some old pages redirect to the main page
 (void (symlink #:site www-2016-site "index.html" "community.html"))
 (void (symlink #:site www-2016-site "index.html" "irc-chat.html"))
+
+(module+ test
+  (module config info
+    (define ignore-stderr "pollen: ")))
