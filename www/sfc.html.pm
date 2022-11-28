@@ -11,7 +11,9 @@
 
 ◊div{Donate
 ◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{
-Support Racket with a tax-deductible donation}}
+Racket is a general-purpose programming language and an ecosystem for language-oriented programming.
+Donations - both in-kind and monetary - are used for hosting community infrastructure, administration, educational outreach, and community events such as RacketCon and Racket School.
+If you would like to support these efforts, you can support Racket with a tax-deductible donation via SFC or ◊link["https://github.com/sponsors/Racket"]{sponsor Racket}.}}
 
 Best option: donate via PayPal by clicking the button below.
 
