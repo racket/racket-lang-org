@@ -9,9 +9,10 @@
 
 ◊section[#:class "one-column-body-text"]{
 
-◊div{Donate
-◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{
-Support Racket with a tax-deductible donation}}
+◊div{Donate}
+
+◊p{
+Donations, both in-kind and monetary, are used for hosting community infrastructure, administration, educational outreach, and community events such as RacketCon and Racket School.}
 
 Best option: donate via PayPal by clicking the button below.
 
@@ -24,6 +25,7 @@ Best option: donate via PayPal by clicking the button below.
 </form>
 }
 
+You can also ◊link["https://github.com/sponsors/Racket"]{sponsor Racket}.
 
 We also accept checks drawn in US dollars from US banks. Make your check payable to "Software Freedom Conservancy, Inc." and put "Directed donation: Racket" as the memo. Mail to:
 
