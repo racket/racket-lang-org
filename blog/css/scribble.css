@@ -1,0 +1,19 @@
+@import url("manual-racket.css");
+
+.SCodeFlow {
+  border-left: 1px dotted black;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin-bottom: 1em;
+  margin-right: 2em;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+.SCodeFlow p {
+  margin-bottom: 0;
+}
+
+.RktBlk {
+  white-space: nowrap;
+}
