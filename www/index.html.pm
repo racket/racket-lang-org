@@ -45,7 +45,7 @@
 
  ◊div[#:style "flex-grow:1"]{}
 
- ◊link["https://con.racket-lang.org/"]{twelfth RacketCon, Oct 28-30, in person!}
+ ◊link["https://racketfest.com/"]{Racketfest 2023, Mar 18, in person!}
 
  ◊div[#:style "flex-grow:1"]{}
 
