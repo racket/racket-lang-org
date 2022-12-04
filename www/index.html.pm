@@ -105,8 +105,8 @@
 ◊div[#:id "mature" #:class "the-language full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-Racket is a mature and stable product. From the beginning, it has  supported cross-platform graphical programming (Windows, macOS, Linux). 
- 
+Racket is a mature and stable product. From the beginning, it has  supported cross-platform graphical programming (Windows, macOS, Linux).
+
 ◊doclinks{
 ◊link["https://docs.racket-lang.org/pkg/index.html"]{Package System}
 ◊link["https://docs.racket-lang.org/framework/index.html"]{GUI Framework}
@@ -117,7 +117,7 @@ Racket is a mature and stable product. From the beginning, it has  supported cro
 ◊div[#:id "batteries" #:class "the-language full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-Racket includes a rich set of libraries, covering the full range from web server apps to mathematics and scientific simulation software. 
+Racket includes a rich set of libraries, covering the full range from web server apps to mathematics and scientific simulation software.
 
 ◊doclinks{
 ◊doclink["web-server"]{Web Applications}
@@ -129,7 +129,7 @@ Racket includes a rich set of libraries, covering the full range from web server
 ◊div[#:id "extensible" #:class "the-language full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-In Racket, programmers define their own loops with ◊strong{powerful macros}. Indeed, these macros are so powerful that programmers make entire ◊strong{domain-specific languages} as libraries. No tools, no Makefiles required. 
+In Racket, programmers define their own loops with ◊strong{powerful macros}. Indeed, these macros are so powerful that programmers make entire ◊strong{domain-specific languages} as libraries. No tools, no Makefiles required.
 
 ◊doclinks{
 ◊link["https://docs.racket-lang.org/guide/macros.html"]{Intro To Macros}
@@ -141,7 +141,7 @@ In Racket, programmers define their own loops with ◊strong{powerful macros}. I
 ◊div[#:id "strong" #:class "the-language full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
 
-Racket is the first language to support ◊strong{higher-order software contracts} and ◊strong{safe gradual typing}. Programmers can easily deploy these tools to harden their software. 
+Racket is the first language to support ◊strong{higher-order software contracts} and ◊strong{safe gradual typing}. Programmers can easily deploy these tools to harden their software.
 
 ◊doclinks{
 ◊link["https://docs.racket-lang.org/guide/contracts.html"]{The Contract Guide}
@@ -154,7 +154,7 @@ Racket is the first language to support ◊strong{higher-order software contract
  ◊special-section[#:class "one-column-body-text"]{
 
 Racket comes with support for major editors. The main bundle includes an innovative and extensible interactive development environment that has inspired other IDE projects.
-                                                            
+
 ◊doclinks{
 ◊doclink["drracket"]{DrRacket Guide}
 ◊link["https://marketplace.visualstudio.com/items?itemName=evzen-wybitul.magic-racket"]{VS Code/Magic Racket}
@@ -194,18 +194,18 @@ Racket comes with support for major editors. The main bundle includes an innovat
 (tog (◊docs{list} 5 "hello "
            1/2 "world" (◊docs{sqrt} -1)))}}}
 
-    ◊div[#:class "block-with-1em-margin"]{ 
+    ◊div[#:class "block-with-1em-margin"]{
 ◊langwww["#lang scribble/base" #:id "lang2"]{
 ◊pre{@; Generate a PDF or HTML document
 @(◊docs{require} (◊docs{only-in} racket ~a))
 @(◊docs{define} N 99)
 @◊docs{title}{Bottles: @◊docs{italic}{Abridged}}
-@(◊docs{apply} 
+@(◊docs{apply}
   ◊docs{itemlist}
   (◊docs{for/list} ([n (◊docs{in-range} N 0 -1)])
     @◊docs{item}{@(◊docs{~a} n) bottles.}))}}}
 
-    ◊div[#:class "block-with-1em-margin"]{ 
+    ◊div[#:class "block-with-1em-margin"]{
 ◊langwww["#lang datalog" #:id "lang4"]{
 ◊pre{ancestor(A, B) ◊link["https://docs.racket-lang.org/datalog/interop.html?q=%3A-#%28form._%28%28lib._datalog%2Fmain..rkt%29._~3a-%29%29"]{:-} parent(A, B).
 ancestor(A, B) ◊link["https://docs.racket-lang.org/datalog/interop.html?q=%3A-#%28form._%28%28lib._datalog%2Fmain..rkt%29._~3a-%29%29"]{:-}
@@ -220,7 +220,7 @@ ancestor(A, B)?}}}
  ◊special-section[#:class "one-column-body-text"]{
 
    ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
-    ◊div[#:class "block-with-1em-margin"]{ 
+    ◊div[#:class "block-with-1em-margin"]{
 ◊langwww["#lang racket" #:style "font-size:75%"]{
 ◊pre{
 (◊docs{provide} time-it)
@@ -228,7 +228,7 @@ ancestor(A, B)?}}}
 (◊docs{require} (◊docs{for-syntax} syntax/parse))
 
 (◊docs{define-syntax} (time-it stx)
-  (◊docs{syntax-parse} stx 
+  (◊docs{syntax-parse} stx
     [(_ task)
      #'(thunk-time-it (◊docs{λ} () task))]))
 
@@ -257,21 +257,21 @@ ancestor(A, B)?}}}
 ◊div[#:id "general-purpose" #:class "lop full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
    ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
-    ◊div[#:class "block-with-1em-margin"]{ 
+    ◊div[#:class "block-with-1em-margin"]{
 
 ◊langwww["#lang racket/gui" #:style "font-size:75%"]{
 ◊pre{;; let's play a guessing game
 
 (◊docs{define} frame (◊docs{new} ◊docs{frame%} [label "Guess"]))
 
-(◊docs{define} secret (◊docs{random} 5)) 
+(◊docs{define} secret (◊docs{random} 5))
 (◊docs{define} ((check i) btn evt)
   (◊docs{define} found? (◊docs{if} (◊docs{=} i secret) "Yes" "No"))
   (◊docs{message-box} "?" found?)
   (◊docs{when} (◊docs{=} i secret)
     (◊docs{send} frame show #false)))
 
-(◊docs{for} ([i (◊docs{in-range} 5)]) 
+(◊docs{for} ([i (◊docs{in-range} 5)])
    (◊docs{new} ◊docs{button%}
 	[label (◊docs{~a} i)]
 	[parent frame]
@@ -445,7 +445,7 @@ ancestor(A, B)?}}}
       Learn more from articles and talks.
 
       ◊link["team.html"]{Team} and ◊link["https://docs.racket-lang.org/racket-build-guide/contribute.html"]{Contributing}
-      Racket's development benefits from a large distributed pool of contributors. 
+      Racket's development benefits from a large distributed pool of contributors.
 
       ◊link["friendly.html"]{Friendly Environment Policy}
       Applies to all Racket venues.
@@ -492,11 +492,11 @@ ancestor(A, B)?}}}
     ◊td{ ◊div[#:class "smartphone-only"]{Education} ◊p{
 
       ◊link["https://school.racket-lang.org"]{The Racket Summer School}
-      a summer school for researchers, professionals, and (under)graduate students to the Racket philosophy of programming languages 
+      a summer school for researchers, professionals, and (under)graduate students to the Racket philosophy of programming languages
 
       ◊link["http://programbydesign.org/"]{Program by Design (aka TeachScheme!)}
       a curriculum and training programfor high school teachers and college faculty
-      
+
       ◊link["http://www.bootstrapworld.org/"]{Bootstrap}
       a curriculum and training program for middle-school and high-school teachers}}
 
@@ -522,14 +522,14 @@ ancestor(A, B)?}}}
 ◊section[#:id "bottom" #:class "one-column-body-text" #:style "padding:0.5rem"]{
 ◊div{Thank you}
 ◊div{To ◊link["http://www.nsf.gov/"]{the NSF},
-◊link["http://www.darpa.mil/"]{DARPA}, 
-the ◊link["http://www.ed.gov/FIPSE/"]{Fund for the Improvement of Postsecondary Education (FIPSE)} at the ◊link["http://www.ed.gov/"]{US Department of Education}, 
-the ◊link["http://www.exxonmobil.com/Corporate/community_foundation.aspx"]{Exxon Foundation}, 
+◊link["http://www.darpa.mil/"]{DARPA},
+the ◊link["http://www.ed.gov/FIPSE/"]{Fund for the Improvement of Postsecondary Education (FIPSE)} at the ◊link["http://www.ed.gov/"]{US Department of Education},
+the ◊link["http://www.exxonmobil.com/Corporate/community_foundation.aspx"]{Exxon Foundation},
 CORD, partners of the Academy of Information Technology,
 ◊link["http://microsoft.com/"]{Microsoft},
 ◊link["http://mozilla.org/"]{Mozilla},
-◊link["http://google.com/"]{Google}, 
-and many ◊link["individuals.html"]{individuals} 
+◊link["http://google.com/"]{Google},
+and many ◊link["individuals.html"]{individuals}
 for their generous support over the years.}}
 
 ◊script[#:src "js/jquery.min.js"]{}
@@ -551,8 +551,8 @@ function openTab(classname, evt, elementname, othertabclassnames, turnredp) {
       .replace(" unselected-tab", "") + " selected-tab";
   }
 
-  // show selected block, on a per section basis 
-  var classes; 
+  // show selected block, on a per section basis
+  var classes;
   classes = document.getElementsByClassName(classname);
   for (i = 0; i < classes.length; i++) {
     classes[i].className = classes[i].className
