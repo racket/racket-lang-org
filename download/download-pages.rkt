@@ -75,6 +75,14 @@
       @span[id: "linux_ppa"]{
         or
         @a[href: "https://launchpad.net/~plt/+archive/ubuntu/racket"]{Ubuntu PPA}}
+      @span[id: "linux_flatpak"]{
+        or
+        @a[href: "https://flathub.org/apps/details/org.racket_lang.Racket"]{
+          @img[src: "https://flathub.org/assets/badges/flathub-badge-en.svg" width: "120" alt: "Flathub"]}}
+      @span[id: "linux_snap"]{
+        or
+        @a[href: "https://snapcraft.io/racket"]{
+          @img[src: "https://raw.githubusercontent.com/snapcore/snap-store-badges/master/EN/%5BEN%5D-snap-store-white%402x.png" width: "120" alt: "Snap Store"]}}
      }})
  (if (version<? @|version| first-version-with-releases-page)
      null
@@ -723,6 +731,8 @@ var property = null;
       showWhen('linux_explain', platform.search(/linux/) >= 0);
       showWhen('linux_install_explain', platform.search(/linux/) >= 0);
       showWhen('linux_ppa', platform.search(/linux/) >= 0);
+      showWhen('linux_flatpak', platform.search(/linux/) >= 0);
+      showWhen('linux_snap', platform.search(/linux/) >= 0);
 
       // NOTE: there used to be a condition that there must not be
       // Windows/Mac source packages in the selector (e.g., no "Windows Source")
