@@ -111,7 +111,7 @@ Racket was originally created by the PLT research group, an affiliation of compu
 ◊link["http://www.ccs.neu.edu/racket/"]{Northeastern University}
 Boston MA
 
-◊link["https://www.cs.utah.edu/plt/"]{University of Utah}
+◊link["https://users.cs.utah.edu/plt/"]{University of Utah}
 Salt Lake City UT
 
 ◊link["http://plt.eecs.northwestern.edu/"]{Northwestern University}

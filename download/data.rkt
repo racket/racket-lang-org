@@ -64,7 +64,7 @@
      "Eli Barzilay"
      "eli@barzilay.org"]
     ["USA, Utah (University of Utah)"
-     "https://www.cs.utah.edu/plt/installers/"
+     "https://users.cs.utah.edu/plt/installers/"
      "Matthew Flatt"
      "mflatt@cs.utah.edu"]
     ["USA, Illinois (Northwestern University)"
