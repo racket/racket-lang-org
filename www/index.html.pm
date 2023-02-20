@@ -495,7 +495,7 @@ ancestor(A, B)?}}}
       a summer school for researchers, professionals, and (under)graduate students to the Racket philosophy of programming languages
 
       ◊link["http://programbydesign.org/"]{Program by Design (aka TeachScheme!)}
-      a curriculum and training programfor high school teachers and college faculty
+      a curriculum and training program for high school teachers and college faculty
 
       ◊link["http://www.bootstrapworld.org/"]{Bootstrap}
       a curriculum and training program for middle-school and high-school teachers}}
