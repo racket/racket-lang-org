@@ -21,7 +21,7 @@ Community moderation team:
 
 ◊link["https://github.com/samdphillips"]{Sam Phillips}
 
-◊link["https://github.com/spdegabrielle"]{Stephen De Gabrielle}
+◊link["https://github.com/spdegabrielle"]{Stephen De Gabrielle} (◊link["mailto:spdegabrielle@gmail.com"]{spdegabrielle@gmail.com})
 
 ◊link["https://github.com/jryans"]{J. Ryan Stinnett} (◊link["mailto:jryans@gmail.com"]{jryans@gmail.com})
 
