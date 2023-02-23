@@ -23,6 +23,8 @@ Community moderation team:
 
 ◊link["https://github.com/spdegabrielle"]{Stephen De Gabrielle}
 
+◊link["https://github.com/jryans"]{J. Ryan Stinnett}
+
 
 ◊link["team.html#management"]{Racket project management} can be reached at ◊link["mailto:management@racket-lang.org"]{management@racket-lang.org}.
 
