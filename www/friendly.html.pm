@@ -1,6 +1,10 @@
 #lang pollen
 
-◊(require (only-in "index.html.pm" top))
+◊(require (only-in "index.html.pm" top)
+          racket/string)
+
+◊(define (email user . host)
+   (format "~a at ~a" user (string-join host " dot ")))
 
 ◊(top)
 
@@ -13,18 +17,14 @@ Racket project management wants to encourage and preserve this open exchange of 
 
 Anyone witnessing or subject to unacceptable behaviour should notify the moderation team or Racket Project management.
 
-Community moderation team:
-
-◊link["https://github.com/countvajhula"]{Siddhartha Kasivajhula}
-
-◊link["https://github.com/jackfirth"]{Jack Firth}
-
-◊link["https://github.com/samdphillips"]{Sam Phillips}
-
-◊link["https://github.com/spdegabrielle"]{Stephen De Gabrielle} (◊link["mailto:spdegabrielle@gmail.com"]{spdegabrielle@gmail.com})
-
-◊link["https://github.com/jryans"]{J. Ryan Stinnett} (◊link["mailto:jryans@gmail.com"]{jryans@gmail.com})
-
+◊div{Community moderation team:}
+◊div[#:style "padding:0.5rem"]{
+◊link["https://github.com/countvajhula"]{Siddhartha Kasivajhula} (◊email["sid" "countvajhula" "com"])
+ ◊link["https://github.com/jackfirth"]{Jack Firth} (◊email["jackhfirth" "gmail" "com"])
+ ◊link["https://github.com/samdphillips"]{Sam Phillips} (◊email["samdphillips" "gmail" "com"])
+ ◊link["https://github.com/spdegabrielle"]{Stephen De Gabrielle} (◊email["spdegabrielle" "gmail" "com"])
+ ◊link["https://github.com/jryans"]{J. Ryan Stinnett} (◊email["jryans" "gmail" "com"])
+}
 
 ◊link["team.html#management"]{Racket project management} can be reached at ◊link["mailto:management@racket-lang.org"]{management@racket-lang.org}.
 
