@@ -4,7 +4,8 @@
           racket/string)
 
 ◊(define (email user . host)
-   (format "~a at ~a" user (string-join host " dot ")))
+   (define addr (format "~a@~a" user (string-join host ".")))
+   ◊link[(format "mailto:~a" addr) addr])
 
 ◊(top)
 
