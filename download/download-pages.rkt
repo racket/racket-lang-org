@@ -112,7 +112,7 @@
              @list{After downloading the installer file, run it with
                          @div{@nbsp @nbsp @tt{sh @tt[id: "installer_name"]{racket.sh}}}
                          to install, possibly adding @tt{sudo} to the start of the command
-                         to install to a location that requires adminstrator access.}}
+                         to install to a location that requires administrator access.}}
       @(if (equal? version version-with-touchbar-bug)
            @div[id: "macos_touchbar_explain"
                 style: note-style]{
