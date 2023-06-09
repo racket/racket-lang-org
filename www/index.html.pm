@@ -41,11 +41,7 @@
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
  ◊div[#:style "margin-left: 1em"]{
-   ◊link["https://blog.racket-lang.org/2023/02/racket-v8-8.html"]{Racket version 8.8} is available.}
-
- ◊div[#:style "flex-grow:1"]{}
-
- ◊link["https://racketfest.com/"]{Racketfest 2023, Mar 18, in person!}
+   ◊link["https://blog.racket-lang.org/2023/05/racket-v8-9.html"]{Racket version 8.9} is available.}
 
  ◊div[#:style "flex-grow:1"]{}
 
