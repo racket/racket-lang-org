@@ -45,10 +45,7 @@
 
  ◊div[#:style "flex-grow:1"]{}
 
- ◊div[#:style "margin-right: 1em"]{◊link["books.html"]{We welcome two new Racket books:}
-                         (1) Racket Programming the Fun Way
-                         (2) Don't Teach Coding: Until You Read this Book
-}
+ ◊div[#:style "margin-right: 1em"]{RacketCon 2023 will be October 28-29 in Chicago}
 }}
 
 ◊div[#:class "frontpage-card"]{
