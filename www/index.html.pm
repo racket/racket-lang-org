@@ -434,7 +434,7 @@ ancestor(A, B)?}}}
       ◊link["https://racket.slack.com/"]{Slack} (◊link["https://join.slack.com/t/racket/shared_invite/zt-1ionnhfs3-bhgf~jJctQVwTb_QnU_yzQ"]{sign up}), ◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{IRC}, ◊link["https://reddit.com/r/racket"]{Reddit}, and ◊link["https://lists.racket-lang.org/"]{Mailing lists}
       Racketeers are here, too!
 
-      ◊link["https://twitter.com/racketlang"]{Twitter} and ◊link["https://blog.racket-lang.org/"]{Blog}
+      ◊link[#:rel "me" "https://functional.cafe/@racketlang"]{Mastodon}, ◊link["https://twitter.com/racketlang"]{Twitter} and ◊link["https://blog.racket-lang.org/"]{Blog}
       Keep in touch.
 
       ◊link["https://github.com/racket/racket/wiki"]{Wiki} and ◊link["https://www.youtube.com/c/racketlang/playlists"]{YouTube}
