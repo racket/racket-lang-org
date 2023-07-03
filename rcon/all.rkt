@@ -58,21 +58,27 @@
 (require (prefix-in 2022: "2022/index.rkt"))
 (define-runtime-path 2022-dir "2022")
 (2022:make 2022-dir)
-(copy-con-site! 2022-dir 2022 #:current #t)
+(copy-con-site! 2022-dir 2022)
+
+;; 2023
+(require (prefix-in 2023: "2023/index.rkt"))
+(define-runtime-path 2023-dir "2023")
+(2023:make 2023-dir)
+(copy-con-site! 2023-dir 2023 #:current #t)
 
 ;; This is a bad idea, because it creates a 301 (permanent)
 ;; redirect:
 #|
-   ;; On web server, redirect 2022/index.html to root index.html
+   ;; On web server, redirect 2023/index.html to root index.html
    ;; (these refer to remote paths)
    (void
     (symlink #:site con-site
              "../index.html"
-             "2022/index.html"))
+             "2023/index.html"))
 |#
 ;; Instead, there's a routing rule added in "sync.rkt"
 
-(define-runtime-path current-con-index "2022/index.html")
+(define-runtime-path current-con-index "2023/index.html")
 (define index
   (page* #:site con-site
          #:link-title "RacketCon" #:title "RacketCon"
