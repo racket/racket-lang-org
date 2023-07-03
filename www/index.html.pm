@@ -45,7 +45,7 @@
 
  ◊div[#:style "flex-grow:1"]{}
 
- ◊div[#:style "margin-right: 1em"]{RacketCon 2023 will be October 28-29 in Chicago}
+ ◊div[#:style "margin-right: 1em"]{◊link["https://con.racket-lang.org/"]{RacketCon 2023} is October 28-29 in Chicago}
 }}
 
 ◊div[#:class "frontpage-card"]{

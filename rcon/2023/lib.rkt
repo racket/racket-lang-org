@@ -3,7 +3,7 @@
          (for-syntax racket/base))
 (provide (all-defined-out))
 
-(define fonts-url "https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro&display=swap")
+(define fonts-url "https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Montserrat:wght@400;700&display=swap")
 
 (define-syntax-rule (define-tag* tag name extra ...)
   (define name
@@ -22,6 +22,7 @@
 
 (define-tag html)
 (define-tag head)
+(define-tag* meta head-meta)
 (define-tag link)
 (define-tag style)
 (define-tag title)

@@ -7,6 +7,9 @@
          (prefix-in gregor: gregor)
          "lib.rkt")
 
+(define monospace
+  "'Cutive Mono', monospace")
+
 (define-div column
   ,@centered
   [width "45em"])
@@ -14,22 +17,27 @@
 (define-div banner
   ,@centered)
 
-(define-div title-append
+(define-div title-container
   [display inline-block]
   (margin-left auto)
   (margin-right auto)
   [text-align left]
   [margin-bottom "1em"])
 
+(define-div title-append
+  [display flex])
+
 (define-div pagetitle
-  [font-size "64pt"]
-  [font-family "'Source Code Pro', monospace"])
+  [font-size "48pt"]
+  [font-family ,monospace])
 
 (define-div main
-  [font-family "'Raleway', sans-serif"])
+  [font-family "'Montserrat', sans-serif"]
+  [background "white"]
+  [color "black"])
 
 (define header-font
-  `([font-weight "bold"]))
+  `(#;[font-weight "bold"]))
 
 (define-div subtitle
   ,@centered
@@ -46,16 +54,24 @@
 (define-div sectionHeader
   [font-size "24pt"]
   [margin-bottom "1em"]
+  [background "lightgray"]
   ,@header-font)
 
-(define-a speaker-a
-  [font-size "24pt"]
+(define-div speaker-a
   [color "firebrick"])
+(define-a unaffiliated
+  [color "inherit"])
+(define-a h-card
+  [color "inherit"])
+
 (define-div talk
+  [font-weight bold]
+  #;
   [font-style "italic"]
   [font-size "24pt"]
   [margin-top "0.25em"]
-  [margin-bottom "1em"])
+  [margin-bottom "1em"]
+  [color "gray"])
 
 (define-div abstract
   [text-align "left"]
@@ -77,7 +93,7 @@
   [font-style "italic"])
 
 (define-span tt
-  [font-family "'Source Code Pro', monospace"])
+  [font-family ,monospace])
 
 (define-span faded
   [color "gray"])
@@ -125,7 +141,8 @@
                            (list 'title name))
                      (cond [(non-empty-string? affiliation)
                             (list (list 'class "h-card"))]
-                           [else null])))
+                           [else
+                            (list (list 'class "unaffiliated"))])))
            (cond [(non-empty-string? affiliation)
                   (list (txexpr* 'a attrs
                                  name
@@ -137,7 +154,7 @@
                  [else
                   (list (txexpr* 'a attrs name))])]))
   (txexpr 'span
-          (list (list 'class "speaker"))
+          (list (list 'class "speaker-a"))
           span-kids))
 (define (lecture #:when when
                  #:who who
@@ -201,6 +218,7 @@
 (define page
   (html #:lang "en"
    (head
+    (head-meta #:http-equiv "content-type" #:content "text/html; charset=utf-8")
     (link #:href fonts-url
           #:rel "stylesheet")
     (style (cdata #f #f (classes->string)))
@@ -223,11 +241,12 @@ $(document).ready(function () {
      (meta #:itemprop "endDate" (gregor:~t sunday "y-MM-d"))
      (meta #:itemprop "location" location)
      (banner
-      (title-append
-       @pagetitle[(img #:style "width:80px; float: right"
-                       #:src "https://racket-lang.org/img/racket-logo.svg"
-                       #:alt "The Racket logo")]
-       @pagetitle["(thirteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp])
+      (title-container
+       (title-append
+        @pagetitle[(img #:style "width:140px; float: right"
+                        #:src "https://racket-lang.org/img/racket-logo.svg"
+                        #:alt "The Racket logo")]
+        @pagetitle["(thirteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
       @subtitle{October 28-29, 2023}
       @subtitle{@`(span ((class "p-location")) "Northwestern University")}
       @subsubtitle{@`(span ((class "p-locality")) ,location)})

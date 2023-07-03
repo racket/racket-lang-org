@@ -64,7 +64,7 @@
 (require (prefix-in 2023: "2023/index.rkt"))
 (define-runtime-path 2023-dir "2023")
 (2023:make 2023-dir)
-(copy-con-site! 2023-dir 2023 #:current #t)
+(copy-con-site! 2023-dir 2023) ; note: don't set `#:current #t`, because we copy below to have it in both places
 
 ;; This is a bad idea, because it creates a 301 (permanent)
 ;; redirect:
