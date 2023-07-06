@@ -278,6 +278,15 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 }
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 9:30am}
+#:who
+@speaker[#:url "http://eecs.northwestern.edu/~czu2221/"]{Chenhao Zhang}
+#:what
+@talk{Reductions on top of Rosette}
+]
+
   @lunch[@talk-time{Saturday, 12:30pm}]
 
   @para{Lunch will served buffet-style right next to the lecture hall.}
