@@ -271,7 +271,11 @@ $(document).ready(function () {
 #:who
 @speaker[#:url "https://sagegerard.com"]{Sage Gerard}
 #:what
-@talk{TBA}
+@talk{Introducing Rackith}
+#:more
+@abstract{
+Rackith is a language-oriented programming language based on Racket. Use Rackith to define many languages with one syntax object. Discussion covers project design and implications for the personal computer.
+}
 ]
 
   @lunch[@talk-time{Saturday, 12:30pm}]
