@@ -287,6 +287,33 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 @talk{Reductions on top of Rosette}
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 10:00am}
+#:who
+@speaker[#:url "https://llazarek.github.io/home.html"]{Lukas Lazarek}
+#:what
+@talk{Mutation!}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 10:30am}
+#:who
+@speaker[#:url "https://github.com/adamperlin"]{Adam Perlin}
+#:what
+@talk{Racket ⟹ WebAssembly}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 11:00am}
+#:who
+@speaker[#:url "https://wphomes.soic.indiana.edu/jsiek/"]{Jeremy Siek}
+#:what
+@talk{A Racket-based compilers course}
+]
+
   @lunch[@talk-time{Saturday, 12:30pm}]
 
   @para{Lunch will served buffet-style right next to the lecture hall.}
