@@ -36,17 +36,27 @@
 
 
 
-(define (copy-annual-site! site starting-dir year #:current [current? #f])
+(define (copy-annual-site! site starting-dir year
+                           #:current [current? #f]
+                           #:copy-current-index? [copy-current-index? #t])
   (for* ([p (in-directory starting-dir)]
          [fn (in-value (filename p))]
          [ext (in-list '(#".html" #".css" #".svg" #".png" #".jpg"))]
          #:unless (or (not (path-has-extension? fn ext))
                       (excluded-path? fn)
-                      (and current? (equal? fn (string->path "index.html")))))
-        (copyfile #:site site (build-path starting-dir fn)
-                  (string-join (map ~a (append
-                                        (if current? null (list year))
-                                        (list fn))) "/")))
+                      (and current?
+                           (not copy-current-index?)
+                           (equal? fn (string->path "index.html")))))
+    (define (copy current?)
+      (copyfile #:site site (build-path starting-dir fn)
+                (string-join (map ~a (append
+                                      (if current? null (list year))
+                                      (list fn))) "/")))
+    (copy current?)
+    (when (and current?
+               copy-current-index?
+               (equal? fn (string->path "index.html")))
+      (copy #f)))
 
   (define (copy-subdir-if-extant subdir-name)
     (define subdir (build-path starting-dir subdir-name))

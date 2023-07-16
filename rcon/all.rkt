@@ -12,8 +12,6 @@
          (prefix-in 2013: "2013/all.rkt")
          (prefix-in 2014: "2014/all.rkt"))
 
-(provide index)
-
 (register-identity con-site)
 
 (define-syntax-rule (copy-con-site! ARG ...)
@@ -64,10 +62,20 @@
 (require (prefix-in 2023: "2023/index.rkt"))
 (define-runtime-path 2023-dir "2023")
 (2023:make 2023-dir)
-(copy-con-site! 2023-dir 2023) ; note: don't set `#:current #t`, because we copy below to have it in both places
+(copy-con-site! 2023-dir 2023 #:current #t) ; change to `#:current` needs change in "sync.rkt"
+
+;; A `#:current #t` above causes that year's content to be copied to
+;; the root directory instead of the year's subdiredtory, except that
+;; "index.html" is by itself created in the subdirectory. A
+;; routing-rule redirect in "../sync.rkt" will send all references
+;; into the subdirectory. A "index.html" file is written in the
+;; subdirectory, anyway, because that is needed for a URL ending in
+;; the directory and NO slash to be redirected to "index.html", which
+;; is then redirected to the root directory.
 
 ;; This is a bad idea, because it creates a 301 (permanent)
-;; redirect:
+;; redirect; instead, there's a routing rule added in "../sync.rkt"
+;; to create a 302 (temporary) redirect:
 #|
    ;; On web server, redirect 2023/index.html to root index.html
    ;; (these refer to remote paths)
@@ -76,8 +84,10 @@
              "../index.html"
              "2023/index.html"))
 |#
-;; Instead, there's a routing rule added in "sync.rkt"
 
+;; Don't do this, either, because it doesn't work right with
+;; extra files referenced relative to "index.html"
+#|
 (define-runtime-path current-con-index "2023/index.html")
 (define index
   (page* #:site con-site
@@ -85,3 +95,4 @@
          #:extra-headers style-header
          #:id 'con
          @copyfile[#:site con-site current-con-index]))
+|#

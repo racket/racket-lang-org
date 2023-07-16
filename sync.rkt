@@ -130,9 +130,17 @@
 (unless dry-run?
   ;; Redirect current year's "index.html" to the root "index.html":
   (add-routing-rules "con.racket-lang.org"
+                     #:preserve-existing? #f ; so redirect for old year is dropped
                      (list
-                      (redirect-prefix-routing-rule #:old-prefix "2023/index.html"
-                                                    #:new-prefix "index.html"
+                      (redirect-prefix-routing-rule #:old-prefix "2023/"
+                                                    #:new-prefix ""
+                                                    #:redirect-code "302"))
+                     #:log-info displayln)
+  (add-routing-rules "school.racket-lang.org"
+                     #:preserve-existing? #f ; so redirect for old year is dropped
+                     (list
+                      (redirect-prefix-routing-rule #:old-prefix "2020/"
+                                                    #:new-prefix ""
                                                     #:redirect-code "302"))
                      #:log-info displayln))
 

@@ -22,13 +22,18 @@
 ;; 2019 
 (define-runtime-path 2019-dir "2019")
 (pollen-rebuild! 2019-dir)
-(copy-school-site! 2019-dir 2019 #:current #f)
+(copy-school-site! 2019-dir 2019)
 
 ;; 2020
 (define-runtime-path 2020-dir "2020")
 (scribble-page (build-path 2020-dir "index.scrbl") 2020-dir)
-(copy-school-site! 2020-dir 2020 #:current #t)
+(copy-school-site! 2020-dir 2020 #:current #t) ; change to `#:current` needs change in "sync.rkt"
 
+;; The rest of this is the wrong idea. See "../rcon/all.rkt".
+;; The current year's directory is redirected through a routing
+;; rule in "../sync.rkt".
+
+#|
 ;; On web server, redirect 2020/index.html to root index.html
 ;; (these refer to remote paths)
 (void
@@ -43,3 +48,4 @@
          #:link-title "Racket School" #:title "Racket School"
          #:id 'school
          @copyfile[#:site school-site current-school-index]))
+|#
