@@ -379,6 +379,16 @@ Please come with your big questions and discussion topics.
  )
 
  (section
+  @sectionHeader{Sponsor}
+  @paragraph{
+ @a[#:href "https://www.cs.northwestern.edu/"]{
+  @img[#:src "nwu-cs.svg"
+       #:alt "Northwestern Computer Science Logo"]
+ }
+ }
+ )
+
+ (section
   @sectionHeader{Previous RacketCons}
   @(apply larger
                (cdr
