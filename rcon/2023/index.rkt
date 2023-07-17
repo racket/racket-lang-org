@@ -296,7 +296,7 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 @talk{Mutate: inject bugs into your programs!}
 #:more
 @abstract{
-In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mutate/" "mutate"), a library for mutating programs, i.e. injecting possible bugs by making small syntactic changes to the program syntax. I’ll talk about what mutation is, why one might want it, and demo how to use the library.
+In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mutate/" "mutate")}, a library for mutating programs, i.e. injecting possible bugs by making small syntactic changes to the program syntax. I’ll talk about what mutation is, why one might want it, and demo how to use the library.
 }
 ]
 
@@ -379,7 +379,7 @@ Please come with your big questions and discussion topics.
 
  (section
   @sectionHeader{Accommodation}
-  @paragraph{We are currently exploring the possibility of getting a block of rooms at a nearby hotel. (Of course, you are welcome to stay wherever you wish!)}
+  @paragraph{We recommend the @(a #:href "https://www.hilton.com/en/hotels/ordoehf-hilton-orrington-evanston/" #:title "Hilton Orrington, Evanston, IL, USA" "Hilton Orrington"). We are currently trying to get a block of rooms there. (That is just a recommendation. You are welcome to stay wherever you wish!)}
  )
 
  (section
