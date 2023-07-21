@@ -136,3 +136,44 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
 
 (define (html->xexpr . strs)
   (puc:html->xexpr (string-join strs "")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (paragraph-list . content)
+  `(@ ,@(map (λ (x) `(p ,x)) content)))
+
+(module tab racket/base
+  (provide tabs
+           tab)
+
+  (require pollen/decode)
+
+  (define current-group-id (make-parameter ""))
+
+  ;; Create a tab group. Children should be a list of `tab`s.
+  ;; There must be exactly one `tab` with #:heading? #t.
+  (define-syntax-rule (tabs #:group-id group-id ts ...)
+    (parameterize ([current-group-id group-id])
+      `(div ([class "tabs"]) ,ts ...)))
+
+  ;; A tab. If #:heading? is #t, the `tab` will be styled as a heading,
+  ;; with content initially visible.
+  (define (tab #:id id #:title title #:heading? [heading? #f] . content)
+    `(@ (input ([type "radio"]
+                [class "btn-link"]
+                [id ,id]
+                [name ,(current-group-id)]
+                ,@(if heading?
+                      '([checked "checked"])
+                      '())))
+        (label ([class ,(if heading?
+                            "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
+                            "frontpage-bar-item frontpage-button")]
+                [for ,id])
+               (span ,title))
+        (div ([class "tab"])
+             ,@(decode-elements content
+                                #:txexpr-elements-proc decode-paragraphs)))))
+
+(require 'tab)
+(provide (all-from-out 'tab))

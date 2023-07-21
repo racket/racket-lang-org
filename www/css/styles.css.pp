@@ -60,6 +60,56 @@ section {
  flex-direction: column;
 }
 
+/* Begin tab system; adapted from https://linuxhint.com/html-tabs/ */
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.tabs input[type="radio"] {
+  display: none;
+}
+
+.tabs label {
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.tabs label.frontpage-bar-heading span {
+  font-size: 108%; /* 90% of 120% */
+}
+
+
+.tabs input[type='radio'] + label.frontpage-bar-item {
+  ◊|unselected-tab-css|
+}
+
+.tabs input[type='radio'] + label.frontpage-bar-item:hover {
+  ◊|unselected-tab-hover-css|
+}
+
+.tabs input[type='radio']:checked + label.frontpage-bar-item {
+  ◊|selected-tab-css|
+}
+
+.tabs input[type='radio']:checked + label.frontpage-bar-item:hover {
+  ◊|selected-tab-hover-css|
+}
+
+.tab {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  border-top: 1px solid ◊|tab-heading-color|;
+  width: 100%;
+  color: gray;
+  font-size: 90%;
+  order: 1;
+}
+
+/* End tab system */
+
 /* these two are to get the button layout at
    the top of the page to look reasonable */
 @media not all and (max-width:460px) {
@@ -81,19 +131,6 @@ section {
 }
 .logo-anchor:hover {
   opacity: 1;
-}
-
-.selected-tab {
-  ◊|selected-tab-css|
-}
-.selected-tab:hover {
-  ◊|selected-tab-hover-css|
-}
-.unselected-tab {
-  ◊|unselected-tab-css|
-}
-.unselected-tab:hover {
-  ◊|unselected-tab-hover-css|
 }
 
 .frontpage-card {
@@ -129,6 +166,10 @@ section {
   font-size:130%;
   color:◊|tab-heading-text-color|;
   text-align:center;
+  width: 100%;
+  padding: 1.256rem 0.5rem;
+  background-color: ◊|tab-heading-color|;
+  border-top: 1px solid ◊|tab-heading-color|;
 }
 
 .frontpage-bar-heading:hover {
@@ -202,11 +243,6 @@ section {
   font-size: 80%;
   margin-left: 1rem;
 }
-
-.mitem {
-  font-size: 50%;
-}
-
 
 .lang:hover .click-here {
   opacity: 0.8;
@@ -526,6 +562,7 @@ a, a:hover {
   section {flex-direction: column;}
   section-title {width: 100%; margin-bottom: 1rem;}
   section-content li {width: 100%;}
+  .tabs .tab { display: block; }
   .disappearing {display: none;}
   section-title + section-content > li {width: 100%;}
   li > p {width: 95%}
@@ -539,17 +576,18 @@ a, a:hover {
 
 /* smartphones only */
 @media all and (max-width:650px) {
+  .tabs label.frontpage-bar-item {
+    display: none;
+  }
+
 /* set max size for feature box to keep them all the same size */
   .feature { height : 8.5rem; }
   .feature > .inner {display: none;} /* prevents passthrough clicks */
   .active_expander.feature > .inner { display: block; }
-  .disappearing-late {display: none;}
   /* smartphones don't do hover effects, so provide fallback behavior */
   .active_expander > .inner {opacity: 1;}
   .expander, .expander:hover, .active_expander:hover {border-color: none;}
   .active_expander {border-color: gray;}
-  .selected-block { display: block; }
-  .unselected-block { display: block; }
   .center-if-smartphone{ text-align:center; }
   .disappear-if-smartphone { display:none; }
   .scale-if-smartphone { width: 100% }
@@ -588,11 +626,16 @@ a, a:hover {
 
 /* non smartphones */
 @media not all and (max-width:650px) {
+  .tabs .tab {
+    display: none;
+  }
+
+  .tabs input[type='radio']:checked + label + .tab {
+    display: block;
+  }
+
   /* this causes the non-initial menu content to be hidden
      in regular mode, visible in smartphone mode */
-  .full-mode-menu-content { display: none; }
-  .selected-block { display: block; }
-  .unselected-block { display: none; }
   .frontpage-bar-nowrap-unless-smartphone {
      white-space:nowrap;
   }
