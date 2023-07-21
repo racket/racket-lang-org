@@ -1,5 +1,7 @@
 #lang frog/config
 
+(require "python.rkt")
+
 ;; Called early when Frog launches. Use this to set parameters defined
 ;; in frog/params.
 (define/contract (init)
@@ -28,7 +30,7 @@
   (-> (listof xexpr/c) (listof xexpr/c))
   ;; Here we pass the xexprs through a series of functions.
   (~> xs
-      (syntax-highlight #:python-executable "python"
+      (syntax-highlight #:python-executable python-executable
                         #:line-numbers? #f
                         #:css-class "pygments")
       (auto-embed-tweets #:parents? #t)
