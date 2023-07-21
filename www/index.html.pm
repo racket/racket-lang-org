@@ -389,7 +389,7 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["il-grande-racket.png" #:size (cons 350 350) #:alt "Il Grande Racket"]{}}}}}}}}
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["il-grande-racket.jpg" #:size (cons 350 350) #:alt "Il Grande Racket"]{}}}}}}}}
 
 ◊div[#:id "tutorials" #:class "eco full-mode-menu-content unselected-block"]{
  ◊special-section[#:class "one-column-body-text"]{
