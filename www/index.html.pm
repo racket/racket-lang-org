@@ -34,6 +34,8 @@
 ◊[define datalog "https://docs.racket-lang.org/datalog/datalog.html?q=datalog"]
 ◊[define br-parsing "https://docs.racket-lang.org/br-parser-tools/index.html?q=parsing"]
 
+◊[define :-link ◊link["https://docs.racket-lang.org/datalog/interop.html?q=%3A-#%28form._%28%28lib._datalog%2Fmain..rkt%29._~3a-%29%29"]{:-}]
+
 ◊; ---------------------------------------------------------------------------------------------------
 
 ◊(top)
@@ -48,24 +50,8 @@
  ◊div[#:style "margin-right: 1em"]{◊link["https://con.racket-lang.org/"]{RacketCon 2023} is October 28-29 in Chicago}
 }}
 
-◊div[#:class "frontpage-card"]{
-◊special-section[#:class "one-column-body-text lop-system"
-                 #:style (~a "padding:0.5rem;align:center;"
-                             "background-color: " tab-heading-color ";")
-                 #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
-       #:onclick "openTab('the-language',event,'it','langtablink',false)"]{
-  Racket, the Programming Language}}
-◊div[#:class "frontpage-bar disappearing-late"]{
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'mature','langtablink',true)"]{◊div[#:style "mitem"]{Mature}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'batteries','langtablink',true)"]{◊div[#:style "mitem"]{Practical}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'extensible','langtablink',true)"]{◊div[#:style "mitem"]{Extensible}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'strong','langtablink',true)"]{◊div[#:style "mitem"]{Robust}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab langtablink" #:onclick "openTab('the-language',event,'drracket','langtablink',true)"]{◊div[#:style "mitem"]{Polished}}
-}}
-
-◊div[#:id "it" #:class "the-language selected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+◊tabs[#:group-id "racket-prog-lang-group"
+  ◊tab[#:heading? #t #:id "racket-prog-lang" #:title "Racket, the Programming Language"]{
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
    ◊div[#:class "translations-code-example-container"]{
     ◊div[#:class "center-if-smartphone"]{
@@ -93,11 +79,8 @@
             "hello world"))
 
 (◊docs{message-box} "" my-hello-world)}
-}}}}}}
-
-◊div[#:id "mature" #:class "the-language full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+}}}}}
+  ◊tab[#:id "mature" #:title "Mature"]{
 Racket is a mature and stable product. From the beginning, it has  supported cross-platform graphical programming (Windows, macOS, Linux).
 
 ◊doclinks{
@@ -105,11 +88,8 @@ Racket is a mature and stable product. From the beginning, it has  supported cro
 ◊link["https://docs.racket-lang.org/framework/index.html"]{GUI Framework}
 ◊link["https://docs.racket-lang.org/raco/exe.html"]{Standalone Binaries}
 ◊link["https://docs.racket-lang.org/foreign/index.html"]{Foreign Interface}}
-}}
-
-◊div[#:id "batteries" #:class "the-language full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+  }
+  ◊tab[#:id "batteries" #:title "Practical"]{
 Racket includes a rich set of libraries, covering the full range from web server apps to mathematics and scientific simulation software.
 
 ◊doclinks{
@@ -117,11 +97,8 @@ Racket includes a rich set of libraries, covering the full range from web server
 ◊doclink["db"]{Database}
 ◊doclink["math"]{Math & Statistics}
 ◊link["https://docs.racket-lang.org"]{Full List ◊begin['rarr]}}
-}}
-
-◊div[#:id "extensible" #:class "the-language full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+  }
+  ◊tab[#:id "extensible" #:title "Extensible"]{
 In Racket, programmers define their own loops with ◊strong{powerful macros}. Indeed, these macros are so powerful that programmers make entire ◊strong{domain-specific languages} as libraries. No tools, no Makefiles required.
 
 ◊doclinks{
@@ -129,11 +106,8 @@ In Racket, programmers define their own loops with ◊strong{powerful macros}. I
 ◊link["https://docs.racket-lang.org/reference/Macros.html"]{Macros In Depth}
 ◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{Making New Languages}
 ◊link["languages.html"]{Sample #Langs}}
-}}
-
-◊div[#:id "strong" #:class "the-language full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+  }
+  ◊tab[#:id "strong" #:title "Robust"]{
 Racket is the first language to support ◊strong{higher-order software contracts} and ◊strong{safe gradual typing}. Programmers can easily deploy these tools to harden their software.
 
 ◊doclinks{
@@ -141,11 +115,8 @@ Racket is the first language to support ◊strong{higher-order software contract
 ◊link["https://www2.ccs.neu.edu/racket/pubs/icfp2002-ff.pdf"]{High-Order Contracts}
 ◊link["https://docs.racket-lang.org/ts-guide/index.html"]{The Typed Racket Guide}
 ◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{Gradual Typing}}
-}}
-
-◊div[#:id "drracket" #:class "the-language full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+  }
+  ◊tab[#:id "drracket" #:title "Polished"]{
 Racket comes with support for major editors. The main bundle includes an innovative and extensible interactive development environment that has inspired other IDE projects.
 
 ◊doclinks{
@@ -153,27 +124,11 @@ Racket comes with support for major editors. The main bundle includes an innovat
 ◊link["https://marketplace.visualstudio.com/items?itemName=evzen-wybitul.magic-racket"]{VS Code/Magic Racket}
 ◊link["https://docs.racket-lang.org/guide/Emacs.html"]{Emacs Integration}
 ◊link["https://docs.racket-lang.org/guide/Vim.html"]{Vim Integration}
-}
 }}
+]
 
-◊div[#:class "frontpage-card"]{
-◊special-section[#:class "one-column-body-text lop-system"
-                 #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
-                 #:id "pull-quote"]{
- ◊span[#:class "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
-       #:onclick "openTab('lop',event,'more-it','loptablink',false)"]{
-  Racket, the Language-Oriented Programming Language}}
-◊div[#:class "frontpage-bar disappearing-late"]{
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'little-macros','loptablink',true)"]{◊div[#:style "mitem"]{Little Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'general-purpose','loptablink',true)"]{◊div[#:style "mitem"]{General Purpose}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'big-macros','loptablink',true)"]{◊div[#:style "mitem"]{Big Macros}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'hash-langs','loptablink',true)"]{◊div[#:style "mitem"]{Easy DSLs}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'ide-support','loptablink',true)"]{◊div[#:style "mitem"]{IDE Support}}
-  ◊button[#:class "frontpage-bar-item frontpage-button unselected-tab loptablink" #:onclick "openTab('lop',event,'any-syntax','loptablink',true)"]{◊div[#:style "mitem"]{Any Syntax}}
-}}
-
-◊div[#:id "more-it" #:class "lop selected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+◊tabs[#:group-id "racket-lop-group"
+  ◊tab[#:heading? #t #:id "racket-lop" #:title "Racket, the Language-Oriented Programming Language"]{
   ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"
        #:style "font-size:77%"]{
     ◊div[#:class "block-with-1em-margin"]{
@@ -200,18 +155,15 @@ Racket comes with support for major editors. The main bundle includes an innovat
 
     ◊div[#:class "block-with-1em-margin"]{
 ◊langwww["#lang datalog" #:id "lang4"]{
-◊pre{ancestor(A, B) ◊link["https://docs.racket-lang.org/datalog/interop.html?q=%3A-#%28form._%28%28lib._datalog%2Fmain..rkt%29._~3a-%29%29"]{:-} parent(A, B).
-ancestor(A, B) ◊link["https://docs.racket-lang.org/datalog/interop.html?q=%3A-#%28form._%28%28lib._datalog%2Fmain..rkt%29._~3a-%29%29"]{:-}
+◊pre{ancestor(A, B) ◊:-link parent(A, B).
+ancestor(A, B) ◊:-link
   parent(A, C), ancestor(C, B).
 parent(john, douglas).
 parent(bob, john).
 ancestor(A, B)?}}}
+}}
 
-}}}
-
-◊div[#:id "little-macros" #:class "lop full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+  ◊tab[#:id "little-macros" #:title "Little Macros"]{
    ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
 ◊langwww["#lang racket" #:style "font-size:75%"]{
@@ -245,10 +197,8 @@ ancestor(A, B)?}}}
 ◊;{the `abc` tag is a random one; I'm not sure what is the right thing to put there but `div` doesn't work.}
     ◊p[#:class "block-with-1em-margin"]{
      Little macros can particularly help programmers with DRY where other features can't. The example ◊abc[#:class "disappear-if-smartphone"]{on the left} ◊abc[#:class "smartphone-only"]{above} shows how to define a new syntax for measuring the time a task takes. The syntax avoids the repeated use of lambda. Note also how the macro is exported from this module as if it were an ordinary function.
-}}}}}
-
-◊div[#:id "general-purpose" #:class "lop full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+}}}}
+  ◊tab[#:id "general-purpose" #:title "General Purpose"]{
    ◊div[#:class "vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
 
@@ -279,13 +229,9 @@ ancestor(A, B)?}}}
 
     ◊p[#:class "block-with-1em-margin"]{
       Macros work with these tools. The example ◊abc[#:class "disappear-if-smartphone"]{on the left} ◊abc[#:class "smartphone-only"]{above} shows the implementation of a small number-guessing game. It is implemented in the GUI dialect of Racket, and demonstrates a number of language features.}}
+}}
 
-}}}
-
-
-◊div[#:id "big-macros" #:class "lop full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+  ◊tab[#:id "big-macros" #:title "Big Macros"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
       ◊img/size["big-macros-class.png" #:alt "Big Macros" #:size (cons 350 262) #:class "lop-image"]{}}
@@ -296,12 +242,8 @@ ancestor(A, B)?}}}
 
      ◊p[#:class "block-with-1em-margin"]{
         While Racket is a functional language, it has offered a sub-language of ◊link[traits-aplas]{classes and objects, mixins and traits}, from the beginning. The macro-based implementation of a Java-like class system lives in a library and does not need any support from the core language. A Racket programmer can thus combine functional with object-oriented components as needed. }}
-
-}}}
-
-◊div[#:id "hash-langs" #:class "lop full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+}}
+  ◊tab[#:id "hash-langs" #:title "Easy DSLs"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
       ◊img/size["lang-video.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350) #:class "lop-image"]{}}
@@ -312,11 +254,8 @@ ancestor(A, B)?}}}
 
      ◊p[#:class "block-with-1em-margin"]{
         Often ◊link[lang-video]{an application domain} comes with several languages.  When you need a new language, you make it—on the fly. Open an IDE window; create a language right there, with just a few keystrokes; and run a module in this new language in a second IDE window.  Making new languages really requires no setup, no project files, no external tools, no nothing.}
-}}}}
-
-◊div[#:id "ide-support" #:class "lop full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+}}}
+  ◊tab[#:id "ide-support" #:title "IDE Support"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
       ◊img/size["ide-support.png" #:alt "IDE Support" #:scale .3 #:class "lop-image"]{}}
@@ -327,11 +266,8 @@ ancestor(A, B)?}}}
 
      ◊p[#:class "block-with-1em-margin"]{
       A programmer immediately benefits from DrRacket while using an alternative language, say ◊link[typed/racket]{Typed Racket}. Racket macros, even complex ones and those used to make new languages, record and propagate a sufficient amount of source information for DrRacket to act as if it understood the features of the new language.}}
-}}}
-
-◊div[#:id "any-syntax" #:class "lop full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
-
+}}
+  ◊tab[#:id "any-syntax" #:title "Any Syntax"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
       ◊img/size["ugly-syntax.png" #:alt "Dots and Colon-Pipes, too!" #:size (cons 350 280) #:class "lop-image"]{}}
@@ -342,89 +278,48 @@ ancestor(A, B)?}}}
 
     ◊p[#:class "block-with-1em-margin"]{
       Racket's ecosystem comes with ◊link[br-parsing]{parsing packages} that allow developers to easily map any syntax to a parenthesized language, which is then compiled to ordinary Racket with the help of Racket's macro system. Such a language can also exploit the hooks of the IDE framework, so that its programmers may take advantage of Racket's IDE.}}
-}}}
+  }}
+]
 
-◊div[#:class "frontpage-card"]{
-◊special-section[#:class "one-column-body-text lop-system"
-                 #:style (~a "padding:0.5rem;align:center;background-color:" tab-heading-color ";")
-                 #:id "pull-quote"]{
- ◊span[#:id "lop-line" #:class "frontpage-bar-heading frontpage-bar-nowrap-unless-smartphone"
-       #:onclick "openTab('eco',event,'us','ecotablink',false)"]{
-  Racket, the Ecosystem}}
-◊div[#:class "frontpage-bar disappearing-late"]{
-  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'software','ecotablink',true)"]{◊div[#:style "mitem"]{Software}}
-  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'tutorials','ecotablink',true)"]{◊div[#:style "mitem"]{Tutorials & Documentation}}
-  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'community','ecotablink',true)"]{◊div[#:style "mitem"]{Community}}
-  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'books','ecotablink',true)"]{◊div[#:style "mitem"]{Books}}
-  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'education','ecotablink',true)"]{◊div[#:style "mitem"]{Education}}
-  ◊button[#:class "frontpage-bar-item unselected-tab frontpage-button ecotablink" #:onclick "openTab('eco',event,'stuff', 'ecotablink',true)"]{◊div[#:style "mitem"]{Swag}}
-}}
-
-◊div[#:id "us" #:class "eco selected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+◊tabs[#:group-id "ecosystem-group"
+  ◊tab[#:heading? #t #:id "ecosystem" #:title "Racket, the Ecosystem"]{
   ◊div[#:class "container-fluid scale-if-smartphone"]{
    ◊img[#:style "margin-left:auto;margin-right:auto;display:block;text-align:center"
         #:alt "eighth RacketCon, 2018"
         #:src "img/racket-con-2018.png" #:class "lop-image-rc8"]{}}
-}}
-
-◊div[#:id "software" #:class "eco full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+  }
+  ◊tab[#:id "software" #:title "Software"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-
-  ◊table{
-    ◊tr{
-
-    ◊td{ ◊div[#:class "smartphone-only"]{Software} ◊p{
-
+  ◊table[
+    ◊tr[
+    ◊td{ ◊div[#:class "smartphone-only"]{Software} ◊paragraph-list[
       ◊link["https://download.racket-lang.org/"]{Download Racket}
-
       ◊link["https://github.com/racket/racket/"]{Source Code}
-
       ◊link["https://github.com/racket/racket/issues"]{Bug Reports}
-
       ◊link["https://pre.racket-lang.org/installers/"]{Nightly Snapshot Builds}
-
-      ◊link["https://pkgs.racket-lang.org/"]{Packages}}}
-
+      ◊link["https://pkgs.racket-lang.org/"]{Packages}]}
     ◊td{ }
-
-    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["il-grande-racket.jpg" #:size (cons 350 350) #:alt "Il Grande Racket"]{}}}}}}}}
-
-◊div[#:id "tutorials" #:class "eco full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["il-grande-racket.jpg" #:size (cons 350 350) #:alt "Il Grande Racket"]{}}}]]}
+  }
+  ◊tab[#:id "tutorials" #:title "Tutorials & Documentation"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-
-  ◊table{
-    ◊tr{
-
-    ◊td{ ◊div[#:class "smartphone-only"]{Tutorials & Documentation} ◊p{
-
+  ◊table[
+    ◊tr[
+    ◊td{ ◊div[#:class "smartphone-only"]{Tutorials & Documentation} ◊paragraph-list[
       ◊link["https://docs.racket-lang.org/quick/"]{Quick Introduction}
-
       ◊link["https://docs.racket-lang.org/more/"]{Systems Programming}
-
       ◊link["https://docs.racket-lang.org/guide/"]{The Racket Guide}
-
       ◊link["https://docs.racket-lang.org/reference/"]{The Racket Reference}
-
       ◊link["https://docs.racket-lang.org/continue/"]{Web Applications}
-
-      ◊link["https://docs.racket-lang.org"]{All Documentation}}}
-
+      ◊link["https://docs.racket-lang.org"]{All Documentation}]}
     ◊td{ }
-
-    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["racket-guide.png" #:alt "The Guide"  #:size (cons 450 320)]{}}}}}}}}
-
-◊div[#:id "community" #:class "eco full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["racket-guide.png" #:alt "The Guide"  #:size (cons 450 320)]{}}}]]}
+  }
+  ◊tab[#:id "community" #:title "Community"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-
-   ◊table{
-    ◊tr{
-
+   ◊table[
+    ◊tr[
     ◊td{ ◊div[#:class "smartphone-only"]{Community} ◊p{
-
       ◊link["https://racket.discourse.group"]{Discourse} and ◊link["https://discord.gg/6Zq8sH5"]{Discord}
       These are the most active places for Racketeers.
 
@@ -445,19 +340,13 @@ ancestor(A, B)?}}}
 
       ◊link["sfc.html"]{Software Freedom Conservancy}
       Make a tax-deductible contribution to support our work.}}
-
     ◊td{ }
-
-    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["racket-school-2018.png" #:alt "Racket School 2018" #:size (cons 450 322)]{}}}}}}}}
-
-
-◊div[#:id "books" #:class "eco full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["racket-school-2018.png" #:alt "Racket School 2018" #:size (cons 450 322)]{}}}]]}
+  }
+  ◊tab[#:id "books" #:title "Books"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-
-   ◊table{
-    ◊tr{
-
+   ◊table[
+    ◊tr[
     ◊td{ ◊div[#:class "smartphone-only"]{Books} ◊p{
 
       ◊link["https://www.realmofracket.com/"]{Realm of Racket}
@@ -473,15 +362,12 @@ ancestor(A, B)?}}}
 
     ◊td{ }
 
-    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["beautiful-racket-cover.svg" #:alt "Beautiful Racket" #:size (cons 350 350)]{}}}}}}}}
-
-◊div[#:id "education" #:class "eco full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+    ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["beautiful-racket-cover.svg" #:alt "Beautiful Racket" #:size (cons 350 350)]{}}}]]}
+  }
+  ◊tab[#:id "education" #:title "Education"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-
-   ◊table{
-    ◊tr{
-
+   ◊table[
+    ◊tr[
     ◊td{ ◊div[#:class "smartphone-only"]{Education} ◊p{
 
       ◊link["https://school.racket-lang.org"]{The Racket Summer School}
@@ -492,25 +378,21 @@ ancestor(A, B)?}}}
 
       ◊link["http://www.bootstrapworld.org/"]{Bootstrap}
       a curriculum and training program for middle-school and high-school teachers}}
-
     ◊td{ }
-
-    ◊td{◊div[#:class "disappear-if-smartphone"]{◊img/size["four.png" #:alt "The Four Amigos" #:size (cons 450 322)]{}}}}}}}}
-
-
-◊div[#:id "stuff" #:class "eco full-mode-menu-content unselected-block"]{
- ◊special-section[#:class "one-column-body-text"]{
+    ◊td{◊div[#:class "disappear-if-smartphone"]{◊img/size["four.png" #:alt "The Four Amigos" #:size (cons 450 322)]{}}}]]}
+  }
+  ◊tab[#:id "stuff" #:title "Swag"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
-
-   ◊table{
-    ◊tr{
-
+   ◊table[
+    ◊tr[
     ◊td{ ◊div[#:class "smartphone-only"]{Swag}◊p{◊link["https://devswag.com/products/racket-t-shirt"]{Racket T-Shirts} — the perfect way to meet friends, influence people, and stay warm.
 
       ◊link["https://devswag.com/products/racket"]{Racket Stickers} — the indispensable accessory for laptops and textbooks.}}
 
     ◊td[#:class "disappear-if-smartphone"]{ }
-    ◊td[#:class "disappear-if-smartphone"]{◊div[#:class "disappear-if-smartphone"]{◊img/size["gear-and-stuff.jpg" #:alt "gear" #:scale .4]{}}}}}}}}
+    ◊td[#:class "disappear-if-smartphone"]{◊img/size["gear-and-stuff.jpg" #:alt "gear" #:scale .4]{}}]]}
+  }
+]
 
 ◊section[#:id "bottom" #:class "one-column-body-text" #:style "padding:0.5rem"]{
 ◊div{Thank you}
@@ -528,35 +410,4 @@ for their generous support over the years.}}
 ◊script[#:src "js/jquery.min.js"]{}
 
 ◊script{
-function openTab(classname, evt, elementname, othertabclassnames, turnredp) {
-  var i;
-
-  var tablinks;
-  tablinks = document.getElementsByClassName(othertabclassnames);
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className
-      .replace(" selected-tab", "")
-      .replace(" unselected-tab","")
-      + " unselected-tab";
-  }
-  if (turnredp) {
-    evt.currentTarget.className = evt.currentTarget.className
-      .replace(" unselected-tab", "") + " selected-tab";
-  }
-
-  // show selected block, on a per section basis
-  var classes;
-  classes = document.getElementsByClassName(classname);
-  for (i = 0; i < classes.length; i++) {
-    classes[i].className = classes[i].className
-      .replace(" selected-block","")
-      .replace(" unselected-block","") +
-      " unselected-block";
-  }
-  document.getElementById(elementname).className =
-    document.getElementById(elementname).className
-      .replace(" selected-block","")
-      .replace(" unselected-block","") +
-      " selected-block";
-}
 }
