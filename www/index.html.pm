@@ -410,4 +410,20 @@ for their generous support over the years.}}
 ◊script[#:src "js/jquery.min.js"]{}
 
 ◊script{
+document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.hash) {
+    const anchor = window.location.hash.substring(1);
+    const elem = document.getElementById(anchor);
+    if (elem) {
+      elem.checked = true;
+      document.querySelector(`#${anchor} + label + div.tab`).scrollIntoView();
+    }
+  }
+  const btnOnClick = e => {
+    window.location.href = '#' + e.target.id;
+  };
+  document.querySelectorAll('.btn-link').forEach(btn => {
+    btn.addEventListener('click', btnOnClick);
+  });
+});
 }
