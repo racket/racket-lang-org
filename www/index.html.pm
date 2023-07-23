@@ -50,8 +50,8 @@
  ◊div[#:style "margin-right: 1em"]{◊link["https://con.racket-lang.org/"]{RacketCon 2023} is October 28-29 in Chicago}
 }}
 
-◊tabs[#:group-id "racket-prog-lang-group"
-  ◊tab[#:heading? #t #:id "racket-prog-lang" #:title "Racket, the Programming Language"]{
+◊tabs[#:group-id "racket-lang-group"
+  ◊tab[#:heading? #t #:id "racket-lang" #:title "Racket, the Programming Language"]{
   ◊div[#:class "container-fluid"  #:style "font-size:77%"]{
    ◊div[#:class "translations-code-example-container"]{
     ◊div[#:class "center-if-smartphone"]{
@@ -89,7 +89,7 @@ Racket is a mature and stable product. From the beginning, it has  supported cro
 ◊link["https://docs.racket-lang.org/raco/exe.html"]{Standalone Binaries}
 ◊link["https://docs.racket-lang.org/foreign/index.html"]{Foreign Interface}}
   }
-  ◊tab[#:id "batteries" #:title "Practical"]{
+  ◊tab[#:id "practical" #:title "Practical"]{
 Racket includes a rich set of libraries, covering the full range from web server apps to mathematics and scientific simulation software.
 
 ◊doclinks{
@@ -107,7 +107,7 @@ In Racket, programmers define their own loops with ◊strong{powerful macros}. I
 ◊link["https://docs.racket-lang.org/guide/hash-languages.html"]{Making New Languages}
 ◊link["languages.html"]{Sample #Langs}}
   }
-  ◊tab[#:id "strong" #:title "Robust"]{
+  ◊tab[#:id "robust" #:title "Robust"]{
 Racket is the first language to support ◊strong{higher-order software contracts} and ◊strong{safe gradual typing}. Programmers can easily deploy these tools to harden their software.
 
 ◊doclinks{
@@ -116,7 +116,7 @@ Racket is the first language to support ◊strong{higher-order software contract
 ◊link["https://docs.racket-lang.org/ts-guide/index.html"]{The Typed Racket Guide}
 ◊link["https://www2.ccs.neu.edu/racket/pubs/typed-racket.pdf"]{Gradual Typing}}
   }
-  ◊tab[#:id "drracket" #:title "Polished"]{
+  ◊tab[#:id "polished" #:title "Polished"]{
 Racket comes with support for major editors. The main bundle includes an innovative and extensible interactive development environment that has inspired other IDE projects.
 
 ◊doclinks{
@@ -243,7 +243,7 @@ ancestor(A, B)?}}}
      ◊p[#:class "block-with-1em-margin"]{
         While Racket is a functional language, it has offered a sub-language of ◊link[traits-aplas]{classes and objects, mixins and traits}, from the beginning. The macro-based implementation of a Java-like class system lives in a library and does not need any support from the core language. A Racket programmer can thus combine functional with object-oriented components as needed. }}
 }}
-  ◊tab[#:id "hash-langs" #:title "Easy DSLs"]{
+  ◊tab[#:id "easy-dsls" #:title "Easy DSLs"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
       ◊img/size["lang-video.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350) #:class "lop-image"]{}}
@@ -281,8 +281,8 @@ ancestor(A, B)?}}}
   }}
 ]
 
-◊tabs[#:group-id "ecosystem-group"
-  ◊tab[#:heading? #t #:id "ecosystem" #:title "Racket, the Ecosystem"]{
+◊tabs[#:group-id "racket-ecosystem-group"
+  ◊tab[#:heading? #t #:id "racket-ecosystem" #:title "Racket, the Ecosystem"]{
   ◊div[#:class "container-fluid scale-if-smartphone"]{
    ◊img[#:style "margin-left:auto;margin-right:auto;display:block;text-align:center"
         #:alt "eighth RacketCon, 2018"
@@ -381,7 +381,7 @@ ancestor(A, B)?}}}
     ◊td{ }
     ◊td{◊div[#:class "disappear-if-smartphone"]{◊img/size["four.png" #:alt "The Four Amigos" #:size (cons 450 322)]{}}}]]}
   }
-  ◊tab[#:id "stuff" #:title "Swag"]{
+  ◊tab[#:id "swag" #:title "Swag"]{
   ◊div[#:class "container-fluid"  #:style "font-size:90%"]{
    ◊table[
     ◊tr[
