@@ -123,7 +123,9 @@ The ◊code{2htdp/image} library provides easy-to-use functions for making image
   (cond
     [definition-tag
       (define-values (path url-tag) (xref-tag->path+anchor xref definition-tag #:external-root-url "http://docs.racket-lang.org/"))
-      (apply link (format "~a#~a" path url-tag) #:class docs-class linkname)]
+      (cond
+        [url-tag (apply link (format "~a#~a" path url-tag) #:class docs-class linkname)]
+        [else (apply link (format "~a" path) #:class docs-class linkname)])]
     [else `(@ ,@linkname)]))
 
 
