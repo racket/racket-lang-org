@@ -80,6 +80,8 @@
 
 (define-div paragraph
   [text-align "left"])
+(define-div center
+  [text-align "center"])
 (define para paragraph)
 
 (define-div plain)
@@ -415,7 +417,7 @@ Please come with your big questions and discussion topics.
 
  (section
   @sectionHeader{Sponsor}
-  @paragraph{
+  @center{
  @a[#:href "https://www.cs.northwestern.edu/"]{
   @img[#:src "nwu-cs.svg"
        #:alt "Northwestern Computer Science Logo"]
