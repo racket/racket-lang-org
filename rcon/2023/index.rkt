@@ -78,7 +78,8 @@
   [margin-left "5em"]
   [margin-right "5em"])
 
-(define-div paragraph)
+(define-div paragraph
+  [text-align "left"])
 (define para paragraph)
 
 (define-div plain)
@@ -375,7 +376,18 @@ Please come with your big questions and discussion topics.
 
  (section
   @sectionHeader{Accommodation}
-  @paragraph{We are currently exploring the possibility of getting a block of rooms at a nearby hotel. (Of course, you are welcome to stay wherever you wish!)}
+
+  @paragraph{
+ We have reserved a block of rooms at the
+ @a[#:href "https://www.hilton.com/en/hotels/ordoehf-hilton-orrington-evanston/"]{Hilton Orrington}.
+ The block includes Deluxe King rooms at the rate of $189
+ per night and Deluxe Queen rooms with two beds at the rate
+ of $209 per night. To make a reservation, call +1 (800)
+ 445-8667 and tell them you are reserving a room to attend
+ RacketCon. Reservations must be made by September 27th to
+ get the block rate.
+}
+
  )
 
  (section
