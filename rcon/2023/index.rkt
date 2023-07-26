@@ -92,6 +92,8 @@
 
 (define-span emph
   [font-style "italic"])
+(define-span book-title
+  [font-style "italic"])
 
 (define-span tt
   [font-family ,monospace])
@@ -312,7 +314,28 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 #:who
 @speaker[#:url "https://wphomes.soic.indiana.edu/jsiek/"]{Jeremy Siek}
 #:what
-@talk{A Racket-based compilers course}
+@talk{Teaching and Learning Compilers Incrementally}
+#:more
+@abstract{
+This talk is an introduction to the joys of teaching and
+learning about compilers using the incremental approach. The talk
+provides a sneak-preview of a compiler course based on the new
+textbooks from MIT Press, @book-title{Essentials of Compilation: An Incremental
+Approach in Racket/Python}. The course takes students on a journey
+through constructing their own compiler for a small but powerful
+language.  The standard approach to describing and teaching compilers
+is to proceed one pass at a time, from the front to the back of the
+compiler. Unfortunately, that approach obfuscates how language
+features motivate design choices in a compiler. In this course we
+instead take an incremental approach in which we build a complete
+compiler every two weeks, starting with a small input language that
+includes only arithmetic and variables. We add new language features
+in subsequent iterations, extending the compiler as necessary.
+Students get immediate positive feedback as they see their compiler
+passing test cases and then learn important lessons regarding software
+engineering as they grow and refactor their compiler throughout the
+semester.
+ }
 ]
 
   @lunch[@talk-time{Saturday, 12:30pm}]
