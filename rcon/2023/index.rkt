@@ -391,7 +391,7 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Registration}
-   @paragraph{Check back soon! We currently do not have a registration form.'}
+   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2023-tickets-669052563227"]{buy a ticket via Eventbrite}.}
 )
 
  (section
