@@ -40,12 +40,12 @@ As of this release:
 Thank you to the people who contributed to this release:
 
 Adrien Ludwig, Alex Harsányi, Alex Knauth, Alexis King, Ben Greenman,
-Cameron Moy, D. Ben Knoble, Greg Hendershott, Gustavo Massaccesi,
-irreconsolable, Jay McCarthy, Joel Dueck, John Clements, Jordan Johnson,
-Kamil Laskowski, Laurent Orseau, Matthew Flatt, Matthias Felleisen, Mike
-Sperber, Oscar Waddell, Pavel Panchekha, Philip McGrath, reflektoin,
-Robby Findler, Ryan Culpepper, Sam Tobin-Hochstadt, Shu-Hung You, Stefan
-Schwarzer, Stephen De Gabrielle, and Yongming Shen
+Cameron Moy, D. Ben Knoble, Greg Hendershott, Gustavo Massaccesi, Jay
+McCarthy, Joel Dueck, John Clements, Jordan Johnson, Kamil Laskowski,
+Laurent Orseau, Liam Avella-Pisera, Matthew Flatt, Matthias Felleisen,
+Mike Sperber, Oscar Waddell, Pavel Panchekha, Philip McGrath,
+reflektoin, Robby Findler, Ryan Culpepper, Sam Tobin-Hochstadt, Shu-Hung
+You, Stefan Schwarzer, Stephen De Gabrielle, and Yongming Shen
 
 Feedback Welcome
 ----------------------------------------------------------------------
