@@ -327,7 +327,8 @@ This talk is an introduction to the joys of teaching and
 learning about compilers using the incremental approach. The talk
 provides a sneak-preview of a compiler course based on the new
 textbooks from MIT Press, @book-title{Essentials of Compilation: An Incremental
-Approach in Racket/Python}. The course takes students on a journey
+Approach in @a[#:href "https://mitpress.mit.edu/9780262047760/essentials-of-compilation/"]{Racket}/@a[#:href "https://mitpress.mit.edu/9780262048248/essentials-of-compilation/"]{Python}}.
+The course takes students on a journey
 through constructing their own compiler for a small but powerful
 language.  The standard approach to describing and teaching compilers
 is to proceed one pass at a time, from the front to the back of the
@@ -341,6 +342,19 @@ Students get immediate positive feedback as they see their compiler
 passing test cases and then learn important lessons regarding software
 engineering as they grow and refactor their compiler throughout the
 semester.
+ }
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 11:30am}
+#:who
+@speaker[#:url "http://www.mendhekar.com"]{Anurag Mendhekar}
+#:what
+@talk{Malt: A Deep Learning Framework for Racket}
+#:more
+@abstract{
+We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/themetaschemer/malt"]{Malt}, that has been built for Racket. Originally designed to support the pedagogy of @a[#:href "https://mitpress.mit.edu/9780262546379/the-little-learner/"]{@book-title{The Little Learner—A Straight Line to Deep Learning}}, it is used to build deep neural networks with a minimum of fuss using tools like higher-order automatic differentiation and rank polymorphism.  The natural, functional style of AI programming that Malt enables can be extended to much  larger, practical applications. We present a roadmap for how we hope to achieve this so that it can become a stepping stone to allow Lisp/Scheme/Racket to reclaim the crown of being @emph{the} language for Artificial Intelligence (perhaps!).
  }
 ]
 
