@@ -78,7 +78,10 @@
   [margin-left "5em"]
   [margin-right "5em"])
 
-(define-div paragraph)
+(define-div paragraph
+  [text-align "left"])
+(define-div center
+  [text-align "center"])
 (define para paragraph)
 
 (define-div plain)
@@ -90,6 +93,8 @@
   [font-weight bold])
 
 (define-span emph
+  [font-style "italic"])
+(define-span book-title
   [font-style "italic"])
 
 (define-span tt
@@ -315,7 +320,28 @@ In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mut
 #:who
 @speaker[#:url "https://wphomes.soic.indiana.edu/jsiek/"]{Jeremy Siek}
 #:what
-@talk{A Racket-based compilers course}
+@talk{Teaching and Learning Compilers Incrementally}
+#:more
+@abstract{
+This talk is an introduction to the joys of teaching and
+learning about compilers using the incremental approach. The talk
+provides a sneak-preview of a compiler course based on the new
+textbooks from MIT Press, @book-title{Essentials of Compilation: An Incremental
+Approach in Racket/Python}. The course takes students on a journey
+through constructing their own compiler for a small but powerful
+language.  The standard approach to describing and teaching compilers
+is to proceed one pass at a time, from the front to the back of the
+compiler. Unfortunately, that approach obfuscates how language
+features motivate design choices in a compiler. In this course we
+instead take an incremental approach in which we build a complete
+compiler every two weeks, starting with a small input language that
+includes only arithmetic and variables. We add new language features
+in subsequent iterations, extending the compiler as necessary.
+Students get immediate positive feedback as they see their compiler
+passing test cases and then learn important lessons regarding software
+engineering as they grow and refactor their compiler throughout the
+semester.
+ }
 ]
 
   @lunch[@talk-time{Saturday, 12:30pm}]
@@ -369,7 +395,7 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Registration}
-   @paragraph{Check back soon! We currently do not have a registration form.'}
+   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2023-tickets-669052563227"]{buy a ticket via Eventbrite}.}
 )
 
  (section
@@ -379,12 +405,23 @@ Please come with your big questions and discussion topics.
 
  (section
   @sectionHeader{Accommodation}
-  @paragraph{We recommend the @(a #:href "https://www.hilton.com/en/hotels/ordoehf-hilton-orrington-evanston/" #:title "Hilton Orrington, Evanston, IL, USA" "Hilton Orrington"). We are currently trying to get a block of rooms there. (That is just a recommendation. You are welcome to stay wherever you wish!)}
+
+  @paragraph{
+ We have reserved a block of rooms at the
+ @a[#:href "https://www.hilton.com/en/hotels/ordoehf-hilton-orrington-evanston/"]{Hilton Orrington}.
+ The block includes Deluxe King rooms at the rate of $189
+ per night and Deluxe Queen rooms with two beds at the rate
+ of $209 per night. To make a reservation, call +1 (800)
+ 445-8667 and tell them you are reserving a room to attend
+ RacketCon. Reservations must be made by September 27th to
+ get the block rate.
+}
+
  )
 
  (section
   @sectionHeader{Sponsor}
-  @paragraph{
+  @center{
  @a[#:href "https://www.cs.northwestern.edu/"]{
   @img[#:src "nwu-cs.svg"
        #:alt "Northwestern Computer Science Logo"]
