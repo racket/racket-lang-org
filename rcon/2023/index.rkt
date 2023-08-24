@@ -327,7 +327,8 @@ This talk is an introduction to the joys of teaching and
 learning about compilers using the incremental approach. The talk
 provides a sneak-preview of a compiler course based on the new
 textbooks from MIT Press, @book-title{Essentials of Compilation: An Incremental
-Approach in Racket/Python}. The course takes students on a journey
+Approach in @a[#:href "https://mitpress.mit.edu/9780262047760/essentials-of-compilation/"]{Racket}/@a[#:href "https://mitpress.mit.edu/9780262048248/essentials-of-compilation/"]{Python}}.
+The course takes students on a journey
 through constructing their own compiler for a small but powerful
 language.  The standard approach to describing and teaching compilers
 is to proceed one pass at a time, from the front to the back of the
