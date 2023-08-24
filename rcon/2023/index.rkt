@@ -345,6 +345,19 @@ semester.
  }
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 11:30am}
+#:who
+@speaker[#:url "http://www.mendhekar.com"]{Anurag Mendhekar}
+#:what
+@talk{Malt: A Deep Learning Framework for Racket}
+#:more
+@abstract{
+We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/themetaschemer/malt"]{Malt}, that has been built for Racket. Originally designed to support the pedagogy of @a[#:href "https://mitpress.mit.edu/9780262546379/the-little-learner/"]{@book-title{The Little Learner—A Straight Line to Deep Learning}}, it is used to build deep neural networks with a minimum of fuss using tools like higher-order automatic differentiation and rank polymorphism.  The natural, functional style of AI programming that Malt enables can be extended to much  larger, practical applications. We present a roadmap for how we hope to achieve this so that it can become a stepping stone to allow Lisp/Scheme/Racket to reclaim the crown of being @emph{the} language for Artificial Intelligence (perhaps!).
+ }
+]
+
   @lunch[@talk-time{Saturday, 12:30pm}]
 
   @para{Lunch will served buffet-style right next to the lecture hall.}
