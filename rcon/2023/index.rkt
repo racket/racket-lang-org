@@ -298,7 +298,11 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 #:who
 @speaker[#:url "https://llazarek.github.io/home.html"]{Lukas Lazarek}
 #:what
-@talk{Mutation!}
+@talk{Mutate: inject bugs into your programs!}
+#:more
+@abstract{
+In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mutate/" "mutate")}, a library for mutating programs, i.e. injecting possible bugs by making small syntactic changes to the program syntax. I’ll talk about what mutation is, why one might want it, and demo how to use the library.
+}
 ]
 
   @lecture[
