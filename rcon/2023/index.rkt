@@ -422,11 +422,16 @@ Please come with your big questions and discussion topics.
 
   @paragraph{
  We have reserved a block of rooms at the
- @a[#:href "https://www.hilton.com/en/hotels/ordoehf-hilton-orrington-evanston/"]{Hilton Orrington}.
+ @a[#:href "https://www.hilton.com/en/attend-my-event/ordoehf-906-49eed243-3f13-4694-a6cf-5bc5184f7c39/"]{Hilton Orrington}.
  The block includes Deluxe King rooms at the rate of $189
  per night and Deluxe Queen rooms with two beds at the rate
- of $209 per night. To make a reservation, call +1 (800)
- 445-8667 and tell them you are reserving a room to attend
+ of $209 per night. To make a reservation, use the previous
+ direct booking link, which already includes the RacketCon
+ discount.
+ If that link doesn't work, you may also reserve by phone by
+ calling @a[#:href "tel:+18004458667"]{+1 (800) 445-8667}.
+ When calling, be sure to tell them you are reserving a room
+ to attend
  RacketCon. Reservations must be made by September 27th to
  get the block rate.
 }
