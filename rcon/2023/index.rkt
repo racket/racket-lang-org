@@ -289,7 +289,22 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 #:who
 @speaker[#:url "http://eecs.northwestern.edu/~czu2221/"]{Chenhao Zhang}
 #:what
-@talk{Reductions on top of Rosette}
+@talk{@code{#lang Karp}: Formulating and Random Testing NP Reductions}
+#:more
+@abstract{
+Reduction, a pervasive idea in computer science, is often
+taught in algorithm courses with NP problems. The
+traditional pen-and-paper approach is notoriously
+ineffective both for students and instructors: Subtle
+mistakes in reductions are often hard to detect by merely
+inspecting the purported solutions. Constructing a
+counterexample by hand to expose the mistake is even more
+onerous. Based on the observation that reductions are
+actually programs, we designed @code{#lang Karp}, a DSL for
+formulating and random testing NP reductions. In this talk,
+I’m going to discuss the implementation of Karp on top of
+Racket and solver-aided host language @a[#:href "https://docs.racket-lang.org/rosette-guide/index.html"]{Rosette}.
+}
 ]
 
   @lecture[
