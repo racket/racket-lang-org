@@ -364,7 +364,7 @@ semester.
 #:when
 @talk-time{Saturday, 11:30am}
 #:who
-@speaker[#:url "https://www.thelittlelearner.com"]{Anurag Mendhekar}
+@speaker[#:url "https://www.thelittlelearner.com"]{Anurag Mendhekar and Daniel P. Friedman}
 #:what
 @talk{Malt: A Deep Learning Framework for Racket}
 #:more
