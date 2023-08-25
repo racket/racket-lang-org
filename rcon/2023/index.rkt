@@ -364,7 +364,7 @@ semester.
 #:when
 @talk-time{Saturday, 11:30am}
 #:who
-@speaker[#:url "http://www.mendhekar.com"]{Anurag Mendhekar}
+@speaker[#:url "https://www.thelittlelearner.com"]{Anurag Mendhekar}
 #:what
 @talk{Malt: A Deep Learning Framework for Racket}
 #:more
