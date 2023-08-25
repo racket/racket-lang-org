@@ -428,7 +428,7 @@ Please come with your big questions and discussion topics.
  of $209 per night. To make a reservation, use the previous
  direct booking link, which already includes the RacketCon
  discount.
- If that link doesn't work, you may also reserve by phone by
+ If that link doesn’t work, you may also reserve by phone by
  calling @a[#:href "tel:+18004458667"]{+1 (800) 445-8667}.
  When calling, be sure to tell them you are reserving a room
  to attend
