@@ -383,8 +383,7 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 #:who
 @speaker[#:url "https://github.com/dstorrs"]{David Storrs}
 #:what
-@talk{@[#:href "https://pkgs.racket-lang.org/package/struct-plus-plus" #:title "struct-plus-plus (Racket package)"]{struct++}}
- }
+@talk{@a[#:href "https://pkgs.racket-lang.org/package/struct-plus-plus" #:title "struct-plus-plus (Racket package)"]{struct++}}
 ]
 
 )
