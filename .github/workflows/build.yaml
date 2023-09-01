@@ -18,7 +18,7 @@ jobs:
           architecture: 'x64'  # or: 'x64', 'x86', 'arm32', 'arm64'
           distribution: 'full' # or: 'minimal'
           variant: 'CS'        # or: 'BC' for Racket Before Chez
-          version: '8.7'
+          version: '8.10'
 
       - name: Install package
         run: raco pkg install --auto --no-docs -n racket-lang-org `pwd`
