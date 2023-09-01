@@ -383,7 +383,13 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 #:who
 @speaker[#:url "https://github.com/dstorrs"]{David Storrs}
 #:what
-@talk{@a[#:href "https://pkgs.racket-lang.org/package/struct-plus-plus" #:title "struct-plus-plus (Racket package)"]{struct++}}
+@talk{Data Integrity via Smart Structs}
+#:more
+@abstract{
+@para{Structs in Racket should be more than dumb data storage.  They should be data models in the sense of MVC programming; they should ensure that their contents are valid according to your project’s business rules and they should make it easy to do common operations such as storing to a database or generating a struct from data of another type such as a database row or user input field.}
+
+@para{The @a[#:href "https://pkgs.racket-lang.org/package/struct-plus-plus" #:title "struct-plus-plus (Racket package)"]{struct-plus-plus} module makes this easy.  It allows you to place contracts on individual fields, specify business rules that ensure integrity between fields, easily create converter functions, and much more, with all of these things being part of the struct definition and therefore in one easily-referenced location.  Come see how it all works and how you can simplify your code with struct-plus-plus!}
+}
 ]
 
 )
