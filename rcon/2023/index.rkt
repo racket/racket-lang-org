@@ -396,6 +396,15 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 }
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 2:30pm}
+#:who
+@speaker[#:url "https://github.com/samdphillips"]{Sam Phillips}
+#:what
+@talk{keyring: Uniformly access secrets}
+]
+
 )
 
  (section
