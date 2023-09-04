@@ -326,7 +326,11 @@ In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mut
 #:who
 @speaker[#:url "https://github.com/adamperlin"]{Adam Perlin}
 #:what
-@talk{Racket ⟹ WebAssembly}
+@talk{Incrementally Developing Support for Racket->Wasm Compilation}
+#:more
+@abstract{
+Wasm is an attractive compiler target for a variety of reasons: it has support in all major browsers, its isolation guarantees are beneficial for security reasons, and it has potential as a general-purpose platform-independent execution environment. However, adding Wasm support to Racket has proven a challenging problem due to differences in the execution model each language uses at runtime. Chez Scheme, the backend of Racket CS, utilizes code generation conventions which are difficult to adapt to Wasm. This talk will present an alternative approach to Racket-to-Wasm compilation which is compatible with Racket CS. The approach is accomplished by using an existing bytecode format and interpreter which are already supported under Chez Scheme, and performing an ahead-of-time translation of portions of bytecode programs into Wasm. This sets up an incremental approach to the development of a Racket-to-Wasm compilation system.
+}
 ]
 
   @lecture[
