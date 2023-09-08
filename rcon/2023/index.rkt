@@ -403,6 +403,12 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 @speaker[#:url "https://github.com/samdphillips"]{Sam Phillips}
 #:what
 @talk{keyring: Uniformly access secrets}
+#:more
+@abstract{
+Hardcoding passwords in your programs is bad.  Using secure password stores are
+good.  @a[#:href "https://pkgs.racket-lang.org/package/keyring" #:title "keyring (Racket package)"]{Keyring} is a Racket library that allows programs to access  different
+password stores using a simple interface.
+}
 ]
 
 )
