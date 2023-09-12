@@ -420,13 +420,13 @@ password stores using a simple interface.
 @talk{Esterel in Racket}
 #:more
 @abstract{
-Concurrency and thread preemption are tools that can make programs more modular. Unfortunately, in conventional programming models, combining state and concurrency (to say nothing of preemption!) makes programs extremely hard to get right.
+@para{Concurrency and thread preemption are tools that can make programs more modular. Unfortunately, in conventional programming models, combining state and concurrency (to say nothing of preemption!) makes programs extremely hard to get right.}
 
-Esterel offers a different programming model that is designed such that concurrency, state change, and thread preemption can all be used harmoniously. It dates to the 1980s and is the brainchild of Gérard Berry.
+@para{Esterel offers a different programming model that is designed such that concurrency, state change, and thread preemption can all be used harmoniously. It dates to the 1980s and is the brainchild of Gérard Berry.}
 
-Unfortunately, the standard implementation technique for Esterel (as embodied in Manuel Serrano’s JS+Esterel integration, HipHop) requires a form of staging that leaks out and affects the programming model. I’ve been working on a different implementation technique that uses continuations as to try to get a more seamless integration with a conventional programming language (Racket, naturally).
+@para{Unfortunately, the standard implementation technique for Esterel (as embodied in Manuel Serrano’s JS+Esterel integration, HipHop) requires a form of staging that leaks out and affects the programming model. I’ve been working on a different implementation technique that uses continuations as to try to get a more seamless integration with a conventional programming language (Racket, naturally).}
 
-In the talk, I’ll try to use examples to make some sense out of what’s written in the second paragraph and, more generally, give a demo of this @a[#:href "https://docs.racket-lang.org/esterel/" #:title "Esterel in Racket (Racket documentation)"]{new implementation}. If we have time, I’ll also try to explain how the implementation actually works.
+@para{In the talk, I’ll try to use examples to make some sense out of what’s written in the second paragraph and, more generally, give a demo of this @a[#:href "https://docs.racket-lang.org/esterel/" #:title "Esterel in Racket (Racket documentation)"]{new implementation}. If we have time, I’ll also try to explain how the implementation actually works.}
 
 }
 ]
