@@ -415,7 +415,7 @@ password stores using a simple interface.
 #:when
 @talk-time{Saturday, 3:00pm}
 #:who
-@speaker[#:url "https://github.com/samdphillips"]{Robby Findler}
+@speaker[#:url "https://users.cs.northwestern.edu/~robby/"]{Robby Findler}
 #:what
 @talk{Esterel in Racket}
 #:more
