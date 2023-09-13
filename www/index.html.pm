@@ -399,7 +399,7 @@ ancestor(A, B)?}}}
 ◊div{To ◊link["http://www.nsf.gov/"]{the NSF},
 ◊link["http://www.darpa.mil/"]{DARPA},
 the ◊link["http://www.ed.gov/FIPSE/"]{Fund for the Improvement of Postsecondary Education (FIPSE)} at the ◊link["http://www.ed.gov/"]{US Department of Education},
-the ◊link["http://www.exxonmobil.com/Corporate/community_foundation.aspx"]{Exxon Foundation},
+the ◊link["https://corporate.exxonmobil.com/news/reporting-and-publications/sustainability-report/social/social-contributions-and-philanthropy/stem-education/"]{Exxon Foundation},
 CORD, partners of the Academy of Information Technology,
 ◊link["http://microsoft.com/"]{Microsoft},
 ◊link["http://mozilla.org/"]{Mozilla},
