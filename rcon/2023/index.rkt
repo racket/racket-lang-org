@@ -431,6 +431,18 @@ password stores using a simple interface.
 }
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 3:30pm}
+#:who
+@speaker[#:url "https://github.com/countvajhula"]{Siddhartha Kasivajhula}
+#:what
+@talk{Redeeming open source with attribution based economics}
+#:more
+@abstract{
+Attribution Based Economics (ABE) is a new paradigm for economics that revises several foundational assumptions governing today’s systems, including the nature of economic value and the origin of money. In this new paradigm, open source software becomes economically viable and, indeed, even financially favored over proprietary models. This talk describes our experiences implementing an early prototype for @a[#:href "https://pkgs.racket-lang.org/package/qi" #:title "Qi (Racket package)"]{the Qi project}, and also how Racket will be an essential part of the solution as ABE scales past the pilot stage.}
+]
+
 )
 
  (section
