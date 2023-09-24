@@ -39,8 +39,8 @@ Principles of programming languages for undergraduates, graduate students, and e
 Semantics for language engineers: graduate students and practitioners alike. 
 
        
-◊link["https://link.springer.com/book/10.1007/978-3-8351-9079-5"]{Die Macht der Abstraktion}
-Einführung in die Programmierung.
+◊link["https://www.deinprogramm.de/sdp/"]{Schreibe Dein Programm!}
+German-language introduction to programming, based on design recipes.
 
 ◊link["http://www.springer.com/us/book/9783658141332"]{Programmierparadigmen (2. Auflage)}
 Eine Einführung auf der Grundlage von Racket.
