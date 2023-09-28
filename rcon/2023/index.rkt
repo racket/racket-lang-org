@@ -443,6 +443,19 @@ password stores using a simple interface.
 Attribution Based Economics (ABE) is a new paradigm for economics that revises several foundational assumptions governing today’s systems, including the nature of economic value and the origin of money. In this new paradigm, open source software becomes economically viable and, indeed, even financially favored over proprietary models. This talk describes our experiences implementing an early prototype for @a[#:href "https://pkgs.racket-lang.org/package/qi" #:title "Qi (Racket package)"]{the Qi project}, and also how Racket will be an essential part of the solution as ABE scales past the pilot stage.}
 ]
 
+  @lecture[
+#:when
+@talk-time{Saturday, 4:00pm}
+#:who
+@speaker[#:url "https://www.micahcantor.com"]{Micah Cantor}
+#:what
+@talk{Crafting Interpreters in Typed Racket}
+#:more
+@abstract{
+My first Typed Racket program was an interpreter for the Lox language from Bob Nystrom’s book @a[#:href "https://craftinginterpreters.com"]{@book{Crafting Interpreters}}. In this talk, I’ll discuss the design decisions I made when translating from Nystrom’s Java, as well as the fun and frustrating aspects of Typed Racket I discovered in the process. I’ll also give a retrospective on learning how to adapt a traditional compiler to Racket’s language-oriented paradigm.
+}
+]
+
 )
 
  (section
