@@ -507,7 +507,7 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Registration}
-   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2023-tickets-669052563227"]{buy a ticket via Eventbrite}.}
+   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2023-tickets-669052563227"]{buy a ticket via Eventbrite}. If you cannot attend in-person, there is an option on Eventbrite for @emph{remote participation}.}
 )
 
  (section
