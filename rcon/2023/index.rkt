@@ -266,7 +266,7 @@ $(document).ready(function () {
 
   @para{@bold{Room}: TBD}
 
-  @doors-open[@talk-time{Saturday, 09:00am}]
+  @doors-open[@talk-time{Saturday, 08:30am}]
 
   @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
@@ -285,7 +285,7 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 
   @lecture[
 #:when
-@talk-time{Saturday, 9:30am}
+@talk-time{Saturday, 09:30am}
 #:who
 @speaker[#:url "http://eecs.northwestern.edu/~czu2221/"]{Chenhao Zhang}
 #:what
@@ -320,9 +320,11 @@ In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mut
 }
 ]
 
+  @coffee[@talk-time{Saturday, 10:30am}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 10:30am}
+@talk-time{Saturday, 11:00am}
 #:who
 @speaker[#:url "https://github.com/adamperlin"]{Adam Perlin}
 #:what
@@ -335,7 +337,7 @@ Wasm is an attractive compiler target for a variety of reasons: it has support i
 
   @lecture[
 #:when
-@talk-time{Saturday, 11:00am}
+@talk-time{Saturday, 11:30am}
 #:who
 @speaker[#:url "https://wphomes.soic.indiana.edu/jsiek/"]{Jeremy Siek}
 #:what
@@ -366,7 +368,7 @@ semester.
 
   @lecture[
 #:when
-@talk-time{Saturday, 11:30am}
+@talk-time{Saturday, 12:00pm}
 #:who
 @speaker[#:url "https://www.thelittlelearner.com"]{Anurag Mendhekar and Daniel P. Friedman}
 #:what
@@ -431,9 +433,11 @@ password stores using a simple interface.
 }
 ]
 
+  @coffee[@talk-time{Saturday, 3:30pm}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 3:30pm}
+@talk-time{Saturday, 4:00pm}
 #:who
 @speaker[#:url "https://github.com/countvajhula"]{Siddhartha Kasivajhula}
 #:what
@@ -445,7 +449,7 @@ Attribution Based Economics (ABE) is a new paradigm for economics that revises s
 
   @lecture[
 #:when
-@talk-time{Saturday, 4:00pm}
+@talk-time{Saturday, 4:30pm}
 #:who
 @speaker[#:url "https://www.micahcantor.com"]{Micah Cantor}
 #:what
@@ -465,11 +469,11 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 
   @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
-  @doors-open[@talk-time{Sunday, 09:30am}]
+  @doors-open[@talk-time{Sunday, 9:30am}]
 
   @lecture[
 #:when
-@talk-time{Sunday, 11:00am}
+@talk-time{Sunday, 10:00am}
 #:who
 @speaker[#:url "https://users.cs.utah.edu/~mflatt/" #:affiliation "Utah"]{Matthew Flatt}
 #:what
@@ -478,7 +482,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 
   @lecture[
 #:when
-@talk-time{Sunday, 11:30am}
+@talk-time{Sunday, 10:30am}
 #:who
 @speaker[#:url "https://samth.github.io" #:affiliation "Indiana"]{Sam Tobin-Hochstadt}
 #:what
@@ -487,7 +491,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 
   @lecture[
 #:when
-@talk-time{Sunday, 12:00pm}
+@talk-time{Sunday, 11:30am}
 #:who
 @speaker[#:person? #f]{Racket Management}
 #:what
