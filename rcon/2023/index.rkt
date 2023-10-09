@@ -274,6 +274,15 @@ $(document).ready(function () {
 #:when
 @talk-time{Saturday, 9:00am}
 #:who
+@speaker[#:url "https://www.crockford.com/riddle.html"]{Douglas Crockford}
+#:what
+@talk{From Here To Lambda And Back Again}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 9:00am}
+#:who
 @speaker[#:url "https://sagegerard.com"]{Sage Gerard}
 #:what
 @talk{Introducing Rackith}
@@ -283,9 +292,11 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 }
 ]
 
+  @coffee[@talk-time{Saturday, 10:00am}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 09:30am}
+@talk-time{Saturday, 10:30am}
 #:who
 @speaker[#:url "http://eecs.northwestern.edu/~czu2221/"]{Chenhao Zhang}
 #:what
@@ -309,7 +320,7 @@ Racket and solver-aided host language @a[#:href "https://docs.racket-lang.org/ro
 
   @lecture[
 #:when
-@talk-time{Saturday, 10:00am}
+@talk-time{Saturday, 11:00am}
 #:who
 @speaker[#:url "https://llazarek.github.io/home.html"]{Lukas Lazarek}
 #:what
@@ -320,11 +331,9 @@ In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mut
 }
 ]
 
-  @coffee[@talk-time{Saturday, 10:30am}]
-
   @lecture[
 #:when
-@talk-time{Saturday, 11:00am}
+@talk-time{Saturday, 11:30am}
 #:who
 @speaker[#:url "https://github.com/adamperlin"]{Adam Perlin}
 #:what
@@ -337,7 +346,7 @@ Wasm is an attractive compiler target for a variety of reasons: it has support i
 
   @lecture[
 #:when
-@talk-time{Saturday, 11:30am}
+@talk-time{Saturday, 12:00pm}
 #:who
 @speaker[#:url "https://wphomes.soic.indiana.edu/jsiek/"]{Jeremy Siek}
 #:what
@@ -366,9 +375,13 @@ semester.
  }
 ]
 
+  @lunch[@talk-time{Saturday, 12:30pm}]
+
+  @para{Lunch will served buffet-style right next to the lecture hall.}
+
   @lecture[
 #:when
-@talk-time{Saturday, 12:00pm}
+@talk-time{Saturday, 2:00pm}
 #:who
 @speaker[#:url "https://www.thelittlelearner.com"]{Anurag Mendhekar and Daniel P. Friedman}
 #:what
@@ -379,13 +392,9 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
  }
 ]
 
-  @lunch[@talk-time{Saturday, 12:30pm}]
-
-  @para{Lunch will served buffet-style right next to the lecture hall.}
-
   @lecture[
 #:when
-@talk-time{Saturday, 2:00pm}
+@talk-time{Saturday, 2:30pm}
 #:who
 @speaker[#:url "https://github.com/dstorrs"]{David Storrs}
 #:what
@@ -398,9 +407,11 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 }
 ]
 
+  @coffee[@talk-time{Saturday, 3:00pm}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 2:30pm}
+@talk-time{Saturday, 3:30pm}
 #:who
 @speaker[#:url "https://github.com/samdphillips"]{Sam Phillips}
 #:what
@@ -412,28 +423,6 @@ good.  @a[#:href "https://pkgs.racket-lang.org/package/keyring" #:title "keyring
 password stores using a simple interface.
 }
 ]
-
-  @lecture[
-#:when
-@talk-time{Saturday, 3:00pm}
-#:who
-@speaker[#:url "https://users.cs.northwestern.edu/~robby/"]{Robby Findler}
-#:what
-@talk{Esterel in Racket}
-#:more
-@abstract{
-@para{Concurrency and thread preemption are tools that can make programs more modular. Unfortunately, in conventional programming models, combining state and concurrency (to say nothing of preemption!) makes programs extremely hard to get right.}
-
-@para{Esterel offers a different programming model that is designed such that concurrency, state change, and thread preemption can all be used harmoniously. It dates to the 1980s and is the brainchild of Gérard Berry.}
-
-@para{Unfortunately, the standard implementation technique for Esterel (as embodied in Manuel Serrano’s JS+Esterel integration, HipHop) requires a form of staging that leaks out and affects the programming model. I’ve been working on a different implementation technique that uses continuations as to try to get a more seamless integration with a conventional programming language (Racket, naturally).}
-
-@para{In the talk, I’ll try to use examples to make some sense out of what’s written in the second paragraph and, more generally, give a demo of this @a[#:href "https://docs.racket-lang.org/esterel/" #:title "Esterel in Racket (Racket documentation)"]{new implementation}. If we have time, I’ll also try to explain how the implementation actually works.}
-
-}
-]
-
-  @coffee[@talk-time{Saturday, 3:30pm}]
 
   @lecture[
 #:when
@@ -469,7 +458,27 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 
   @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
-  @doors-open[@talk-time{Sunday, 9:30am}]
+  @doors-open[@talk-time{Sunday, 9:00am}]
+
+  @lecture[
+#:when
+@talk-time{Sunday, 9:00am}
+#:who
+@speaker[#:url "https://users.cs.northwestern.edu/~robby/"]{Robby Findler}
+#:what
+@talk{Esterel in Racket}
+#:more
+@abstract{
+@para{Concurrency and thread preemption are tools that can make programs more modular. Unfortunately, in conventional programming models, combining state and concurrency (to say nothing of preemption!) makes programs extremely hard to get right.}
+
+@para{Esterel offers a different programming model that is designed such that concurrency, state change, and thread preemption can all be used harmoniously. It dates to the 1980s and is the brainchild of Gérard Berry.}
+
+@para{Unfortunately, the standard implementation technique for Esterel (as embodied in Manuel Serrano’s JS+Esterel integration, HipHop) requires a form of staging that leaks out and affects the programming model. I’ve been working on a different implementation technique that uses continuations as to try to get a more seamless integration with a conventional programming language (Racket, naturally).}
+
+@para{In the talk, I’ll try to use examples to make some sense out of what’s written in the second paragraph and, more generally, give a demo of this @a[#:href "https://docs.racket-lang.org/esterel/" #:title "Esterel in Racket (Racket documentation)"]{new implementation}. If we have time, I’ll also try to explain how the implementation actually works.}
+
+}
+]
 
   @lecture[
 #:when
