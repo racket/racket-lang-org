@@ -458,7 +458,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 
   @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
-  @doors-open[@talk-time{Sunday, 9:00am}]
+  @doors-open[@talk-time{Sunday, 8:30am}]
 
   @lecture[
 #:when
