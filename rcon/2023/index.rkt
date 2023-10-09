@@ -70,7 +70,7 @@
   [font-style "italic"]
   [font-size "24pt"]
   [margin-top "0.25em"]
-  [margin-bottom "1em"]
+  [margin-bottom "0.5em"]
   [color "gray"])
 
 (define-div abstract
@@ -114,7 +114,11 @@
   [top 0])
 
 (define-div speech
-  [margin-top "4em"]
+  [margin-top "3em"]
+  [position relative])
+
+(define-div first-speech
+  [margin-top "1em"]
   [position relative])
 
 (define-div bio-div
@@ -123,6 +127,14 @@
 (define-div keynote-speaker
   [font-size "24pt"]
   [font-weight "bold"])
+
+(define-div nb
+  [text-align "center"]
+  [font-style "italic"])
+
+(define-div specific-location
+  [font-size "18pt"]
+  [margin-top "0.25em"])
 
 (define (script . contents)
  `(script ,@(map (λ (x) (cdata #f #f x)) contents)))
@@ -169,20 +181,22 @@
                  #:who who
                  #:link [l #f]
                  #:what [what ""]
-                 #:more [more ""])
-  (speech when
-          who
-          (if l
-           (live-link "" (a #:href l "talk link"))
-           "")
-          what
-          more))
+                 #:more [more ""]
+                 #:first? [first? #f])
+  ((if first? first-speech speech) when
+                                   who
+                                   (if l
+                                       (live-link "" (a #:href l "talk link"))
+                                       "")
+                                   what
+                                   more))
 
 (define (hallway when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Hallway}}))
 
 (define (doors-open when)
- (lecture #:when when #:who @speaker[#:person? #f]{@bold{Doors Open}}))
+  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Doors Open}}
+           #:first? #t))
 
 (define (coffee when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Coffee}}))
@@ -262,7 +276,9 @@ $(document).ready(function () {
         @pagetitle["(thirteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
       @subtitle{October 28-29, 2023}
       @subtitle{@`(span ((class "p-location")) "Northwestern University")}
-      @subsubtitle{@`(span ((class "p-locality")) ,location)})
+      @subsubtitle{@`(span ((class "p-locality")) ,location)}
+      @specific-location{Ryan Auditorium}
+      )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
 (txexpr* 'time `((class "dt-end") (hidden "") (datetime ,(gregor:~t sunday "y-MM-dd"))))
@@ -272,11 +288,9 @@ $(document).ready(function () {
  (section
   @sectionHeader{Saturday, October 28th}
 
-  @para{@bold{Room}: TBD}
-
   @doors-open[@talk-time{Saturday, 8:30am}]
 
-  @para{NB Breakfast won’t be served! Please eat before coming to the event.}
+  @nb{Breakfast won’t be served, so please eat before coming to the event.}
 
   @keynote[
 @talk-time{Saturday, 9:00am}
@@ -461,11 +475,9 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
  (section
   @sectionHeader{Sunday, October 29th}
 
-  @para{@bold{Room}: TBD}
-
-  @para{NB Breakfast won’t be served! Please eat before coming to the event.}
-
   @doors-open[@talk-time{Sunday, 8:30am}]
+
+  @nb{NB Breakfast won’t be served! Please eat before coming to the event.}
 
   @lecture[
 #:when
