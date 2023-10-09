@@ -240,6 +240,9 @@
   `(span ([data-slot-time ,(moment->iso8601 m)])
     ,(~t tz "EEEE, h:mma zz"))))
 
+(define nb-breakfast
+  @nb{Breakfast won’t be served, so please eat before coming to the event.})
+
 ;; ------------------------------------------------------------
 
 (define page
@@ -290,7 +293,7 @@ $(document).ready(function () {
 
   @doors-open[@talk-time{Saturday, 8:30am}]
 
-  @nb{Breakfast won’t be served, so please eat before coming to the event.}
+  @nb-breakfast
 
   @keynote[
 @talk-time{Saturday, 9:00am}
@@ -367,7 +370,7 @@ Wasm is an attractive compiler target for a variety of reasons: it has support i
 
   @lunch[@talk-time{Saturday, 12:30pm}]
 
-  @para{Lunch will served buffet-style right next to the lecture hall.}
+  @nb{Lunch will served buffet-style right next to the lecture hall.}
 
   @lecture[
 #:when
@@ -477,7 +480,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 
   @doors-open[@talk-time{Sunday, 8:30am}]
 
-  @nb{NB Breakfast won’t be served! Please eat before coming to the event.}
+  @nb-breakfast
 
   @lecture[
 #:when
