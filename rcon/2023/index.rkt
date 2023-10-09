@@ -478,13 +478,15 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
  (section
   @sectionHeader{Sunday, October 29th}
 
-  @doors-open[@talk-time{Sunday, 8:30am}]
+  @para{@bold{Room}: TBD}
+
+  @doors-open[@talk-time{Sunday, 9:00am}]
 
   @nb-breakfast
 
   @lecture[
 #:when
-@talk-time{Sunday, 9:00am}
+@talk-time{Sunday, 9:30am}
 #:who
 @speaker[#:url "https://users.cs.northwestern.edu/~robby/"]{Robby Findler}
 #:what
@@ -511,9 +513,11 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 @talk{Rhombus: Status Update}
 ]
 
+  @coffee[@talk-time{Sunday, 10:30am}]
+
   @lecture[
 #:when
-@talk-time{Sunday, 10:30am}
+@talk-time{Sunday, 11:00am}
 #:who
 @speaker[#:url "https://samth.github.io" #:affiliation "Indiana"]{Sam Tobin-Hochstadt}
 #:what
