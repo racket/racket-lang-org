@@ -114,11 +114,15 @@
   [top 0])
 
 (define-div speech
-  [margin-top "2em"]
+  [margin-top "4em"]
   [position relative])
 
 (define-div bio-div
   [margin-top "0.5em"])
+
+(define-div keynote-speaker
+  [font-size "24pt"]
+  [font-weight "bold"])
 
 (define (script . contents)
  `(script ,@(map (λ (x) (cdata #f #f x)) contents)))
@@ -185,6 +189,10 @@
 
 (define (lunch when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Lunch}}))
+
+(define (keynote when #:who who #:what what)
+  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Keynote}}
+           #:what (keynote-speaker who) #:more what))
 
 (define (bio . contents)
  (apply bio-div @bold{Bio: } contents))
@@ -270,8 +278,7 @@ $(document).ready(function () {
 
   @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
-  @lecture[
-#:when
+  @keynote[
 @talk-time{Saturday, 9:00am}
 #:who
 @speaker[#:url "https://www.crockford.com/riddle.html"]{Douglas Crockford}
