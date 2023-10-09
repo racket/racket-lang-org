@@ -279,9 +279,11 @@ $(document).ready(function () {
 @talk{From Here To Lambda And Back Again}
 ]
 
+  @coffee[@talk-time{Saturday, 10:00am}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 9:00am}
+@talk-time{Saturday, 10:30am}
 #:who
 @speaker[#:url "https://sagegerard.com"]{Sage Gerard}
 #:what
@@ -292,11 +294,9 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 }
 ]
 
-  @coffee[@talk-time{Saturday, 10:00am}]
-
   @lecture[
 #:when
-@talk-time{Saturday, 10:30am}
+@talk-time{Saturday, 11:00am}
 #:who
 @speaker[#:url "http://eecs.northwestern.edu/~czu2221/"]{Chenhao Zhang}
 #:what
@@ -320,7 +320,7 @@ Racket and solver-aided host language @a[#:href "https://docs.racket-lang.org/ro
 
   @lecture[
 #:when
-@talk-time{Saturday, 11:00am}
+@talk-time{Saturday, 11:30am}
 #:who
 @speaker[#:url "https://llazarek.github.io/home.html"]{Lukas Lazarek}
 #:what
@@ -333,7 +333,7 @@ In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mut
 
   @lecture[
 #:when
-@talk-time{Saturday, 11:30am}
+@talk-time{Saturday, 12:00pm}
 #:who
 @speaker[#:url "https://github.com/adamperlin"]{Adam Perlin}
 #:what
@@ -344,9 +344,13 @@ Wasm is an attractive compiler target for a variety of reasons: it has support i
 }
 ]
 
+  @lunch[@talk-time{Saturday, 12:30pm}]
+
+  @para{Lunch will served buffet-style right next to the lecture hall.}
+
   @lecture[
 #:when
-@talk-time{Saturday, 12:00pm}
+@talk-time{Saturday, 2:00pm}
 #:who
 @speaker[#:url "https://wphomes.soic.indiana.edu/jsiek/"]{Jeremy Siek}
 #:what
@@ -375,13 +379,9 @@ semester.
  }
 ]
 
-  @lunch[@talk-time{Saturday, 12:30pm}]
-
-  @para{Lunch will served buffet-style right next to the lecture hall.}
-
   @lecture[
 #:when
-@talk-time{Saturday, 2:00pm}
+@talk-time{Saturday, 2:30pm}
 #:who
 @speaker[#:url "https://www.thelittlelearner.com"]{Anurag Mendhekar and Daniel P. Friedman}
 #:what
@@ -394,7 +394,7 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 
   @lecture[
 #:when
-@talk-time{Saturday, 2:30pm}
+@talk-time{Saturday, 3:00pm}
 #:who
 @speaker[#:url "https://github.com/dstorrs"]{David Storrs}
 #:what
@@ -407,11 +407,11 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 }
 ]
 
-  @coffee[@talk-time{Saturday, 3:00pm}]
+  @coffee[@talk-time{Saturday, 3:30pm}]
 
   @lecture[
 #:when
-@talk-time{Saturday, 3:30pm}
+@talk-time{Saturday, 4:00pm}
 #:who
 @speaker[#:url "https://github.com/samdphillips"]{Sam Phillips}
 #:what
@@ -426,7 +426,7 @@ password stores using a simple interface.
 
   @lecture[
 #:when
-@talk-time{Saturday, 4:00pm}
+@talk-time{Saturday, 4:30pm}
 #:who
 @speaker[#:url "https://github.com/countvajhula"]{Siddhartha Kasivajhula}
 #:what
@@ -438,7 +438,7 @@ Attribution Based Economics (ABE) is a new paradigm for economics that revises s
 
   @lecture[
 #:when
-@talk-time{Saturday, 4:30pm}
+@talk-time{Saturday, 5:00pm}
 #:who
 @speaker[#:url "https://www.micahcantor.com"]{Micah Cantor}
 #:what
