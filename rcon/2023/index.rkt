@@ -508,7 +508,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 #:when
 @talk-time{Sunday, 10:00am}
 #:who
-@speaker[#:url "https://users.cs.utah.edu/~mflatt/" #:affiliation "Utah"]{Matthew Flatt}
+@speaker[#:url "https://users.cs.utah.edu/~mflatt/" #;#:affiliation #;"Utah"]{Matthew Flatt}
 #:what
 @talk{Rhombus: Status Update}
 ]
@@ -519,7 +519,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 #:when
 @talk-time{Sunday, 11:00am}
 #:who
-@speaker[#:url "https://samth.github.io" #:affiliation "Indiana"]{Sam Tobin-Hochstadt}
+@speaker[#:url "https://samth.github.io" #;#:affiliation #;"Indiana"]{Sam Tobin-Hochstadt}
 #:what
 @talk{The State of Racket}
 ]
