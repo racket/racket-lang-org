@@ -70,7 +70,7 @@
   [font-style "italic"]
   [font-size "24pt"]
   [margin-top "0.25em"]
-  [margin-bottom "1em"]
+  [margin-bottom "0.5em"]
   [color "gray"])
 
 (define-div abstract
@@ -114,11 +114,27 @@
   [top 0])
 
 (define-div speech
-  [margin-top "2em"]
+  [margin-top "3em"]
+  [position relative])
+
+(define-div first-speech
+  [margin-top "1em"]
   [position relative])
 
 (define-div bio-div
   [margin-top "0.5em"])
+
+(define-div keynote-speaker
+  [font-size "24pt"]
+  [font-weight "bold"])
+
+(define-div nb
+  [text-align "center"]
+  [font-style "italic"])
+
+(define-div specific-location
+  [font-size "18pt"]
+  [margin-top "0.25em"])
 
 (define (script . contents)
  `(script ,@(map (λ (x) (cdata #f #f x)) contents)))
@@ -165,26 +181,32 @@
                  #:who who
                  #:link [l #f]
                  #:what [what ""]
-                 #:more [more ""])
-  (speech when
-          who
-          (if l
-           (live-link "" (a #:href l "talk link"))
-           "")
-          what
-          more))
+                 #:more [more ""]
+                 #:first? [first? #f])
+  ((if first? first-speech speech) when
+                                   who
+                                   (if l
+                                       (live-link "" (a #:href l "talk link"))
+                                       "")
+                                   what
+                                   more))
 
 (define (hallway when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Hallway}}))
 
 (define (doors-open when)
- (lecture #:when when #:who @speaker[#:person? #f]{@bold{Doors Open}}))
+  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Doors Open}}
+           #:first? #t))
 
 (define (coffee when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Coffee}}))
 
 (define (lunch when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Lunch}}))
+
+(define (keynote when #:who who #:what what)
+  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Keynote}}
+           #:what (keynote-speaker who) #:more what))
 
 (define (bio . contents)
  (apply bio-div @bold{Bio: } contents))
@@ -217,6 +239,9 @@
  (talk-time-div
   `(span ([data-slot-time ,(moment->iso8601 m)])
     ,(~t tz "EEEE, h:mma zz"))))
+
+(define nb-breakfast
+  @nb{Breakfast won’t be served, so please eat before coming to the event.})
 
 ;; ------------------------------------------------------------
 
@@ -254,7 +279,9 @@ $(document).ready(function () {
         @pagetitle["(thirteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
       @subtitle{October 28-29, 2023}
       @subtitle{@`(span ((class "p-location")) "Northwestern University")}
-      @subsubtitle{@`(span ((class "p-locality")) ,location)})
+      @subsubtitle{@`(span ((class "p-locality")) ,location)}
+      @specific-location{Ryan Auditorium (@a[#:href "https://maps.app.goo.gl/3GWSz3CR3zifQUgp9"]{map})}
+      )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
 (txexpr* 'time `((class "dt-end") (hidden "") (datetime ,(gregor:~t sunday "y-MM-dd"))))
@@ -264,14 +291,11 @@ $(document).ready(function () {
  (section
   @sectionHeader{Saturday, October 28th}
 
-  @para{@bold{Room}: TBD}
-
   @doors-open[@talk-time{Saturday, 8:30am}]
 
-  @para{NB Breakfast won’t be served! Please eat before coming to the event.}
+  @nb-breakfast
 
-  @lecture[
-#:when
+  @keynote[
 @talk-time{Saturday, 9:00am}
 #:who
 @speaker[#:url "https://www.crockford.com/riddle.html"]{Douglas Crockford}
@@ -324,7 +348,7 @@ Racket and solver-aided host language @a[#:href "https://docs.racket-lang.org/ro
 #:who
 @speaker[#:url "https://llazarek.github.io/home.html"]{Lukas Lazarek}
 #:what
-@talk{Mutate: inject bugs into your programs!}
+@talk{Mutate: Inject Bugs into Your Programs!}
 #:more
 @abstract{
 In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mutate/" "mutate")}, a library for mutating programs, i.e. injecting possible bugs by making small syntactic changes to the program syntax. I’ll talk about what mutation is, why one might want it, and demo how to use the library.
@@ -346,7 +370,7 @@ Wasm is an attractive compiler target for a variety of reasons: it has support i
 
   @lunch[@talk-time{Saturday, 12:30pm}]
 
-  @para{Lunch will served buffet-style right next to the lecture hall.}
+  @nb{Lunch will served buffet-style right next to the lecture hall.}
 
   @lecture[
 #:when
@@ -415,7 +439,7 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 #:who
 @speaker[#:url "https://github.com/samdphillips"]{Sam Phillips}
 #:what
-@talk{keyring: Uniformly access secrets}
+@talk{keyring: Uniformly Access Secrets}
 #:more
 @abstract{
 Hardcoding passwords in your programs is bad.  Using secure password stores are
@@ -430,7 +454,7 @@ password stores using a simple interface.
 #:who
 @speaker[#:url "https://github.com/countvajhula"]{Siddhartha Kasivajhula}
 #:what
-@talk{Redeeming open source with attribution based economics}
+@talk{Redeeming Open Source with Attribution Based Economics}
 #:more
 @abstract{
 Attribution Based Economics (ABE) is a new paradigm for economics that revises several foundational assumptions governing today’s systems, including the nature of economic value and the origin of money. In this new paradigm, open source software becomes economically viable and, indeed, even financially favored over proprietary models. This talk describes our experiences implementing an early prototype for @a[#:href "https://pkgs.racket-lang.org/package/qi" #:title "Qi (Racket package)"]{the Qi project}, and also how Racket will be an essential part of the solution as ABE scales past the pilot stage.}
@@ -456,9 +480,9 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 
   @para{@bold{Room}: TBD}
 
-  @para{NB Breakfast won’t be served! Please eat before coming to the event.}
-
   @doors-open[@talk-time{Sunday, 9:00am}]
+
+  @nb-breakfast
 
   @lecture[
 #:when
@@ -486,7 +510,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 #:who
 @speaker[#:url "https://users.cs.utah.edu/~mflatt/" #:affiliation "Utah"]{Matthew Flatt}
 #:what
-@talk{Rhombus: Status update}
+@talk{Rhombus: Status Update}
 ]
 
   @coffee[@talk-time{Sunday, 10:30am}]
