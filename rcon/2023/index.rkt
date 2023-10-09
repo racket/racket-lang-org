@@ -266,7 +266,7 @@ $(document).ready(function () {
 
   @para{@bold{Room}: TBD}
 
-  @doors-open[@talk-time{Saturday, 08:30am}]
+  @doors-open[@talk-time{Saturday, 8:30am}]
 
   @para{NB Breakfast won’t be served! Please eat before coming to the event.}
 
