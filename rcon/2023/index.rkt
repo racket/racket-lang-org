@@ -345,7 +345,7 @@ Racket and solver-aided host language @a[#:href "https://docs.racket-lang.org/ro
 #:who
 @speaker[#:url "https://llazarek.github.io/home.html"]{Lukas Lazarek}
 #:what
-@talk{Mutate: inject bugs into your programs!}
+@talk{Mutate: Inject Bugs into Your Programs!}
 #:more
 @abstract{
 In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mutate/" "mutate")}, a library for mutating programs, i.e. injecting possible bugs by making small syntactic changes to the program syntax. I’ll talk about what mutation is, why one might want it, and demo how to use the library.
@@ -436,7 +436,7 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 #:who
 @speaker[#:url "https://github.com/samdphillips"]{Sam Phillips}
 #:what
-@talk{keyring: Uniformly access secrets}
+@talk{keyring: Uniformly Access Secrets}
 #:more
 @abstract{
 Hardcoding passwords in your programs is bad.  Using secure password stores are
@@ -451,7 +451,7 @@ password stores using a simple interface.
 #:who
 @speaker[#:url "https://github.com/countvajhula"]{Siddhartha Kasivajhula}
 #:what
-@talk{Redeeming open source with attribution based economics}
+@talk{Redeeming Open Source with Attribution Based Economics}
 #:more
 @abstract{
 Attribution Based Economics (ABE) is a new paradigm for economics that revises several foundational assumptions governing today’s systems, including the nature of economic value and the origin of money. In this new paradigm, open source software becomes economically viable and, indeed, even financially favored over proprietary models. This talk describes our experiences implementing an early prototype for @a[#:href "https://pkgs.racket-lang.org/package/qi" #:title "Qi (Racket package)"]{the Qi project}, and also how Racket will be an essential part of the solution as ABE scales past the pilot stage.}
@@ -505,7 +505,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 #:who
 @speaker[#:url "https://users.cs.utah.edu/~mflatt/" #:affiliation "Utah"]{Matthew Flatt}
 #:what
-@talk{Rhombus: Status update}
+@talk{Rhombus: Status Update}
 ]
 
   @lecture[
