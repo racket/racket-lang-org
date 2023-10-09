@@ -280,7 +280,7 @@ $(document).ready(function () {
       @subtitle{October 28-29, 2023}
       @subtitle{@`(span ((class "p-location")) "Northwestern University")}
       @subsubtitle{@`(span ((class "p-locality")) ,location)}
-      @specific-location{Ryan Auditorium}
+      @specific-location{Ryan Auditorium (@a[#:href "https://maps.app.goo.gl/3GWSz3CR3zifQUgp9"]{map})}
       )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
