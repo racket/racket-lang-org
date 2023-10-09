@@ -489,7 +489,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 @talk{Rhombus: Status update}
 ]
 
-  @coffee[@talk-time{Saturday, 10:30am}]
+  @coffee[@talk-time{Sunday, 10:30am}]
 
   @lecture[
 #:when
