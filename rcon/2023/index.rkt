@@ -136,6 +136,9 @@
   [font-size "18pt"]
   [margin-top "0.25em"])
 
+(define-div specific-location-cotd
+  [font-size "18pt"])
+
 (define (script . contents)
  `(script ,@(map (λ (x) (cdata #f #f x)) contents)))
 
@@ -279,8 +282,10 @@ $(document).ready(function () {
         @pagetitle["(thirteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
       @subtitle{October 28-29, 2023}
       @subtitle{@`(span ((class "p-location")) "Northwestern University")}
-      @subsubtitle{@`(span ((class "p-locality")) ,location)}
-      @specific-location{Ryan Auditorium (@a[#:href "https://maps.app.goo.gl/3GWSz3CR3zifQUgp9"]{map})}
+      @specific-location{The Ryan Family Auditorium}
+      @specific-location-cotd{Technological Institute}
+      @specific-location-cotd{2145 Sheridan Road}
+      @specific-location-cotd{@location  (@a[#:href "https://maps.app.goo.gl/3GWSz3CR3zifQUgp9"]{map})}
       )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
