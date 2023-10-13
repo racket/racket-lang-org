@@ -293,11 +293,12 @@ $(document).ready(function () {
 <iframe width="720" height="410" src="https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&market=smb&showDocuments=0&showIndex=0&showDonations=0" frameBorder="0" scrolling="auto" allowfullscreen="true" allow="autoplay; fullscreen"></iframe>
 --
          )
-
+#|
   (cdata #f #f #<<--
 <iframe src="https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d" width="100%" height="450" allowtransparency="yes" allow="autoplay" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe>
 --
-         ))
+         )
+|#)
 
  (section
   @sectionHeader{Saturday, October 28th}
