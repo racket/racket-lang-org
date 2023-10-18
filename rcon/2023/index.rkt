@@ -122,7 +122,15 @@
   [position relative])
 
 (define-div bio-div
-  [margin-top "0.5em"])
+  [margin-top "0.5em"]
+  [text-align "left"]
+  [margin-left "5em"]
+  [margin-right "5em"])
+
+
+(define-span bio-label
+  [font-weight "bold"]
+  [color "gray"])
 
 (define-div keynote-speaker
   [font-size "24pt"]
@@ -214,7 +222,7 @@
            #:what (keynote-speaker who) #:more what))
 
 (define (bio . contents)
- (apply bio-div @bold{Bio: } contents))
+ (apply bio-div @bio-label{Bio: } contents))
 
 (define (q content)
   `(q () ,content))
