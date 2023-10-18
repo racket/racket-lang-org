@@ -185,6 +185,7 @@
                  #:link [l #f]
                  #:what [what ""]
                  #:more [more ""]
+                 #:bio [bio #f]
                  #:first? [first? #f])
   ((if first? first-speech speech) when
                                    who
@@ -192,7 +193,8 @@
                                        (live-link "" (a #:href l "talk link"))
                                        "")
                                    what
-                                   more))
+                                   more
+                                   (or bio "")))
 
 (define (hallway when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Hallway}}))
@@ -321,6 +323,8 @@ $(document).ready(function () {
 @abstract{
 Rackith is a language-oriented programming language based on Racket. Use Rackith to define many languages with one syntax object. Discussion covers project design and implications for the personal computer.
 }
+#:bio
+@bio{Sage is a programmer by hobby and trade. If you bought a car, educated kids, or avoided a lawsuit, then you may have used his code.}
 ]
 
   @lecture[
@@ -358,6 +362,8 @@ Racket and solver-aided host language @a[#:href "https://docs.racket-lang.org/ro
 @abstract{
 In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mutate/" "mutate")}, a library for mutating programs, i.e. injecting possible bugs by making small syntactic changes to the program syntax. I’ll talk about what mutation is, why one might want it, and demo how to use the library.
 }
+#:bio
+@bio{Lukas is a PL PhD student at Northwestern. He’s graduating this winter and is on the job market.}
 ]
 
   @lecture[
@@ -371,6 +377,8 @@ In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mut
 @abstract{
 Wasm is an attractive compiler target for a variety of reasons: it has support in all major browsers, its isolation guarantees are beneficial for security reasons, and it has potential as a general-purpose platform-independent execution environment. However, adding Wasm support to Racket has proven a challenging problem due to differences in the execution model each language uses at runtime. Chez Scheme, the backend of Racket CS, utilizes code generation conventions which are difficult to adapt to Wasm. This talk will present an alternative approach to Racket-to-Wasm compilation which is compatible with Racket CS. The approach is accomplished by using an existing bytecode format and interpreter which are already supported under Chez Scheme, and performing an ahead-of-time translation of portions of bytecode programs into Wasm. This sets up an incremental approach to the development of a Racket-to-Wasm compilation system.
 }
+#:bio
+@bio{Adam Perlin is a software engineer in Microsoft Azure. He completed BS and MS degrees in Computer Science at Cal Poly, San Luis Obispo with a Master’s thesis focused on Racket to Wasm translation.}
 ]
 
   @lunch[@talk-time{Saturday, 12:30pm}]
@@ -434,6 +442,8 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 
 @para{The @a[#:href "https://pkgs.racket-lang.org/package/struct-plus-plus" #:title "struct-plus-plus (Racket package)"]{struct-plus-plus} module makes this easy.  It allows you to place contracts on individual fields, specify business rules that ensure integrity between fields, easily create converter functions, and much more, with all of these things being part of the struct definition and therefore in one easily-referenced location.  Come see how it all works and how you can simplify your code with struct-plus-plus!}
 }
+#:bio
+@bio{David Storrs has been a professional programmer since the mid 90s, working in a wide array of fields.  He has started and operated multiple companies in the last 15 years and published about four million words of SF&F in the last 10.  He is currently co-founder at AllPossible Solutions, a software consulting company focused in bioinformatics.  He discovered Racket back when it was called PLT and has been in love ever since.}
 ]
 
   @coffee[@talk-time{Saturday, 3:30pm}]
@@ -476,6 +486,8 @@ Attribution Based Economics (ABE) is a new paradigm for economics that revises s
 @abstract{
 My first Typed Racket program was an interpreter for the Lox language from Bob Nystrom’s book @a[#:href "https://craftinginterpreters.com"]{@emph{Crafting Interpreters}}. In this talk, I’ll discuss the design decisions I made when translating from Nystrom’s Java, as well as the fun and frustrating aspects of Typed Racket I discovered in the process. I’ll also give a retrospective on learning how to adapt a traditional compiler to Racket’s language-oriented paradigm.
 }
+#:bio
+@bio{Micah is a student at Grinnell College with interests in compilers, functional programming, writing and education.}
 ]
 
 )
