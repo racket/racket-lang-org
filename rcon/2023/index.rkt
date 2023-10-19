@@ -434,6 +434,8 @@ passing test cases and then learn important lessons regarding software
 engineering as they grow and refactor their compiler throughout the
 semester.
  }
+#:bio
+@bio{Jeremy Siek is a Professor at Indiana University. Jeremy’s interests include programming language design, type systems, mechanized theorem proving, and compilers.}
 ]
 
   @lecture[
