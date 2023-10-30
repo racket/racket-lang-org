@@ -298,6 +298,10 @@ $(document).ready(function () {
       @specific-location-cotd{Technological Institute}
       @specific-location-cotd{2145 Sheridan Road}
       @specific-location-cotd{@location  (@a[#:href "https://maps.app.goo.gl/3GWSz3CR3zifQUgp9"]{map})}
+
+      @a[#:href "racketcon2023-people.jpg"]{
+ @img[#:src "racketcon2023-people-small.jpg"
+      #:alt "RacketCon 2023 Attendees"]}
       )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
