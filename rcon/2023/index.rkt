@@ -323,7 +323,7 @@ $(document).ready(function () {
 @talk-time{Saturday, 9:00am}
 #:who
 @speaker[#:url "https://www.crockford.com/riddle.html"]{Douglas Crockford}
-#:link "https://youtu.be/O7zHugxxLgs"
+#:link "https://youtu.be/vMDHpPN_p08"
 #:what
 @talk{From Here To Lambda And Back Again}
 ]
@@ -337,7 +337,7 @@ $(document).ready(function () {
 @speaker[#:url "https://sagegerard.com"]{Sage Gerard}
 #:what
 @talk{Introducing Rackith}
-#:link "https://youtu.be/5C4cUngTroY"
+#:link "https://youtu.be/mbF5AbFi4bM"
 #:more
 @abstract{
 Rackith is a language-oriented programming language based on Racket. Use Rackith to define many languages with one syntax object. Discussion covers project design and implications for the personal computer.
@@ -353,7 +353,7 @@ Rackith is a language-oriented programming language based on Racket. Use Rackith
 @speaker[#:url "http://eecs.northwestern.edu/~czu2221/"]{Chenhao Zhang}
 #:what
 @talk{@code{#lang Karp}: Formulating and Random Testing NP Reductions}
-#:link "https://youtu.be/qtMX9hJ8-Xg"
+#:link "https://youtu.be/GUXcctw5Qks"
 #:more
 @abstract{
 Reduction, a pervasive idea in computer science, is often
@@ -378,7 +378,7 @@ Racket and solver-aided host language @a[#:href "https://docs.racket-lang.org/ro
 @speaker[#:url "https://llazarek.github.io/home.html"]{Lukas Lazarek}
 #:what
 @talk{Mutate: Inject Bugs into Your Programs!}
-#:link "https://youtu.be/qCxE_0_Cu30"
+#:link "https://youtu.be/C1I4Glv7ixI"
 #:more
 @abstract{
 In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mutate/" "mutate")}, a library for mutating programs, i.e. injecting possible bugs by making small syntactic changes to the program syntax. I’ll talk about what mutation is, why one might want it, and demo how to use the library.
@@ -394,7 +394,7 @@ In this talk I’ll introduce @code{@(a #:href "https://docs.racket-lang.org/mut
 @speaker[#:url "https://github.com/adamperlin"]{Adam Perlin}
 #:what
 @talk{Incrementally Developing Support for Racket->Wasm Compilation}
-#:link "https://youtu.be/aF4w4wRgHPs"
+#:link "https://youtu.be/6q_J4ZAKlAU"
 #:more
 @abstract{
 Wasm is an attractive compiler target for a variety of reasons: it has support in all major browsers, its isolation guarantees are beneficial for security reasons, and it has potential as a general-purpose platform-independent execution environment. However, adding Wasm support to Racket has proven a challenging problem due to differences in the execution model each language uses at runtime. Chez Scheme, the backend of Racket CS, utilizes code generation conventions which are difficult to adapt to Wasm. This talk will present an alternative approach to Racket-to-Wasm compilation which is compatible with Racket CS. The approach is accomplished by using an existing bytecode format and interpreter which are already supported under Chez Scheme, and performing an ahead-of-time translation of portions of bytecode programs into Wasm. This sets up an incremental approach to the development of a Racket-to-Wasm compilation system.
@@ -414,7 +414,7 @@ Wasm is an attractive compiler target for a variety of reasons: it has support i
 @speaker[#:url "https://wphomes.soic.indiana.edu/jsiek/"]{Jeremy Siek}
 #:what
 @talk{Teaching and Learning Compilers Incrementally}
-#:link "https://youtu.be/y_6bycM5fV8"
+#:link "https://youtu.be/43VA_QaTRT8"
 #:more
 @abstract{
 This talk is an introduction to the joys of teaching and
@@ -448,7 +448,7 @@ semester.
 @speaker[#:url "https://www.thelittlelearner.com"]{Anurag Mendhekar and Daniel P. Friedman}
 #:what
 @talk{Malt: A Deep Learning Framework for Racket}
-#:link "https://youtu.be/xEq2upfqxjI"
+#:link "https://youtu.be/AW9isjesTkQ"
 #:more
 @abstract{
 We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/themetaschemer/malt"]{Malt}, that has been built for Racket. Originally designed to support the pedagogy of @a[#:href "https://mitpress.mit.edu/9780262546379/the-little-learner/"]{@book-title{The Little Learner—A Straight Line to Deep Learning}}, it is used to build deep neural networks with a minimum of fuss using tools like higher-order automatic differentiation and rank polymorphism.  The natural, functional style of AI programming that Malt enables can be extended to much  larger, practical applications. We present a roadmap for how we hope to achieve this so that it can become a stepping stone to allow Lisp/Scheme/Racket to reclaim the crown of being @emph{the} language for Artificial Intelligence (perhaps!).
@@ -462,7 +462,7 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 @speaker[#:url "https://github.com/dstorrs"]{David Storrs}
 #:what
 @talk{Data Integrity via Smart Structs}
-#:link "https://youtu.be/7coRq434o1o"
+#:link "https://youtu.be/Ph3S8m7n17I"
 #:more
 @abstract{
 @para{Structs in Racket should be more than dumb data storage.  They should be data models in the sense of MVC programming; they should ensure that their contents are valid according to your project’s business rules and they should make it easy to do common operations such as storing to a database or generating a struct from data of another type such as a database row or user input field.}
@@ -482,7 +482,7 @@ We discuss the design of a deep learning toolkit, @a[#:href "https://github.com/
 @speaker[#:url "https://github.com/samdphillips"]{Sam Phillips}
 #:what
 @talk{keyring: Uniformly Access Secrets}
-#:link "https://youtu.be/HQjcUsnJmeU"
+#:link "https://youtu.be/ZGayAVXvrLk"
 #:more
 @abstract{
 Hardcoding passwords in your programs is bad.  Using secure password stores are
@@ -501,7 +501,7 @@ password stores using a simple interface.
  }
 #:what
 @talk{Redeeming Open Source with Attribution Based Economics}
-#:link "https://youtu.be/ADjPg2kAgEM"
+#:link "https://youtu.be/-xnppM6GG9Q"
 #:more
 @abstract{
 Attribution Based Economics (ABE) is a new paradigm for economics that revises several foundational assumptions governing today’s systems, including the nature of economic value and the origin of money. In this new paradigm, open source software becomes economically viable and, indeed, even financially favored over proprietary models. This talk describes our experiences implementing an early prototype for @a[#:href "https://pkgs.racket-lang.org/package/qi" #:title "Qi (Racket package)"]{the Qi project}, and also how Racket will be an essential part of the solution as ABE scales past the pilot stage.}
@@ -516,7 +516,7 @@ Attribution Based Economics (ABE) is a new paradigm for economics that revises s
 @speaker[#:url "https://www.micahcantor.com"]{Micah Cantor}
 #:what
 @talk{Crafting Interpreters in Typed Racket}
-#:link "https://youtu.be/sor9uFljeQc"
+#:link "https://youtu.be/TLHYhiyuank"
 #:more
 @abstract{
 My first Typed Racket program was an interpreter for the Lox language from Bob Nystrom’s book @a[#:href "https://craftinginterpreters.com"]{@emph{Crafting Interpreters}}. In this talk, I’ll discuss the design decisions I made when translating from Nystrom’s Java, as well as the fun and frustrating aspects of Typed Racket I discovered in the process. I’ll also give a retrospective on learning how to adapt a traditional compiler to Racket’s language-oriented paradigm.
@@ -541,7 +541,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 @speaker[#:url "https://users.cs.northwestern.edu/~robby/"]{Robby Findler}
 #:what
 @talk{Esterel in Racket}
-#:link "https://youtu.be/p5cThMNA7Ts"
+#:link "https://youtu.be/qq1TDJky__s"
 #:more
 @abstract{
 @para{Concurrency and thread preemption are tools that can make programs more modular. Unfortunately, in conventional programming models, combining state and concurrency (to say nothing of preemption!) makes programs extremely hard to get right.}
@@ -560,7 +560,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 @talk-time{Sunday, 10:00am}
 #:who
 @speaker[#:url "https://users.cs.utah.edu/~mflatt/" #;#:affiliation #;"Utah"]{Matthew Flatt}
-#:link "https://youtu.be/Mz-9LzkVujw"
+#:link "https://youtu.be/OLgEL4esYU0"
 #:what
 @talk{Rhombus: Status Update}
 ]
@@ -572,7 +572,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 @talk-time{Sunday, 11:00am}
 #:who
 @speaker[#:url "https://samth.github.io" #;#:affiliation #;"Indiana"]{Sam Tobin-Hochstadt}
-#:link "https://youtu.be/zEYWOU52DcM"
+#:link "https://youtu.be/fN_7LFg_7r8"
 #:what
 @talk{The State of Racket}
 ]
@@ -582,7 +582,7 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 @talk-time{Sunday, 11:30am}
 #:who
 @speaker[#:person? #f]{Racket Management}
-#:link "https://youtu.be/va_uBcX9bNM"
+#:link "https://youtu.be/bl8JjwdtWLs"
 #:what
 @talk{Racket Town Hall}
 #:more
