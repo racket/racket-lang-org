@@ -326,6 +326,16 @@ $(document).ready(function () {
 #:link "https://youtu.be/vMDHpPN_p08"
 #:what
 @talk{From Here To Lambda And Back Again}
+#:more
+@abstract{
+@para{Renowned computer scientist Douglas Crockford delivers a thought-provoking keynote address at RacketCon 2023, tracing the evolution of programming language paradigms and presenting a compelling argument for the resurgence of the actor model, a paradigm that emerged in the 1970s.}
+
+@para{Crockford, a renowned expert in programming language design and implementation, guides the audience on a captivating journey through the history of programming paradigms, highlighting their strengths, limitations, and impact on the field. He astutely observes the recurring cycles of paradigm popularity, with each new paradigm promising to revolutionize software development only to eventually be overtaken by the next, and often for reasons more to do with inertia than merit.}
+
+@para{In a bold and insightful prediction, Crockford asserts that the actor model, once considered a niche paradigm, is poised to reclaim its prominence in the future of programming. He eloquently explains how the actor model's inherent concurrency and message-passing capabilities align perfectly with the demands of modern distributed and cloud-based computing environments.}
+
+@para{Crockford's insights serve as a timely reminder of the importance of revisiting and reappraising past paradigms to uncover hidden potential and adapt to the ever-changing landscape of software development.}
+}
 ]
 
   @coffee[@talk-time{Saturday, 10:00am}]
