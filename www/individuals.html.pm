@@ -70,11 +70,23 @@
 ◊(top)
 
 ◊section{
-Individual Supporters
+
+◊div[#:id "management"]{Individual Supporters
+
+◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
+Thank you to the many individuals who for their generous support over the years.}
+
+◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
+Donations are used for hosting community infrastructure, administration, educational 
+outreach, and community events such as RacketCon and Racket School.}
+
+◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{See 
+◊link["sfc.html"]{Software Freedom Conservancy} to make a tax-deductible contribution 
+to support our work.
+}}
 
 ◊div[#:class "individuals-outer-div"]{
  ◊(apply div #:class "individuals-left-div" first-half)
  ◊(apply div #:class "individuals-right-div" second-half)
 }
 }
-
