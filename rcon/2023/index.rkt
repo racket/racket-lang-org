@@ -573,6 +573,10 @@ My first Typed Racket program was an interpreter for the Lox language from Bob N
 #:link "https://youtu.be/OLgEL4esYU0"
 #:what
 @talk{Rhombus: Status Update}
+#:more
+@abstract{
+This talk demonstrates the current version of Rhombus, which is a new programming language that seamlessly integrates Racket's powerful macro system with a conventional infix syntax. Rhombus's goal is to make Racket's macro capabilities more accessible: through the use of conventional syntax, by unifying more programming and metaprogramming constructs (e.g., using `match` for data and for code), and by packaging common patterns for macro primitives into out-of-the-box coordination facilities (e.g., macro-extensible binding positions).  Through live coding on example programs, the talk demonstrates how Rhombus features work together to define a convenient and expressive programming language.
+}
 ]
 
   @coffee[@talk-time{Sunday, 10:30am}]
