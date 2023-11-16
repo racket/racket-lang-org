@@ -198,6 +198,7 @@
                  #:link [l #f]
                  #:what [what ""]
                  #:more [more ""]
+                 #:even-more [even-more ""]
                  #:bio [bio #f]
                  #:first? [first? #f])
   ((if first? first-speech speech) when
@@ -207,6 +208,7 @@
                                        "")
                                    what
                                    more
+                                   even-more
                                    (or bio "")))
 
 (define (hallway when)
@@ -222,9 +224,10 @@
 (define (lunch when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Lunch}}))
 
-(define (keynote when #:who who #:what what #:link [link #f])
+(define (keynote when #:who who #:what what #:more more #:link [link #f])
   (lecture #:when when #:who @speaker[#:person? #f]{@bold{Keynote}}
-           #:what (keynote-speaker who) #:link link #:more what))
+           #:what (keynote-speaker who) #:link link #:more what
+           #:even-more more))
 
 (define (bio . contents)
  (apply bio-div @bio-label{Bio: } contents))
