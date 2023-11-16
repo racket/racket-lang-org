@@ -65,7 +65,7 @@ The Pollen language is markup-based, so you can write & edit text naturally. But
 ProfessorJ is a plug-in for DrRacket that implements variants of Java, especially for teaching purposes.
 
 
- ◊link["https://github.com/vishesh/racketscript"]{Racketscript}
+ ◊link["https://github.com/racketscript/racketscript"]{RacketScript}
 
 A lightweight Racket to JavaScript compiler.
 
