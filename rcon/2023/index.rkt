@@ -592,6 +592,16 @@ This talk demonstrates the current version of Rhombus, which is a new programmin
 #:link "https://youtu.be/fN_7LFg_7r8"
 #:what
 @talk{The State of Racket}
+#:more
+@abstract{
+Join Sam Tobin-Hochstadt for an informative and insightful overview of the latest developments in the Racket language and community. This annual address covers key advancements, milestones, and community contributions achieved over the past year, providing a comprehensive update on the language's growth, direction, and impact.
+
+Learn about the latest improvements to Typed Racket, including shallow and optional types, as well as the integration of Racket's Chez Scheme fork upstream, a significant culmination of years of collaboration. Explore the contributions of the community, including big improvements in Racket Mode for Emacs and the r16 trick bot for Discord, and much more.
+
+Sam also provides a glimpse into the future of Racket, teasing upcoming releases and innovations that are on the horizon, providing insights into the community's roadmap which includes type inference, compiling Racket to web, and enhanced tooling further streamlining the process of finding and installing Racket packages.
+
+Whether you're a seasoned Racket developer or a newcomer to the language, don't miss this opportunity to learn about the latest developments in Racket and get a sneak peek at its future!
+}
 ]
 
   @lecture[
