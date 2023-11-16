@@ -18,6 +18,10 @@ The following is a selection of of languages built with Racket including languag
 ◊section{
 ◊div{Languages}
 
+◊link["https://joe.cz/rrll/RRLL__Actor_Basic.html"]{Actor Basic}
+
+A single-value flow-oriented language differentiating between flow steps and value expressions.
+
 ◊link["https://docs.racket-lang.org/algol60/"]{Algol 60}
 
 The “Algol 60” language for DrRacket implements the language defined by the “Revised Report on the Algorithmic Language Algol 60,” edited by Peter Naur.
@@ -29,6 +33,11 @@ Asi64 is a cross-platform 6502 assembler. Primarily aimed at programming the Com
 ◊link["https://docs.racket-lang.org/datalog/"]{Datalog: Deductive Database Programming}
 
 Datalog is a declarative logic language in which each formula is a function-free Horn clause, and every variable in the head of a clause must appear in the body of the clause. Datalog is also a lightweight deductive database system where queries and database updates are expressed in the logic language.
+
+◊link["https://docs.racket-lang.org/forth/"]{Forth}
+
+Forth is a stack-based calculator language. This package implements a subset of Forth as a Racket #lang.
+
 
 ◊link["https://lexi-lambda.github.io/hackett/"]{The Hackett Programming Language}
 
@@ -65,6 +74,11 @@ The Pollen language is markup-based, so you can write & edit text naturally. But
 ProfessorJ is a plug-in for DrRacket that implements variants of Java, especially for teaching purposes.
 
 
+ ◊link["https://docs.racket-lang.org/qi/"]{Qi: An Embeddable Flow-oriented Language}
+
+Qi is a general-purpose language that's useful for programming in the functional, immutable style and easily embedding such computations anywhere in your programs. It embodies a point-free, "flow-oriented" way of thinking that is appropriate for many common classes of problems, including data pipelines and working with multiple values.
+
+
  ◊link["https://github.com/racketscript/racketscript"]{RacketScript}
 
 A lightweight Racket to JavaScript compiler.
@@ -73,6 +87,11 @@ A lightweight Racket to JavaScript compiler.
  ◊link["https://docs.racket-lang.org/rash/"]{Rash: The Reckless Racket Shell}
 
 Rash is a shell language embedded in Racket. It has a concrete syntax that is amenable to quick and easy interactions without lots of punctuation overhead. It aims to allow shell-style interaction and programming to be freely mixed with more general-purpose Racket code.
+
+
+ ◊link["https://docs.racket-lang.org/rhombus/"]{Rhombus}
+
+Rhombus is an experimental, general-purpose programming language with conventional expression syntax that is built on Racket and that is macro-extensible in the same way as Racket.
 
 
  ◊link["https://docs.racket-lang.org/riposte/"]{Riposte}
