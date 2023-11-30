@@ -1,0 +1,13 @@
+1701325670
+Racket v8.11.1
+
+----------------------------------------------------------------------
+
+Racket version 8.11.1 is now available from [https://racket-lang.org/](https://racket-lang.org/)
+
+This bug-fix release repairs a problem with building from source when using the "builtpkgs" source distribution.
+
+Feedback Welcome
+
+----------------------------------------------------------------------
+
