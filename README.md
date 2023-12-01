@@ -2,6 +2,16 @@
 
 This the source for the Racket package: "racket-lang-org".
 
+Setup:
+======
+
+Install this directory as a package with `raco pkg install`
+
+You additionally need to install the [Pygments](https://pygments.org/) package to Python via `pip3 install pygments`.
+
+You may also want to install [raco-static-web](https://github.com/samdphillips/raco-static-web), 
+though this is not necessary (you could use Python 3's `http.server` instead).
+
 Sources:
 ========
 
@@ -27,18 +37,21 @@ To build:
 
  [See "upload" and `--dry-run` for an alternative]
 
-* The simplest way to build the whole site is to
+* The simplest way to build the whole site is to run the command below:
 
-  1. install this directory as a package with `raco pkg install`
-  2. run the command below:
+    ```
+    racket -l- racket-lang-org/sync --save-temps --render-locally Web
+    ```
 
-```
-  racket -l- racket-lang-org/sync --save-temps --render-locally Web ; open Web/www/index.html
-```
+  This renders the site in some temp directory and then moves the directory to `Web`.
+  
+* To view the rendered pages in a browser, change directory to a rendered site 
+  (e.g., `Web/www` or  `Web/download`) and spawn a local server:
 
-* This renders the site in some temp directory and then moves the directory
-  to 'Web` here. It will also open the front-page index file in your
-  default browser on the Mac.
+  - If you wish to use `raco-static-web`, run `raco static-web` to spawn a local server.
+  - If you wish use Python 3, run `python3 -m http.server` to spawn a local server.
+  
+  Then navigate to http://localhost:8000/ in your browser to view the site.
 
 You may encounter some problems. Check below first:
 
