@@ -15,21 +15,21 @@ though this is not necessary (you could use Python 3's `http.server` instead).
 Sources:
 ========
 
-* www: actual content of main site.
+* `www`: actual content of main site.
 
-* blog: actual content of blog.
+* `blog`: actual content of blog.
 
-* download: content of download site (only installer pages and such)
+* `download`: content of download site (only installer pages and such)
 
-* */all.rkt: files that just require all the necessary modules to build
+* `*/all.rkt`: files that just require all the necessary modules to build
   the whole site or sub-sites
 
-* */resources.rkt: files that define the resources for a site (icon,
+* `*/resources.rkt`: files that define the resources for a site (icon,
   css, logo)
 
-* minis: smaller one-source-file sites
+* `minis`: smaller one-source-file sites
 
-* stubs: template "sites" that are intended to be hooked into other
+* `stubs`: template "sites" that are intended to be hooked into other
   systems to get the racket look.
 
 To build:
@@ -65,20 +65,20 @@ You may encounter some problems. Check below first:
   **DANGER!** Really make sure that you don't have any files you want
   to keep that aren't committed! This command also rm's uncommitted files. 
 
-* Run "racket all.rkt -o <dir>" to build all pages to subdirectories of
-  <dir>. As a safety measure, the target directory must not overlap
-  with any installed directory. (Use `-f' in scripts to avoid
+* Run `racket all.rkt -o <dir>` to build all pages to subdirectories of
+  `<dir>`. As a safety measure, the target directory must not overlap
+  with any installed directory. (Use `-f` in scripts to avoid
   answering the question about deleting existing files.)
 
-* Running any "*.rkt" might build a page and things that it
+* Running any `*.rkt` might build a page and things that it
   references. (Use `-h` as usual.) That's less true for newer pages.
 
 * For older pages, you can choose `-w` (the default) for web mode,
-  `-l` for local using "file://" references, or `-r` for' local mode
+  `-l` for local using `file://` references, or `-r` for local mode
   using relative references. Normally, you'll want to use `-l` for
   testing, and then use `-w` for deployment.
 
-* Set the $GIT_DIR environment variable to point to the ".git"
+* Set the `$GIT_DIR` environment variable to point to the `.git`
   directory of a Racket repository if you want to extract release
   information from a repository other than the enclosing one.
 
@@ -86,11 +86,11 @@ To upload:
 ==========
 
 * You'll need credentials to upload to S3, and those credentials
-  should be in "~/.aws-keys".
+  should be in `~/.aws-keys`.
 
-* You'll need the "s3-sync" Racket package installed.
+* You'll need the `s3-sync` Racket package installed.
 
-* Run the "sync.rkt" script: racket -l- racket-lang-org/sync
+* Run the `sync.rkt` script: `racket -l- racket-lang-org/sync`
 
 * To build without uploading, use `--save-temps --render-locally <directory-name>`. If you
   don't have AWS credentials, the pages will still build, and look for
