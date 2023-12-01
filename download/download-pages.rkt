@@ -58,6 +58,11 @@
                        " text-align: left;"
                        " line-height: 1.5em; "
                        " background-color: #edd"))
+  (define (upgrade-advice-packages)
+    @p{@strong{Upgrading? } When you freshly install a new version, no package from
+       your previous version will be available. You can either use @tt{raco pkg 
+       migrate} (e.g. @tt{raco pkg migrate 8.10}) or “Copy from Version” in DrRacket 
+       (in File > Package Manager) to install all packages from a previous version.})
   (define (more-installers)
     @a[href: @at-download{@|releases|/@version}]{More Installers and Checksums})
   (append
@@ -357,7 +362,10 @@ var property = null;
            @row{@links[@license{License}
                        @span{@all-version-pages
                              @span[style: "font-size: 80%"]{with notes and documentation}}
-                       @pre:installers{Snapshot Builds}]}))})))
+                       @pre:installers{Snapshot Builds}]}))})
+ (list
+  @columns[8 #:center? #t #:center-text? #t #:row? #t]{
+   @row[style: "margin: 1ex;"]{@upgrade-advice-packages[]}})))
 
 (define (release-page* rel)
   (define ver (release-version rel))
