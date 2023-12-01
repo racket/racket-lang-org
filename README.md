@@ -2,8 +2,7 @@
 
 This the source for the Racket package: "racket-lang-org".
 
-Setup:
-======
+## Setup:
 
 Install this directory as a package with `raco pkg install`
 
@@ -12,8 +11,7 @@ You additionally need to install the [Pygments](https://pygments.org/) package t
 You may also want to install [raco-static-web](https://github.com/samdphillips/raco-static-web), 
 though this is not necessary (you could use Python 3's `http.server` instead).
 
-Sources:
-========
+## Sources:
 
 * `www`: actual content of main site.
 
@@ -32,8 +30,7 @@ Sources:
 * `stubs`: template "sites" that are intended to be hooked into other
   systems to get the racket look.
 
-To build:
-=========
+## To build:
 
  [See "upload" and `--dry-run` for an alternative]
 
@@ -82,8 +79,7 @@ You may encounter some problems. Check below first:
   directory of a Racket repository if you want to extract release
   information from a repository other than the enclosing one.
 
-To upload:
-==========
+## To upload:
 
 * You'll need credentials to upload to S3, and those credentials
   should be in `~/.aws-keys`.
@@ -97,13 +93,13 @@ To upload:
   "Files so far written to" for the temporary directory that contains
   the rendered pages.
 
-### Contributing
+## Contributing
 
 Contribute to Racket by submitting a [pull request], reporting an
 [issue], joining the [development mailing list], or visiting the
 IRC or Slack channels.
 
-### License
+## License
 
 Racket, including these packages, is free software, see [LICENSE]
 for more details.
