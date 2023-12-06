@@ -1,0 +1,31 @@
+name: Push to racket-lang.org
+
+on: workflow_dispatch
+
+jobs:
+  coverage:
+    name: Build and push the site
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Racket
+        uses: Bogdanp/setup-racket@v1.11
+        with:
+          architecture: 'x64'  # or: 'x64', 'x86', 'arm32', 'arm64'
+          distribution: 'full' # or: 'minimal'
+          variant: 'CS'        # or: 'BC' for Racket Before Chez
+          version: '8.10'
+
+      - name: Install package
+        run: raco pkg install --auto --no-docs -n racket-lang-org `pwd`
+
+      - name: Setup credentials
+        run: echo "$KEY" > ~/.aws-keys
+        env:
+          KEY: ${{secrets.AWS_KEY}}
+
+      - name: Build everything (headless display via xvfb)
+        run: xvfb-run racket -l- racket-lang-org/sync
