@@ -52,12 +52,16 @@
           (append-map cdr
                       (group-by/dict installer-variant group finalize-variant)))))))
 
-  (define note-style '("font-size: 85%; display: none;"
-                       " margin-top: 1ex;"
-                       " padding: 1ex 1ex 1ex 1ex;"
-                       " text-align: left;"
-                       " line-height: 1.5em; "
-                       " background-color: #edd"))
+  (define base-note-style '(" font-size: 85%;"
+                            " margin-top: 1ex;"
+                            " padding: 1ex 1ex 1ex 1ex;"
+                            " text-align: left;"
+                            " line-height: 1.5em;"))
+  (define note-style (append '(" display: none;"
+                               " background-color: #edd;")
+                             base-note-style))
+  (define always-note-style (append '(" background-color: #eed;")
+                                    base-note-style))
   (define (more-installers)
     @a[href: @at-download{@|releases|/@version}]{More Installers and Checksums})
   (append
@@ -125,15 +129,20 @@
          [(version<=? version version-before-m1-support)
           @div[id: "m1_mac_explain"
                style: note-style]{
-               @div{@b{M1 Mac users:}}
+               @div{@b{M1 / M2 / M3 Mac users:}}
                @list{The latest version of Racket supports Apple Silicon directly.
 
                For version @version, the Mac OS (Intel 64-bit) variant requires macOS Big Sur 11.1 or above.}}]
          [(version<? version-before-m1-support version)
-          @div[id: "m1_mac_explain"
-               style: note-style]{
-               @div{@b{M1 Mac users:}}
-               @list{Select the @b{Apple Silicon} option in @b{Platform}.}}]
+          (list
+           @div[id: "m1_mac_explain"
+                style: note-style]{
+                @div{@b{M1 / M2 / M3 Mac users:}}
+                @list{Select the @b{Apple Silicon} option in @b{Platform}.}}
+           @div[id: "intel_mac_explain"
+                style: note-style]{
+                @div{@b{Intel Mac users:}}
+                @list{Select the @b{Intel 64-bit} option in @b{Platform}.}})]
          [else null])
       @div[id: "builtpkgs_explain"
            style: note-style]{
@@ -162,6 +171,12 @@
            from source, install the @tt{racket-lib} package with
            with @div{@nbsp @nbsp @tt{raco pkg update --auto racket-lib}}
            before installing other packages.}
+      @div[id: "upgrade_explain"
+               style: always-note-style]{
+       @div{@strong{When upgrading:}}
+       @list{To restore packages installed for a previous version of Racket, use
+                DrRacket's @b{File} > @b{Package Manager} > @b{Copy from Version}
+                or at a command line use @tt{raco pkg migrate}.}}
     @script/inline[type: 'text/javascript]{
 
 // higher-order functions
@@ -768,6 +783,7 @@ var property = null;
       @(if (version<=? version-before-m1-support version)
            @list{
                  showWhen('m1_mac_explain', platform === 'x86_64-macosx');
+                 @; showWhen('intel_mac_explain', platform === 'aarch64-macosx');
            }
            null)
 
