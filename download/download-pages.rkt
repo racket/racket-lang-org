@@ -556,8 +556,8 @@ var property = null;
       else if (l("WOW64")) return [Win64, Win];
       else if (l("Win"))   return [Win32, Win];
       else if (l("Mac"))   return [
-        l("Intel") ? MacIntel64 : MacPPC,
         l("Intel") ? MacARM64 : MacPPC,
+        l("Intel") ? MacIntel64 : MacPPC,
         l("Intel") ? MacIntel32 : MacPPC,
         Mac,
         Unix
@@ -782,8 +782,8 @@ var property = null;
 
       @(if (version<=? version-before-m1-support version)
            @list{
-                 showWhen('m1_mac_explain', platform === 'x86_64-macosx');
-                 @; showWhen('intel_mac_explain', platform === 'aarch64-macosx');
+                 @; showWhen('m1_mac_explain', platform === 'x86_64-macosx');
+                 showWhen('intel_mac_explain', platform === 'aarch64-macosx');
            }
            null)
 
