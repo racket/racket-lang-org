@@ -404,7 +404,7 @@ CORD, partners of the Academy of Information Technology,
 ◊link["http://microsoft.com/"]{Microsoft},
 ◊link["http://mozilla.org/"]{Mozilla},
 ◊link["http://google.com/"]{Google},
-and many ◊link["individuals.html"]{individuals}
+and many ◊link["https://github.com/sponsors/racket#sponsors"]{individuals}
 for their generous support over the years.}}
 
 ◊script[#:src "js/jquery.min.js"]{}
