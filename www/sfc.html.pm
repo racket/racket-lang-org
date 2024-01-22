@@ -14,7 +14,11 @@
 ◊p{
 Donations, both in-kind and monetary, are used for hosting community infrastructure, administration, educational outreach, and community events such as RacketCon and Racket School.}
 
-Best option: donate via PayPal by clicking the button below.
+Best option: ◊link["https://github.com/sponsors/Racket"]{sponsor Racket}. 
+
+Sponsoring via GitHub Sponsors allows us to ◊link["https://racket-lang.org/individuals.html"]{acknowledge individuals} for their support.
+
+You can also donate via PayPal or credit card by clicking the button below.
 
 ◊html->xexpr{
 <form action="https://www.paypal.com/cgi-bin/webscr" name="paypal_form" method="post" target="_blank" onsubmit="try {return window.confirm(&quot;You are submitting information to an external page.\nAre you sure?&quot;);} catch (e) {return false;}">
@@ -24,8 +28,6 @@ Best option: donate via PayPal by clicking the button below.
 <a style="cursor:pointer;font-size:110%;display:inline-block;margin:1em 0;" onclick="document.paypal_form.submit()" class="top-button" id="download">Click here to donate via PayPal</a>
 </form>
 }
-
-You can also ◊link["https://github.com/sponsors/Racket"]{sponsor Racket}.
 
 We also accept checks drawn in US dollars from US banks. Make your check payable to "Software Freedom Conservancy, Inc." and put "Directed donation: Racket" as the memo. Mail to:
 
@@ -37,7 +39,4 @@ EIN: 41-2203632
 
 Thank you for supporting Racket!
 }
-
-
-
 
