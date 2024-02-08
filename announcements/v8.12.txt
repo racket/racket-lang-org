@@ -1,0 +1,56 @@
+1707435901
+Racket v8.12
+
+----------------------------------------------------------------------
+
+As of this release:
+
+- The "Die Macht der Abstraktion" language levels are no longer present,
+replaced by the "Schreibe dein Programm" language levels which have been
+available for several years. (see https://www.deinprogramm.de/sdp/ )
+
+- The release fixes a problem with the binding structure of the `for/fold`
+form in the rare situation when an iteration clause identifier shadowed
+an accumulator identifier. This change may break code that depends on
+the old binding structure. (see https://docs.racket-lang.org/reference/for.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._for%2Ffold%29%29 )
+
+- Racket automatically sets the close-on-exec flag when opening a file, on
+systems where this is available. This change lowers the cost of avoiding
+problems that can occur when file descriptors become accidentally shared
+between processes. (see https://docs.racket-lang.org/reference/file-ports.html#%28def._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._open-input-file%29%29 )
+
+- Match includes `hash` and `hash*` patterns. (see https://docs.racket-lang.org/reference/match.html#%28form._%28%28lib._racket%2Fmatch..rkt%29._match%29%29 )
+
+- The `vector-set/copy` function allows creation of a new vector that differs
+at only one index. This change also adds `vector-append` and `vector-copy`
+primitives. (see https://docs.racket-lang.org/reference/vectors.html#%28def._%28%28lib._racket%2Fvector..rkt%29._vector-set%2Fcopy%29%29 )
+
+- The `pregexp-quote` function brings the functionality of `regexp-quote`
+to pregexps. (see https://docs.racket-lang.org/reference/regexp.html#%28def._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._pregexp-quote%29%29 )
+
+- The C FFI convention-based converter supports `PascalCase` and `camelCase` in
+addition to an underscore-based convention. (see https://docs.racket-lang.org/foreign/Defining_Bindings.html#%28form._%28%28lib._ffi%2Funsafe%2Fdefine%2Fconventions..rkt%29._convention~3ahyphen-~3ecamel.Case%29%29 )
+
+- The `racket/case` library allows `case`-like forms that use different
+equality comparisons, such as `eq?` and `equal-always?`. (see https://docs.racket-lang.org/reference/case.html#%28form._%28%28lib._racket%2Fcase..rkt%29._case%2Fequal%29%29 )
+
+- Scribble rendering to HTML adds linking and information buttons when
+hovering over heading titles.
+
+- The `interval-map` data structure supports iterator functions in the style
+of `gen:ordered-dict`. (see https://docs.racket-lang.org/data/Orders_and_Ordered_Dictionaries.html#%28def._%28%28lib._data%2Forder..rkt%29._gen~3aordered-dict%29%29 )
+
+The following people contributed to this release:
+
+Alex Harsányi, Alex Knauth, Alex Muscar, Alexis King, Ben Greenman, Bert
+De Ketelaere, Bob Burger, Bogdan Popa, Chris Payne, Fred Fu, J. Ryan
+Stinnett, Jamie Taylor, Jared Forsyth, Jarhmander, Jens Axel Søgaard,
+Joel Dueck, John Clements, Jordan Johnson, Ken Harris, Laurent Orseau,
+Mao Yifu, Marc Nieper-Wißkirchen, Matteo d’Addio, Matthew Flatt,
+Matthias Felleisen, Micah Cantor, Mike Sperber, naveen srinivasan, Oscar
+Waddell, Philip McGrath, Philippe Meunier, Robby Findler, Rocketnia, Sam
+Phillips, Sam Tobin-Hochstadt, Sarthak Shah, Shu-Hung You, Sorawee
+Porncharoenwase, Stephen De Gabrielle, Tom Price, ur4t, Wing Hei Chan,
+and ZhangHao
+
+----------------------------------------------------------------------
