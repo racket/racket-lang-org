@@ -17,7 +17,7 @@ Learn to design programs systematically, with pictures.
 Learn to program with Racket, one game at a time.
 
 ◊link["https://link.springer.com/book/10.1007/978-3-031-43973-5"]{Programming-Based Formal Languages and Automata Theory}
-Learn Automata Theory via programming using FSM--A DSL embedded in Racket.
+Learn Formal Languages and Automata Theory using FSM--A DSL embedded in Racket.
 
 ◊link["https://rd.springer.com/book/10.1007/978-3-030-85091-3"]{Animated Problem Solving}
 Learn to design programs systematically using video games.
