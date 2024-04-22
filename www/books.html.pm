@@ -16,6 +16,9 @@ Learn to design programs systematically, with pictures.
 ◊link["https://nostarch.com/realmofracket.htm"]{Realm of Racket}
 Learn to program with Racket, one game at a time; see also ◊link["https://www.realmofracket.com/"]{its companion site}
 
+◊link["https://link.springer.com/book/10.1007/978-3-031-43973-5"]{Programming-Based Formal Languages and Automata Theory}
+Learn Formal Languages and Automata Theory using FSM--A DSL embedded in Racket.
+
 ◊link["https://rd.springer.com/book/10.1007/978-3-030-85091-3"]{Animated Problem Solving}
 Learn to design programs systematically using video games.
 
