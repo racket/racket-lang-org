@@ -29,6 +29,7 @@
 "James Emmott"
 "Xu Xue"
 "Dyllon Gagnier"
+"Sage Gerard"
 "Stephen DeGabrielle"
 "Ross McKinlay"
 "Fred Fu"
