@@ -30,7 +30,7 @@
 "Xu Xue"
 "Dyllon Gagnier"
 "Sage Gerard"
-"Stephen DeGabrielle"
+"Stephen De Gabrielle"
 "Ross McKinlay"
 "Fred Fu"
 "Jack Firth"
