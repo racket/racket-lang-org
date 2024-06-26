@@ -3,7 +3,10 @@
          (for-syntax racket/base))
 (provide (all-defined-out))
 
-(define fonts-url "https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Montserrat:wght@400;700&display=swap")
+(define fonts-url "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap")
+
+(define monospace
+  "'Source Code Pro', monospace")
 
 (define-syntax-rule (define-tag* tag name extra ...)
   (define name

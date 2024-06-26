@@ -7,14 +7,26 @@
          (prefix-in gregor: gregor)
          "lib.rkt")
 
-(define monospace
-  "'Cutive Mono', monospace")
+(define-div main
+  [font-family "'Montserrat', sans-serif"]
+  [background "forestgreen"]
+  [color "black"]
+  [margin "0px"])
+
+(define-div content
+  ,@centered
+  [background "white"]
+  [margin-left "10ex"]
+  [margin-right "10ex"]
+  [padding-top "2ex"]
+  [padding-bottom "2ex"])
 
 (define-div column
   ,@centered
   [width "45em"])
 
 (define-div banner
+  [padding-top "1ex"]
   ,@centered)
 
 (define-div title-container
@@ -28,20 +40,16 @@
   [display flex])
 
 (define-div pagetitle
-  [font-size "48pt"]
+  [font-size "40pt"]
   [font-family ,monospace])
-
-(define-div main
-  [font-family "'Montserrat', sans-serif"]
-  [background "white"]
-  [color "black"])
 
 (define header-font
   `(#;[font-weight "bold"]))
 
 (define-div subtitle
   ,@centered
-  [font-size "40pt"]
+  [font-size "32pt"]
+  [font-weight "bold"]
   ,@header-font)
 
 (define-div subsubtitle
@@ -54,7 +62,9 @@
 (define-div sectionHeader
   [font-size "24pt"]
   [margin-bottom "1em"]
-  [background "lightgray"]
+  [background "#CCEEDD"]
+  [margin-left "-10ex"]
+  [margin-right "-10ex"]
   ,@header-font)
 
 (define-div speaker-a
@@ -141,6 +151,10 @@
 (define-div nb
   [text-align "center"]
   [font-style "italic"])
+
+(define-div p-location
+  [font-size "24pt"]
+  [font-weight "bold"])
 
 (define-div specific-location
   [font-size "18pt"]
@@ -277,12 +291,12 @@
     `(script ([src      "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"]) "")
     `(script ([src "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"]) "")
     `(script ([src "https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data-10-year-range.js"]) "")
-    @title{(thirteenth RacketCon)}
+    @title{(fourteenth RacketCon)}
     @script{
 $(document).ready(function () {
  $("[data-slot-time]").each(function() {
   var date = new Date($(this).data("slot-time"));
-  var localTime = moment.tz(date, "America/Chicago").format("dddd, h:mma zz")
+  var localTime = moment.tz(date, "America/Los_Angeles").format("dddd, h:mma zz")
   $(this).html(localTime); }); }); })
     (body
      #:class "main h-event"
@@ -291,18 +305,18 @@ $(document).ready(function () {
      (meta #:itemprop "startDate" (gregor:~t saturday "y-MM-d"))
      (meta #:itemprop "endDate" (gregor:~t sunday "y-MM-d"))
      (meta #:itemprop "location" location)
+(content
      (banner
       (title-container
        (title-append
         @pagetitle[(img #:style "width:140px; float: right"
                         #:src "https://racket-lang.org/img/racket-logo.svg"
                         #:alt "The Racket logo")]
-        @pagetitle["(thirteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
-      @subtitle{October 28-29, 2023}
-      @subtitle{@`(span ((class "p-location")) "University of Washington")}
-      @specific-location{Paul G. Allen School of Computer Science & Engineering}
-      @specific-location{185 E Stevens Way NE, Seattle, WA  98195, United States}
-      @specific-location-cotd{@location  (@a[#:href "https://nominatim.openstreetmap.org/ui/details.html?osmtype=W&osmid=222825541&class=building" #:title "Paul G. Allen School of Computer Science & Engineering (OpenStreetMap)"]{map})}
+        @pagetitle["(fourteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
+      @subtitle{October 5-6, 2024}
+      @subtitle{@p-location{University of Washington}}
+      @specific-location{Kane Hall Room 220}
+      @specific-location{4069 Spokane Way @'nbsp @location  (@a[#:href "https://www.openstreetmap.org/way/26447597" #:title "Kane Hall (OpenStreetMap)"]{map})}
       )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
@@ -327,12 +341,25 @@ $(document).ready(function () {
   @keynote[
 @talk-time{Saturday, 9:00am}
 #:who
-@speaker[#:url "https://example.com"]{TBB}
+@speaker[#:url "https://example.com"]{TBD}
 #:what
 @talk{TBD}
 #:more
 @abstract{
 Stay tuned for an exciting keynote speaker announcement!
+}
+]
+
+  @lecture[
+#:when
+@talk-time{Sunday, 10:30am}
+#:who
+@speaker[#:person? #f]{A friendly Racketeer}
+#:what
+@talk{Your Fascinating Racket Project}
+#:more
+@abstract{
+Did we mention that we are looking for @emph{you}? If you have an idea for a presentation you’d like to give, please @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Write to the RacketCon organizers" "write to the RacketCon organizers") for consideration. All Racket-y ideas are welcome.
 }
 ]
 
@@ -351,10 +378,10 @@ Stay tuned for an exciting keynote speaker announcement!
 #:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
-@talk{Your fascinating Racket project}
+@talk{Your Fascinating Racket Project}
 #:more
 @abstract{
-Did we mention that we are looking for @emph{you}? If you have an idea for a presentation you’d like to give, please @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Write to the RacketCon organizers" "write to the RacketCon organizers") for consideration. All Racket-y ideas are welcome.
+Yes, @emph{you}! If you have an idea for a presentation you’d like to give, please @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Write to the RacketCon organizers" "write to the RacketCon organizers") for consideration. All Racket-y ideas are welcome.
 }
 ]
 
@@ -386,7 +413,9 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Organization}
-   @paragraph{The RacketCon 2024 organizers are Jesse Alama, Matthew Flatt, Robby Findler, Siddhartha Kasivajhula, and Stephen De Gabrielle. They may be reached at @(a #:href "mailto:con-organizers@racket-lang.org" "con-organizers@racket-lang.org").}
+   @paragraph{The RacketCon 2024 organizers are Jesse Alama, Matthew Flatt, Robby Findler, Siddhartha Kasivajhula, and Stephen De Gabrielle
+              with local arrangements by Zach Tatlock and Sorawee Porncharoenwase.
+              The organizers may be reached at @(a #:href "mailto:con-organizers@racket-lang.org" "con-organizers@racket-lang.org").}
   )
 
  (section
@@ -398,7 +427,7 @@ Please come with your big questions and discussion topics.
                  (for/list ([year '(2023 2022 2021 2020 2019 2018 2017 2016 2015 2014 2013 2012 2011)])
                    (list " ∙ "
                          (a #:href (format "https://con.racket-lang.org/~a/" year)
-                            (format "~a" year))))))))))))
+                            (format "~a" year)))))))))))))
 
 ;; ------------------------------------------------------------
 
