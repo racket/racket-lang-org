@@ -315,8 +315,7 @@ $(document).ready(function () {
         @pagetitle["(fourteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
       @subtitle{October 5-6, 2024}
       @subtitle{@p-location{University of Washington}}
-      @specific-location{Kane Hall Room 220}
-      @specific-location{4069 Spokane Way}
+      @specific-location{Kane Hall Room 220 @'nbsp @'nbsp 4069 Spokane Way}
       @specific-location{@location  (@a[#:href "https://www.openstreetmap.org/way/26447597" #:title "Kane Hall (OpenStreetMap)"]{map})}
       )
 
