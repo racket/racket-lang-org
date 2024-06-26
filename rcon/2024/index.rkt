@@ -311,6 +311,13 @@ $(document).ready(function () {
 (column
 
  (section
+  @sectionHeader{Call for Presentations}
+
+  @para{We are looking for @emph{you!} If you have an idea for a presentation you’d like to give, please write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the RacketCon organizer" "the RacketCon organizers") for consideration. All Racket-y ideas are welcome. We’d love to have you!}
+
+ )
+
+ (section
   @sectionHeader{Saturday, October 5th}
 
   @doors-open[@talk-time{Saturday, 8:30am}]
@@ -340,6 +347,19 @@ Stay tuned for an exciting keynote speaker announcement!
 
   @lecture[
 #:when
+@talk-time{Sunday, 9:30am}
+#:who
+@speaker[#:person? #f]{A friendly Racketeer}
+#:what
+@talk{Your fascinating Racket project}
+#:more
+@abstract{
+Did we mention that we are looking for @emph{you}? If you have an idea for a presentation you’d like to give, please @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Write to the RacketCon organizers" "write to the RacketCon organizers") for consideration. All Racket-y ideas are welcome.
+}
+]
+
+  @lecture[
+#:when
 @talk-time{Sunday, 11:30am}
 #:who
 @speaker[#:person? #f]{Racket Management}
@@ -357,11 +377,16 @@ Please come with your big questions and discussion topics.
  (section
    @sectionHeader{Registration}
    @paragraph{Registration is not yet open. Come back soon to find a link!}
-)
+ )
 
  (section
    @sectionHeader{Friendly Policy}
    @paragraph{The proceedings of RacketCon will take place under the Racket @(a #:href "https://racket-lang.org/friendly.html" "Friendly Environment Policy").}
+  )
+
+ (section
+   @sectionHeader{Organization}
+   @paragraph{The RacketCon 2024 organizers are Jesse Alama, Matthew Flatt, Robby Findler, Siddhartha Kasivajhula, and Stephen De Gabrielle. They may be reached at @(a #:href "mailto:con-organizers@racket-lang.org" "con-organizers@racket-lang.org").}
   )
 
  (section
