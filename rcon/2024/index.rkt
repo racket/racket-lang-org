@@ -316,7 +316,8 @@ $(document).ready(function () {
       @subtitle{October 5-6, 2024}
       @subtitle{@p-location{University of Washington}}
       @specific-location{Kane Hall Room 220}
-      @specific-location{4069 Spokane Way @'nbsp @location  (@a[#:href "https://www.openstreetmap.org/way/26447597" #:title "Kane Hall (OpenStreetMap)"]{map})}
+      @specific-location{4069 Spokane Way}
+      @specific-location{@location  (@a[#:href "https://www.openstreetmap.org/way/26447597" #:title "Kane Hall (OpenStreetMap)"]{map})}
       )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
