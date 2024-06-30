@@ -349,6 +349,9 @@ ancestor(A, B)?}}}
     ◊tr[
     ◊td{ ◊div[#:class "smartphone-only"]{Books} ◊p{
 
+      ◊link["https://docs.racket-lang.org/guide/index.html"]{The Racket Guide}
+      A detailed overview of the Racket Language.
+      
       ◊link["https://www.realmofracket.com/"]{Realm of Racket}
       Learn to program with Racket, one game at a time.
 
