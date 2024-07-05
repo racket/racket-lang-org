@@ -350,9 +350,20 @@ Stay tuned for an exciting keynote speaker announcement!
 }
 ]
 
+  @coffee[@talk-time{Saturday, 10:00am}]
+
   @lecture[
 #:when
-@talk-time{Sunday, 10:30am}
+@talk-time{Saturday, 10:30am}
+#:who
+@speaker{Jack Firth}
+#:what
+@talk{Sorted collections in Rebellion}
+]
+
+  @lecture[
+#:when
+@talk-time{Sunday, 11:00am}
 #:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
