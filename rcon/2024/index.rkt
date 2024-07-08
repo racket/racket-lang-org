@@ -356,7 +356,7 @@ Stay tuned for an exciting keynote speaker announcement!
 #:when
 @talk-time{Saturday, 10:30am}
 #:who
-@speaker{Jack Firth}
+@speaker[#:url "https://github.com/jackfirth"]{Jack Firth}
 #:what
 @talk{Sorted collections in Rebellion}
 ]
