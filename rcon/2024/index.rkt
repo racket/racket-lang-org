@@ -363,7 +363,7 @@ Stay tuned for an exciting keynote speaker announcement!
 
   @lecture[
 #:when
-@talk-time{Sunday, 11:00am}
+@talk-time{Saturday, 11:00am}
 #:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
@@ -394,6 +394,15 @@ Did we mention that we are looking for @emph{you}? If you have an idea for a pre
 @abstract{
 Yes, @emph{you}! If you have an idea for a presentation you’d like to give, please @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Write to the RacketCon organizers" "write to the RacketCon organizers") for consideration. All Racket-y ideas are welcome.
 }
+]
+
+  @lecture[
+#:when
+@talk-time{Sunday, 11:00am}
+#:who
+@speaker[#:url "https://samth.github.io" #;#:affiliation #;"Indiana"]{Sam Tobin-Hochstadt}
+#:what
+@talk{The State of Racket}
 ]
 
   @lecture[
