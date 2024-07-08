@@ -398,6 +398,15 @@ Yes, @emph{you}! If you have an idea for a presentation you’d like to give, pl
 
   @lecture[
 #:when
+@talk-time{Sunday, 11:00am}
+#:who
+@speaker[#:url "https://samth.github.io" #;#:affiliation #;"Indiana"]{Sam Tobin-Hochstadt}
+#:what
+@talk{The State of Racket}
+]
+
+  @lecture[
+#:when
 @talk-time{Sunday, 11:30am}
 #:who
 @speaker[#:person? #f]{Racket Management}
