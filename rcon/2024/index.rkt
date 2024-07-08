@@ -363,7 +363,7 @@ Stay tuned for an exciting keynote speaker announcement!
 
   @lecture[
 #:when
-@talk-time{Sunday, 11:00am}
+@talk-time{Saturday, 11:00am}
 #:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
