@@ -408,7 +408,7 @@ Please come with your big questions and discussion topics.
 
  (section
    @sectionHeader{Accommodation}
-   @paragraph{No official hotel has been selected, and no block(s) of rooms have been reserved. However, the University of Washington has @(a #:href "https://www.cs.washington.edu/visitors/getting_here#hotels" #:title "Accomodations near the Paul G. Allen School of Computer Science & Engineering" "a useful list") of nearby hotel recommendations on its Getting Here page.}
+   @paragraph{No official hotel has been selected, and no block(s) of rooms have been reserved. However, the University of Washington has @(a #:href "https://www.cs.washington.edu/visitors/getting_here#hotels" #:title "Accomodations near the Paul G. Allen School of Computer Science & Engineering" "a useful list") of nearby hotel recommendations on its Getting Here page. @(strong "NB") On that list of recommended hotels, Hotel Deca has been renamed to @(a #:href "https://graduatehotels.com/seattle/" #:title "Graduate Hotel" "Graduate Hotel").}
  )
 
  (section
