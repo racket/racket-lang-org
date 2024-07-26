@@ -409,7 +409,7 @@ Please come with your big questions and discussion topics.
  (section
    @sectionHeader{Accommodation}
    @paragraph{No official hotel has been selected, and no block(s) of rooms have been reserved. However, the University of Washington has @(a #:href "https://www.cs.washington.edu/visitors/getting_here#hotels" #:title "Accomodations near the Paul G. Allen School of Computer Science & Engineering" "a useful list") of nearby hotel recommendations on its Getting Here page. @(strong "NB") On that list of recommended hotels, Hotel Deca has been renamed to @(a #:href "https://graduatehotels.com/seattle/" #:title "Graduate Hotel" "Graduate Hotel").}
-    @paragraph{There will be a @(#:href "https://www.espn.com/college-football/game/_/gameId/401628505/michigan-washington" #:title "Washington vs. Michigan" "college football game") on October 5th, so there might not be parking space for those bringing their own car. It should also be fine if to say somewhere in the downtown area somewhat away from the university, though public transportation will likely be crowded because of the game.}
+    @paragraph{There will be a @(#:href "https://www.espn.com/college-football/game/_/gameId/401628505/michigan-washington" #:title "Washington vs. Michigan" "college football game") on October 5th, so there might not be parking space for those bringing their own car. It should also be fine if to stay somewhere in the downtown area somewhat away from the university, though public transportation will likely be crowded because of the game.}
   )
 
  (section
