@@ -376,7 +376,16 @@ Racket’s macros are fantastic for building DSLs that mix well with general-pur
 
   @lecture[
 #:when
-@talk-time{Saturday, 11:30am}
+@talk-time{Saturday, 12:00pm}
+#:who
+@speaker[#:url "https://github.com/benknoble"]{Ben Knoble}
+#:what
+@talk{TBA}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 12:30pm}
 #:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
