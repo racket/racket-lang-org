@@ -380,7 +380,15 @@ Racket’s macros are fantastic for building DSLs that mix well with general-pur
 #:who
 @speaker[#:url "https://github.com/benknoble"]{Ben Knoble}
 #:what
-@talk{TBA}
+@talk{Frosthaven Manager: Built by the Community}
+#:more
+@abstract{
+Consisting of more than 15k lines of code and documentation,
+written in spare time during the last two and a half years, the
+Frosthaven Manager would not exist without the Racket community. Let’s
+explore some of the community’s contributions, reflect on the benefits
+of building in the open, and dream about what comes next.
+}
 ]
 
   @lecture[
