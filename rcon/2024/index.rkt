@@ -403,7 +403,7 @@ Consisting of more than 15k lines of code and documentation, written in spare ti
 
   @lecture[
 #:when
-@talk-time{Saturday, 14:00pm}
+@talk-time{Saturday, 2:00pm}
 #:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
