@@ -391,6 +391,20 @@ Consisting of more than 15k lines of code and documentation, written in spare ti
 #:when
 @talk-time{Saturday, 12:30pm}
 #:who
+@speaker[#:url "https://williamjbowman.com"]{William Bowman}
+#:what
+@talk{First-class Prompt Engineering with llm-lang! (This is a bad idea.)}
+#:more
+@abstract{
+@paragraph{As we all know, generative AI and LLMs have replaced software engineering entirely, so all existing programming languages are deprecated. (What are you talking about?) Unfortunately, because even PL people don’t understand the importance of language-oriented programming, interfaces to LLMs remain restricted to chatbots, IDE plugins, and crappy APIs for deprecated languages! This is not the world we were promised; I want first-class prompt engineering! (No, I really don’t!)}
+
+@paragraph{Introducing, @(a #:href "https://github.com/wilbowma/llm-lang" #:title "llm-lang (GitHub)" "llm-lang"), a Racket hash-lang in which prompt engineering in first class! (Why did I do this?) By default, youre writing a prompt! If you need, you can escape into Racket to compute part of the prompt, or compute over the result of the prompt, but you probably won’t since LLMs can do it all! (You’re joking right?) We perform some cursory experiments to show the power of llm-lang, and some limitations. While it doesn’t @emph{strictly} provide any measurable benefit, and might in fact be hugely problematic if deployed for anything real, it is @emph{cool}. (Please, somebody stop me.) I’m sure sufficiently advanced magic will solve these problems in the future. (😫)}}
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 14:00pm}
+#:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
 @talk{Your Fascinating Racket Project}
