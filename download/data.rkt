@@ -17,6 +17,7 @@
     ;; binary platforms
     ["i386-win32" "Windows (x86, 32-bit)"]
     ["x86_64-win32" "Windows (x64, 64-bit)"]
+    ["arm64-win32" "Windows (Arm, 64-bit)"]
     ["(ppc|i386|x86_64|aarch64)-(?:osx-mac|macosx)"
      ,(λ (_ cpu)
         (format "Mac OS (~a)"

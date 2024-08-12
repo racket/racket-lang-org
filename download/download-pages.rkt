@@ -529,16 +529,20 @@ var property = null;
     // returns an ordering for the platform names, an array of regexps
     // note that the entries are sorted in a good order, so return an order
     // that only brings the locally desired entries to the top
-    function getPlatformOrder() {
+    function getPlatformOrder(ua) {
       var p = navigator.platform;
       var p2 = navigator.appVersion;
       var p3 = navigator.userAgent;
       function l(str) {
         return (p.indexOf(str) != -1) || (p2.indexOf(str) != -1) || (p3.indexOf(str) != -1);
       }
+      function is_win_arm64() {
+        return (ua && ua.platform == 'Windows' && ua.architecture === 'arm' && ua.bitness === '64');
+      }
       var Win      = /Windows/,
-          Win64    = /Windows.*64/,
+          Win64    = /Windows.*x64/,
           Win32    = /Windows.*32/,
+          WinArm64 = /Windows.*Arm/,
           Mac      = /Mac/,
           MacIntel = /Mac.*Intel/,
           MacIntel64 = /Mac.*Intel.*64/,
@@ -551,9 +555,10 @@ var property = null;
           Unix     = /Unix/,
           Solaris  = /Solaris/;
       if (p == null) return [];
+      else if (is_win_arm64()) return [WinArm64, Win64, Win];
       else if (l("SunOS")) return [Solaris, Unix];
-      else if (l("Win64")) return [Win64, Win];
-      else if (l("WOW64")) return [Win64, Win];
+      else if (l("Win64")) return [Win64, WinArm64, Win];
+      else if (l("WOW64")) return [Win64, WinArm64, Win];
       else if (l("Win"))   return [Win32, Win];
       else if (l("Mac"))   return [
         l("Intel") ? MacARM64 : MacPPC,
@@ -566,10 +571,10 @@ var property = null;
       else return [];
     }
 
-    function orderPlatform(platforms) {
+    function orderPlatform(platforms, ua) {
       var len = platforms.length;
       // get the order and a make a sorting function
-      var order = getPlatformOrder();
+      var order = getPlatformOrder(ua);
       function getOrder(str) {
         for (var i = 0; i < order.length; i++)
           if (str.search(order[i]) >= 0) return i;
@@ -598,9 +603,11 @@ var property = null;
       });
     }
 
-    forEach(allInstallers, function (dist) {
-      orderPlatform(dist.installers);
-    });
+    function orderAllPlatforms(ua) {
+      forEach(allInstallers, function (dist) {
+        orderPlatform(dist.installers, ua);
+      });
+    }
 
     function getAllPlatforms(allInstallers, currentDist) {
       return filter(allInstallers, function (group) {
@@ -718,7 +725,8 @@ var property = null;
       return elem('div', {}, children);
     }
 
-    function init() {
+    function init(ua) {
+      orderAllPlatforms(ua)
       var currentDist = initialDist;
       var allPlatforms = getAllPlatforms(allInstallers, currentDist);
       var currentPlatform = allPlatforms[0].platform;
@@ -731,7 +739,11 @@ var property = null;
       }, toDraw);
     }
 
-    init();
+    if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+      navigator.userAgentData.getHighEntropyValues(["architecture", "bitness"])
+      .then(ua => { init(ua) })
+    } else
+      init(false)
 
     function showWhen(e, b) {
       document.getElementById(e).style.display = b ? 'block' : 'none';
