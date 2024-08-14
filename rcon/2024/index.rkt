@@ -336,6 +336,11 @@ $(document).ready(function () {
  )
 
  (section
+  @sectionHeader{Registration}
+   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2024-tickets-983892828937"]{buy a ticket via Eventbrite}. If you cannot attend in-person, there is an option on Eventbrite for @emph{remote participation} to support the livestream.}
+ )
+
+ (section
   @sectionHeader{Saturday, October 5th}
 
   @doors-open[@talk-time{Saturday, 8:30am}]
@@ -509,11 +514,6 @@ Please come with your big questions and discussion topics.
 }]
 
 )
-
- (section
-  @sectionHeader{Registration}
-   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2024-tickets-983892828937"]{buy a ticket via Eventbrite}. If you cannot attend in-person, there is an option on Eventbrite for @emph{remote participation} to support the livestream.}
- )
 
  (section
    @sectionHeader{Accommodation}
