@@ -232,6 +232,10 @@
   (lecture #:when when #:who @speaker[#:person? #f]{@bold{Doors Open}}
            #:first? #t))
 
+(define (social #:when when #:more [more ""])
+  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Evening Social}}
+           #:more more))
+
 (define (coffee when)
  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Coffee}}))
 
@@ -414,6 +418,15 @@ Did we mention that we are looking for @emph{you}? If you have an idea for a pre
 }
 ]
 
+  @social[
+#:when
+@talk-time{Saturday, 6:00pm}
+#:more
+@abstract{
+Gathering with drinks and snacks, details TBA.
+}
+]
+
 )
 
  (section
@@ -462,8 +475,8 @@ Please come with your big questions and discussion topics.
 )
 
  (section
-   @sectionHeader{Registration}
-   @paragraph{Registration is not yet open. Come back soon to find a link!}
+  @sectionHeader{Registration}
+   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2024-tickets-983892828937"]{buy a ticket via Eventbrite}. If you cannot attend in-person, there is an option on Eventbrite for @emph{remote participation} to support the livestream.}
  )
 
  (section
