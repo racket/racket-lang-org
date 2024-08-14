@@ -76,9 +76,9 @@
                              "Download")]
       @br
       or @a[href: (resource "download/" #f) id: "mirror_link"]{mirror}
-      @span[id: "linux_ppa"]{
+      @;{span[id: "linux_ppa"]{
         or
-        @a[href: "https://launchpad.net/~plt/+archive/ubuntu/racket"]{Ubuntu PPA}}
+        @a[href: "https://launchpad.net/~plt/+archive/ubuntu/racket"]{Ubuntu PPA}}}
       @span[id: "linux_flatpak"]{
         or
         @a[href: "https://flathub.org/apps/details/org.racket_lang.Racket"]{
