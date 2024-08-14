@@ -16,28 +16,28 @@ As of this release:
   programs.
 
 - The `contract-in` form enables contracts to be specified in an
-  importing module.
+  importing module. (see https://docs.racket-lang.org/reference/attaching-contracts-to-values.html#%28form._%28%28lib._racket%2Fcontract%2Fbase..rkt%29._contract-in%29%29 )
 
 - The `#%declare` form supports the `#:flatten-requires` and
-  `#:unlimited-compile` keywords
+  `#:unlimited-compile` keywords (see https://docs.racket-lang.org/reference/module.html#%28form._%28%28quote._~23~25kernel%29._~23~25declare%29%29 )
 
 - Identifiers such as `case-λ`, `match-λ` and `λ` are equivalent to
   their Latin-alphabet equivalents (`case-lambda`, `match-lambda`, and
   `lambda`) in more contexts, including uses of `match`.
 
 - The `hash-filter` function allows the use of a predicate to select a
-  sub-table of a hash table.
+  sub-table of a hash table. (see https://docs.racket-lang.org/reference/hashtables.html#%28def._%28%28lib._racket%2Fhash..rkt%29._hash-filter%29%29 )
 
 - The module browser can perform filtering on submodules.
 
 - The `raco test` command-line form respects the
   `current-test-invocation-directory` parameter, and shows well-formed
-  module paths in its output.
+  module paths in its output. (see https://docs.racket-lang.org/raco/test.html#%28def._%28%28lib._raco%2Ftesting..rkt%29._current-test-invocation-directory%29%29 )
 
 - Racket CS allows the use of in-memory boot files.
 
 - The `raco/testing` collection brings together a variety of testing-
-  related functions and forms.
+  related functions and forms. (see https://docs.racket-lang.org/raco/test.html#%28mod-path._raco%2Ftesting%29 )
 
 - This release also includes many bug-fixes and documentation updates!
 
