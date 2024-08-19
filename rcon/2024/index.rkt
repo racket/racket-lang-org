@@ -409,6 +409,42 @@ Consisting of more than 15k lines of code and documentation, written in spare ti
 #:when
 @talk-time{Saturday, 2:00pm}
 #:who
+@speaker[#:person? #f]{Ashton Wiersdorf}
+#:what
+@talk{Type Tailoring: Teach an old type checker new tricks}
+#:more
+@abstract{
+
+@paragraph{Type checkers evolve too slowly to keep up with the libraries and
+DSLs programmers create. For example, compilers typically see only
+opaque strings where programmers see regular expressions or SQL
+queries with rich internal structure. Consequently, type checkers
+will assign overly-general types where the programmer knows more
+about the data at hand.}
+
+@paragraph{This talk will present two implementations of a type tailoring:
+the first in Racket, and the second in Rhombus. The Racket
+tailoring strengthens Typed Racket by making regular expressions
+legible to the type system, and the Rhombus tailoring relaxes
+Static Rhombus in the spirit of gradual typing—all using the macro
+system.}
+
+}
+
+#:bio
+@bio{Ashton Wiersdorf is a PhD student beginning his third year at
+the University of Utah. He works with his advisor Ben Greenman on
+the intersection between types and metaprogramming. When he’s not
+working, he enjoys taking hikes with his wife and three-year-old
+daughter who already knows to answer “Racket” when asked what her
+favorite programming language is.}
+
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 3:00pm}
+#:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
 @talk{Your Fascinating Racket Project}
