@@ -367,7 +367,7 @@ Stay tuned for an exciting keynote speaker announcement!
 #:who
 @speaker[#:url "https://github.com/jackfirth"]{Jack Firth}
 #:what
-@talk{Sorted collections in Rebellion}
+@talk{Sorted Collections in Rebellion}
 ]
 
   @lecture[
@@ -376,7 +376,7 @@ Stay tuned for an exciting keynote speaker announcement!
 #:who
 @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
 #:what
-@talk{A multi-language-oriented macro system}
+@talk{A Multi-Language-Oriented Macro System}
 #:more
 @abstract{
 Racket’s macros are fantastic for building DSLs that mix well with general-purpose code and inherit Racket’s extensibility. But they suffer when it comes time to equip your DSL with an optimizing compiler or static analyses. There, the very closeness with Racket that makes language mixing and extension so easy gets in the way. In this talk I’ll present my `syntax-spec` metalanguage. It extends Racket’s macro system to allow specifications of DSLs as fragments of a multi-language: DSL and Racket code mix, but only at carefully delineated boundaries. The result is that optimizing compilation, language mixing, and extension combine constructively rather than clash.
@@ -416,7 +416,7 @@ Consisting of more than 15k lines of code and documentation, written in spare ti
 #:who
 @speaker[#:person? #f]{Ashton Wiersdorf}
 #:what
-@talk{Type Tailoring: Teach an old type checker new tricks}
+@talk{Type Tailoring: Teach an Old Type Checker New Tricks}
 #:more
 @abstract{
 
