@@ -757,7 +757,7 @@ var property = null;
 
       showWhen('linux_explain', platform.search(/linux/) >= 0);
       showWhen('linux_install_explain', platform.search(/linux/) >= 0);
-      showWhen('linux_ppa', platform.search(/linux/) >= 0);
+      // showWhen('linux_ppa', platform.search(/linux/) >= 0);
       showWhen('linux_flatpak', platform.search(/linux/) >= 0);
       showWhen('linux_snap', platform.search(/linux/) >= 0);
 
