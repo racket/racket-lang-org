@@ -448,6 +448,31 @@ favorite programming language is.}
 
   @lecture[
 #:when
+@talk-time{Saturday, 2:30pm}
+#:who
+@speaker[#:url "https://passingti.me"]{Sean Bocirnea}
+#:what
+@talk{Making Extensible Language Frameworks That Compile Quickly Too}
+#:more
+@abstract{
+
+Racket has many frameworks for implementing extensible
+languages. Unfortunately, while very extensible, they can exhibit
+compile-time performance problems. For example, Cur, a small dependently
+typed language written in the Turnstile+ framework, is 5x slower to type
+check a simple proof than a comparable language type-checked by
+traditional means. In this talk, we’ll figure out why, develop a
+criteria for what @q{extensible} even means, explore the tradeoffs between
+extensibility and performance in existing frameworks, and determine how
+we can make extensible language frameworks faster without losing
+extensibility.
+
+}
+
+]
+
+  @lecture[
+#:when
 @talk-time{Saturday, 3:00pm}
 #:who
 @speaker[#:person? #f]{A friendly Racketeer}
