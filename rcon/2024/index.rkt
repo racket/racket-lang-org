@@ -475,6 +475,16 @@ extensibility.
 #:when
 @talk-time{Saturday, 3:00pm}
 #:who
+@speaker[#:url "https://github.com/ndh4"]{Nathaniel Hejduk}
+#:what
+@talk{rouble with Typed Racket? Try a Boundary Profiler!}
+
+]
+
+  @lecture[
+#:when
+@talk-time{Saturday, 3:30pm}
+#:who
 @speaker[#:person? #f]{A friendly Racketeer}
 #:what
 @talk{Your Fascinating Racket Project}
