@@ -450,7 +450,7 @@ favorite programming language is.}
 #:when
 @talk-time{Saturday, 2:30pm}
 #:who
-@speaker{Sean Bocirnea}
+@speaker[#:url "https://passingti.me"]{Sean Bocirnea}
 #:what
 @talk{Making Extensible Language Frameworks That Compile Quickly Too}
 #:more
