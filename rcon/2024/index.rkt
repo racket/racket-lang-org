@@ -74,6 +74,8 @@
 (define-a h-card
   [color "inherit"])
 
+(define-span activity)
+
 (define-div talk
   [font-weight bold]
   #;
@@ -82,6 +84,17 @@
   [margin-top "0.25em"]
   [margin-bottom "0.5em"]
   [color "gray"])
+
+(define-div place
+  [font-weight bold]
+  #;
+  [font-style "italic"]
+  [font-size "24pt"]
+  [margin-top "0.25em"]
+  [color "gray"])
+
+(define-div place-address
+  [margin-bottom "0.5em"])
 
 (define-div abstract
   [text-align "left"]
@@ -96,8 +109,20 @@
 
 (define-div plain)
 
+(define-div joint
+  [color "gray"])
+
 (define-div larger
   [font-size "24pt"])
+
+(define-div featuring
+  [white-space "nowrap"]
+  [font-size "18pt"]
+  [margin-top "1em"]
+  [color "blue"])
+
+(define-span featured
+  [font-weight bold])
 
 (define-span bold
   [font-weight bold])
@@ -196,14 +221,14 @@
                             (list (list 'class "unaffiliated"))])))
            (cond [(non-empty-string? affiliation)
                   (list (txexpr* 'a attrs
-                                 name
+                                 (bold name)
                                  " ("
                                  (txexpr* 'span
                                           (list (list 'class "p-org"))
                                           affiliation)
                                  ")"))]
                  [else
-                  (list (txexpr* 'a attrs name))])]))
+                  (list (txexpr* 'a attrs (bold name)))])]))
   (txexpr 'span
           (list (list 'class "speaker-a"))
           span-kids))
@@ -226,24 +251,29 @@
                                    (or bio "")))
 
 (define (hallway when)
- (lecture #:when when #:who @speaker[#:person? #f]{@bold{Hallway}}))
+ (lecture #:when when #:who @speaker[#:person? #f]{@activity{Hallway}}))
 
 (define (doors-open when)
-  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Doors Open}}
+  (lecture #:when when #:who @speaker[#:person? #f]{@activity{Doors Open}}
            #:first? #t))
 
-(define (social #:when when #:more [more ""])
-  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Evening Social}}
+(define (social #:when when #:where [where ""] #:more [more ""])
+  (lecture #:when when #:who @speaker[#:person? #f]{@activity{Evening Social}}
+           #:what where
            #:more more))
 
 (define (coffee when)
- (lecture #:when when #:who @speaker[#:person? #f]{@bold{Coffee}}))
+ (lecture #:when when #:who @speaker[#:person? #f]{@activity{Coffee}}))
+
+(define (break when)
+ (lecture #:when when #:who @speaker[#:person? #f]{@activity{Break}}))
 
 (define (lunch when)
- (lecture #:when when #:who @speaker[#:person? #f]{@bold{Lunch}}))
+ (lecture #:when when #:who @speaker[#:person? #f]{@activity{Lunch}}))
 
-(define (keynote when #:who who #:what what #:more more #:link [link #f])
-  (lecture #:when when #:who @speaker[#:person? #f]{@bold{Keynote}}
+(define (keynote when #:who who #:what what #:more more #:link [link #f]
+                 #:desc [desc "Keynote"])
+  (lecture #:when when #:who @speaker[#:person? #f]{@activity{@desc}}
            #:what (keynote-speaker who) #:link link #:more what
            #:even-more more))
 
@@ -252,6 +282,11 @@
 
 (define (q content)
   `(q () ,content))
+
+(define (at-where name addr)
+  `(div ()
+        (div ,name)
+        (div ,addr)))
 
 (define saturday (gregor:date 2024 10 5))
 (define sunday (gregor:date 2024 10 6))
@@ -328,6 +363,10 @@ $(document).ready(function () {
 
 (column
 
+ @featuring{Celebrating 40 years of magic with Hal Abelson & Gerald Sussman,@(br)
+            and featuring Lisp legend Gregor Kiczales}
+  
+ #;
  (section
   @sectionHeader{Call for Presentations}
 
@@ -349,34 +388,34 @@ $(document).ready(function () {
 
   @keynote[
 @talk-time{Saturday, 9:00am}
+#:desc "Invited Talk"
 #:who
-@speaker[#:url "https://example.com"]{TBD}
+@speaker[#:url "https://www.cs.ubc.ca/~gregor/"]{Gregor Kiczales}
 #:what
-@talk{TBD}
+@talk{Strategies and Technology for Teaching HtDP at Scale}
 #:more
 @abstract{
-Stay tuned for an exciting keynote speaker announcement!
 }
 ]
 
-  @coffee[@talk-time{Saturday, 10:00am}]
+  @break[@talk-time{Saturday, 9:45am}]
 
-  @lecture[
-#:when
-@talk-time{Saturday, 10:30am}
+  @keynote[
+@talk-time{Saturday, 10:15am}
+#:desc "Keynote (Remote Presentation)"
 #:who
-@speaker[#:url "https://github.com/jackfirth"]{Jacqueline Firth}
+@joint{@speaker[#:url "https://www.csail.mit.edu/person/hal-abelson"]{Hal Abelson}
+       and @speaker[#:url "https://www.csail.mit.edu/person/gerald-sussman"]{Gerald Sussman}}
 #:what
-@talk{Sorted Collections in Rebellion}
+@talk{}
 #:more
 @abstract{
-Computation exists in service of data. Useful data structures, therefore, make the difference between what is possible and what is easy. And of the many forms of structured data, sorted data is arguably the most useful. In this talk, we’ll tour the sorted data structures in Rebellion, a second standard library for Racket I’ve developed over the years. We’ll collect data into sorted sets, sorted maps, and range sets. We’ll reduce and transduce data from one collection into another. We’ll order data according to composable comparators. We’ll build data up gradually, then all at once. We’ll query it, mutate it, persistently update it, and concurrently access it. And we’ll do it all with enough performance to wrap up by lunch.
 }
 ]
 
   @lecture[
 #:when
-@talk-time{Saturday, 11:00am}
+@talk-time{Saturday, 11:15am}
 #:who
 @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
 #:what
@@ -387,9 +426,11 @@ Racket’s macros are fantastic for building DSLs that mix well with general-pur
 }
 ]
 
+ @lunch[@talk-time{Saturday, 11:45am}]
+
   @lecture[
 #:when
-@talk-time{Saturday, 12:00pm}
+@talk-time{Saturday, 1:30pm}
 #:who
 @speaker[#:url "https://github.com/benknoble"]{Ben Knoble}
 #:what
@@ -402,23 +443,37 @@ Consisting of more than 15k lines of code and documentation, written in spare ti
 
   @lecture[
 #:when
-@talk-time{Saturday, 12:30pm}
+@talk-time{Saturday, 2:00pm}
 #:who
-@speaker[#:url "https://williamjbowman.com"]{William Bowman}
+@speaker[#:url "https://www.linkedin.com/in/charlie-ray-5a11b81a7/"]{Charlie Ray}
 #:what
-@talk{First-class Prompt Engineering with llm-lang! (This is a bad idea.)}
+@talk{Mutation Testing: better than coverage?}
 #:more
 @abstract{
-@paragraph{As we all know, generative AI and LLMs have replaced software engineering entirely, so all existing programming languages are deprecated. (What are you talking about?) Unfortunately, because even PL people don’t understand the importance of language-oriented programming, interfaces to LLMs remain restricted to chatbots, IDE plugins, and crappy APIs for deprecated languages! This is not the world we were promised; I want first-class prompt engineering! (No, I really don’t!)}
-
-@paragraph{Introducing, @(a #:href "https://github.com/wilbowma/llm-lang" #:title "llm-lang (GitHub)" "llm-lang"), a Racket hash-lang in which prompt engineering in first class! (Why did I do this?) By default, youre writing a prompt! If you need, you can escape into Racket to compute part of the prompt, or compute over the result of the prompt, but you probably won’t since LLMs can do it all! (You’re joking right?) We perform some cursory experiments to show the power of llm-lang, and some limitations. While it doesn’t @emph{strictly} provide any measurable benefit, and might in fact be hugely problematic if deployed for anything real, it is @emph{cool}. (Please, somebody stop me.) I’m sure sufficiently advanced magic will solve these problems in the future. (😫)}}
+Mutation testing is the idea that we can assess the completeness of a test suite by updating (or ‘mutating’) a single location in the code under test, and checking to make sure at least one of the existing tests fails. Building on Lukas Lazarek’s mutation framework for Racket, we apply mutation testing in two very different settings—the classroom, and the open-source software project—to see what kinds of benefit mutation testing might offer above and beyond the commonly-used test case coverage metric.}
 ]
+
+    @lecture[
+#:when
+@talk-time{Saturday, 2:30pm}
+#:who
+@speaker[#:url "https://github.com/ndh4"]{Nathaniel Hejduk}
+#:what
+@talk{Trouble with Typed Racket? Try a Boundary Profiler!}
+#:more
+@abstract{
+When you add types to a portion of your partially-untyped code base in Typed Racket (TR), the type soundness guarantees you gain will make you feel warm and fuzzy. Sometimes, however, doing so will cause your running time to skyrocket, turning your cute, fluffy type annotations into an unexpected tribulation. When such troubles occur, a boundary profiler can help you ease the runtime wrath of contract checking. In this talk, I’ll demonstrate how to use a boundary profiler to boldly reduce the overhead of type-checking in your program, without violating the following prime directive: once a component has been typed, it must stay typed forever.
+}
+]
+
+   @break[@talk-time{Saturday, 3:00pm}]
+
 
   @lecture[
 #:when
-@talk-time{Saturday, 2:00pm}
+@talk-time{Saturday, 3:30pm}
 #:who
-@speaker[#:person? #f]{Ashton Wiersdorf}
+@speaker[#:url "https://lambdaland.org"]{Ashton Wiersdorf}
 #:what
 @talk{Type Tailoring: Teach an Old Type Checker New Tricks}
 #:more
@@ -452,7 +507,7 @@ favorite programming language is.}
 
   @lecture[
 #:when
-@talk-time{Saturday, 2:30pm}
+@talk-time{Saturday, 4:00pm}
 #:who
 @speaker[#:url "https://passingti.me"]{Sean Bocirnea}
 #:what
@@ -477,36 +532,27 @@ extensibility.
 
   @lecture[
 #:when
-@talk-time{Saturday, 3:00pm}
+@talk-time{Saturday, 4:30pm}
 #:who
-@speaker[#:url "https://github.com/ndh4"]{Nathaniel Hejduk}
+@speaker[#:url "https://williamjbowman.com"]{William Bowman}
 #:what
-@talk{Trouble with Typed Racket? Try a Boundary Profiler!}
+@talk{First-class Prompt Engineering with llm-lang! (This is a bad idea.)}
 #:more
 @abstract{
-When you add types to a portion of your partially-untyped code base in Typed Racket (TR), the type soundness guarantees you gain will make you feel warm and fuzzy. Sometimes, however, doing so will cause your running time to skyrocket, turning your cute, fluffy type annotations into an unexpected tribulation. When such troubles occur, a boundary profiler can help you ease the runtime wrath of contract checking. In this talk, I’ll demonstrate how to use a boundary profiler to boldly reduce the overhead of type-checking in your program, without violating the following prime directive: once a component has been typed, it must stay typed forever.
-}
-]
+@paragraph{As we all know, generative AI and LLMs have replaced software engineering entirely, so all existing programming languages are deprecated. (What are you talking about?) Unfortunately, because even PL people don’t understand the importance of language-oriented programming, interfaces to LLMs remain restricted to chatbots, IDE plugins, and crappy APIs for deprecated languages! This is not the world we were promised; I want first-class prompt engineering! (No, I really don’t!)}
 
-  @lecture[
-#:when
-@talk-time{Saturday, 3:30pm}
-#:who
-@speaker[#:person? #f]{A friendly Racketeer}
-#:what
-@talk{Your Fascinating Racket Project}
-#:more
-@abstract{
-Did we mention that we are looking for @emph{you}? If you have an idea for a presentation you’d like to give, please @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Write to the RacketCon organizers" "write to the RacketCon organizers") for consideration. All Racket-y ideas are welcome.
-}
+@paragraph{Introducing, @(a #:href "https://github.com/wilbowma/llm-lang" #:title "llm-lang (GitHub)" "llm-lang"), a Racket hash-lang in which prompt engineering in first class! (Why did I do this?) By default, youre writing a prompt! If you need, you can escape into Racket to compute part of the prompt, or compute over the result of the prompt, but you probably won’t since LLMs can do it all! (You’re joking right?) We perform some cursory experiments to show the power of llm-lang, and some limitations. While it doesn’t @emph{strictly} provide any measurable benefit, and might in fact be hugely problematic if deployed for anything real, it is @emph{cool}. (Please, somebody stop me.) I’m sure sufficiently advanced magic will solve these problems in the future. (😫)}}
 ]
 
   @social[
 #:when
 @talk-time{Saturday, 6:00pm}
+#:where
+@at-where[@place{@(a #:href "https://www.elysianbrewing.com/locations/capitol-hill" "Elysian Capitol Hill")}
+          @place-address{1221 Pike Street}]
 #:more
 @abstract{
-Gathering with drinks and snacks, details TBA.
+Gathering with drinks and snacks, located close to a light rail station that is one stop away from the university.
 }
 ]
 
@@ -523,14 +569,48 @@ Gathering with drinks and snacks, details TBA.
 #:when
 @talk-time{Sunday, 9:30am}
 #:who
-@speaker[#:person? #f]{A friendly Racketeer}
+@speaker[#:url "https://github.com/jackfirth"]{Jacqueline Firth}
 #:what
-@talk{Your Fascinating Racket Project}
+@talk{Sorted Collections in Rebellion}
 #:more
 @abstract{
-Yes, @emph{you}! If you have an idea for a presentation you’d like to give, please @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Write to the RacketCon organizers" "write to the RacketCon organizers") for consideration. All Racket-y ideas are welcome.
+ Computation exists in service of data. Useful data
+ structures, therefore, make the difference between what is possible
+ and what is easy. And of the many forms of structured data, sorted
+ data is arguably the most useful. In this talk, we'll tour the sorted
+ data structures in Rebellion, a second standard library for Racket
+ I've developed over the years. We'll collect data into sorted sets,
+ sorted maps, and range sets. We'll reduce and transduce data from one
+ collection into another. We'll order data according to composable
+ comparators. We'll build data up gradually, then all at once. We'll
+ query it, mutate it, persistently update it, and concurrently access
+ it. And we'll do it all with enough performance to wrap up by lunch.
 }
 ]
+
+  @lecture[
+#:when
+@talk-time{Sunday, 10:00am}
+#:who
+@speaker[#:url "https://linkedin.com/in/allanschougaard"]{Allan Schougaard}
+#:what
+@talk{Racket Syntax: The Great, the Good and the Back-to-the-Drawing-Board}
+#:more
+@abstract{
+In this talk I present a linguistic comparison of language choices in
+Racket and LISP vs. a number of other computer languages. LISP is by far
+the programming language with the simplest syntax: only using parenthesis
+as delineations. However, the Racket and LISP communities have over time
+added a great variety of semantics on this simple mechanism, some of which
+have proven great inventions, and some of which other languages may have
+better solutions to, and that the Racket and LISP communities may learn
+from. The talk will directly compare elements of yaml, SmallTalk, Ruby,
+Java, regular expressions, visual programming, and shell programming with
+Racket.
+}
+]
+
+  @break[@talk-time{Sunday, 10:30am}]
 
   @lecture[
 #:when
