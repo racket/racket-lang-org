@@ -365,9 +365,13 @@ Stay tuned for an exciting keynote speaker announcement!
 #:when
 @talk-time{Saturday, 10:30am}
 #:who
-@speaker[#:url "https://github.com/jackfirth"]{Jack Firth}
+@speaker[#:url "https://github.com/jackfirth"]{Jacqueline Firth}
 #:what
 @talk{Sorted Collections in Rebellion}
+#:more
+@abstract{
+Computation exists in service of data. Useful data structures, therefore, make the difference between what is possible and what is easy. And of the many forms of structured data, sorted data is arguably the most useful. In this talk, we’ll tour the sorted data structures in Rebellion, a second standard library for Racket I’ve developed over the years. We’ll collect data into sorted sets, sorted maps, and range sets. We’ll reduce and transduce data from one collection into another. We’ll order data according to composable comparators. We’ll build data up gradually, then all at once. We’ll query it, mutate it, persistently update it, and concurrently access it. And we’ll do it all with enough performance to wrap up by lunch.
+}
 ]
 
   @lecture[
