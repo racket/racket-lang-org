@@ -505,7 +505,7 @@ favorite programming language is.}
 
 ]
 
-  @lecture[
+@;{ @lecture[
 #:when
 @talk-time{Saturday, 4:00pm}
 #:who
@@ -528,11 +528,11 @@ extensibility.
 
 }
 
-]
+]}
 
   @lecture[
 #:when
-@talk-time{Saturday, 4:30pm}
+@talk-time{Saturday, 4:00pm}
 #:who
 @speaker[#:url "https://williamjbowman.com"]{William Bowman}
 #:what
@@ -549,7 +549,7 @@ extensibility.
 @talk-time{Saturday, 6:00pm}
 #:where
 @at-where[@place{@(a #:href "https://www.elysianbrewing.com/locations/capitol-hill" "Elysian Capitol Hill")}
-          @place-address{1221 Pike Street}]
+          @place-address{1221 E Pike Street}]
 #:more
 @abstract{
 Gathering with drinks and snacks, located close to a light rail station that is one stop away from the university.
