@@ -459,10 +459,10 @@ Mutation testing is the idea that we can assess the completeness of a test suite
 #:who
 @speaker[#:url "https://github.com/ndh4"]{Nathaniel Hejduk}
 #:what
-@talk{Trouble with Typed Racket? Try a Boundary Profiler!}
+@talk{Trouble with Typed Racket? Try contract-profile!}
 #:more
 @abstract{
-When you add types to a portion of your partially-untyped code base in Typed Racket (TR), the type soundness guarantees you gain will make you feel warm and fuzzy. Sometimes, however, doing so will cause your running time to skyrocket, turning your cute, fluffy type annotations into an unexpected tribulation. When such troubles occur, a boundary profiler can help you ease the runtime wrath of contract checking. In this talk, I’ll demonstrate how to use a boundary profiler to boldly reduce the overhead of type-checking in your program, without violating the following prime directive: once a component has been typed, it must stay typed forever.
+When you add types to a portion of your partially-untyped code base in Typed Racket, the type soundness guarantees you gain will make you feel warm and fuzzy. Sometimes, however, doing so will cause your running time to skyrocket, turning your cute, fluffy type annotations into an unexpected tribulation. When such troubles occur, contract-profile can help you ease the runtime wrath of contract checking. In this talk, I’ll demonstrate how to use contract-profile to boldly reduce the overhead of type-checking in your program, without violating the following prime directive: once a module has been typed, it must stay typed forever.
 }
 ]
 
