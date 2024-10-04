@@ -372,7 +372,26 @@ $(document).ready(function () {
 
   @para{We are looking for @emph{you!} If you have an idea for a presentation you’d like to give, please write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the RacketCon organizer" "the RacketCon organizers") for consideration. All Racket-y ideas are welcome. We’d love to have you!}
 
- )
+  )
+
+ (section
+  @sectionHeader{Live Stream}
+  '(iframe ([width "720"]
+           [height "800"]
+           [src "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]
+           [frameBorder "0"]
+           [scrolling "auto"]
+           [allowfullscreen "true"]
+           [allow "autoplay; fullscreen"]))
+  '(iframe ([src "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]
+           [width "100%"]
+           [height "450"]
+           [allowtransparency "yes"]
+           [allow "autoplay"]
+           [frameborder "0"]
+           [marginheight "0"]
+           [marginwidth "0"]
+           [scrolling "auto"])))
 
  (section
   @sectionHeader{Registration}
