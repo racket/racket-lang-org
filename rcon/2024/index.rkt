@@ -375,28 +375,9 @@ $(document).ready(function () {
   )
 
  (section
-  @sectionHeader{Live Stream}
-  '(iframe ([width "720"]
-           [height "800"]
-           [src "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]
-           [frameBorder "0"]
-           [scrolling "auto"]
-           [allowfullscreen "true"]
-           [allow "autoplay; fullscreen"]))
-  '(iframe ([src "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]
-           [width "100%"]
-           [height "450"]
-           [allowtransparency "yes"]
-           [allow "autoplay"]
-           [frameborder "0"]
-           [marginheight "0"]
-           [marginwidth "0"]
-           [scrolling "auto"])))
-
- (section
-  @sectionHeader{Registration}
-   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2024-tickets-983892828937"]{buy a ticket via Eventbrite}. If you cannot attend in-person, there is an option on Eventbrite for @emph{remote participation} to support the livestream.}
- )
+  @abstract{@bold{Talk recordings coming soon.} Stay tuned for links to talk vidoes; it will take a few days. Meanwhile,
+          you can still reach the @a[#:href "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj"]{livstream feed} (currently has the day 2 recording)
+          and the @a[#:href "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]{chat}.})
 
  (section
   @sectionHeader{Saturday, October 5th}
@@ -655,6 +636,11 @@ Please come with your big questions and discussion topics.
 }]
 
 )
+
+ (section
+  @sectionHeader{Registration}
+   @paragraph{To register, @a[#:href "https://www.eventbrite.com/e/racketcon-2024-tickets-983892828937"]{buy a ticket via Eventbrite}. If you cannot attend in-person, there is an option on Eventbrite for @emph{remote participation} to support the livestream.}
+ )
 
  (section
    @sectionHeader{Accommodation}
