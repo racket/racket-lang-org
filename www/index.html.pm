@@ -323,7 +323,7 @@ ancestor(A, B)?}}}
       ◊link["https://racket.discourse.group"]{Discourse} and ◊link["https://discord.gg/6Zq8sH5"]{Discord}
       These are the most active places for Racketeers.
 
-      ◊link["https://racket.slack.com/"]{Slack} (◊link["https://join.slack.com/t/racket/shared_invite/zt-1ionnhfs3-bhgf~jJctQVwTb_QnU_yzQ"]{sign up}), ◊link["https://kiwiirc.com/nextclient/irc.libera.chat/#racket"]{IRC}, ◊link["https://reddit.com/r/racket"]{Reddit}, and ◊link["https://lists.racket-lang.org/"]{Mailing lists}
+      ◊link["https://racket.slack.com/"]{Slack} (◊link["https://join.slack.com/t/racket/shared_invite/zt-1ionnhfs3-bhgf~jJctQVwTb_QnU_yzQ"]{sign up}), ◊link["https://reddit.com/r/racket"]{Reddit}, and ◊link["https://lists.racket-lang.org/"]{Mailing lists}
       Racketeers are here, too!
 
       ◊link[#:rel "me" "https://functional.cafe/@racketlang"]{Mastodon}, ◊link["https://twitter.com/racketlang"]{Twitter}, and ◊link["https://blog.racket-lang.org/"]{Blog}
