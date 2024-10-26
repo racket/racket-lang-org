@@ -375,9 +375,7 @@ $(document).ready(function () {
   )
 
  (section
-  @abstract{@bold{Talk recordings coming soon.} Stay tuned for links to talk vidoes; it will take a few days. Meanwhile,
-          you can still reach the @a[#:href "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj"]{livstream feed} (currently has the day 2 recording)
-          and the @a[#:href "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]{chat}.})
+  @abstract{@bold{Talk recordings:} Some are linked below, and there are more to come!})
 
  (section
   @sectionHeader{Saturday, October 5th}
@@ -393,6 +391,7 @@ $(document).ready(function () {
 @speaker[#:url "https://www.cs.ubc.ca/~gregor/"]{Gregor Kiczales}
 #:what
 @talk{Strategies and Technology for Teaching HtDP at Scale}
+#:link "https://youtu.be/Uc4koFmFDdQ"
 #:more
 @abstract{
 }
@@ -408,6 +407,7 @@ $(document).ready(function () {
        and @speaker[#:url "https://www.csail.mit.edu/person/gerald-sussman"]{Gerald Sussman}}
 #:what
 @talk{}
+#:link "https://youtu.be/_2qXIDO-cWw"
 #:more
 @abstract{
 }
@@ -418,6 +418,7 @@ $(document).ready(function () {
 @talk-time{Saturday, 11:15am}
 #:who
 @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
+#:link "https://youtu.be/KHxZ3mT9BSo"
 #:what
 @talk{A Multi-Language-Oriented Macro System}
 #:more
@@ -435,6 +436,7 @@ Racket’s macros are fantastic for building DSLs that mix well with general-pur
 @speaker[#:url "https://github.com/benknoble"]{Ben Knoble}
 #:what
 @talk{Frosthaven Manager: Built by the Community}
+#:link "https://youtu.be/O33NK52ZmUk"
 #:more
 @abstract{
 Consisting of more than 15k lines of code and documentation, written in spare time during the last two and a half years, the @(a #:href "https://github.com/benknoble/frosthaven-manager" #:title "frosthaven-manager (GitHub)" "Frosthaven Manager") would not exist without the Racket community. Let’s explore some of the community’s contributions, reflect on the benefits of building in the open, and dream about what comes next.
