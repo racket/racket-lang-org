@@ -418,9 +418,9 @@ $(document).ready(function () {
 @talk-time{Saturday, 11:15am}
 #:who
 @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
-#:link "https://youtu.be/KHxZ3mT9BSo"
 #:what
 @talk{A Multi-Language-Oriented Macro System}
+#:link "https://youtu.be/KHxZ3mT9BSo"
 #:more
 @abstract{
 Racket’s macros are fantastic for building DSLs that mix well with general-purpose code and inherit Racket’s extensibility. But they suffer when it comes time to equip your DSL with an optimizing compiler or static analyses. There, the very closeness with Racket that makes language mixing and extension so easy gets in the way. In this talk I’ll present my `syntax-spec` metalanguage. It extends Racket’s macro system to allow specifications of DSLs as fragments of a multi-language: DSL and Racket code mix, but only at carefully delineated boundaries. The result is that optimizing compilation, language mixing, and extension combine constructively rather than clash.
@@ -450,6 +450,7 @@ Consisting of more than 15k lines of code and documentation, written in spare ti
 @speaker[#:url "https://www.linkedin.com/in/charlie-ray-5a11b81a7/"]{Charlie Ray}
 #:what
 @talk{Mutation Testing: better than coverage?}
+#:link "https://youtu.be/Ed6Ocs3U1v4"
 #:more
 @abstract{
 Mutation testing is the idea that we can assess the completeness of a test suite by updating (or ‘mutating’) a single location in the code under test, and checking to make sure at least one of the existing tests fails. Building on Lukas Lazarek’s mutation framework for Racket, we apply mutation testing in two very different settings—the classroom, and the open-source software project—to see what kinds of benefit mutation testing might offer above and beyond the commonly-used test case coverage metric.}
@@ -462,6 +463,7 @@ Mutation testing is the idea that we can assess the completeness of a test suite
 @speaker[#:url "https://github.com/ndh4"]{Nathaniel Hejduk}
 #:what
 @talk{Trouble with Typed Racket? Try contract-profile!}
+#:link "https://youtu.be/FeDVjomZgmE"
 #:more
 @abstract{
 When you add types to a portion of your partially-untyped code base in Typed Racket, the type soundness guarantees you gain will make you feel warm and fuzzy. Sometimes, however, doing so will cause your running time to skyrocket, turning your cute, fluffy type annotations into an unexpected tribulation. When such troubles occur, contract-profile can help you ease the runtime wrath of contract checking. In this talk, I’ll demonstrate how to use contract-profile to boldly reduce the overhead of type-checking in your program, without violating the following prime directive: once a module has been typed, it must stay typed forever.
@@ -478,6 +480,7 @@ When you add types to a portion of your partially-untyped code base in Typed Rac
 @speaker[#:url "https://lambdaland.org"]{Ashton Wiersdorf}
 #:what
 @talk{Type Tailoring: Teach an Old Type Checker New Tricks}
+#:link "https://youtu.be/rmPCstrSQOA"
 #:more
 @abstract{
 
