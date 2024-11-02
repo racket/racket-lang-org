@@ -375,9 +375,6 @@ $(document).ready(function () {
   )
 
  (section
-  @abstract{@bold{Talk recordings:} Some are linked below, and there are more to come!})
-
- (section
   @sectionHeader{Saturday, October 5th}
 
   @doors-open[@talk-time{Saturday, 8:30am}]
