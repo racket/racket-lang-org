@@ -542,6 +542,7 @@ extensibility.
 @speaker[#:url "https://williamjbowman.com"]{William Bowman}
 #:what
 @talk{First-class Prompt Engineering with llm-lang! (This is a bad idea.)}
+#:link "https://youtu.be/ueGC3xVcDlc"
 #:more
 @abstract{
 @paragraph{As we all know, generative AI and LLMs have replaced software engineering entirely, so all existing programming languages are deprecated. (What are you talking about?) Unfortunately, because even PL people don’t understand the importance of language-oriented programming, interfaces to LLMs remain restricted to chatbots, IDE plugins, and crappy APIs for deprecated languages! This is not the world we were promised; I want first-class prompt engineering! (No, I really don’t!)}
@@ -577,6 +578,7 @@ Gathering with drinks and snacks, located close to a light rail station that is 
 @speaker[#:url "https://github.com/jackfirth"]{Jacqueline Firth}
 #:what
 @talk{Sorted Collections in Rebellion}
+#:link " https://youtu.be/-eLw9vpcKI8"
 #:more
 @abstract{
  Computation exists in service of data. Useful data
@@ -600,6 +602,7 @@ Gathering with drinks and snacks, located close to a light rail station that is 
 @speaker[#:url "https://linkedin.com/in/allanschougaard"]{Allan Schougaard}
 #:what
 @talk{Racket Syntax: The Great, the Good and the Back-to-the-Drawing-Board}
+#:link "https://youtu.be/ZtTqRH1uwu4"
 #:more
 @abstract{
 In this talk I present a linguistic comparison of language choices in
@@ -624,6 +627,7 @@ Racket.
 @speaker[#:url "https://samth.github.io" #;#:affiliation #;"Indiana"]{Sam Tobin-Hochstadt}
 #:what
 @talk{The State of Racket}
+#:link "https://youtu.be/PYeKEshvAh8"
 ]
 
   @lecture[
@@ -633,6 +637,7 @@ Racket.
 @speaker[#:person? #f]{Racket Management}
 #:what
 @talk{Racket Town Hall}
+#:link "https://youtu.be/lhkXdE0nPOU"
 #:more
 @abstract{
 
