@@ -1111,3 +1111,13 @@
 157264256	8.14/racket-8.14-src-builtpkgs.tgz
 34144519	8.14/racket-8.14-src.tgz
 34142388	8.14/racket-src.tgz
+263122244	8.15/racket-8.15-aarch64-macosx-cs.dmg
+166900056	8.15/racket-8.15-arm64-win32-cs.exe
+248247383	8.15/racket-8.15-x86_64-linux-cs.sh
+274927856	8.15/racket-8.15-x86_64-macosx-cs.dmg
+173703280	8.15/racket-8.15-x86_64-win32-cs.exe
+127324581	8.15/racket-8.15-i386-macosx-bc.dmg
+87088704	8.15/racket-8.15-i386-win32-bc.exe
+157495068	8.15/racket-8.15-src-builtpkgs.tgz
+34160328	8.15/racket-8.15-src.tgz
+34155890	8.15/racket-src.tgz
