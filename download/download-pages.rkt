@@ -792,7 +792,7 @@ var property = null;
            }
            null)
 
-      @(if (version<=? version-before-m1-support version)
+      @(if (version<? version-before-m1-support version)
            @list{
                  @; showWhen('m1_mac_explain', platform === 'x86_64-macosx');
                  showWhen('intel_mac_explain', platform === 'aarch64-macosx');
