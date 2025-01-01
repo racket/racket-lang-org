@@ -246,7 +246,7 @@ ancestor(A, B)?}}}
   ◊tab[#:id "easy-dsls" #:title "Easy DSLs"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["lang-video.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350) #:class "lop-image"]{}}
+      ◊img/size["fh.drawio.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
