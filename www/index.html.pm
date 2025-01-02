@@ -29,7 +29,7 @@
 ◊[define miniKanren "https://pkgs.racket-lang.org/package/faster-minikanren"]
 ◊[define traits-aplas "http://www.cs.utah.edu/plt/publications/aplas06-fff.pdf"]
 ◊[define hash-langs "https://docs.racket-lang.org/guide/hash-languages.html"]
-◊[define lang-video "https://lang.video"]
+◊[define frosthaven-manager "https://benknoble.github.io/frosthaven-manager/Programming_a_Scenario.html"]
 ◊[define typed/racket "https://docs.racket-lang.org/ts-guide/index.html"]
 ◊[define datalog "https://docs.racket-lang.org/datalog/datalog.html?q=datalog"]
 ◊[define br-parsing "https://docs.racket-lang.org/br-parser-tools/index.html?q=parsing"]
@@ -246,14 +246,14 @@ ancestor(A, B)?}}}
   ◊tab[#:id "easy-dsls" #:title "Easy DSLs"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["fh.drawio.png" #:alt "#lang video Dependency Graph" #:size (cons 350 350) #:class "lop-image"]{}}
+      ◊img/size["frosthaven.png" #:alt "Frosthaven Manager application tech stack diagram" #:size (cons 350 350) #:class "lop-image"]{}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
         Some languages convey ideas more easily than others. And some programming languages convey solutions better than others.  Therefore Racket is a language for ◊link[hash-langs]{making languages}, so that a programmer can write every module in a well-suited language.}
 
      ◊p[#:class "block-with-1em-margin"]{
-        Often ◊link["https://benknoble.github.io/frosthaven-manager/Programming_a_Scenario.html"]{an application domain} comes with several languages.  When you need a new language, you make it—on the fly. Open an IDE window; create a language right there, with just a few keystrokes; and run a module in this new language in a second IDE window.  Making new languages really requires no setup, no project files, no external tools, no nothing.}
+        Often ◊link[frosthaven-manager]{an application domain} comes with several languages.  When you need a new language, you make it—on the fly. Open an IDE window; create a language right there, with just a few keystrokes; and run a module in this new language in a second IDE window.  Making new languages really requires no setup, no project files, no external tools, no nothing.}
 }}}
   ◊tab[#:id "ide-support" #:title "IDE Support"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
