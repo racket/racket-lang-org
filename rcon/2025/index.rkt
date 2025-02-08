@@ -364,15 +364,12 @@ $(document).ready(function () {
 
  @featuring{Special Guests TBC}
   
- #;
  (section
   @sectionHeader{Call for Presentations}
 
   @para{We are looking for @emph{you!} If you have an idea for a presentation you’d like to give, please write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the RacketCon organizer" "the RacketCon organizers") for consideration. All Racket-y ideas are welcome. We’d love to have you!}
 
   )
-
- 
 
  (section
   @sectionHeader{Programme}
@@ -381,15 +378,6 @@ $(document).ready(function () {
   @para{We are looking for @emph{you!} If you have an idea for a presentation you’d like to give, please write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the RacketCon organizer" "the RacketCon organizers") for consideration. All Racket-y ideas are welcome. We’d love to have you!}
 
   )
-
-
-
-
-
-
-
-
-)
 
  (section
   @sectionHeader{Registration}
