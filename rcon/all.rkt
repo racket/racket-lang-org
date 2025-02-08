@@ -68,7 +68,13 @@
 (require (prefix-in 2024: "2024/index.rkt"))
 (define-runtime-path 2024-dir "2024")
 (2024:make 2024-dir)
-(copy-con-site! 2024-dir 2024 #:current #t) ; change to `#:current` needs change in "sync.rkt"
+(copy-con-site! 2024-dir 2024)
+
+;; 2025
+(require (prefix-in 2025: "2025/index.rkt"))
+(define-runtime-path 2025-dir "2025")
+(2025:make 2025-dir)
+(copy-con-site! 2025-dir 2025 #:current #t) ; change to `#:current` needs change in "sync.rkt"
 
 ;; A `#:current #t` above causes that year's content to be copied to
 ;; the root directory instead of the year's subdiredtory, except that
