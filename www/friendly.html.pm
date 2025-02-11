@@ -21,7 +21,7 @@ Anyone witnessing or subject to unacceptable behaviour should notify the moderat
 ◊div{Community moderation team:}
 ◊div[#:style "padding:0.5rem"]{
 ◊link["https://github.com/countvajhula"]{Siddhartha Kasivajhula} (◊email["sid" "countvajhula" "com"])
- ◊link["https://github.com/jackfirth"]{Jack Firth} (◊email["jackhfirth" "gmail" "com"])
+ ◊link["https://github.com/jackfirth"]{Jacqueline Firth} (◊email["jackhfirth" "gmail" "com"])
  ◊link["https://github.com/samdphillips"]{Sam Phillips} (◊email["samdphillips" "gmail" "com"])
  ◊link["https://github.com/spdegabrielle"]{Stephen De Gabrielle} (◊email["spdegabrielle" "gmail" "com"])
  ◊link["https://github.com/jryans"]{J. Ryan Stinnett} (◊email["jryans" "gmail" "com"])
