@@ -1,0 +1,63 @@
+1740942300
+Racket v8.16
+
+----------------------------------------------------------------------
+
+- Racket has expanded support for immutable and mutable treelists:
+  - A variety of new treelist utility functions are available:
+    `treelist-filter`, `treelist-flatten`, et cetera.
+  - The `mutable-treelist-prepend!` function allows prepending to
+    mutable treelists.
+  - Mutable treelists are serializable.
+- The `serialize-structs` module allows the minimization of
+  dependencies by providing only a handful of core forms.
+- The `flbit-field` function allows access to the binary
+  representation of IEEE floating-point numbers.
+- The top-left search box in the documentation works once more.
+- The XML reader is 2-3x faster on inputs with long CDATA and
+  comments, and avoids some internal contract checks to obtain a 25%
+  speedup on large documents generally.
+- The pregexp syntax includes "\X" to match a grapheme cluster),
+  following Perl and PCRE.
+- The `read-json*` and `write-json*` functions allow customization of
+  the Racket representation of JSON elements, eliminating the need for
+  a separate "translation" pass.
+- Racket has new port I/O functions:
+  - The `open-input-nowhere` function creates an empty input port.
+  - The `pipe-port?` function makes it possible to determine whether a
+    port is created by `make-pipe`.
+  - The `port-file-stat` function allows gathering information about the
+    file that is the source or target of a file-stream port.
+- A revised representation of pointers improves the performance of
+  foreign function calls. As a result, `ptr-ref` and `ptr-set!` are
+  substantially faster.
+- In anticipation of the fifteenth RacketCon, the `fifteenth` function
+  returns the fifteenth element of a list.
+- Racket has an improved multi-line convention for error messages.
+- The `db` library allows `prepare` on virtual statements.
+- The `student-t` distribution is part of the `math/distributions`
+  library.
+- Expeditor supports customizing the prompt, using the `#:prompt`
+  keyword argument to `call-with-expeditor`.
+- There is a guide to adding internationalization for a new (human)
+  language.
+- Optimizations to racket/profile improve asymptotic speed for very
+  large call graphs.
+- The `#lang htdp/asl` language incorporates Graphical Debugger
+  support.
+- There is lots of new documentation, and many defects repaired!
+
+The following people contributed to this release:
+
+a11ce, Alex Knauth, Alexander Shopov, Alexis King, Andrew
+Mauer-Oats, Anthony Carrico, Bert De Ketelaere, Bob Burger, Bogdan
+Popa, D. Ben Knoble, David Van Horn, Gustavo Massaccesi, halfminami,
+Hao Zhang, Jacqueline Firth, Jinser Kafka, JJ, John Clements, Jörgen
+Brandt, Kraskaska, lafirest, Laurent Orseau, lukejianu, Marc
+Nieper-Wißkirchen, Matthew Flatt, Matthias Felleisen, mehbark, Mike
+Sperber, Noah Ma, Onorio Catenacci, Oscar Waddell, Pavel Panchekha,
+payneca, Robby Findler, Sam Phillips, Sam Tobin-Hochstadt, Shu-Hung
+You, Sorawee Porncharoenwase, Stephen De Gabrielle, Wing Hei Chan,
+Yi Cao, and ZhangHao.
+
+----------------------------------------------------------------------
