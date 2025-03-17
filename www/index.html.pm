@@ -47,7 +47,7 @@
 
  ◊div[#:style "flex-grow:1"]{}
 
- ◊div[#:style "margin-right: 1em"]{◊link["https://con.racket-lang.org/"]{RacketCon 2024}}
+ ◊div[#:style "margin-right: 1em"]{◊link["https://con.racket-lang.org/"]{RacketCon 2025 will be in October}}
 }}
 
 ◊tabs[#:group-id "racket-lang-group"
