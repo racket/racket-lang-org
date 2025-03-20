@@ -132,7 +132,7 @@
   (add-routing-rules "con.racket-lang.org"
                      #:preserve-existing? #f ; so redirect for old year is dropped
                      (list
-                      (redirect-prefix-routing-rule #:old-prefix "2024/"
+                      (redirect-prefix-routing-rule #:old-prefix "2025/"
                                                     #:new-prefix ""
                                                     #:redirect-code "302"))
                      #:log-info displayln)
