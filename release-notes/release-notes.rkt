@@ -45,28 +45,28 @@
 
 @bullet{Typed Racket has support for @link[(rur "treelist.html")]{treelists}.}
 
-@bullet{The package manager computes checksums for packages when required,
+@bullet{The package manager computes @link[(dur "pkg/Package_Concepts.html")]{checksums} for packages when required,
    allowing the use and automatic upgrade of packages without them.}
 
 @bullet{The @link[bfs-url]{`bitwise-first-bit-set`} function returns the smallest bit that is
    set in the twos-complement representation of the given number.}
 
-@bullet{The updated `dynamic-require` function makes it easier to use
+@bullet{The updated @link[(rur "Module_Names_and_Loading.html#%28def._%28%28quote._~23~25kernel%29._dynamic-require%29%29")]{`dynamic-require`} function makes it easier to use
    syntax bindings by allowing a syntax-thunk (or 'eval) to be used for them.}
 
-@bullet{The `error-module-path->string-handler` parameter allows the customization
+@bullet{The @link[(rur "exns.html#%28def._%28%28quote._~23~25kernel%29._error-module-path-~3estring-handler%29%29")]{`error-module-path->string-handler`} parameter allows the customization
    of the display of module-paths in error messages.}
 
-@bullet{Precision of certain numeric functions (`sin`, `cos`, and others) is
+@bullet{Precision of certain @link[(rur "generic-numbers.html")]{numeric functions} (`sin`, `cos`, and others) is
    improved on Windows platforms by using the MSVCRT/UCRT libraries.}
   
-@bullet{The `string-append` function has improved performance and reduced memory
+@bullet{The @link[(rur "strings.html#%28def._%28%28quote._~23~25kernel%29._string-append%29%29")]{`string-append`} function has improved performance and reduced memory
    use for long lists of strings in the Racket CS implementation.
    Differences are clearly noticeable for lists of length 1 million.}
 
-@bullet{TCP ports use `SO_KEEPALIVE`, instructing the kernel to send periodic
+@bullet{@link[(rur "tcp.html")]{TCP ports} use `SO_KEEPALIVE`, instructing the kernel to send periodic
    messages while waiting for data to check whether the connection
-   is still responsive}
+   is still responsive.}
 
 @bullet{Racket code using a terminal in Windows can receive mouse events as
  virtual terminal characters after using SetConsoleMode. (This is also
@@ -74,27 +74,27 @@
  @link["https://docs.racket-lang.org/tui-term/index.html"]{tui-term} package
  for related example code.}
 
-@bullet{The `#:replace-malformed-surrogate?` keyword can be used to specify
+@bullet{The @link[(dur "json/index.html#%28part._.Parsing_.J.S.O.N_.Text_into_.J.S-.Expressions%29")]{`#:replace-malformed-surrogate?`} keyword can be used to specify
    a replacement for malformed unicode surrogates in JSON input}
 
-@bullet{The http-client module no longer sends "Content-Length: 0" for
+@bullet{The @link[(dur "http-client/index.html")]{http-client} module no longer sends "Content-Length: 0" for
    requests without a body.}
 
-@bullet{The demodularizer (`compiler/demod`) can prune more unused assignments}
+@bullet{The @link[(dur "raco/demod.html")]{demodularizer} (`compiler/demod`) can prune more unused assignments}
 
-@bullet{Several judgment rendering forms in Redex are replaced by functions, allowing
+@bullet{Several judgment rendering forms in @link[(dur "redex/index.html")]{Redex} are replaced by functions, allowing
    more convenient abstraction.}
 
 @bullet{When a distribution includes no teaching languages, DrRacket’s language-dialog
  configuration moves into the preferences dialog and the “Language” menu disappears.}
 
-@bullet{The math library has better support for block-diagonal matrices, including
+@bullet{The @link[(dur "math/index.html")]{math library} has better support for block-diagonal matrices, including
  both Racket and Typed Racket.}
 
-@bullet{The math library contains improved implementations of acos and
+@bullet{The @link[(dur "math/index.html")]{math library} contains improved implementations of acos and
    matrix-(cos-)angle.}
 
-@bullet{The stepper again works for `big-bang` programs.}
+@bullet{The @link[(dur "stepper/index.html")]{stepper} again works for @link[(dur "teachpack/2htdpuniverse.html#(part._world._interactive)")]{`big-bang`} programs.}
 
 @bullet{There are many other repairs and documentation imprevements!
 }
@@ -155,16 +155,13 @@
 
 (define markdown-closing-block
   #<<|
-_Racket is a community developed open source project and we welcome new
-contributors. See 
-[racket/README.md](https://github.com/racket/racket/blob/master/README.md#contributing)
-to learn how you can be a part of this amazing project._
+**Racket** is a community developed open source project and we welcome new contributors. See [racket/README.md](https://github.com/racket/racket/blob/master/README.md#contributing)
+to learn how you can be a part of this amazing project.
 
 ## Feedback Welcome
 
-Questions and discussion welcome at the Racket community
-[Discourse](https://racket.discourse.group/invites/VxkBcXY7yL) or
-[Discord](https://discord.gg/6Zq8sH5) 
+Questions and discussion welcome at the Racket community on [Discourse](https://racket.discourse.group/invites/VxkBcXY7yL) or
+[Discord](https://discord.gg/6Zq8sH5).
 
 ## Please share
 
