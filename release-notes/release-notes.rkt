@@ -80,7 +80,7 @@
 @bullet{The @link[(dur "http-client/index.html")]{http-client} module no longer sends "Content-Length: 0" for
    requests without a body.}
 
-@bullet{The @link[(dur "raco/demod.html")]{demodularizer} (`compiler/demod`) can prune more unused assignments}
+@bullet{The @link[(dur "raco/demod.html")]{demodularizer} (`compiler/demod`) can prune more unused assignments.}
 
 @bullet{Several judgment rendering forms in @link[(dur "redex/index.html")]{Redex} are replaced by functions, allowing
    more convenient abstraction.}
