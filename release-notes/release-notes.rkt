@@ -155,16 +155,13 @@
 
 (define markdown-closing-block
   #<<|
-_Racket is a community developed open source project and we welcome new
-contributors. See 
-[racket/README.md](https://github.com/racket/racket/blob/master/README.md#contributing)
-to learn how you can be a part of this amazing project._
+**Racket** is a community developed open source project and we welcome new contributors. See [racket/README.md](https://github.com/racket/racket/blob/master/README.md#contributing)
+to learn how you can be a part of this amazing project.
 
 ## Feedback Welcome
 
-Questions and discussion welcome at the Racket community
-[Discourse](https://racket.discourse.group/invites/VxkBcXY7yL) or
-[Discord](https://discord.gg/6Zq8sH5) 
+Questions and discussion welcome at the Racket community on [Discourse](https://racket.discourse.group/invites/VxkBcXY7yL) or
+[Discord](https://discord.gg/6Zq8sH5).
 
 ## Please share
 
