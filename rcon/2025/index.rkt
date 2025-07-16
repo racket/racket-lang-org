@@ -197,6 +197,9 @@
 (define (code content)
  `(code () ,content))
 
+(define mailto:con-organizers
+  @(a #:href "mailto:con-organizers@racket-lang.org" "con-organizers@racket-lang.org"))
+
 ;; ------------------------------------------------------------
 
 (define (speaker #:person? [person? #t]
@@ -585,12 +588,11 @@ $(document).ready(function () {
 
  (section
    @sectionHeader{Organization}
-   @paragraph{The RacketCon 2025 is organised by a team of volunteers:
-                  Stephen De Gabrielle, Robby Findler, Jacqueline Firth, Matthew Flatt,
-                  Ben Greenman, Siddhartha Kasivajhula, Bogdan Popa, Sam Tobin-Hochstadt
-                  and @a[#:href "https://forms.gle/omJAjAQ6xJLjsw3z8"]{Your name here}
-              with local arrangements by Stephen Chang.
-              The organizers may be reached at @(a #:href "mailto:con-organizers@racket-lang.org" "con-organizers@racket-lang.org").}
+   @paragraph{
+    The RacketCon 2025 is organised by a team of volunteers: Stephen De Gabrielle, Robby Findler,
+    Jacqueline Firth, Matthew Flatt, Ben Greenman, Siddhartha Kasivajhula, Bogdan Popa, Sam
+    Tobin-Hochstadt with local arrangements by Stephen Chang. The organizers may be reached at
+    @|mailto:con-organizers|.}
   )
 
  (section
