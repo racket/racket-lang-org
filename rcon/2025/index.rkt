@@ -478,10 +478,26 @@ $(document).ready(function () {
   @break[@talk-time{Saturday, 3:00pm}]
   @lecture[
    #:when @talk-time{Saturday, 3:30pm}
-   #:who @speaker[#:url "https://github.com/capfredf"]{Fred Fu}
-   #:what @talk{TBD}
-   #:more @abstract{}
-   ;#:bio @bio{}
+   #:who @joint{
+    @speaker[#:url "https://github.com/ariscript"]{Ari Prakash}
+    @speaker[#:url "https://github.com/zackbach/"]{Zachary Eisbach}
+   }
+   #:what @talk{miniDusa: An Extensible Finite-Choice Logic Programming Language}
+   #:more @abstract{
+    Dusa is a recently designed logic programming language featuring mutually exclusive choice as a
+    primitive to enable computation of solutions that satisfy constraints. To explore further host
+    integration, we introduce miniDusa, a Dusa-inspired hosted domain-specific language implemented
+    using Racket and the syntax-spec metalanguage. This architecture lets us inherit tooling,
+    extensibility, and interoperability features from Racket essentially “for free”.
+   }
+   #:bio @bio{
+    Zachary Eisbach is a student at Northeastern University studying Mathematics and Computer
+    Science. He is interested in compilers, logic, and safe interoperability.
+    @paragraph{
+     Ari Prakash is a student at Northeastern University studying Computer Science. She is
+     interested in developer tooling to make creating reliable systems easier.
+    }
+   }
   ]
   @lecture[
    #:when @talk-time{Saturday, 4:00pm}
@@ -503,6 +519,13 @@ $(document).ready(function () {
     harbored a love for Lisp which eventually led him to Racket.
    }
   ]
+  @lecture[
+   #:when @talk-time{Saturday, 4:30pm}
+   #:who @speaker[#:url "https://github.com/capfredf"]{Fred Fu}
+   #:what @talk{TBD}
+   #:more @abstract{}
+   ;#:bio @bio{}
+  ]
   )
 
  (section
@@ -510,9 +533,17 @@ $(document).ready(function () {
   @doors-open[@talk-time{Sunday, 9:00am}]
   @lecture[
    #:when @talk-time{Sunday, 9:30am}
-   #:who @speaker[#:url "https://example.com"]{???}
-   #:what @talk{???}
-   #:more @abstract{}
+   #:who @speaker[#:url "https://github.com/texdraft"]{Asher Olsen}
+   #:what @talk{PROG Rock: Listening to old Lisp code}
+   #:more @abstract{
+    Music and Lisp code might seem worlds apart, but through various processes it is possible to get
+    aurally pleasing results from a LISP 1.5 → music compiler (written in Racket, of course). In
+    this talk, I explain how this “musicalization” works and show ways that composers can make use
+    of the concept.
+   }
+   #:bio @bio{
+    Asher Olsen is a composer and programming language enthusiast living in Texas.
+   }
   ]
   @lecture[
    #:when @talk-time{Sunday, 10:00am}
