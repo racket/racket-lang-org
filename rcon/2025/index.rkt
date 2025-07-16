@@ -372,6 +372,7 @@ $(document).ready(function () {
    content, reaching and engaging both the Racket community and the
    wider programming world.})
 
+ #;
  (section
   @sectionHeader{Call for Presentations}
   @para{We are looking for @emph{you!} If you have an idea for
