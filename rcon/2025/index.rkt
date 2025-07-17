@@ -462,8 +462,22 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 1:30pm}
    #:who @speaker[#:url "https://github.com/toddjonker"]{Todd Jonker}
    #:what @talk{Ion Fusion}
-   #:more @abstract{}
-   ;#:bio @bio{}
+   #:more @abstract{
+    Ion Fusion is a customizable programming language that unifies the semantics of persistent data
+    and the code that manipulates it. Oriented around the Amazon Ion data format--the backbone of
+    Amazon’s retail systems and even consumer products--Fusion has been the brains of internal
+    analytics, data processing, and workflow systems since 2013. This talk explores Ion Fusion’s
+    unique design goals and constraints, its roots in Scheme and Racket, and its vision of
+    sustainable software evolution.
+   }
+   #:bio @bio{
+    I got bored with AppleSoft Basic in 1982 and have been designing PLs ever since. A self-taught
+    coder, I was reeducated by PLT at Rice, then failed out of CMU into an industry career. After
+    surfing through startups in a variety of industries, I settled down for two decades at Amazon,
+    building foundation tech and evolving very large systems, including the company’s central
+    package builder. Throughout, my mission is to improve developer happiness through transparent,
+    coherent, and sustainable languages, frameworks, and tools.
+   }
   ]
   @lecture[
    #:when @talk-time{Saturday, 2:00pm}
