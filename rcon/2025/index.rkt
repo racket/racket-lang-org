@@ -539,18 +539,6 @@ $(document).ready(function () {
   ]
   @lecture[
    #:when @talk-time{Saturday, 4:30pm}
-   #:who @speaker[#:url "https://github.com/capfredf"]{Fred Fu}
-   #:what @talk{TBD}
-   #:more @abstract{}
-   ;#:bio @bio{}
-  ]
-  )
-
- (section
-  @sectionHeader{Sunday, October 5th}
-  @doors-open[@talk-time{Sunday, 9:00am}]
-  @lecture[
-   #:when @talk-time{Sunday, 9:30am}
    #:who @speaker[#:url "https://github.com/texdraft"]{Asher Olsen}
    #:what @talk{PROG Rock: Listening to old Lisp code}
    #:more @abstract{
@@ -562,6 +550,36 @@ $(document).ready(function () {
    #:bio @bio{
     Asher Olsen is a composer and programming language enthusiast living in Texas.
    }
+  ]
+  )
+
+ (section
+  @sectionHeader{Sunday, October 5th}
+  @doors-open[@talk-time{Sunday, 8:30am}]
+  @lecture[
+   #:when @talk-time{Sunday, 9:00am}
+   #:who @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
+   #:what @talk{Advanced Macrology: 5 Macro Programming Patterns You (No Longer) Need to Know}
+   #:more @abstract{
+    Racket's macros make creating small extensions to the language remarkably simple. But when
+    you step up to creating DSLs with static semantics and compiler optimizations, you need new
+    tools to integrate your DSL implementation with Racket's expansion process. In this talk I'll
+    demonstrate 5 macro design patterns that sophisticated DSLs like match, syntax-parse, and Typed
+    Racket use to validate syntax, communicate static information, and integrate with DrRacket. But
+    as any good language-oriented programmer knows, a design pattern usually indicates a missing
+    linguistic abstraction! And in fact, my syntax-spec metalanguage abstracts over all of these
+    design patterns, generating implementations from a declarative specification of your DSL
+    syntax. So I'll also show how you can more easily achieve the same results with syntax-spec,
+    design-pattern-free.
+   }
+   ;#:bio @bio{}
+  ]
+  @lecture[
+   #:when @talk-time{Sunday, 9:30am}
+   #:who @speaker[#:url "https://github.com/capfredf"]{Fred Fu}
+   #:what @talk{TBD}
+   #:more @abstract{}
+   ;#:bio @bio{}
   ]
   @lecture[
    #:when @talk-time{Sunday, 10:00am}
