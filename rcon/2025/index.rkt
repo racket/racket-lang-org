@@ -572,7 +572,12 @@ $(document).ready(function () {
     syntax. So I'll also show how you can more easily achieve the same results with syntax-spec,
     design-pattern-free.
    }
-   ;#:bio @bio{}
+   #:bio @bio{
+    Michael Ballantyne recently completed his Ph.D. at Northeastern University, advised by Matthias
+    Felleisen. His research works towards a future where mainstream programmers regularly create,
+    extend, and fluidly intermix domain-specific languages, with excellent support from their
+    programming language and environment.
+   }
   ]
   @lecture[
    #:when @talk-time{Sunday, 9:30am}
