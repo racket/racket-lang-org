@@ -489,9 +489,22 @@ $(document).ready(function () {
   @lecture[
    #:when @talk-time{Saturday, 2:30pm}
    #:who @speaker[#:url "https://camoy.net/"]{Cameron Moy}
-   #:what @talk{roulette}
-   #:more @abstract{}
-   ;#:bio @bio{}
+   #:what @talk{Roulette for Racketeers}
+   #:more @abstract{
+    Exact probabilistic inference is a requirement for many applications of probabilistic
+    programming languages (PPLs), but implementing a PPL with high-performance inference is
+    difficult. Roulette is a new discrete PPL that combines high-performance exact inference with
+    expressive language features by leveraging the close connection between exact probabilistic
+    inference and the symbolic evaluation strategy of Rosette. Building on this connection,
+    Roulette generalizes and extends the Rosette solver-aided programming system to reason about
+    probabilistic rather than symbolic quantities. In this talk, I'll demonstrate how to use
+    Roulette and discuss some of the ideas that make it work.
+   }
+   #:bio @bio{
+    Cameron is a PhD student and member of the PLT and PRL research groups at Northeastern
+    University. He primarily studies contract systems but is broadly interested in programming
+    language design.
+   }
   ]
   @break[@talk-time{Saturday, 3:00pm}]
   @lecture[
