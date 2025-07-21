@@ -482,9 +482,18 @@ $(document).ready(function () {
   @lecture[
    #:when @talk-time{Saturday, 2:00pm}
    #:who @speaker[#:url "https://www.greghendershott.com/"]{Greg Hendershott}
-   #:what @talk{racket-mode}
-   #:more @abstract{}
-   ;#:bio @bio{}
+   #:what @talk{"It Works": More Adventures with Racket and Emacs}
+   #:more @abstract{
+    The Emacs package "racket-mode" has continued to evolve its design and features. Among other
+    things, it allows multiple local and remote back ends, has a redesigned "lossless" REPL,
+    supports modern Emacs UI completion annotations, and enables lang-driven editing. Most recently
+    the step debugger has gotten some attention.
+   }
+   #:bio @bio{
+    Greg Hendershott has a useless degree in philosophy, a background in the music software
+    industry, and a decade working in the open source Racket and Emacs communities. Tedious details
+    are available at @(a #:href "https://www.greghendershott.com/About.html" "greghendershott.com").
+   }
   ]
   @lecture[
    #:when @talk-time{Saturday, 2:30pm}
