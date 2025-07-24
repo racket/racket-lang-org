@@ -603,8 +603,8 @@ $(document).ready(function () {
   ]
   @lecture[
    #:when @talk-time{Sunday, 9:30am}
-   #:who @speaker[#:url "https://github.com/capfredf"]{Fred Fu}
-   #:what @talk{TBD}
+   #:who @speaker[#:url "https://github.com/jagen31"]{Jared Gentner}
+   #:what @talk{Tonart}
    #:more @abstract{}
    ;#:bio @bio{}
   ]
