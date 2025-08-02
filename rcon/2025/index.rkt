@@ -197,6 +197,9 @@
 (define (code content)
  `(code () ,content))
 
+(define mailto:con-organizers
+  @(a #:href "mailto:con-organizers@racket-lang.org" "con-organizers@racket-lang.org"))
+
 ;; ------------------------------------------------------------
 
 (define (speaker #:person? [person? #t]
@@ -272,10 +275,10 @@
  (lecture #:when when #:who @speaker[#:person? #f]{@activity{Lunch}}))
 
 (define (keynote when #:who who #:what what #:more more #:link [link #f]
-                 #:desc [desc "Keynote"])
+                 #:desc [desc "Keynote"] #:bio [bio #f])
   (lecture #:when when #:who @speaker[#:person? #f]{@activity{@desc}}
            #:what (keynote-speaker who) #:link link #:more what
-           #:even-more more))
+           #:even-more more #:bio bio))
 
 (define (bio . contents)
  (apply bio-div @bio-label{Bio: } contents))
@@ -308,7 +311,7 @@
              ["Saturday" saturday]
              ["Sunday"   sunday]))
  (define t (parse-time times " h:mmaa"))
- (define tz (with-timezone (on-date t d) "America/Boston"))
+ (define tz (with-timezone (on-date t d) "America/New_York"))
  (define m (adjust-timezone tz "Etc/UTC"))
  (talk-time-div
   `(span ([data-slot-time ,(moment->iso8601 m)])
@@ -335,7 +338,7 @@
 $(document).ready(function () {
  $("[data-slot-time]").each(function() {
   var date = new Date($(this).data("slot-time"));
-  var localTime = moment.tz(date, "America/Boston").format("dddd, h:mma zz")
+  var localTime = moment.tz(date, "America/New_York").format("dddd, h:mma zz")
   $(this).html(localTime); }); }); })
     (body
      #:class "main h-event"
@@ -365,26 +368,266 @@ $(document).ready(function () {
  ;; @featuring{Special Guests TBC}
 
  (section
- @para{RacketCon is a public gathering dedicated to fostering a
- vibrant, innovative, and inclusive community around the Racket
- programming language. We aim to create an exciting and enjoyable
- conference open to anyone interested in Racket, filled with inspiring
- content, reaching and engaging both the Racket community and the
- wider programming world.})
- 
+   @para{RacketCon is a public gathering dedicated to fostering a
+   vibrant, innovative, and inclusive community around the Racket
+   programming language. We aim to create an exciting and enjoyable
+   conference open to anyone interested in Racket, filled with inspiring
+   content, reaching and engaging both the Racket community and the
+   wider programming world.})
+
+ #;
  (section
   @sectionHeader{Call for Presentations}
+  @para{We are looking for @emph{you!} If you have an idea for
+  a presentation you’d like to give, please write to @(a #:href
+  "mailto:con-organizers@racket-lang.org" #:title "Send mail to the
+  RacketCon organizer" "the RacketCon organizers") for consideration.
+  All Racket-y ideas are welcome. We’d love to have you!})
 
-  @para{We are looking for @emph{you!} If you have an idea for a presentation you’d like to give, please write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the RacketCon organizer" "the RacketCon organizers") for consideration. All Racket-y ideas are welcome. We’d love to have you!}
+ (section
+  @sectionHeader{Saturday, October 4th}
+  @doors-open[@talk-time{Saturday, 8:30am}]
+  @keynote[
+   @talk-time{Saturday, 9:00am}
+   #:desc "Keynote"
+   #:who @joint{
+    @speaker[#:url "https://cloudflare.com"]{James Larisch}
+    @speaker[#:url "https://cloudflare.com"]{Suleman Ahmad}
+   }
+   #:what @talk{
+    How Cloudflare Uses Racket and Rosette to Verify DNS Changes
+   }
+   #:more @abstract{
+    @paragraph{
+     Since 2022, Cloudflare has used Racket and Rosette to prevent DNS-related bugs.
+     Cloudflare engineers express desired DNS behavior as small programs called policies,
+     written in a custom DSL called topaz-lang. Topaz-lang policies are executed in
+     real-time on Cloudflare’s global edge network in response to live DNS queries. But
+     before deployment, all policies are checked for bugs using a verifier we wrote in
+     Rosette, a solver-aided Racket #lang.
+    }
+    @paragraph{
+     In this talk, we describe our experience writing and using Racket in production
+     at Cloudflare. We describe why managing DNS behavior at Cloudflare scale is so
+     challenging, and how these challenges motivated topaz-lang and its parent system Topaz.
+     We discuss why we chose Racket (and Rosette) and the types of bugs our Rosette verifier
+     detects. Finally, we reflect on why making changes to our verifier remains daunting for
+     many software engineers.
+    }
+   }
+   #:bio @bio{
+    Suleman is a Research Engineer at Cloudflare, working at the intersection of systems engineering
+    and Internet security. He holds a Master's degree from the University of Wisconsin–Madison,
+    where he focused on analyzing security and privacy challenges in large-scale Internet
+    architectures and engineering scalable measurement platforms. It was during his master's studies
+    that he developed an appreciation for functional programming and its practical application to
+    verifiable distributed systems.
 
+    @paragraph{
+     James is a systems/security researcher and programming language fanboy. He developed his
+     appreciation for the functional style (and Racket) during his undergraduate degree at
+     Northeastern University. He received his PhD in Computer Science from Harvard University,
+     where one of his projects involved bringing Prolog to the Web Public Key Infrastructure. He
+     is currently a Research Engineer at Cloudflare, where he works on the Web PKI, distributed
+     systems, and a bit of formal methods.
+    }
+   }
+  ]
+  @coffee[@talk-time{Saturday, 10:00am}]
+  @lecture[
+   #:when @talk-time{Saturday, 10:15am}
+   #:who @speaker[#:url "https://mukn.com"]{François-René Rideau}
+   #:what @talk{Compositional Object Oriented Prototypes}
+   #:more @abstract{}
+  ]
+  @lecture[
+   #:when @talk-time{Saturday, 10:45am}
+   #:who @speaker[#:url "https://github.com/quasarbright"]{Mike Delmonaco}
+   #:what @talk{A Match-Like DSL for Deep Immutable Updates}
+   #:more @abstract{
+    @code{match} is very convenient for deconstructing data and accessing values deep within a data
+    structure, but it is not useful for making changes to that data structure. In this talk, I’ll
+    present a DSL that looks like match, but allows you to perform immutable updates on the target
+    value using pattern variables to specify where an update should occur. I’ll also talk about
+    optics, which are the abstraction powering these immutable updates.
+   }
+   #:bio @bio{
+    Mike Delmonaco is a Software Engineer at Amazon Web Services with a hobby interest in
+    Programming Languages and Racket. Outside of work, he enjoys rock climbing, video games,
+    creating interactive math visualizations, programming language research, and teaching.
+   }
+  ]
+  @lunch[@talk-time{Saturday, 11:45am}]
+  @lecture[
+   #:when @talk-time{Saturday, 1:30pm}
+   #:who @speaker[#:url "https://github.com/toddjonker"]{Todd Jonker}
+   #:what @talk{Ion Fusion}
+   #:more @abstract{
+    Ion Fusion is a customizable programming language that unifies the semantics of persistent data
+    and the code that manipulates it. Oriented around the Amazon Ion data format--the backbone of
+    Amazon’s retail systems and even consumer products--Fusion has been the brains of internal
+    analytics, data processing, and workflow systems since 2013. This talk explores Ion Fusion’s
+    unique design goals and constraints, its roots in Scheme and Racket, and its vision of
+    sustainable software evolution.
+   }
+   #:bio @bio{
+    I got bored with AppleSoft Basic in 1982 and have been designing PLs ever since. A self-taught
+    coder, I was reeducated by PLT at Rice, then failed out of CMU into an industry career. After
+    surfing through startups in a variety of industries, I settled down for two decades at Amazon,
+    building foundation tech and evolving very large systems, including the company’s central
+    package builder. Throughout, my mission is to improve developer happiness through transparent,
+    coherent, and sustainable languages, frameworks, and tools.
+   }
+  ]
+  @lecture[
+   #:when @talk-time{Saturday, 2:00pm}
+   #:who @speaker[#:url "https://www.greghendershott.com/"]{Greg Hendershott}
+   #:what @talk{"It Works": More Adventures with Racket and Emacs}
+   #:more @abstract{
+    The Emacs package "racket-mode" has continued to evolve its design and features. Among other
+    things, it allows multiple local and remote back ends, has a redesigned "lossless" REPL,
+    supports modern Emacs UI completion annotations, and enables lang-driven editing. Most recently
+    the step debugger has gotten some attention.
+   }
+   #:bio @bio{
+    Greg Hendershott has a useless degree in philosophy, a background in the music software
+    industry, and a decade working in the open source Racket and Emacs communities. Tedious details
+    are available at @(a #:href "https://www.greghendershott.com/About.html" "greghendershott.com").
+   }
+  ]
+  @lecture[
+   #:when @talk-time{Saturday, 2:30pm}
+   #:who @speaker[#:url "https://camoy.net/"]{Cameron Moy}
+   #:what @talk{Roulette for Racketeers}
+   #:more @abstract{
+    Exact probabilistic inference is a requirement for many applications of probabilistic
+    programming languages (PPLs), but implementing a PPL with high-performance inference is
+    difficult. Roulette is a new discrete PPL that combines high-performance exact inference with
+    expressive language features by leveraging the close connection between exact probabilistic
+    inference and the symbolic evaluation strategy of Rosette. Building on this connection,
+    Roulette generalizes and extends the Rosette solver-aided programming system to reason about
+    probabilistic rather than symbolic quantities. In this talk, I'll demonstrate how to use
+    Roulette and discuss some of the ideas that make it work.
+   }
+   #:bio @bio{
+    Cameron is a PhD student and member of the PLT and PRL research groups at Northeastern
+    University. He primarily studies contract systems but is broadly interested in programming
+    language design.
+   }
+  ]
+  @break[@talk-time{Saturday, 3:00pm}]
+  @lecture[
+   #:when @talk-time{Saturday, 3:30pm}
+   #:who @joint{
+    @speaker[#:url "https://github.com/ariscript"]{Ari Prakash}
+    @speaker[#:url "https://github.com/zackbach/"]{Zachary Eisbach}
+   }
+   #:what @talk{miniDusa: An Extensible Finite-Choice Logic Programming Language}
+   #:more @abstract{
+    Dusa is a recently designed logic programming language featuring mutually exclusive choice as a
+    primitive to enable computation of solutions that satisfy constraints. To explore further host
+    integration, we introduce miniDusa, a Dusa-inspired hosted domain-specific language implemented
+    using Racket and the syntax-spec metalanguage. This architecture lets us inherit tooling,
+    extensibility, and interoperability features from Racket essentially “for free”.
+   }
+   #:bio @bio{
+    Zachary Eisbach is a student at Northeastern University studying Mathematics and Computer
+    Science. He is interested in compilers, logic, and safe interoperability.
+    @paragraph{
+     Ari Prakash is a student at Northeastern University studying Computer Science. She is
+     interested in developer tooling to make creating reliable systems easier.
+    }
+   }
+  ]
+  @lecture[
+   #:when @talk-time{Saturday, 4:00pm}
+   #:who @speaker[#:url "https://github.com/jjsimpso"]{Jonathan Simpson}
+   #:what @talk{Browsing(and serving) the Slow Internet with Racket}
+   #:more @abstract{
+    Taking its name from the slow food movement, the slow internet movement seeks to recreate the
+    less commercial and more user-centric internet of the early 90s. We will explore how Racket
+    facilitated the development of two slow internet applications and one DSL. First is gopher21,
+    a gopher server with full text search. Second is the graphical, multi-tabbed gopher and gemini
+    client Molasses. And finally, #lang magic is an implementation of the Unix file command's
+    custom language for writing filetype determination queries. By the end of the talk we will
+    have discussed fear of macros, html layout and rendering, custom canvas widgets and how Racket
+    appears from the perspective of an experienced C programmer and low-level engineer.
+   }
+   #:bio @bio{
+    Jonathan Simpson has worked as a professional software engineer since 2001, mostly in the Linux
+    and embedded systems spaces. While almost all of his professional work is in C, he has long
+    harbored a love for Lisp which eventually led him to Racket.
+   }
+  ]
+  @lecture[
+   #:when @talk-time{Saturday, 4:30pm}
+   #:who @speaker[#:url "https://github.com/texdraft"]{Asher Olsen}
+   #:what @talk{PROG Rock: Listening to old Lisp code}
+   #:more @abstract{
+    Music and Lisp code might seem worlds apart, but through various processes it is possible to get
+    aurally pleasing results from a LISP 1.5 → music compiler (written in Racket, of course). In
+    this talk, I explain how this “musicalization” works and show ways that composers can make use
+    of the concept.
+   }
+   #:bio @bio{
+    Asher Olsen is a composer and programming language enthusiast living in Texas.
+   }
+  ]
   )
 
  (section
-  @sectionHeader{Program}
-
-
-  @para{We are looking for @emph{you!} If you have an idea for a presentation you’d like to give, please write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the RacketCon organizer" "the RacketCon organizers") for consideration. All Racket-y ideas are welcome. We’d love to have you!}
-
+  @sectionHeader{Sunday, October 5th}
+  @doors-open[@talk-time{Sunday, 8:30am}]
+  @lecture[
+   #:when @talk-time{Sunday, 9:00am}
+   #:who @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
+   #:what @talk{Advanced Macrology: 5 Macro Programming Patterns You (No Longer) Need to Know}
+   #:more @abstract{
+    Racket's macros make creating small extensions to the language remarkably simple. But when
+    you step up to creating DSLs with static semantics and compiler optimizations, you need new
+    tools to integrate your DSL implementation with Racket's expansion process. In this talk I'll
+    demonstrate 5 macro design patterns that sophisticated DSLs like match, syntax-parse, and Typed
+    Racket use to validate syntax, communicate static information, and integrate with DrRacket. But
+    as any good language-oriented programmer knows, a design pattern usually indicates a missing
+    linguistic abstraction! And in fact, my syntax-spec metalanguage abstracts over all of these
+    design patterns, generating implementations from a declarative specification of your DSL
+    syntax. So I'll also show how you can more easily achieve the same results with syntax-spec,
+    design-pattern-free.
+   }
+   #:bio @bio{
+    Michael Ballantyne recently completed his Ph.D. at Northeastern University, advised by Matthias
+    Felleisen. His research works towards a future where mainstream programmers regularly create,
+    extend, and fluidly intermix domain-specific languages, with excellent support from their
+    programming language and environment.
+   }
+  ]
+  @lecture[
+   #:when @talk-time{Sunday, 9:30am}
+   #:who @speaker[#:url "https://github.com/jagen31"]{Jared Gentner}
+   #:what @talk{Tonart}
+   #:more @abstract{}
+   ;#:bio @bio{}
+  ]
+  @lecture[
+   #:when @talk-time{Sunday, 10:00am}
+   #:who @speaker[#:url "https://users.cs.utah.edu/~mflatt/"]{Matthew Flatt}
+   #:what @talk{Rhombus}
+   #:more @abstract{}
+  ]
+  @break[@talk-time{Sunday, 10:30am}]
+  @lecture[
+   #:when @talk-time{Sunday, 11:00am}
+   #:who @speaker[#:url "https://samth.github.io"]{Sam Tobin-Hochstadt}
+   #:what @talk{The State of Racket}
+  ]
+  @lecture[
+   #:when @talk-time{Sunday, 11:30am}
+   #:who @speaker[#:person? #f]{Racket Management}
+   #:what @talk{Racket Town Hall}
+   #:more @abstract{
+    Please come with your big questions and discussion topics.
+   }
+  ]
   )
 
  (section
@@ -404,12 +647,11 @@ $(document).ready(function () {
 
  (section
    @sectionHeader{Organization}
-   @paragraph{The RacketCon 2025 is organised by a team of volunteers:
-                  Stephen De Gabrielle, Robby Findler, Jacqueline Firth, Matthew Flatt,
-                  Ben Greenman, Siddhartha Kasivajhula, Bogdan Popa, Sam Tobin-Hochstadt
-                  and @a[#:href "https://forms.gle/omJAjAQ6xJLjsw3z8"]{Your name here}
-              with local arrangements by Stephen Chang.
-              The organizers may be reached at @(a #:href "mailto:con-organizers@racket-lang.org" "con-organizers@racket-lang.org").}
+   @paragraph{
+    The RacketCon 2025 is organised by a team of volunteers: Stephen De Gabrielle, Robby Findler,
+    Jacqueline Firth, Matthew Flatt, Ben Greenman, Siddhartha Kasivajhula, Bogdan Popa, Sam
+    Tobin-Hochstadt with local arrangements by Stephen Chang. The organizers may be reached at
+    @|mailto:con-organizers|.}
   )
 
  (section

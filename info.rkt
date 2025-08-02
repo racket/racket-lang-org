@@ -3,33 +3,34 @@
 (define collection "racket-lang-org")
 
 (define deps
-  '("slideshow-lib"
-     "csv-reading"
-     "typed-racket-lib"
-     "datalog"
-     "graph"
-     "gui-lib"
-     "base"
-     ("plt-web-lib" #:version "1.3")
-     "at-exp-lib"
-     "net-lib"
-     "racket-index"
-     ("scribble-lib" #:version "1.28")
-     "syntax-color-lib"
-     "plot-gui-lib"
-     "plot-lib"
-     "math-lib"
-     "pollen"
-     "css-tools"
-     "sugar"
-     "txexpr"
-     "gregor-lib"
-     "frog"
-     "rackunit-lib"
-     "pict-lib"
-     "ppict"
-     "draw-lib"
-     ("s3-sync" #:version "1.13")))
+  '("at-exp-lib"
+    "base"
+    "css-tools"
+    "csv-reading"
+    "datalog"
+    "draw-lib"
+    "frog"
+    "graph"
+    "gregor-lib"
+    "gui-lib"
+    "math-lib"
+    "net-lib"
+    "pict-lib"
+    "plot-gui-lib"
+    "plot-lib"
+    ["plt-web-lib" #:version "1.3"]
+    "pollen"
+    "ppict"
+    "racket-index"
+    "rackunit-lib"
+    "rash-demos"
+    ["s3-sync" #:version "1.13"]
+    ["scribble-lib" #:version "1.28"]
+    "slideshow-lib"
+    "sugar"
+    "syntax-color-lib"
+    "txexpr"
+    "typed-racket-lib"))
 
 (define pkg-desc "Sources for http://racket-lang.org")
 
