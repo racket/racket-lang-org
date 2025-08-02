@@ -606,9 +606,24 @@ $(document).ready(function () {
   @lecture[
    #:when @talk-time{Sunday, 9:30am}
    #:who @speaker[#:url "https://github.com/jagen31"]{Jared Gentner}
-   #:what @talk{Tonart}
-   #:more @abstract{}
-   ;#:bio @bio{}
+   #:what @talk{Great Composers Steal: Obbligato Reuse of Racket in Tonart}
+   #:more @abstract{
+    Imagine, for a moment, that a music score could somehow become a Racket module. Imagine if every
+    notation on that music score was a syntax object. Imagine selecting areas of the score and
+    running macro-like rewrites on the notations within that selection. Imagine a context system
+    which allows a composer to summon important static information about any notation, such as the
+    key, the tuning system, or the instrument. This is the vision of Tonart, an extensible language
+    and library for composing music in Racket. This talk will highlight the ideas Tonart steals
+    from Racket in its design, as well as the language features Tonart reuses from Racket in its
+    implementation.
+   }
+   #:bio @bio{
+    Jared has been composing music and functions since a young age. A native of Upstate New York,
+    he moved to Boston to study computing at Northeastern. He had no clue about Racket when he
+    enrolled, but where fate leads, we are bound to follow! What he enjoys most is making music with
+    his friends. Jared believes in living life to the fullest, that “Life imitates Art”, and that
+    the greatest art is to be found at home.
+   }
   ]
   @lecture[
    #:when @talk-time{Sunday, 10:00am}
