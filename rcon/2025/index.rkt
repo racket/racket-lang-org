@@ -392,6 +392,7 @@ $(document).ready(function () {
    #:desc "Keynote"
    #:who @joint{
     @speaker[#:url "https://cloudflare.com"]{James Larisch}
+    and
     @speaker[#:url "https://cloudflare.com"]{Suleman Ahmad}
    }
    #:what @talk{
@@ -520,6 +521,7 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 3:30pm}
    #:who @joint{
     @speaker[#:url "https://github.com/ariscript"]{Ari Prakash}
+    and
     @speaker[#:url "https://github.com/zackbach/"]{Zachary Eisbach}
    }
    #:what @talk{miniDusa: An Extensible Finite-Choice Logic Programming Language}
