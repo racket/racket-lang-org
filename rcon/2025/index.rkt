@@ -628,8 +628,15 @@ $(document).ready(function () {
   @lecture[
    #:when @talk-time{Sunday, 10:00am}
    #:who @speaker[#:url "https://users.cs.utah.edu/~mflatt/"]{Matthew Flatt}
-   #:what @talk{Rhombus}
-   #:more @abstract{}
+   #:what @talk{Rhombus Update}
+   #:more @abstract{
+    @a[#:href "https://rhombus-lang.org/"]{Rhombus} is ready for early adopters. There's still
+    plenty to be done in creating Rhombus-style bindings for Racket libraries, building entirely
+    new Rhombus libraries when that makes sense, and refining the Rhombus tooling and ecosystem.
+    No language is ever finished, but Rhombus is well past the prototype stage and increasingly a
+    language that you can use for everyday tasks. The talk will present a status report and some
+    guesses about what will happen next.
+   }
   ]
   @break[@talk-time{Sunday, 10:30am}]
   @lecture[
