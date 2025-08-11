@@ -67,6 +67,9 @@
   [margin-right "-10ex"]
   ,@header-font)
 
+(define-div top-section
+  [margin-top "1em"])
+
 (define-div speaker-a
   [color "firebrick"])
 (define-a unaffiliated
@@ -93,6 +96,13 @@
   [margin-top "0.25em"]
   [color "gray"])
 
+(define-div fromplace
+  [font-size "16pt"]
+  [font-weight "bold"]
+  [text-align "left"]
+  [margin-top "2ex"]
+  ,@header-font)
+
 (define-div place-address
   [margin-bottom "0.5em"])
 
@@ -106,6 +116,10 @@
 (define-div center
   [text-align "center"])
 (define para paragraph)
+
+(define-div vpara
+  [text-align "left"]
+  [margin-top "2ex"])
 
 (define-div plain)
 
@@ -358,6 +372,7 @@ $(document).ready(function () {
       @subtitle{October 4-5, 2025}
       @subtitle{@p-location{UMass Boston}}
       @specific-location{Boston, Massachusetts, USA}
+      @specific-location{@a[#:href "umb.html"]{University Hall}}
       )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
@@ -367,7 +382,7 @@ $(document).ready(function () {
 
  ;; @featuring{Special Guests TBC}
 
- (section
+ (top-section
    @para{RacketCon is a public gathering dedicated to fostering a
    vibrant, innovative, and inclusive community around the Racket
    programming language. We aim to create an exciting and enjoyable
@@ -575,7 +590,19 @@ $(document).ready(function () {
     Asher Olsen is a composer and programming language enthusiast living in Texas.
    }
   ]
-  )
+
+    @social[
+#:when
+@talk-time{Saturday, 6:00pm}
+#:where
+@at-where[@place{@a[#:href "https://lordhobo.com/boston/"]{Lord Hobo Brewery}}
+          @place-address{2 Drydock Ave}]
+#:more
+@abstract{
+Gathering with drinks and snacks.
+}
+]
+)
 
  (section
   @sectionHeader{Sunday, October 5th}
@@ -660,8 +687,8 @@ $(document).ready(function () {
  )
 
  (section
-   @sectionHeader{Accommodation}
-   @paragraph{At this stage, we have not made accomodation arrangements. If you would like to be notified please use the @a[#:href "https://forms.gle/omJAjAQ6xJLjsw3z8"]{Register your interest in RacketCon} form.}
+   @sectionHeader{Local Infomation and Accommodation}
+   @paragraph{@a[#:href "umb.html"]{See the local-information page for directions and hotel information}.}
   )
 
  (section
@@ -672,10 +699,11 @@ $(document).ready(function () {
  (section
    @sectionHeader{Organization}
    @paragraph{
-    The RacketCon 2025 is organised by a team of volunteers: Stephen De Gabrielle, Robby Findler,
-    Jacqueline Firth, Matthew Flatt, Ben Greenman, Siddhartha Kasivajhula, Bogdan Popa, Sam
-    Tobin-Hochstadt with local arrangements by Stephen Chang. The organizers may be reached at
-    @|mailto:con-organizers|.}
+              The RacketCon 2025 is organised by a team of volunteers: Bogdan Popa organzied the program,
+              Stephen Chang provided local arrangements, and
+              Stephen De Gabrielle, Robby Findler, Jacqueline Firth, Matthew Flatt, Ben Greenman,
+              Siddhartha Kasivajhula, Sam Tobin-Hochstadt helped. The organizers may be reached at
+              @|mailto:con-organizers|.}
   )
 
  (section
@@ -691,6 +719,134 @@ $(document).ready(function () {
 
 ;; ------------------------------------------------------------
 
+ (define hotel-link
+  "https://www.hilton.com/en/hotels/boschdt-doubletree-boston-bayside/")
+(define hotel-booking-link
+  "https://www.hilton.com/en/book/reservation/deeplink/?ctyhocn=BOSCHDT&corporateCode=0002702479")
+
+(define shuttle-bus @a[#:href "https://www.umb.edu/the_university/getting_here/shuttle_bus_information"]{UMass Boston shuttle bus})
+
+(define umb-page
+  (html #:lang "en"
+   (head
+    (head-meta #:http-equiv "content-type" #:content "text/html; charset=utf-8")
+    (link #:href fonts-url
+          #:rel "stylesheet")
+    (style (cdata #f #f (classes->string)))
+    (style (cdata #f #f "a { text-decoration: none; } li { text-align: left; } "))
+    @title{(fifteenth RacketCon) Local Information})
+   (body
+     #:class "main h-event"
+     (content
+      (banner
+       @subtitle{@a[#:href "index.html"]{RacketCon 2025} Local Information})
+
+(column
+       (section
+        @sectionHeader{Location}
+       
+        (column
+         @specific-location{UMass Boston}
+         @specific-location{University Hall}
+         @specific-location{2nd floor}
+         @specific-location{Y01-1300}))
+
+      (section
+       @sectionHeader{Hotel}
+       (column
+        @vpara{The closest hotel is the @a[#:href hotel-link]{DoubleTree by Hilton Boston Bayside}.}
+        @vpara{@bold{@a[#:href hotel-booking-link]{Book at a discounted rate}}
+                    (limited number of rooms are available).}
+        @vpara{See below for advice on getting from Logan Airport to this hotel.}))
+
+      (section
+       @sectionHeader{Saturday Social}
+       (column
+        @vpara{The Saturday social event will take place 6:00pm-9:00pm at
+                   @a[#:href "https://lordhobo.com/boston/"]{Lord Hobo Brewery}
+                       in the Seaport neighborhood of Boston.}))
+
+      (section
+       @sectionHeader{Getting There}
+
+       (column
+
+        @fromplace{From DoubleTree Boston Bayside}
+
+        @vpara{Walk (15-20 minutes):}
+
+        @ul{
+            @li{Walk down Mt. Vernon St.}
+            @li{Take the walkway through campus.}
+            @li{Attive at to University Hall.}
+            }
+        
+        @vpara{or take the @shuttle-bus (@a[#:href "https://umb.transloc.com/routes"]{track in real-time}):}
+
+        @ul{
+            @li{Walk to the Bayside stop on Mt. Vernon St. in front of hotel.}
+            @li{Take the @shuttle-bus to Campus Center (5 min).}
+            @li{Walk from Campus Center to University Hall (next door).}
+            }
+
+
+        @fromplace{From Logan Airport}
+
+        @ul{
+            @li{Take the Silver Line (bus) to South Station.}
+            @li{Take the T Red Line (subway), to JFK/UMass station.}
+            }
+        
+        @vpara{Then either}
+        
+        @ul{
+            @li{Walk to DoubleTree hotel from JFK/UMass (5min.)}
+            }
+        
+        @vpara{or}
+
+        @ul{
+            @li{Take the @shuttle-bus to Campus Center (5-10 min).}
+            @li{Walk from Campus Center to University Hall (next door).}
+            }
+
+        @fromplace{From South Station}
+        
+        @ul{
+            @li{Take the T Red Line (subway) to JFK/UMass station.}
+            @li{Take the @shuttle-bus to Campus Center (5-10 min).}
+            @li{walk from Campus Center to University Hall (next door).}
+           }
+      
+       @fromplace{Parking}
+
+       @vpara{The closest parking garage to University Hall (connected, next door) is
+                  the Campus Center Garage.}
+
+       @vpara{If that is full, parking is also available in the West Garage or Bayside Lot.}
+       
+       @vpara{See @a[#:href "https://www.umb.edu/the_university/getting_here/visitor_resources"]{UMass Boston Visitor Resources}
+                  for rates and locations of all parking garages.}
+
+       @fromplace{See Also}
+
+       @vpara{@a[#:href "https://www.umb.edu/the_university/getting_here"]{UMass Boston “Getting Here”}}
+       @vpara{@a[#:href "https://www.umb.edu/map"]{UMass Boston Campus Map}}
+       
+       ))
+      
+      (section
+       @sectionHeader{Wi-Fi}
+       (column
+       @vpara{Attendees with university credentials should be able to access the
+                            internet using eduroam.}
+
+       @vpara{For other attendees, we have set up the @tt{Event_Guests} network.}
+
+       @vpara{Alternately, the @tt{UMB-Guest} network may also be used (@a[#:href "https://www.umb.edu/campus_center/services/wireless_access"]{details here}).})))))))
+
+;; ------------------------------------------------------------
+
 (provide make)
 (define (make p)
   (with-output-to-file
@@ -698,7 +854,13 @@ $(document).ready(function () {
     #:exists 'replace
     (λ ()
       (displayln "<!doctype html>")
-      (write-xexpr page))))
+      (write-xexpr page)))
+  (with-output-to-file
+    (build-path p "umb.html")
+    #:exists 'replace
+    (λ ()
+      (displayln "<!doctype html>")
+      (write-xexpr umb-page))))
 
 (module+ main
   (require racket/runtime-path)
