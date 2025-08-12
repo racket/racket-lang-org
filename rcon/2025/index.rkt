@@ -400,6 +400,18 @@ $(document).ready(function () {
   All Racket-y ideas are welcome. We’d love to have you!})
 
  (section
+  @sectionHeader{Registration}  
+  @paragraph{@a[#:href "https://www.eventbrite.com/e/racketcon-2025-tickets-1578775272339"]{To register, buy a ticket via Eventbrite}.
+             If you cannot attend in-person, there is an option to help support the livestream for remote participants.}
+ )
+
+ (section
+   @sectionHeader{Local Infomation and Accommodation}
+   @paragraph{@a[#:href "umb.html"]{See the local-information page for directions and hotel information}.}
+  )
+
+
+ (section
   @sectionHeader{Saturday, October 4th}
   @doors-open[@talk-time{Saturday, 8:30am}]
   @keynote[
@@ -682,16 +694,6 @@ Gathering with drinks and snacks.
   )
 
  (section
-  @sectionHeader{Registration}
-   @paragraph{Complete this form to be notified when registration opens, @a[#:href "https://forms.gle/omJAjAQ6xJLjsw3z8"]{Register your interest in RacketCon}. (Yes, we are planning to livestream for those who cannot attend in person, but please register so we can keep you informed.)}
- )
-
- (section
-   @sectionHeader{Local Infomation and Accommodation}
-   @paragraph{@a[#:href "umb.html"]{See the local-information page for directions and hotel information}.}
-  )
-
- (section
    @sectionHeader{Friendly Policy}
    @paragraph{The proceedings of RacketCon will take place under the Racket @(a #:href "https://racket-lang.org/friendly.html" "Friendly Environment Policy").}
   )
@@ -748,7 +750,7 @@ Gathering with drinks and snacks.
         (column
          @specific-location{UMass Boston}
          @specific-location{University Hall}
-         @specific-location{2nd floor}
+         @specific-location{1st floor}
          @specific-location{Y01-1300}))
 
       (section
