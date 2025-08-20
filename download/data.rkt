@@ -2,16 +2,19 @@
 (require racket/string)
 
 (define -platform-names-
-  ;; Maps regexp to replace argument, or to an association list
-  ;; of package to replace argument
+  ;; Maps regexp to replace argument, an association list
+  ;; of package to replace argument, or a version-threshold
+  ;; association list of association lists
   `(;; source platforms
     ["win"  "Windows source"]
     ["mac"  "Mac OS source"]
     ["unix" "Unix source"]
-    ["src-builtpkgs" (("Racket" . "Unix Source + built packages")
-                      ("Minimal Racket" . "Source + built packages"))]
-    ["src"  (("Racket" . "Unix Source")
-             ("Minimal Racket" . "Source"))]
+    ["src-builtpkgs" [("8.18" . "Source + built packages")
+                      ("1.0" . (("Racket" . "Unix Source + built packages")
+                                ("Minimal Racket" . "Source + built packages")))]]
+    ["src" [("8.18" . "Source")
+            ("1.0" . (("Racket" . "Unix Source")
+                      ("Minimal Racket" . "Source")))]]
     ["src-builtpkgs-unix" "Unix source + built packages"]
     ["src-unix" "Unix source"]
     ;; binary platforms
@@ -34,16 +37,16 @@
                 (if (equal? cpu "ppc") "PPC" "Intel")))]
     ["i386-linux(-gcc2)?"          "Linux i386"]
     ["i386-linux-fc([0-9]+)"               "Linux i386 (Fedora Core \\1)"]
-    ["(i386|x86_64)-linux-f([0-9]+)"       "Linux \\1 (Fedora \\2)"]
-    ["(i386|x86_64)-linux-debian"          "Linux \\1 (Debian Stable)"]
-    ["(i386|x86_64)-linux-debian-([a-zA-Z0-9]+)" "Linux \\1 (Debian \\2)"]
-    ["(i386|x86_64)-linux-ubuntu([0-9]+)"  "Linux \\1 (Ubuntu \\2)"]
-    ["(i386|x86_64)-linux-ubuntu-([a-z]+)" "Linux \\1 (Ubuntu \\2)"]
-    ["(i386|x86_64)-linux-ubuntu.*"        "Linux \\1 (Ubuntu)"]
-    ["(i386|x86_64)-linux(-buster)?"       "Linux \\1"]
-    ["arm-linux(-buster)?"                 "Linux Arm32/ARMv6"]
-    ["aarch64-linux(-buster)?"             "Linux Arm64/AArch64"]
-    ["(i386|x86_64)-freebsd"               "FreeBSD \\1"]
+    ["(i386|x86_64)-linux-f([0-9]+)"       "Linux (\\1 Fedora \\2)"]
+    ["(i386|x86_64)-linux-debian"          "Linux (\\1 Debian Stable)"]
+    ["(i386|x86_64)-linux-debian-([a-zA-Z0-9]+)" "Linux (\\1 Debian \\2)"]
+    ["(i386|x86_64)-linux-ubuntu([0-9]+)"  "Linux (\\1 Ubuntu \\2)"]
+    ["(i386|x86_64)-linux-ubuntu-([a-z]+)" "Linux (\\1 Ubuntu \\2)"]
+    ["(i386|x86_64)-linux-ubuntu.*"        "Linux (\\1 Ubuntu)"]
+    ["(i386|x86_64)-linux(-buster)?"       "Linux (\\1)"]
+    ["arm-linux(-buster)?"                 "Linux (Arm32/ARMv6)"]
+    ["aarch64-linux(-buster)?"             "Linux (Arm64/AArch64)"]
+    ["(i386|x86_64)-freebsd"               "FreeBSD (\\1)"]
     ["sparc-solaris"                       "Sparc Solaris (SunOS)"]
     ["i386-kernel"                         "x86 Standalone Kernel"]
     ))
@@ -114,9 +117,9 @@
   `((,installer-package ,eq? (racket racket-minimal racket-textual))
     (,installer-binary? ,eq? (#t #f))
     (,installer-platform ,regexp-match?
-     (#px"\\bwin(32)?\\b" #px"\\bmac\\b" #px"\\blinux\\b" #px""))
+     (#px"\\bwin(32)?\\b" #px"\\bmac(osx)?\\b" #px"\\blinux\\b" #px""))
     (,installer-platform ,regexp-match?
-     (#px"\\bi386\\b" #px"\\bx86_64\\b" #px"\\bppc\\b" #px""))))
+     (#px"\\bx86_64\\b" #px"\\b(arm64|aarch64)\\b" #px"\\bi386\\b" #px"\\barm\\b" #px"\\bppc\\b" #px""))))
 
 ;; ----------------------------------------------------------------------------
 
@@ -294,7 +297,7 @@
          (if (null? fns)
            #f
            (let* ([get (caar fns)] [<? (cdar fns)] [x1 (get i1)] [x2 (get i2)])
-             (or (<? x1 x2) (and (equal? x1 x2) (loop (cdr fns)))))))))))
+             (or (<? x1 x2) (and (not (<? x2 x1)) (loop (cdr fns)))))))))))
 
 (define-lazy all-releases ; still sorted from newest to oldest
   (remove-duplicates (map installer-release all-installers)))
@@ -315,13 +318,22 @@
 
 (define platform->name
   (let ([t (make-hash)])
-    (λ (platform package)
-      (hash-ref! t (cons platform package)
+    (λ (platform package version)
+      (hash-ref! t (list platform package version)
         (λ () (or (for/or ([pn (in-list platform-names)])
                     ;; find out if a regexp applied by checking if the result
                     ;; is different (relies on regexp-replace returning the
                     ;; same string when fails)
-                    (define raw-r (cadr pn))
+                    (define rawest-r (cadr pn))
+                    (define raw-r (if (and (list? rawest-r)
+                                           (valid-version? (caar rawest-r)))
+                                      (let loop ([rawest-r rawest-r])
+                                        (cond
+                                          [(null? rawest-r) (error "failed to match version")]
+                                          [(version<? version (caar rawest-r))
+                                           (loop (cdr rawest-r))]
+                                          [else (cdar rawest-r)]))
+                                      rawest-r))
                     (define r (if (list? raw-r)
                                   (let ([a (assoc package raw-r)])
                                     (cond
