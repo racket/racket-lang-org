@@ -8,7 +8,7 @@
          "check-links.rkt")
 
 (define major-v 8)
-(define minor-v 17)
+(define minor-v 18)
 
 (define version (~a "v"major-v"."minor-v))
 
@@ -18,7 +18,8 @@
 (define blog-post-url
   (match* (major-v minor-v) 
     [(8 16) "https://blog.racket-lang.org/2025/01/racket-v8-16.html"]
-    [(8 17) "https://blog.racket-lang.org/2025/05/racket-v8-17.html"]))
+    [(8 17) "https://blog.racket-lang.org/2025/05/racket-v8-17.html"]
+    [(8 18) "https://blog.racket-lang.org/2025/08/racket-v8-18.html"]))
 
 
 
