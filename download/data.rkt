@@ -32,7 +32,7 @@
      ,(λ (_ cpu)
         (format "Darwin (~a)"
                 (if (equal? cpu "ppc") "PPC" "Intel")))]
-    ["i386-linux(-gcc2)?"                  "Linux i386"]
+    ["i386-linux(-gcc2)?"          "Linux i386"]
     ["i386-linux-fc([0-9]+)"               "Linux i386 (Fedora Core \\1)"]
     ["(i386|x86_64)-linux-f([0-9]+)"       "Linux \\1 (Fedora \\2)"]
     ["(i386|x86_64)-linux-debian"          "Linux \\1 (Debian Stable)"]
@@ -40,7 +40,9 @@
     ["(i386|x86_64)-linux-ubuntu([0-9]+)"  "Linux \\1 (Ubuntu \\2)"]
     ["(i386|x86_64)-linux-ubuntu-([a-z]+)" "Linux \\1 (Ubuntu \\2)"]
     ["(i386|x86_64)-linux-ubuntu.*"        "Linux \\1 (Ubuntu)"]
-    ["(i386|x86_64)-linux"                 "Linux \\1"]
+    ["(i386|x86_64)-linux(-buster)?"       "Linux \\1"]
+    ["arm-linux(-buster)?"                 "Linux Arm32/ARMv6"]
+    ["aarch64-linux(-buster)?"             "Linux Arm64/AArch64"]
     ["(i386|x86_64)-freebsd"               "FreeBSD \\1"]
     ["sparc-solaris"                       "Sparc Solaris (SunOS)"]
     ["i386-kernel"                         "x86 Standalone Kernel"]
