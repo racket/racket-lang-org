@@ -43,7 +43,7 @@ Racket v8.18
 - The math library contains improved implementations of acos and
   matrix-(cos-)angle.
 - The stepper again works for `big-bang` programs.
-- There are many other repairs and documentation imprevements!
+- There are many other repairs and documentation improvements!
 
 The following people contributed to this release:
 
