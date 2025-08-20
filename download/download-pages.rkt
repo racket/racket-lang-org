@@ -17,6 +17,7 @@
 (define first-version-without-alternative-page "8.0")
 (define version-with-touchbar-bug "6.7")
 (define version-before-m1-support "7.9")
+(define version-with-all-platform-source "8.18")
 
 ;; use a list of cons instead of hash to preserve the order
 (define (group-by/dict grouper xs f)
@@ -518,7 +519,7 @@ var property = null;
                         'variant (installer-variant i)
                         'suffix (installer-suffix i))))
                (hash 'platform platform
-                     'platformName (platform->name platform distname)
+                     'platformName (platform->name platform distname version)
                      'installers installers)))))
 
   @script/inline[type: 'text/javascript]{@||
@@ -769,9 +770,13 @@ var property = null;
       // the other condition is to match for "Unix Source", but versions prior 5.92
       // spelled "Unix source". This means the condition only applies to versions
       // after Racket 5.92 already.
-      showWhen('source_explain',
-               (platform === 'src-builtpkgs' || platform === 'src') &&
-               dist === 'racket');
+      @(if (version<? version version-with-all-platform-source)
+           @list{
+              showWhen('source_explain',
+                       (platform === 'src-builtpkgs' || platform === 'src') &&
+                       dist === 'racket');
+           }
+           null)
 
       showWhen('win_source_explain',
                (platform === 'src-builtpkgs' || platform === 'src') &&

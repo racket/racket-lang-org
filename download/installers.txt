@@ -1141,3 +1141,14 @@
 158087574	8.17/racket-8.17-src-builtpkgs.tgz
 34341785	8.17/racket-8.17-src.tgz
 34333458	8.17/racket-src.tgz
+243987916	8.18/racket-8.18-aarch64-linux-buster-cs.sh
+277228922	8.18/racket-8.18-aarch64-macosx-cs.dmg
+168981736	8.18/racket-8.18-arm64-win32-cs.exe
+238087941	8.18/racket-8.18-arm-linux-buster-cs.sh
+252614390	8.18/racket-8.18-i386-linux-buster-cs.sh
+250132045	8.18/racket-8.18-x86_64-linux-buster-cs.sh
+288627389	8.18/racket-8.18-x86_64-macosx-cs.dmg
+176423776	8.18/racket-8.18-x86_64-win32-cs.exe
+158397366	8.18/racket-8.18-src-builtpkgs.tgz
+34413405	8.18/racket-8.18-src.tgz
+34410957	8.18/racket-src.tgz
