@@ -43,7 +43,7 @@
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
  ◊div[#:style "margin-left: 1em"]{
-   ◊link["https://blog.racket-lang.org/2025/05/racket-v8-17.html"]{Racket version 8.17} is available.}
+   ◊link["https://blog.racket-lang.org/2025/08/racket-v8-18.html"]{Racket version 8.18} is available.}
 
  ◊div[#:style "flex-grow:1"]{}
 

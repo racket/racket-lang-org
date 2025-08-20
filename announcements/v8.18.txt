@@ -1,0 +1,47 @@
+1755669600
+Racket v8.18
+
+----------------------------------------------------------------------
+
+- The racket-lang.org website no longer distributes Racket BC bundles,
+  but it includes pre-built bundles for two flavors of ARM linux,
+  AArch64 and 32-bit ARMv6 VFP.
+- XML structures are serializable.
+- Scribble's HTML generation conforms better to modern standards.
+- Racket uses Unicode 16.0 for character and string operations.
+- The `redex-check` default generation strategy always uses random
+  generation to supplement the enumerator.
+- DrRacket supports the use of shift-tab to go backward to previous
+  indentation positions.
+- The macro stepper supports the string-constants library, allowing
+  internationalization of the stepper itself.
+- The `struct` form supports `#:properties prop-list-expr`, making it
+  more convenient to attach multiple property values to a structure
+  type.
+- Build-system improvements support containers registered at Docker
+  Hub to build for all platforms that have downloads from the main
+  Racket download site; improvements also support Unix-style builds
+  for Mac OS in the style of MacPorts.
+- The `expt` function produces a more accurate result when its first
+  argument is a flonum and its second argument is an exact integer
+  that has no equivalent flonum representation than it did in prior
+  versions.
+- TCP ports use `SO_KEEPALIVE` correctly.
+- Unsafe code can use “uninterruptible mode” instead of “atomic mode”
+  to allow futures to run concurrently while preventing interruptions
+  from other threads.
+- The `net/imap` library supports IMAP's `move` operation.
+- There are many other repairs and documentation improvements!
+
+The following people contributed to this release:
+
+Bob Burger, Bogdan Popa, Carl Gay, Chloé Vulquin, D. Ben Knoble,
+Dario Hamidi, Gustavo Massaccesi, Jacqueline Firth, Jade Sailor,
+Jarhmander, Jason Hemann, Jens Axel Søgaard, Joel Dueck, John
+Clements, jyn, Jörgen Brandt, Mao Yifu, Marc Nieper-Wißkirchen,
+Matthew Flatt, Matthias Felleisen, Mike Sperber, Noah Ma,
+paralogismos, Pavel Panchekha, Philip McGrath, Robby Findler, Ryan
+Culpepper, Sam Tobin-Hochstadt, Shalok Shalom, Steve Byan, Vincent
+Lee, Wing Hei Chan, and ZC Findler.
+
+----------------------------------------------------------------------

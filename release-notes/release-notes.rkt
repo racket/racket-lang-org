@@ -35,63 +35,59 @@
 (define dr-core-url
   "https://github.com/racket/drracket/commit/ae16d6bc6e00a9498313cff035537ac98ef71194")
 
-
 (define bullets
   (list
 
-   @bullet{The racket-lang.org website no longer distributes Racket BC bundles, but
-it includes pre-built bundles for two flavors of ARM linux, AArch64 and 32-bit ARMv6 VFP.}
-   
-   @bullet{XML structures are serializable.}
+@bullet{The @link[racket-lang-core-url]{racket-lang.org} website no longer distributes Racket BC bundles, but it includes pre-built
+ bundles for two flavors of ARM linux, AArch64 and 32-bit ARMv6 VFP.}
 
-   @bullet{Scribble's HTML generation conforms better to modern standards.}
+@bullet{@link["https://docs.racket-lang.org/xml/index.html"]{XML structures} are serializable.}
 
+@bullet{@link["https://docs.racket-lang.org/scribble/index.html"]{Scribble's} HTML generation conforms better to modern standards.}
 
-   @bullet{Racket uses Unicode 16.0 for character and string operations.}
-   
-  @bullet{The `redex-check` default generation strategy
-    always uses random generation to supplement the enumerator.}
+@bullet{Racket uses Unicode 16.0 for character and string operations.}
 
-  @bullet{DrRacket supports the use of shift-tab to go backward to previous
-          indentation positions.}
+@bullet{The @link["https://docs.racket-lang.org/redex/Testing.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-check%29%29"]{`redex-check`}
+ default generation strategy always uses random generation to supplement the enumerator.}
 
-  @bullet{The macro stepper supports the string-constants library,
+@bullet{@link["https://docs.racket-lang.org/drracket/editor.html"]{DrRacket} supports the use of shift-tab to go backward to previous indentation positions.}
+
+@bullet{The @link["https://docs.racket-lang.org/macro-debugger/index.html#%28part._.Macro_.Stepper%29"]{macro stepper}
+ supports the @link["https://docs.racket-lang.org/string-constants/index.html"]{string-constants library},
  allowing internationalization of the stepper itself.}
 
-  @bullet{The `struct` form supports `#:properties prop-alist-expr`, making it more convenient
-to attach multiple property values to a structure type.}
+@bullet{The @link["https://docs.racket-lang.org/reference/define-struct.html"]{`struct`} form supports
+ @link["https://docs.racket-lang.org/reference/define-struct.html#:~:text=The%20%23%3Aproperties%20option%2C%20which%20can%20be%20supplied%20multiple%20times%2C%20accepts%20multiple%20properties%20and%20their%20values%20as%20an%20association%20list."]{`#:properties prop-list-expr`},
+ making it more convenient to attach multiple property values to a structure type.}
 
-   @bullet{The distro-build package has new infrastructure for build farms
- using docker images.}
+@bullet{Build-system improvements support containers registered at @link["https://hub.docker.com/u/racket"]{Docker Hub}
+ to build for all platforms that have downloads from the main Racket download site; improvements also
+ support Unix-style builds for Mac OS in the style of MacPorts.}
 
-   @bullet{The `expt` function produces a more accurate result when its
- first argument is a flonum and its second argument is an exact integer
- that has no equivalent flonum representation than it did in prior versions.}
+@bullet{The @link["https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._expt%29%29"]{`expt`}
+ function produces a more accurate result when its first argument is a flonum and its
+ second argument is an exact integer that has no equivalent flonum representation than it did in prior
+ versions.}
 
-   @bullet{TCP ports use `SO_KEEPALIVE` correctly.}
+@bullet{@link["https://docs.racket-lang.org/reference/tcp.html"]{TCP ports} use `SO_KEEPALIVE` correctly.}
 
-   @bullet{Unsafe code can use “uninterruptible mode” instead of “atomic mode” to allow futures to run concurrently while preventing interruptions from other threads.}
-   
+@bullet{Unsafe code can use @link["https://docs.racket-lang.org/foreign/Atomic_Execution.html#%28tech._uninterruptible._mode%29"]{“uninterruptible mode”}
+ instead of “atomic mode” to allow futures to run concurrently while preventing interruptions from other threads.}
 
-   @bullet{The `net/imap` library supports IMAP's `move` operation.}
+@bullet{The @link["https://docs.racket-lang.org/net/imap.html"]{`net/imap`} library supports
+ @link["https://docs.racket-lang.org/net/imap.html#%28def._%28%28lib._net%2Fimap..rkt%29._imap-move%29%29"]{IMAP's `move`} operation.}
 
 @bullet{There are many other repairs and documentation improvements!}
-
-
-
-
   
   ))
 
 (define contributors
-  '("Bob Burger"
-    "Bogdan Popa" "Brad Lucier" "Carl Gay" "Chloé Vulquin" "D. Ben Knoble" "Gustavo Massaccesi"
-    "Jacqueline Firth" "Jade Sailor" "Jarhmander" "Jason Hemann" "Jens Axel Søgaard" "Joel Dueck"
-    "John Clements" "jyn" "Jörgen Brandt" "Mao Yifu" "Marc Nieper-Wißkirchen" "Matthew Flatt"
-    "Matthias Felleisen" "Mike Sperber" "Noah Ma" "paralogismos" "Pavel Panchekha" "Philip McGrath"
-    "Robby Findler" "Ryan Culpepper" "Sam Tobin-Hochstadt" "Shalok Shalom" "Steve Byan"
-    "Vincent Lee" "Wing Hei Chan" "ZC Findler"))
-
+  (list "Bob Burger" "Bogdan Popa" "Carl Gay" "Chloé Vulquin" "D. Ben Knoble" "Dario Hamidi"
+        "Gustavo Massaccesi" "Jacqueline Firth" "Jade Sailor" "Jarhmander" "Jason Hemann"
+        "Jens Axel Søgaard" "Joel Dueck" "John Clements" "jyn" "Jörgen Brandt" "Mao Yifu" "Marc Nieper-Wißkirchen"
+        "Matthew Flatt" "Matthias Felleisen" "Mike Sperber" "Noah Ma" "paralogismos" "Pavel Panchekha"
+        "Philip McGrath" "Robby Findler" "Ryan Culpepper" "Sam Tobin-Hochstadt" "Shalok Shalom"
+        "Steve Byan" "Vincent Lee" "Wing Hei Chan" "ZC Findler"))
 
 (define (go)
   ;; abstraction between these two OBVIOUSLY possible, waiting on this until the first time
