@@ -22,7 +22,7 @@ Racket v8.17
   length 1 million.
 - TCP ports use `SO_KEEPALIVE`, instructing the kernel to send
   periodic messages while waiting for data to check whether the
-  connection is still responsive
+  connection is still responsive.
 - Racket code using a terminal in Windows can receive mouse events as
   virtual terminal characters after using SetConsoleMode. (This is
   also already possible on macOS and Linux.) See the tui-term package
@@ -32,7 +32,7 @@ Racket v8.17
 - The http-client module no longer sends "Content-Length: 0" for
   requests without a body.
 - The demodularizer (`compiler/demod`) can prune more unused
-  assignments
+  assignments.
 - Several judgment rendering forms in Redex are replaced by functions,
   allowing more convenient abstraction.
 - When a distribution includes no teaching languages, DrRacket’s

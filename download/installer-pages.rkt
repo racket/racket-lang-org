@@ -12,7 +12,7 @@
   (define package   (package->name (installer-package installer)))
   (define size      (installer-size installer))
   (define type      "") ;; (if (installer-binary? installer) "" " source")
-  (define platform  (platform->name (installer-platform installer) package))
+  (define platform  (platform->name (installer-platform installer) package version))
   (define variant   (installer-variant installer))
   (define title     @text{Download @package v@|version type| for @platform})
   (define suffix-desc (suffix->name (installer-suffix installer)))

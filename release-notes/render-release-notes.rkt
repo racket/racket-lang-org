@@ -8,7 +8,9 @@
          txt-render-bullet
          md-render-bullet
          bullet-links
-         display-lines horizontal-bar render-contributors)
+         display-lines horizontal-bar
+         render-contributors
+         render-contributors-md)
 
 ;; yeah, I probably had better things to do than write a little string-reflowing
 ;; function, sigh.
@@ -29,17 +31,22 @@
 (struct linkS (text url) #:transparent)
 
 ;; given a list of contributors, return a list of strings suitable for inclusion
-;; in the release notes
+;; in the txt release notes
 (define (render-contributors contributors)
   (string-reflow
-   (apply
-    string-append
-    (append
-     (add-between (all-but-last contributors) ", ")
-     (list
-      ", and "
-      (last contributors)
-      ".")))))
+   (render-contributors-md contributors)))
+
+;; given a list of contributors, return a list of strings suitable for inclusion
+;; in the markdown release notes
+(define (render-contributors-md contributors)
+  (apply
+   string-append
+   (append
+    (add-between (all-but-last contributors) ", ")
+    (list
+     ", and "
+     (last contributors)
+     "."))))
 
 (define (all-but-last l)
   (reverse (rest (reverse l))))
