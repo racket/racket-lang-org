@@ -37,68 +37,53 @@
 (define bfs-url
   (rur "generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._bitwise-first-bit-set%29%29"))
 
+(define racket-lang-core-url
+  "https://racket-lang.org")
+
 
 (define bullets
   (list
 
-@bullet{The new @link[dr-core-url]{`drracket-core`} package provides a version of drracket with
-   a smaller set of dependencies.}
+@bullet{The @link[racket-lang-core-url]{racket-lang.org} website no longer distributes Racket BC bundles, but it includes pre-built
+ bundles for two flavors of ARM linux, AArch64 and 32-bit ARMv6 VFP.}
 
-@bullet{Typed Racket has support for @link[(rur "treelist.html")]{treelists}.}
+@bullet{@link["https://docs.racket-lang.org/xml/index.html"]{XML structures} are serializable.}
 
-@bullet{The package manager computes @link[(dur "pkg/Package_Concepts.html")]{checksums} for packages when required,
-   allowing the use and automatic upgrade of packages without them.}
+@bullet{@link["https://docs.racket-lang.org/scribble/index.html"]{Scribble's} HTML generation conforms better to modern standards.}
 
-@bullet{The @link[bfs-url]{`bitwise-first-bit-set`} function returns the smallest bit that is
-   set in the twos-complement representation of the given number.}
+@bullet{Racket uses Unicode 16.0 for character and string operations.}
 
-@bullet{The updated @link[(rur "Module_Names_and_Loading.html#%28def._%28%28quote._~23~25kernel%29._dynamic-require%29%29")]{`dynamic-require`} function makes it easier to use
-   syntax bindings by allowing a syntax-thunk (or 'eval) to be used for them.}
+@bullet{The @link["https://docs.racket-lang.org/redex/Testing.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-check%29%29"]{`redex-check`}
+ default generation strategy always uses random generation to supplement the enumerator.}
 
-@bullet{The @link[(rur "exns.html#%28def._%28%28quote._~23~25kernel%29._error-module-path-~3estring-handler%29%29")]{`error-module-path->string-handler`} parameter allows the customization
-   of the display of module-paths in error messages.}
+@bullet{@link["https://docs.racket-lang.org/drracket/editor.html"]{DrRacket} supports the use of shift-tab to go backward to previous indentation positions.}
 
-@bullet{Precision of certain @link[(rur "generic-numbers.html")]{numeric functions} (`sin`, `cos`, and others) is
-   improved on Windows platforms by using the MSVCRT/UCRT libraries.}
-  
-@bullet{The @link[(rur "strings.html#%28def._%28%28quote._~23~25kernel%29._string-append%29%29")]{`string-append`} function has improved performance and reduced memory
-   use for long lists of strings in the Racket CS implementation.
-   Differences are clearly noticeable for lists of length 1 million.}
+@bullet{The @link["https://docs.racket-lang.org/macro-debugger/index.html#%28part._.Macro_.Stepper%29"]{macro stepper}
+ supports the @link["https://docs.racket-lang.org/string-constants/index.html"]{string-constants library},
+ allowing internationalization of the stepper itself.}
 
-@bullet{@link[(rur "tcp.html")]{TCP ports} use `SO_KEEPALIVE`, instructing the kernel to send periodic
-   messages while waiting for data to check whether the connection
-   is still responsive.}
+@bullet{The @link["https://docs.racket-lang.org/reference/define-struct.html"]{`struct`} form supports
+ @link["https://docs.racket-lang.org/reference/define-struct.html#:~:text=The%20%23%3Aproperties%20option%2C%20which%20can%20be%20supplied%20multiple%20times%2C%20accepts%20multiple%20properties%20and%20their%20values%20as%20an%20association%20list."]{`#:properties prop-list-expr`},
+ making it more convenient to attach multiple property values to a structure type.}
 
-@bullet{Racket code using a terminal in Windows can receive mouse events as
- virtual terminal characters after using SetConsoleMode. (This is also
- already possible on macOS and Linux.) See the
- @link["https://docs.racket-lang.org/tui-term/index.html"]{tui-term} package
- for related example code.}
+@bullet{Build-system improvements support containers registered at @link["https://hub.docker.com/u/racket"]{Docker Hub}
+ to build for all platforms that have downloads from the main Racket download site; improvements also
+ support Unix-style builds for Mac OS in the style of MacPorts.}
 
-@bullet{The @link[(dur "json/index.html#%28part._.Parsing_.J.S.O.N_.Text_into_.J.S-.Expressions%29")]{`#:replace-malformed-surrogate?`} keyword can be used to specify
-   a replacement for malformed unicode surrogates in JSON input}
+@bullet{The @link["https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._expt%29%29"]{`expt`}
+ function produces a more accurate result when its first argument is a flonum and its
+ second argument is an exact integer that has no equivalent flonum representation than it did in prior
+ versions.}
 
-@bullet{The @link[(dur "http-client/index.html")]{http-client} module no longer sends "Content-Length: 0" for
-   requests without a body.}
+@bullet{@link["https://docs.racket-lang.org/reference/tcp.html"]{TCP ports} use `SO_KEEPALIVE` correctly.}
 
-@bullet{The @link[(dur "raco/demod.html")]{demodularizer} (`compiler/demod`) can prune more unused assignments}
+@bullet{Unsafe code can use @link["https://docs.racket-lang.org/foreign/Atomic_Execution.html#%28tech._uninterruptible._mode%29"]{“uninterruptible mode”}
+ instead of “atomic mode” to allow futures to run concurrently while preventing interruptions from other threads.}
 
-@bullet{Several judgment rendering forms in @link[(dur "redex/index.html")]{Redex} are replaced by functions, allowing
-   more convenient abstraction.}
+@bullet{The @link["https://docs.racket-lang.org/net/imap.html"]{`net/imap`} library supports
+ @link["https://docs.racket-lang.org/net/imap.html#%28def._%28%28lib._net%2Fimap..rkt%29._imap-move%29%29"]{IMAP's `move`} operation.}
 
-@bullet{When a distribution includes no teaching languages, DrRacket’s language-dialog
- configuration moves into the preferences dialog and the “Language” menu disappears.}
-
-@bullet{The @link[(dur "math/index.html")]{math library} has better support for block-diagonal matrices, including
- both Racket and Typed Racket.}
-
-@bullet{The @link[(dur "math/index.html")]{math library} contains improved implementations of acos and
-   matrix-(cos-)angle.}
-
-@bullet{The @link[(dur "stepper/index.html")]{stepper} again works for @link[(dur "teachpack/2htdpuniverse.html#(part._world._interactive)")]{`big-bang`} programs.}
-
-@bullet{There are many other repairs and documentation imprevements!
-}
+@bullet{There are many other repairs and documentation improvements!}
 
 
 
@@ -111,13 +96,12 @@
   ))
 
 (define contributors
-  (list "Alexander Shopov" "Andrei Dorian Duma" "Bert De Ketelaere" "Bob Burger" "Bogdan Popa"
-        "Bogdana Vereha" "Cameron Moy" "Chung-chieh Shan" "Cutie Deng" "D. Ben Knoble" "Dario Hamidi"
-        "Dominik Pantůček" "Gustavo Massaccesi" "halfminami" "Jacqueline Firth" "Jason Hemann"
-        "Jens Axel Søgaard" "Joel Dueck" "John Clements" "Jordan Harman" "Marc Nieper-Wißkirchen"
-        "Matthew Flatt" "Matthias Felleisen" "Mike Sperber" "Noah Ma" "owaddell-ib" "Philippe Meunier"
-        "Robby Findler" "Ryan Culpepper" "Ryan Ficklin" "Sam Phillips" "Sam Tobin-Hochstadt" "Shu-Hung You"
-        "sogaiu" "Sorawee Porncharoenwase" "Stephen De Gabrielle" "Vincent Lee" "Wing Hei Chan"))
+  (list "Bob Burger" "Bogdan Popa" "Carl Gay" "Chloé Vulquin" "D. Ben Knoble" "Dario Hamidi"
+        "Gustavo Massaccesi" "Jacqueline Firth" "Jade Sailor" "Jarhmander" "Jason Hemann"
+        "Jens Axel Søgaard" "Joel Dueck" "John Clements" "jyn" "Jörgen Brandt" "Mao Yifu" "Marc Nieper-Wißkirchen"
+        "Matthew Flatt" "Matthias Felleisen" "Mike Sperber" "Noah Ma" "paralogismos" "Pavel Panchekha"
+        "Philip McGrath" "Robby Findler" "Ryan Culpepper" "Sam Tobin-Hochstadt" "Shalok Shalom"
+        "Steve Byan" "Vincent Lee" "Wing Hei Chan" "ZC Findler"))
 
 (define (go)
   ;; abstraction between these two OBVIOUSLY possible, waiting on this until the first time
