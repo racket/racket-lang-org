@@ -400,7 +400,7 @@ $(document).ready(function () {
   All Racket-y ideas are welcome. We’d love to have you!})
 
  (section
-  @sectionHeader{Registration}  
+  @sectionHeader{Registration}
   @paragraph{@a[#:href "https://www.eventbrite.com/e/racketcon-2025-tickets-1578775272339"]{To register, buy a ticket via Eventbrite}.
              If you cannot attend in-person, there is an option to help support the livestream for remote participants.}
  )
@@ -466,7 +466,27 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 10:15am}
    #:who @speaker[#:url "https://mukn.com"]{François-René Rideau}
    #:what @talk{Compositional Object Oriented Prototypes}
-   #:more @abstract{}
+   #:more @abstract{
+    We reconstruct a theory of object-orientation from first principles, as modularity and
+    extensibility together. Mixin inheritance then appears as a natural embodiment of these joined
+    principles expressed in the lambda-calculus. Further OO concepts such as prototypes, classes,
+    single or multiple inheritance, multiple dispatch, method combinations and more naturally
+    follow. Interestingly, many misconceptions about OO can also be dispelled, and we find that the
+    simplest and most natural context for OO is pure lazy dynamic functional programming, without
+    classes, and even without objects(!). A Scheme and/or Racket prototype (ha!) of these ideas will
+    be presented.
+   }
+   #:bio @bio{
+    Not fitting in French Academia due to his penchant for dynamic languages, Faré learned how (not)
+    to build software in Corporate America (ITA, Google, Bridgewater), and eventually became his own
+    startup entrepreneur in the domain of secure blockchain architecture. Trained in Programming
+    Language Semantics and Distributed Systems, Faré completed but never defended a thesis on
+    Reflective Systems. Once author of versions 2 and 3 of the build system ASDF at the heart of all
+    Common Lisp free software, he is now co-maintainer of Gerbil Scheme. Unsettled by online debates
+    between OO vs FP back when he was a student at ENS.fr, he finally discovered twenty years later
+    the essence of OO thanks to Jsonnet and Nix, and, trying to share his insight and digging into
+    old bibliography, became despite himself an expert on Object-Orientation.
+   }
   ]
   @lecture[
    #:when @talk-time{Saturday, 10:45am}
@@ -746,7 +766,7 @@ Gathering with drinks and snacks.
 (column
        (section
         @sectionHeader{Location}
-       
+
         (column
          @specific-location{UMass Boston}
          @specific-location{University Hall}
@@ -782,7 +802,7 @@ Gathering with drinks and snacks.
             @li{Take the walkway through campus.}
             @li{Attive at to University Hall.}
             }
-        
+
         @vpara{or take the @shuttle-bus (@a[#:href "https://umb.transloc.com/routes"]{track in real-time}):}
 
         @ul{
@@ -798,13 +818,13 @@ Gathering with drinks and snacks.
             @li{Take the Silver Line (bus) to South Station.}
             @li{Take the T Red Line (subway), to JFK/UMass station.}
             }
-        
+
         @vpara{Then either}
-        
+
         @ul{
             @li{Walk to DoubleTree hotel from JFK/UMass (5min.)}
             }
-        
+
         @vpara{or}
 
         @ul{
@@ -813,20 +833,20 @@ Gathering with drinks and snacks.
             }
 
         @fromplace{From South Station}
-        
+
         @ul{
             @li{Take the T Red Line (subway) to JFK/UMass station.}
             @li{Take the @shuttle-bus to Campus Center (5-10 min).}
             @li{walk from Campus Center to University Hall (next door).}
            }
-      
+
        @fromplace{Parking}
 
        @vpara{The closest parking garage to University Hall (connected, next door) is
                   the Campus Center Garage.}
 
        @vpara{If that is full, parking is also available in the West Garage or Bayside Lot.}
-       
+
        @vpara{See @a[#:href "https://www.umb.edu/the_university/getting_here/visitor_resources"]{UMass Boston Visitor Resources}
                   for rates and locations of all parking garages.}
 
@@ -834,9 +854,9 @@ Gathering with drinks and snacks.
 
        @vpara{@a[#:href "https://www.umb.edu/the_university/getting_here"]{UMass Boston “Getting Here”}}
        @vpara{@a[#:href "https://www.umb.edu/map"]{UMass Boston Campus Map}}
-       
+
        ))
-      
+
       (section
        @sectionHeader{Wi-Fi}
        (column
