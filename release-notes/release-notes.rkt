@@ -5,8 +5,7 @@
 ;; the markdown used for the blog post.
 
 (require "render-release-notes.rkt"
-         "check-links.rkt"
-         )
+         "check-links.rkt")
 
 (define major-v 8)
 (define minor-v 18)
@@ -88,12 +87,41 @@
   ))
 
 (define contributors
-  (list "Bob Burger" "Bogdan Popa" "Carl Gay" "Chloé Vulquin" "D. Ben Knoble" "Dario Hamidi"
-        "Gustavo Massaccesi" "Jacqueline Firth" "Jade Sailor" "Jarhmander" "Jason Hemann"
-        "Jens Axel Søgaard" "Joel Dueck" "John Clements" "jyn" "Jörgen Brandt" "Mao Yifu" "Marc Nieper-Wißkirchen"
-        "Matthew Flatt" "Matthias Felleisen" "Mike Sperber" "Noah Ma" "paralogismos" "Pavel Panchekha"
-        "Philip McGrath" "Robby Findler" "Ryan Culpepper" "Sam Tobin-Hochstadt" "Shalok Shalom"
-        "Steve Byan" "Vincent Lee" "Wing Hei Chan" "ZC Findler"))
+  '("Bob Burger"
+    "Bogdan Popa"
+    "Brad Lucier"
+    "Carl Gay"
+    "Chloé Vulquin"
+    "D. Ben Knoble"
+    "Gustavo Massaccesi"
+    "Jacqueline Firth"
+    "Jade Sailor"
+    "Jarhmander"
+    "Jason Hemann"
+    "Jens Axel Søgaard"
+    "Joel Dueck"
+    "John Clements"
+    "jyn"
+    "Jörgen Brandt"
+    "Mao Yifu"
+    "Marc Nieper-Wißkirchen"
+    "Matthew Flatt"
+    "Matthias Felleisen"
+    "Mike Sperber"
+    "Noah Ma"
+    "paralogismos"
+    "Pavel Panchekha"
+    "Philip McGrath"
+    "Robby Findler"
+    "Ryan Culpepper"
+    "Sam Tobin-Hochstadt"
+    "Shalok Shalom"
+    "Stephen De Gabrielle"
+    "Steve Byan"
+    "Vincent Lee"
+    "Wing Hei Chan"
+    "ZC Findler"))
+
 
 (define (go)
   ;; abstraction between these two OBVIOUSLY possible, waiting on this until the first time

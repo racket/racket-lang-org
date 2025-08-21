@@ -35,13 +35,13 @@ Racket v8.18
 
 The following people contributed to this release:
 
-Bob Burger, Bogdan Popa, Carl Gay, Chloé Vulquin, D. Ben Knoble,
-Dario Hamidi, Gustavo Massaccesi, Jacqueline Firth, Jade Sailor,
+Bob Burger, Bogdan Popa, Brad Lucier, Carl Gay, Chloé Vulquin, D.
+Ben Knoble, Gustavo Massaccesi, Jacqueline Firth, Jade Sailor,
 Jarhmander, Jason Hemann, Jens Axel Søgaard, Joel Dueck, John
 Clements, jyn, Jörgen Brandt, Mao Yifu, Marc Nieper-Wißkirchen,
 Matthew Flatt, Matthias Felleisen, Mike Sperber, Noah Ma,
 paralogismos, Pavel Panchekha, Philip McGrath, Robby Findler, Ryan
-Culpepper, Sam Tobin-Hochstadt, Shalok Shalom, Steve Byan, Vincent
-Lee, Wing Hei Chan, and ZC Findler.
+Culpepper, Sam Tobin-Hochstadt, Shalok Shalom, Stephen De Gabrielle,
+Steve Byan, Vincent Lee, Wing Hei Chan, and ZC Findler.
 
 ----------------------------------------------------------------------
