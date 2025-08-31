@@ -35,6 +35,12 @@
 (define dr-core-url
   "https://github.com/racket/drracket/commit/ae16d6bc6e00a9498313cff035537ac98ef71194")
 
+(define bfs-url
+  (rur "generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._bitwise-first-bit-set%29%29"))
+
+(define racket-lang-core-url
+  "https://racket-lang.org")
+
 (define bullets
   (list
 
