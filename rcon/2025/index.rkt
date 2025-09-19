@@ -729,6 +729,16 @@ Gathering with drinks and snacks.
   )
 
  (section
+  @sectionHeader{Sponsor: UMass Boston}
+  @center{
+ @a[#:href "https://www.umb.edu/"]{
+  @img[#:src "umb.svg"
+       #:alt "University of Massachusetts Boston Logo"]
+ }
+ }
+ )
+
+ (section
   @sectionHeader{Previous RacketCons}
   @(apply larger
                (cdr
