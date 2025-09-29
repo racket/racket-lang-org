@@ -803,6 +803,8 @@ Gathering with drinks and snacks.
 
        (column
 
+        @vpara{@a[#:href "umb-navigation.pdf"]{Navigation Summary (PDF)}}
+
         @fromplace{From DoubleTree Boston Bayside}
 
         @vpara{Walk (15-20 minutes):}

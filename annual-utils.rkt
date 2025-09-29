@@ -39,9 +39,12 @@
 (define (copy-annual-site! site starting-dir year
                            #:current [current? #f]
                            #:copy-current-index? [copy-current-index? #t])
-  (for* ([p (in-directory starting-dir)]
+  (define subdirs '("fonts" "slides"))
+  (for* ([p (in-directory starting-dir (lambda (dir)
+                                         (not (for/or ([subdir (in-list subdirs)])
+                                                (equal? (build-path starting-dir subdir) dir)))))]
          [fn (in-value (filename p))]
-         [ext (in-list '(#".html" #".css" #".svg" #".png" #".jpg"))]
+         [ext (in-list '(#".html" #".css" #".svg" #".png" #".jpg" #".pdf"))]
          #:unless (or (not (path-has-extension? fn ext))
                       (excluded-path? fn)
                       (and current?
@@ -68,5 +71,4 @@
                                (if current? null (list year))
                                (list subdir-name (filename p)))) "/")))))
   
-  (copy-subdir-if-extant "fonts")
-  (copy-subdir-if-extant "slides"))
+  (for-each copy-subdir-if-extant subdirs))
