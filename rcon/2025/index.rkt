@@ -400,6 +400,28 @@ $(document).ready(function () {
   All Racket-y ideas are welcome. We’d love to have you!})
 
  (section
+  @sectionHeader{Live Stream}
+  @para{@emph{Stay tuned}: the live stream will appear here.}
+  #;
+  '(iframe ([width "720"]
+           [height "800"]
+           [src "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]
+           [frameBorder "0"]
+           [scrolling "auto"]
+           [allowfullscreen "true"]
+           [allow "autoplay; fullscreen"]))
+  #;
+  '(iframe ([src "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]
+           [width "100%"]
+           [height "450"]
+           [allowtransparency "yes"]
+           [allow "autoplay"]
+           [frameborder "0"]
+           [marginheight "0"]
+           [marginwidth "0"]
+           [scrolling "auto"])))
+
+ (section
   @sectionHeader{Registration}
   @paragraph{@a[#:href "https://www.eventbrite.com/e/racketcon-2025-tickets-1578775272339"]{To register, buy a ticket via Eventbrite}.
              If you cannot attend in-person, there is an option to help support the livestream for remote participants.}
