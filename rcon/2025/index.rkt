@@ -331,8 +331,14 @@
   `(span ([data-slot-time ,(moment->iso8601 m)])
     ,(~t tz "EEEE, h:mma zz"))))
 
-(define nb-breakfast
+(define nb-yes-lunch
+  @nb{Lunch is provided.})
+
+(define nb-no-breakfast
   @nb{Breakfast won’t be served, so please eat before coming to the event.})
+
+(define nb-yes-breakfast
+  @nb{Light breakfast served.})
 
 ;; ------------------------------------------------------------
 
@@ -436,6 +442,7 @@ $(document).ready(function () {
  (section
   @sectionHeader{Saturday, October 4th}
   @doors-open[@talk-time{Saturday, 8:30am}]
+  @nb-yes-breakfast
   @keynote[
    @talk-time{Saturday, 9:00am}
    #:desc "Keynote"
@@ -528,6 +535,7 @@ $(document).ready(function () {
    }
   ]
   @lunch[@talk-time{Saturday, 11:45am}]
+  @nb-yes-lunch
   @lecture[
    #:when @talk-time{Saturday, 1:30pm}
    #:who @speaker[#:url "https://github.com/toddjonker"]{Todd Jonker}
@@ -661,6 +669,7 @@ Gathering with drinks and snacks.
  (section
   @sectionHeader{Sunday, October 5th}
   @doors-open[@talk-time{Sunday, 8:30am}]
+  @nb-no-breakfast
   @lecture[
    #:when @talk-time{Sunday, 9:00am}
    #:who @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
