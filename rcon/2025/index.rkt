@@ -667,7 +667,7 @@ Gathering with drinks and snacks.
  (section
   @sectionHeader{Sunday, October 5th}
   @doors-open[@talk-time{Sunday, 8:30am}]
-  @nb-no-breakfast
+  @nb-yes-breakfast
   @lecture[
    #:when @talk-time{Sunday, 9:00am}
    #:who @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
