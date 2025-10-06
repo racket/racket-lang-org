@@ -406,7 +406,10 @@ $(document).ready(function () {
   All Racket-y ideas are welcome. We’d love to have you!})
 
  (section
-  @sectionHeader{Live Stream}
+  @sectionHeader{Live Stream Recording (Day Two)}
+
+  @para{Videos will appear soon for all of the RacketCon talks. For now, a recording of the second day remains available}
+
   @a[#:href "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]{Link}
   '(iframe ([width "720"]
            [height "480"]
@@ -415,6 +418,7 @@ $(document).ready(function () {
            [scrolling "auto"]
            [allowfullscreen "true"]
            [allow "autoplay; fullscreen"]))
+  #;
   '(iframe ([src "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]
            [width "100%"]
            [height "450"]
@@ -425,16 +429,12 @@ $(document).ready(function () {
            [marginwidth "0"]
            [scrolling "auto"])))
 
+ #;
  (section
   @sectionHeader{Registration}
   @paragraph{@a[#:href "https://www.eventbrite.com/e/racketcon-2025-tickets-1578775272339"]{To register, buy a ticket via Eventbrite}.
              If you cannot attend in-person, there is an option to help support the livestream for remote participants.}
  )
-
- (section
-   @sectionHeader{Local Infomation and Accommodation}
-   @paragraph{@a[#:href "umb.html"]{See the local-information page for directions and hotel information}.}
-  )
 
 
  (section
@@ -743,6 +743,11 @@ Gathering with drinks and snacks.
   )
 
  (section
+   @sectionHeader{Local Infomation and Accommodation}
+   @paragraph{@a[#:href "umb.html"]{See the local-information page for directions and hotel information}.}
+  )
+
+ (section
    @sectionHeader{Friendly Policy}
    @paragraph{The proceedings of RacketCon will take place under the Racket @(a #:href "https://racket-lang.org/friendly.html" "Friendly Environment Policy").}
   )
@@ -755,6 +760,7 @@ Gathering with drinks and snacks.
               Stephen De Gabrielle, Robby Findler, Jacqueline Firth, Matthew Flatt, Ben Greenman,
               Siddhartha Kasivajhula, Sam Tobin-Hochstadt helped. The organizers may be reached at
               @|mailto:con-organizers|.}
+
   )
 
  (section
