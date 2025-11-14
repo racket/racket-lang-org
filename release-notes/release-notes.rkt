@@ -7,8 +7,8 @@
 (require "render-release-notes.rkt"
          "check-links.rkt")
 
-(define major-v 8)
-(define minor-v 18)
+(define major-v 9)
+(define minor-v 0)
 
 (define version (~a "v"major-v"."minor-v))
 
@@ -19,7 +19,8 @@
   (match* (major-v minor-v) 
     [(8 16) "https://blog.racket-lang.org/2025/01/racket-v8-16.html"]
     [(8 17) "https://blog.racket-lang.org/2025/05/racket-v8-17.html"]
-    [(8 18) "https://blog.racket-lang.org/2025/08/racket-v8-18.html"]))
+    [(8 18) "https://blog.racket-lang.org/2025/08/racket-v8-18.html"]
+    [(9 0) "https://blog.racket-lang.org/2025/11/racket-v9-0.html"]))
 
 
 
@@ -43,6 +44,30 @@
 (define bullets
   (list
 
+
+Add support for recording a thread's results via the `#:keep` option
+ to `thread`; results are returned by `thread-wait`
+CS: Add support for parallel threads via the `#:pool` argument to
+ `thread`
+CS: Expand the set of primitives that can be used in futures without
+ blocking, although the changes are mainly meant to enable more
+ parallelism via parallel threads
+Adapt and expand the role of "uninterruptible" mode and the API
+ provided by `ffi/unsafe/atomic`
+Add `black-box`
+racket/linklet: Add `decompile-linklet`
+BC: Change `processor-count` to always return parallel count
+Add AArch64 "natipkg" packages, which are useful for package-build
+ and package-testing infrastructure
+
+   . check syntax tracks identifiers that it finds in the origin fields
+    of identifiers that are in the origin fields (before it would not
+    consider the origin field of identifiers that were in the origin field)
+
+
+
+
+   
 @bullet{The @link[racket-lang-core-url]{racket-lang.org} website no longer distributes Racket BC bundles, but it includes pre-built
  bundles for two flavors of ARM linux, AArch64 and 32-bit ARMv6 VFP.}
 
