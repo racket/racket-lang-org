@@ -34,6 +34,6 @@
             @text{The Racket community is a great place to find answers
                   to questions when the above resources don't pan out@";"
                   sign up to the ◊link["https://racket.discourse.group/invites/VxkBcXY7yL"]{Racket Discourse} 
-                  or ◊link["https://discord.gg/6Zq8sH5"]{Discord}}]
+                  or ◊link["https://discord.gg/6Zq8sH5"]{Discord}.}]
    @br
    @text{Thanks for using Racket!}}})
