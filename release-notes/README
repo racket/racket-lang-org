@@ -1,5 +1,9 @@
-2025-05-15: This directory contains code that generates release notes in both textual
-styles (for use in the announcements/ directory) and in a markdown style (for use in the
-blog/ directory). It's currently very ad-hoc, and not directly linked to the locations
-in the tree where the resulting release notes are actually used. However, putting
-it here seems like a nice way to make this into shared public code. -- JBC
+2025-05-15: This directory contains code that generates release notes in
+both textual styles (for use in the announcements/ directory) and in a
+markdown style (for use in the blog/ directory). It's currently very
+ad-hoc, and not directly linked to the locations in the tree where the
+resulting release notes are actually used. However, putting it here
+seems like a nice way to make this into shared public code. -- JBC
+
+2025-11-15: To generate the release notes, call the "(go)" function in
+release-notes.rkt. This generates several files in /tmp

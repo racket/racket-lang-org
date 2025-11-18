@@ -12,8 +12,12 @@
 
 (define version (~a "v"major-v"."minor-v))
 
+
 ;; call (go) to generate the release-notes files; this overwrites several paths in
 ;; /tmp
+
+(define txt-file-path "/tmp/release-notes.txt")
+(define md-file-path "/tmp/release-notes.md")
 
 (define blog-post-url
   (match* (major-v minor-v) 
@@ -41,117 +45,83 @@
 (define racket-lang-core-url
   "https://racket-lang.org")
 
+
 (define bullets
   (list
 
 
-Add support for recording a thread's results via the `#:keep` option
- to `thread`; results are returned by `thread-wait`
-CS: Add support for parallel threads via the `#:pool` argument to
- `thread`
-CS: Expand the set of primitives that can be used in futures without
- blocking, although the changes are mainly meant to enable more
- parallelism via parallel threads
-Adapt and expand the role of "uninterruptible" mode and the API
- provided by `ffi/unsafe/atomic`
-Add `black-box`
-racket/linklet: Add `decompile-linklet`
-BC: Change `processor-count` to always return parallel count
-Add AArch64 "natipkg" packages, which are useful for package-build
- and package-testing infrastructure
+@bullet{Racket supports parallel threads.}
 
-   . check syntax tracks identifiers that it finds in the origin fields
-    of identifiers that are in the origin fields (before it would not
-    consider the origin field of identifiers that were in the origin field)
-
-
-
-
+@sub-bullet{Parallel threads can be created using the `#:pool` argument
+ to thread creation.}
    
-@bullet{The @link[racket-lang-core-url]{racket-lang.org} website no longer distributes Racket BC bundles, but it includes pre-built
- bundles for two flavors of ARM linux, AArch64 and 32-bit ARMv6 VFP.}
+@sub-bullet{Threads created with `#:keep` set to `'results` will record their results
+for later retrieval with `thread-wait`.}
 
-@bullet{@link["https://docs.racket-lang.org/xml/index.html"]{XML structures} are serializable.}
+@sub-bullet{A larger set of primitives can be used without blocking.}
 
-@bullet{@link["https://docs.racket-lang.org/scribble/index.html"]{Scribble's} HTML generation conforms better to modern standards.}
+@sub-bullet{Uninterruptible mode is enriched and constrained to work with
+parallel threads, with adjustments around the use of `equal?`-based hash
+tables and semaphores.}
 
-@bullet{Racket uses Unicode 16.0 for character and string operations.}
+@bullet{The `black-box` wrapper prevents the optimizing
+ compiler from optimizing away certain computations entirely.
+ This can be helpful in ensuring that benchmarks are
+ accurate.}
 
-@bullet{The @link["https://docs.racket-lang.org/redex/Testing.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-check%29%29"]{`redex-check`}
- default generation strategy always uses random generation to supplement the enumerator.}
+@bullet{The `decompile-linklet` function can map linklets back to s-expressions.}
 
-@bullet{@link["https://docs.racket-lang.org/drracket/editor.html"]{DrRacket} supports the use of shift-tab to go backward to previous indentation positions.}
+@bullet{When using BC Racket, the `processor-count` function is changed
+ to always return the parallel count.}
 
-@bullet{The @link["https://docs.racket-lang.org/macro-debugger/index.html#%28part._.Macro_.Stepper%29"]{macro stepper}
- supports the @link["https://docs.racket-lang.org/string-constants/index.html"]{string-constants library},
- allowing internationalization of the stepper itself.}
+@bullet{We now distribute "natipkg" packages for AArch64, useful for package-build
+  and package-testing infrastructure.}
 
-@bullet{The @link["https://docs.racket-lang.org/reference/define-struct.html"]{`struct`} form supports
- @link["https://docs.racket-lang.org/reference/define-struct.html#:~:text=The%20%23%3Aproperties%20option%2C%20which%20can%20be%20supplied%20multiple%20times%2C%20accepts%20multiple%20properties%20and%20their%20values%20as%20an%20association%20list."]{`#:properties prop-list-expr`},
- making it more convenient to attach multiple property values to a structure type.}
+@bullet{Check Syntax tracks identifiers more deeply nested in the
+ "origin" field of syntax objects.}
 
-@bullet{Build-system improvements support containers registered at @link["https://hub.docker.com/u/racket"]{Docker Hub}
- to build for all platforms that have downloads from the main Racket download site; improvements also
- support Unix-style builds for Mac OS in the style of MacPorts.}
-
-@bullet{The @link["https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._expt%29%29"]{`expt`}
- function produces a more accurate result when its first argument is a flonum and its
- second argument is an exact integer that has no equivalent flonum representation than it did in prior
- versions.}
-
-@bullet{@link["https://docs.racket-lang.org/reference/tcp.html"]{TCP ports} use `SO_KEEPALIVE` correctly.}
-
-@bullet{Unsafe code can use @link["https://docs.racket-lang.org/foreign/Atomic_Execution.html#%28tech._uninterruptible._mode%29"]{“uninterruptible mode”}
- instead of “atomic mode” to allow futures to run concurrently while preventing interruptions from other threads.}
-
-@bullet{The @link["https://docs.racket-lang.org/net/imap.html"]{`net/imap`} library supports
- @link["https://docs.racket-lang.org/net/imap.html#%28def._%28%28lib._net%2Fimap..rkt%29._imap-move%29%29"]{IMAP's `move`} operation.}
+@bullet{The `math` library includes Weibull distributions.}
 
 @bullet{There are many other repairs and documentation improvements!}
   
   ))
 
 (define contributors
-  '("Bob Burger"
+  '("Alexander Shopov"
+    "Anthony Carrico"
+    "Bert De Ketelaere"
     "Bogdan Popa"
-    "Brad Lucier"
-    "Carl Gay"
-    "Chloé Vulquin"
-    "D. Ben Knoble"
+    "Cadence Ember"
+    "David Van Horn"
     "Gustavo Massaccesi"
-    "Jacqueline Firth"
     "Jade Sailor"
-    "Jarhmander"
-    "Jason Hemann"
+    "Jakub Zalewski"
     "Jens Axel Søgaard"
-    "Joel Dueck"
+    "jestarray"
     "John Clements"
-    "jyn"
-    "Jörgen Brandt"
-    "Mao Yifu"
-    "Marc Nieper-Wißkirchen"
+    "Jordan Johnson"
     "Matthew Flatt"
     "Matthias Felleisen"
     "Mike Sperber"
-    "Noah Ma"
-    "paralogismos"
-    "Pavel Panchekha"
     "Philip McGrath"
+    "RMOlive"
     "Robby Findler"
+    "Ruifeng Xie"
     "Ryan Culpepper"
+    "Sam Phillips"
     "Sam Tobin-Hochstadt"
-    "Shalok Shalom"
+    "Sebastian Rakel"
+    "shenleban tongying"
+    "Shu-Hung You"
     "Stephen De Gabrielle"
     "Steve Byan"
-    "Vincent Lee"
-    "Wing Hei Chan"
-    "ZC Findler"))
+    "Wing Hei Chan"))
 
 
 (define (go)
   ;; abstraction between these two OBVIOUSLY possible, waiting on this until the first time
   ;; we need to change them...
-  (with-output-to-file "/tmp/release-notes.txt"
+  (with-output-to-file txt-file-path
     #:exists 'truncate
     (λ ()(displayln horizontal-bar)
       (newline)
@@ -162,7 +132,7 @@ Add AArch64 "natipkg" packages, which are useful for package-build
       (for-each displayln (render-contributors contributors))
       (newline)
       (displayln horizontal-bar)))
-  (with-output-to-file "/tmp/release-notes.md"
+  (with-output-to-file md-file-path
     #:exists 'truncate
     (λ ()(displayln horizontal-bar)
       (display-lines
@@ -228,5 +198,3 @@ If you can  - please help get the word out to users and platform specific repo p
     (when (not (equal? response 'okay))
       (eprintf "fail:\n ~v\n ~v\n\n"
                response l))))
-
-
