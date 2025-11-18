@@ -30,9 +30,10 @@
                   Racket questions on
                   @a[href: "https://stackoverflow.com/questions/tagged/racket"]{
                     stackoverflow}.}]
-   @parlist[@strong{The Mailing List}
-            @text{The @tt|{users@racket-lang.org}| mailing list is a great
-                  source for answers to questions when the above resources
-                  don't pan out@";" sign up .}]
+   @parlist[@strong{The Racket Community}
+            @text{The Racket community is a great place to find answers
+                  to questions when the above resources don't pan out@";"
+                  sign up to the ◊link["https://racket.discourse.group/invites/VxkBcXY7yL"]{Racket Discourse} 
+                  or ◊link["https://discord.gg/6Zq8sH5"]{Discord}}]
    @br
    @text{Thanks for using Racket!}}})
