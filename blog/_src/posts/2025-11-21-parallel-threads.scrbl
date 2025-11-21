@@ -178,15 +178,11 @@ Findler, Gustavo Massaccesi, and Sam Tobin-Hochstadt}
 With the upcoming version 9.0 release, Racket includes support for
 shared-memory threads that can take advantage of multicore hardware
 and operating-systems threads to run in parallel---not merely
-concurrently with other Racket threads, as in versions before 9.0.
+concurrently with other Racket threads, as was the case in versions before 9.0.
 
-Create a @defterm{parallel thread} using @racket[(thread _thunk #:pool
-_p)] to put the new thread in the pool @racket[_p] as created with
-@racket[make-parallel-thread-pool], or use @racket[(thread _thunk
-#:pool 'own)] to have the Racket-level thread backed by its own
-OS-level thread. It is as simple as that.
-
-For example, you can run the following putting it into a file named
+Creating a thread that runs in parallel is as simple as adding a
+flag to the call to @racket[thread].
+To see the effect, try first putting the following code into a file named
 @filepath{thread.rkt} and running @exec{racket thread.rkt} on the
 command line:
 
@@ -242,16 +238,25 @@ runs twice as fast. On the machine used @seclink["perf"]{below}:
   (list 1021 517 13)
   ]
 @;
+
+Passing the new @racket[#:pool] argument
+creates a @defterm{parallel thread}; create pools via
+@racket[make-parallel-thread-pool] to have a group of threads share
+processor resources or just pass @racket['own] to have the
+new thread exist in its own
+@tech[#:doc '(lib "scribblings/reference/reference.scrbl")]{parallel thread pool}.
+
 As a further addition to @racket[thread], a @racket[#:keep 'result]
 argument keeps the result of @racket[_thunk] when it returns, instead
 of discarding the result. Retrieve a thread's result with
-@racket[thread-wait]. So, for example, @racket[(thread-wait (thread
-_thunk #:pool 'own #:keep 'result))] runs @racket[_thunk] in parallel
+@racket[thread-wait]. So, for example, @racketblock[
+ (thread-wait (thread _thunk #:pool 'own #:keep 'result))
+ ] runs @racket[_thunk] in parallel
 to other Racket threads, blocks the current Racket thread (while
 allowing other Racket threads to continue, even non-parallel ones),
 and then returns the result value(s) when @racket[_thunk] completes.
 
-The @racket[thread] function still creates a @defterm{coroutine
+To maintain backwards compatibility, the @racket[thread] function still creates a @defterm{coroutine
 thread} by default, which is a lightweight thread that is premptively
 scheduled and whose execution is interleaved with other coroutine
 threads. For many tasks that need the organizational benefits of
@@ -263,21 +268,22 @@ can use @racket[#:keep 'result], too.
 Racket's full thread API works with parallel threads. Follow the links
 from the @racket[thread] documentation to see more details on thread
 pools and for more interesting uses. Of course, just because you put
-task in parallel threads doesn't mean that they always speed up,
-because sharing and communication can limit parallelism. Racket's
+tasks in parallel threads doesn't mean that they always speed up,
+as sharing and communication can limit parallelism. Racket's
 @hyperlink["https://docs.racket-lang.org/guide/parallelism.html#(part._effective-futures)"]{future
-visualizer} works for parallel threads, too, and can help you
+visualizer} works for parallel threads, tho, and it can help you
 understand where synchronization in a task limits parallelism.
-
-Adding parallelism to Racket potentially creates trouble for existing
+Also, adding parallelism to Racket potentially creates trouble for existing
 libraries that were not designed to accommodate parallelism. We expect
-problems to be rare, however, for reasons @seclink["compat"]{discussed
-below}.
+problems to be rare, however.
+
+We'll explore the performance details and explain why we expect most
+programs will continue to work well later in this post, but first:
 
 @; -----------------------------------------------------------------
 @section*{Racket's Road to Parallelism}
 
-Running threads in parallel counts as news in 2025?! It has been a long
+Running threads in parallel counts as news in 2025?! Well, it has been a long
 road.
 
 Racket's implementation started in the mid-1990s, just as a wave of
