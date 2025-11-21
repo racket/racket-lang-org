@@ -21,6 +21,9 @@ Tags: Threads, Parallelism
 @(define (code name)
    (~a "https://users.cs.utah.edu/plt/parallel-bm/" name))
 
+@(define (codelink name)
+   (list "[" (hyperlink (code name) "code") "]"))
+
 @(define small-tab-style
    (style #f (list (attributes '((style . "font-size: 60%"))))))
 @(define smallish-tab-style
@@ -348,14 +351,15 @@ as low as possible, including for non-parallel Racket programs.
 @; -----------------------------------------------------------------
 @section*[#:tag "perf"]{Performance}
 
-Here are some simple benchmarks on an M2 Mac. This machine has 8
+Here are some simple benchmarks on an M2 Mac to give a sense
+of the state of the current implementation. This machine has 8
 cores, but 4 big and 4 little, so ×4 speedup is possible with
-4-way parallelism and less than ×8 with 8-way parallelism.
+4-way parallelism but less than ×8 with 8-way parallelism.
 
-We should expect that a @hyperlink[(code "fib.rkt")]{Fibonacci} run of
+As an easy first example, we should expect that a Fibonacci @codelink["fib.rkt"] run of
 1 iteration in each of 4 coroutine threads takes the same time as
 running it 4 iterations in 1 thread, while 1 iteration in each of 4
-parallel threads should take about 1/4 the time. Also, for such a
+parallel threads should take about 1/4th of the time. Also, for such a
 simple function, using plain old futures should work just as well as
 parallel threads. That's what we see in the numbers below.
 
@@ -382,11 +386,12 @@ run of the benchmark.}
                  (list 5928 776 1)
                  (list 6006 796 2))]
 
-The @hyperlink[(code "strfib.rkt")]{Fibonacci with string conversion}
-variant calls functions that are much more complex to implement number
-conversions. It also triggers frequent allocation, which lets us check
-that thread-local allocation and parallel garbage collection scale
-reasonably.
+Of course, most programs are not just simple arithmetic. If we
+change our example to repeatedly convert numbers back and forth
+to strings as we compute Fibonacci @codelink["strfib.rkt"] then
+we can see the effects of the more complex conversions. This version
+also triggers frequent allocation, which lets us see
+how thread-local allocation and parallel garbage collection scale.
 
 @benchmark[@racket[(strfib* 32)]
            (list 1
@@ -405,19 +410,22 @@ reasonably.
                  (list 2544 419 59)
                  (list 2551 406 59))]
 
-This first string variant of Fibonacci includes a slight cheat,
+From this graph we still see reasonable scaling up to four cores,
+but the additional work and the use of the garbage collector limit
+scaling beyond that point.
+
+That first string variant of Fibonacci includes a slight cheat,
 however: it goes out of its way to use a @racket[string->number*]
-wrapper that calls @racket[string->number] without relying on implicit
-arguments, so does not use @racket[read-decimal-as-inexact] or
-@racket[read-single-flonum]. Reading those settings consults the
-current continuation, which is disallowed in a future (so its
-computation blocks until @racket[touch]ed) and its precise timing can
-depend on how many frames are in a thread's continuation. After
-changing @racket[string->number*] to @racket[string->number], calling
-in a coroutine thread turns out to be faster than a direct call
-(because a coroutine thread has a minimal continuation), futures
-provide no speedup at all, and parallel threads still provide a
-straightforward speedup.
+wrapper that carefully calls @racket[string->number] in a way that
+avoids evaluating expressions that compute the default values of implicit
+arguments. Computing these implicit arguments involves consulting the
+@tech[#:doc '(lib "scribblings/guide/guide.scrbl")]{parameters}
+@racket[read-decimal-as-inexact] and
+@racket[read-single-flonum] and determining the value of parameters consults the
+current continuation. The precise timing for doing so
+depend on how many frames are in a thread's continuation and, even worse, it also
+immediately blocks a future (so the future waits until @racket[touch]ed,
+eliminating any parallel speedup).
 
 @benchmark[@racket[(strfib 32)]
            (list 1
@@ -436,9 +444,28 @@ straightforward speedup.
                  (list 9166 1493 197)
                  (list 8135 8353 4))]
 
-Operations on @hyperlink[(code "hash-nums.rkt")]{mutable
-@racket[equal?]-based hash tables} are another case where futures
-block, but parallel threads can provide performance improvement:
+The coroutine column shows an improvement because a
+coroutine thread has a smaller continuation than the one in
+the sequential column. Importantly, however, note that the
+absolute time for the coroutine column in this table is more
+than double the absolute time in the previous table, meaning
+that we're not learning anything about parallelism with the
+speed up in this table, but instead the cost of consulting
+parameters in smaller continuations vs the cost in larger
+ones.
+
+And, as expected futures now provide no speedup at all.
+Parallel threads, however, are not blocked by the use of
+parameters, so we still see a respectable speedup in that
+column, but still a much slower absolute time than in the
+previous table because the added cost of consulting the
+parameter.
+
+Operations on mutable @racket[equal?]-based
+@tech[#:doc '(lib "scribblings/guide/guide.scrbl")]{hash tables}
+@codelink["hash-nums.rkt"] are another case where
+futures block, but parallel threads can provide performance
+improvement.
 
 @benchmark[@racket[(hash-nums 6)]
            (list 1
@@ -458,11 +485,9 @@ block, but parallel threads can provide performance improvement:
 (list 1470 1539 1))]
 
 As an illustration of the current limitations of parallel threads in
-Racket, we try a program that @hyperlink[(code
-"hash-digits.rkt")]{writes data to a byte-string port then hashes it}.
-The fact that separate ports are not contended enables performance
-improvement from parallelism, but speedup is limited by some general
-locks in the I/O layer.
+Racket, let's try a program that writes data to a byte-string
+@tech[#:doc '(lib "scribblings/guide/guide.scrbl")]{port} then hashes it
+@codelink["hash-digits.rkt"].
 
 @benchmark[@racket[(hash-digs 7)]
            (list 1
@@ -481,8 +506,14 @@ locks in the I/O layer.
                  (list 1630 403 85)
                  (list 1017 1049 60))]
 
-Even further in that direction, we try a program that @hyperlink[(code
-"hash-dir.rkt")]{hashes all files in the current directory} and
+Here we see that parallel threads do get some speedup but
+they do not scale especially well. The fact that separate
+ports are not contended is what enables performance
+improvement from parallelism, but speedup is limited by some
+general locks in the I/O layer.
+
+Even further in that direction, let's try a program that
+hashes all files in the current directory @codelink["hash-dir.rkt"] and
 computes a combined hash. When run on the @filepath{src} directory of
 the Racket Git repository, most of the time is reading bytes from
 files, and locks related to file I/O are currently too coarse-grained
@@ -509,14 +540,14 @@ Having locks in place for parallel threads can impose a cost on
 sequential programs, since locks generally have to be taken whether or
 not any parallel threads are active. Different data structures in
 Racket use specialized locks to minimize the cost, and most benchmarks
-reported here run the same in sequential most in Racket v8.18 (the
+reported here run report the same numbers in sequential column in Racket v8.18 (the
 previous release) and Racket v9.0. The exceptions are the
 @racket[(hash-nums 6)] and @racket[(hash-digs 7)] benchmarks, because
 those measure very-fine grained actions on mutable hash tables and I/O
 ports, and the cost is largest for those. Comparing sequential times
 for those two versions shows that support for parallel thread can cost
 up to 6-8% for programs that do not use them, although the cost tends
-to be much less.
+to be much less for most programs.
 
 @versus-benchmark[@racket[(hash-nums 6)]
            (list 1
