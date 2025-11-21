@@ -450,16 +450,15 @@ the sequential column. Importantly, however, note that the
 absolute time for the coroutine column in this table is more
 than double the absolute time in the previous table, meaning
 that we're not learning anything about parallelism with the
-speed up in this table, but instead the cost of consulting
+speed up in this column, but instead the cost of consulting
 parameters in smaller continuations vs the cost in larger
 ones.
 
-And, as expected futures now provide no speedup at all.
-Parallel threads, however, are not blocked by the use of
+Parallel threads let us share the work of consulting the
 parameters, so we still see a respectable speedup in that
 column, but still a much slower absolute time than in the
-previous table because the added cost of consulting the
-parameter.
+previous table because the added cost.
+And, as expected, futures now provide no speedup at all.
 
 Operations on mutable @racket[equal?]-based
 @tech[#:doc '(lib "scribblings/guide/guide.scrbl")]{hash tables}
