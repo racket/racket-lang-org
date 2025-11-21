@@ -257,7 +257,7 @@ allowing other Racket threads to continue, even non-parallel ones),
 and then returns the result value(s) when @racket[_thunk] completes.
 
 To maintain backwards compatibility, the @racket[thread] function still creates a @defterm{coroutine
-thread} by default, which is a lightweight thread that is premptively
+thread} by default, which is a lightweight thread that is preemptively
 scheduled and whose execution is interleaved with other coroutine
 threads. For many tasks that need the organizational benefits of
 concurrency without the performance benefits of parallelism, such as
@@ -511,7 +511,7 @@ not any parallel threads are active. Different data structures in
 Racket use specialized locks to minimize the cost, and most benchmarks
 reported here run the same in sequential most in Racket v8.18 (the
 previous release) and Racket v9.0. The exceptions are the
-@racket[(hash-nums 6)] and @racket[(hash-digs 7)] benchamrks, because
+@racket[(hash-nums 6)] and @racket[(hash-digs 7)] benchmarks, because
 those measure very-fine grained actions on mutable hash tables and I/O
 ports, and the cost is largest for those. Comparing sequential times
 for those two versions shows that support for parallel thread can cost
