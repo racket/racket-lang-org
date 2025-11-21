@@ -611,7 +611,7 @@ control to work properly in a multithreaded context. Racket already
 has concurrency, and the expectation for libraries to work with
 threads does not change with the introduction of parallel threads.
 Racket's semaphores, channels, and other synchronization constructs
-work the same will parallel threads as concurrent threads. Even
+work the same with parallel threads as concurrent threads. Even
 programs that use lock-free approaches based on compare-and-swap
 operation (such as @racket[box-cas!]) continue to work, since Racket's
 compare-and-swap operations use processor-level primitives.
