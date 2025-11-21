@@ -410,7 +410,7 @@ how thread-local allocation and parallel garbage collection scale.
                  (list 2544 419 59)
                  (list 2551 406 59))]
 
-From this graph we still see reasonable scaling up to four cores,
+From this table we still see reasonable scaling up to four cores,
 but the additional work and the use of the garbage collector limit
 scaling beyond that point.
 
