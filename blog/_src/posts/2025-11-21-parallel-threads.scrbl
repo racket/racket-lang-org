@@ -178,7 +178,7 @@ Tags: Threads, Parallelism
 @italic{posted by Matthew Flatt, Ryan Culpepper, Robby
 Findler, Gustavo Massaccesi, and Sam Tobin-Hochstadt}
 
-With the upcoming version 9.0 release, Racket includes support for
+With the version 9.0 release, Racket includes support for
 shared-memory threads that can take advantage of multicore hardware
 and operating-systems threads to run in parallel---not merely
 concurrently with other Racket threads, as was the case in versions before 9.0.
