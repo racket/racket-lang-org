@@ -175,7 +175,7 @@ Tags: Threads, Parallelism
                      col1
                      col2)))
 
-@italic{posted by Matthew Flatt with help from Ryan Culpepper, Robby
+@italic{posted by Matthew Flatt, Ryan Culpepper, Robby
 Findler, Gustavo Massaccesi, and Sam Tobin-Hochstadt}
 
 With the upcoming version 9.0 release, Racket includes support for
@@ -252,9 +252,13 @@ new thread exist in its own
 As a further addition to @racket[thread], a @racket[#:keep 'result]
 argument keeps the result of @racket[_thunk] when it returns, instead
 of discarding the result. Retrieve a thread's result with
-@racket[thread-wait]. So, for example, @racketblock[
+@racket[thread-wait]. So, for example,
+
+@racketblock[
  (thread-wait (thread _thunk #:pool 'own #:keep 'result))
- ] runs @racket[_thunk] in parallel
+ ]
+
+runs @racket[_thunk] in parallel
 to other Racket threads, blocks the current Racket thread (while
 allowing other Racket threads to continue, even non-parallel ones),
 and then returns the result value(s) when @racket[_thunk] completes.
@@ -388,7 +392,7 @@ run of the benchmark.}
 
 Of course, most programs are not just simple arithmetic. If we
 change our example to repeatedly convert numbers back and forth
-to strings as we compute Fibonacci @codelink["strfib.rkt"] then
+to strings as we compute Fibonacci @codelink["strfib.rkt"], then
 we can see the effects of the more complex conversions. This version
 also triggers frequent allocation, which lets us see
 how thread-local allocation and parallel garbage collection scale.
@@ -410,22 +414,25 @@ how thread-local allocation and parallel garbage collection scale.
                  (list 2544 419 59)
                  (list 2551 406 59))]
 
-From this table we still see reasonable scaling up to four cores,
+From this table, we still see reasonable scaling up to four cores,
 but the additional work and the use of the garbage collector limit
 scaling beyond that point.
 
 That first string variant of Fibonacci includes a slight cheat,
 however: it goes out of its way to use a @racket[string->number*]
 wrapper that carefully calls @racket[string->number] in a way that
-avoids evaluating expressions that compute the default values of implicit
-arguments. Computing these implicit arguments involves consulting the
+avoids evaluating expressions that compute the default values of some
+arguments. The defaults consult the
 @tech[#:doc '(lib "scribblings/guide/guide.scrbl")]{parameters}
 @racket[read-decimal-as-inexact] and
-@racket[read-single-flonum] and determining the value of parameters consults the
-current continuation. The precise timing for doing so
-depend on how many frames are in a thread's continuation and, even worse, it also
-immediately blocks a future (so the future waits until @racket[touch]ed,
-eliminating any parallel speedup).
+@racket[read-single-flonum]---which a perfectly fine thing to do in
+general, but turns out to block a future, because parameter values
+can depend on the current continuation. In contrast, parallel threads
+continue to provide a benefit when those kinds of Racket constructs
+are used. We can see the difference by using plain
+@racket[string->number] in place of @racket[string->number*], which
+will fetch parameter values 14 million times in each individual run of
+@racket[(strfib 32)]:
 
 @benchmark[@racket[(strfib 32)]
            (list 1
@@ -444,21 +451,12 @@ eliminating any parallel speedup).
                  (list 9166 1493 197)
                  (list 8135 8353 4))]
 
-The coroutine column shows an improvement because a
-coroutine thread has a smaller continuation than the one in
-the sequential column. Importantly, however, note that the
-absolute time for the coroutine column in this table is more
-than double the absolute time in the previous table, meaning
-that we're not learning anything about parallelism with the
-speed up in this column, but instead the cost of consulting
-parameters in smaller continuations vs the cost in larger
-ones.
-
-Parallel threads let us share the work of consulting the
-parameters, so we still see a respectable speedup in that
-column, but still a much slower absolute time than in the
-previous table because the added cost.
-And, as expected, futures now provide no speedup at all.
+The coroutine column here also shows an improvement, surprisingly.
+That's because a coroutine thread has a smaller continuation than the one in
+the sequential column, and the cost of fetching a parameter
+value can depend (to a limited degree) on continuation size.
+The effect of parallel threads on this kind of program is
+more consistent than fine details of a continuation's shape.
 
 Operations on mutable @racket[equal?]-based
 @tech[#:doc '(lib "scribblings/guide/guide.scrbl")]{hash tables}
@@ -505,9 +503,9 @@ Racket, let's try a program that writes data to a byte-string
                  (list 1630 403 85)
                  (list 1017 1049 60))]
 
-Here we see that parallel threads do get some speedup but
+Here we see that parallel threads do get some speedup, but
 they do not scale especially well. The fact that separate
-ports are not contended is what enables performance
+ports are not contended enables performance
 improvement from parallelism, but speedup is limited by some
 general locks in the I/O layer.
 
