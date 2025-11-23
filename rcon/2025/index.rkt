@@ -396,6 +396,11 @@ $(document).ready(function () {
    content, reaching and engaging both the Racket community and the
    wider programming world.})
 
+ (top-section
+   @para{@emph{The video recording for each talk is available below, or you can
+             @a[#:href "https://www.youtube.com/watch?v=7Twlh-Opq5E&list=PLXr4KViVC0qI3GixTBDcayVOZG6DcRFPp"]{watch the playlist}
+             for all talks.}})
+
  #;
  (section
   @sectionHeader{Call for Presentations}
@@ -405,6 +410,7 @@ $(document).ready(function () {
   RacketCon organizer" "the RacketCon organizers") for consideration.
   All Racket-y ideas are welcome. We’d love to have you!})
 
+ #;
  (section
   @sectionHeader{Live Stream Recording (Day Two)}
 
@@ -444,6 +450,7 @@ $(document).ready(function () {
   @keynote[
    @talk-time{Saturday, 9:00am}
    #:desc "Keynote"
+   #:link "https://youtu.be/7Twlh-Opq5E?si=_Jo_VztAXOkJz1rz"
    #:who @joint{
     @speaker[#:url "https://cloudflare.com"]{James Larisch}
     and
@@ -493,6 +500,7 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 10:15am}
    #:who @speaker[#:url "https://mukn.com"]{François-René Rideau}
    #:what @talk{Compositional Object Oriented Prototypes}
+   #:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
    #:more @abstract{
     We reconstruct a theory of object-orientation from first principles, as modularity and
     extensibility together. Mixin inheritance then appears as a natural embodiment of these joined
@@ -519,6 +527,7 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 10:45am}
    #:who @speaker[#:url "https://github.com/quasarbright"]{Mike Delmonaco}
    #:what @talk{A Match-Like DSL for Deep Immutable Updates}
+   #:link "https://youtu.be/rwafaIfdOf0?si=51SECxi8PPgmGk07"
    #:more @abstract{
     @code{match} is very convenient for deconstructing data and accessing values deep within a data
     structure, but it is not useful for making changes to that data structure. In this talk, I’ll
@@ -538,6 +547,7 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 1:30pm}
    #:who @speaker[#:url "https://github.com/toddjonker"]{Todd Jonker}
    #:what @talk{Ion Fusion}
+   #:link "https://youtu.be/OQT4jbP5Aak?si=lHJfJKDucS3KMdah"
    #:more @abstract{
     Ion Fusion is a customizable programming language that unifies the semantics of persistent data
     and the code that manipulates it. Oriented around the Amazon Ion data format--the backbone of
@@ -559,6 +569,7 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 2:00pm}
    #:who @speaker[#:url "https://www.greghendershott.com/"]{Greg Hendershott}
    #:what @talk{"It Works": More Adventures with Racket and Emacs}
+   #:link "https://youtu.be/OJqocEYhgng?si=1Tdby1IoKmG4tAl1"
    #:more @abstract{
     The Emacs package "racket-mode" has continued to evolve its design and features. Among other
     things, it allows multiple local and remote back ends, has a redesigned "lossless" REPL,
@@ -575,6 +586,7 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 2:30pm}
    #:who @speaker[#:url "https://camoy.net/"]{Cameron Moy}
    #:what @talk{Roulette for Racketeers}
+   #:link "https://youtu.be/8dk3PWED4G4?si=_dZNl-PyKY3e-AHI"
    #:more @abstract{
     Exact probabilistic inference is a requirement for many applications of probabilistic
     programming languages (PPLs), but implementing a PPL with high-performance inference is
@@ -600,6 +612,7 @@ $(document).ready(function () {
     @speaker[#:url "https://github.com/zackbach/"]{Zachary Eisbach}
    }
    #:what @talk{miniDusa: An Extensible Finite-Choice Logic Programming Language}
+   #:link "https://youtu.be/9HNrYJLeJ5k?si=EkdNTmpldzc5LrBM"
    #:more @abstract{
     Dusa is a recently designed logic programming language featuring mutually exclusive choice as a
     primitive to enable computation of solutions that satisfy constraints. To explore further host
@@ -620,6 +633,7 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 4:00pm}
    #:who @speaker[#:url "https://github.com/jjsimpso"]{Jonathan Simpson}
    #:what @talk{Browsing(and serving) the Slow Internet with Racket}
+   #:link "https://youtu.be/gExw0GajLYk?si=ndUW9Q3gLXpSwKOm"
    #:more @abstract{
     Taking its name from the slow food movement, the slow internet movement seeks to recreate the
     less commercial and more user-centric internet of the early 90s. We will explore how Racket
@@ -640,6 +654,7 @@ $(document).ready(function () {
    #:when @talk-time{Saturday, 4:30pm}
    #:who @speaker[#:url "https://github.com/texdraft"]{Asher Olsen}
    #:what @talk{PROG Rock: Listening to old Lisp code}
+   #:link "https://youtu.be/0pKU5lcfMYw?si=rUT3a69Gdc6tFbpS"
    #:more @abstract{
     Music and Lisp code might seem worlds apart, but through various processes it is possible to get
     aurally pleasing results from a LISP 1.5 → music compiler (written in Racket, of course). In
@@ -672,6 +687,7 @@ Gathering with drinks and snacks.
    #:when @talk-time{Sunday, 9:00am}
    #:who @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
    #:what @talk{Advanced Macrology: 5 Macro Programming Patterns You (No Longer) Need to Know}
+   #:link "https://youtu.be/SZH8dfQ9zpA?si=Wi_KZJqFmjkE5l3K"
    #:more @abstract{
     Racket's macros make creating small extensions to the language remarkably simple. But when
     you step up to creating DSLs with static semantics and compiler optimizations, you need new
@@ -695,6 +711,7 @@ Gathering with drinks and snacks.
    #:when @talk-time{Sunday, 9:30am}
    #:who @speaker[#:url "https://github.com/jagen31"]{Jared Gentner}
    #:what @talk{Great Composers Steal: Obbligato Reuse of Racket in Tonart}
+   #:link "https://youtu.be/F9E3HNTAwXk?si=orEdd7ieU87b5ihq"
    #:more @abstract{
     Imagine, for a moment, that a music score could somehow become a Racket module. Imagine if every
     notation on that music score was a syntax object. Imagine selecting areas of the score and
@@ -717,6 +734,7 @@ Gathering with drinks and snacks.
    #:when @talk-time{Sunday, 10:00am}
    #:who @speaker[#:url "https://users.cs.utah.edu/~mflatt/"]{Matthew Flatt}
    #:what @talk{Rhombus Update}
+   #:link "https://youtu.be/f5kTOaO04o4?si=oRLU_fBcZbZV1_6y"
    #:more @abstract{
     @a[#:href "https://rhombus-lang.org/"]{Rhombus} is ready for early adopters. There's still
     plenty to be done in creating Rhombus-style bindings for Racket libraries, building entirely
@@ -731,11 +749,13 @@ Gathering with drinks and snacks.
    #:when @talk-time{Sunday, 11:00am}
    #:who @speaker[#:url "https://samth.github.io"]{Sam Tobin-Hochstadt}
    #:what @talk{The State of Racket}
+   #:link "https://youtu.be/H-F7bw8JMHE?si=Q-9ITz1PyNJ3j2QE"
   ]
   @lecture[
    #:when @talk-time{Sunday, 11:30am}
    #:who @speaker[#:person? #f]{Racket Management}
    #:what @talk{Racket Town Hall}
+   #:link "https://youtu.be/R4MvOxG2ews?si=V6YM2bvGlgMo_-Wy"
    #:more @abstract{
     Please come with your big questions and discussion topics.
    }
