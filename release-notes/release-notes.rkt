@@ -50,28 +50,23 @@
   (list
 
 
-@bullet{Racket supports parallel threads.}
+@bullet{Racket supports parallel threads. @link["https://example.com"]{For more information see the new blog post on the topic.}}
 
-@sub-bullet{Parallel threads can be created using the `#:pool` argument
+@sub-bullet{Parallel threads can be created using the @link["https://docs.racket-lang.org/reference/threads.html#%28def._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._thread%29%29"]{`#:pool`} argument
  to thread creation.}
    
-@sub-bullet{Threads created with `#:keep` set to `'results` will record their results
+@sub-bullet{Threads created with @link["https://docs.racket-lang.org/reference/threads.html#%28def._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._thread%29%29"]{`#:keep`} set to `'results` will record their results
 for later retrieval with `thread-wait`.}
 
-@sub-bullet{A larger set of primitives can be used without blocking.}
 
-@sub-bullet{Uninterruptible mode is enriched and constrained to work with
-parallel threads, with adjustments around the use of `equal?`-based hash
-tables and semaphores.}
-
-@bullet{The `black-box` wrapper prevents the optimizing
+@bullet{The @link["https://docs.racket-lang.org/reference/black-box.html#%28def._%28%28quote._~23~25kernel%29._black-box%29%29"]{`black-box`} wrapper prevents the optimizing
  compiler from optimizing away certain computations entirely.
  This can be helpful in ensuring that benchmarks are
  accurate.}
 
-@bullet{The `decompile-linklet` function can map linklets back to s-expressions.}
+@bullet{The @link["https://docs.racket-lang.org/reference/linklets.html#%28def._%28%28lib._racket%2Flinklet..rkt%29._decompile-linklet%29%29"]{`decompile-linklet`} function can map linklets back to s-expressions.}
 
-@bullet{When using BC Racket, the `processor-count` function is changed
+@bullet{When using BC Racket, the @link["https://docs.racket-lang.org/reference/places.html#%28def._%28%28lib._racket%2Fplace..rkt%29._processor-count%29%29"]{`processor-count`} function is changed
  to always return the parallel count.}
 
 @bullet{We now distribute "natipkg" packages for AArch64, useful for package-build
@@ -80,7 +75,7 @@ tables and semaphores.}
 @bullet{Check Syntax tracks identifiers more deeply nested in the
  "origin" field of syntax objects.}
 
-@bullet{The `math` library includes Weibull distributions.}
+@bullet{The `math` library includes @link["https://docs.racket-lang.org/math/Real_Distribution_Families.html#%28part._.Weibull_.Distributions%29"]{Weibull distributions}.}
 
 @bullet{There are many other repairs and documentation improvements!}
   
