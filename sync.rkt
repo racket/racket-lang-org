@@ -76,6 +76,7 @@
                #:jobs jobs
                #:log displayln))
 
+#;
 (unless render-locally?
   (upload "www" "racket-lang.org")
   (upload "www" "www.racket-lang.org")
@@ -113,7 +114,10 @@
                                  #:redirect-code "302"
                                  #:new-protocol 'https)
    (for/list ([r (in-list all-releases)]
-              #:when (version<=? "5.92" (release-version r)))
+              ;; when we run out of redirects (max is 50), this version number
+              ;; will need to be increased by running the "version-redirect.rkt"
+              ;; script
+              #:when (version<=? "7.0" (release-version r)))
      (redirect-prefix-routing-rule #:old-prefix (format "releases/~a/installers" (release-version r))
                                    #:new-prefix (format "~ainstallers/~a"
                                                         download-mirror-path
