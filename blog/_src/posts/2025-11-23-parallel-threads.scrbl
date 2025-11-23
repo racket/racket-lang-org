@@ -210,7 +210,7 @@ command line:
 Racket will find many square roots (tweak @racket[N] to match your
 machine), but will keep only one core of your CPU busy. Using
 @exec{time} in the shell reports ``CPU'' (possibly broken into
-``user'' and `system'') and ``real'' times that are similar. To
+``user'' and ``system'') and ``real'' times that are similar. To
 use two cores, add @racket[#:pool 'own] to the @racket[thread] call:
 
 @(racketblock
