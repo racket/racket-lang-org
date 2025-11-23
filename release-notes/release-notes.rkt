@@ -50,7 +50,7 @@
   (list
 
 
-@bullet{Racket supports parallel threads. @link["https://example.com"]{For more information see the new blog post on the topic.}}
+@bullet{Racket supports parallel threads. @link["https:/blog.racket-lang.org/2025/11/parallel-threads.html"]{For more information see the new blog post on the topic.}}
 
 @sub-bullet{Parallel threads can be created using the @link["https://docs.racket-lang.org/reference/threads.html#%28def._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._thread%29%29"]{`#:pool`} argument
  to thread creation.}

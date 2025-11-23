@@ -1,7 +1,7 @@
 #lang scribble/manual
 
 Title: Parallel Threads in Racket v9.0
-Date: 2025-11-21T00:00:00
+Date: 2025-11-23T00:00:00
 Tags: Threads, Parallelism
 
 @(require (for-label racket/base
