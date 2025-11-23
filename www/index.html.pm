@@ -47,7 +47,7 @@
 
  ◊div[#:style "flex-grow:1"]{}
 
- ◊; ◊div[#:style "margin-right: 1em"]{◊link["https://con.racket-lang.org/"]{RacketCon October 2025}}
+ ◊div[#:style "margin-right: 1em"]{◊link["https://con.racket-lang.org/"]{RacketCon October 2025}}
 }}
 
 ◊tabs[#:group-id "racket-lang-group"
