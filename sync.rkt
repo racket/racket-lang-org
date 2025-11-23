@@ -76,7 +76,6 @@
                #:jobs jobs
                #:log displayln))
 
-#;
 (unless render-locally?
   (upload "www" "racket-lang.org")
   (upload "www" "www.racket-lang.org")
