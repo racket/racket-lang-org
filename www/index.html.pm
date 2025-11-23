@@ -11,7 +11,7 @@
      ◊img[#:alt "small logo" #:src "img/racket-logo.svg" #:class "logo"] Racket}}
 
   ◊div[#:class "margin-above-if-smartphone"]{
-   ◊link[#:class "top-button" #:id "packages" "sfc.html"]{donate}
+   ◊link[#:class "top-button" #:id "packages" "rplf.html"]{donate}
    ◊link[#:class "top-button" #:id "docs" "https://docs.racket-lang.org/"]{docs}
    ◊link[#:class "top-button" #:id "packages" "https://pkgs.racket-lang.org/"]{packages}
    ◊link[#:class "top-button" #:id "download" "https://download.racket-lang.org/"]{download}
@@ -338,7 +338,7 @@ ancestor(A, B)?}}}
       ◊link["friendly.html"]{Friendly Environment Policy}
       Applies to all Racket venues.
 
-      ◊link["sfc.html"]{Software Freedom Conservancy}
+      ◊link["rplf.html"]{Racket Programming Language Foundation}
       Make a tax-deductible contribution to support our work.}}
     ◊td{ }
     ◊td{◊div[ #:class "disappear-if-smartphone"]{◊img/size["racket-school-2018.png" #:alt "Racket School 2018" #:size (cons 450 322)]{}}}]]}
