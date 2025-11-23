@@ -25,6 +25,7 @@
     "rackunit-lib"
     "rash-demos"
     ["s3-sync" #:version "1.13"]
+    "aws"
     ["scribble-lib" #:version "1.28"]
     "slideshow-lib"
     "sugar"
