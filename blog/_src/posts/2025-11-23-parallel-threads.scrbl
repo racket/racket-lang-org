@@ -278,7 +278,7 @@ pools and for more interesting uses. Of course, just because you put
 tasks in parallel threads doesn't mean that they always speed up,
 as sharing and communication can limit parallelism. Racket's
 @hyperlink["https://docs.racket-lang.org/guide/parallelism.html#(part._effective-futures)"]{future
-visualizer} works for parallel threads, tho, and it can help you
+visualizer} works for parallel threads, though, and it can help you
 understand where synchronization in a task limits parallelism.
 Also, adding parallelism to Racket potentially creates trouble for existing
 libraries that were not designed to accommodate parallelism. We expect
