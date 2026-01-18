@@ -352,7 +352,7 @@ ancestor(A, B)?}}}
       ◊link["https://docs.racket-lang.org/guide/index.html"]{The Racket Guide}
       A detailed overview of the Racket Language.
       
-      ◊link["https://www.realmofracket.com/"]{Realm of Racket}
+      ◊link["https://www.realmofracket.org/"]{Realm of Racket}
       Learn to program with Racket, one game at a time.
 
       ◊link["https://beautifulracket.com/"]{Beautiful Racket}
