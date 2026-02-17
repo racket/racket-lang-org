@@ -8,7 +8,7 @@
          "check-links.rkt")
 
 (define major-v 9)
-(define minor-v 0)
+(define minor-v 1)
 
 (define version (~a "v"major-v"."minor-v))
 
@@ -24,9 +24,8 @@
     [(8 16) "https://blog.racket-lang.org/2025/01/racket-v8-16.html"]
     [(8 17) "https://blog.racket-lang.org/2025/05/racket-v8-17.html"]
     [(8 18) "https://blog.racket-lang.org/2025/08/racket-v8-18.html"]
-    [(9 0) "https://blog.racket-lang.org/2025/11/racket-v9-0.html"]))
-
-
+    [(9 0) "https://blog.racket-lang.org/2025/11/racket-v9-0.html"]
+    [(9 1) "https://blog.racket-lang.org/2026/02/racket-v9-1.html"]))
 
 
 ;; inferred url abstraction...
@@ -50,32 +49,44 @@
   (list
 
 
-@bullet{Racket supports parallel threads. @link["https://blog.racket-lang.org/2025/11/parallel-threads.html"]{For more information see the new blog post on the topic.}}
+   @bullet{Documentation organization and navigation can be specialized by
+language family, to allow users to interact with documentation in a way that
+is tailored to that language family. This is currently used by Rhombus.}
 
-@sub-bullet{Parallel threads can be created using the @link["https://docs.racket-lang.org/reference/threads.html#%28def._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._thread%29%29"]{`#:pool`} argument
- to thread creation.}
-   
-@sub-bullet{Threads created with @link["https://docs.racket-lang.org/reference/threads.html#%28def._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._thread%29%29"]{`#:keep`} set to `'results` will record their results
-for later retrieval with `thread-wait`.}
+@bullet{The `for` form and its variants accept an `#:on-length-mismatch` specifier.}
 
+@bullet{DrRacket improves the handling of the dark mode preferences,
+and improves the GUI for choosing color schemes.}
 
-@bullet{The @link["https://docs.racket-lang.org/reference/black-box.html#%28def._%28%28quote._~23~25kernel%29._black-box%29%29"]{`black-box`} wrapper prevents the optimizing
- compiler from optimizing away certain computations entirely.
- This can be helpful in ensuring that benchmarks are
- accurate.}
+@bullet{DrRacket has curved syntax arrows. The degree of curvature
+indicates the relative left- or right-displacement of the arrow's target.}
 
-@bullet{The @link["https://docs.racket-lang.org/reference/linklets.html#%28def._%28%28lib._racket%2Flinklet..rkt%29._decompile-linklet%29%29"]{`decompile-linklet`} function can map linklets back to s-expressions.}
+@bullet{DrRacket's "Insert Large Letters" uses characters that match the
+comment syntax of the buffer's language.}
 
-@bullet{When using BC Racket, the @link["https://docs.racket-lang.org/reference/places.html#%28def._%28%28lib._racket%2Fplace..rkt%29._processor-count%29%29"]{`processor-count`} function is changed
- to always return the parallel count.}
+@bullet{The `exn-classify-errno` maps network and filesystem error numbers on various platforms
+ to posix-standard symbols, to enable more portable code.}
 
-@bullet{We now distribute "natipkg" packages for AArch64, useful for package-build
-  and package-testing infrastructure.}
+@bullet{The behavior of Racket BC on certain character operations (most notably `eq?`) is changed
+ to match that of Racket CS, with a small performance penalty for these operations for BC programs.}
 
-@bullet{Check Syntax tracks identifiers more deeply nested in the
- "origin" field of syntax objects.}
+@bullet{The `make-struct-type` procedure can inherit the current inspector using a `'current`
+flag. This is the default behavior, but there are situations in which it's not possible
+to refer to the current inspector.}
 
-@bullet{The `math` library includes @link["https://docs.racket-lang.org/math/Real_Distribution_Families.html#%28part._.Weibull_.Distributions%29"]{Weibull distributions}.}
+@bullet{Bundle configurations can better control the conventions for locating shared object
+files with the `--enable-sofind=<conv>` flags.}
+
+@bullet{The `system-type` function can report on platform and shared-object-library conventions
+with new flags.}
+
+@bullet{The `openssl/legacy` library makes it possible to access OpenSSL's built-in "legacy"
+provider, to get access to insecure and outdated algorithms.}
+
+@bullet{DrRacket's contour window width has become sensitive to the width
+of the text in the window it is tracking.}
+
+@bullet{Typed Racket improves expected type propagation for keyword argument functions.}
 
 @bullet{There are many other repairs and documentation improvements!}
   
@@ -83,33 +94,30 @@ for later retrieval with `thread-wait`.}
 
 (define contributors
   '("Alexander Shopov"
-    "Anthony Carrico"
-    "Bert De Ketelaere"
-    "Bogdan Popa"
+    "beast-hacker"
+    "Bob Burger"
+    "Brad Lucier"
     "Cadence Ember"
     "David Van Horn"
+    "evan"
+    "François-René Rideau"
     "Gustavo Massaccesi"
+    "Jacqueline Firth"
     "Jade Sailor"
-    "Jakub Zalewski"
+    "Jason Hemann"
     "Jens Axel Søgaard"
-    "jestarray"
     "John Clements"
-    "Jordan Johnson"
+    "Jonas Rinke"
     "Matthew Flatt"
     "Matthias Felleisen"
     "Mike Sperber"
-    "Philip McGrath"
-    "RMOlive"
+    "Noah Ma"
+    "Pavel Panchekha"
+    "Rob Durst"
     "Robby Findler"
-    "Ruifeng Xie"
     "Ryan Culpepper"
-    "Sam Phillips"
     "Sam Tobin-Hochstadt"
-    "Sebastian Rakel"
-    "shenleban tongying"
-    "Shu-Hung You"
     "Stephen De Gabrielle"
-    "Steve Byan"
     "Wing Hei Chan"))
 
 
