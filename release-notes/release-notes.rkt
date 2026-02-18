@@ -55,14 +55,13 @@ is tailored to that language family. This is currently used by Rhombus.}
 
 @bullet{The `for` form and its variants accept an `#:on-length-mismatch` specifier.}
 
-@bullet{DrRacket improves the handling of the dark mode preferences,
-and improves the GUI for choosing color schemes.}
+@bullet{DrRacket improves the GUI for choosing color schemes.}
 
 @bullet{DrRacket has curved syntax arrows. The degree of curvature
 indicates the relative left- or right-displacement of the arrow's target.}
 
 @bullet{DrRacket's "Insert Large Letters" uses characters that match the
-comment syntax of the buffer's language.}
+comment syntax of the buffer's language, making it useful (and fun!) in Rhombus.}
 
 @bullet{The `exn-classify-errno` maps network and filesystem error numbers on various platforms
  to posix-standard symbols, to enable more portable code.}
@@ -82,9 +81,6 @@ with new flags.}
 
 @bullet{The `openssl/legacy` library makes it possible to access OpenSSL's built-in "legacy"
 provider, to get access to insecure and outdated algorithms.}
-
-@bullet{DrRacket's contour window width has become sensitive to the width
-of the text in the window it is tracking.}
 
 @bullet{Typed Racket improves expected type propagation for keyword argument functions.}
 
