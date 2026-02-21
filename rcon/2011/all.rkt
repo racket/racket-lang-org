@@ -44,18 +44,14 @@
     @h3{Saturday, July 23}
     @sched[
       @slot["9:30-10:00" #f]{Breakfast}
-      @slot["10:00-10:45" mflatt #:video (yt "wEgaVMOYLEU")]{Racket at @tt{(expt 2 4)}}
+      @slot["10:00-10:45" mflatt]{Racket at @tt{(expt 2 4)}}
       @slot["10:45-11:15" #f]{Break}
-      @slot["11:15-11:45" ryanc #:video (yt "AB15shYUU4M")]{Designing macros using @a[class: 'doclink href: "http://docs.racket-lang.org/syntax/stxparse.html"]{@tt{syntax-parse}}}
-      @slot["11:45-12:00" @name["http://dorophone.blogspot.com/"]{Vincent Toups}
-            #:video (yt "sZ-jGHUWIyA")]{Monadic Parallel Turtle Graphics}
-      @slot["12:00-12:15" dyoo #:video (yt "wg9aoJDJNgk")]{Whalesong}
-      @slot["12:15-12:30" "Doug Williams"
-            #:video (yt "ePZAvb9at8Q")]{Content Generation from Templates}
+      @slot["11:15-11:45" ryanc]{Designing macros using @a[class: 'doclink href: "http://docs.racket-lang.org/syntax/stxparse.html"]{@tt{syntax-parse}}}
+      @slot["11:45-12:00" @name["http://dorophone.blogspot.com/"]{Vincent Toups}]{Monadic Parallel Turtle Graphics}
+      @slot["12:00-12:15" dyoo]{Whalesong}
+      @slot["12:15-12:30" "Doug Williams"]{Content Generation from Templates}
       @slot["12:30-2:00" #f]{Lunch}
-      @slot["2:00-2:45" matthias
-            #:video (yt "ngUeVD7OUKo")
-            #:slides (F "matthias-slides.pdf")]{
+      @slot["2:00-2:45" matthias #:slides (F "matthias-slides.pdf")]{
         What's wrong with How to Design Programs@";"
         @br What's new in How to Design Programs 2e}
       @slot["2:45-3:00" "William Dunklau"]{Using Picturing Programs in Grades 7 and 8}
