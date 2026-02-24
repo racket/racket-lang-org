@@ -43,11 +43,11 @@
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
  ◊div[#:style "margin-left: 1em"]{
-   ◊link["https://blog.racket-lang.org/2025/11/racket-v9-0.html"]{Racket version 9.0} is available.}
+   ◊link["https://blog.racket-lang.org/2026/02/racket-v9-1.html"]{Racket version 9.1} is available.}
 
  ◊div[#:style "flex-grow:1"]{}
 
- ◊div[#:style "margin-right: 1em"]{◊link["https://con.racket-lang.org/"]{RacketCon October 2025}}
+
 }}
 
 ◊tabs[#:group-id "racket-lang-group"
