@@ -44,6 +44,11 @@
 (define racket-lang-core-url
   "https://racket-lang.org")
 
+"[3.18 Iterations and Comprehensions: for, for/list, ...](https://docs.racket-lang.org/reference/for.html)"
+
+
+@list["https://docs.racket-lang.org/reference/for.html"]{3.18
+  Iterations and Comprehensions: for, for/list, ...}
 
 (define bullets
   (list
@@ -53,7 +58,9 @@
 language family, to allow users to interact with documentation in a way that
 is tailored to that language family. This is currently used by Rhombus.}
 
-@bullet{The `for` form and its variants accept an `#:on-length-mismatch` specifier.}
+@bullet{The `for` form and its variants accept an `#:on-length-mismatch`
+ specifier. @link["https://docs.racket-lang.org/reference/for.html"]{3.18
+  Iterations and Comprehensions: for, for/list, ...}}
 
 @bullet{DrRacket improves the GUI for choosing color schemes.}
 
@@ -63,24 +70,31 @@ indicates the relative left- or right-displacement of the arrow's target.}
 @bullet{DrRacket's "Insert Large Letters" uses characters that match the
 comment syntax of the buffer's language, making it useful (and fun!) in Rhombus.}
 
-@bullet{The `exn-classify-errno` maps network and filesystem error numbers on various platforms
- to posix-standard symbols, to enable more portable code.}
+@bullet{The `exn-classify-errno` maps network and filesystem error numbers on various
+ platforms to posix-standard symbols, to enable more portable code. @link["https://docs.racket-lang.org/reference/exns.html#%28def._%28%28quote._~23~25kernel%29._exn-classify-errno%29%29"]{10.2
+  Exceptions}}
 
-@bullet{The behavior of Racket BC on certain character operations (most notably `eq?`) is changed
- to match that of Racket CS, with a small performance penalty for these operations for BC programs.}
+@bullet{The behavior of Racket BC on certain character operations (most notably `eq?`)
+ is changed to match that of Racket CS, with a small performance penalty for these operations for BC programs.
+@link["https://docs.racket-lang.org/guide/performance.html#%28tech._bc%29"]{19 Performance}
+@link["https://docs.racket-lang.org/reference/implementations.html#%28tech._bc%29"]{1.5 Implementations}}
 
 @bullet{The `make-struct-type` procedure can inherit the current inspector using a `'current`
 flag. This is the default behavior, but there are situations in which it's not possible
-to refer to the current inspector.}
+to refer to the current inspector. @link["https://docs.racket-lang.org/reference/creatingmorestructs.html"]{5.2
+  Creating Structure Types}}
 
 @bullet{Bundle configurations can better control the conventions for locating shared object
 files with the `--enable-sofind=<conv>` flags.}
 
 @bullet{The `system-type` function can report on platform and shared-object-library conventions
-with new flags.}
+with new flags. @link["https://docs.racket-lang.org/reference/runtime.html"]{15.8
+  Environment and Runtime Information}}
 
 @bullet{The `openssl/legacy` library makes it possible to access OpenSSL's built-in "legacy"
-provider, to get access to insecure and outdated algorithms.}
+provider, to get access to insecure and outdated algorithms. @link[
+ "https://docs.racket-lang.org/openssl/index.html#%28mod-path._openssl%2Flegacy%29"]{OpenSSL:
+  Secure Communication}}
 
 @bullet{Typed Racket improves expected type propagation for keyword argument functions.}
 

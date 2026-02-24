@@ -1,10 +1,12 @@
 #lang at-exp racket
 
-(require rackunit)
+(require rackunit
+         ;; sorry I'm addicted to Ryan's regexp library
+         scramble/regexp)
 
-(provide bullet
-         sub-bullet
-         link
+(provide bullet ; a bullet
+         sub-bullet ; a sub-bullet
+         link ; use this to represent links, as e.g. @link["http://zzz.com"]{this is a link to zzz}
          txt-render-bullet
          md-render-bullet
          bullet-links
@@ -19,6 +21,9 @@
 (define max-width (make-parameter 68))
 
 (define bar-length 70)
+
+;; looks like sdg prefers stars?
+(define bullet-start-string "* ")
 
 (define horizontal-bar (apply string (for/list ([i bar-length]) #\-)))
 
@@ -160,8 +165,16 @@
   (bulletS url 1 args))
 
 ;; an at-exp function that creates a link
-(define (link url text)
-  (linkS text url))
+(define (link url . texts)
+  (linkS (apply string-append (map newline->string texts))
+         url))
+
+;; replace newlines with strings: because of the way that
+;; at-exp parsing works, newlines will occur in separate strings.
+(define (newline->string s)
+  (match s
+    ["\n" " "]
+    [other other]))
 
 ;; given a bullet, return a list of strings representing
 ;; lines suitable for inclusion in a text file
@@ -227,7 +240,7 @@
   (define no-newlines-strs (map (λ (s) (cond [(equal? s "\n") " "]
                                              [else s]))
                                 strs))
-  (list (string-append pad-str "- " (apply string-append no-newlines-strs))))
+  (list (string-append pad-str bullet-start-string (apply string-append no-newlines-strs))))
 
 ;; list-of-strings -> string
 (define (display-lines los)
@@ -366,7 +379,54 @@
                 (list "Matthew Flatt,"
                       "Stephen Chang, and"
                       "Robby Findler."))
+
+  
+(check-equal? (link "https://zzz.com" "yay a string")
+              (linkS "yay a string" "https://zzz.com"))
+(check-equal? (link "https://zzz.com" "yay a" "\n" "string")
+              (linkS "yay a string" "https://zzz.com"))
   )
 
+;; utility function for "going backward" from the markdown syntax to the release-notes format
+(define (flip-markdown-link txt)
+  (match txt
+    ;; this is probably overly conservative?
+    [(regexp (px ^ "[" (report (+ (chars (complement "]")))) "](" (report (+ (chars (complement ")")))) ")" $)
+             (list _ text-part url-part))
+     ;; it would be really easy to get the quoting wrong here... I probably have,
+     ;; I'm not going to spend a long time thinking about it. Specifically, curly
+     ;; braces in the text part will definitely be a problem.
+     ;; ... okay, I can check for that anyway...
+     (when (regexp-match? (px (chars "{}")) txt)
+       (error "do this by hand, this string has curly braces in it."))
+     (~a "@link[\"" url-part "\"]{" text-part "}")]
+    [else #f]))
+
+(define lines
+#<<|
+* The behavior of Racket BC on certain character operations (most notably `eq?`) is changed to match that of Racket CS, with a small performance penalty for these operations for BC programs.
+
+[19 Performance](https://docs.racket-lang.org/guide/performance.html#%28tech._bc%29)
+
+[1.5 Implementations](https://docs.racket-lang.org/reference/implementations.html#%28tech._bc%29)
+
+* The `make-struct-type` procedure can inherit the current inspector using a `'current` flag. This is the default behavior, but there are situations in which it's not possible to refer to the current inspector.
+
+[5.2 Creating Structure Types](https://docs.racket-lang.org/reference/creatingmorestructs.html)
+
+* The `system-type` function can report on platform and shared-object-library conventions with new flags.
+
+[15.8 Environment and Runtime Information](https://docs.racket-lang.org/reference/runtime.html)
+
+* The `openssl/legacy` library makes it possible to access OpenSSL's built-in "legacy" provider, to get access to insecure and outdated algorithms.
+
+[OpenSSL: Secure Communication](https://docs.racket-lang.org/openssl/index.html#%28mod-path._openssl%2Flegacy%29)
+|
+)
+
+;; use this to translate all the links...
+#;(for ([line (regexp-split (px "\n") lines)])
+  (define try-flip (flip-markdown-link line))
+  (displayln (or try-flip line)))
 
 
