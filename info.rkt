@@ -31,7 +31,8 @@
     "sugar"
     "syntax-color-lib"
     "txexpr"
-    "typed-racket-lib"))
+    "typed-racket-lib"
+    "scramble-lib"))
 
 (define pkg-desc "Sources for http://racket-lang.org")
 
