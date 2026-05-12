@@ -25,7 +25,8 @@
     [(8 17) "https://blog.racket-lang.org/2025/05/racket-v8-17.html"]
     [(8 18) "https://blog.racket-lang.org/2025/08/racket-v8-18.html"]
     [(9 0) "https://blog.racket-lang.org/2025/11/racket-v9-0.html"]
-    [(9 1) "https://blog.racket-lang.org/2026/02/racket-v9-1.html"]))
+    [(9 1) "https://blog.racket-lang.org/2026/02/racket-v9-1.html"]
+    [(9 2) "https://blog.racket-lang.org/2026/05/racket-v9-1.html"]))
 
 
 ;; inferred url abstraction...
@@ -53,14 +54,59 @@
 (define bullets
   (list
 
+   Allow more types of `quote`d data in cross-phase persistent modules
 
-   @bullet{Documentation organization and navigation can be specialized by
-language family, to allow users to interact with documentation in a way that
-is tailored to that language family. This is currently used by Rhombus.}
+   Change `match` to reject non-linear patterns with mismatched ellipsis
+ depth
 
-@bullet{The `for` form and its variants accept an `#:on-length-mismatch`
- specifier. @link["https://docs.racket-lang.org/reference/for.html"]{3.18
-  Iterations and Comprehensions: for, for/list, ...}}
+ Add a `#%foreign-inline` core syntactic form for unsafe access to
+ facilities provided at the linklet layer by a Racket implementation
+
+ Change `object/c` implementation to improve performance
+
+ Reduce foreign-procedure call overhead in some cases by internally
+ shifting interrupt-disabling responsibility to callbacks
+
+ Add internal "ffi2" support for a more static FFI (to be used in
+ a future package)
+
+ Correct some error messages from `memw`, `with-syntax`,
+  and `unquote-splicing`
+
+  Reorganize, tidy, and merge various `racket/private` modules
+
+  @bullet{The implementations of `member`, `memw`, `when`, `unless`,
+  `let/ec`, and `cond` are rewritten to use only racket/kernel syntax}
+
+  Add `impersonator-property-predicate-procedure?`
+
+  Add `terminal-file-position`
+
+  @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
+
+  ;; TR
+
+  - Fix previously-incorrect types of `asin` and `acos`, which may
+  cause existing programs not to type check.
+- Improve printing of polymorphic struct types: show the name with
+  type arguments (e.g. `(Array Byte)`) instead of the internal
+  representation.
+
+  ;; stepper
+
+  The stepper now displays numbers according the the language settings.
+
+  ;; htdp
+
+   fix bug that prevented distributed .dmg programs to close down
+  properly at the end, depending on the close-on-stop clause.
+
+* fix documentation for close-on-stop clauses, which somehow had it
+  backwards (given the tag's name). 
+
+
+
+  ;; old below:
 
 @bullet{DrRacket improves the GUI for choosing color schemes.}
 
