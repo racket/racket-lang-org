@@ -54,7 +54,8 @@
 (define bullets
   (list
 
-   Allow more types of `quote`d data in cross-phase persistent modules
+   @bullet{Cross-phase persistent modules allow more types of @racket[quote]d
+   data.}
 
    Change `match` to reject non-linear patterns with mismatched ellipsis
  depth
@@ -73,8 +74,6 @@
  Correct some error messages from `memw`, `with-syntax`,
   and `unquote-splicing`
 
-  Reorganize, tidy, and merge various `racket/private` modules
-
   @bullet{The implementations of `member`, `memw`, `when`, `unless`,
   `let/ec`, and `cond` are rewritten to use only racket/kernel syntax}
 
@@ -86,15 +85,13 @@
 
   ;; TR
 
-  - Fix previously-incorrect types of `asin` and `acos`, which may
-  cause existing programs not to type check.
-- Improve printing of polymorphic struct types: show the name with
-  type arguments (e.g. `(Array Byte)`) instead of the internal
-  representation.
+  @bullet{Typed Racket has repaired the types of @racket[asin] and @racket[acos].
+This may cause existing programs not to type check}
 
-  ;; stepper
+  @bullet{Polymorphic Struct types are printed using type arguments
+(e.g., @racket[(Array Byte)]) rather than exposing an internal representation.}
 
-  The stepper now displays numbers according the the language settings.
+  @bullet{The stepper's display of numbers better matches the language settings.}
 
   ;; htdp
 
