@@ -95,11 +95,11 @@ This may cause existing programs not to type check}
 
   ;; htdp
 
-   fix bug that prevented distributed .dmg programs to close down
-  properly at the end, depending on the close-on-stop clause.
+  @bullet{fix bug that prevented distributed .dmg programs to close down
+  properly at the end, depending on the close-on-stop clause.}
 
-* fix documentation for close-on-stop clauses, which somehow had it
-  backwards (given the tag's name). 
+  @bullet{fix documentation for close-on-stop clauses, which somehow had it
+  backwards (given the tag's name). }
 
 
 
