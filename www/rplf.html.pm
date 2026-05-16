@@ -15,6 +15,8 @@ The Racket Programming Language Foundation is registered in Delaware and is reco
 
 Donations, both in-kind and monetary, are used for hosting community infrastructure, administration, educational outreach, and community events such as RacketCon and Racket School.}
 
+As a 501(3)(c) public charity in the US, donations are fully tax-deductible to the extent permitted by law.
+
 You can ◊link["https://github.com/sponsors/Racket"]{sponsor Racket} via GitHub.
 
 We also accept checks drawn in US dollars from US banks. Make your check payable to "Racket Programming Language Foundation" and mail to:
