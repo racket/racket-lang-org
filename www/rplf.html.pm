@@ -11,7 +11,7 @@
 ◊div{Donate}
 
 ◊p{
-The Racket Programming Language Foundation is registered in Delaware and is recognizes as a 501(3)(c) public charity in the US.
+The Racket Programming Language Foundation is registered in Delaware and is recognized as a 501(3)(c) public charity in the US.
 
 Donations, both in-kind and monetary, are used for hosting community infrastructure, administration, educational outreach, and community events such as RacketCon and Racket School.}
 
