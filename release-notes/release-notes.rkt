@@ -45,101 +45,44 @@
 (define racket-lang-core-url
   "https://racket-lang.org")
 
-"[3.18 Iterations and Comprehensions: for, for/list, ...](https://docs.racket-lang.org/reference/for.html)"
-
-
-@list["https://docs.racket-lang.org/reference/for.html"]{3.18
-  Iterations and Comprehensions: for, for/list, ...}
-
 (define bullets
   (list
 
-   @bullet{Cross-phase persistent modules allow more types of @racket[quote]d
+   @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
+
+   @bullet{Typed Racket has repaired the types of `asin` and `acos`.
+This may cause existing programs not to type check.}
+  
+   @bullet{This release includes internal support for a more static "ffi2" FFI
+ (to be used in a future package).}
+
+   @bullet{The `terminal-file-position` function counts bytes written to ports connected to
+  a terminal, such as `stdin` and `stderr`.}
+
+      @bullet{The `match` form rejects non-linear patterns with mismatched ellipsis
+ depth.}
+      
+   @bullet{Cross-phase persistent modules allow more types of `quote`d
    data.}
 
-   Change `match` to reject non-linear patterns with mismatched ellipsis
- depth
+   @bullet{The `#%foreign-inline` core syntactic form provides unsafe access to
+ facilities provided at the linklet layer by a Racket implementation.}
 
- Add a `#%foreign-inline` core syntactic form for unsafe access to
- facilities provided at the linklet layer by a Racket implementation
-
- Change `object/c` implementation to improve performance
-
- Reduce foreign-procedure call overhead in some cases by internally
- shifting interrupt-disabling responsibility to callbacks
-
- Add internal "ffi2" support for a more static FFI (to be used in
- a future package)
-
- Correct some error messages from `memw`, `with-syntax`,
-  and `unquote-splicing`
-
-  @bullet{The implementations of `member`, `memw`, `when`, `unless`,
+   @bullet{The implementations of `member`, `memw`, `when`, `unless`,
   `let/ec`, and `cond` are rewritten to use only racket/kernel syntax}
 
-  Add `impersonator-property-predicate-procedure?`
-
-  Add `terminal-file-position`
-
-  @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
-
-  ;; TR
-
-  @bullet{Typed Racket has repaired the types of @racket[asin] and @racket[acos].
-This may cause existing programs not to type check}
+  @bullet{The `impersonator-property-predicate-procedure?` function identifies
+  procedures created by `make-impersonator-property`.}
 
   @bullet{Polymorphic Struct types are printed using type arguments
-(e.g., @racket[(Array Byte)]) rather than exposing an internal representation.}
+(e.g., `(Array Byte)`) rather than exposing an internal representation.}
 
   @bullet{The stepper's display of numbers better matches the language settings.}
 
   ;; htdp
 
-   fix bug that prevented distributed .dmg programs to close down
-  properly at the end, depending on the close-on-stop clause.
-
-* fix documentation for close-on-stop clauses, which somehow had it
-  backwards (given the tag's name). 
-
-
-
-  ;; old below:
-
-@bullet{DrRacket improves the GUI for choosing color schemes.}
-
-@bullet{DrRacket has curved syntax arrows. The degree of curvature
-indicates the relative left- or right-displacement of the arrow's target.}
-
-@bullet{DrRacket's "Insert Large Letters" uses characters that match the
-comment syntax of the buffer's language, making it useful (and fun!) in Rhombus.}
-
-@bullet{The `exn-classify-errno` maps network and filesystem error numbers on various
- platforms to posix-standard symbols, to enable more portable code. @link["https://docs.racket-lang.org/reference/exns.html#%28def._%28%28quote._~23~25kernel%29._exn-classify-errno%29%29"]{10.2
-  Exceptions}}
-
-@bullet{The behavior of Racket BC on certain character operations (most notably `eq?`)
- is changed to match that of Racket CS, with a small performance penalty for these operations for BC programs.
-@link["https://docs.racket-lang.org/guide/performance.html#%28tech._bc%29"]{19 Performance}
-@link["https://docs.racket-lang.org/reference/implementations.html#%28tech._bc%29"]{1.5 Implementations}}
-
-@bullet{The `make-struct-type` procedure can inherit the current inspector using a `'current`
-flag. This is the default behavior, but there are situations in which it's not possible
-to refer to the current inspector. @link["https://docs.racket-lang.org/reference/creatingmorestructs.html"]{5.2
-  Creating Structure Types}}
-
-@bullet{Bundle configurations can better control the conventions for locating shared object
-files with the `--enable-sofind=<conv>` flags.}
-
-@bullet{The `system-type` function can report on platform and shared-object-library conventions
-with new flags. @link["https://docs.racket-lang.org/reference/runtime.html"]{15.8
-  Environment and Runtime Information}}
-
-@bullet{The `openssl/legacy` library makes it possible to access OpenSSL's built-in "legacy"
-provider, to get access to insecure and outdated algorithms. @link[
- "https://docs.racket-lang.org/openssl/index.html#%28mod-path._openssl%2Flegacy%29"]{OpenSSL:
-  Secure Communication}}
-
-@bullet{Typed Racket improves expected type propagation for keyword argument functions.}
+  @bullet{Big-bang programs distributed as .dmg files correctly handle the `close-on-stop`
+feature.}
 
 @bullet{There are many other repairs and documentation improvements!}
   
@@ -147,30 +90,32 @@ provider, to get access to insecure and outdated algorithms. @link[
 
 (define contributors
   '("Alexander Shopov"
-    "beast-hacker"
+    "Alexis King"
+    "Asilo"
+    "Bert De Ketelaere"
     "Bob Burger"
-    "Brad Lucier"
-    "Cadence Ember"
-    "David Van Horn"
-    "evan"
+    "Bogdan Popa"
+    "Chung-chieh Shan"
     "François-René Rideau"
     "Gustavo Massaccesi"
-    "Jacqueline Firth"
+    "Ilya Klyuchnikov"
     "Jade Sailor"
-    "Jason Hemann"
-    "Jens Axel Søgaard"
+    "Jamie Taylor"
     "John Clements"
-    "Jonas Rinke"
+    "Jonathan Simpson"
+    "LS_Hower"
     "Matthew Flatt"
     "Matthias Felleisen"
     "Mike Sperber"
-    "Noah Ma"
     "Pavel Panchekha"
-    "Rob Durst"
+    "Philippe Meunier"
+    "RMOlive"
     "Robby Findler"
-    "Ryan Culpepper"
+    "Roman Klochkov"
     "Sam Tobin-Hochstadt"
-    "Stephen De Gabrielle"
+    "Shu-Hung You"
+    "Tejas Sanap"
+    "Vincent Lee"
     "Wing Hei Chan"))
 
 
