@@ -57,29 +57,29 @@
    @bullet{Cross-phase persistent modules allow more types of @racket[quote]d
    data.}
 
-   Change `match` to reject non-linear patterns with mismatched ellipsis
- depth
+   @bullet{Change `match` to reject non-linear patterns with mismatched ellipsis
+ depth}
 
- Add a `#%foreign-inline` core syntactic form for unsafe access to
- facilities provided at the linklet layer by a Racket implementation
+ @bullet{Add a `#%foreign-inline` core syntactic form for unsafe access to
+ facilities provided at the linklet layer by a Racket implementation}
 
- Change `object/c` implementation to improve performance
+ @bullet{Change `object/c` implementation to improve performance}
 
- Reduce foreign-procedure call overhead in some cases by internally
- shifting interrupt-disabling responsibility to callbacks
+ @bullet{Reduce foreign-procedure call overhead in some cases by internally
+ shifting interrupt-disabling responsibility to callbacks}
 
- Add internal "ffi2" support for a more static FFI (to be used in
- a future package)
+ @bullet{Add internal "ffi2" support for a more static FFI (to be used in
+ a future package)}
 
- Correct some error messages from `memw`, `with-syntax`,
-  and `unquote-splicing`
+ @bullet{Correct some error messages from `memw`, `with-syntax`,
+  and `unquote-splicing`}
 
   @bullet{The implementations of `member`, `memw`, `when`, `unless`,
   `let/ec`, and `cond` are rewritten to use only racket/kernel syntax}
 
-  Add `impersonator-property-predicate-procedure?`
+  @bullet{Add `impersonator-property-predicate-procedure?`}
 
-  Add `terminal-file-position`
+  @bullet{Add `terminal-file-position`}
 
   @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
 
