@@ -22,7 +22,7 @@
 
 ◊p{Donations are usually tax-deductible in the US.}
 
-◊p{Many companies offer a matching gift program to encourage philanthropy. You may be able to increase the impact of your donations and your employer may receive a tax deduction for contributions to the Racket Programming Language Foundation (EIN 04-3594598), which is a public charity classified as exempt under section 501(c)(3) of the Internal Revenue Code. Please contact your our company's Human Resources or Accounting Department for details of requirements or forms. Please contact us at ◊link["mailto:management@racket-lang.org"]{management@racket-lang.org} with any questions.}
+◊p{Many companies offer a matching gift program to encourage philanthropy. You may be able to increase the impact of your donations and your employer may receive a tax deduction for contributions to the Racket Programming Language Foundation (EIN 33-4854933), which is a public charity classified as exempt under section 501(c)(3) of the Internal Revenue Code. Please contact your our company's Human Resources or Accounting Department for details of requirements or forms. Please contact us at ◊link["mailto:management@racket-lang.org"]{management@racket-lang.org} with any questions.}
 }
 
 ◊section[#:class "one-column-body-text"]{
