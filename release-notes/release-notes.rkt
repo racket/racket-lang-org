@@ -79,6 +79,14 @@ This may cause existing programs not to type check.}
 
   @bullet{The stepper's display of numbers better matches the language settings.}
 
+   @bullet{Scribble documents that do not use the Racket-manual style get an
+   `initial-scale` of 1.0, instead of the manual style's 0.8, but this
+   can be configured using the `initial-scale` property.}
+
+   @bullet{By default, margin notes appear inline for narrow
+ displays in all styles, not just in the Racket-manual style.}
+
+
   ;; htdp
 
   @bullet{Big-bang programs distributed as .dmg files correctly handle the `close-on-stop`
