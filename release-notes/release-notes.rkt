@@ -8,7 +8,7 @@
          "check-links.rkt")
 
 (define major-v 9)
-(define minor-v 1)
+(define minor-v 2)
 
 (define version (~a "v"major-v"."minor-v))
 
