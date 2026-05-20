@@ -48,20 +48,25 @@
 (define bullets
   (list
 
+   @bullet{Typed Racket's types for the `asin` and `acos` procedures correctly handle
+ situations where the function produces a complex number, avoiding unsound results
+ that were previously possible. This repair could cause existing code to fail.}
+
+   @bullet{The updated `match` form checks that when non-linear patterns
+ (patterns where the same variable is used multiple times) are used with `...`, the two parts of the
+ matched value actually are equal. Additionally, match rejects non-linear patterns
+ where one use of the variable is used with `...` and another is not. This repair
+ could cause existing code to fail.}
+
    @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
 
-   @bullet{Typed Racket has repaired the types of `asin` and `acos`.
-This may cause existing programs not to type check.}
-  
+
    @bullet{This release includes internal support for a more static "ffi2" FFI
  (to be used in a future package).}
 
    @bullet{The `terminal-file-position` function counts bytes written to ports connected to
   a terminal, such as `stdin` and `stderr`.}
 
-      @bullet{The `match` form rejects non-linear patterns with mismatched ellipsis
- depth.}
-      
    @bullet{Cross-phase persistent modules allow more types of `quote`d
    data.}
 
@@ -74,7 +79,7 @@ This may cause existing programs not to type check.}
   @bullet{The `impersonator-property-predicate-procedure?` function identifies
   procedures created by `make-impersonator-property`.}
 
-  @bullet{Polymorphic Struct types are printed using type arguments
+  @bullet{In Typed Racket, polymorphic struct types are printed using type arguments
 (e.g., `(Array Byte)`) rather than exposing an internal representation.}
 
   @bullet{The stepper's display of numbers better matches the language settings.}
