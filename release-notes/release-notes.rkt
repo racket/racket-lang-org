@@ -50,7 +50,8 @@
 
    @bullet{Typed Racket's types for the `asin` and `acos` procedures correctly handle
  situations where the function produces a complex number, avoiding unsound results
- that were previously possible. This repair could cause existing code to fail.}
+ that were previously possible. This repair could cause existing code to fail at compile
+ time.}
 
    @bullet{The updated `match` form checks that when non-linear patterns
  (patterns where the same variable is used multiple times) are used with `...`, the two parts of the
@@ -61,7 +62,8 @@
    @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
 
 
-   @bullet{This release includes internal support for a more static "ffi2" FFI
+   @bullet{This release includes internal support for a more static "ffi2" foreign
+           interface
  (to be used in a future package).}
 
    @bullet{The `terminal-file-position` function counts bytes written to ports connected to
@@ -74,7 +76,7 @@
  facilities provided at the linklet layer by a Racket implementation.}
 
    @bullet{The implementations of `member`, `memw`, `when`, `unless`,
-  `let/ec`, and `cond` are rewritten to use only racket/kernel syntax}
+  `let/ec`, and `cond` are rewritten to use only `racket/kernel` syntax}
 
   @bullet{The `impersonator-property-predicate-procedure?` function identifies
   procedures created by `make-impersonator-property`.}
