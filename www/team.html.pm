@@ -136,7 +136,7 @@ Bloomington IN
 
 ◊div[#:id "management"]{Project management
 ◊p[#:style "font-size: 80%;margin-top: 1rem;color:gray;width:80%;line-height:1.5"]{
-The Software Freedom Conservancy's Racket Project Leadership Committee manages the Racket project.}}
+The Racket Project Management Committee manages the Racket project.}}
 
 ◊link["https://www.brinckerhoff.org/"]{John Clements}
 
