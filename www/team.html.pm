@@ -15,7 +15,7 @@
 ◊section{
 ◊div{Recognized Contributors
 
-◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{Racket is developed by a broad community of contributors. The following people have earned special recognition for their work.}}
+◊p[#:style "font-size: 80%;margin-top: 1rem;color: gray;width:80%;line-height:1.5"]{Racket is developed by a broad community of contributors.  The following people have earned special recognition for their work.}}
 
 ◊link["http://www.ccs.neu.edu/home/matthias/"]{Matthias Felleisen}
 
