@@ -763,7 +763,7 @@ Gathering with drinks and snacks.
   )
 
  (section
-   @sectionHeader{Local Infomation and Accommodation}
+   @sectionHeader{Local Information and Accommodation}
    @paragraph{@a[#:href "umb.html"]{See the local-information page for directions and hotel information}.}
   )
 
