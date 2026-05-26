@@ -5,10 +5,11 @@
 ;; the markdown used for the blog post.
 
 (require "render-release-notes.rkt"
-         "check-links.rkt")
+         "check-links.rkt"
+         rackunit)
 
 (define major-v 9)
-(define minor-v 1)
+(define minor-v 2)
 
 (define version (~a "v"major-v"."minor-v))
 
@@ -31,19 +32,64 @@
 
 ;; inferred url abstraction...
 
-(define (dur str)
+(define (durl str)
   (string-append "https://docs.racket-lang.org/" str))
-(define (rur str)
-  (dur (string-append "reference/" str)))
+(define (pkg-url pkg str) (durl (string-append pkg "/" str)))
+(define (rurl str)        (pkg-url "reference" str))
 
 (define dr-core-url
   "https://github.com/racket/drracket/commit/ae16d6bc6e00a9498313cff035537ac98ef71194")
 
 (define bfs-url
-  (rur "generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._bitwise-first-bit-set%29%29"))
+  (rurl "generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._bitwise-first-bit-set%29%29"))
+
+(define (url-flatten d)
+  (cond [(list? d)
+         (string-append LP (apply string-append (map url-flatten d)) RP)]
+        [else
+         d]))
+
+(define LP "%28")
+(define RP "%29")
+(define DU "._")
+(define qk  (list "quote._~23~25kernel"))
+(define lrm (list "lib._racket%2Fmatch..rkt"))
+(define shp (list "lib._scribble%2Fhtml-properties..rkt"))
+
+(define (maker page kind lib name)
+  (apply
+   string-append
+   (map url-flatten (list page ".html" "#" (list kind DU (list lib DU name))))))
+
+(define (rmaker page kind lib name)
+  (rurl (maker page kind lib name)))
+
+(define bfbs-url  (rmaker "generic-numbers" "def"  qk  "bitwise-first-bit-set"))
+(define tfp-url   (rmaker "port-buffers"    "def"  qk  "terminal-file-position"))
+(define match-url (rmaker "match"           "form" lrm "match"))
+(define fi-url    (rmaker "foreign-inline"  "form" qk  "~23~25foreign-inline"))
+(define ippp-url  (rmaker "chaperones"      "def"  qk
+                          "impersonator-property-predicate-procedure~3f"))
+
+(define is-url (pkg-url "scribble" (maker "core" "def" shp "initial-scale")))
+
+(define kernel-url   (rurl "Kernel_Forms_and_Functions.html"))
+(define stepper-url  (durl "stepper/index.html"))
+(define scribble-url (durl "scribble/index.html"))
+
+
+
+
+(check-equal?
+ tfp-url
+ "https://docs.racket-lang.org/reference/port-buffers.html#%28def._\
+%28%28quote._~23~25kernel%29._terminal-file-position%29%29")
 
 (define racket-lang-core-url
   "https://racket-lang.org")
+
+(define (l url term)
+  (string-append "[`" term "`](" url ")" ))
 
 (define bullets
   (list
@@ -53,7 +99,7 @@
  that were previously possible. This repair could cause existing code to fail at compile
  time.}
 
-   @bullet{The updated `match` form checks that when non-linear patterns
+   @bullet{The updated @l[match-url]{match} form checks that when non-linear patterns
  (patterns where the same variable is used multiple times) are used with `...`, the two parts of the
  matched value actually are equal. Additionally, match rejects non-linear patterns
  where one use of the variable is used with `...` and another is not. This repair
@@ -66,19 +112,19 @@
            interface
  (to be used in a future package).}
 
-   @bullet{The `terminal-file-position` function counts bytes written to ports connected to
-  a terminal, such as `stdin` and `stderr`.}
+   @bullet{The @l[tfp-url]{terminal-file-position} function counts bytes
+ written to ports connected to a terminal, such as `stdin` and `stderr`.}
 
    @bullet{Cross-phase persistent modules allow more types of `quote`d
    data.}
 
-   @bullet{The `#%foreign-inline` core syntactic form provides unsafe access to
+   @bullet{The @l[fi-url]{#%foreign-inline} core syntactic form provides unsafe access to
  facilities provided at the linklet layer by a Racket implementation.}
 
    @bullet{The implementations of `member`, `memw`, `when`, `unless`,
-  `let/ec`, and `cond` are rewritten to use only `racket/kernel` syntax}
+  `let/ec`, and `cond` are rewritten to use only @l[kernel-url]{racket/kernel} syntax}
 
-  @bullet{The `impersonator-property-predicate-procedure?` function identifies
+  @bullet{The @l[ippp-url]{impersonator-property-predicate-procedure?} function identifies
   procedures created by `make-impersonator-property`.}
 
   @bullet{In Typed Racket, polymorphic struct types are printed using type arguments
@@ -87,7 +133,7 @@
   @bullet{The stepper's display of numbers better matches the language settings.}
 
    @bullet{Scribble documents that do not use the Racket-manual style get an
-   `initial-scale` of 1.0, instead of the manual style's 0.8, but this
+   @l[is-url]{initial-scale} of 1.0, instead of the manual style's 0.8, but this
    can be configured using the `initial-scale` property.}
 
    @bullet{By default, margin notes appear inline for narrow
