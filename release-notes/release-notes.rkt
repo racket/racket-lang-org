@@ -21,13 +21,18 @@
 (define md-file-path "/tmp/release-notes.md")
 
 (define blog-post-url
-  (match* (major-v minor-v) 
-    [(8 16) "https://blog.racket-lang.org/2025/01/racket-v8-16.html"]
-    [(8 17) "https://blog.racket-lang.org/2025/05/racket-v8-17.html"]
-    [(8 18) "https://blog.racket-lang.org/2025/08/racket-v8-18.html"]
-    [(9 0) "https://blog.racket-lang.org/2025/11/racket-v9-0.html"]
-    [(9 1) "https://blog.racket-lang.org/2026/02/racket-v9-1.html"]
-    [(9 2) "https://blog.racket-lang.org/2026/05/racket-v9-1.html"]))
+  (let ()
+    (match-define (list year-str month-str)
+      (match* (major-v minor-v) 
+        [(8 16) "https://blog.racket-lang.org/2025/01/racket-v8-16.html"]
+        [(8 17) "https://blog.racket-lang.org/2025/05/racket-v8-17.html"]
+        [(8 18) "https://blog.racket-lang.org/2025/08/racket-v8-18.html"]
+        [(9 0) "https://blog.racket-lang.org/2025/11/racket-v9-0.html"]
+        ;; lines above this need to be edited, if ever needed...
+        [(9 1) '("2026" "02")]
+        [(9 2) '("2026" "05")]))
+    (~a "https://blog.racket-lang.org/"year-str"/"
+        month-str"/racket-v"major-v"-"minor-v".html")))
 
 
 ;; inferred url abstraction...
