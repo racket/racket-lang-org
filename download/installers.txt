@@ -1174,3 +1174,16 @@
 161575256	9.1/racket-9.1-src-builtpkgs.tgz
 34584483	9.1/racket-9.1-src.tgz
 34580830	9.1/racket-src.tgz
+249922332	9.2/racket-9.2-aarch64-linux-buster-cs.sh
+284249927	9.2/racket-9.2-aarch64-macosx-cs.dmg
+171983960	9.2/racket-9.2-arm64-win32-cs.exe
+243243647	9.2/racket-9.2-arm-linux-raspbian-cs.sh
+258161618	9.2/racket-9.2-i386-linux-buster-cs.sh
+256390749	9.2/racket-9.2-x86_64-linux-buster-cs.sh
+295828008	9.2/racket-9.2-x86_64-macosx-cs.dmg
+179456680	9.2/racket-9.2-x86_64-win32-cs.exe
+12020	9.2/installers.json
+163124367	9.2/racket-9.2-src-builtpkgs.tgz
+34737316	9.2/racket-9.2-src.tgz
+34736034	9.2/racket-src.tgz
+5626	9.2/table.json
