@@ -89,21 +89,21 @@
   "https://racket-lang.org")
 
 (define (l url term)
-  (string-append "[`" term "`](" url ")" ))
+  (link url (string-append "`" term "`")))
 
 (define bullets
   (list
 
    @bullet{Typed Racket's types for the `asin` and `acos` procedures correctly handle
  situations where the function produces a complex number, avoiding unsound results
- that were previously possible. This repair could cause existing code to fail at compile
- time.}
+ that were previously possible. @link["https://github.com/racket/typed-racket/pull/1428"]{This repair could cause existing code to fail at compile
+ time}.}
 
    @bullet{The updated @l[match-url]{match} form checks that when non-linear patterns
  (patterns where the same variable is used multiple times) are used with `...`, the two parts of the
  matched value actually are equal. Additionally, match rejects non-linear patterns
- where one use of the variable is used with `...` and another is not. This repair
- could cause existing code to fail.}
+ where one use of the variable is used with `...` and another is not. @link["https://github.com/racket/racket/pull/5467"]{This repair
+ could cause existing code to fail}.}
 
    @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
 
