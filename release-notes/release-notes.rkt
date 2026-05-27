@@ -94,23 +94,27 @@
 (define bullets
   (list
 
+   @bullet{The @l[match-url]{match} form checks that when non-linear patterns
+ (patterns where the same variable is used multiple times) are used with `...`, the two parts of the
+ matched value actually are equal. Additionally, match rejects non-linear patterns
+ where one use of the variable is used with `...` and another is not. @link["https://github.com/racket/racket/pull/5467"]{This repair
+ could cause existing code to fail}.}
+   
    @bullet{Typed Racket's types for the `asin` and `acos` procedures correctly handle
  situations where the function produces a complex number, avoiding unsound results
  that were previously possible. @link["https://github.com/racket/typed-racket/pull/1428"]{This repair could cause existing code to fail at compile
  time}.}
 
-   @bullet{The updated @l[match-url]{match} form checks that when non-linear patterns
- (patterns where the same variable is used multiple times) are used with `...`, the two parts of the
- matched value actually are equal. Additionally, match rejects non-linear patterns
- where one use of the variable is used with `...` and another is not. @link["https://github.com/racket/racket/pull/5467"]{This repair
- could cause existing code to fail}.}
-
+   @bullet{The @l[fi-url]{#%foreign-inline} core syntactic form provides unsafe access to
+ facilities provided at the linklet layer by a Racket implementation. This means that any
+ code that handles all core forms by enumeration will need to be updated.
+ }
+   
    @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
 
 
    @bullet{This release includes internal support for a more static "ffi2" foreign
-           interface
- (to be used in a future package).}
+ interface (to be used in a future package).}
 
    @bullet{The @l[tfp-url]{terminal-file-position} function counts bytes
  written to ports connected to a terminal, such as `stdin` and `stderr`.}
@@ -118,8 +122,7 @@
    @bullet{Cross-phase persistent modules allow more types of `quote`d
    data.}
 
-   @bullet{The @l[fi-url]{#%foreign-inline} core syntactic form provides unsafe access to
- facilities provided at the linklet layer by a Racket implementation.}
+   
 
    @bullet{The implementations of `member`, `memw`, `when`, `unless`,
   `let/ec`, and `cond` are rewritten to use only @l[kernel-url]{racket/kernel} syntax}

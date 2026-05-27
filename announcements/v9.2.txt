@@ -1,0 +1,55 @@
+1779859750
+Racket v9.2
+
+----------------------------------------------------------------------
+
+- The `match` form checks that when non-linear patterns (patterns
+  where the same variable is used multiple times) are used with `...`,
+  the two parts of the matched value actually are equal. Additionally,
+  match rejects non-linear patterns where one use of the variable is
+  used with `...` and another is not. This repair could cause existing
+  code to fail.
+- Typed Racket's types for the `asin` and `acos` procedures correctly
+  handle situations where the function produces a complex number,
+  avoiding unsound results that were previously possible. This repair
+  could cause existing code to fail at compile time.
+- The `#%foreign-inline` core syntactic form provides unsafe access to
+  facilities provided at the linklet layer by a Racket implementation.
+  This means that any code that handles all core forms by enumeration
+  will need to be updated.
+- Racket 9.2 uses Unicode 17.0 for character and string operations.
+- This release includes internal support for a more static "ffi2"
+  foreign interface (to be used in a future package).
+- The `terminal-file-position` function counts bytes written to ports
+  connected to a terminal, such as `stdin` and `stderr`.
+- Cross-phase persistent modules allow more types of `quote`d data.
+- The implementations of `member`, `memw`, `when`, `unless`, `let/ec`,
+  and `cond` are rewritten to use only `racket/kernel` syntax
+- The `impersonator-property-predicate-procedure?` function identifies
+  procedures created by `make-impersonator-property`.
+- In Typed Racket, polymorphic struct types are printed using type
+  arguments (e.g., `(Array Byte)`) rather than exposing an internal
+  representation.
+- The stepper's display of numbers better matches the language
+  settings.
+- Scribble documents that do not use the Racket-manual style get an
+  `initial-scale` of 1.0, instead of the manual style's 0.8, but this
+  can be configured using the `initial-scale` property.
+- By default, margin notes appear inline for narrow displays in all
+  styles, not just in the Racket-manual style.
+- Big-bang programs distributed as .dmg files correctly handle the
+  `close-on-stop` feature.
+- There are many other repairs and documentation improvements!
+
+The following people contributed to this release:
+
+Alexander Shopov, Alexis King, Asilo, Bert De Ketelaere, Bob Burger,
+Bogdan Popa, Chung-chieh Shan, François-René Rideau, Gustavo
+Massaccesi, Ilya Klyuchnikov, Jade Sailor, Jamie Taylor, John
+Clements, Jonathan Simpson, LS_Hower, Matthew Flatt, Matthias
+Felleisen, Mike Sperber, Pavel Panchekha, Philippe Meunier, RMOlive,
+Robby Findler, Roman Klochkov, Sam Tobin-Hochstadt, Shu-Hung You,
+Tejas Sanap, Vincent Lee, and Wing Hei Chan.
+
+----------------------------------------------------------------------
+
