@@ -17,7 +17,7 @@ Racket v9.2
   facilities provided at the linklet layer by a Racket implementation.
   This means that any code that handles all core forms by enumeration
   will need to be updated.
-- Racket 9.2 uses Unicode 17.0 for character and string operations.
+- Unicode 17.0 is used for character and string operations.
 - This release includes internal support for a more static "ffi2"
   foreign interface (to be used in a future package).
 - The `terminal-file-position` function counts bytes written to ports
@@ -49,7 +49,7 @@ Massaccesi, Ilya Klyuchnikov, Jade Sailor, Jamie Taylor, John
 Clements, Jonathan Simpson, LS_Hower, Matthew Flatt, Matthias
 Felleisen, Mike Sperber, Pavel Panchekha, Philippe Meunier, RMOlive,
 Robby Findler, Roman Klochkov, Sam Tobin-Hochstadt, Shu-Hung You,
-Tejas Sanap, Vincent Lee, and Wing Hei Chan.
+Stephen de Gabrielle, Tejas Sanap, Vincent Lee, and Wing Hei Chan.
 
 ----------------------------------------------------------------------
 

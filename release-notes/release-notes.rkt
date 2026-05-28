@@ -115,7 +115,7 @@
  code that handles all core forms by enumeration will need to be updated.
  }
    
-   @bullet{Racket 9.2 uses Unicode 17.0 for character and string operations.}
+   @bullet{Unicode 17.0 is used for character and string operations.}
 
 
    @bullet{This release includes internal support for a more static "ffi2" foreign
@@ -157,6 +157,7 @@ feature.}
   
   ))
 
+;; probably always add Stephen De Gabrielle!
 (define contributors
   '("Alexander Shopov"
     "Alexis King"
@@ -183,6 +184,7 @@ feature.}
     "Roman Klochkov"
     "Sam Tobin-Hochstadt"
     "Shu-Hung You"
+    "Stephen de Gabrielle"
     "Tejas Sanap"
     "Vincent Lee"
     "Wing Hei Chan"))
