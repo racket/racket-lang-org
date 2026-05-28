@@ -1182,8 +1182,6 @@
 256390749	9.2/racket-9.2-x86_64-linux-buster-cs.sh
 295828008	9.2/racket-9.2-x86_64-macosx-cs.dmg
 179456680	9.2/racket-9.2-x86_64-win32-cs.exe
-12020	9.2/installers.json
 163124367	9.2/racket-9.2-src-builtpkgs.tgz
 34737316	9.2/racket-9.2-src.tgz
 34736034	9.2/racket-src.tgz
-5626	9.2/table.json
