@@ -45,6 +45,7 @@
     ["(i386|x86_64)-linux-ubuntu.*"        "Linux (\\1 Ubuntu)"]
     ["(i386|x86_64)-linux(-buster)?"       "Linux (\\1)"]
     ["arm-linux(-buster)?"                 "Linux (Arm32/ARMv6)"]
+    ["arm-linux-raspbian"                  "Linux (Arm32/ARMv6) (Raspbian)"]
     ["aarch64-linux(-buster)?"             "Linux (Arm64/AArch64)"]
     ["(i386|x86_64)-freebsd"               "FreeBSD (\\1)"]
     ["sparc-solaris"                       "Sparc Solaris (SunOS)"]
