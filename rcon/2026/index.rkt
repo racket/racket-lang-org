@@ -8,14 +8,17 @@
          "lib.rkt")
 
 (define-div main
-  [font-family "'Montserrat', sans-serif"]
-  [background "blue"]
+  [font-family "'Lexend', sans-serif"]
+  #;[background "#3e5ba9"]
+  [background "WhiteSmoke"]
   [color "black"]
-  [margin "0px"])
+  [margin "0px"]
+  [font-weight "200"]
+  [font-size "14pt"])
 
 (define-div content
   ,@centered
-  [background "white"]
+  [background "whitesmoke"]
   [margin-left "10ex"]
   [margin-right "10ex"]
   [padding-top "2ex"]
@@ -31,6 +34,9 @@
 
 (define-div title-container
   [display inline-block]
+  [border-radius "25px"]
+  [padding "8px"]
+  [background "#f5dd06"]
   (margin-left auto)
   (margin-right auto)
   [text-align left]
@@ -41,6 +47,7 @@
 
 (define-div pagetitle
   [font-size "40pt"]
+  [color "#005d00"]
   [font-family ,monospace])
 
 (define header-font
@@ -62,7 +69,10 @@
 (define-div sectionHeader
   [font-size "24pt"]
   [margin-bottom "1em"]
-  [background "#CCCCEE"]
+  [border-radius "5px"]
+  #;[background "#CCCCEE"]
+  [background "#9f1d20"]
+  [color "#f5dd06"]
   [margin-left "-10ex"]
   [margin-right "-10ex"]
   ,@header-font)
