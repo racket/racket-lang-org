@@ -386,9 +386,8 @@ $(document).ready(function () {
                         #:alt "The Racket logo")]
         @pagetitle["(sixteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
       @subtitle{October 3-4, 2026}
-      @subtitle{@p-location{Oakstop, Oakland}}
-      @specific-location{Oakland, California, USA}
-      @specific-location{@a[#:href "localinfo.html"]{Broadway Gallery Suite}}
+      @specific-location{@p-location{Oakland, California, USA}}
+      @specific-location{Oakstop, @a[#:href "localinfo.html"]{Broadway Gallery Suite}}
       )
 
 (txexpr* 'time `((class "dt-start") (hidden "") (datetime ,(gregor:~t saturday "y-MM-dd"))))
