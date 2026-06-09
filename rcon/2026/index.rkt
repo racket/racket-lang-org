@@ -421,7 +421,7 @@ $(document).ready(function () {
    @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
                Recordings will also be made available on YouTube some time after the conference.
                Streaming users will have the option to purchase a remote participation ticket to
-               support the livestream. Prvious RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
+               support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
 
  #;
  (section
