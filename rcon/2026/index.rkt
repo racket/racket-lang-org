@@ -382,7 +382,7 @@ $(document).ready(function () {
       (title-container
        (title-append
         @pagetitle[(img #:style "width:140px; float: right"
-                        #:src "https://racket-lang.org/img/racket-logo.svg"
+                        #:src "rcon2026logo.png"
                         #:alt "The Racket logo")]
         @pagetitle["(sixteenth" (br) 'nbsp "RacketCon)" 'nbsp 'nbsp 'nbsp]))
       @subtitle{October 3-4, 2026}
