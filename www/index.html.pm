@@ -43,7 +43,7 @@
 ◊special-section[#:class "one-column-body-text" #:style "font-size:77%" #:id "pull-quote"]{
 ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
  ◊div[#:style "margin-left: 1em"]{
-   ◊link["https://con.racket-lang.org/"]{RacketCon 2026 3-4 October}}
+   ◊link["https://con.racket-lang.org/"]{(sixteenth RacketCon) 3-4 October 2026}}
  ◊div[#:style "flex-grow:1"]{}
 
 
