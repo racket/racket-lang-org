@@ -104,3 +104,12 @@
   `((text-align center)
     (margin-left auto)
     (margin-right auto)))
+
+(define (make p filename content)
+  (with-output-to-file
+    (build-path p filename)
+    #:exists 'replace
+    (λ ()
+      (displayln "<!doctype html>")
+      (write-xexpr content))))
+
