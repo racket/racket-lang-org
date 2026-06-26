@@ -301,4 +301,26 @@ $(document).ready(function () {
    @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
                Recordings will also be made available on YouTube some time after the conference.
                Streaming users will have the option to purchase a remote participation ticket to
-               support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}}))))))
+               support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
+
+  (section
+   @sectionHeader{Friendly Policy}
+   @paragraph{The proceedings of RacketCon will take place under the Racket @(a #:href "https://racket-lang.org/friendly.html" "Friendly Environment Policy").}
+  )
+
+ (section
+   @sectionHeader{Organisation}
+   @paragraph{
+              The RacketCon 2026 is organised by a team of volunteers.
+              The organizers may be reached at @|mailto:con-organizers|.})
+
+ (section
+  @sectionHeader{Previous RacketCons}
+  @(apply larger
+               (cdr
+                (apply
+                 append
+                 (for/list ([year '(2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 2015 2014 2013 2012 2011)])
+                   (list " ∙ "
+                         (a #:href (format "https://con.racket-lang.org/~a/" year)
+                            (format "~a" year)))))))))))))
