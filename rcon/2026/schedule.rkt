@@ -7,6 +7,8 @@
          (prefix-in gregor: gregor)
          "lib.rkt")
 
+(provide page)
+
 (define-div main
   [font-family "'Lexend', sans-serif"]
   #;[background "#3e5ba9"]
@@ -395,8 +397,6 @@ $(document).ready(function () {
 
 (column
 
- ;; @featuring{Special Guests TBC}
- 
  (top-section
    @para{RacketCon is a public gathering dedicated to fostering a
    vibrant, innovative, and inclusive community around the Racket
@@ -404,26 +404,8 @@ $(document).ready(function () {
    conference open to anyone interested in Racket, filled with inspiring
    content, reaching and engaging both the Racket community and the
    wider programming world.})
-
- (section
-  @sectionHeader{Call for Presentations}
-  @para{We are looking for @emph{you!} If you have an idea for
-  a presentation you’d like to give, please submit your proposal using @(a #:href "https://forms.gle/4YG57adx5snEwVe27" "this form") or
-  write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the
-  RacketCon organizer" "the RacketCon organizers") for consideration.
-
- For more information about presentation format, video streaming details, volunteering and sponsorships, please
-  see our detailed call for participation @(a #:href "https://racket.discourse.group/t/racketcon-2026-call-for-participation/4211" "here").
-  All Racket-y ideas are welcome. We’d love to have you!})
-
- (top-section
-   @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
-               Recordings will also be made available on YouTube some time after the conference.
-               Streaming users will have the option to purchase a remote participation ticket to
-               support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
-
- #;
- (section
+  
+ #;(section
   @sectionHeader{Live Stream Recording (Day Two)}
 
   @para{Videos will appear soon for all of the RacketCon talks. For now, a recording of the second day remains available}
@@ -436,7 +418,7 @@ $(document).ready(function () {
            [scrolling "auto"]
            [allowfullscreen "true"]
            [allow "autoplay; fullscreen"]))
-  #;
+  
   '(iframe ([src "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]
            [width "100%"]
            [height "450"]
@@ -448,14 +430,6 @@ $(document).ready(function () {
            [scrolling "auto"])))
 
  
- #;
- (section
-  @sectionHeader{Registration}
-  @paragraph{@a[#:href "https://www.eventbrite.com/e/racketcon-2025-tickets-1578775272339"]{To register, buy a ticket via Eventbrite}.
-             If you cannot attend in-person, there is an option to help support the livestream for remote participants.}
- )
-
- #;
  (section
   @sectionHeader{Saturday, October 3rd}
   @doors-open[@talk-time{Saturday, 8:30am}]
@@ -691,8 +665,8 @@ Gathering with drinks and snacks.
 }
 ]
 )
+
  
- #;
  (section
   @sectionHeader{Sunday, October 4th}
   @doors-open[@talk-time{Sunday, 8:30am}]
@@ -776,10 +750,9 @@ Gathering with drinks and snacks.
   ]
   )
 
- #;
  (section
    @sectionHeader{Local Information and Accommodation}
-   @paragraph{@a[#:href "umb.html"]{See the local-information page for directions and hotel information}.}
+   @paragraph{@a[#:href "localinfo.html"]{See the local-information page for directions and hotel information}.}
   )
 
  (section
@@ -795,16 +768,6 @@ Gathering with drinks and snacks.
 
   )
 
-  #;
- (section
-  @sectionHeader{Sponsor: UMass Boston}
-  @center{
- @a[#:href "https://www.umb.edu/"]{
-  @img[#:src "umb.svg"
-       #:alt "University of Massachusetts Boston Logo"]
- }
- }
- )
 
  (section
   @sectionHeader{Previous RacketCons}
@@ -818,136 +781,3 @@ Gathering with drinks and snacks.
                             (format "~a" year)))))))))))))
 
 ;; ------------------------------------------------------------
-
- (define hotel-link
-  "https://www.hilton.com/en/hotels/boschdt-doubletree-boston-bayside/")
-(define hotel-booking-link
-  "https://www.hilton.com/en/book/reservation/deeplink/?ctyhocn=BOSCHDT&corporateCode=0002702479")
-
-(define shuttle-bus @a[#:href "https://www.umb.edu/the_university/getting_here/shuttle_bus_information"]{UMass Boston shuttle bus})
-
-(define localinfo-page
-  (html #:lang "en"
-   (head
-    (head-meta #:http-equiv "content-type" #:content "text/html; charset=utf-8")
-    (link #:href fonts-url
-          #:rel "stylesheet")
-    (style (cdata #f #f (classes->string)))
-    (style (cdata #f #f "a { text-decoration: none; } li { text-align: left; } "))
-    @title{(sixteenth RacketCon) Local Information})
-   (body
-     #:class "main h-event"
-     (content
-      (banner
-       @subtitle{@a[#:href "index.html"]{RacketCon 2026} Local Information})
-
-(column
-       (section
-        @sectionHeader{Location}
-
-        (column
-         @specific-location{Oakstop, Broadway Gallery Suite}
-         @specific-location{1721 Broadway suite #201}
-         @specific-location{Oakland, CA 94612}
-         @specific-location{That's right, at the 18th Street BART (rapid transit) stop.}))
-
-      (section
-       @sectionHeader{Hotel}
-       (column
-        @vpara{To be confirmed...}))
-      
-      #; 
-      (section
-       @sectionHeader{Saturday Social}
-       (column
-        @vpara{The Saturday social event will take place /at some time/ at
-                   @a[#:href ""]{/some location/} /some more info about location/}))
-      #;
-      (section
-       @sectionHeader{Getting There}
-
-       (column
-
-        @vpara{@a[#:href "umb-navigation.pdf"]{/Possible navigation summary in PDF/}}
-
-        @fromplace{From /the recommended hotel/}
-
-        @vpara{Walk (/duration/):}
-
-        @ul{
-            @li{Step 1}
-            @li{Step 2}
-            @li{Step N}
-            }
-
-        @vpara{or /here is how to take an alternative route (e.g bus)/}
-
-        @ul{
-            @li{Step 1 (duration)}
-            @li{Step 2 (duration)}
-            @li{Step n (duration)}
-            }
-
-
-        @fromplace{From /the nearest Airport/}
-
-        @ul{
-            @li{Do this}
-            @li{Do that}
-            }
-
-        @vpara{Then /more info on how to get there/}        
-
-        @fromplace{From South Station}
-
-        @ul{
-            @li{Step 1}
-            @li{Step 2}
-            @li{Step 3}
-           }
-
-       @fromplace{Parking}
-
-       @vpara{The closest parking garage to Oakstop is ...}
-
-       @vpara{If that is full, parking is also available in ...}
-
-       @vpara{See (link to local parking info) for rates and locations of all parking garages.}
-
-       @fromplace{See Also}
-
-       @vpara{Even more links with local information on how to get to Oakstop}
-       ))
-
-      (section
-       @sectionHeader{Wi-Fi}
-       (column
-       #;
-       @vpara{Attendees with university credentials should be able to access the
-                            internet using eduroam.}
-
-       @vpara{For all attendees, there will be network access via the venue WiFi network.}
-       #;
-       @vpara{Alternately, the @tt{UMB-Guest} network may also be used (@a[#:href "https://www.umb.edu/campus_center/services/wireless_access"]{details here}).})))))))
-
-;; ------------------------------------------------------------
-
-(provide make)
-(define (make p)
-  (with-output-to-file
-    (build-path p "index.html")
-    #:exists 'replace
-    (λ ()
-      (displayln "<!doctype html>")
-      (write-xexpr page)))
-  (with-output-to-file
-    (build-path p "localinfo.html")
-    #:exists 'replace
-    (λ ()
-      (displayln "<!doctype html>")
-      (write-xexpr localinfo-page))))
-
-(module+ main
-  (require racket/runtime-path)
-  (define-runtime-path here ".")
-  (make here))
