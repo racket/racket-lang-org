@@ -320,7 +320,7 @@ ancestor(A, B)?}}}
    ◊table[
     ◊tr[
     ◊td{ ◊div[#:class "smartphone-only"]{Community} ◊p{
-      ◊link["https://racket.discourse.group"]{Discourse} and ◊link["https://discord.gg/6Zq8sH5"]{Discord}
+      ◊link["https://racket.discourse.group/invites/VxkBcXY7yL"]{Discourse} and ◊link["https://discord.gg/6Zq8sH5"]{Discord}
       These are the most active places for Racketeers.
 
       ◊link["https://racket.slack.com/"]{Slack} (◊link["https://join.slack.com/t/racket/shared_invite/zt-1ionnhfs3-bhgf~jJctQVwTb_QnU_yzQ"]{sign up}), ◊link["https://reddit.com/r/racket"]{Reddit}, and ◊link["https://lists.racket-lang.org/"]{Mailing lists}
