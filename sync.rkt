@@ -116,7 +116,7 @@
               ;; when we run out of redirects (max is 50), this version number
               ;; will need to be increased by running the "version-redirect.rkt"
               ;; script
-              #:when (version<=? "7.0" (release-version r)))
+              #:when (version<=? "9.0" (release-version r)))
      (redirect-prefix-routing-rule #:old-prefix (format "releases/~a/installers" (release-version r))
                                    #:new-prefix (format "~ainstallers/~a"
                                                         download-mirror-path

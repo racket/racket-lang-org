@@ -19,7 +19,7 @@
 ;; remove bucket-wide redirection rules that are meant to be covered
 ;; by the added objects, so remove those manually via the S3 console.
 
-(define redirect-before-version "7.0")
+(define redirect-before-version "9.0")
 
 (define bucket "download.racket-lang.org")
 (define target "mirror.racket-lang.org")
