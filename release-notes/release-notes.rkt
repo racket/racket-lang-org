@@ -9,7 +9,7 @@
          rackunit)
 
 (define major-v 9)
-(define minor-v 2)
+(define minor-v 3)
 
 (define version (~a "v"major-v"."minor-v))
 
@@ -30,7 +30,9 @@
         [(9 0) "https://blog.racket-lang.org/2025/11/racket-v9-0.html"]
         ;; lines above this need to be edited, if ever needed...
         [(9 1) '("2026" "02")]
-        [(9 2) '("2026" "05")]))
+        [(9 2) '("2026" "05")]
+        ;; edit this if the release is after the first of august...:
+        [(9 2) '("2026" "07")]))
     (~a "https://blog.racket-lang.org/"year-str"/"
         month-str"/racket-v"major-v"-"minor-v".html")))
 
@@ -98,62 +100,34 @@
 
 (define bullets
   (list
+   @bullet{The `raco pkg install` command includes new options that provide
+more install-time configuration flexibility: `--adjacent-deps`, `--destdir`, and `--attach`,
+and a refined `--skip-installed`.}
+   @bullet{The `raco setup` command can generate markdown documentation, using the
+`--doc-markdown` option.}
+   @bullet{The `ffi/unsafe/runtime-lib` library provides a `define-runtime-lib`
+ mechanism similar to `define-runtime-path`, allowing location of libraries located relative
+to a source file.}
+   @bullet{The `prompt-tag/c` contract generator no longer performs checking on `call/cc`
+when the `#:call/cc` option is not present.}
+   @bullet{The `impersonate-prompt-tag` function takes an additional argument that allows
+checking and update of results for composable continuations.}
+   @bullet{The `error-syntax->srcloc-handler` parameter provides control over the mapping
+from syntactic forms to source locations for error handling.}
+   @bullet{Uses of `(tcp-listen 0)` will retry when it fails with "address in use".}
+   @bullet{The `racket/base` module requires fewer internal modules and instantiations.}
+   @bullet{The `file/zip` package provides a new mechanism for greatly increased control
+over zip file generation, allowing in-memory file sources and per-file compression control.}
+
+
+   )
+  #;(list
 
    @bullet{The @l[match-url]{match} form checks that when non-linear patterns
  (patterns where the same variable is used multiple times) are used with `...`, the two parts of the
  matched value actually are equal. Additionally, match rejects non-linear patterns
  where one use of the variable is used with `...` and another is not. @link["https://github.com/racket/racket/pull/5467"]{This repair
  could cause existing code to fail}.}
-   
-   @bullet{Typed Racket's types for the `asin` and `acos` procedures correctly handle
- situations where the function produces a complex number, avoiding unsound results
- that were previously possible. @link["https://github.com/racket/typed-racket/pull/1428"]{This repair could cause existing code to fail at compile
- time}.}
-
-   @bullet{The @l[fi-url]{#%foreign-inline} core syntactic form provides unsafe access to
- facilities provided at the linklet layer by a Racket implementation. This means that any
- code that handles all core forms by enumeration will need to be updated.
- }
-   
-   @bullet{Unicode 17.0 is used for character and string operations.}
-
-
-   @bullet{This release includes internal support for a more static "ffi2" foreign
- interface (to be used in a future package).}
-
-   @bullet{The @l[tfp-url]{terminal-file-position} function counts bytes
- written to ports connected to a terminal, such as `stdin` and `stderr`.}
-
-   @bullet{Cross-phase persistent modules allow more types of `quote`d
-   data.}
-
-   
-
-   @bullet{The implementations of `member`, `memw`, `when`, `unless`,
-  `let/ec`, and `cond` are rewritten to use only @l[kernel-url]{racket/kernel} syntax}
-
-  @bullet{The @l[ippp-url]{impersonator-property-predicate-procedure?} function identifies
-  procedures created by `make-impersonator-property`.}
-
-  @bullet{In Typed Racket, polymorphic struct types are printed using type arguments
-(e.g., `(Array Byte)`) rather than exposing an internal representation.}
-
-  @bullet{The stepper's display of numbers better matches the language settings.}
-
-   @bullet{Scribble documents that do not use the Racket-manual style get an
-   @l[is-url]{initial-scale} of 1.0, instead of the manual style's 0.8, but this
-   can be configured using the `initial-scale` property.}
-
-   @bullet{By default, margin notes appear inline for narrow
- displays in all styles, not just in the Racket-manual style.}
-
-
-  ;; htdp
-
-  @bullet{Big-bang programs distributed as .dmg files correctly handle the `close-on-stop`
-feature.}
-
-@bullet{There are many other repairs and documentation improvements!}
   
   ))
 
