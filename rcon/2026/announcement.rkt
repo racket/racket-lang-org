@@ -4,7 +4,6 @@
 
 (require racket/match
          racket/string
-         xml
          txexpr
          (prefix-in gregor: gregor)
          "lib.rkt"
@@ -20,9 +19,6 @@
          (attr-set elem 'itemprop itemprop)]
         [else elem]))
 
-(define saturday (gregor:date 2026 10 3))
-(define sunday (gregor:date 2026 10 4))
-(define location "Oakland, California, USA")
 
 (define page
   (html #:lang "en"
