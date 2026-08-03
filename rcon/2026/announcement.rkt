@@ -77,9 +77,9 @@ $(document).ready(function () {
   write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the
   RacketCon organizer" "the RacketCon organizers") for consideration.
 
- For more information about presentation format, video streaming details, volunteering and sponsorships, please
+  For more information about presentation format, video streaming details, volunteering and sponsorships, please
   see our detailed call for participation @(a #:href "https://racket.discourse.group/t/racketcon-2026-call-for-participation/4211" "here").
-  All Racket-y ideas are welcome. We’d love to have you!})
+ All Racket-y ideas are welcome. We’d love to have you!})
 
  (top-section
    @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
@@ -87,6 +87,10 @@ $(document).ready(function () {
                Streaming users will have the option to purchase a remote participation ticket to
                support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
 
+ (top-section
+  @paragraph{@center{A @bold{provisional} conference programme can be found @(a #:href "schedule.html" "here")}})
+
+ 
   (section
    @sectionHeader{Friendly Policy}
    @paragraph{The proceedings of RacketCon will take place under the Racket @(a #:href "https://racket-lang.org/friendly.html" "Friendly Environment Policy").}

@@ -213,327 +213,64 @@ $(document).ready(function () {
            [marginwidth "0"]
            [scrolling "auto"])))
 
- 
+
+(section
+ @sectionHeader{@bold{Provisional} Conference Programme})
+
  (section
   @sectionHeader{Saturday, October 3rd}
   @doors-open[@talk-time{Saturday, 8:30am}]
   @nb-yes-breakfast
-  @keynote[
-   @talk-time{Saturday, 9:00am}
-   #:desc "Keynote"
-   #:link "https://youtu.be/7Twlh-Opq5E?si=_Jo_VztAXOkJz1rz"
-   #:who @joint{
-    @speaker[#:url "https://cloudflare.com"]{James Larisch}
-    and
-    @speaker[#:url "https://cloudflare.com"]{Suleman Ahmad}
-   }
-   #:what @talk{
-    How Cloudflare Uses Racket and Rosette to Verify DNS Changes
-   }
-   #:more @abstract{
-    @paragraph{
-     Since 2022, Cloudflare has used Racket and Rosette to prevent DNS-related bugs.
-     Cloudflare engineers express desired DNS behavior as small programs called policies,
-     written in a custom DSL called topaz-lang. Topaz-lang policies are executed in
-     real-time on Cloudflare’s global edge network in response to live DNS queries. But
-     before deployment, all policies are checked for bugs using a verifier we wrote in
-     Rosette, a solver-aided Racket #lang.
-    }
-    @paragraph{
-     In this talk, we describe our experience writing and using Racket in production
-     at Cloudflare. We describe why managing DNS behavior at Cloudflare scale is so
-     challenging, and how these challenges motivated topaz-lang and its parent system Topaz.
-     We discuss why we chose Racket (and Rosette) and the types of bugs our Rosette verifier
-     detects. Finally, we reflect on why making changes to our verifier remains daunting for
-     many software engineers.
-    }
-   }
-   #:bio @bio{
-    Suleman is a Research Engineer at Cloudflare, working at the intersection of systems engineering
-    and Internet security. He holds a Master's degree from the University of Wisconsin–Madison,
-    where he focused on analyzing security and privacy challenges in large-scale Internet
-    architectures and engineering scalable measurement platforms. It was during his master's studies
-    that he developed an appreciation for functional programming and its practical application to
-    verifiable distributed systems.
-
-    @paragraph{
-     James is a systems/security researcher and programming language fanboy. He developed his
-     appreciation for the functional style (and Racket) during his undergraduate degree at
-     Northeastern University. He received his PhD in Computer Science from Harvard University,
-     where one of his projects involved bringing Prolog to the Web Public Key Infrastructure. He
-     is currently a Research Engineer at Cloudflare, where he works on the Web PKI, distributed
-     systems, and a bit of formal methods.
-    }
-   }
-  ]
-  @coffee[@talk-time{Saturday, 10:00am}]
   @lecture[
-   #:when @talk-time{Saturday, 10:15am}
-   #:who @speaker[#:url "https://mukn.com"]{François-René Rideau}
-   #:what @talk{Compositional Object Oriented Prototypes}
-   #:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
-   #:more @abstract{
-    We reconstruct a theory of object-orientation from first principles, as modularity and
-    extensibility together. Mixin inheritance then appears as a natural embodiment of these joined
-    principles expressed in the lambda-calculus. Further OO concepts such as prototypes, classes,
-    single or multiple inheritance, multiple dispatch, method combinations and more naturally
-    follow. Interestingly, many misconceptions about OO can also be dispelled, and we find that the
-    simplest and most natural context for OO is pure lazy dynamic functional programming, without
-    classes, and even without objects(!). A Scheme and/or Racket prototype (ha!) of these ideas will
-    be presented.
-   }
-   #:bio @bio{
-    Not fitting in French Academia due to his penchant for dynamic languages, Faré learned how (not)
-    to build software in Corporate America (ITA, Google, Bridgewater), and eventually became his own
-    startup entrepreneur in the domain of secure blockchain architecture. Trained in Programming
-    Language Semantics and Distributed Systems, Faré completed but never defended a thesis on
-    Reflective Systems. Once author of versions 2 and 3 of the build system ASDF at the heart of all
-    Common Lisp free software, he is now co-maintainer of Gerbil Scheme. Unsettled by online debates
-    between OO vs FP back when he was a student at ENS.fr, he finally discovered twenty years later
-    the essence of OO thanks to Jsonnet and Nix, and, trying to share his insight and digging into
-    old bibliography, became despite himself an expert on Object-Orientation.
-   }
-  ]
+           #:when @talk-time{Saturday, 10:15am}
+           #:who @speaker[#:url "https://"]{Tom Passarelli}
+           #:what @talk{Let Agents Write Programs, Not Files}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+           Your editor, git, and jump-to-definition all treat source files as the truth about your
+           program, recovering meaning by re-reading them. That worked reasonably well when code was
+           authored at human speed. It buckles when many AI agents write at once: names change on
+           rename, locations change on insert, and content hashes change on every edit. This talk
+           presents Fram, a fact-graph substrate where the database is the program, and Beagle,
+           a typed Lisp that began life as a Racket #lang and can project source files from that
+           graph. Delete a projected file, re-render it from facts, and it still compiles. I’ll show
+           how stable identity turns edits into transactions, makes rename a fact update instead of a
+           rewrite across reference sites, and changes the concurrency story for agentic programming,
+           with wins, losses, and null results recorded side by side.
+           }
+           #:bio @bio{
+           Tom Passarelli is a systems builder whose work began in competitive gaming hardware and
+           now spans input devices, browsers, operating systems, and programming tools. He was a
+           co-developer of the B0XX, a controller built for the competitive Super Smash Bros. Melee
+           community, and has contributed to Mozilla Firefox and Kanata. His own projects include
+           Gjoa, a Firefox fork; Glide, a touchpad input experiment; Firn, a NixOS framework; and
+           Beagle and Fram, current work exploring what programming looks like when text files are no
+           longer the source of truth, but projections from a database of small, persistent facts.
+           }]
   @lecture[
-   #:when @talk-time{Saturday, 10:45am}
-   #:who @speaker[#:url "https://github.com/quasarbright"]{Mike Delmonaco}
-   #:what @talk{A Match-Like DSL for Deep Immutable Updates}
-   #:link "https://youtu.be/rwafaIfdOf0?si=51SECxi8PPgmGk07"
-   #:more @abstract{
-    @code{match} is very convenient for deconstructing data and accessing values deep within a data
-    structure, but it is not useful for making changes to that data structure. In this talk, I’ll
-    present a DSL that looks like match, but allows you to perform immutable updates on the target
-    value using pattern variables to specify where an update should occur. I’ll also talk about
-    optics, which are the abstraction powering these immutable updates.
-   }
-   #:bio @bio{
-    Mike Delmonaco is a Software Engineer at Amazon Web Services with a hobby interest in
-    Programming Languages and Racket. Outside of work, he enjoys rock climbing, video games,
-    creating interactive math visualizations, programming language research, and teaching.
-   }
-  ]
-  @lunch[@talk-time{Saturday, 11:45am}]
-  @nb-yes-lunch
-  @lecture[
-   #:when @talk-time{Saturday, 1:30pm}
-   #:who @speaker[#:url "https://github.com/toddjonker"]{Todd Jonker}
-   #:what @talk{Ion Fusion}
-   #:link "https://youtu.be/OQT4jbP5Aak?si=lHJfJKDucS3KMdah"
-   #:more @abstract{
-    Ion Fusion is a customizable programming language that unifies the semantics of persistent data
-    and the code that manipulates it. Oriented around the Amazon Ion data format--the backbone of
-    Amazon’s retail systems and even consumer products--Fusion has been the brains of internal
-    analytics, data processing, and workflow systems since 2013. This talk explores Ion Fusion’s
-    unique design goals and constraints, its roots in Scheme and Racket, and its vision of
-    sustainable software evolution.
-   }
-   #:bio @bio{
-    I got bored with AppleSoft Basic in 1982 and have been designing PLs ever since. A self-taught
-    coder, I was reeducated by PLT at Rice, then failed out of CMU into an industry career. After
-    surfing through startups in a variety of industries, I settled down for two decades at Amazon,
-    building foundation tech and evolving very large systems, including the company’s central
-    package builder. Throughout, my mission is to improve developer happiness through transparent,
-    coherent, and sustainable languages, frameworks, and tools.
-   }
-  ]
-  @lecture[
-   #:when @talk-time{Saturday, 2:00pm}
-   #:who @speaker[#:url "https://www.greghendershott.com/"]{Greg Hendershott}
-   #:what @talk{"It Works": More Adventures with Racket and Emacs}
-   #:link "https://youtu.be/OJqocEYhgng?si=1Tdby1IoKmG4tAl1"
-   #:more @abstract{
-    The Emacs package "racket-mode" has continued to evolve its design and features. Among other
-    things, it allows multiple local and remote back ends, has a redesigned "lossless" REPL,
-    supports modern Emacs UI completion annotations, and enables lang-driven editing. Most recently
-    the step debugger has gotten some attention.
-   }
-   #:bio @bio{
-    Greg Hendershott has a useless degree in philosophy, a background in the music software
-    industry, and a decade working in the open source Racket and Emacs communities. Tedious details
-    are available at @(a #:href "https://www.greghendershott.com/About.html" "greghendershott.com").
-   }
-  ]
-  @lecture[
-   #:when @talk-time{Saturday, 2:30pm}
-   #:who @speaker[#:url "https://camoy.net/"]{Cameron Moy}
-   #:what @talk{Roulette for Racketeers}
-   #:link "https://youtu.be/8dk3PWED4G4?si=_dZNl-PyKY3e-AHI"
-   #:more @abstract{
-    Exact probabilistic inference is a requirement for many applications of probabilistic
-    programming languages (PPLs), but implementing a PPL with high-performance inference is
-    difficult. Roulette is a new discrete PPL that combines high-performance exact inference with
-    expressive language features by leveraging the close connection between exact probabilistic
-    inference and the symbolic evaluation strategy of Rosette. Building on this connection,
-    Roulette generalizes and extends the Rosette solver-aided programming system to reason about
-    probabilistic rather than symbolic quantities. In this talk, I'll demonstrate how to use
-    Roulette and discuss some of the ideas that make it work.
-   }
-   #:bio @bio{
-    Cameron is a PhD student and member of the PLT and PRL research groups at Northeastern
-    University. He primarily studies contract systems but is broadly interested in programming
-    language design.
-   }
-  ]
-  @break[@talk-time{Saturday, 3:00pm}]
-  @lecture[
-   #:when @talk-time{Saturday, 3:30pm}
-   #:who @joint{
-    @speaker[#:url "https://github.com/ariscript"]{Ari Prakash}
-    and
-    @speaker[#:url "https://github.com/zackbach/"]{Zachary Eisbach}
-   }
-   #:what @talk{miniDusa: An Extensible Finite-Choice Logic Programming Language}
-   #:link "https://youtu.be/9HNrYJLeJ5k?si=EkdNTmpldzc5LrBM"
-   #:more @abstract{
-    Dusa is a recently designed logic programming language featuring mutually exclusive choice as a
-    primitive to enable computation of solutions that satisfy constraints. To explore further host
-    integration, we introduce miniDusa, a Dusa-inspired hosted domain-specific language implemented
-    using Racket and the syntax-spec metalanguage. This architecture lets us inherit tooling,
-    extensibility, and interoperability features from Racket essentially “for free”.
-   }
-   #:bio @bio{
-    Zachary Eisbach is a student at Northeastern University studying Mathematics and Computer
-    Science. He is interested in compilers, logic, and safe interoperability.
-    @paragraph{
-     Ari Prakash is a student at Northeastern University studying Computer Science. She is
-     interested in developer tooling to make creating reliable systems easier.
-    }
-   }
-  ]
-  @lecture[
-   #:when @talk-time{Saturday, 4:00pm}
-   #:who @speaker[#:url "https://github.com/jjsimpso"]{Jonathan Simpson}
-   #:what @talk{Browsing(and serving) the Slow Internet with Racket}
-   #:link "https://youtu.be/gExw0GajLYk?si=ndUW9Q3gLXpSwKOm"
-   #:more @abstract{
-    Taking its name from the slow food movement, the slow internet movement seeks to recreate the
-    less commercial and more user-centric internet of the early 90s. We will explore how Racket
-    facilitated the development of two slow internet applications and one DSL. First is gopher21,
-    a gopher server with full text search. Second is the graphical, multi-tabbed gopher and gemini
-    client Molasses. And finally, #lang magic is an implementation of the Unix file command's
-    custom language for writing filetype determination queries. By the end of the talk we will
-    have discussed fear of macros, html layout and rendering, custom canvas widgets and how Racket
-    appears from the perspective of an experienced C programmer and low-level engineer.
-   }
-   #:bio @bio{
-    Jonathan Simpson has worked as a professional software engineer since 2001, mostly in the Linux
-    and embedded systems spaces. While almost all of his professional work is in C, he has long
-    harbored a love for Lisp which eventually led him to Racket.
-   }
-  ]
-  @lecture[
-   #:when @talk-time{Saturday, 4:30pm}
-   #:who @speaker[#:url "https://github.com/texdraft"]{Asher Olsen}
-   #:what @talk{PROG Rock: Listening to old Lisp code}
-   #:link "https://youtu.be/0pKU5lcfMYw?si=rUT3a69Gdc6tFbpS"
-   #:more @abstract{
-    Music and Lisp code might seem worlds apart, but through various processes it is possible to get
-    aurally pleasing results from a LISP 1.5 → music compiler (written in Racket, of course). In
-    this talk, I explain how this “musicalization” works and show ways that composers can make use
-    of the concept.
-   }
-   #:bio @bio{
-    Asher Olsen is a composer and programming language enthusiast living in Texas.
-   }
-  ]
-
-    @social[
-#:when
-@talk-time{Saturday, 6:00pm}
-#:where
-@at-where[@place{@a[#:href "https://lordhobo.com/boston/"]{Lord Hobo Brewery}}
-          @place-address{2 Drydock Ave}]
-#:more
-@abstract{
-Gathering with drinks and snacks.
-}
-]
-)
-
+           #:when @talk-time{Saturday, 10:40am}
+           #:who @speaker[#:url "https://"]{Fred Fu}
+           #:what @talk{TBC}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+           Racket and Rhombus support flexible idioms that pose challenges for type systems. Typed
+           Racket, the gradually typed counterpart of Racket, uses occurrence typing to type-check
+           programs whose control flow depends on run-time type tests. To alleviate the burden of
+           annotation, Typed Racket also supports local type inference. Problems arise, however, when
+           a Typed Racket program imports a macro from a Racket module that expands to complex code
+           containing lambda expressions. Programmers cannot add annotations to generated parameters.
+           Moreover, local type inference is not designed to infer types for lambda parameters.
+           Therefore, the type system usually conservatively rejects the code. As a result,
+           programmers often have to rewrite macros in Typed Racket. My ongoing prototype type
+           inference system addresses the problem by combining occurrence typing and algebraic
+           subtyping. In this talk, I will demonstrate how the new type inference handles patterns
+           commonly seen in Racket programs.        
+           }
+           #:bio @bio{
+           I am Fred Fu, a PhD student at IU. I am a racketeer who have made myriad bugs in Typed
+           Racket. I am a big fan of Rhombus as well.  
+           }])
  
- (section
-  @sectionHeader{Sunday, October 4th}
-  @doors-open[@talk-time{Sunday, 8:30am}]
-  @nb-yes-breakfast
-  @lecture[
-   #:when @talk-time{Sunday, 9:00am}
-   #:who @speaker[#:url "https://github.com/michaelballantyne"]{Michael Ballantyne}
-   #:what @talk{Advanced Macrology: 5 Macro Programming Patterns You (No Longer) Need to Know}
-   #:link "https://youtu.be/SZH8dfQ9zpA?si=Wi_KZJqFmjkE5l3K"
-   #:more @abstract{
-    Racket's macros make creating small extensions to the language remarkably simple. But when
-    you step up to creating DSLs with static semantics and compiler optimizations, you need new
-    tools to integrate your DSL implementation with Racket's expansion process. In this talk I'll
-    demonstrate 5 macro design patterns that sophisticated DSLs like match, syntax-parse, and Typed
-    Racket use to validate syntax, communicate static information, and integrate with DrRacket. But
-    as any good language-oriented programmer knows, a design pattern usually indicates a missing
-    linguistic abstraction! And in fact, my syntax-spec metalanguage abstracts over all of these
-    design patterns, generating implementations from a declarative specification of your DSL
-    syntax. So I'll also show how you can more easily achieve the same results with syntax-spec,
-    design-pattern-free.
-   }
-   #:bio @bio{
-    Michael Ballantyne recently completed his Ph.D. at Northeastern University, advised by Matthias
-    Felleisen. His research works towards a future where mainstream programmers regularly create,
-    extend, and fluidly intermix domain-specific languages, with excellent support from their
-    programming language and environment.
-   }
-  ]
-  @lecture[
-   #:when @talk-time{Sunday, 9:30am}
-   #:who @speaker[#:url "https://github.com/jagen31"]{Jared Gentner}
-   #:what @talk{Great Composers Steal: Obbligato Reuse of Racket in Tonart}
-   #:link "https://youtu.be/F9E3HNTAwXk?si=orEdd7ieU87b5ihq"
-   #:more @abstract{
-    Imagine, for a moment, that a music score could somehow become a Racket module. Imagine if every
-    notation on that music score was a syntax object. Imagine selecting areas of the score and
-    running macro-like rewrites on the notations within that selection. Imagine a context system
-    which allows a composer to summon important static information about any notation, such as the
-    key, the tuning system, or the instrument. This is the vision of Tonart, an extensible language
-    and library for composing music in Racket. This talk will highlight the ideas Tonart steals
-    from Racket in its design, as well as the language features Tonart reuses from Racket in its
-    implementation.
-   }
-   #:bio @bio{
-    Jared has been composing music and functions since a young age. A native of Upstate New York,
-    he moved to Boston to study computing at Northeastern. He had no clue about Racket when he
-    enrolled, but where fate leads, we are bound to follow! What he enjoys most is making music with
-    his friends. Jared believes in living life to the fullest, that “Life imitates Art”, and that
-    the greatest art is to be found at home.
-   }
-  ]
-  @lecture[
-   #:when @talk-time{Sunday, 10:00am}
-   #:who @speaker[#:url "https://users.cs.utah.edu/~mflatt/"]{Matthew Flatt}
-   #:what @talk{Rhombus Update}
-   #:link "https://youtu.be/f5kTOaO04o4?si=oRLU_fBcZbZV1_6y"
-   #:more @abstract{
-    @a[#:href "https://rhombus-lang.org/"]{Rhombus} is ready for early adopters. There's still
-    plenty to be done in creating Rhombus-style bindings for Racket libraries, building entirely
-    new Rhombus libraries when that makes sense, and refining the Rhombus tooling and ecosystem.
-    No language is ever finished, but Rhombus is well past the prototype stage and increasingly a
-    language that you can use for everyday tasks. The talk will present a status report and some
-    guesses about what will happen next.
-   }
-  ]
-  @break[@talk-time{Sunday, 10:30am}]
-  @lecture[
-   #:when @talk-time{Sunday, 11:00am}
-   #:who @speaker[#:url "https://samth.github.io"]{Sam Tobin-Hochstadt}
-   #:what @talk{The State of Racket}
-   #:link "https://youtu.be/H-F7bw8JMHE?si=Q-9ITz1PyNJ3j2QE"
-  ]
-  @lecture[
-   #:when @talk-time{Sunday, 11:30am}
-   #:who @speaker[#:person? #f]{Racket Management}
-   #:what @talk{Racket Town Hall}
-   #:link "https://youtu.be/R4MvOxG2ews?si=V6YM2bvGlgMo_-Wy"
-   #:more @abstract{
-    Please come with your big questions and discussion topics.
-   }
-  ]
-  )
-
  (section
    @sectionHeader{Local Information and Accommodation}
    @paragraph{@a[#:href "localinfo.html"]{See the local-information page for directions and hotel information}.}
