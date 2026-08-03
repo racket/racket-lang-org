@@ -8,6 +8,11 @@
 
 (provide (all-defined-out))
 
+(define saturday (gregor:date 2026 10 3))
+(define sunday (gregor:date 2026 10 4))
+(define location "Oakland, California, USA")
+
+
 (define-div main
   [font-family "'Lexend', sans-serif"]
   #;[background "#3e5ba9"]

@@ -6,9 +6,8 @@
 
 (require racket/match
          racket/string
-         xml
-         txexpr
          (prefix-in gregor: gregor)
+         txexpr         
          "lib.rkt"
          "commonelements.rkt")
 
@@ -49,6 +48,7 @@
   (txexpr 'span
           (list (list 'class "speaker-a"))
           span-kids))
+
 (define (lecture #:when when
                  #:who who
                  #:link [l #f]
@@ -104,10 +104,6 @@
   `(div ()
         (div ,name)
         (div ,addr)))
-
-(define saturday (gregor:date 2026 10 3))
-(define sunday (gregor:date 2026 10 4))
-(define location "Oakland, California, USA")
 
 (define (meta #:itemprop [itemprop #f]
               content)

@@ -102,10 +102,6 @@
         (div ,name)
         (div ,addr)))
 
-(define saturday (gregor:date 2026 10 3))
-(define sunday (gregor:date 2026 10 4))
-(define location "Oakland, California, USA")
-
 (define (meta #:itemprop [itemprop #f]
               content)
   (define elem (txexpr* 'meta (list (list 'content content))))
