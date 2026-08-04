@@ -121,7 +121,7 @@
              ["Saturday" saturday]
              ["Sunday"   sunday]))
  (define t (parse-time times " h:mmaa"))
- (define tz (with-timezone (on-date t d) "America/New_York"))
+ (define tz (with-timezone (on-date t d) "America/Los_Angeles"))
  (define m (adjust-timezone tz "Etc/UTC"))
  (talk-time-div
   `(span ([data-slot-time ,(moment->iso8601 m)])
