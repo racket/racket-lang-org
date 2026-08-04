@@ -9,6 +9,12 @@
 
 (define-runtime-path here ".")
 
-(make here "index.html" page_announcement)
+;; page_announcement is just the pure announcement and call
+;; for participation for the conference. It is the default index.html
+
+;; But, there is a preference for a single page organisation, therefore
+;; page_schedule becomes index.html during schedule formation.
+
+;(make here "index.html" page_announcement)
 (make here "localinfo.html" page_venue)
-(make here "schedule.html" page_schedule)
+(make here "index.html" page_schedule)
