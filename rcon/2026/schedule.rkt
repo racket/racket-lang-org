@@ -303,17 +303,17 @@ $(document).ready(function () {
            #:what @talk{Pille}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
            #:more @abstract{
-           I am developing a new Rhombus-based
-           language, called Pille (and pronounced like “peel”), that aims to
-           bring language-oriented programming to low-level and high-performance
-           domains. In particular, Pille grafts Rhombus’s “enforestation”
-           process onto a new core language with an LLVM-based compiler,
-           yielding highly-efficient machine code while retaining full
-           Rhombus-based macros.
+           Racket and Rhombus offer incredible expressive power, but the Racket VM can become a 
+           limiting factor for low-level performance and efficiency—and it necessitates a runtime 
+           system that precludes highly-constrained platforms like microcontrollers.
 
-           This talk will provide an introduction to Pille, with a particular emphasis on how
-           its “high-level” metaprogramming—not all of which derives from Rhombus—can address
-           decidedely low-level problems.
+           Pille (pronounced like “peel”) is a new Rhombus-based language that aims to bring 
+           language-oriented programming to low-level and high-performance domains. In particular, 
+           Pille grafts Rhombus’s enforestation process onto a new core language with an LLVM-based 
+           compiler, bypassing the limitations of the Racket VM while retaining full Rhombus-based macros.
+
+           This talk will provide an introduction to Pille, with a particular emphasis on how its high-level 
+           metaprogramming—not all of which derives from Rhombus—can address decidedely low-level problems.
            }
            #:bio @bio{
            Lucas Myers is a PhD student at Northwestern University (advised by Robby Findler), 
