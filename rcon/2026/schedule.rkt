@@ -74,8 +74,8 @@
   (lecture #:when when #:who @speaker[#:person? #f]{@activity{Doors Open}}
            #:first? #t))
 
-(define (social #:when when #:where [where ""] #:more [more ""])
-  (lecture #:when when #:who @speaker[#:person? #f]{@activity{Evening Social}}
+(define (social #:when when #:where [where ""] #:more [more ""] #:omit-label? [omit-label? #f])
+  (lecture #:when when #:who @speaker[#:person? #f]{@(if omit-label? "" @activity{Evening Social})}
            #:what where
            #:more more))
 
@@ -88,7 +88,7 @@
 (define (lunch when)
  (lecture #:when when #:who @speaker[#:person? #f]{@activity{Lunch}}))
 
-(define (keynote when #:who who #:what what #:more more #:link [link #f]
+(define (keynote #:when when #:who who #:what what #:more more #:link [link #f]
                  #:desc [desc "Keynote"] #:bio [bio #f])
   (lecture #:when when #:who @speaker[#:person? #f]{@activity{@desc}}
            #:what (keynote-speaker who) #:link link #:more what
@@ -230,8 +230,24 @@ $(document).ready(function () {
                Streaming users will have the option to purchase a remote participation ticket to
                support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
 
+;; Move this section to the schedule later?
 (section
- @sectionHeader{@bold{Provisional} Conference Programme}
+ @sectionHeader{Keynote}
+ @keynote[
+          #:when ""
+          #:desc "" ; drop when moving to the schedule
+          #:who @speaker[#:url "https://profiles.stanford.edu/patrick-hanrahan"]{Pat Hanrahan}
+          #:what @talk{On Notation}
+          ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+          #:more ""
+          #:bio @bio{
+          Pat Hanrahan is the Canon Professor of Computer Science and Electrical Engineering Emeritus 
+          at Stanford University. He led design of RenderMan at Pixar, co-founded Tableau, and recieved the
+          2019 ACM Turing Award.
+          }])
+
+(section
+ @sectionHeader{Talks}
  @lecture[
           #:when ""
           #:who @speaker[#:url "https://"]{Tom Passarelli}
@@ -281,10 +297,48 @@ $(document).ready(function () {
            I am Fred Fu, a PhD student at IU. I am a racketeer who have made myriad bugs in Typed
            Racket. I am a big fan of Rhombus as well.  
            }])
+  @lecture[
+           #:when ""
+           #:who @speaker[#:url "https://"]{Lucas Myers}
+           #:what @talk{Pille}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+           I am developing a new Rhombus-based
+           language, called Pille (and pronounced like “peel”), that aims to
+           bring language-oriented programming to low-level and high-performance
+           domains. In particular, Pille grafts Rhombus’s “enforestation”
+           process onto a new core language with an LLVM-based compiler,
+           yielding highly-efficient machine code while retaining full
+           Rhombus-based macros.
+
+           This talk will provide an introduction to Pille, with a particular emphasis on how
+           its “high-level” metaprogramming—not all of which derives from Rhombus—can address
+           decidedely low-level problems.
+           }
+           #:bio @bio{
+           Lucas Myers is a PhD student at Northwestern University (advised by Robby Findler), 
+           where his research focuses on adapting the ideas and technologies of extensible
+           programming languages—especially Racket and Rhombus—to the domain of systems
+           programming. Prior to starting his PhD, Lucas worked in the software industry on
+           an eclectic mix of projects that spanned the hardware/software stack. He is broadly
+           interested in finding PL solutions to systems problems, and see extensible languages
+           as holding immense (and largely unrealized) potential in that pursuit.
+           }
+         ]
  
+ ;; This section can be replaced later with an entry in the schedule
  (section
-   @sectionHeader{Local Information and Accommodation}
-   @paragraph{@a[#:href "localinfo.html"]{See the local-information page for directions and hotel information}.}
+   @sectionHeader{Evening Social Event}
+   (social #:when @talk-time{Saturday, 6:00pm}
+           #:omit-label? #t ;; change to `#f` as a schedule entry
+           #:where @at-where[@place{@a[#:href "https://drinkdrakes.com/visit/dealership/"]{Drake's Dealership}}
+                             @place-address{2325 Broadway}]
+           #:more @abstract{Gathering with drinks and snacks.})
+  )
+
+ (section
+   @sectionHeader{Local Information}
+   @paragraph{@a[#:href "localinfo.html"]{See the local-information page}.}
   )
 
  (section
@@ -293,9 +347,9 @@ $(document).ready(function () {
   )
 
  (section
-   @sectionHeader{Organisation}
+   @sectionHeader{Organization}
    @paragraph{
-              The RacketCon 2026 is organised by a team of volunteers.
+              The RacketCon 2026 is organized by a team of volunteers.
               The organizers may be reached at @|mailto:con-organizers|.}
 
   )
