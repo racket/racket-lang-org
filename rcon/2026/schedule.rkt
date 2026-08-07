@@ -112,6 +112,8 @@
          (attr-set elem 'itemprop itemprop)]
         [else elem]))
 
+(define event-time-zone "America/Los_Angeles")
+
 (define slot-number 0)
 (define (talk-time dtime)
  (set! slot-number (add1 slot-number))
@@ -121,7 +123,7 @@
              ["Saturday" saturday]
              ["Sunday"   sunday]))
  (define t (parse-time times " h:mmaa"))
- (define tz (with-timezone (on-date t d) "America/Los_Angeles"))
+ (define tz (with-timezone (on-date t d) event-time-zone))
  (define m (adjust-timezone tz "Etc/UTC"))
  (talk-time-div
   `(span ([data-slot-time ,(moment->iso8601 m)])
@@ -154,7 +156,7 @@
 $(document).ready(function () {
  $("[data-slot-time]").each(function() {
   var date = new Date($(this).data("slot-time"));
-  var localTime = moment.tz(date, "America/New_York").format("dddd, h:mma zz")
+  var localTime = moment.tz(date, @event-time-zone).format("dddd, h:mma zz")
   $(this).html(localTime); }); }); })
     (body
      #:class "main h-event"
