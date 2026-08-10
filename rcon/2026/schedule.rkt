@@ -330,6 +330,29 @@ $(document).ready(function () {
            as holding immense (and largely unrealized) potential in that pursuit.
            }
          ]
+
+  @lecture[
+           #:when ""
+           #:who @speaker[#:url "https://"]{Mike Delmonaco}
+           #:what @talk{Treason: Making macros and IDE services work together}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+           Racket's macros let us extend the language and create DSLs, but they also 
+           get in the way of providing good IDE services when the program is broken or incomplete. 
+           Treason is a prototype of a macro-extensible language that provides good IDE services 
+           even when such errors prevent complete macro expansion. Treason's macro expander recovers 
+           from errors to continue expanding and collecting information used to drive IDE services. 
+           Our key contribution is spec-driven subexpression expansion: syntax-class annotations 
+           allow us to expand subexpressions even within a broken macro use.
+           }
+           #:bio @bio{
+           Mike Delmonaco is a Software Engineer at Amazon Web Services with a hobby interest in 
+           Programming Languages and Racket. Outside of work, he enjoys rock climbing, video games, 
+           creating interactive math visualizations, writing music, programming language research, 
+           and teaching.
+          }
+         ]
+
  
  ;; This section can be replaced later with an entry in the schedule
  (section
