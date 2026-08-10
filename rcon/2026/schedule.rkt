@@ -216,6 +216,11 @@ $(document).ready(function () {
            [scrolling "auto"])))
 
  (section
+  @sectionHeader{Registration is open!}
+  @para{Please register for RacketCon 2026 by following
+        @(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "this link").})
+ 
+ (section
   @sectionHeader{Call for Presentations}
   @para{We are looking for @emph{you!} If you have an idea for
   a presentation you’d like to give, please submit your proposal using @(a #:href "https://forms.gle/4YG57adx5snEwVe27" "this form") or
@@ -224,7 +229,7 @@ $(document).ready(function () {
 
   For more information about presentation format, video streaming details, volunteering and sponsorships, please
   see our detailed call for participation @(a #:href "https://racket.discourse.group/t/racketcon-2026-call-for-participation/4211" "here").
- All Racket-y ideas are welcome. We’d love to have you!})
+  All Racket-y ideas are welcome. We’d love to have you!})
 
  (top-section
    @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
@@ -232,7 +237,6 @@ $(document).ready(function () {
                Streaming users will have the option to purchase a remote participation ticket to
                support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
 
-;; Move this section to the schedule later?
 (section
  @sectionHeader{Keynote}
  @keynote[
