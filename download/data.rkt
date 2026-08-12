@@ -70,7 +70,7 @@
     ;; this will change again after we update mirror.racket-lang.org to
     ;; point to racketbox1
     ["USA, Illinois (Northwestern University)"
-     "https://racketbox1.cs.northwestern.edu/"
+     "https://racketbox1.cs.northwestern.edu/installers/"
      "Robby Findler"
      "robby@eecs.northwestern.edu"]
     #;
