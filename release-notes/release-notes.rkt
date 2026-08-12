@@ -32,7 +32,7 @@
         [(9 1) '("2026" "02")]
         [(9 2) '("2026" "05")]
         ;; edit this if the release is after the first of august...:
-        [(9 2) '("2026" "07")]))
+        [(9 3) '("2026" "08")]))
     (~a "https://blog.racket-lang.org/"year-str"/"
         month-str"/racket-v"major-v"-"minor-v".html")))
 
@@ -100,11 +100,21 @@
 
 (define bullets
   (list
+      @bullet{The `raco setup` command can generate markdown documentation, using the
+`--doc-markdown` option.}
+      @bullet{The "#lang" teaching languages have reached parity with the ones chosen using the
+Language dialog, and are the recommended choice. Specifically:}
+   @sub-bullet{These languages can specify DrRacket annotation values, to enable
+test coverage by default.}
+   @sub-bullet{These languages display coverage information by default
+  in DrRacket.}
+   @sub-bullet{These languages display source-code locations in the
+  same way as the menu-based *SL languages.}
+   @bullet{DrRacket's background expansion disables errortrace
+annotations, for faster syntax checking.}
    @bullet{The `raco pkg install` command includes new options that provide
 more install-time configuration flexibility: `--adjacent-deps`, `--destdir`, and `--attach`,
 and a refined `--skip-installed`.}
-   @bullet{The `raco setup` command can generate markdown documentation, using the
-`--doc-markdown` option.}
    @bullet{The `ffi/unsafe/runtime-lib` library provides a `define-runtime-lib`
  mechanism similar to `define-runtime-path`, allowing location of libraries located relative
 to a source file.}
@@ -119,6 +129,7 @@ from syntactic forms to source locations for error handling.}
    @bullet{The `file/zip` package provides a new mechanism for greatly increased control
 over zip file generation, allowing in-memory file sources and per-file compression control.}
 
+   
 
    )
   #;(list
@@ -133,34 +144,33 @@ over zip file generation, allowing in-memory file sources and per-file compressi
 
 ;; probably always add Stephen De Gabrielle!
 (define contributors
-  '("Alexander Shopov"
-    "Alexis King"
-    "Asilo"
+  '("Alex Knauth"
+    "Alexander Shopov"
+    "Aris Spathis"
     "Bert De Ketelaere"
     "Bob Burger"
-    "Bogdan Popa"
-    "Chung-chieh Shan"
-    "François-René Rideau"
+    "Caleb Mazalevskis"
+    "Cameron Moy"
+    "Geoffrey J. Teale"
     "Gustavo Massaccesi"
-    "Ilya Klyuchnikov"
+    "Hannes Braun"
     "Jade Sailor"
-    "Jamie Taylor"
+    "Jason Hemann"
+    "Jens Axel Søgaard"
     "John Clements"
-    "Jonathan Simpson"
-    "LS_Hower"
+    "Jordan Johnson"
     "Matthew Flatt"
     "Matthias Felleisen"
     "Mike Sperber"
-    "Pavel Panchekha"
-    "Philippe Meunier"
-    "RMOlive"
+    "Nathan Dykman"
+    "Noah Ma"
+    "Philip McGrath"
     "Robby Findler"
-    "Roman Klochkov"
+    "Romeo Ahmed"
     "Sam Tobin-Hochstadt"
     "Shu-Hung You"
-    "Stephen de Gabrielle"
-    "Tejas Sanap"
-    "Vincent Lee"
+    "Stefan Schwarzer"
+    "Stephen De Gabrielle"
     "Wing Hei Chan"))
 
 
