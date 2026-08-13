@@ -66,18 +66,10 @@
 ;; from download.racket-lang.org. The redirection is implemented
 ;; by an S3 routing rule.
 (define -mirrors-
-  '(;; setting up new download server at Northwestern...
-    ;; this will change again after we update mirror.racket-lang.org to
-    ;; point to racketbox1
-    ["USA, Illinois (Northwestern University)"
-     "https://racketbox1.cs.northwestern.edu/installers/"
+  '(["USA, Illinois (Northwestern University)"
+     "https://mirror.racket-lang.org/installers/"
      "Robby Findler"
      "robby@eecs.northwestern.edu"]
-    #;
-    ["USA, Massachusetts (Northeastern University)"
-     "https://mirror.racket-lang.org/installers/"
-     "Eli Barzilay"
-     "eli@barzilay.org"]
     ["USA, Utah (University of Utah)"
      "https://users.cs.utah.edu/plt/installers/"
      "Matthew Flatt"
