@@ -35,6 +35,14 @@
     (~a "https://blog.racket-lang.org/"year-str"/"
         month-str"/racket-v"major-v"-"minor-v".html")))
 
+;; used to check while shortening things that you didn't break anything. Remove
+;; the use of thallthesame after you've got it shortened.
+(define (allthesame . args)
+  (cond [(or (= (length args) 1) (apply equal? args))
+         (first args)]
+        [else
+         (eprintf "all ~v are not the same!\n" (length args))
+         (map displayln args)]))
 
 ;; inferred url abstraction...
 
@@ -61,10 +69,20 @@
 
 (define LP "%28")
 (define RP "%29")
+(define SLASH "%2F")
 (define DU "._")
-(define qk  (list "quote._~23~25kernel"))
-(define lrm (list "lib._racket%2Fmatch..rkt"))
-(define shp (list "lib._scribble%2Fhtml-properties..rkt"))
+
+(define (mod-ref mod-kind path)
+  (list (string-append mod-kind DU path)))
+;; constructs something like (list "lib._racket%2Fmatch..rkt")
+(define (lib-mod-ref . path-components)
+  (mod-ref "lib" (string-append
+                  (apply string-append (add-between path-components "%2F"))
+                  "..rkt")))
+
+(define qk  (mod-ref "quote" "~23~25kernel"))
+(define lrm (lib-mod-ref "racket" "match"))
+(define shp (lib-mod-ref "scribble" "html-properties"))
 
 (define (maker page kind lib name)
   (apply
@@ -91,20 +109,23 @@
 (define stepper-url  (durl "stepper/index.html"))
 (define scribble-url (durl "scribble/index.html"))
 
-(define (allthesame . args)
-  (cond [(or (= (length args) 1) (apply equal? args))
-         (first args)]
-        [else
-         (eprintf "all ~v are not the same!\n" (length args))
-         (map displayln args)]))
 
 
-(define raco-setup-url (pkg-url "raco" "running.html"))
-(define teaching-langs-url "https://docs.racket-lang.org/htdp-langs/index.html")
-(define check-stx-button-url "https://docs.racket-lang.org/drracket/buttons.html#%28idx._%28gentag._8._%28lib._scribblings%2Fdrracket%2Fdrracket..scrbl%29%29%29")
+
+(define raco-setup-url (durl "raco/running.html"))
+(define teaching-langs-url (durl "htdp-langs/index.html"))
+(define check-stx-button-url
+  (pkg-url "drracket"            "buttons.html#%28idx._%28gentag._8._%28lib._scribblings%2Fdrracket%2Fdrracket..scrbl%29%29%29"))
 (define raco-pkg-install-url "https://docs.racket-lang.org/pkg/cmdline.html#%28part._raco-pkg-install%29")
-(define define-runtime-lib-url "https://docs.racket-lang.org/foreign/runtime-lib.html#%28form._%28%28lib._ffi%2Funsafe%2Fruntime-lib..rkt%29._define-runtime-lib%29%29")
-(define prompt-tag-c-url "https://docs.racket-lang.org/reference/data-structure-contracts.html#%28form._%28%28lib._racket%2Fcontract%2Fprivate%2Fmisc..rkt%29._prompt-tag%2Fc%29%29")
+(define define-runtime-lib-url
+  (pkg-url "foreign"
+           (maker "runtime-lib" "form"
+                  (lib-mod-ref "ffi" "unsafe" "runtime-lib")
+                  "define-runtime-lib")))
+(define prompt-tag-c-url
+  (rmaker "data-structure-contracts" "form"
+          (lib-mod-ref "racket" "contract" "private" "misc")
+          "prompt-tag%2Fc"))
 (define impersonate-prompt-tag-url
  "https://docs.racket-lang.org/reference/chaperones.html#%28def._%28%28quote._~23~25kernel%29._impersonate-prompt-tag%29%29")
 (define es2sh-url "https://docs.racket-lang.org/reference/exns.html#%28def._%28%28quote._~23~25kernel%29._error-syntax-~3esrcloc-handler%29%29")
