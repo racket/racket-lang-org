@@ -120,34 +120,35 @@
 (define racket-lang-core-url
   "https://racket-lang.org")
 
+;; make a link, put backticks around the term
 (define (l url term)
   (link url (string-append "`" term "`")))
 
 (define bullets
   (list
-      @bullet{The @l[raco-setup-url]{`raco setup`} command can generate markdown
+      @bullet{The @l[raco-setup-url]{raco setup} command can generate markdown
  documentation, using the `--doc-markdown` option.}
-      @bullet{The "#lang" @l[teaching-langs-url]{teaching languages} (BSL, ..., ISL+;
+      @bullet{The "#lang" @link[teaching-langs-url]{teaching languages} (BSL, ..., ISL+;
  plus DeinProgram) have reached parity with the ones chosen using the
  Language dialog, and are the recommended choice.}
    @bullet{DrRacket's background expansion disables errortrace
- annotations, for faster @l[check-stx-button-url]{syntax checking}.}
-   @bullet{The @l[raco-pkg-install-url]{`raco pkg install`} command includes
+ annotations, for faster @link[check-stx-button-url]{syntax checking}.}
+   @bullet{The @l[raco-pkg-install-url]{raco pkg install} command includes
  new options that provide
  more install-time configuration flexibility: `--adjacent-deps`, `--destdir`,
  and `--attach`, and a refined `--skip-installed`.}
-   @bullet{The `ffi/unsafe/runtime-lib` library provides a @l[define-runtime-lib-url]{`define-runtime-lib`}
+   @bullet{The `ffi/unsafe/runtime-lib` library provides a @link[define-runtime-lib-url]{`define-runtime-lib`}
  mechanism similar to `define-runtime-path`, allowing location of libraries located relative
 to a source file.}
-   @bullet{The @l[prompt-tag-c-url]{`prompt-tag/c`} contract generator no longer performs checking on `call/cc`
+   @bullet{The @link[prompt-tag-c-url]{`prompt-tag/c`} contract generator no longer performs checking on `call/cc`
 when the `#:call/cc` option is not present.}
-   @bullet{The @l[impersonate-prompt-tag-url]{`impersonate-prompt-tag`} function takes an additional argument that allows
+   @bullet{The @link[impersonate-prompt-tag-url]{`impersonate-prompt-tag`} function takes an additional argument that allows
 checking and update of results for composable continuations.}
-   @bullet{The @l[es2sh-url]`error-syntax->srcloc-handler` parameter provides control over the mapping
+   @bullet{The @link[es2sh-url]{`error-syntax->srcloc-handler`} parameter provides control over the mapping
 from syntactic forms to source locations for error handling.}
-   @bullet{Uses of `(@l[tcp-listen-url]{tcp-listen} 0)` will retry when it fails with "address in use".}
-   @bullet{The @l[racket-base-url]{`racket/base`} module requires fewer internal modules and instantiations.}
-   @bullet{The `file/zip` package provides a @l[zip-entry-url]{new mechanism} for greatly increased control
+   @bullet{Uses of `(@link[tcp-listen-url]{tcp-listen} 0)` will retry when it fails with "address in use".}
+   @bullet{The @link[racket-base-url]{`racket/base`} module requires fewer internal modules and instantiations.}
+   @bullet{The `file/zip` package provides a @link[zip-entry-url]{new mechanism} for greatly increased control
 over zip file generation, allowing in-memory file sources and per-file compression control.}
 
    
