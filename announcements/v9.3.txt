@@ -1,0 +1,44 @@
+1786628000
+Racket v9.3
+----------------------------------------------------------------------
+
+- The `raco setup` command can generate markdown documentation, using
+  the `--doc-markdown` option.
+- The "#lang" teaching languages (BSL, ..., ISL+; plus DeinProgram)
+  have reached parity with the ones chosen using the Language dialog,
+  and are the recommended choice.
+- DrRacket's background expansion disables errortrace annotations, for
+  faster syntax checking.
+- The `raco pkg install` command includes new options that provide
+  more install-time configuration flexibility: `--adjacent-deps`,
+  `--destdir`, and `--attach`, and a refined `--skip-installed`.
+- The `ffi/unsafe/runtime-lib` library provides a `define-runtime-lib`
+  mechanism similar to `define-runtime-path`, allowing location of
+  libraries located relative to a source file.
+- The `prompt-tag/c` contract generator no longer performs checking on
+  `call/cc` when the `#:call/cc` option is not present.
+- The `impersonate-prompt-tag` function takes an additional argument
+  that allows checking and update of results for composable
+  continuations.
+- The `error-syntax->srcloc-handler` parameter provides control over
+  the mapping from syntactic forms to source locations for error
+  handling.
+- Uses of `(tcp-listen 0)` will retry when it fails with "address in
+  use".
+- The `racket/base` module requires fewer internal modules and
+  instantiations.
+- The `file/zip` package provides a new mechanism for greatly
+  increased control over zip file generation, allowing in-memory file
+  sources and per-file compression control.
+
+The following people contributed to this release:
+
+Alex Knauth, Alexander Shopov, Aris Spathis, Bert De Ketelaere, Bob
+Burger, Caleb Mazalevskis, Cameron Moy, Geoffrey J. Teale, Gustavo
+Massaccesi, Hannes Braun, Jade Sailor, Jason Hemann, Jens Axel
+Søgaard, John Clements, Jordan Johnson, Matthew Flatt, Matthias
+Felleisen, Mike Sperber, Nathan Dykman, Noah Ma, Philip McGrath,
+Robby Findler, Romeo Ahmed, Sam Tobin-Hochstadt, Shu-Hung You,
+Stefan Schwarzer, Stephen De Gabrielle, and Wing Hei Chan.
+
+----------------------------------------------------------------------
