@@ -31,7 +31,6 @@
         ;; lines above this need to be edited, if ever needed...
         [(9 1) '("2026" "02")]
         [(9 2) '("2026" "05")]
-        ;; edit this if the release is after the first of august...:
         [(9 3) '("2026" "08")]))
     (~a "https://blog.racket-lang.org/"year-str"/"
         month-str"/racket-v"major-v"-"minor-v".html")))
@@ -39,9 +38,12 @@
 
 ;; inferred url abstraction...
 
+;; prepend docs/ url prefix:
 (define (durl str)
   (string-append "https://docs.racket-lang.org/" str))
+;; given pkg and str, prepend docs/ url, then pkg then / then str
 (define (pkg-url pkg str) (durl (string-append pkg "/" str)))
+;; fix previous for reference
 (define (rurl str)        (pkg-url "reference" str))
 
 (define dr-core-url
@@ -50,6 +52,7 @@
 (define bfs-url
   (rurl "generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._bitwise-first-bit-set%29%29"))
 
+;; transforms a nested list into a string using left-parens ("&28") and right-parens ("&29")
 (define (url-flatten d)
   (cond [(list? d)
          (string-append LP (apply string-append (map url-flatten d)) RP)]
@@ -68,8 +71,12 @@
    string-append
    (map url-flatten (list page ".html" "#" (list kind DU (list lib DU name))))))
 
+
 (define (rmaker page kind lib name)
   (rurl (maker page kind lib name)))
+
+;; e.g. (rmaker "generic-numbers" "def"  qk  "bitwise-first-bit-set")
+;; yields "https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._bitwise-first-bit-set%29%29"
 
 (define bfbs-url  (rmaker "generic-numbers" "def"  qk  "bitwise-first-bit-set"))
 (define tfp-url   (rmaker "port-buffers"    "def"  qk  "terminal-file-position"))
@@ -84,8 +91,26 @@
 (define stepper-url  (durl "stepper/index.html"))
 (define scribble-url (durl "scribble/index.html"))
 
+(define (allthesame . args)
+  (cond [(or (= (length args) 1) (apply equal? args))
+         (first args)]
+        [else
+         (eprintf "all ~v are not the same!\n" (length args))
+         (map displayln args)]))
 
 
+(define raco-setup-url (pkg-url "raco" "running.html"))
+(define teaching-langs-url "https://docs.racket-lang.org/htdp-langs/index.html")
+(define check-stx-button-url "https://docs.racket-lang.org/drracket/buttons.html#%28idx._%28gentag._8._%28lib._scribblings%2Fdrracket%2Fdrracket..scrbl%29%29%29")
+(define raco-pkg-install-url "https://docs.racket-lang.org/pkg/cmdline.html#%28part._raco-pkg-install%29")
+(define define-runtime-lib-url "https://docs.racket-lang.org/foreign/runtime-lib.html#%28form._%28%28lib._ffi%2Funsafe%2Fruntime-lib..rkt%29._define-runtime-lib%29%29")
+(define prompt-tag-c-url "https://docs.racket-lang.org/reference/data-structure-contracts.html#%28form._%28%28lib._racket%2Fcontract%2Fprivate%2Fmisc..rkt%29._prompt-tag%2Fc%29%29")
+(define impersonate-prompt-tag-url
+ "https://docs.racket-lang.org/reference/chaperones.html#%28def._%28%28quote._~23~25kernel%29._impersonate-prompt-tag%29%29")
+(define es2sh-url "https://docs.racket-lang.org/reference/exns.html#%28def._%28%28quote._~23~25kernel%29._error-syntax-~3esrcloc-handler%29%29")
+(define tcp-listen-url "https://docs.racket-lang.org/reference/tcp.html#%28def._%28%28lib._racket%2Ftcp..rkt%29._tcp-listen%29%29")
+(define racket-base-url "https://docs.racket-lang.org/reference/index.html")
+(define zip-entry-url "https://docs.racket-lang.org/file/zip.html#%28def._%28%28lib._file%2Fzip..rkt%29._zip-entry~3f%29%29")
 
 (check-equal?
  tfp-url
@@ -100,33 +125,29 @@
 
 (define bullets
   (list
-      @bullet{The `raco setup` command can generate markdown documentation, using the
-`--doc-markdown` option.}
-      @bullet{The "#lang" teaching languages have reached parity with the ones chosen using the
-Language dialog, and are the recommended choice. Specifically:}
-   @sub-bullet{These languages can specify DrRacket annotation values, to enable
-test coverage by default.}
-   @sub-bullet{These languages display coverage information by default
-  in DrRacket.}
-   @sub-bullet{These languages display source-code locations in the
-  same way as the menu-based *SL languages.}
+      @bullet{The @l[raco-setup-url]{`raco setup`} command can generate markdown
+ documentation, using the `--doc-markdown` option.}
+      @bullet{The "#lang" @l[teaching-langs-url]{teaching languages} (BSL, ..., ISL+;
+ plus DeinProgram) have reached parity with the ones chosen using the
+ Language dialog, and are the recommended choice.}
    @bullet{DrRacket's background expansion disables errortrace
-annotations, for faster syntax checking.}
-   @bullet{The `raco pkg install` command includes new options that provide
-more install-time configuration flexibility: `--adjacent-deps`, `--destdir`, and `--attach`,
-and a refined `--skip-installed`.}
-   @bullet{The `ffi/unsafe/runtime-lib` library provides a `define-runtime-lib`
+ annotations, for faster @l[check-stx-button-url]{syntax checking}.}
+   @bullet{The @l[raco-pkg-install-url]{`raco pkg install`} command includes
+ new options that provide
+ more install-time configuration flexibility: `--adjacent-deps`, `--destdir`,
+ and `--attach`, and a refined `--skip-installed`.}
+   @bullet{The `ffi/unsafe/runtime-lib` library provides a @l[define-runtime-lib-url]{`define-runtime-lib`}
  mechanism similar to `define-runtime-path`, allowing location of libraries located relative
 to a source file.}
-   @bullet{The `prompt-tag/c` contract generator no longer performs checking on `call/cc`
+   @bullet{The @l[prompt-tag-c-url]{`prompt-tag/c`} contract generator no longer performs checking on `call/cc`
 when the `#:call/cc` option is not present.}
-   @bullet{The `impersonate-prompt-tag` function takes an additional argument that allows
+   @bullet{The @l[impersonate-prompt-tag-url]{`impersonate-prompt-tag`} function takes an additional argument that allows
 checking and update of results for composable continuations.}
-   @bullet{The `error-syntax->srcloc-handler` parameter provides control over the mapping
+   @bullet{The @l[es2sh-url]`error-syntax->srcloc-handler` parameter provides control over the mapping
 from syntactic forms to source locations for error handling.}
-   @bullet{Uses of `(tcp-listen 0)` will retry when it fails with "address in use".}
-   @bullet{The `racket/base` module requires fewer internal modules and instantiations.}
-   @bullet{The `file/zip` package provides a new mechanism for greatly increased control
+   @bullet{Uses of `(@l[tcp-listen-url]{tcp-listen} 0)` will retry when it fails with "address in use".}
+   @bullet{The @l[racket-base-url]{`racket/base`} module requires fewer internal modules and instantiations.}
+   @bullet{The `file/zip` package provides a @l[zip-entry-url]{new mechanism} for greatly increased control
 over zip file generation, allowing in-memory file sources and per-file compression control.}
 
    
