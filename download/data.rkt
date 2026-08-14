@@ -74,10 +74,6 @@
      "https://users.cs.utah.edu/plt/installers/"
      "Matthew Flatt"
      "mflatt@cs.utah.edu"]
-    ["USA, Illinois (Northwestern University)"
-     "https://plt.cs.northwestern.edu/racket-mirror/"
-     "Robby Findler"
-     "robby@eecs.northwestern.edu"]
     ["Canada, Ontario (University of Waterloo)"
      "https://mirror.csclub.uwaterloo.ca/racket/racket-installers/"
      "Systems Committee"
