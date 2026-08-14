@@ -167,7 +167,7 @@ when the `#:call/cc` option is not present.}
 checking and update of results for composable continuations.}
    @bullet{The @link[es2sh-url]{`error-syntax->srcloc-handler`} parameter provides control over the mapping
 from syntactic forms to source locations for error handling.}
-   @bullet{Uses of `(@link[tcp-listen-url]{tcp-listen} 0)` will retry when it fails with "address in use".}
+   @bullet{Uses of @l[tcp-listen-url]{(tcp-listen 0)} will retry when it fails with "address in use".}
    @bullet{The @link[racket-base-url]{`racket/base`} module requires fewer internal modules and instantiations.}
    @bullet{The `file/zip` package provides a @link[zip-entry-url]{new mechanism} for greatly increased control
 over zip file generation, allowing in-memory file sources and per-file compression control.}
