@@ -338,7 +338,7 @@ $(document).ready(function () {
   @lecture[
            #:when ""
            #:who @speaker[#:url "https://"]{Mike Delmonaco}
-           #:what @talk{Treason: Making macros and IDE services work together}
+           #:what @talk{Treason: Making Macros and IDE Services Work Together}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
            #:more @abstract{
            Racket's macros let us extend the language and create DSLs, but they also 
@@ -357,7 +357,64 @@ $(document).ready(function () {
           }
          ]
 
- 
+    @lecture[
+           #:when ""
+           #:who @speaker[#:url "https://"]{JJ}
+           #:what @talk{Effect Handlers in @em{cio}}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+             Effect handlers — What are they? How do they work? We will
+             discuss the design of @em{cio}, an (untyped) effect-handler library for Racket
+             and Guile Scheme, and delve into the user interface considerations and
+             implementation strategies of effect handlers broadly. Effect handlers,
+             similar to delimited continuations, offer the expression of general
+             @em{non-local control flow} through a minimal set of primitives, yet more
+             closely resemble standard imperative constructions — but preserve pure
+             reasoning principles by separating the @em{invocation} of a particular effect
+             from its @em{implementation}. We discuss this, and further discuss some of the
+             challenges and limitations of a library-level implementation of effect
+             handlers.
+           }
+           #:bio @bio{
+             JJ is a linguist by trade, living and working in Vancouver,
+             British Columbia, by the Salish Sea. They are also a hobbyist programmer
+             and a programming languages nerd: interested in language in its capability
+             as an @em{interface} for expressing @em{intent} — between humans and other
+             humans, and between humans and computers. They are a big fan of Rust, Lean
+             4, and (of course) Racket. 
+          }
+         ]
+
+    @lecture[
+           #:when ""
+           #:who @speaker[#:url "https://"]{Matthew Flatt}
+           #:what @talk{A New Foreign-Function Interface: ffi2}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+             Eli Barzilay's FFI (ca. 2004) made C-based dynamic libraries accessible
+             within Racket programs without new C code. This approach had precedents
+             in Lisp and Scheme systems, including Chez Scheme, but Barzilay's
+             dynamic esthetic and pioneering use of Racket macros resulted in an
+             especially convenient and composable interface that was a good fit to
+             the underlying runtime system. Meanwhile, Andy Keep's ftypes layer (ca.
+             2011) for Chez Scheme's FFI similarly takes advantage of macros for
+             expressiveness, and it also cleverly exploits Chez Scheme's
+             data-representation regime. Keep's more static system offers good
+             performance, compact representations of foreign pointers, and low-cost
+             checking of pointer operations. The new `ffi2` layer in Racket brings
+             these two lines of development together. It relies on small adjustments
+             to Chez Scheme that reflect lessons learned from `unsafe/ffi`, and it
+             introduces a static approach at the Racket level to better target Chez
+             Scheme. As a result, the `ffi2` library offers the convenience and
+             composability combined with good performance and low-cost foreign
+             pointers.
+           }
+           #:bio @bio{
+             Matthew is a developer of Racket who focuses mostly on macros,
+             compilation, and the runtime system.
+          }
+         ]
+
  ;; This section can be replaced later with an entry in the schedule
  (section
    @sectionHeader{Evening Social Event}
