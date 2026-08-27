@@ -254,32 +254,6 @@ $(document).ready(function () {
 
 (section
  @sectionHeader{Talks}
- @lecture[
-          #:when ""
-          #:who @speaker[#:url "https://"]{Tom Passarelli}
-          #:what @talk{Let Agents Write Programs, Not Files}
-          ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
-          #:more @abstract{
-          Your editor, git, and jump-to-definition all treat source files as the truth about your
-          program, recovering meaning by re-reading them. That worked reasonably well when code was
-          authored at human speed. It buckles when many AI agents write at once: names change on
-          rename, locations change on insert, and content hashes change on every edit. This talk
-          presents Fram, a fact-graph substrate where the database is the program, and Beagle,
-          a typed Lisp that began life as a Racket #lang and can project source files from that
-          graph. Delete a projected file, re-render it from facts, and it still compiles. I’ll show
-          how stable identity turns edits into transactions, makes rename a fact update instead of a
-          rewrite across reference sites, and changes the concurrency story for agentic programming,
-          with wins, losses, and null results recorded side by side.
-          }
-          #:bio @bio{
-          Tom Passarelli is a systems builder whose work began in competitive gaming hardware and
-          now spans input devices, browsers, operating systems, and programming tools. He was a
-          co-developer of the B0XX, a controller built for the competitive Super Smash Bros. Melee
-          community, and has contributed to Mozilla Firefox and Kanata. His own projects include
-          Gjoa, a Firefox fork; Glide, a touchpad input experiment; Firn, a NixOS framework; and
-          Beagle and Fram, current work exploring what programming looks like when text files are no
-          longer the source of truth, but projections from a database of small, persistent facts.
-          }]
   @lecture[
            #:when ""
            #:who @speaker[#:url "https://"]{Fred Fu}
