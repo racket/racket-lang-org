@@ -361,6 +361,27 @@ $(document).ready(function () {
 
     @lecture[
            #:when ""
+           #:who @speaker[#:url "https://"]{Pavel Panchekha}
+           #:what @talk{Herbie: Improving Floating-point Accuracy}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+             Floating-point math requires rounding, so
+             it's not perfectly accurate. But how inaccurate it is depends on how
+             you do your computation: two ways of writing the same mathematical
+             formula can have radically different accuracy. Herbie is a compiler
+             that exploits this property to compile mathematical formulas to
+             accurate floating-point expressions. The talk will introduce
+             floating-point error, demonstrate Herbie, talk a bit about how it
+             works, and reflect on ten years of writing Herbie in Racket.
+           }
+           #:bio @bio{
+             Pavel is an Associate Professor at the University of Utah and
+             a Herbie developer.
+           }
+         ]
+    
+    @lecture[
+           #:when ""
            #:who @speaker[#:url "https://"]{Matthew Flatt}
            #:what @talk{A New Foreign-Function Interface: ffi2}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
