@@ -218,8 +218,8 @@ $(document).ready(function () {
  (section
   @sectionHeader{Registration is open!}
   
-   @distinct{Please register for RacketCon 2026 by following
-                 @bold{@larger{@(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "this link").}}}
+   @distinct{Please register for RacketCon 2026 by following this
+                 @bold{@larger{@(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "registration link").}}}
  
   @para{There is still time to submit a proposal for a talk at RacketCon 2026 using
         @(a #:href "https://forms.gle/4YG57adx5snEwVe27" "this form") or
