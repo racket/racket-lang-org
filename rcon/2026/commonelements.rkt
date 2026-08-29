@@ -86,6 +86,10 @@
 (define-div top-section
   [margin-top "1em"])
 
+(define-div distinct
+  [margin-top "4em"]
+  [margin-bottom "4em"])
+
 (define-div speaker-a
   [color "firebrick"])
 (define-a unaffiliated
