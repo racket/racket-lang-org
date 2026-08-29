@@ -217,19 +217,19 @@ $(document).ready(function () {
 
  (section
   @sectionHeader{Registration is open!}
-  @para{Please register for RacketCon 2026 by following
-        @(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "this link").})
+  
+   @distinct{Please register for RacketCon 2026 by following this
+                 @bold{@larger{@(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "registration link").}}}
  
- (section
-  @sectionHeader{Call for Presentations}
-  @para{We are looking for @emph{you!} If you have an idea for
-  a presentation you’d like to give, please submit your proposal using @(a #:href "https://forms.gle/4YG57adx5snEwVe27" "this form") or
-  write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the
-  RacketCon organizer" "the RacketCon organizers") for consideration.
+  @para{There is still time to submit a proposal for a talk at RacketCon 2026 using
+        @(a #:href "https://forms.gle/4YG57adx5snEwVe27" "this form") or
+        write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the
+        RacketCon organizer" "the RacketCon organizers") for consideration.
 
-  For more information about presentation format, video streaming details, volunteering and sponsorships, please
-  see our detailed call for participation @(a #:href "https://racket.discourse.group/t/racketcon-2026-call-for-participation/4211" "here").
-  All Racket-y ideas are welcome. We’d love to have you!})
+        For more information about presentation format, video streaming details, volunteering and
+        sponsorships, please see our detailed call for participation
+        @(a #:href "https://racket.discourse.group/t/racketcon-2026-call-for-participation/4211" "here").
+        All Racket-y ideas are welcome. We’d love to have you!})  
 
  (top-section
    @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
