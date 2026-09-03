@@ -16,7 +16,8 @@
 (define-div main
   [font-family "'Lexend', sans-serif"]
   #;[background "#3e5ba9"]
-  [background "WhiteSmoke"]
+  #;[background "WhiteSmoke"]
+  [background-image "url('bground_opt.png')"]
   [color "black"]
   [margin "0px"]
   [font-weight "200"]
@@ -24,7 +25,8 @@
 
 (define-div content
   ,@centered
-  [background "whitesmoke"]
+  #;[background "whitesmoke"]
+  [background "rgba(245,245,245, 0.88)"] ; This is still WhiteSmoke but with transparency
   [margin-left "10ex"]
   [margin-right "10ex"]
   [padding-top "2ex"]
