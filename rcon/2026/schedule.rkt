@@ -379,7 +379,22 @@ $(document).ready(function () {
              a Herbie developer.
            }
          ]
-    
+
+    @lecture[
+           #:when ""
+           #:who @speaker[#:url "https://"]{Sam Phillips}
+           #:what @talk{Dataframes in Uke}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+            Dataframes emerged from statistical programming languages in the 90s, and
+            now many languages have them. Even Racket has several to choose from. Uke
+            is an opinionated dataframe library that focuses on immutability and tries
+            to be efficient about copying.
+           }
+           #:bio @bio{
+             Sam is an engineer that works with machine data.
+           }
+          ]
     @lecture[
            #:when ""
            #:who @speaker[#:url "https://"]{Matthew Flatt}
@@ -405,8 +420,8 @@ $(document).ready(function () {
              pointers.
            }
            #:bio @bio{
-             Matthew is a developer of Racket who focuses mostly on macros,
-             compilation, and the runtime system.
+             Matthew is a Professor at the University of Utah and a developer of
+             Racket who focuses mostly on macros, compilation, and the runtime system.
           }
          ]
 
