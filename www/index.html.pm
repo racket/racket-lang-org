@@ -246,7 +246,7 @@ ancestor(A, B)?}}}
   ◊tab[#:id "easy-dsls" #:title "Easy DSLs"]{
    ◊div[#:class "container-fluid vertical-in-smartphones-horizontal-otherwise"]{
     ◊div[#:class "block-with-1em-margin"]{
-      ◊img/size["frosthaven.png" #:alt "Frosthaven Manager application tech stack diagram" #:size (cons 350 350) #:class "lop-image"]{}}
+     ◊object[#:type "image/svg+xml" #:data "img/frosthaven.svg" #:width "350" #:height "350"]{Frosthaven Manager application tech stack diagram}}
 
     ◊div{
      ◊p[#:class "block-with-1em-margin"]{
