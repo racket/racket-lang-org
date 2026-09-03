@@ -156,7 +156,7 @@
 $(document).ready(function () {
  $("[data-slot-time]").each(function() {
   var date = new Date($(this).data("slot-time"));
-  var localTime = moment.tz(date, @event-time-zone).format("dddd, h:mma zz")
+  var localTime = moment.tz(date, '@event-time-zone').format("dddd, h:mma zz")
   $(this).html(localTime); }); }); })
     (body
      #:class "main h-event"
