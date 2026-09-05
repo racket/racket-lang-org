@@ -160,6 +160,7 @@
          @specific-location{Oakland, CA 94612}
          @specific-location{That's right, at the 18th Street BART (rapid transit) stop.}))
 
+     #;
       (section
        @sectionHeader{Hotel}
        (column
@@ -228,6 +229,7 @@
        @vpara{Even more links with local information on how to get to Oakstop}
        ))
 
+      #;
       (section
        @sectionHeader{Wi-Fi}
        (column
