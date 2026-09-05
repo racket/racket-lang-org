@@ -383,7 +383,7 @@ $(document).ready(function () {
     @lecture[
            #:when ""
            #:who @speaker[#:url "https://"]{Sam Phillips}
-           #:what @talk{Dataframes in Uke}
+           #:what @talk{Uke: Immutable Dataframes for Racket}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
            #:more @abstract{
             Dataframes emerged from statistical programming languages in the 90s, and
