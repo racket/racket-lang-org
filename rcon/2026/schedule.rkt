@@ -397,6 +397,17 @@ $(document).ready(function () {
           ]
     @lecture[
            #:when ""
+           #:who @speaker[#:url "https://"]{Ryan Culpepper}
+           #:what @talk{Brandx, a New Library for OOP, Interfaces, Generics, and More}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{            
+           }
+           #:bio @bio{
+             Ryan is a developer of Racket.
+           }
+          ]
+    @lecture[
+           #:when ""
            #:who @speaker[#:url "https://"]{Matthew Flatt}
            #:what @talk{A New Foreign-Function Interface: ffi2}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
