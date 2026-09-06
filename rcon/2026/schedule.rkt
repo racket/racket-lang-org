@@ -185,8 +185,8 @@ $(document).ready(function () {
 
  (top-section
    @para{RacketCon is a public gathering dedicated to fostering a
-   vibrant, innovative, and inclusive community around the Racket
-   programming language. We aim to create an exciting and enjoyable
+   vibrant, innovative, and inclusive community around the
+   @a[#:href "https://racket-lang.org/"]{Racket programming language}. We aim to create an exciting and enjoyable
    conference open to anyone interested in Racket, filled with inspiring
    content, reaching and engaging both the Racket community and the
    wider programming world.})
@@ -219,8 +219,10 @@ $(document).ready(function () {
   @sectionHeader{Registration is open!}
   
    @distinct{Please register for RacketCon 2026 by following this
-                 @bold{@larger{@(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "registration link").}}}
- 
+             @bold{@larger{@(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "registration link")}}
+             with discounted early registration before @bold{September 13}.}
+
+  @;{
   @para{There is still time to submit a proposal for a talk at RacketCon 2026 using
         @(a #:href "https://forms.gle/4YG57adx5snEwVe27" "this form") or
         write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the
@@ -229,7 +231,8 @@ $(document).ready(function () {
         For more information about presentation format, video streaming details, volunteering and
         sponsorships, please see our detailed call for participation
         @(a #:href "https://racket.discourse.group/t/racketcon-2026-call-for-participation/4211" "here").
-        All Racket-y ideas are welcome. We’d love to have you!})  
+        All Racket-y ideas are welcome. We’d love to have you!}
+ })
 
  (top-section
    @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
