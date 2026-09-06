@@ -158,7 +158,7 @@
          @specific-location{Oakstop, Broadway Gallery Suite}
          @specific-location{1721 Broadway suite #201}
          @specific-location{Oakland, CA 94612}
-         @specific-location{That's right, at the 18th Street BART (rapid transit) stop.}))
+         @specific-location{(That's right at the 18th Street BART (rapid transit) stop.)}))
 
       (section
        @sectionHeader{Hotel}
