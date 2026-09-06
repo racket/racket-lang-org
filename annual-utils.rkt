@@ -39,7 +39,7 @@
 (define (copy-annual-site! site starting-dir year
                            #:current [current? #f]
                            #:copy-current-index? [copy-current-index? #t])
-  (define subdirs '("fonts" "slides"))
+  (define subdirs '("fonts" "slides" "resources"))
   (for* ([p (in-directory starting-dir (lambda (dir)
                                          (not (for/or ([subdir (in-list subdirs)])
                                                 (equal? (build-path starting-dir subdir) dir)))))]
