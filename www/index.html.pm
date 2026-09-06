@@ -47,6 +47,8 @@
 
  ◊div[#:style "flex-grow:1"]{}
 
+ ◊div[#:style "margin-right: 1em"]{
+  ◊link["https://con.racket-lang.org"]{RacketCon: October 3-4, 2026 in Oakland, CA}}
 
 }}
 
