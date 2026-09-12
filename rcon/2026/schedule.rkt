@@ -241,9 +241,10 @@ $(document).ready(function () {
                support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
 
 (section
- @sectionHeader{Keynote}
+ @sectionHeader{Saturday, October 3rd}
+
  @keynote[
-          #:when ""
+          #:when @talk-time{Saturday, 09:00am}
           #:desc "" ; drop when moving to the schedule
           #:who @speaker[#:url "https://profiles.stanford.edu/patrick-hanrahan"]{Pat Hanrahan}
           #:what @talk{On Notation}
@@ -253,12 +254,12 @@ $(document).ready(function () {
           Pat Hanrahan is the Canon Professor of Computer Science and Electrical Engineering Emeritus 
           at Stanford University. He led design of RenderMan at Pixar, co-founded Tableau, and recieved the
           2019 ACM Turing Award.
-          }])
+          }]
 
-(section
- @sectionHeader{Talks}
+  @break[@talk-time{Saturday, 10:00am}]
+ 
   @lecture[
-           #:when ""
+           #:when @talk-time{Saturday, 10:30am}
            #:who @speaker[#:url "https://"]{Fred Fu}
            #:what @talk{Type Inference With Logical Types For Untyped Languages}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
@@ -279,9 +280,10 @@ $(document).ready(function () {
            #:bio @bio{
            I am Fred Fu, a PhD student at IU. I am a racketeer who have made myriad bugs in Typed
            Racket. I am a big fan of Rhombus as well.  
-           }])
+           }]
+
   @lecture[
-           #:when ""
+           #:when @talk-time{Saturday, 11:10am}
            #:who @speaker[#:url "https://"]{Lucas Myers}
            #:what @talk{Language-Oriented Low-Level Programming with Pille}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
@@ -312,8 +314,10 @@ $(document).ready(function () {
            }
          ]
 
+  @lunch[@talk-time{Saturday, 11:50am}]
+
   @lecture[
-           #:when ""
+           #:when @talk-time{Saturday, 1:30pm}
            #:who @speaker[#:url "https://"]{Mike Delmonaco}
            #:what @talk{Treason: Making Macros and IDE Services Work Together}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
@@ -335,7 +339,30 @@ $(document).ready(function () {
          ]
 
     @lecture[
-           #:when ""
+           #:when @talk-time{Saturday, 2:10pm}
+           #:who @speaker[#:url "https://"]{Pavel Panchekha}
+           #:what @talk{Herbie: Improving Floating-point Accuracy}
+           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:more @abstract{
+             Floating-point math requires rounding, so
+             it's not perfectly accurate. But how inaccurate it is depends on how
+             you do your computation: two ways of writing the same mathematical
+             formula can have radically different accuracy. Herbie is a compiler
+             that exploits this property to compile mathematical formulas to
+             accurate floating-point expressions. The talk will introduce
+             floating-point error, demonstrate Herbie, talk a bit about how it
+             works, and reflect on ten years of writing Herbie in Racket.
+           }
+           #:bio @bio{
+             Pavel is an Associate Professor at the University of Utah and
+             a Herbie developer.
+           }
+         ]
+
+    @break[@talk-time{Saturday, 2:50pm}]
+
+    @lecture[
+           #:when @talk-time{Saturday, 3:30pm}
            #:who @speaker[#:url "https://"]{JJ}
            #:what @talk{Effect Handlers in @em{cio}}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
@@ -363,28 +390,31 @@ $(document).ready(function () {
          ]
 
     @lecture[
-           #:when ""
-           #:who @speaker[#:url "https://"]{Pavel Panchekha}
-           #:what @talk{Herbie: Improving Floating-point Accuracy}
+           #:when @talk-time{Saturday, 4:10pm}
+           #:who @speaker[#:url "https://"]{Ryan Culpepper}
+           #:what @talk{Brandx, a New Library for OOP, Interfaces, Generics, and More}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
-           #:more @abstract{
-             Floating-point math requires rounding, so
-             it's not perfectly accurate. But how inaccurate it is depends on how
-             you do your computation: two ways of writing the same mathematical
-             formula can have radically different accuracy. Herbie is a compiler
-             that exploits this property to compile mathematical formulas to
-             accurate floating-point expressions. The talk will introduce
-             floating-point error, demonstrate Herbie, talk a bit about how it
-             works, and reflect on ten years of writing Herbie in Racket.
+           #:more @abstract{            
            }
            #:bio @bio{
-             Pavel is an Associate Professor at the University of Utah and
-             a Herbie developer.
+             Ryan is a developer of Racket.
            }
-         ]
+          ]
+
+
+   @social[
+         #:when @talk-time{Saturday, 6:00pm}
+         #:omit-label? #f ;; change to `#f` as a schedule entry
+         #:where @at-where[@place{@a[#:href "https://drinkdrakes.com/visit/dealership/"]{Drake's Dealership}}
+                             @place-address{2325 Broadway}]
+         #:more @abstract{Gathering with drinks and snacks.}
+         ])
+
+(section
+ @sectionHeader{Sunday, October 4th}
 
     @lecture[
-           #:when ""
+           #:when @talk-time{Sunday, 9:00am}
            #:who @speaker[#:url "https://"]{Sam Phillips}
            #:what @talk{Uke: Immutable Dataframes for Racket}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
@@ -398,19 +428,9 @@ $(document).ready(function () {
              Sam is an engineer that works with machine data.
            }
           ]
+
     @lecture[
-           #:when ""
-           #:who @speaker[#:url "https://"]{Ryan Culpepper}
-           #:what @talk{Brandx, a New Library for OOP, Interfaces, Generics, and More}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
-           #:more @abstract{            
-           }
-           #:bio @bio{
-             Ryan is a developer of Racket.
-           }
-          ]
-    @lecture[
-           #:when ""
+           #:when @talk-time{Sunday, 9:40am}
            #:who @speaker[#:url "https://"]{Matthew Flatt}
            #:what @talk{A New Foreign-Function Interface: ffi2}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
@@ -439,15 +459,22 @@ $(document).ready(function () {
           }
          ]
 
- ;; This section can be replaced later with an entry in the schedule
- (section
-   @sectionHeader{Evening Social Event}
-   (social #:when @talk-time{Saturday, 6:00pm}
-           #:omit-label? #t ;; change to `#f` as a schedule entry
-           #:where @at-where[@place{@a[#:href "https://drinkdrakes.com/visit/dealership/"]{Drake's Dealership}}
-                             @place-address{2325 Broadway}]
-           #:more @abstract{Gathering with drinks and snacks.})
-  )
+    @break[@talk-time{Sunday, 10:20am}]
+
+    @lecture[
+       #:when @talk-time{Sunday, 11:00am}
+       #:who @speaker[#:url "https://samth.github.io"]{Sam Tobin-Hochstadt}
+       #:what @talk{The State of Racket}
+       ;#:link "https://youtu.be/H-F7bw8JMHE?si=Q-9ITz1PyNJ3j2QE"
+         ]
+
+    @lecture[
+       #:when @talk-time{Sunday, 11:30am}
+       #:who @speaker[#:person? #f]{Racket Management}
+       #:what @talk{Racket Town Hall}
+       ;#:link "https://youtu.be/R4MvOxG2ews?si=V6YM2bvGlgMo_-Wy"
+       #:more @abstract{@center{Please come with your big questions and discussion topics.}}
+  ])
 
  (section
    @sectionHeader{Local Information}
