@@ -71,11 +71,11 @@
  (lecture #:when when #:who @speaker[#:person? #f]{@activity{Hallway}}))
 
 (define (doors-open when)
-  (lecture #:when when #:who @speaker[#:person? #f]{@activity{Doors Open}}
+  (lecture #:when when #:who @speaker[#:person? #f]{@activity{@bold{Doors Open}}}
            #:first? #t))
 
 (define (social #:when when #:where [where ""] #:more [more ""] #:omit-label? [omit-label? #f])
-  (lecture #:when when #:who @speaker[#:person? #f]{@(if omit-label? "" @activity{Evening Social})}
+  (lecture #:when when #:who @speaker[#:person? #f]{@(if omit-label? "" @activity{@bold{Evening Social}})}
            #:what where
            #:more more))
 
@@ -83,10 +83,10 @@
  (lecture #:when when #:who @speaker[#:person? #f]{@activity{Coffee}}))
 
 (define (break when)
- (lecture #:when when #:who @speaker[#:person? #f]{@activity{Break}}))
+ (lecture #:when when #:who @speaker[#:person? #f]{@activity{@bold{Break}}}))
 
 (define (lunch when)
- (lecture #:when when #:who @speaker[#:person? #f]{@activity{Lunch}}))
+ (lecture #:when when #:who @speaker[#:person? #f]{@activity{@bold{Lunch}}}))
 
 (define (keynote #:when when #:who who #:what what #:more more #:link [link #f]
                  #:desc [desc "Keynote"] #:bio [bio #f])
@@ -243,6 +243,8 @@ $(document).ready(function () {
 (section
  @sectionHeader{Saturday, October 3rd}
 
+ @doors-open[@talk-time{Saturday, 8:30am}]
+
  @keynote[
           #:when @talk-time{Saturday, 09:00am}
           #:desc "" ; drop when moving to the schedule
@@ -315,6 +317,7 @@ $(document).ready(function () {
          ]
 
   @lunch[@talk-time{Saturday, 11:50am}]
+  @nb-yes-lunch
 
   @lecture[
            #:when @talk-time{Saturday, 1:30pm}
@@ -413,6 +416,8 @@ $(document).ready(function () {
 (section
  @sectionHeader{Sunday, October 4th}
 
+    @doors-open[@talk-time{Sunday, 8:30am}]
+
     @lecture[
            #:when @talk-time{Sunday, 9:00am}
            #:who @speaker[#:url "https://"]{Sam Phillips}
@@ -470,7 +475,7 @@ $(document).ready(function () {
 
     @lecture[
        #:when @talk-time{Sunday, 11:30am}
-       #:who @speaker[#:person? #f]{Racket Management}
+       #:who @speaker[#:person? #f]{@bold{Racket Management}}
        #:what @talk{Racket Town Hall}
        ;#:link "https://youtu.be/R4MvOxG2ews?si=V6YM2bvGlgMo_-Wy"
        #:more @abstract{@center{Please come with your big questions and discussion topics.}}
