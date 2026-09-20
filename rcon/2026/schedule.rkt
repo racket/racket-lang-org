@@ -280,8 +280,10 @@ $(document).ready(function () {
            commonly seen in Racket programs.        
            }
            #:bio @bio{
-           I am Fred Fu, a PhD student at IU. I am a racketeer who have made myriad bugs in Typed
-           Racket. I am a big fan of Rhombus as well.  
+           Fred Fu is a PhD candidate at Indiana University. While introducing new features to Typed 
+           Racket, he has also been fixing bugs in the language as well as flaws in the metatheory of
+           @(a #:href "https://docs.racket-lang.org/ts-guide/occurrence-typing.html" "occurrence typing")
+           , one of the underlying distinguishing features of its type system.  
            }]
 
   @lecture[
