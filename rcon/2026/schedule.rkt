@@ -283,7 +283,7 @@ $(document).ready(function () {
            Fred Fu is a PhD candidate at Indiana University. While introducing new features to Typed 
            Racket, he has also been fixing bugs in the language as well as flaws in the metatheory of
            @(a #:href "https://docs.racket-lang.org/ts-guide/occurrence-typing.html" "occurrence typing"),
-           one of the underlying distinguishing features of its type system.  
+           one of the distinguishing features underlying its type system.  
            }]
 
   @lecture[
