@@ -397,12 +397,21 @@ $(document).ready(function () {
     @lecture[
            #:when @talk-time{Saturday, 4:10pm}
            #:who @speaker[#:url "https://"]{Ryan Culpepper}
-           #:what @talk{Brandx, a New Library for OOP, Interfaces, Generics, and More}
+           #:what @talk{BrandX: Commoditizing OOP with Interfaces, Generics, and Contracts}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
-           #:more @abstract{            
+           #:more @abstract{
+             BrandX is a new Racket library primarily for OOP via interfaces and
+             generic functions with proper contract support. This talk explains my
+             motivations for a new library, mainly stemming from limitations in
+             @tt{racket/class} and @tt{racket/generic}. It discusses the library design
+             in terms of syntax, semantics, and ergonomics@|'mdash|how to improve on
+             existing features and how to mitigate the loss of omitted features. It
+             sketches some aspects of the implementation, including some
+             under-appreciated macro tricks for modern Racket. Finally, it reports
+             on experiences using the library so far.
            }
            #:bio @bio{
-             Ryan is a developer of Racket.
+             Ryan is a developer of Racket who focuses on macros and Rackety library design.
            }
           ]
 
