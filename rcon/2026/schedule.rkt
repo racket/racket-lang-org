@@ -404,7 +404,7 @@ $(document).ready(function () {
              generic functions with proper contract support. This talk explains my
              motivations for a new library, mainly stemming from limitations in
              @tt{racket/class} and @tt{racket/generic}. It discusses the library design
-             in terms of syntax, semantics, and ergonomics—-how to improve on
+             in terms of syntax, semantics, and ergonomics@|'mdash|how to improve on
              existing features and how to mitigate the loss of omitted features. It
              sketches some aspects of the implementation, including some
              under-appreciated macro tricks for modern Racket. Finally, it reports
