@@ -241,7 +241,7 @@ $(document).ready(function () {
   @lecture[
            #:when @talk-time{Saturday, 10:30am}
            #:who @speaker[#:url "https://"]{Fred Fu}
-           #:what @talk{Type Inference With Logical Types For Untyped Languages}
+           #:what @talk{Type Inference With Logical Types For Rhombus}
            ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
            #:more @abstract{
            Racket and Rhombus support flexible idioms that pose challenges for type systems. Typed
