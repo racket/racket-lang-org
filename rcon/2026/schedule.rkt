@@ -193,43 +193,19 @@ $(document).ready(function () {
 
   
  (section
-  @sectionHeader{Registration is open!}
-  
-   @distinct{Please register for RacketCon 2026 by following this
-             @bold{@larger{@(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "registration link")}}
-             with discounted early registration before @bold{September 13}.}
-
-  @;{
-  @para{There is still time to submit a proposal for a talk at RacketCon 2026 using
-        @(a #:href "https://forms.gle/4YG57adx5snEwVe27" "this form") or
-        write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the
-        RacketCon organizer" "the RacketCon organizers") for consideration.
-
-        For more information about presentation format, video streaming details, volunteering and
-        sponsorships, please see our detailed call for participation
-        @(a #:href "https://racket.discourse.group/t/racketcon-2026-call-for-participation/4211" "here").
-        All Racket-y ideas are welcome. We’d love to have you!}
- })
-
- (top-section
-   @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
-               Recordings will also be made available on YouTube some time after the conference.
-               Streaming users will have the option to purchase a remote participation ticket to
-               support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
-
- (section
   @sectionHeader{Live Stream}
 
   ;; @para{Videos will appear soon for all of the RacketCon talks.}
 
-  @a[#:href "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]{Link}
-  '(iframe ([width "720"]
+  @para{@a[#:href "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]{Link}}
+  
+  @(para '(iframe ([width "720"]
            [height "480"]
            [src "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]
            [frameBorder "0"]
            [scrolling "auto"]
            [allowfullscreen "true"]
-           [allow "autoplay; fullscreen"]))
+           [allow "autoplay; fullscreen"])))
 
   '(iframe ([src "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]
            [width "100%"]
@@ -511,6 +487,31 @@ $(document).ready(function () {
               The organizers may be reached at @|mailto:con-organizers|.}
 
   )
+
+ (section
+  @sectionHeader{Registration}
+  
+   @distinct{Please register for RacketCon 2026 by following this
+             @bold{@larger{@(a #:href"https://www.eventbrite.com/e/racketcon-2026-tickets-1997181002140" "registration link")}}
+             @;{with discounted early registration before @bold{September 13}.}}
+
+  @;{
+  @para{There is still time to submit a proposal for a talk at RacketCon 2026 using
+        @(a #:href "https://forms.gle/4YG57adx5snEwVe27" "this form") or
+        write to @(a #:href "mailto:con-organizers@racket-lang.org" #:title "Send mail to the
+        RacketCon organizer" "the RacketCon organizers") for consideration.
+
+        For more information about presentation format, video streaming details, volunteering and
+        sponsorships, please see our detailed call for participation
+        @(a #:href "https://racket.discourse.group/t/racketcon-2026-call-for-participation/4211" "here").
+        All Racket-y ideas are welcome. We’d love to have you!}
+ })
+
+ (top-section
+   @para{@emph{As in previous years, RacketCon will be streamed for those unable to attend in person.
+               Recordings will also be made available on YouTube some time after the conference.
+               Streaming users will have the option to purchase a remote participation ticket to
+               support the livestream. Previous RacketCon presentations can be found @(a #:href "https://www.youtube.com/racketlang/playlists" "here").}})
 
 
  (section
