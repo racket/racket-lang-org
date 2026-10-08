@@ -228,7 +228,7 @@ $(document).ready(function () {
           #:desc "" ; drop when moving to the schedule
           #:who @speaker[#:url "https://profiles.stanford.edu/patrick-hanrahan"]{Pat Hanrahan}
           #:what @talk{On Notation}
-          ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+          #:link "https://youtu.be/pIoogidKxOU"
           #:more ""
           #:bio @bio{
           Pat Hanrahan is the Canon Professor of Computer Science and Electrical Engineering Emeritus 
@@ -242,7 +242,7 @@ $(document).ready(function () {
            #:when @talk-time{Saturday, 10:30am}
            #:who @speaker[#:url "https://"]{Fred Fu}
            #:what @talk{Type Inference With Logical Types For Rhombus}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:link "https://youtu.be/BF55M7qF1y0"
            #:more @abstract{
            Racket and Rhombus support flexible idioms that pose challenges for type systems. Typed
            Racket, the gradually typed counterpart of Racket, uses occurrence typing to type-check
@@ -268,7 +268,7 @@ $(document).ready(function () {
            #:when @talk-time{Saturday, 11:10am}
            #:who @speaker[#:url "https://"]{Lucas Myers}
            #:what @talk{Language-Oriented Low-Level Programming with Pille}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:link "https://youtu.be/aEJE5IimvyM"
            #:more @abstract{
            Racket and Rhombus offer incredible expressive power, but the Racket VM can
            become a limiting factor for low-level performance and efficiency—and it
@@ -303,7 +303,7 @@ $(document).ready(function () {
            #:when @talk-time{Saturday, 1:30pm}
            #:who @speaker[#:url "https://"]{Mike Delmonaco}
            #:what @talk{Treason: Making Macros and IDE Services Work Together}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:link "https://youtu.be/zKXHEXH_axI"
            #:more @abstract{
            Racket's macros let us extend the language and create DSLs, but they also 
            get in the way of providing good IDE services when the program is broken or incomplete. 
@@ -325,7 +325,7 @@ $(document).ready(function () {
            #:when @talk-time{Saturday, 2:10pm}
            #:who @speaker[#:url "https://"]{Pavel Panchekha}
            #:what @talk{Herbie: Improving Floating-point Accuracy}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:link "https://youtu.be/IZPdbZvHD1U"
            #:more @abstract{
              Floating-point math requires rounding, so
              it's not perfectly accurate. But how inaccurate it is depends on how
@@ -348,7 +348,7 @@ $(document).ready(function () {
            #:when @talk-time{Saturday, 3:30pm}
            #:who @speaker[#:url "https://"]{JJ}
            #:what @talk{Effect Handlers in @em{cio}}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:link "https://youtu.be/MLCO_IjgBOQ"
            #:more @abstract{
              Effect handlers — What are they? How do they work? We will
              discuss the design of @em{cio}, an (untyped) effect-handler library for Racket
@@ -376,7 +376,7 @@ $(document).ready(function () {
            #:when @talk-time{Saturday, 4:10pm}
            #:who @speaker[#:url "https://"]{Ryan Culpepper}
            #:what @talk{BrandX: Commoditizing OOP with Interfaces, Generics, and Contracts}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:link "https://youtu.be/UXfU9WEn9vY"
            #:more @abstract{
              BrandX is a new Racket library primarily for OOP via interfaces and
              generic functions with proper contract support. This talk explains my
@@ -411,7 +411,7 @@ $(document).ready(function () {
            #:when @talk-time{Sunday, 9:00am}
            #:who @speaker[#:url "https://"]{Sam Phillips}
            #:what @talk{Uke: Immutable Dataframes for Racket}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:link "https://youtu.be/ZCqFrqh6PUA"
            #:more @abstract{
             Dataframes emerged from statistical programming languages in the 90s, and
             now many languages have them. Even Racket has several to choose from. Uke
@@ -427,7 +427,7 @@ $(document).ready(function () {
            #:when @talk-time{Sunday, 9:40am}
            #:who @speaker[#:url "https://"]{Matthew Flatt}
            #:what @talk{A New Foreign-Function Interface: ffi2}
-           ;#:link "https://youtu.be/OpT2W45w9MQ?si=-twzTu6tFdyvIbmd"
+           #:link "https://youtu.be/BE06lNw_tv4"
            #:more @abstract{
              Eli Barzilay's FFI (ca. 2004) made C-based dynamic libraries accessible
              within Racket programs without new C code. This approach had precedents
@@ -459,14 +459,14 @@ $(document).ready(function () {
        #:when @talk-time{Sunday, 11:00am}
        #:who @speaker[#:url "https://samth.github.io"]{Sam Tobin-Hochstadt}
        #:what @talk{The State of Racket}
-       ;#:link "https://youtu.be/H-F7bw8JMHE?si=Q-9ITz1PyNJ3j2QE"
+       #:link "https://youtu.be/WHKvw_MCCb8"
          ]
 
     @lecture[
        #:when @talk-time{Sunday, 11:30am}
        #:who @speaker[#:person? #f]{@bold{Racket Management}}
        #:what @talk{Racket Town Hall}
-       ;#:link "https://youtu.be/R4MvOxG2ews?si=V6YM2bvGlgMo_-Wy"
+       #:link "https://youtu.be/6mMSy8jS4CA"
        #:more @abstract{@center{Please come with your big questions and discussion topics.}}
   ])
 
