@@ -191,31 +191,31 @@ $(document).ready(function () {
    content, reaching and engaging both the Racket community and the
    wider programming world.})
 
-  
- (section
-  @sectionHeader{Live Stream}
-
-  ;; @para{Videos will appear soon for all of the RacketCon talks.}
-
-  @para{@a[#:href "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]{Link}}
-  
-  @(para '(iframe ([width "720"]
-           [height "480"]
-           [src "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]
-           [frameBorder "0"]
-           [scrolling "auto"]
-           [allowfullscreen "true"]
-           [allow "autoplay; fullscreen"])))
-
-  '(iframe ([src "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]
-           [width "100%"]
-           [height "450"]
-           [allowtransparency "yes"]
-           [allow "autoplay"]
-           [frameborder "0"]
-           [marginheight "0"]
-           [marginwidth "0"]
-           [scrolling "auto"])))
+ ; Live Stream Section
+ ;; (section
+ ;;  @sectionHeader{Live Stream}
+ ;;
+ ;;  ;; @para{Videos will appear soon for all of the RacketCon talks.}
+ ;;
+ ;;  @para{@a[#:href "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]{Link}}
+ ;;
+ ;;  @(para '(iframe ([width "720"]
+ ;;           [height "480"]
+ ;;           [src "https://boxcast.tv/view-embed/xtihxdvdmgttkttsp2gj?showTitle=0&showDescription=0&showHighlights=0&showRelated=0&defaultVideo=next&playInline=0&dvr=1&market=smb&showCountdown=0&showDonations=0&showDocuments=0&showIndex=0&showChat=0&hidePreBroadcastTextOverlay=0"]
+ ;;           [frameBorder "0"]
+ ;;           [scrolling "auto"]
+ ;;           [allowfullscreen "true"]
+ ;;           [allow "autoplay; fullscreen"])))
+ ;;
+ ;;  '(iframe ([src "https://www6.cbox.ws/box/?boxid=846185&boxtag=7afys&tid=127&tkey=b25da2af9627c97d"]
+ ;;           [width "100%"]
+ ;;           [height "450"]
+ ;;           [allowtransparency "yes"]
+ ;;           [allow "autoplay"]
+ ;;           [frameborder "0"]
+ ;;           [marginheight "0"]
+ ;;           [marginwidth "0"]
+ ;;           [scrolling "auto"])))
 
 
 (section
