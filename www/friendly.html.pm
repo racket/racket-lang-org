@@ -24,7 +24,6 @@ Anyone witnessing or subject to unacceptable behaviour should notify the moderat
  ◊link["https://github.com/jackfirth"]{Jacqueline Firth} (◊email["jackhfirth" "gmail" "com"])
  ◊link["https://github.com/samdphillips"]{Sam Phillips} (◊email["samdphillips" "gmail" "com"])
  ◊link["https://github.com/spdegabrielle"]{Stephen De Gabrielle} (◊email["spdegabrielle" "gmail" "com"])
- ◊link["https://github.com/jryans"]{J. Ryan Stinnett} (◊email["jryans" "gmail" "com"])
 }
 
 ◊link["team.html#management"]{Racket project management} can be reached at ◊link["mailto:management@racket-lang.org"]{management@racket-lang.org}.
